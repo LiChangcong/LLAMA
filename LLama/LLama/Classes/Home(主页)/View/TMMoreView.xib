@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TMMoreView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Sc-xW-RXn">
+                    <rect key="frame" x="0.0" y="215" width="600" height="385"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享这个视频到" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Voh-97-Qw0">
+                            <rect key="frame" x="251" y="17" width="98" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRr-VL-RH4">
+                            <rect key="frame" x="25" y="50" width="550" height="90"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmU-Ty-jZg" customClass="TMShareButton">
+                                    <rect key="frame" x="148" y="14" width="116" height="62"/>
+                                    <state key="normal" title="朋友圈" image="wechat">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="wechath"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opl-Tt-QyP" customClass="TMShareButton">
+                                    <rect key="frame" x="295" y="14" width="98" height="62"/>
+                                    <state key="normal" title="微博" image="wechat">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="wechath"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjx-se-oIC" customClass="TMShareButton">
+                                    <rect key="frame" x="20" y="14" width="98" height="62"/>
+                                    <state key="normal" title="微信" image="wechat">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="wechath"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgE-e2-SX8" customClass="TMShareButton">
+                                    <rect key="frame" x="437" y="14" width="89" height="62"/>
+                                    <state key="normal" title="QQ" image="wechat">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="wechath"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="bmU-Ty-jZg" firstAttribute="top" secondItem="jRr-VL-RH4" secondAttribute="top" id="8Hg-pw-nvq"/>
+                                <constraint firstItem="IgE-e2-SX8" firstAttribute="leading" secondItem="Opl-Tt-QyP" secondAttribute="trailing" id="Gna-Bt-JKJ"/>
+                                <constraint firstItem="IgE-e2-SX8" firstAttribute="width" secondItem="Pjx-se-oIC" secondAttribute="width" id="Kcb-iR-MkG"/>
+                                <constraint firstItem="bmU-Ty-jZg" firstAttribute="leading" secondItem="Pjx-se-oIC" secondAttribute="trailing" id="P1e-Yz-sdF"/>
+                                <constraint firstItem="bmU-Ty-jZg" firstAttribute="leading" secondItem="Pjx-se-oIC" secondAttribute="trailing" id="PKL-Gz-ruR"/>
+                                <constraint firstItem="Pjx-se-oIC" firstAttribute="top" secondItem="jRr-VL-RH4" secondAttribute="top" id="Pjv-To-Kwe"/>
+                                <constraint firstAttribute="height" constant="90" id="RgQ-g2-eRt"/>
+                                <constraint firstAttribute="trailing" secondItem="IgE-e2-SX8" secondAttribute="trailing" id="Skb-8x-xI5"/>
+                                <constraint firstItem="Opl-Tt-QyP" firstAttribute="leading" secondItem="bmU-Ty-jZg" secondAttribute="trailing" id="VFW-Ie-ti6"/>
+                                <constraint firstAttribute="bottom" secondItem="IgE-e2-SX8" secondAttribute="bottom" id="XIi-BK-isF"/>
+                                <constraint firstAttribute="bottom" secondItem="Opl-Tt-QyP" secondAttribute="bottom" id="Yvs-QC-KMT"/>
+                                <constraint firstAttribute="bottom" secondItem="bmU-Ty-jZg" secondAttribute="bottom" id="cmS-3d-iS1"/>
+                                <constraint firstItem="IgE-e2-SX8" firstAttribute="top" secondItem="jRr-VL-RH4" secondAttribute="top" id="dgY-lO-iho"/>
+                                <constraint firstAttribute="bottom" secondItem="Pjx-se-oIC" secondAttribute="bottom" id="evX-BN-8qG"/>
+                                <constraint firstItem="bmU-Ty-jZg" firstAttribute="width" secondItem="Pjx-se-oIC" secondAttribute="width" id="rvy-v9-Izq"/>
+                                <constraint firstItem="Opl-Tt-QyP" firstAttribute="top" secondItem="jRr-VL-RH4" secondAttribute="top" id="tr9-aC-ige"/>
+                                <constraint firstItem="Pjx-se-oIC" firstAttribute="leading" secondItem="jRr-VL-RH4" secondAttribute="leading" id="vyk-Y9-d4e"/>
+                                <constraint firstItem="Opl-Tt-QyP" firstAttribute="width" secondItem="Pjx-se-oIC" secondAttribute="width" id="xRe-KY-AVs"/>
+                                <constraint firstItem="Opl-Tt-QyP" firstAttribute="leading" secondItem="bmU-Ty-jZg" secondAttribute="trailing" id="ys6-ZD-qIu"/>
+                                <constraint firstItem="IgE-e2-SX8" firstAttribute="leading" secondItem="Opl-Tt-QyP" secondAttribute="trailing" id="zpl-3J-wPR"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQZ-EK-lMh">
+                            <rect key="frame" x="25" y="339" width="550" height="30"/>
+                            <state key="normal" title="取消"/>
+                            <connections>
+                                <action selector="cancelButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="b7l-bO-dx0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78K-Se-eYh">
+                            <rect key="frame" x="25" y="293" width="550" height="30"/>
+                            <state key="normal" title="举报"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="78K-Se-eYh" secondAttribute="trailing" constant="25" id="50n-2d-EYt"/>
+                        <constraint firstAttribute="trailing" secondItem="jRr-VL-RH4" secondAttribute="trailing" constant="25" id="6kY-hP-lTi"/>
+                        <constraint firstAttribute="bottom" secondItem="tQZ-EK-lMh" secondAttribute="bottom" constant="16" id="81I-J8-5dD"/>
+                        <constraint firstItem="tQZ-EK-lMh" firstAttribute="leading" secondItem="8Sc-xW-RXn" secondAttribute="leading" constant="25" id="91A-9I-pdd"/>
+                        <constraint firstItem="jRr-VL-RH4" firstAttribute="leading" secondItem="8Sc-xW-RXn" secondAttribute="leading" constant="25" id="R8k-8z-19X"/>
+                        <constraint firstItem="jRr-VL-RH4" firstAttribute="top" secondItem="8Sc-xW-RXn" secondAttribute="top" constant="50" id="bUu-f4-ORc"/>
+                        <constraint firstItem="Voh-97-Qw0" firstAttribute="top" secondItem="8Sc-xW-RXn" secondAttribute="top" constant="17" id="gwy-Nh-BYJ"/>
+                        <constraint firstItem="jRr-VL-RH4" firstAttribute="top" secondItem="Voh-97-Qw0" secondAttribute="bottom" constant="50" id="hRt-ji-mX0"/>
+                        <constraint firstItem="78K-Se-eYh" firstAttribute="leading" secondItem="8Sc-xW-RXn" secondAttribute="leading" constant="25" id="lYR-iO-3WE"/>
+                        <constraint firstItem="tQZ-EK-lMh" firstAttribute="top" secondItem="78K-Se-eYh" secondAttribute="bottom" constant="16" id="lmB-pU-OSL"/>
+                        <constraint firstAttribute="trailing" secondItem="tQZ-EK-lMh" secondAttribute="trailing" constant="25" id="mAn-BY-fSO"/>
+                        <constraint firstItem="Voh-97-Qw0" firstAttribute="centerX" secondItem="8Sc-xW-RXn" secondAttribute="centerX" id="sbV-Me-Fow"/>
+                        <constraint firstAttribute="height" constant="385" id="yau-ZC-iKN"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="hRt-ji-mX0"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="8Sc-xW-RXn" secondAttribute="bottom" id="2D8-Al-WpZ"/>
+                <constraint firstAttribute="trailing" secondItem="8Sc-xW-RXn" secondAttribute="trailing" id="L0f-Ih-h1z"/>
+                <constraint firstItem="8Sc-xW-RXn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zwB-9A-EGn"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="wechat" width="62" height="62"/>
+        <image name="wechath" width="62" height="62"/>
+    </resources>
+</document>

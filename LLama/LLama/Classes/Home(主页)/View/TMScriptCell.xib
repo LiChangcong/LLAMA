@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="214" id="KGk-i7-Jjw" customClass="TMScriptCell">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="213"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="415" height="212.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userhead" translatesAutoresizingMaskIntoConstraints="NO" id="VZ8-fT-ged" userLabel="头像">
+                        <rect key="frame" x="29" y="34" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="9A7-Qp-2dG"/>
+                            <constraint firstAttribute="height" constant="45" id="cwo-dN-w0x"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LANDY@露" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21B-Q3-SUs" userLabel="名称">
+                        <rect key="frame" x="86" y="47" width="77.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZHY-7I-6f8" userLabel="分割线">
+                        <rect key="frame" x="8" y="91" width="399" height="1"/>
+                        <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ccG-6F-7k3"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meinv" translatesAutoresizingMaskIntoConstraints="NO" id="V6D-7H-BaG">
+                        <rect key="frame" x="14" y="100" width="84" height="84"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="84" id="OLM-Zh-42H"/>
+                            <constraint firstAttribute="height" constant="84" id="qSQ-9t-Ozx"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#剧本#《诗经》是中国汉族文学史上最早的诗歌总集，先秦称为《诗》，共305首，取其为儒家经典、沿用至今。汉朝毛亨、毛苌[cháng]曾注释《诗经》" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSb-HA-H1z">
+                        <rect key="frame" x="106" y="100" width="291" height="67"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布于两天前" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXA-vS-qpU">
+                        <rect key="frame" x="317" y="184" width="72" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZV-Ae-GQz">
+                        <rect key="frame" x="0.0" y="211" width="415" height="1"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="SeR-qq-cfm"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="actor_pay_red" translatesAutoresizingMaskIntoConstraints="NO" id="hp0-CC-S8M">
+                        <rect key="frame" x="319" y="13" width="78" height="63"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="Eao-Ob-sdm"/>
+                            <constraint firstAttribute="height" constant="63" id="gtT-NU-fsC"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="gXA-vS-qpU" secondAttribute="trailing" constant="18" id="1Pf-Tv-rMv"/>
+                    <constraint firstItem="VZ8-fT-ged" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="1xq-6B-aUI"/>
+                    <constraint firstItem="V6D-7H-BaG" firstAttribute="top" secondItem="ZHY-7I-6f8" secondAttribute="bottom" constant="8" id="2eb-B0-5sM"/>
+                    <constraint firstItem="zSb-HA-H1z" firstAttribute="top" secondItem="V6D-7H-BaG" secondAttribute="top" id="6N7-eg-ufD"/>
+                    <constraint firstItem="ZHY-7I-6f8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Fet-Il-v9d"/>
+                    <constraint firstAttribute="trailing" secondItem="zSb-HA-H1z" secondAttribute="trailing" constant="18" id="Ihn-9Z-wPr"/>
+                    <constraint firstItem="gXA-vS-qpU" firstAttribute="top" secondItem="V6D-7H-BaG" secondAttribute="bottom" id="LF8-yt-s58"/>
+                    <constraint firstItem="VZ8-fT-ged" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="21" id="OXd-K9-dJz"/>
+                    <constraint firstItem="hp0-CC-S8M" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="SSu-Tv-ySW"/>
+                    <constraint firstItem="ZHY-7I-6f8" firstAttribute="top" secondItem="VZ8-fT-ged" secondAttribute="bottom" constant="12" id="TPf-RD-sk6"/>
+                    <constraint firstAttribute="trailing" secondItem="QZV-Ae-GQz" secondAttribute="trailing" id="ebB-rj-hky"/>
+                    <constraint firstItem="21B-Q3-SUs" firstAttribute="centerY" secondItem="VZ8-fT-ged" secondAttribute="centerY" id="euh-PU-YeL"/>
+                    <constraint firstItem="V6D-7H-BaG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="is7-Ax-Liu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ZHY-7I-6f8" secondAttribute="trailing" id="lOM-v7-SuE"/>
+                    <constraint firstItem="21B-Q3-SUs" firstAttribute="leading" secondItem="VZ8-fT-ged" secondAttribute="trailing" constant="12" id="mdT-Tn-YDk"/>
+                    <constraint firstAttribute="bottom" secondItem="QZV-Ae-GQz" secondAttribute="bottom" id="qJL-Ui-zOg"/>
+                    <constraint firstItem="zSb-HA-H1z" firstAttribute="leading" secondItem="V6D-7H-BaG" secondAttribute="trailing" constant="8" id="qQF-Oo-BzN"/>
+                    <constraint firstItem="QZV-Ae-GQz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uXj-l6-ePU"/>
+                    <constraint firstAttribute="trailing" secondItem="hp0-CC-S8M" secondAttribute="trailing" constant="18" id="zP2-S8-rTu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="305.5" y="360"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="actor_pay_red" width="78" height="64"/>
+        <image name="meinv" width="200" height="300"/>
+        <image name="userhead" width="34" height="34"/>
+    </resources>
+</document>
