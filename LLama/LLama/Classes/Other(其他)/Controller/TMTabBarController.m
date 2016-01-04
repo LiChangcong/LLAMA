@@ -12,6 +12,8 @@
 #import "TMProfileViewController.h"
 #import "TMNavigationController.h"
 #import "TMTabBar.h"
+#import "TMMessageController.h"
+#import "TMZoomController.h"
 
 @interface TMTabBarController ()
 
@@ -68,11 +70,18 @@
 - (void)setupChildVcs
 {
     
-    // 我
-    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMProfileViewController alloc] init]]  image:@"profile" selectedImage:@"profileH"];
-    
     // 主页
     [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMHomeViewController alloc] init]]  image:@"home" selectedImage:@"homeH"];
+
+    // 消息
+    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMMessageController alloc] init]]  image:@"message" selectedImage:@"messageH"];
+    
+    // 发现
+    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMZoomController alloc] init]]
+        image:@"zoom" selectedImage:@"zoomH"];
+    
+    // 我
+    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMProfileViewController alloc] init]]  image:@"profile" selectedImage:@"profileH"];
     
 }
 

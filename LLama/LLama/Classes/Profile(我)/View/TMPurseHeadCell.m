@@ -20,4 +20,18 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)purseButtonClick:(UIButton *)sender {
+    
+    
+    TMLog(@"点击了提现按钮");
+
+    
+    if ([self.delegate respondsToSelector:@selector(purseHeadCellDidClickPurseButton:)]) {
+        
+        [self.delegate purseHeadCellDidClickPurseButton:self];
+    }
+
+}
+
+
 @end

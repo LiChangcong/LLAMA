@@ -37,7 +37,10 @@
 */
 - (IBAction)cancelButtonClick:(UIButton *)sender {
     
-//    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    // 推出键盘
+    [self.view endEditing:YES];
+
     
     [UIView animateWithDuration:0.4 animations:^{
         self.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
@@ -47,6 +50,12 @@
     
     // 推出键盘
     [self.view endEditing:YES];    
+}
+
+// 点击屏幕时也推出键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end

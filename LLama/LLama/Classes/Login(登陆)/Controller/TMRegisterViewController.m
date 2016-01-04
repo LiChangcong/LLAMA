@@ -7,14 +7,19 @@
 //
 
 #import "TMRegisterViewController.h"
-#import "TMPerfectDataViewController.h"
+//#import "TMPerfectDataViewController.h"
 #import "TMHTTPSessionManager.h"
+#import "TMDataIconController.h"
+#import "TMDataVideoController.h"
 
 @interface TMRegisterViewController ()
 
-@property (nonatomic, strong) TMPerfectDataViewController *perfect;
+//@property (nonatomic, strong) TMPerfectDataViewController *perfect;
 /** 请求管理者 */
 @property (nonatomic, weak) TMHTTPSessionManager *manager;
+
+@property (nonatomic, strong) TMDataIconController *dataIcon;
+
 
 @end
 
@@ -75,21 +80,28 @@
 //    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"请求失败");
 //    }];
-//    
-
+//
+    // 推出键盘
+    [self.view endEditing:YES];
     
-    TMPerfectDataViewController *perfect = [[TMPerfectDataViewController alloc] init];
-    self.perfect = perfect;
+    TMDataIconController *dataIcon = [[TMDataIconController alloc] init];
+    self.dataIcon = dataIcon;
     
-    self.perfect.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
+    self.dataIcon.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
     [UIView animateWithDuration:0.4 animations:^{
-        self.perfect.view.frame = CGRectMake(0, 0, self.view.width, self.view.height);
-        [self.view addSubview:self.perfect.view];
+        self.dataIcon.view.frame = CGRectMake(0, 0, self.view.width, self.view.height);
+        [self.view addSubview:self.dataIcon.view];
     }];
     
-    
-
 
 }
+
+// 点击屏幕时也推出键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+
 
 @end

@@ -57,7 +57,7 @@ LLAMA用户协议和隐私条款</string>
                                         <constraint firstAttribute="width" constant="40" id="UDd-Ya-zYF"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sql-9a-BzY">
@@ -246,7 +246,7 @@ LLAMA用户协议和隐私条款</string>
         <image name="qqh" width="62" height="62"/>
         <image name="wechat" width="62" height="62"/>
         <image name="wechath" width="62" height="62"/>
-        <image name="weiboh" width="20" height="20"/>
+        <image name="weiboh" width="62" height="62"/>
         <image name="weixin" width="62" height="62"/>
     </resources>
 </document>

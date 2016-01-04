@@ -18,6 +18,7 @@
 #import "UIView+TMExtension.h"
 #import "UIWindow+TMExtension.h"
 #import "UIBarButtonItem+TMExtension.h"
+#import "NSString+TMExtension.h"
 
 
 #ifdef DEBUG // 开发调试阶段
@@ -34,7 +35,10 @@
 #define TMColorA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 #define TMRandomColor TMColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
 #define TMGrayColor(v) TMColor(v, v, v)
-#define TMCommonBgColor TMGrayColor(206)
+#define TMCommonBgColor TMGrayColor(247)
+#define TMYellowColor TMColor(250, 210, 1)
+
+
 
 #endif
 

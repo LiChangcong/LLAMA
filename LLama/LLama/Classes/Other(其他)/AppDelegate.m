@@ -19,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 看启动图1秒
+    [NSThread sleepForTimeInterval:1.0];
+
     // 创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -26,9 +30,9 @@
 //    self.window.rootViewController = [[TMTabBarController alloc] init];
 
     // 选择窗口的根控制器
-//    [self.window switchRootViewController];
+    [self.window switchRootViewController];
 //    self.window.rootViewController = [[TMImagePickVC alloc] init];
-    self.window.rootViewController = [[TMTabBarController alloc] init];
+//    self.window.rootViewController = [[TMTabBarController alloc] init];
 
     
     // 显示窗口

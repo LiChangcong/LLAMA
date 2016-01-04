@@ -9,8 +9,9 @@
 #import "TMPurseViewController.h"
 #import "TMPurseHeadCell.h"
 #import "TMTHistoryCell.h"
+#import "TMNoticeView.h"
 
-@interface TMPurseViewController ()
+@interface TMPurseViewController ()<TMPurseHeadCellDelegate>
 
 @end
 
@@ -55,6 +56,8 @@ static NSString * const  TMTHistoryCellId= @"history";
 {
     if (indexPath.row == 0) {
         TMPurseHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:TMPurseHeadCellId];
+        // 设置代理
+        cell.delegate = self;
         return cell;
         
     }else{
@@ -76,6 +79,18 @@ static NSString * const  TMTHistoryCellId= @"history";
         
     }
 
+}
+
+// 点赞按钮点击后显示点赞用户页面
+- (void)purseHeadCellDidClickPurseButton:(TMPurseHeadCell *)purseHeadCell
+{
+    TMLog(@"123");
+    TMNoticeView *noticeView = [TMNoticeView noticeView];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    noticeView.frame = window.bounds;
+    [window addSubview:noticeView];
+    
+    
 }
 
 

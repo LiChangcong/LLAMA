@@ -54,10 +54,6 @@
 
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
-}
 
 - (IBAction)inLlamaButtonClick:(UIButton *)sender {
     
@@ -68,11 +64,12 @@
 }
 - (IBAction)forgetPwdClick:(UIButton *)sender {
     
-//    TMRetrievePasswordViewController *retrieve = [[TMRetrievePasswordViewController alloc] init];
-//    [self presentViewController:retrieve animated:NO completion:nil];
+    
+    // 推出键盘
+    [self.view endEditing:YES];
+
     
     TMRetrievePasswordViewController *retrieve = [[TMRetrievePasswordViewController alloc] init];
-    //    [self.navigationController pushViewController:perfect animated:YES];
     self.retrieve = retrieve;
     
     self.retrieve.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
@@ -85,6 +82,12 @@
 
 }
 
+
+// 点击屏幕时也推出键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
 
 

@@ -19,7 +19,6 @@
 
 @interface YZPersonTableViewController ()
 
-
 @property (nonatomic, assign) CGFloat lastOffsetY;
 
 @end
@@ -43,8 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
     _lastOffsetY = -(YZHeadViewH + YZTabBarH);
     
     // 设置顶部额外滚动区域
@@ -52,6 +49,7 @@
     
     YZTableView *tableView = (YZTableView *)self.tableView;
     tableView.tabBar = _tabBar;
+    
     
 
     
@@ -73,17 +71,24 @@
     
     _headHCons.constant = headH;
     
-    // 计算透明度，刚好拖动200 - 64 136，透明度为1
+//    // 计算透明度，刚好拖动200 - 64 136，透明度为1
+//    
+//    CGFloat alpha = delta / (YZHeadViewH - YZHeadViewMinH);
+//    
+//    // 获取透明颜色
+//    UIColor *alphaColor = [UIColor colorWithWhite:0 alpha:alpha];
+//    [_titleLabel setTextColor:alphaColor];
+//    
+//    // 设置导航条背景图片
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:alpha]] forBarMetrics:UIBarMetricsDefault];
     
-    CGFloat alpha = delta / (YZHeadViewH - YZHeadViewMinH);
+    // 设置导航栏背景颜色
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"tabbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
-    // 获取透明颜色
-    UIColor *alphaColor = [UIColor colorWithWhite:0 alpha:alpha];
-    [_titleLabel setTextColor:alphaColor];
-    
-    // 设置导航条背景图片
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:alpha]] forBarMetrics:UIBarMetricsDefault];
-    
+    // 状态栏设置为白色
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
+
 }
 
 

@@ -12,6 +12,7 @@
 #import "TMLikeViewController.h"
 #import "TMPurseViewController.h"
 #import "TMNavigationController.h"
+#import "TMSettingViewController.h"
 
 #define YZClickBtnObjcKey @"clickBtnObjc"
 #define YZClickBtnNote @"clickBtn"
@@ -20,16 +21,11 @@
 @property (nonatomic, weak) UILabel *titleLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *tabBar;
-
 @property (weak, nonatomic) IBOutlet UIView *contentView;
-
 @property (nonatomic, weak) UIButton *selectedBtn;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headViewCons;
-
 // 个人头像控件
 @property (weak, nonatomic) IBOutlet UIImageView *personIconView;
-
 // 个人明信片控件
 @property (weak, nonatomic) IBOutlet UIImageView *personCardView;
 
@@ -57,7 +53,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:YZClickBtnNote object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
        
         UIButton *clickBtnObjc = note.userInfo[YZClickBtnObjcKey];
-        
         [self btnClick:clickBtnObjc];
         
         
@@ -67,24 +62,30 @@
 // 设置导航条
 - (void)setUpNav
 {
-    // 导航条背景透明
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    // 导航条背景透明
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
-    // 设置导航条中间view
-    UILabel *label = [[UILabel alloc] init];
+//    // 设置导航条中间view
+//    UILabel *label = [[UILabel alloc] init];
+//    _titleLabel = label;
+//    label.font = [UIFont  boldSystemFontOfSize:18];
+//    label.text = self.title;
+//    [label setTextColor:[UIColor colorWithWhite:1 alpha:0]];
+//    [label sizeToFit];
+//    self.navigationItem.titleView = label;
     
-    _titleLabel = label;
-    
-    label.font = [UIFont  boldSystemFontOfSize:18];
-    
-    label.text = self.title;
-    
-    [label setTextColor:[UIColor colorWithWhite:1 alpha:0]];
-    
-    [label sizeToFit];
-    
-    self.navigationItem.titleView = label;
+    // 设置导航栏右边设置按钮
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"set" highImage:@"seth" target:self action:@selector(setButtonClick)];
+
+}
+
+// 点击设置按钮后
+- (void)setButtonClick
+{
+    TMSettingViewController *setting = [[TMSettingViewController alloc] init];
+    [self.navigationController pushViewController:setting animated:YES];
+
 }
 
 // 设置子控制器
@@ -136,16 +137,12 @@
     for (UIViewController *childVc in self.childViewControllers) {
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
         btn.tag = _tabBar.subviews.count;
         
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        
+        btn.titleLabel.font = [UIFont systemFontOfSize:18];
         [btn setTitle:childVc.title forState:UIControlStateNormal];
-        
-        [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:TMYellowColor forState:UIControlStateSelected];
         
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
         
@@ -170,7 +167,6 @@
     // 将上一次选中的控制器的view移除内容视图
     
     UITableView *lastVcView = (UITableView *)[self.childViewControllers[_selectedBtn.tag] view];
-    
     [lastVcView removeFromSuperview];
     
     // 选中按钮
@@ -180,9 +176,7 @@
 
     // 切换内容视图显示
     UITableViewController *vc = self.childViewControllers[btn.tag];
-    
     vc.view.frame = _contentView.bounds;
-    
     [_contentView addSubview:vc.view];
     
     // 设置tableView的滚动区域
@@ -196,21 +190,16 @@
     
     // 布局tabBar子控件位置
     NSUInteger count = _tabBar.subviews.count;
-    
     CGFloat btnW = self.view.bounds.size.width / count;
-    
     CGFloat btnH = _tabBar.bounds.size.height;
     
     CGFloat btnX = 0;
-    
     CGFloat btnY = 0;
     
     for (int i = 0; i < count; i++) {
-        
+    
         btnX = i * btnW;
-        
         UIView *childV = _tabBar.subviews[i];
-        
         childV.frame = CGRectMake(btnX, btnY, btnW, btnH);
         
     }

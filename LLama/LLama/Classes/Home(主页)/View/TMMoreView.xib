@@ -25,17 +25,17 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmU-Ty-jZg" customClass="TMShareButton">
                                     <rect key="frame" x="148" y="14" width="116" height="62"/>
-                                    <state key="normal" title="朋友圈" image="wechat">
+                                    <state key="normal" title="朋友圈" image="friendscircle">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="wechath"/>
+                                    <state key="highlighted" image="friendscircleh"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opl-Tt-QyP" customClass="TMShareButton">
                                     <rect key="frame" x="295" y="14" width="98" height="62"/>
-                                    <state key="normal" title="微博" image="wechat">
+                                    <state key="normal" title="微博" image="weibo">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="wechath"/>
+                                    <state key="highlighted" image="weiboh"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjx-se-oIC" customClass="TMShareButton">
                                     <rect key="frame" x="20" y="14" width="98" height="62"/>
@@ -46,10 +46,10 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgE-e2-SX8" customClass="TMShareButton">
                                     <rect key="frame" x="437" y="14" width="89" height="62"/>
-                                    <state key="normal" title="QQ" image="wechat">
+                                    <state key="normal" title="QQ" image="qq">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="wechath"/>
+                                    <state key="highlighted" image="qqh"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,17 +78,23 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQZ-EK-lMh">
                             <rect key="frame" x="25" y="339" width="550" height="30"/>
-                            <state key="normal" title="取消"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.83137254901960778" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="取  消">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
                                 <action selector="cancelButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="b7l-bO-dx0"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78K-Se-eYh">
                             <rect key="frame" x="25" y="293" width="550" height="30"/>
-                            <state key="normal" title="举报"/>
+                            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="举报">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="78K-Se-eYh" secondAttribute="trailing" constant="25" id="50n-2d-EYt"/>
                         <constraint firstAttribute="trailing" secondItem="jRr-VL-RH4" secondAttribute="trailing" constant="25" id="6kY-hP-lTi"/>
@@ -111,7 +117,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="8Sc-xW-RXn" secondAttribute="bottom" id="2D8-Al-WpZ"/>
                 <constraint firstAttribute="trailing" secondItem="8Sc-xW-RXn" secondAttribute="trailing" id="L0f-Ih-h1z"/>
@@ -120,7 +126,13 @@
         </view>
     </objects>
     <resources>
+        <image name="friendscircle" width="62" height="62"/>
+        <image name="friendscircleh" width="62" height="62"/>
+        <image name="qq" width="62" height="62"/>
+        <image name="qqh" width="62" height="62"/>
         <image name="wechat" width="62" height="62"/>
         <image name="wechath" width="62" height="62"/>
+        <image name="weibo" width="62" height="62"/>
+        <image name="weiboh" width="62" height="62"/>
     </resources>
 </document>

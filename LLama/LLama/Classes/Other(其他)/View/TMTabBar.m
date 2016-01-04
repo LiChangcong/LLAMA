@@ -58,10 +58,12 @@
     CGFloat w = self.frame.size.width;
     CGFloat h = self.frame.size.height;
     
+    /**** 发布按钮 ****/
+    self.publishButton.center = CGPointMake(w * 0.5, h * 0.5);
     
     /**** 选项卡按钮 ****/
     // 按钮的尺寸
-    CGFloat buttonW = (w - self.publishButton.frame.size.width) / 2;
+    CGFloat buttonW = w / 5;
     CGFloat buttonH = h;
     CGFloat buttonY = 0;
     
@@ -69,14 +71,16 @@
     int index = 0;
     
     for (UIControl *tabBarButton in self.subviews) {
-        
+        // 不要用class作为变量名(因为class在C++是关键字)
+        //        Class clazz = NSClassFromString(@"UITabBarButton");
+        //        if (tabBarButton.class != clazz) continue;
         NSString *className = NSStringFromClass(tabBarButton.class);
         if (![className isEqualToString:@"UITabBarButton"]) continue;
         
         // 按钮的位置
         CGFloat buttonX = index * buttonW;
-        if (index >= 1) { // 右边2个按钮
-            buttonX += self.publishButton.frame.size.width;
+        if (index >= 2) { // 右边2个按钮
+            buttonX += buttonW;
         }
         tabBarButton.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
         
@@ -84,10 +88,6 @@
         index++;
         
     }
-    
-    /**** 发布按钮 ****/
-    self.publishButton.center = CGPointMake(w * 0.5, h * 0.5);
-    
 }
 
 

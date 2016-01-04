@@ -52,7 +52,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pms-bD-zBt">
                         <rect key="frame" x="10" y="220" width="431" height="40"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="体现(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwQ-X3-FnM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwQ-X3-FnM">
                                 <rect key="frame" x="10" y="11" width="100" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="LvA-7j-olI"/>
@@ -85,9 +85,12 @@
                             <constraint firstAttribute="height" constant="40" id="Wwk-i1-3hZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <state key="normal" title="体  现">
+                        <state key="normal" title="提   现">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="purseButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sUS-3p-odk"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LLama将收取5%的运营手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btS-az-1Wu">
                         <rect key="frame" x="144" y="324" width="162.5" height="14.5"/>

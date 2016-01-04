@@ -132,10 +132,10 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JN9-Hn-BDP">
                                             <rect key="frame" x="0.0" y="0.0" width="125" height="49"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <state key="normal" title="上传个人视频" image="takevideo">
+                                            <state key="normal" title="上传个人视频" image="takevideo1">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <state key="highlighted" image="takevideoh"/>
+                                            <state key="highlighted" image="takevideo1h"/>
                                             <connections>
                                                 <action selector="uploadVideoButtonClick:" destination="-1" eventType="touchUpInside" id="QY4-Oz-jJm"/>
                                             </connections>
@@ -156,7 +156,7 @@
                                     </variation>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="KbD-wY-Ur8" firstAttribute="leading" secondItem="C4w-Lj-JAM" secondAttribute="trailing" id="1G9-5M-s7x"/>
                                 <constraint firstAttribute="height" constant="49" id="9uI-Ow-Zz2"/>
@@ -177,7 +177,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我是帅哥啊环境环境就会就会环境环境环境环境行间距行间距就会环境环境环境环境" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQO-YH-G41">
                             <rect key="frame" x="80" y="81" width="275" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -208,7 +208,7 @@
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTn-32-HCL" userLabel="选项卡视图">
                     <rect key="frame" x="0.0" y="200" width="375" height="44"/>
-                    <color key="backgroundColor" red="1" green="0.69269543730000005" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="43v-Nt-zQv"/>
                     </constraints>
@@ -238,7 +238,7 @@
         <image name="meinv" width="200" height="300"/>
         <image name="purse" width="15" height="15"/>
         <image name="purseh" width="15" height="15"/>
-        <image name="takevideo" width="21" height="21"/>
-        <image name="takevideoh" width="21" height="21"/>
+        <image name="takevideo1" width="21" height="21"/>
+        <image name="takevideo1h" width="21" height="21"/>
     </resources>
 </document>

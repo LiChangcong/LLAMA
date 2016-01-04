@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class TMPurseHeadCell;
+
+@protocol TMPurseHeadCellDelegate <NSObject>
+@optional
+
+- (void)purseHeadCellDidClickPurseButton:(TMPurseHeadCell *)purseHeadCell;
+
+@end
+
+
 @interface TMPurseHeadCell : UITableViewCell
+/** 代理对象 */
+@property (nonatomic, weak) id<TMPurseHeadCellDelegate> delegate;
 
 @end

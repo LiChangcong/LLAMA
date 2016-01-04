@@ -11,10 +11,7 @@
 @interface YZPersonTableViewController : UITableViewController
 
 @property (nonatomic, weak)   UIView *tabBar;
-
 @property (nonatomic, weak)  NSLayoutConstraint *headHCons;
-
-
 @property (nonatomic, weak) UILabel *titleLabel;
 
 @end
