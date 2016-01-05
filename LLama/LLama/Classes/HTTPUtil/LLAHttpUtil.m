@@ -108,7 +108,8 @@ static NSString *const httpBaseURL = @"http://";
 
 + (AFHTTPSessionManager *) defaultManager {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/octet-stream",@"text/xml",@"text/html",@"image/jpeg",@"text/plain",@"application/json",@"text/json",@"text/javascript",@"audio/amr", nil];
     [manager.requestSerializer setValue:@"" forHTTPHeaderField:@""];
     return manager;
