@@ -110,6 +110,8 @@
 		A3C58F761C3BAFE3003D90BA /* NSObject+MTLComparisonAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C58F631C3BAFE3003D90BA /* NSObject+MTLComparisonAdditions.m */; };
 		A3C58F771C3BAFE3003D90BA /* NSValueTransformer+MTLInversionAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C58F651C3BAFE3003D90BA /* NSValueTransformer+MTLInversionAdditions.m */; };
 		A3C58F781C3BAFE3003D90BA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C58F671C3BAFE3003D90BA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */; };
+		A3C58F7C1C3BB27D003D90BA /* LLAHttpUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C58F7B1C3BB27D003D90BA /* LLAHttpUtil.m */; };
+		A3C58F7F1C3BCA56003D90BA /* LLAHttpResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C58F7E1C3BCA56003D90BA /* LLAHttpResponseData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +322,10 @@
 		A3C58F651C3BAFE3003D90BA /* NSValueTransformer+MTLInversionAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLInversionAdditions.m"; sourceTree = "<group>"; };
 		A3C58F661C3BAFE3003D90BA /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
 		A3C58F671C3BAFE3003D90BA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
+		A3C58F7A1C3BB27D003D90BA /* LLAHttpUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLAHttpUtil.h; path = HTTPUtil/LLAHttpUtil.h; sourceTree = "<group>"; };
+		A3C58F7B1C3BB27D003D90BA /* LLAHttpUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLAHttpUtil.m; path = HTTPUtil/LLAHttpUtil.m; sourceTree = "<group>"; };
+		A3C58F7D1C3BCA56003D90BA /* LLAHttpResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLAHttpResponseData.h; path = HTTPUtil/LLAHttpResponseData.h; sourceTree = "<group>"; };
+		A3C58F7E1C3BCA56003D90BA /* LLAHttpResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLAHttpResponseData.m; path = HTTPUtil/LLAHttpResponseData.m; sourceTree = "<group>"; };
 		E9F330D0FB11035557ECA200 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -444,6 +450,7 @@
 		7E1A14871C15D80400693F3E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A3C58F791C3BB25A003D90BA /* HTTPUtil */,
 				A3C58F411C3BAFE3003D90BA /* ThirdParty */,
 				7EC083851C200A5400C7FDF9 /* Publish(发布) */,
 				7ED7A80F1C1940810033B29A /* Login(登陆) */,
@@ -963,6 +970,17 @@
 			path = extobjc;
 			sourceTree = "<group>";
 		};
+		A3C58F791C3BB25A003D90BA /* HTTPUtil */ = {
+			isa = PBXGroup;
+			children = (
+				A3C58F7A1C3BB27D003D90BA /* LLAHttpUtil.h */,
+				A3C58F7B1C3BB27D003D90BA /* LLAHttpUtil.m */,
+				A3C58F7D1C3BCA56003D90BA /* LLAHttpResponseData.h */,
+				A3C58F7E1C3BCA56003D90BA /* LLAHttpResponseData.m */,
+			);
+			name = HTTPUtil;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1177,6 +1195,7 @@
 				A3C58F6C1C3BAFE3003D90BA /* MTLModel+NSCoding.m in Sources */,
 				7EBC39BE1C27A3FA00A26505 /* TMILikeViewController.m in Sources */,
 				7EC3E3BB1C252B5300F40F9B /* YZPersonViewController.m in Sources */,
+				A3C58F7F1C3BCA56003D90BA /* LLAHttpResponseData.m in Sources */,
 				7EE875D41C30EFE70081941F /* TMAccountSecurityController.m in Sources */,
 				7E2729131C1BC367002F1FAC /* TMRetrievePasswordViewController.m in Sources */,
 				7E0F544E1C166B1A0032179D /* TMTitleButton.m in Sources */,
@@ -1241,6 +1260,7 @@
 				7E5C57411C16CBF4007366E8 /* TMCommentViewController.m in Sources */,
 				A3C58F681C3BAFE3003D90BA /* EXTRuntimeExtensions.m in Sources */,
 				7E4FD71A1C17D8760021DE83 /* TMLikeTableViewController.m in Sources */,
+				A3C58F7C1C3BB27D003D90BA /* LLAHttpUtil.m in Sources */,
 				A3C58F6D1C3BAFE3003D90BA /* MTLModel.m in Sources */,
 				A3C58F6F1C3BAFE3003D90BA /* MTLTransformerErrorHandling.m in Sources */,
 			);
