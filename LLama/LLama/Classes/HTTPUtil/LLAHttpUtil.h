@@ -29,11 +29,11 @@ typedef void(^HttpProgressBlock)(NSUInteger bytesWritten, long long totalBytesWr
 //有文件的请求
 
 + (NSURLSessionTask *)httpPostWithUrl:(NSString *)url
-                  param:(NSDictionary *)paramDict
-               progress:(HttpProgressBlock) progressBlock
-              bodyBlock:(void (^)(id <AFMultipartFormData> formData)) bodyBlock
-          responseBlock:(HttpSuccessBlock)responseBlock
-              exception:(HttpExceptionBlock)exceptionBlock
-                 failed:(HttpFailedBlock)failedBlock;
+                                param:(NSDictionary *)params
+                            bodyBlock:(HttpBodyBlock) bodyBlock
+                             progress:(HttpProgressBlock) progressBlock
+                        responseBlock:(HttpSuccessBlock)responseBlock
+                            exception:(HttpExceptionBlock)exceptionBlock
+                               failed:(HttpFailedBlock)failedBlock;
 
 @end

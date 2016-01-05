@@ -9,7 +9,7 @@
 #import "LLAHttpUtil.h"
 #import "LLAHttpResponseData.h"
 
-static NSString *const httpBaseURL = @"http://61.139.124.171:8086";
+static NSString *const httpBaseURL = @"http://";
 
 @implementation LLAHttpUtil
 
@@ -20,18 +20,16 @@ static NSString *const httpBaseURL = @"http://61.139.124.171:8086";
                             exception:(HttpExceptionBlock) exceptionBlock
                                failed:(HttpFailedBlock) failedBlock {
     
-    NSString *fullUrl = [self fullURLString:url];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:[self publicParams]];
-    [params addEntriesFromDictionary:paramDict];
-    
-    return [self httpPostWithUrl:fullUrl
-                           param:params
+    return [self httpPostWithUrl:url
+                           param:paramDict
                        bodyBlock:NULL
                         progress:progressBlock
                    responseBlock:responseBlock
                        exception:exceptionBlock
                           failed:failedBlock];
 }
+
+
 
 //
 + (NSURLSessionTask *)httpPostWithUrl:(NSString *)url
