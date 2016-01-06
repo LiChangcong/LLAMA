@@ -1,41 +1,23 @@
 //
-//  AppDelegate.m
+//  LLADelegate.m
 //  LLama
 //
-//  Created by tommin on 15/12/7.
-//  Copyright © 2015年 heihei. All rights reserved.
+//  Created by WanDa on 16/1/6.
+//  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "TMTabBarController.h"
-//#import "TMImagePickVC.h"
+#import "LLADelegate.h"
+#import "TMLoginRegisterViewController.h"
 
-@interface AppDelegate ()
-
-@end
-
-@implementation AppDelegate
-
+@implementation LLADelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // 看启动图1秒
-    [NSThread sleepForTimeInterval:1.0];
-
-    // 创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    // 设置窗口的根控制器
-//    self.window.rootViewController = [[TMTabBarController alloc] init];
+    self.window.rootViewController =  [[TMLoginRegisterViewController alloc] init];
 
-    // 选择窗口的根控制器
-    [self.window switchRootViewController];
-//    self.window.rootViewController = [[TMImagePickVC alloc] init];
-//    self.window.rootViewController = [[TMTabBarController alloc] init];
-
-    
-    // 显示窗口
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -62,5 +44,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end
