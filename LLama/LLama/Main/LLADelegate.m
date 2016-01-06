@@ -9,7 +9,31 @@
 #import "LLADelegate.h"
 #import "TMLoginRegisterViewController.h"
 
+//sina
+#import "WeiboSDK.h"
+
+//QQ
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/QQApiInterfaceObject.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+//weixin
+#import "WXApi.h"
+
+#define LLA_QQ_APPID @"1105024860"
+#define LLA_QQ_APPKEY @"k4Nznv263UT0cXxt"
+
+#define LLA_SINA_WEIBO_APPKEY @"514339865"
+
+#define LLA_WEIXIN_APPID @"wxae2f98ae451293df"
+#define LLA_WEIXIN_APP_SECRET @"f1c063d044076449afea4652ff90f6f4"
+
+@interface LLADelegate()<WeiboSDKDelegate,WXApiDelegate>
+
+@end
+
 @implementation LLADelegate
+
+#pragma mark - AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -19,6 +43,9 @@
     self.window.rootViewController =  [[TMLoginRegisterViewController alloc] init];
 
     [self.window makeKeyAndVisible];
+    
+    //
+    [self setupThirdSDK];
     
     //
     [self setupShortCutsItems];
@@ -53,6 +80,69 @@
         completionHandler(YES);
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    NSString *urlStr = [url absoluteString];
+    
+    if([urlStr hasPrefix:@"wx"]){
+        return  [WXApi handleOpenURL:url delegate:self];
+    }else if([urlStr hasPrefix:@"tencent"]){
+        if([TencentOAuth CanHandleOpenURL:url]){
+            return [TencentOAuth HandleOpenURL:url];
+        }
+    }else if([urlStr hasPrefix:@"wb"]){
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url {
+    NSString *urlStr = [url absoluteString];
+    
+    if([urlStr hasPrefix:@"wx"]){
+        return  [WXApi handleOpenURL:url delegate:self];
+    }else if([urlStr hasPrefix:@"tencent"]){
+        if([TencentOAuth CanHandleOpenURL:url]){
+            return [TencentOAuth HandleOpenURL:url];
+        }
+    }else if([urlStr hasPrefix:@"wb"]){
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
+
+}
+
+#pragma mark - Setup Third SDK
+
+- (void) setupThirdSDK {
+    [self setupQQSDK];
+    [self setupSinaWeiBoSDK];
+    [self setupWeiXinSDK];
+    [self setupAliPaySDK];
+}
+
+- (void) setupQQSDK {
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:LLA_SINA_WEIBO_APPKEY];
+}
+
+- (void) setupSinaWeiBoSDK {
+    
+}
+
+- (void) setupWeiXinSDK {
+    [WXApi registerApp:LLA_WEIXIN_APPID];
+}
+
+- (void) setupAliPaySDK {
+    
+}
+
 #pragma mark - Setup ShortCuts
 
 - (void) setupShortCutsItems {
@@ -75,5 +165,24 @@
     [UIApplication sharedApplication].shortcutItems = @[item1,item2];
 }
 
+#pragma mark - SinaWeiBoDelegate
+
+- (void) didReceiveWeiboRequest:(WBBaseRequest *)request {
+    
+}
+
+- (void) didReceiveWeiboResponse:(WBBaseResponse *)response {
+    
+}
+
+#pragma mark - WeiXinDelegate
+
+- (void) onReq:(BaseReq *)req {
+    
+}
+
+- (void) onResp:(BaseResp *)resp {
+    
+}
 
 @end
