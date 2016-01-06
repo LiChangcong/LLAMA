@@ -20,6 +20,9 @@
 
     [self.window makeKeyAndVisible];
     
+    //
+    [self setupShortCutsItems];
+    
     return YES;
 }
 
@@ -43,6 +46,33 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void) application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    if (completionHandler)
+        completionHandler(YES);
+}
+
+#pragma mark - Setup ShortCuts
+
+- (void) setupShortCutsItems {
+    
+    UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc]
+                                        initWithType:@"typeString1"
+                                        localizedTitle:@"拍照片"
+                                        localizedSubtitle:nil
+                                        icon:[UIApplicationShortcutIcon iconWithType:
+                                              UIApplicationShortcutIconTypeCapturePhoto]
+                                        userInfo:nil];
+    UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc]
+                                        initWithType:@"typeString2"
+                                        localizedTitle:@"信息"
+                                        localizedSubtitle:@"描述"
+                                        icon:[UIApplicationShortcutIcon iconWithType:
+                                              UIApplicationShortcutIconTypeMessage]
+                                        userInfo:nil];
+    
+    [UIApplication sharedApplication].shortcutItems = @[item1,item2];
 }
 
 
