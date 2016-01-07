@@ -8,6 +8,7 @@
 
 #import "LLAHttpUtil.h"
 #import "LLAHttpResponseData.h"
+#import "LLAThirdSDKDelegate.h"
 
 static NSString *const httpBaseURL = @"https://api.hillama.com";
 
@@ -111,9 +112,11 @@ static NSString *const httpBaseURL = @"https://api.hillama.com";
     manager.securityPolicy = [AFSecurityPolicy defaultPolicy];
 //    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/octet-stream",@"text/xml",@"text/html",@"image/jpeg",@"text/plain",@"application/json",@"text/json",@"text/javascript",@"audio/amr", nil];
-    //[manager.requestSerializer setValue:@"" forHTTPHeaderField:@""];
+    
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    return manager;
+
+    [manager.requestSerializer setValue:[LLAThirdSDKDelegate shareInstance].tempToken forHTTPHeaderField:@"auth"];
+        return manager;
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlS-HN-2lm">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Jb-Z3-QWw">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Jb-Z3-QWw">
                             <rect key="frame" x="12" y="24" width="32" height="32"/>
                             <state key="normal" image="back1"/>
                             <connections>
@@ -59,19 +59,28 @@
                             <rect key="frame" x="269" y="381" width="62" height="62"/>
                             <state key="normal" image="wechat"/>
                             <state key="highlighted" image="wechath"/>
+                            <connections>
+                                <action selector="weChatLoginClicked:" destination="-1" eventType="touchUpInside" id="T8x-uZ-6k8"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-oU-rY4">
-                            <rect key="frame" x="171" y="386" width="62" height="62"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-oU-rY4">
+                            <rect key="frame" x="171" y="381" width="62" height="62"/>
                             <state key="normal" image="weixin"/>
                             <state key="highlighted" image="weiboh"/>
+                            <connections>
+                                <action selector="sinaWeiBoLoginClicked:" destination="-1" eventType="touchUpInside" id="879-qO-asW"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBc-Ds-FGI">
-                            <rect key="frame" x="367" y="386" width="62" height="62"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBc-Ds-FGI">
+                            <rect key="frame" x="367" y="381" width="62" height="62"/>
                             <state key="normal" image="qq"/>
                             <state key="highlighted" image="qqh"/>
+                            <connections>
+                                <action selector="qqLoginClicked:" destination="-1" eventType="touchUpInside" id="xVW-U4-dTw"/>
+                            </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-kG-xx0">
-                            <rect key="frame" x="245" y="548" width="110" height="12"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-kG-xx0">
+                            <rect key="frame" x="238" y="566" width="124.5" height="24"/>
                             <string key="text">注册代表你已阅读并同意
 LLAMA用户协议和隐私条款</string>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>

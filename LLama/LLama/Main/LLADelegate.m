@@ -9,25 +9,11 @@
 #import "LLADelegate.h"
 #import "TMLoginRegisterViewController.h"
 
-//sina
-#import "WeiboSDK.h"
+#import "LLAThirdSDKDelegate.h"
 
-//QQ
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/QQApiInterfaceObject.h>
-#import <TencentOpenAPI/TencentOAuth.h>
-//weixin
-#import "WXApi.h"
 
-#define LLA_QQ_APPID @"1105024860"
-#define LLA_QQ_APPKEY @"k4Nznv263UT0cXxt"
 
-#define LLA_SINA_WEIBO_APPKEY @"514339865"
-
-#define LLA_WEIXIN_APPID @"wxae2f98ae451293df"
-#define LLA_WEIXIN_APP_SECRET @"f1c063d044076449afea4652ff90f6f4"
-
-@interface LLADelegate()<WeiboSDKDelegate,WXApiDelegate>
+@interface LLADelegate()
 
 @end
 
@@ -87,34 +73,20 @@
     NSString *urlStr = [url absoluteString];
     
     if([urlStr hasPrefix:@"wx"]){
-        return  [WXApi handleOpenURL:url delegate:self];
-    }else if([urlStr hasPrefix:@"tencent"]){
+        return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+    }else if([urlStr hasPrefix:@"tencent"] || [urlStr hasPrefix:@"QQ"]){
+    
+        [QQApiInterface handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+        
         if([TencentOAuth CanHandleOpenURL:url]){
             return [TencentOAuth HandleOpenURL:url];
         }
+        
     }else if([urlStr hasPrefix:@"wb"]){
-        return [WeiboSDK handleOpenURL:url delegate:self];
+        return [WeiboSDK handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
     }
     
     return YES;
-}
-
-- (BOOL)application:(UIApplication *)application
-      handleOpenURL:(NSURL *)url {
-    NSString *urlStr = [url absoluteString];
-    
-    if([urlStr hasPrefix:@"wx"]){
-        return  [WXApi handleOpenURL:url delegate:self];
-    }else if([urlStr hasPrefix:@"tencent"]){
-        if([TencentOAuth CanHandleOpenURL:url]){
-            return [TencentOAuth HandleOpenURL:url];
-        }
-    }else if([urlStr hasPrefix:@"wb"]){
-        return [WeiboSDK handleOpenURL:url delegate:self];
-    }
-    
-    return YES;
-
 }
 
 #pragma mark - Setup Third SDK
@@ -163,26 +135,6 @@
                                         userInfo:nil];
     
     [UIApplication sharedApplication].shortcutItems = @[item1,item2];
-}
-
-#pragma mark - SinaWeiBoDelegate
-
-- (void) didReceiveWeiboRequest:(WBBaseRequest *)request {
-    
-}
-
-- (void) didReceiveWeiboResponse:(WBBaseResponse *)response {
-    
-}
-
-#pragma mark - WeiXinDelegate
-
-- (void) onReq:(BaseReq *)req {
-    
-}
-
-- (void) onResp:(BaseResp *)resp {
-    
 }
 
 @end

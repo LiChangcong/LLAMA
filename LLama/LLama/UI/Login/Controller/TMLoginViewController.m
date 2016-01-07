@@ -9,11 +9,12 @@
 #import "TMLoginViewController.h"
 #import "TMTabBarController.h"
 #import "TMRetrievePasswordViewController.h"
-
+#import "LLAThirdSDKDelegate.h"
 
 @interface TMLoginViewController ()
 
 @property(nonatomic, strong) TMRetrievePasswordViewController *retrieve;
+- (IBAction)sinaWeiBoLoginClicked:(id)sender;
 
 @end
 
@@ -90,5 +91,17 @@
 }
 
 
+
+- (IBAction)sinaWeiBoLoginClicked:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance] sinaWeiBoLogin];
+}
+- (IBAction)weChatLoginClicked:(id)sender {
+    [[LLAThirdSDKDelegate shareInstance] weChatLogin];
+}
+- (IBAction)qqLoginClicked:(id)sender {
+    [[LLAThirdSDKDelegate shareInstance] qqLogin];
+    
+}
 
 @end
