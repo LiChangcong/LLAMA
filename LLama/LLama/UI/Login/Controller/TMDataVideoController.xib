@@ -15,49 +15,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSz-RR-nFa" userLabel="顶部栏">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9R1-YS-dps" userLabel="顶部栏">
-                            <rect key="frame" x="0.0" y="20" width="600" height="40"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4n-6w-RaO" userLabel="返回按钮">
-                                    <rect key="frame" x="10" y="0.0" width="44" height="40"/>
-                                    <state key="normal" image="back"/>
-                                    <state key="highlighted" image="backH"/>
-                                    <connections>
-                                        <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="5TD-qH-0bb"/>
-                                    </connections>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="个 人 资 料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edC-lN-KEb">
-                                    <rect key="frame" x="239" y="0.0" width="82" height="40"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="8X0-HB-lS2"/>
-                                <constraint firstItem="X4n-6w-RaO" firstAttribute="leading" secondItem="9R1-YS-dps" secondAttribute="leading" constant="10" id="Aqa-UA-nRh"/>
-                                <constraint firstAttribute="bottom" secondItem="X4n-6w-RaO" secondAttribute="bottom" id="HWf-45-C9C"/>
-                                <constraint firstItem="edC-lN-KEb" firstAttribute="centerX" secondItem="9R1-YS-dps" secondAttribute="centerX" id="U0a-ab-Yjw"/>
-                                <constraint firstAttribute="bottom" secondItem="edC-lN-KEb" secondAttribute="bottom" id="o77-gW-F3F"/>
-                                <constraint firstItem="X4n-6w-RaO" firstAttribute="top" secondItem="9R1-YS-dps" secondAttribute="top" id="txY-lS-N4M"/>
-                                <constraint firstItem="edC-lN-KEb" firstAttribute="top" secondItem="9R1-YS-dps" secondAttribute="top" id="zk2-Ke-ALe"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="64" id="Or1-Z0-sfh"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="hdf-4c-a8Z"/>
-                        <constraint firstAttribute="trailing" secondItem="9R1-YS-dps" secondAttribute="trailing" id="l7g-kD-g30"/>
-                        <constraint firstItem="9R1-YS-dps" firstAttribute="leading" secondItem="iSz-RR-nFa" secondAttribute="leading" id="pzh-Ai-wCy"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="u8x-ZE-eL4"/>
-                        <constraint firstItem="9R1-YS-dps" firstAttribute="top" secondItem="iSz-RR-nFa" secondAttribute="top" constant="20" id="wlg-QQ-N5L"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-8w-CfO" userLabel="摄像按钮">
                     <rect key="frame" x="252" y="118" width="96" height="96"/>
                     <state key="normal" image="uploadingvideo"/>
@@ -91,14 +48,11 @@
             </subviews>
             <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="gXh-8w-CfO" firstAttribute="top" secondItem="iSz-RR-nFa" secondAttribute="bottom" constant="54" id="3He-KZ-H4h"/>
                 <constraint firstAttribute="trailing" secondItem="vl9-cT-LqM" secondAttribute="trailing" constant="20" id="8FX-lZ-XdY"/>
                 <constraint firstItem="vl9-cT-LqM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="8g8-ja-owx"/>
-                <constraint firstItem="iSz-RR-nFa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="EeN-xy-wMg"/>
+                <constraint firstItem="gXh-8w-CfO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="118" id="EZL-uN-mXe"/>
                 <constraint firstAttribute="trailing" secondItem="CPw-jx-gpu" secondAttribute="trailing" constant="20" id="Hie-85-1tu"/>
                 <constraint firstItem="gXh-8w-CfO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Kuz-Yh-a4Z"/>
-                <constraint firstAttribute="trailing" secondItem="iSz-RR-nFa" secondAttribute="trailing" id="WVL-iJ-5vr"/>
-                <constraint firstItem="iSz-RR-nFa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZTe-o3-6Jz"/>
                 <constraint firstItem="vl9-cT-LqM" firstAttribute="top" secondItem="gXh-8w-CfO" secondAttribute="bottom" constant="112" id="a1Z-kT-F0g"/>
                 <constraint firstItem="CPw-jx-gpu" firstAttribute="top" secondItem="vl9-cT-LqM" secondAttribute="bottom" constant="11" id="g2P-0c-jg6"/>
                 <constraint firstItem="CPw-jx-gpu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="gQZ-vk-Aqh"/>
@@ -107,8 +61,6 @@
         </view>
     </objects>
     <resources>
-        <image name="back" width="44" height="44"/>
-        <image name="backH" width="44" height="44"/>
         <image name="uploadingvideo" width="96" height="96"/>
     </resources>
 </document>

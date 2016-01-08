@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -20,6 +20,10 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Jb-Z3-QWw">
                             <rect key="frame" x="12" y="24" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="MU4-mu-oJl"/>
+                                <constraint firstAttribute="height" constant="32" id="Til-tw-Yee"/>
+                            </constraints>
                             <state key="normal" image="back1"/>
                             <connections>
                                 <action selector="cancelButtonClick:" destination="-1" eventType="touchUpInside" id="vAM-d3-ovg"/>
