@@ -25,6 +25,18 @@
 //weixin
 #import "WXApi.h"
 
+typedef NS_ENUM(NSInteger,LLAThirdLoginState) {
+
+    LLAThirdLoginState_Unknow = 0,
+    LLAThirdLoginState_Begin = 1,
+    LLAThirdLoginState_Success = 2,
+    LLAThirdLoginState_Cancel = 3,
+    LLAThirdLoginState_Failed = 4,
+    
+};
+
+typedef void(^ThirdLoginBlock)(NSString *tokenString,LLAThirdLoginState state,NSError *error);
+
 @class LLAUser;
 
 @interface LLAThirdSDKDelegate : NSObject<WeiboSDKDelegate,WXApiDelegate,TencentSessionDelegate,QQApiInterfaceDelegate>
@@ -32,11 +44,11 @@
 
 + (instancetype) shareInstance;
 
-- (void) sinaWeiBoLogin;
+- (void) sinaWeiBoLogin:(ThirdLoginBlock) callBack;
 
-- (void) weChatLogin;
+- (void) weChatLogin:(ThirdLoginBlock) callBack;
 
-- (void) qqLogin;
+- (void) qqLogin:(ThirdLoginBlock) callBack;
 
 - (void) fetchUserAccessTokenInfoWithInfo:(LLAUser *) user;
 

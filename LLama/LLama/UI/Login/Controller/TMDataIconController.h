@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLACommonViewController.h"
 
-@interface TMDataIconController : UIViewController
+@interface TMDataIconController : LLACommonViewController
 
 @end

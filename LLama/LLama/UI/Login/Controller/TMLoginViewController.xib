@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMLoginViewController">
             <connections>
                 <outlet property="loginButton" destination="eIG-Ir-J9a" id="ZS1-17-jwX"/>
+                <outlet property="passwordField" destination="3Ci-DR-cPt" id="gmj-8Q-S7r"/>
+                <outlet property="phoneNumField" destination="nqc-sa-QjN" id="8g7-6x-utN"/>
                 <outlet property="registerButton" destination="fGd-RN-2y2" id="qGQ-hU-Rmg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

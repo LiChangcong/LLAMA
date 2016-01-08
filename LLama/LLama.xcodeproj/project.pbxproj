@@ -38,6 +38,7 @@
 		A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7F71C3F8EDF00B27898 /* UIImage+LLAImage.m */; };
 		A3D8E7FB1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7FA1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m */; };
 		A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7FD1C3F9E9800B27898 /* UIButton+AlignImageTitle.m */; };
+		A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */; };
 		A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC8C1C3CAE38009F3D37 /* NSString+TMExtension.m */; };
 		A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC8E1C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m */; };
 		A3DEDD661C3CAE38009F3D37 /* UIView+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC901C3CAE38009F3D37 /* UIView+TMExtension.m */; };
@@ -228,6 +229,8 @@
 		A3D8E7FA1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LLABKColorWithState.m"; sourceTree = "<group>"; };
 		A3D8E7FC1C3F9E9800B27898 /* UIButton+AlignImageTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AlignImageTitle.h"; sourceTree = "<group>"; };
 		A3D8E7FD1C3F9E9800B27898 /* UIButton+AlignImageTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AlignImageTitle.m"; sourceTree = "<group>"; };
+		A3D8E8001C3FA6D600B27898 /* LLAViewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAViewUtil.h; sourceTree = "<group>"; };
+		A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAViewUtil.m; sourceTree = "<group>"; };
 		A3DEDC8B1C3CAE38009F3D37 /* NSString+TMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TMExtension.h"; sourceTree = "<group>"; };
 		A3DEDC8C1C3CAE38009F3D37 /* NSString+TMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TMExtension.m"; sourceTree = "<group>"; };
 		A3DEDC8D1C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+TMExtension.h"; sourceTree = "<group>"; };
@@ -607,6 +610,15 @@
 			path = SinaWeiBo;
 			sourceTree = "<group>";
 		};
+		A3D8E7FF1C3FA6B500B27898 /* ViewUtil */ = {
+			isa = PBXGroup;
+			children = (
+				A3D8E8001C3FA6D600B27898 /* LLAViewUtil.h */,
+				A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */,
+			);
+			path = ViewUtil;
+			sourceTree = "<group>";
+		};
 		A3DEDC8A1C3CAE38009F3D37 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +756,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A3D8E7FF1C3FA6B500B27898 /* ViewUtil */,
 				A3DEDD591C3CAE38009F3D37 /* HTTPUtil */,
 			);
 			path = Util;
@@ -1341,6 +1354,7 @@
 				A3DEDE941C3CAEC7009F3D37 /* TMNoticeView.m in Sources */,
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
+				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				A3DEDE771C3CAEC7009F3D37 /* TMDataIconController.m in Sources */,
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,

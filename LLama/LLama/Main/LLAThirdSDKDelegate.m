@@ -17,6 +17,8 @@
     TencentOAuth *qqAuth;
 }
 
+@property(nonatomic , copy) ThirdLoginBlock loginCallBack;
+
 @end
 
 @implementation LLAThirdSDKDelegate
@@ -31,41 +33,81 @@
     return shareInstance;
 }
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Init
 
 - (instancetype) init {
     self = [super init];
     if (self) {
         qqAuth = [[TencentOAuth alloc] initWithAppId:LLA_QQ_APPID andDelegate:self];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
-#pragma mark - Public Method
+#pragma mark - Notification
 
-- (void) qqLogin {
-    NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
-    [qqAuth authorize:permissions inSafari:NO];
+- (void) applicationDidBecomeActive:(NSNotification *) noti {
+    //
 }
 
-- (void) weChatLogin {
+#pragma mark - Public Method
+
+- (void) qqLogin:(ThirdLoginBlock) callBack {
+    
+    self.loginCallBack = callBack;
+    
+    NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
+    if (![qqAuth authorize:permissions inSafari:NO]) {
+        
+        if (self.loginCallBack){
+            self.loginCallBack(nil,LLAThirdLoginState_Failed,nil);
+            self.loginCallBack = nil;
+        }
+    };
+}
+
+- (void) weChatLogin:(ThirdLoginBlock) callBack {
     if(![WXApi isWXAppInstalled]){
         //未安装微信
         return;
     }
+    
+    self.loginCallBack = callBack;
+    
     SendAuthReq* req =[[SendAuthReq alloc ] init];
     req.scope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact";
     req.state = SDK_REDIRECT_URL ;
-    [WXApi sendReq:req];
+    
+    if ([WXApi sendReq:req]) {
+        if (self.loginCallBack){
+            self.loginCallBack(nil,LLAThirdLoginState_Failed,nil);
+            self.loginCallBack = nil;
+        }
+
+    }
 }
 
-- (void) sinaWeiBoLogin {
+- (void) sinaWeiBoLogin:(ThirdLoginBlock) callBack {
+    
+    self.loginCallBack = callBack;
+    //
+    
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
 
     request.redirectURI = SDK_REDIRECT_URL;
     request.scope = @"all";
     request.userInfo = @{@"type": @"login"};
-    [WeiboSDK sendRequest:request];
+    if ([WeiboSDK sendRequest:request]) {
+        if (self.loginCallBack){
+            self.loginCallBack(nil,LLAThirdLoginState_Failed,nil);
+            self.loginCallBack = nil;
+        }
+    }
 }
 
 #pragma mark - SinaWeiBoDelegate
@@ -119,7 +161,7 @@
             }
         }
         
-    }else if(resp.errCode == WXSuccess){
+    }else {
         if ([resp isKindOfClass:[SendAuthResp class]]) {
             //login
             if (resp.errCode == 0) {
@@ -235,25 +277,24 @@
     }
     
     [LLAHttpUtil httpPostWithUrl:url param:params progress:NULL responseBlock:^(id responseObject) {
-        NSLog(@"responseObject:%@",responseObject);
-        
+
         NSString *token = [responseObject valueForKey:@"token"];
         self.tempToken = token;
         
         //get userInfo
         [LLAHttpUtil httpPostWithUrl:@"/user/getUserInfo" param:[NSMutableDictionary dictionary] progress:NULL responseBlock:^(id responseObject) {
-            LLAUser *loginUser = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
-            NSLog(@"%@",responseObject);
+            //LLAUser *loginUser = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
+            
         } exception:^(NSInteger code, NSString *errorMessage) {
-            NSLog(@"%@",errorMessage);
+
         } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-            NSLog(@"%@",error);
+
         }];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
-        NSLog(@"errorMessage:%@",errorMessage);
+
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-        NSLog(@"error:%@",error);
+        
     }];
 }
 

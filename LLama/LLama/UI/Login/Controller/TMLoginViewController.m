@@ -10,7 +10,11 @@
 #import "TMTabBarController.h"
 #import "TMRetrievePasswordViewController.h"
 #import "TMRegisterViewController.h"
+#import "TMDataIconController.h"
+
 #import "LLAThirdSDKDelegate.h"
+#import "LLAHttpUtil.h"
+#import "LLAViewUtil.h"
 
 @interface TMLoginViewController ()
 
@@ -20,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
 
@@ -68,6 +74,28 @@
     
     //login
     
+    [self.view endEditing:YES];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:self.phoneNumField.text forKey:@"mobile"];
+    [params setValue:self.passwordField.text forKey:@"pwd"];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/login/mobileLogin" param:params progress:NULL responseBlock:^(id responseObject) {
+        //
+        TMDataIconController *finishData = [TMDataIconController new];
+        [self.navigationController pushViewController:finishData animated:YES];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+    
 }
 - (IBAction)forgetPwdClick:(UIButton *)sender {
     
@@ -100,13 +128,19 @@
 
 - (IBAction)sinaWeiBoLoginClicked:(id)sender {
     
-    [[LLAThirdSDKDelegate shareInstance] sinaWeiBoLogin];
+    [[LLAThirdSDKDelegate shareInstance] sinaWeiBoLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+        
+    }];
 }
 - (IBAction)weChatLoginClicked:(id)sender {
-    [[LLAThirdSDKDelegate shareInstance] weChatLogin];
+    [[LLAThirdSDKDelegate shareInstance] weChatLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+        
+    }];
 }
 - (IBAction)qqLoginClicked:(id)sender {
-    [[LLAThirdSDKDelegate shareInstance] qqLogin];
+    [[LLAThirdSDKDelegate shareInstance] qqLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+        
+    }];
     
 }
 
