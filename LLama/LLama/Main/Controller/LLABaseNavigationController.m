@@ -8,6 +8,9 @@
 
 #import "LLABaseNavigationController.h"
 
+#import "LLACustomNavigationBarViewController.h"
+
+
 @interface LLABaseNavigationController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @end
@@ -38,6 +41,8 @@
     [super pushViewController:viewController animated:animated];
 }
 
+//
+
 - (void)navigationController:(UINavigationController *)navigationController
        didShowViewController:(UIViewController *)viewController
                     animated:(BOOL)animated
@@ -49,6 +54,19 @@
             navigationController.interactivePopGestureRecognizer.enabled = NO;
         }
     }
+    //
+}
+
+- (BOOL) shouldAutorotate {
+    return self.topViewController.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask) supportedInterfaceOrientations {
+    return self.topViewController.supportedInterfaceOrientations;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return self.topViewController.preferredInterfaceOrientationForPresentation;
 }
 
 - (void)didReceiveMemoryWarning {

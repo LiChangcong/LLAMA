@@ -10,6 +10,7 @@
 #import "TMLoginRegisterViewController.h"
 
 #import "LLAThirdSDKDelegate.h"
+#import "LLABaseNavigationController.h"
 
 
 
@@ -25,8 +26,12 @@
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+
     
-    self.window.rootViewController =  [[TMLoginRegisterViewController alloc] init];
+    TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
+    LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
+    
+    self.window.rootViewController = loginNavi;
 
     [self.window makeKeyAndVisible];
     
@@ -70,6 +75,7 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
     NSString *urlStr = [url absoluteString];
     
     if([urlStr hasPrefix:@"wx"]){

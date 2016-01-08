@@ -12,8 +12,6 @@
 #import "TMNavigationController.h"
 
 @interface TMLoginRegisterViewController ()
-@property(nonatomic, strong) TMRegisterViewController *registerVC;
-@property(nonatomic, strong) TMLoginViewController *login;
 
 @end
 
@@ -27,13 +25,8 @@
 - (IBAction)registerButtonClick:(UIButton *)sender {
     
     TMRegisterViewController *registerVC = [[TMRegisterViewController alloc] init];
-    self.registerVC = registerVC;
     
-    self.registerVC.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
-    [UIView animateWithDuration:0.4 animations:^{
-        self.registerVC.view.frame = CGRectMake(0, 0, self.view.width, self.view.height);
-        [self.view addSubview:self.registerVC.view];
-    }];
+    [self.navigationController pushViewController:registerVC animated:YES];
 
 
 }
@@ -41,14 +34,8 @@
 - (IBAction)loginButtonClick:(UIButton *)sender {
     
     TMLoginViewController *login = [[TMLoginViewController alloc] init];
-    self.login = login;
     
-    self.login.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
-    [UIView animateWithDuration:0.4 animations:^{
-        self.login.view.frame = CGRectMake(0, 0, self.view.width, self.view.height);
-        [self.view addSubview:self.login.view];
-    }];
-
+    [self.navigationController pushViewController:login animated:YES];
 }
 
 

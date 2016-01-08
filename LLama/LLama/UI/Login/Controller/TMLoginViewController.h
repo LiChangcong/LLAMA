@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLACustomNavigationBarViewController.h"
 
-@interface TMLoginViewController : UIViewController
+@interface TMLoginViewController : LLACustomNavigationBarViewController
 
 @end
