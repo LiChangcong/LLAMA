@@ -14,4 +14,21 @@
     return [UIImage imageNamed:imageName];
 }
 
++ (UIImage *) llaImageWithColor:(UIColor *)color {
+    UIColor *paintColor = color;
+    if (!paintColor)
+        paintColor = [UIColor whiteColor];
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [paintColor CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+
+    
+}
+
 @end

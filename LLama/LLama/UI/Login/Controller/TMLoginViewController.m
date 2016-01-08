@@ -9,12 +9,17 @@
 #import "TMLoginViewController.h"
 #import "TMTabBarController.h"
 #import "TMRetrievePasswordViewController.h"
+#import "TMRegisterViewController.h"
 #import "LLAThirdSDKDelegate.h"
 
 @interface TMLoginViewController ()
 
 @property(nonatomic, strong) TMRetrievePasswordViewController *retrieve;
 - (IBAction)sinaWeiBoLoginClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
@@ -23,6 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //UIImage *loginBackImage = [[UIImage llaImageWithName:@"finish"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 30)];
+    
+    //[self.loginButton setBackgroundImage:loginBackImage forState:UIControlStateNormal];
+    
+    //
+    [self.registerButton sizeToFit];
+    
+    [self.registerButton addTarget:self action:@selector(registerUserClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +83,14 @@
 
 }
 
+- (IBAction)registerUserClicked:(id)sender {
+    [self.view endEditing:YES];
+    
+    TMRegisterViewController *registerController = [TMRegisterViewController new];
+
+    [self.navigationController pushViewController:registerController animated:YES];
+    
+}
 
 // 点击屏幕时也推出键盘
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

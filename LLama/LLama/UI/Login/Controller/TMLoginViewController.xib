@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMLoginViewController">
             <connections>
+                <outlet property="loginButton" destination="eIG-Ir-J9a" id="ZS1-17-jwX"/>
+                <outlet property="registerButton" destination="fGd-RN-2y2" id="qGQ-hU-Rmg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -42,7 +44,7 @@
                                 <action selector="inLlamaButtonClick:" destination="-1" eventType="touchUpInside" id="ajd-60-uXb"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGd-RN-2y2">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGd-RN-2y2">
                             <rect key="frame" x="21" y="264" width="173" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="没有LLAMA账号？去注册" image="user">
@@ -170,7 +172,6 @@ LLAMA用户协议和隐私条款</string>
                         <constraint firstItem="Ewj-Nz-Mjw" firstAttribute="centerX" secondItem="OlS-HN-2lm" secondAttribute="centerX" id="2Ya-6T-15X"/>
                         <constraint firstItem="u6o-j1-tfR" firstAttribute="top" secondItem="kG3-7l-3TB" secondAttribute="bottom" constant="40" id="3HE-hw-AOu"/>
                         <constraint firstItem="Cx5-yG-nqQ" firstAttribute="centerY" secondItem="u6o-j1-tfR" secondAttribute="centerY" id="51U-90-VwL"/>
-                        <constraint firstItem="kG3-7l-3TB" firstAttribute="leading" secondItem="fGd-RN-2y2" secondAttribute="trailing" constant="28" id="85Y-Ae-o6E"/>
                         <constraint firstItem="CBc-Ds-FGI" firstAttribute="leading" secondItem="Ewj-Nz-Mjw" secondAttribute="trailing" constant="36" id="A7C-ku-cEW"/>
                         <constraint firstItem="fGd-RN-2y2" firstAttribute="top" secondItem="eIG-Ir-J9a" secondAttribute="bottom" constant="13" id="BGZ-Z2-3m2"/>
                         <constraint firstItem="u6o-j1-tfR" firstAttribute="leading" secondItem="3ND-k5-DGA" secondAttribute="trailing" constant="20" id="Bm6-zq-Kzd"/>
@@ -179,7 +180,6 @@ LLAMA用户协议和隐私条款</string>
                         <constraint firstItem="fGd-RN-2y2" firstAttribute="leading" secondItem="OlS-HN-2lm" secondAttribute="leading" constant="21" id="HEF-ty-MK4"/>
                         <constraint firstItem="WCx-oU-rY4" firstAttribute="centerY" secondItem="Ewj-Nz-Mjw" secondAttribute="centerY" id="MAT-vq-Ioq"/>
                         <constraint firstItem="3Jb-Z3-QWw" firstAttribute="top" secondItem="OlS-HN-2lm" secondAttribute="top" constant="24" id="OGt-4h-nle"/>
-                        <constraint firstItem="kG3-7l-3TB" firstAttribute="trailing" secondItem="eIG-Ir-J9a" secondAttribute="trailing" id="Q0b-qO-i9T"/>
                         <constraint firstItem="eIG-Ir-J9a" firstAttribute="top" secondItem="sYq-Gl-GbG" secondAttribute="bottom" constant="12" id="Qo7-Qs-eSF"/>
                         <constraint firstAttribute="trailing" secondItem="eIG-Ir-J9a" secondAttribute="trailing" constant="20" id="Ti7-vV-o6H"/>
                         <constraint firstItem="CBc-Ds-FGI" firstAttribute="centerY" secondItem="Ewj-Nz-Mjw" secondAttribute="centerY" id="X5u-Lo-MZk"/>
@@ -198,12 +198,6 @@ LLAMA用户协议和隐私条款</string>
                         <constraint firstItem="kG3-7l-3TB" firstAttribute="centerY" secondItem="fGd-RN-2y2" secondAttribute="centerY" id="wRa-dy-XnN"/>
                         <constraint firstItem="sYq-Gl-GbG" firstAttribute="top" secondItem="lja-JU-db8" secondAttribute="bottom" constant="5" id="xbl-lg-wDJ"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="85Y-Ae-o6E"/>
-                            <exclude reference="Q0b-qO-i9T"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -213,6 +207,7 @@ LLAMA用户协议和隐私条款</string>
                 <constraint firstItem="OlS-HN-2lm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HsD-xJ-11g"/>
                 <constraint firstAttribute="trailing" secondItem="OlS-HN-2lm" secondAttribute="trailing" id="fJu-Lh-o91"/>
             </constraints>
+            <point key="canvasLocation" x="342" y="311"/>
         </view>
     </objects>
     <resources>

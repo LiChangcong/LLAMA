@@ -11,5 +11,5 @@
 @interface UIImage (LLAImage)
 
 + (UIImage *) llaImageWithName:(NSString *) imageName;
-
++ (UIImage *) llaImageWithColor:(UIColor *) color;
 @end

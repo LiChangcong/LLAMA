@@ -19,5 +19,7 @@
 #import "UIBarButtonItem+Image.h"
 #import "UIImage+LLAImage.h"
 #import "UIFont+LLAFont.h"
+#import "UIButton+AlignImageTitle.h"
+#import "UIButton+LLABKColorWithState.h"
 
 #endif /* LLAUIKitExtension_h */
