@@ -21,6 +21,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //set navigationBar Attribute
+    
+    [self.navigationBar setTranslucent:YES];
+    self.navigationBar.barTintColor = [UIColor colorWithHex:0x11111e];
+    self.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //
     self.delegate = self;
     
     __weak typeof (self) weakSelf = self;
@@ -67,6 +74,10 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return self.topViewController.preferredInterfaceOrientationForPresentation;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return self.topViewController.preferredStatusBarStyle;
 }
 
 - (void)didReceiveMemoryWarning {

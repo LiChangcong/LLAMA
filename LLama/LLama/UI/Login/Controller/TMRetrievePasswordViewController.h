@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TMRetrievePasswordViewController : UIViewController
+#import "LLACommonViewController.h"
+
+@interface TMRetrievePasswordViewController : LLACommonViewController
 
 @end

@@ -14,9 +14,19 @@
 
 @implementation LLABaseViewController
 
+- (void) back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //set back item
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +45,12 @@
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+//status bar style
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 /*

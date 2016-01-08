@@ -52,7 +52,7 @@
 
 - (IBAction)inLlamaButtonClick:(UIButton *)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    //login
     
 }
 - (IBAction)forgetPwdClick:(UIButton *)sender {
@@ -63,14 +63,8 @@
 
     
     TMRetrievePasswordViewController *retrieve = [[TMRetrievePasswordViewController alloc] init];
-    self.retrieve = retrieve;
-    
-    self.retrieve.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
-    [UIView animateWithDuration:0.4 animations:^{
-        self.retrieve.view.frame = CGRectMake(0, 0, self.view.width, self.view.height);
-        [self.view addSubview:self.retrieve.view];
-        //        self.view = perfect.view;
-    }];
+
+    [self.navigationController pushViewController:retrieve animated:YES];
     
 
 }

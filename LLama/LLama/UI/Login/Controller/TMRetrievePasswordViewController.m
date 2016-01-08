@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navigationItem.title = @"找回密码";
 
 }
 
@@ -37,19 +38,10 @@
 */
 - (IBAction)cancelButtonClick:(UIButton *)sender {
     
-    
     // 推出键盘
     [self.view endEditing:YES];
-
     
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
-        //        [self.view removeFromSuperview];
-        //        self.view = perfect.view;
-    }];
-    
-    // 推出键盘
-    [self.view endEditing:YES];    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // 点击屏幕时也推出键盘

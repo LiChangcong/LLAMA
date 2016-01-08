@@ -32,6 +32,10 @@
 		A3D8E7E11C3F5B7D00B27898 /* LLABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7E01C3F5B7D00B27898 /* LLABaseViewController.m */; };
 		A3D8E7E41C3F5BA800B27898 /* LLACommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7E31C3F5BA800B27898 /* LLACommonViewController.m */; };
 		A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7E91C3F5C2800B27898 /* LLACustomNavigationBarViewController.m */; };
+		A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7EC1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m */; };
+		A3D8E7F21C3F87F300B27898 /* UIBarButtonItem+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7F11C3F87F300B27898 /* UIBarButtonItem+Image.m */; };
+		A3D8E7F51C3F8DDA00B27898 /* UIFont+LLAFont.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7F41C3F8DDA00B27898 /* UIFont+LLAFont.m */; };
+		A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D8E7F71C3F8EDF00B27898 /* UIImage+LLAImage.m */; };
 		A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC8C1C3CAE38009F3D37 /* NSString+TMExtension.m */; };
 		A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC8E1C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m */; };
 		A3DEDD661C3CAE38009F3D37 /* UIView+TMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DEDC901C3CAE38009F3D37 /* UIView+TMExtension.m */; };
@@ -209,6 +213,15 @@
 		A3D8E7E31C3F5BA800B27898 /* LLACommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACommonViewController.m; sourceTree = "<group>"; };
 		A3D8E7E81C3F5C2800B27898 /* LLACustomNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACustomNavigationBarViewController.h; sourceTree = "<group>"; };
 		A3D8E7E91C3F5C2800B27898 /* LLACustomNavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACustomNavigationBarViewController.m; sourceTree = "<group>"; };
+		A3D8E7EB1C3F82CF00B27898 /* UIColor+LLAColorWithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LLAColorWithHex.h"; sourceTree = "<group>"; };
+		A3D8E7EC1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LLAColorWithHex.m"; sourceTree = "<group>"; };
+		A3D8E7EF1C3F844100B27898 /* LLAUIKitExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAUIKitExtension.h; sourceTree = "<group>"; };
+		A3D8E7F01C3F87F300B27898 /* UIBarButtonItem+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Image.h"; sourceTree = "<group>"; };
+		A3D8E7F11C3F87F300B27898 /* UIBarButtonItem+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Image.m"; sourceTree = "<group>"; };
+		A3D8E7F31C3F8DDA00B27898 /* UIFont+LLAFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+LLAFont.h"; sourceTree = "<group>"; };
+		A3D8E7F41C3F8DDA00B27898 /* UIFont+LLAFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+LLAFont.m"; sourceTree = "<group>"; };
+		A3D8E7F61C3F8EDF00B27898 /* UIImage+LLAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LLAImage.h"; sourceTree = "<group>"; };
+		A3D8E7F71C3F8EDF00B27898 /* UIImage+LLAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LLAImage.m"; sourceTree = "<group>"; };
 		A3DEDC8B1C3CAE38009F3D37 /* NSString+TMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TMExtension.h"; sourceTree = "<group>"; };
 		A3DEDC8C1C3CAE38009F3D37 /* NSString+TMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TMExtension.m"; sourceTree = "<group>"; };
 		A3DEDC8D1C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+TMExtension.h"; sourceTree = "<group>"; };
@@ -599,6 +612,14 @@
 				A3DEDC901C3CAE38009F3D37 /* UIView+TMExtension.m */,
 				A3DEDC911C3CAE38009F3D37 /* UIWindow+TMExtension.h */,
 				A3DEDC921C3CAE38009F3D37 /* UIWindow+TMExtension.m */,
+				A3D8E7EB1C3F82CF00B27898 /* UIColor+LLAColorWithHex.h */,
+				A3D8E7EC1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m */,
+				A3D8E7F01C3F87F300B27898 /* UIBarButtonItem+Image.h */,
+				A3D8E7F11C3F87F300B27898 /* UIBarButtonItem+Image.m */,
+				A3D8E7F31C3F8DDA00B27898 /* UIFont+LLAFont.h */,
+				A3D8E7F41C3F8DDA00B27898 /* UIFont+LLAFont.m */,
+				A3D8E7F61C3F8EDF00B27898 /* UIImage+LLAImage.h */,
+				A3D8E7F71C3F8EDF00B27898 /* UIImage+LLAImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -615,6 +636,7 @@
 				A3DEDCD81C3CAE38009F3D37 /* Controller */,
 				A3DEDCDD1C3CAE38009F3D37 /* main.m */,
 				A3DEDCDE1C3CAE38009F3D37 /* PrefixHeader.pch */,
+				A3D8E7EF1C3F844100B27898 /* LLAUIKitExtension.h */,
 				A3DEDCDF1C3CAE38009F3D37 /* TMHTTPSessionManager.h */,
 				A3DEDCE01C3CAE38009F3D37 /* TMHTTPSessionManager.m */,
 				A3DEDCE11C3CAE38009F3D37 /* View */,
@@ -1319,6 +1341,7 @@
 				A3DEDE701C3CAEC7009F3D37 /* TMScriptCell.m in Sources */,
 				A3DEDE831C3CAEC7009F3D37 /* TMMessageController.m in Sources */,
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
+				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
 				A3DEDEA51C3CAEC7009F3D37 /* TMVersionCell.m in Sources */,
 				A3DEDD911C3CAE38009F3D37 /* TMTabBar.m in Sources */,
 				A3DEDD9B1C3CAE38009F3D37 /* MTLModel+NSCoding.m in Sources */,
@@ -1338,6 +1361,7 @@
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
 				A3DEDE8D1C3CAEC7009F3D37 /* TMProfileViewController.m in Sources */,
 				A3D8E7E11C3F5B7D00B27898 /* LLABaseViewController.m in Sources */,
+				A3D8E7F21C3F87F300B27898 /* UIBarButtonItem+Image.m in Sources */,
 				A3DEDD8F1C3CAE38009F3D37 /* main.m in Sources */,
 				A3DEDE911C3CAEC7009F3D37 /* YZPersonViewController.m in Sources */,
 				A3DEDEA21C3CAEC7009F3D37 /* TMClearCacheCell.m in Sources */,
@@ -1355,6 +1379,7 @@
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
+				A3D8E7F51C3F8DDA00B27898 /* UIFont+LLAFont.m in Sources */,
 				A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
 				A3DEDE8C1C3CAEC7009F3D37 /* TMLikeViewController.m in Sources */,
@@ -1377,6 +1402,7 @@
 				A3DEDDA41C3CAE38009F3D37 /* NSError+MTLModelException.m in Sources */,
 				A3DEDE661C3CAEC7009F3D37 /* TMScriptTableViewController.m in Sources */,
 				A3DEDE811C3CAEC7009F3D37 /* TMRetrievePasswordViewController.m in Sources */,
+				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
