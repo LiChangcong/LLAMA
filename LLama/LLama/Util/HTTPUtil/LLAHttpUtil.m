@@ -30,6 +30,20 @@ static NSString *const httpBaseURL = @"https://api.hillama.com";
                           failed:failedBlock];
 }
 
++ (NSURLSessionTask *) httpPostWithUrl:(NSString *)url
+                                 param:(NSDictionary *)paramDict
+                         responseBlock:(HttpSuccessBlock)responseBlock
+                             exception:(HttpExceptionBlock)exceptionBlock
+                                failed:(HttpFailedBlock)failedBlock {
+    
+    return [self httpPostWithUrl:url
+                           param:paramDict
+                       bodyBlock:NULL
+                        progress:NULL
+                   responseBlock:responseBlock
+                       exception:exceptionBlock
+                          failed:failedBlock];
+}
 
 
 //
@@ -65,17 +79,18 @@ static NSString *const httpBaseURL = @"https://api.hillama.com";
     
     AFHTTPSessionManager *manager = [self defaultManager];
     
+    if (progressBlock) {
+        
+        [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDownloadTask * _Nonnull downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            progressBlock(bytesWritten,totalBytesWritten,totalBytesExpectedToWrite);
+        }];
+    }
+    
     NSURLSessionDataTask *dataTask = [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if (bodyBlock) {
             bodyBlock(formData);
         }
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-        if (progressBlock) {
-            progressBlock(0,uploadProgress.completedUnitCount,uploadProgress.totalUnitCount);
-        }
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    }  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //
         LLAHttpResponseData *data = [LLAHttpResponseData parseJsonWithDic:responseObject];
         if (data && data.responseCode == 0) {

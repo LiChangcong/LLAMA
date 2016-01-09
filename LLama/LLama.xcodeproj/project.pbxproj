@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
+		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
+		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
@@ -168,6 +171,13 @@
 /* Begin PBXFileReference section */
 		17DA4835DA331D5811427335 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
+		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
+		5CDD977E1C40E56D00557CB7 /* LLAUploadFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileUtil.h; sourceTree = "<group>"; };
+		5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUploadFileUtil.m; sourceTree = "<group>"; };
+		5CDD97811C40E5B200557CB7 /* LLAQiNiuUploadFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAQiNiuUploadFileManager.h; sourceTree = "<group>"; };
+		5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAQiNiuUploadFileManager.m; sourceTree = "<group>"; };
+		5CDD97841C40E9D800557CB7 /* LLAUploadFileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileHeader.h; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -467,6 +477,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5CDD977E1C40E56D00557CB7 /* LLAUploadFileUtil.h */,
+				5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */,
+				5CDD97811C40E5B200557CB7 /* LLAQiNiuUploadFileManager.h */,
+				5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */,
+				5CDD97841C40E9D800557CB7 /* LLAUploadFileHeader.h */,
+			);
+			path = UploadFileUtil;
+			sourceTree = "<group>";
+		};
 		660179C1F0CA8536FA315666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +637,8 @@
 			children = (
 				A3D8E8001C3FA6D600B27898 /* LLAViewUtil.h */,
 				A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */,
+				5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */,
+				5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */,
 			);
 			path = ViewUtil;
 			sourceTree = "<group>";
@@ -756,6 +780,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5CDD977D1C40E53100557CB7 /* UploadFileUtil */,
 				A3D8E7FF1C3FA6B500B27898 /* ViewUtil */,
 				A3DEDD591C3CAE38009F3D37 /* HTTPUtil */,
 			);
@@ -1366,6 +1391,7 @@
 				A3DEDE831C3CAEC7009F3D37 /* TMMessageController.m in Sources */,
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
 				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
+				5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */,
 				A3DEDEA51C3CAEC7009F3D37 /* TMVersionCell.m in Sources */,
 				A3DEDD911C3CAE38009F3D37 /* TMTabBar.m in Sources */,
 				A3DEDD9B1C3CAE38009F3D37 /* MTLModel+NSCoding.m in Sources */,
@@ -1378,6 +1404,7 @@
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
 				A3DEDE901C3CAEC7009F3D37 /* YZPersonTableViewController.m in Sources */,
 				A3E2D9111C3E3865005885D4 /* LLABaseNavigationController.m in Sources */,
+				5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */,
 				A3DEDDA01C3CAE38009F3D37 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				A3DEDE961C3CAEC7009F3D37 /* TMProfileLikeCell.m in Sources */,
 				A3DEDE9D1C3CAEC7009F3D37 /* TMChangePwdController.m in Sources */,
@@ -1430,6 +1457,7 @@
 				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
+				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
@@ -1577,6 +1605,31 @@
 					"$(PROJECT_DIR)/LLama/ThirdSDK/WeiXin",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/SinaWeiBo",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"Masonry\"",
+					"-l\"Qiniu\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"c++\"",
+					"-l\"pop\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.fundu.thunderfund;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
@@ -1604,6 +1657,31 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/WeiXin",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/SinaWeiBo",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"Masonry\"",
+					"-l\"Qiniu\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"c++\"",
+					"-l\"pop\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.fundu.thunderfund;
 				PRODUCT_NAME = "$(TARGET_NAME)";

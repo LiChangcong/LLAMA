@@ -26,6 +26,12 @@ typedef void(^HttpProgressBlock)(NSUInteger bytesWritten, long long totalBytesWr
               exception:(HttpExceptionBlock) exceptionBlock
                  failed:(HttpFailedBlock) failedBlock;
 
++ (NSURLSessionTask *) httpPostWithUrl:(NSString *)url
+                                 param:(NSDictionary *)paramDict
+                         responseBlock:(HttpSuccessBlock)responseBlock
+                             exception:(HttpExceptionBlock)exceptionBlock
+                                failed:(HttpFailedBlock)failedBlock;
+
 //有文件的请求
 
 + (NSURLSessionTask *)httpPostWithUrl:(NSString *)url

@@ -7,7 +7,7 @@
 //
 
 #import "LLAViewUtil.h"
-#import "MBProgressHUD.h"
+#import "LLALoadingView.h"
 
 static const CGFloat defaultDuration = 1.0;
 
@@ -36,6 +36,19 @@ static const CGFloat defaultDuration = 1.0;
     
     return HUD;
 
+}
+
+//loading View
+
++ (LLALoadingView *) addLLALoadingViewToView:(UIView *)view {
+    
+    if (!view)
+        return nil;
+    
+    LLALoadingView *loadinView = [[LLALoadingView alloc] initWithView:view];
+    [view addSubview:loadinView];
+    
+    return loadinView;
 }
 
 @end

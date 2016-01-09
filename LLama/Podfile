@@ -2,6 +2,7 @@ platform :ios, "7.0"
 
 pod "pop"
 pod "Masonry"
-pod "AFNetworking"
+pod "AFNetworking","~>2.6.3"
 pod "SVProgressHUD"
 pod "MBProgressHUD"
+pod "Qiniu", "~> 7.0"

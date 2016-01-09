@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class MBProgressHUD;
+@class LLALoadingView;
 
 @interface LLAViewUtil : NSObject
 
@@ -17,5 +18,9 @@
 + (MBProgressHUD *)showAlter:(UIView *)view withText:(NSString *)text withOffset:(float)offset;
 
 + (MBProgressHUD *)showAlter:(UIView *)view withText:(NSString *)text withOffset:(float)offset duration:(CGFloat) duration;
+
+//loading view
+
++ (LLALoadingView *) addLLALoadingViewToView:(UIView *) view;
 
 @end
