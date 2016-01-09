@@ -49,7 +49,7 @@
             }
             
             // use qiniu to upload
-            [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadData progress:progress complete:complete];
+            [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadToken key:fileKey token:uploadToken progress:progress complete:complete];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {
