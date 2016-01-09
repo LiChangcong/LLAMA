@@ -29,6 +29,7 @@ PODS:
     - HappyDNS (~> 0.2)
   - SVProgressHUD (1.1.3)
   - UMengAnalytics-NO-IDFA (3.6.7)
+  - UMengSocial (4.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.3)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Qiniu (~> 7.0)
   - SVProgressHUD
   - UMengAnalytics-NO-IDFA
+  - UMengSocial
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -48,5 +50,6 @@ SPEC CHECKSUMS:
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
+  UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
 
 COCOAPODS: 0.39.0
