@@ -21,7 +21,17 @@
     
     // get uploadKey and token from server
     
-    [LLAHttpUtil httpPostWithUrl:@"/qiniuauth/getUploadToken" param:[NSMutableDictionary dictionary] responseBlock:^(id responseObject) {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    if (fileType == LLAUploadFileType_Text) {
+        [params setValue:@(0) forKey:@"type"];
+    }else if (fileType == LLAUploadFileType_Image) {
+        [params setValue:@(1) forKey:@"type"];
+    }else if (fileType == LLAUploadFileType_Video) {
+        [params setValue:@(2) forKey:@"type"];
+    }
+    
+    [LLAHttpUtil httpPostWithUrl:@"/qiniuauth/getUploadToken" param:params responseBlock:^(id responseObject) {
         
         NSString *uploadToken = [responseObject valueForKey:@"uploadToken"];
         NSString *fileKey = [responseObject valueForKey:@"key"];
@@ -49,7 +59,7 @@
             }
             
             // use qiniu to upload
-            [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadToken key:fileKey token:uploadToken progress:progress complete:complete];
+            [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadData key:fileKey token:uploadToken progress:progress complete:complete];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {

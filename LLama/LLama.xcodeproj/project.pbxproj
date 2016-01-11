@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */; };
+		5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298251C438E5500106BA2 /* LLACommonUtil.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -171,6 +173,10 @@
 /* Begin PBXFileReference section */
 		17DA4835DA331D5811427335 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5C7298201C4366A700106BA2 /* LLASaveUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASaveUserDefaultUtil.h; sourceTree = "<group>"; };
+		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
+		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
+		5C7298251C438E5500106BA2 /* LLACommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACommonUtil.m; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
 		5CDD977E1C40E56D00557CB7 /* LLAUploadFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileUtil.h; sourceTree = "<group>"; };
@@ -477,6 +483,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C72981F1C43668900106BA2 /* SaveUserDefaultUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C7298201C4366A700106BA2 /* LLASaveUserDefaultUtil.h */,
+				5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */,
+			);
+			path = SaveUserDefaultUtil;
+			sourceTree = "<group>";
+		};
+		5C7298231C438E4600106BA2 /* CommonUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C7298241C438E5500106BA2 /* LLACommonUtil.h */,
+				5C7298251C438E5500106BA2 /* LLACommonUtil.m */,
+			);
+			path = CommonUtil;
+			sourceTree = "<group>";
+		};
 		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +804,8 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5C7298231C438E4600106BA2 /* CommonUtil */,
+				5C72981F1C43668900106BA2 /* SaveUserDefaultUtil */,
 				5CDD977D1C40E53100557CB7 /* UploadFileUtil */,
 				A3D8E7FF1C3FA6B500B27898 /* ViewUtil */,
 				A3DEDD591C3CAE38009F3D37 /* HTTPUtil */,
@@ -1384,6 +1410,7 @@
 				A3DEDE771C3CAEC7009F3D37 /* TMDataIconController.m in Sources */,
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
+				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
 				A3DEDE6F1C3CAEC7009F3D37 /* TMPhotoView.m in Sources */,
 				A3DEDD9F1C3CAE38009F3D37 /* MTLValueTransformer.m in Sources */,
 				A3DEDE691C3CAEC7009F3D37 /* TMDetailsCell.m in Sources */,
@@ -1459,6 +1486,7 @@
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
+				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,

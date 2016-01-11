@@ -7,10 +7,10 @@
 //
 
 #import "LLAThirdSDKDelegate.h"
-#import "LLAUser.h"
-#import "LLAHttpUtil.h"
 
-#define SDK_REDIRECT_URL @"http://www.hillama.com"
+#import "LLAHttpUtil.h"
+#import "LLASaveUserDefaultUtil.h"
+
 
 @interface LLAThirdSDKDelegate()
 {
@@ -42,7 +42,7 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        qqAuth = [[TencentOAuth alloc] initWithAppId:LLA_QQ_APPID andDelegate:self];
+        //qqAuth = [[TencentOAuth alloc] initWithAppId:LLA_QQ_APPID andDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
@@ -56,6 +56,62 @@
 }
 
 #pragma mark - Public Method
+
+- (void) thirdLoginWithType:(UserLoginType)loginType loginCallBack:(ThirdLoginCallBack)callBack {
+    if (loginType == UserLoginType_SinaWeiBo) {
+        //umeng
+        if (callBack)
+            callBack(nil,nil,LLAThirdLoginState_Begin,nil);
+        
+        UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+        
+        snsPlatform.loginClickHandler(nil,[UMSocialControllerService defaultControllerService],NO,^(UMSocialResponseEntity *response){
+            
+            //          获取微博用户名、uid、token等
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+            
+            //NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            if (callBack)
+                callBack(snsAccount.usid,snsAccount.accessToken,[self umResponseCodeToLoginState:response.responseCode],response.error);
+        });
+        
+    }else if(loginType == UserLoginType_QQ) {
+        if (callBack)
+            callBack(nil,nil,LLAThirdLoginState_Begin,nil);
+        
+        UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+        
+        snsPlatform.loginClickHandler(nil,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+            
+            //          获取微博用户名、uid、token等
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+            if (callBack)
+                callBack(snsAccount.usid,snsAccount.accessToken,[self umResponseCodeToLoginState:response.responseCode],response.error);
+        });
+        
+    }else if(loginType == UserLoginType_WeChat) {
+        
+        if (callBack)
+            callBack(nil,nil,LLAThirdLoginState_Begin,nil);
+        
+        UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+        
+        snsPlatform.loginClickHandler(nil,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            
+            if (callBack)
+                callBack(snsAccount.usid,snsAccount.accessToken,[self umResponseCodeToLoginState:response.responseCode],response.error);
+            
+        });
+        
+        
+    }else {
+        if (callBack){
+            callBack(nil,nil,LLAThirdLoginState_Failed,nil);
+        }
+    }
+}
 
 - (void) qqLogin:(ThirdLoginBlock) callBack {
     
@@ -131,7 +187,9 @@
             user.sinaWeiBoUid = [uid integerValue];
             user.sinaWeiBoAccess_Token = accessToken;
             
-            [self fetchUserAccessTokenInfoWithInfo:user];
+            [self fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+                
+            }];
             
         }else if([type isEqualToString:@"share"]){
         
@@ -191,7 +249,9 @@
                                     user.weChatOpenId = openId;
                                     user.weChatAccess_Token = accessToken;
                                     
-                                    [self fetchUserAccessTokenInfoWithInfo:user];
+                                    [self fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+                                        
+                                    }];
                                     
                                 }
                             }
@@ -226,7 +286,9 @@
     user.qqOpenId = qqAuth.openId;
     user.qqAccess_Token = qqAuth.accessToken;
     
-    [self fetchUserAccessTokenInfoWithInfo:user];
+    [self fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+        
+    }];
 }
 
 - (void) tencentDidNotLogin:(BOOL)cancelled {
@@ -252,24 +314,31 @@
 
 #pragma mark - Get UserInfo
 
-- (void) fetchUserAccessTokenInfoWithInfo:(LLAUser *) user {
+- (void) fetchUserAccessTokenInfoWithInfo:(LLAUser *) user  callBack:(fetchAccessTokenCallBack)callBack{
     
     NSString *url = @"";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     if (user.loginType == UserLoginType_MobilePhone) {
+        
         url = @"/login/mobileLogin";
+        [params setValue:user.mobilePhone forKey:@"mobile"];
+        [params setValue:user.mobileLoginPsd forKey:@"pwd"];
+        
     }else if (user.loginType == UserLoginType_SinaWeiBo) {
+        
         url = @"/login/weiboLogin";
         [params setValue:@(user.sinaWeiBoUid) forKey:@"uid"];
         [params setValue:user.sinaWeiBoAccess_Token forKey:@"access_token"];
         
     }else if (user.loginType == UserLoginType_WeChat) {
+        
         url = @"/login/weixinLogin";
         [params setValue:user.weChatOpenId forKey:@"openid"];
         [params setValue:user.weChatAccess_Token forKey:@"access_token"];
         
     }else if (user.loginType == UserLoginType_QQ) {
+        
         url = @"/login/qqLogin";
         [params setValue:user.qqOpenId forKey:@"openid"];
         [params setValue:user.qqAccess_Token forKey:@"access_token"];
@@ -279,23 +348,82 @@
     [LLAHttpUtil httpPostWithUrl:url param:params progress:NULL responseBlock:^(id responseObject) {
 
         NSString *token = [responseObject valueForKey:@"token"];
-        self.tempToken = token;
         
-        //get userInfo
-        [LLAHttpUtil httpPostWithUrl:@"/user/getUserInfo" param:[NSMutableDictionary dictionary] progress:NULL responseBlock:^(id responseObject) {
-            //LLAUser *loginUser = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
-            
-        } exception:^(NSInteger code, NSString *errorMessage) {
-
-        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-
-        }];
+        if (![token isKindOfClass:[NSString class]]) {
+            token = @"";
+        }
+        if (callBack)
+            callBack(token,nil);
+        
+//        //get userInfo
+//        [LLAHttpUtil httpPostWithUrl:@"/user/getUserInfo" param:[NSMutableDictionary dictionary] progress:NULL responseBlock:^(id responseObject) {
+//            //LLAUser *loginUser = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
+//            
+//        } exception:^(NSInteger code, NSString *errorMessage) {
+//
+//        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+//
+//        }];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
-
-    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        NSError *error = [NSError errorWithDomain:SDK_REDIRECT_URL code:-1 userInfo:
+                          [NSDictionary dictionaryWithObjectsAndKeys:errorMessage?errorMessage:@"",NSLocalizedDescriptionKey, nil]];
+        if (callBack)
+            callBack(nil,error);
         
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        if (callBack)
+            callBack(nil,error);
     }];
+}
+
+- (void) fetchUserInfoWithUserToken:(NSString *)token callBack:(fetchUserDetailInfoCallBack)callBack {
+    
+    //
+    [LLASaveUserDefaultUtil saveUserTokenToUserDefault:token];
+    
+    //get user Info
+    
+    [LLAHttpUtil httpPostWithUrl:@"/user/getUserInfo" param:[NSDictionary dictionary] responseBlock:^(id responseObject) {
+        //
+        LLAUser *userInfo = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
+        userInfo.isLogin = YES;
+        userInfo.authenToken = token;
+        
+        if (callBack)
+            callBack(userInfo,nil);
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        if (callBack) {
+            
+            NSError *error = [NSError errorWithDomain:SDK_REDIRECT_URL code:code userInfo:[NSDictionary dictionaryWithObjectsAndKeys:errorMessage?errorMessage:@"",NSLocalizedDescriptionKey, nil]];
+            callBack(nil,error);
+        }
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        if (callBack)
+            callBack(nil,error);
+    }];
+    
+}
+
+#pragma mark - Public
+
+- (LLAThirdLoginState) umResponseCodeToLoginState:(UMSResponseCode) umRSPCode {
+    
+    LLAThirdLoginState state = LLAThirdLoginState_Unknow;
+    switch (umRSPCode) {
+        case UMSResponseCodeSuccess:
+            state = LLAThirdLoginState_Success;
+            break;
+        case UMSResponseCodeCancel:
+            state = LLAThirdLoginState_Cancel;
+            break;
+        default:
+            state = LLAThirdLoginState_Failed;
+            break;
+    }
+    
+    return state;
 }
 
 @end

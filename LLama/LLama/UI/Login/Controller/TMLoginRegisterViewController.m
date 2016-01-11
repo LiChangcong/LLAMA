@@ -24,7 +24,7 @@
 
 - (IBAction)registerButtonClick:(UIButton *)sender {
     
-    TMRegisterViewController *registerVC = [[TMRegisterViewController alloc] init];
+    TMRegisterViewController *registerVC = [[TMRegisterViewController alloc] initWithNibName:nil bundle:nil];
     
     [self.navigationController pushViewController:registerVC animated:YES];
 

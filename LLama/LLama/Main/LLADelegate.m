@@ -76,20 +76,27 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-    NSString *urlStr = [url absoluteString];
+//    NSString *urlStr = [url absoluteString];
+//    
+//    if([urlStr hasPrefix:@"wx"]){
+//        return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+//    }else if([urlStr hasPrefix:@"tencent"] || [urlStr hasPrefix:@"QQ"]){
+//    
+//        [QQApiInterface handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+//        
+//        if([TencentOAuth CanHandleOpenURL:url]){
+//            return [TencentOAuth HandleOpenURL:url];
+//        }
+//        
+//    }else if([urlStr hasPrefix:@"wb"]){
+//        return [WeiboSDK handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+//    }
     
-    if([urlStr hasPrefix:@"wx"]){
-        return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
-    }else if([urlStr hasPrefix:@"tencent"] || [urlStr hasPrefix:@"QQ"]){
+    // umeng
+    BOOL umResult = [UMSocialSnsService handleOpenURL:url];
     
-        [QQApiInterface handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+    if (!umResult){
         
-        if([TencentOAuth CanHandleOpenURL:url]){
-            return [TencentOAuth HandleOpenURL:url];
-        }
-        
-    }else if([urlStr hasPrefix:@"wb"]){
-        return [WeiboSDK handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
     }
     
     return YES;
@@ -98,24 +105,38 @@
 #pragma mark - Setup Third SDK
 
 - (void) setupThirdSDK {
-    [self setupQQSDK];
-    [self setupSinaWeiBoSDK];
-    [self setupWeiXinSDK];
+//    [self setupQQSDK];
+//    [self setupSinaWeiBoSDK];
+//    [self setupWeiXinSDK];
+    
+    [self setupUmengSDK];
     [self setupAliPaySDK];
 }
 
-- (void) setupQQSDK {
-    [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:LLA_SINA_WEIBO_APPKEY];
-}
-
-- (void) setupSinaWeiBoSDK {
+- (void) setupUmengSDK {
+    [MobClick startWithAppkey:LLA_UMENG_APPKEY  reportPolicy:BATCH channelId:nil];
+    [UMSocialData setAppKey:LLA_UMENG_APPKEY];
     
+    //weChat
+    [UMSocialWechatHandler setWXAppId:LLA_WEIXIN_APPID appSecret:LLA_WEIXIN_APP_SECRET url:SDK_REDIRECT_URL];
+    //qq
+    [UMSocialQQHandler setQQWithAppId:LLA_QQ_APPID appKey:LLA_QQ_APPKEY url:SDK_REDIRECT_URL];
+    //sina
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY RedirectURL:SDK_REDIRECT_URL];
 }
 
-- (void) setupWeiXinSDK {
-    [WXApi registerApp:LLA_WEIXIN_APPID];
-}
+//- (void) setupQQSDK {
+//    [WeiboSDK enableDebugMode:YES];
+//    [WeiboSDK registerApp:LLA_SINA_WEIBO_APPKEY];
+//}
+//
+//- (void) setupSinaWeiBoSDK {
+//    
+//}
+//
+//- (void) setupWeiXinSDK {
+//    [WXApi registerApp:LLA_WEIXIN_APPID];
+//}
 
 - (void) setupAliPaySDK {
     

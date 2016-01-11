@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMDataIconController">
             <connections>
+                <outlet property="ChooseHeadImageButton" destination="47V-FT-ubh" id="Qn5-Fh-ndn"/>
+                <outlet property="femaleButton" destination="WCU-LC-qB8" id="NZg-fN-NEL"/>
+                <outlet property="maleButton" destination="zrG-8k-4FY" id="1w2-Q4-J4C"/>
+                <outlet property="nickNameTextField" destination="xyK-rs-7SZ" id="vOh-iy-IKB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,7 +21,14 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47V-FT-ubh" userLabel="拍照">
                     <rect key="frame" x="241" y="117" width="119" height="119"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="119" id="3Re-cq-fiz"/>
+                        <constraint firstAttribute="width" constant="119" id="OTm-tg-qe5"/>
+                    </constraints>
                     <state key="normal" image="userheadul"/>
+                    <connections>
+                        <action selector="chooseHeadImageButtonClicked:" destination="-1" eventType="touchUpInside" id="2cM-Bj-d1n"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg6-vj-WO1">
                     <rect key="frame" x="0.0" y="287" width="600" height="46"/>
@@ -44,6 +55,9 @@
                     </state>
                     <state key="selected" backgroundImage="manh"/>
                     <state key="highlighted" backgroundImage="manh"/>
+                    <connections>
+                        <action selector="maleButtonClicked:" destination="-1" eventType="touchUpInside" id="Lw5-SI-hML"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCU-LC-qB8">
                     <rect key="frame" x="300" y="353" width="259.5" height="46"/>
@@ -51,6 +65,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="womanh"/>
+                    <connections>
+                        <action selector="femaleButtonClicked:" destination="-1" eventType="touchUpInside" id="vSy-ad-fpM"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p04-pT-AX8">
                     <rect key="frame" x="20" y="520" width="560" height="40"/>

@@ -11,12 +11,19 @@
 #import "TMRetrievePasswordViewController.h"
 #import "TMRegisterViewController.h"
 #import "TMDataIconController.h"
+#import "TMTabBarController.h"
 
 #import "LLAThirdSDKDelegate.h"
 #import "LLAHttpUtil.h"
 #import "LLAViewUtil.h"
+#import "LLALoadingView.h"
+
+#import "LLACommonUtil.h"
 
 @interface TMLoginViewController ()
+{
+    LLALoadingView *HUD;
+}
 
 @property(nonatomic, strong) TMRetrievePasswordViewController *retrieve;
 - (IBAction)sinaWeiBoLoginClicked:(id)sender;
@@ -43,6 +50,10 @@
     [self.registerButton sizeToFit];
     
     [self.registerButton addTarget:self action:@selector(registerUserClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    [HUD hide:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,25 +87,26 @@
     
     [self.view endEditing:YES];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //check
+    if (![LLACommonUtil validateMobile:self.phoneNumField.text]) {
+        [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
+        return;
+    }
     
-    [params setValue:self.phoneNumField.text forKey:@"mobile"];
-    [params setValue:self.passwordField.text forKey:@"pwd"];
+    if (self.passwordField.text.length < 1) {
+        [LLAViewUtil showAlter:self.view withText:@"请填写密码"];
+        return;
+    }
+
     
-    [LLAHttpUtil httpPostWithUrl:@"/login/mobileLogin" param:params progress:NULL responseBlock:^(id responseObject) {
-        //
-        TMDataIconController *finishData = [TMDataIconController new];
-        [self.navigationController pushViewController:finishData animated:YES];
-        
-    } exception:^(NSInteger code, NSString *errorMessage) {
-        
-        [LLAViewUtil showAlter:self.view withText:errorMessage];
-        
-    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-        
-        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
-        
-    }];
+    LLAUser *user = [LLAUser new];
+    
+    user.mobilePhone = self.phoneNumField.text;
+    user.mobileLoginPsd = self.passwordField.text;
+    user.loginType = UserLoginType_MobilePhone;
+    
+    [self fetchUserInfoWithUser:user loginType:UserLoginType_MobilePhone];
+    
     
 }
 - (IBAction)forgetPwdClick:(UIButton *)sender {
@@ -112,6 +124,7 @@
 }
 
 - (IBAction)registerUserClicked:(id)sender {
+    
     [self.view endEditing:YES];
     
     TMRegisterViewController *registerController = [TMRegisterViewController new];
@@ -127,21 +140,120 @@
 }
 
 - (IBAction)sinaWeiBoLoginClicked:(id)sender {
-    
-    [[LLAThirdSDKDelegate shareInstance] sinaWeiBoLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_SinaWeiBo loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+        
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_SinaWeiBo;
+            user.sinaWeiBoUid = [openId integerValue];
+            user.sinaWeiBoAccess_Token = accessToken;
+            
+            //fetch UserInfo
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_SinaWeiBo];
+            
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
         
     }];
 }
 - (IBAction)weChatLoginClicked:(id)sender {
-    [[LLAThirdSDKDelegate shareInstance] weChatLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+    
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_WeChat loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
         
-    }];
-}
-- (IBAction)qqLoginClicked:(id)sender {
-    [[LLAThirdSDKDelegate shareInstance] qqLogin:^(NSString *tokenString, LLAThirdLoginState state, NSError *error) {
+        if (state == LLAThirdLoginState_Success) {
+            
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_WeChat;
+            user.weChatOpenId = openId;
+            user.weChatAccess_Token = accessToken;
+            
+            //fetch token;
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_WeChat];
+
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
         
     }];
     
 }
+- (IBAction)qqLoginClicked:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance]  thirdLoginWithType:UserLoginType_QQ loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            LLAUser *user = [LLAUser new];
+            
+            user.loginType = UserLoginType_QQ;
+            user.qqOpenId = openId;
+            user.qqAccess_Token = accessToken;
+            //fetch
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_QQ];
+
+            
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+    
+}
+
+- (void) fetchUserInfoWithUser:(LLAUser *) user loginType:(UserLoginType)loginType{
+    
+    [HUD show:YES];
+    
+    
+    __weak typeof (self) blockSelf = self;
+    
+    [[LLAThirdSDKDelegate shareInstance] fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+        if (token) {
+            //fetch userInfo
+
+            [[LLAThirdSDKDelegate shareInstance] fetchUserInfoWithUserToken:token callBack:^(LLAUser *userInfo, NSError *error) {
+                
+                [HUD hide:YES];
+                
+                if (error) {
+                    [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+                }else {
+                    
+                    //login success,save userInfo to disk
+                    userInfo.loginType = loginType;
+                    
+                    [blockSelf loginSuccessWithUser:userInfo];
+                }
+            }];
+            
+        }else{
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+        }
+    }];
+}
+
+- (void) loginSuccessWithUser:(LLAUser *)newUser {
+    
+    [LLAUser updateUserInfo:newUser];
+    
+    if ([newUser hasUserProfile]) {
+        
+        //
+        TMTabBarController *tabController = [[TMTabBarController alloc] init];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabController;
+    }else {
+        //
+        TMDataIconController *finishProfile = [TMDataIconController new];
+        
+        [self.navigationController pushViewController:finishProfile animated:YES];
+    }
+}
+
+
 
 @end

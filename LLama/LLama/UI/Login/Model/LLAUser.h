@@ -9,6 +9,8 @@
 #import "MTLModel.h"
 #import "Mantle.h"
 
+#define LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION @"LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION"
+
 typedef NS_ENUM(NSInteger,UserGender){
     UserGender_Female = 0,
     UserGender_Male = 1,
@@ -29,7 +31,14 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 @property(nonatomic , copy) NSString *userName;
 
 @property(nonatomic , copy) NSString *mobilePhone;
+//
 
+/***
+ 只用做临时存储
+ ***/
+
+@property(nonatomic , copy) NSString *mobileLoginPsd;
+//
 @property(nonatomic , assign) UserGender gender;
 
 @property(nonatomic , assign) UserLoginType loginType;
@@ -57,5 +66,11 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 @property(nonatomic , copy) NSString *weChatAccess_Token;
 
 + (LLAUser *) parseJsonWidthDic:(NSDictionary *) data;
+
++ (LLAUser *) me;
+
++ (void) updateUserInfo:(LLAUser *) newUser;
+
+- (BOOL) hasUserProfile;
 
 @end

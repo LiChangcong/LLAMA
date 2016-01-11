@@ -8,7 +8,7 @@
 
 #import "LLAHttpUtil.h"
 #import "LLAHttpResponseData.h"
-#import "LLAThirdSDKDelegate.h"
+#import "LLASaveUserDefaultUtil.h"
 
 static NSString *const httpBaseURL = @"https://api.hillama.com";
 
@@ -130,7 +130,7 @@ static NSString *const httpBaseURL = @"https://api.hillama.com";
     
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
 
-    [manager.requestSerializer setValue:[LLAThirdSDKDelegate shareInstance].tempToken forHTTPHeaderField:@"auth"];
+    [manager.requestSerializer setValue:[LLASaveUserDefaultUtil userAuthToken] forHTTPHeaderField:@"auth"];
         return manager;
 }
 

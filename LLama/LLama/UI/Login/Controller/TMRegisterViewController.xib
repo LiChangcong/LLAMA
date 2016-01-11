@@ -9,9 +9,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMRegisterViewController">
             <connections>
                 <outlet property="cellPhoneNumerFiled" destination="sql-9a-BzY" id="YYK-VW-njD"/>
-                <outlet property="indentityField" destination="kvB-OQ-RMj" id="MNQ-f9-cis"/>
+                <outlet property="identityField" destination="kvB-OQ-RMj" id="hXz-XY-K1D"/>
                 <outlet property="passwordField" destination="dW3-3A-29z" id="cq1-WA-EjN"/>
-                <outlet property="sendToGetIdenCode" destination="17m-q5-k1s" id="2ND-8g-IuO"/>
+                <outlet property="sendToGetIDCodeButton" destination="17m-q5-k1s" id="FTc-zz-BD4"/>
                 <outlet property="view" destination="qVP-Of-aay" id="Ksg-hu-LQW"/>
             </connections>
         </placeholder>
@@ -107,7 +107,8 @@ LLAMA用户协议和隐私条款</string>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="PRn-Ge-CfG"/>
                             </constraints>
-                            <state key="normal" title="发 送">
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -145,6 +146,9 @@ LLAMA用户协议和隐私条款</string>
                                     </constraints>
                                     <state key="normal" image="weixin"/>
                                     <state key="highlighted" image="weiboh"/>
+                                    <connections>
+                                        <action selector="sinaWeiBoLogin:" destination="-1" eventType="touchUpInside" id="dNp-uy-YNe"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f58-dc-n1C">
                                     <rect key="frame" x="98" y="0.0" width="62" height="62"/>
@@ -154,6 +158,9 @@ LLAMA用户协议和隐私条款</string>
                                     </constraints>
                                     <state key="normal" image="wechat"/>
                                     <state key="highlighted" image="wechath"/>
+                                    <connections>
+                                        <action selector="weChatLogin:" destination="-1" eventType="touchUpInside" id="gYm-1I-oAo"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqT-N3-qQn">
                                     <rect key="frame" x="196" y="0.0" width="62" height="62"/>
@@ -163,6 +170,9 @@ LLAMA用户协议和隐私条款</string>
                                     </constraints>
                                     <state key="normal" image="qq"/>
                                     <state key="highlighted" image="qqh"/>
+                                    <connections>
+                                        <action selector="qqLogin:" destination="-1" eventType="touchUpInside" id="B9H-wR-Sn4"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
