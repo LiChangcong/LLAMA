@@ -15,6 +15,14 @@
 		5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */; };
 		5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */; };
 		5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */; };
+		5CE646C71C44DB6A004DA6D5 /* LLAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C61C44DB6A004DA6D5 /* LLAHomeViewController.m */; };
+		5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C91C44DBBB004DA6D5 /* LLAUserProfileViewController.m */; };
+		5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646CC1C44E6C0004DA6D5 /* LLAHomeTitleView.m */; };
+		5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646CF1C44FB33004DA6D5 /* LLAHomeHallViewController.m */; };
+		5CE646D31C44FB59004DA6D5 /* LLAHomeScriptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D21C44FB59004DA6D5 /* LLAHomeScriptViewController.m */; };
+		5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */; };
+		5CE646DB1C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D91C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m */; };
+		5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646DE1C4513D3004DA6D5 /* LLATableView.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
@@ -193,6 +201,23 @@
 		5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LLAImageCache.m"; sourceTree = "<group>"; };
 		5CE646C21C44D1B3004DA6D5 /* UIColor+LLACustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LLACustomColor.h"; sourceTree = "<group>"; };
 		5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LLACustomColor.m"; sourceTree = "<group>"; };
+		5CE646C51C44DB6A004DA6D5 /* LLAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHomeViewController.h; sourceTree = "<group>"; };
+		5CE646C61C44DB6A004DA6D5 /* LLAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHomeViewController.m; sourceTree = "<group>"; };
+		5CE646C81C44DBBB004DA6D5 /* LLAUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileViewController.h; sourceTree = "<group>"; };
+		5CE646C91C44DBBB004DA6D5 /* LLAUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileViewController.m; sourceTree = "<group>"; };
+		5CE646CB1C44E6C0004DA6D5 /* LLAHomeTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHomeTitleView.h; sourceTree = "<group>"; };
+		5CE646CC1C44E6C0004DA6D5 /* LLAHomeTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHomeTitleView.m; sourceTree = "<group>"; };
+		5CE646CE1C44FB33004DA6D5 /* LLAHomeHallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHomeHallViewController.h; sourceTree = "<group>"; };
+		5CE646CF1C44FB33004DA6D5 /* LLAHomeHallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHomeHallViewController.m; sourceTree = "<group>"; };
+		5CE646D11C44FB59004DA6D5 /* LLAHomeScriptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHomeScriptViewController.h; sourceTree = "<group>"; };
+		5CE646D21C44FB59004DA6D5 /* LLAHomeScriptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHomeScriptViewController.m; sourceTree = "<group>"; };
+		5CE646D51C4512D6004DA6D5 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		5CE646D61C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		5CE646D81C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		5CE646D91C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		5CE646DD1C4513D3004DA6D5 /* LLATableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATableView.h; sourceTree = "<group>"; };
+		5CE646DE1C4513D3004DA6D5 /* LLATableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLATableView.m; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -522,6 +547,27 @@
 			path = UploadFileUtil;
 			sourceTree = "<group>";
 		};
+		5CE646D41C4512D6004DA6D5 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				5CE646D51C4512D6004DA6D5 /* SVPullToRefresh.h */,
+				5CE646D61C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.h */,
+				5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */,
+				5CE646D81C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.h */,
+				5CE646D91C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
+		5CE646DC1C45138B004DA6D5 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				5CE646DD1C4513D3004DA6D5 /* LLATableView.h */,
+				5CE646DE1C4513D3004DA6D5 /* LLATableView.m */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		660179C1F0CA8536FA315666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +613,7 @@
 		7E1A14531C15D4A700693F3E /* LLama */ = {
 			isa = PBXGroup;
 			children = (
+				5CE646DC1C45138B004DA6D5 /* CustomView */,
 				A3209A791C3D044700CADC51 /* ThirdSDK */,
 				A3DEDDC91C3CAEC6009F3D37 /* UI */,
 				A3DEDC8A1C3CAE38009F3D37 /* Category */,
@@ -760,6 +807,7 @@
 		A3DEDCF21C3CAE38009F3D37 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5CE646D41C4512D6004DA6D5 /* SVPullToRefresh */,
 				A3DEDCF31C3CAE38009F3D37 /* Mantle */,
 			);
 			path = ThirdParty;
@@ -896,6 +944,12 @@
 				A3DEDDDA1C3CAEC6009F3D37 /* TMLikeTableViewController.m */,
 				A3DEDDDB1C3CAEC6009F3D37 /* TMScriptTableViewController.h */,
 				A3DEDDDC1C3CAEC6009F3D37 /* TMScriptTableViewController.m */,
+				5CE646C51C44DB6A004DA6D5 /* LLAHomeViewController.h */,
+				5CE646C61C44DB6A004DA6D5 /* LLAHomeViewController.m */,
+				5CE646CE1C44FB33004DA6D5 /* LLAHomeHallViewController.h */,
+				5CE646CF1C44FB33004DA6D5 /* LLAHomeHallViewController.m */,
+				5CE646D11C44FB59004DA6D5 /* LLAHomeScriptViewController.h */,
+				5CE646D21C44FB59004DA6D5 /* LLAHomeScriptViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -929,6 +983,8 @@
 				A3DEDDF51C3CAEC6009F3D37 /* TMTopicCell.h */,
 				A3DEDDF61C3CAEC6009F3D37 /* TMTopicCell.m */,
 				A3DEDDF71C3CAEC6009F3D37 /* TMTopicCell.xib */,
+				5CE646CB1C44E6C0004DA6D5 /* LLAHomeTitleView.h */,
+				5CE646CC1C44E6C0004DA6D5 /* LLAHomeTitleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1049,6 +1105,8 @@
 				A3DEDE281C3CAEC6009F3D37 /* TMPurseViewController.h */,
 				A3DEDE291C3CAEC6009F3D37 /* TMPurseViewController.m */,
 				A3DEDE2A1C3CAEC6009F3D37 /* YZPerson */,
+				5CE646C81C44DBBB004DA6D5 /* LLAUserProfileViewController.h */,
+				5CE646C91C44DBBB004DA6D5 /* LLAUserProfileViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1418,12 +1476,14 @@
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
 				A3DEDD981C3CAE38009F3D37 /* EXTScope.m in Sources */,
+				5CE646C71C44DB6A004DA6D5 /* LLAHomeViewController.m in Sources */,
 				A3DEDE941C3CAEC7009F3D37 /* TMNoticeView.m in Sources */,
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				A3DEDE771C3CAEC7009F3D37 /* TMDataIconController.m in Sources */,
+				5CE646D31C44FB59004DA6D5 /* LLAHomeScriptViewController.m in Sources */,
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
 				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
@@ -1441,6 +1501,7 @@
 				A3DEDEA41C3CAEC7009F3D37 /* TMSwitch.m in Sources */,
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
+				5CE646DB1C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
@@ -1466,6 +1527,8 @@
 				A3DEDE6D1C3CAEC7009F3D37 /* TMMoreView.m in Sources */,
 				A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */,
 				A3D8E7E41C3F5BA800B27898 /* LLACommonViewController.m in Sources */,
+				5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
 				A3DEDE931C3CAEC7009F3D37 /* YZTableView.m in Sources */,
 				A3DEDD901C3CAE38009F3D37 /* TMHTTPSessionManager.m in Sources */,
 				A3DEDDA21C3CAE38009F3D37 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
@@ -1474,10 +1537,12 @@
 				A3DEDEA31C3CAEC7009F3D37 /* TMSettingCell.m in Sources */,
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
+				5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
 				A3D8E7F51C3F8DDA00B27898 /* UIFont+LLAFont.m in Sources */,
 				A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
+				5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */,
 				A3DEDE8C1C3CAEC7009F3D37 /* TMLikeViewController.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */,
@@ -1507,6 +1572,7 @@
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
+				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,

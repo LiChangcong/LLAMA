@@ -11,4 +11,6 @@
 @interface TMPublishView : UIView
 
 + (instancetype)publishView;
+
+- (void) show;
 @end

@@ -12,4 +12,8 @@
 
 + (UIColor *) themeColor;
 
++ (UIColor *) llaNavigationBarColor;
+
++ (UIColor *) llaTabbarColor;
+
 @end

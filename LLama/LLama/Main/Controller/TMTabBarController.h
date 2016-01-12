@@ -10,4 +10,8 @@
 
 @interface TMTabBarController : UITabBarController
 
+@property(nonatomic,readonly) UINavigationController *homeNavigationController;
+
+@property(nonatomic,readonly) UINavigationController *userProfileNavigationController;
+
 @end

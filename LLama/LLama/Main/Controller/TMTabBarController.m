@@ -7,33 +7,58 @@
 //
 
 #import "TMTabBarController.h"
-#import "TMHomeViewController.h"
-#import "TMStartViewController.h"
-#import "TMProfileViewController.h"
-#import "TMNavigationController.h"
-#import "TMTabBar.h"
-#import "TMMessageController.h"
-#import "TMZoomController.h"
+
+#import "LLABaseNavigationController.h"
+#import "LLAHomeViewController.h"
+#import "LLAUserProfileViewController.h"
+
+#import "TMPublishView.h"
+
+
+static NSString * const homeTabarImage_Normal = @"home";
+static NSString * const homeTabarImage_Selected = @"homeH";
+
+static NSString * const userProfileTabbarImage_Normal = @"message";
+static NSString * const userProfileTabbarImage_Selected = @"messageH";
+
+static NSString * const publishScriptImage_Normal = @"start";
+static NSString * const publishScriptImage_Selected= @"startH";
 
 @interface TMTabBarController ()
+{
+    UIButton *publishScriptButton;
+}
+
+@property(nonatomic,readwrite,strong) UINavigationController *homeNavigationController;
+
+@property(nonatomic,readwrite,strong) UINavigationController *userProfileNavigationController;
 
 @end
 
 @implementation TMTabBarController
+
+@synthesize homeNavigationController;
+@synthesize userProfileNavigationController;
 
 #pragma mark - 初始化方法
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 设置item的文字属性
-    [self setupItemTextAttrs];
+    [self setupAppearance];
     
-    // 添加所有的子控制器
-    [self setupChildVcs];
+    [self setupViewControllers];
     
     // 处理tabBar
     [self setupTabBar];
+}
+
+- (void) viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [publishScriptButton sizeToFit];
+    
+    publishScriptButton.center = CGPointMake(self.tabBar.bounds.size.width/2, self.tabBar.bounds.size.height/2);
 }
 
 /**
@@ -41,64 +66,70 @@
  */
 - (void)setupTabBar
 {
-    [self setValue:[[TMTabBar alloc] init] forKeyPath:@"tabBar"];
+    //[self setValue:[[TMTabBar alloc] init] forKeyPath:@"tabBar"];
 }
 
 /**
  *  设置item的文字属性
  */
-- (void)setupItemTextAttrs
-{
-    // 普通状态下的文字属性
-    NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
-    normalAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
+- (void)setupAppearance {
+    self.tabBar.backgroundImage = [UIImage llaImageWithColor:[UIColor llaTabbarColor]];
+    self.tabBar.contentMode = UIViewContentModeScaleAspectFill;
     
-    // 选中状态下的文字属性
-    NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
-    
-    // 统一设置所有UITabBarItem的文字属性
-    UITabBarItem *item = [UITabBarItem appearance];
-    [item setTitleTextAttributes:normalAttrs forState:UIControlStateNormal];
-    [item setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
 }
 
-/**
- *  添加所有的子控制器
- */
-- (void)setupChildVcs
-{
+- (void) setupViewControllers {
     
-    // 主页
-    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMHomeViewController alloc] init]]  image:@"home" selectedImage:@"homeH"];
+    //home
+    LLAHomeViewController *homeViewController = [[LLAHomeViewController alloc] init];
 
-    // 消息
-    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMMessageController alloc] init]]  image:@"message" selectedImage:@"messageH"];
+    homeNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:homeViewController];
     
-    // 发现
-    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMZoomController alloc] init]]
-        image:@"zoom" selectedImage:@"zoomH"];
+    //empty controller
+    UIViewController *empty = [UIViewController new];
     
-    // 我
-    [self setupOneChildVc:[[TMNavigationController alloc] initWithRootViewController:[[TMProfileViewController alloc] init]]  image:@"profile" selectedImage:@"profileH"];
+    //user profile
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] init];
+    
+    userProfileNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:userProfile];
+    
+    [self setViewControllers:@[homeNavigationController,empty,userProfileNavigationController]];
+    
+    NSArray *titlesArray = @[@"",@"",@""];
+    NSArray *normalImages = @[homeTabarImage_Normal,@"",userProfileTabbarImage_Normal];
+    NSArray *selectedImages = @[homeTabarImage_Selected,@"",userProfileTabbarImage_Selected];
+    
+    [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        [item setTitle:titlesArray[idx]];
+        [item setImage:[[UIImage llaImageWithName:normalImages[idx]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        [item setSelectedImage:[[UIImage llaImageWithName:selectedImages[idx]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    }];
+    
+    [self.tabBar.items[1] setEnabled:NO];
+    
+    //center Button
+    publishScriptButton = [[UIButton alloc] init];
+    //publishScriptButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [publishScriptButton setImage:[UIImage llaImageWithName:publishScriptImage_Normal] forState:UIControlStateNormal];
+    [publishScriptButton setImage:[UIImage llaImageWithName:publishScriptImage_Selected] forState:UIControlStateHighlighted];
+    [publishScriptButton addTarget:self action:@selector(publishButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [publishScriptButton sizeToFit];
+    
+    [self.tabBar addSubview:publishScriptButton];
     
 }
 
-/**
- *  添加一个子控制器
- *  @param vc            控制器
- *  @param image         图标
- *  @param selectedImage 选中的图标
- */
-- (void)setupOneChildVc:(UIViewController *)vc image:(NSString *)image selectedImage:(NSString *)selectedImage
-{
-    // 图标
-    vc.tabBarItem.image = [UIImage imageNamed:image];
-    // 选中图标
-    vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
-    [self addChildViewController:vc];
-}
+#pragma mark - Publish Script
 
+- (void) publishButtonClicked:(UIButton *) sender {
+    
+    TMPublishView *publish = [TMPublishView publishView];
+    
+    [publish show];
+
+}
 
 @end

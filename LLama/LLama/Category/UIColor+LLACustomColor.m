@@ -14,4 +14,13 @@
     return [UIColor colorWithHex:0xffd409];
 }
 
++ (UIColor *)llaNavigationBarColor {
+    
+    return [UIColor colorWithHex:0x11111e];
+}
+
++ (UIColor *) llaTabbarColor {
+    return [UIColor colorWithHex:0x11111e];
+}
+
 @end

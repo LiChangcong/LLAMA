@@ -11,6 +11,7 @@
 
 #import "LLAThirdSDKDelegate.h"
 #import "LLABaseNavigationController.h"
+#import "TMTabBarController.h"
 
 
 
@@ -28,10 +29,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
     
-    TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
-    LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
     
-    self.window.rootViewController = loginNavi;
 
     [self.window makeKeyAndVisible];
     
@@ -40,6 +38,22 @@
     
     //
     [self setupShortCutsItems];
+    
+    //
+    if ([LLAUser me].isLogin) {
+        
+        TMTabBarController *tabbar = [[TMTabBarController alloc] init];
+        
+        self.window.rootViewController = tabbar;
+        
+    }else {
+        TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
+        LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
+        
+        self.window.rootViewController = loginNavi;
+    }
+    
+    
     
     return YES;
 }

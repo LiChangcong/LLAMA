@@ -141,6 +141,12 @@ static CGFloat const XMGSpringFactor = 10;
 
 }
 
+- (void) show {
+    
+    self.frame = [UIApplication sharedApplication].keyWindow.frame;
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    
+}
 
 
 @end
