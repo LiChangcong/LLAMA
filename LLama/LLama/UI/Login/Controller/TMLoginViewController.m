@@ -50,6 +50,7 @@
     [self.registerButton sizeToFit];
     
     [self.registerButton addTarget:self action:@selector(registerUserClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.phoneNumField.keyboardType = UIKeyboardTypePhonePad;
     
     //
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];

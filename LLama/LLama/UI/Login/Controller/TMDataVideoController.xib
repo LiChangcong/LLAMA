@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMDataVideoController">
             <connections>
+                <outlet property="chooseVideoButton" destination="gXh-8w-CfO" id="npX-MW-1tx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,11 +16,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-8w-CfO" userLabel="摄像按钮">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXh-8w-CfO" userLabel="摄像按钮">
                     <rect key="frame" x="252" y="118" width="96" height="96"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="96" id="dqr-fS-1IP"/>
+                        <constraint firstAttribute="width" constant="96" id="os6-pz-GhP"/>
+                    </constraints>
                     <state key="normal" image="uploadingvideo"/>
+                    <connections>
+                        <action selector="chooseVideoButtonClicked:" destination="-1" eventType="touchUpInside" id="aM4-r5-4O3"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-cT-LqM">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-cT-LqM">
                     <rect key="frame" x="20" y="326" width="560" height="40"/>
                     <color key="backgroundColor" red="0.98431372549999996" green="0.87450980389999999" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -29,8 +37,11 @@
                     <state key="normal" title="上传个人视频">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="uploadVideoButtonClicked:" destination="-1" eventType="touchUpInside" id="D0b-kb-paL"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPw-jx-gpu">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPw-jx-gpu">
                     <rect key="frame" x="20" y="377" width="560" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -42,6 +53,7 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
+                        <action selector="doNotUploadButtonClicked:" destination="-1" eventType="touchUpInside" id="UUa-Vy-Yq6"/>
                         <action selector="ignore:" destination="-1" eventType="touchUpInside" id="coV-m9-3le"/>
                     </connections>
                 </button>

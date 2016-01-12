@@ -23,8 +23,9 @@
     // Do any additional setup after loading the view.
     
     //set back item
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
+    if (self.navigationController.viewControllers.count > 1){
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
+    }
 
     
 }

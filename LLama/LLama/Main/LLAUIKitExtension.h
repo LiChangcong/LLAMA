@@ -21,5 +21,8 @@
 #import "UIFont+LLAFont.h"
 #import "UIButton+AlignImageTitle.h"
 #import "UIButton+LLABKColorWithState.h"
+#import "UIColor+LLACustomColor.h"
+#import "UIImageView+LLAImageCache.h"
+#import "UIButton+LLAImageCache.h"
 
 #endif /* LLAUIKitExtension_h */

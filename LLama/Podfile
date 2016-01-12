@@ -8,3 +8,4 @@ pod "MBProgressHUD"
 pod "Qiniu", "~> 7.0"
 pod "UMengAnalytics-NO-IDFA"
 pod "UMengSocial"
+pod "SDWebImage“

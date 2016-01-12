@@ -9,7 +9,15 @@
 #import "TMDataVideoController.h"
 #import "TMTabBarController.h"
 
+#import "LLAViewUtil.h"
+#import "LLALoadingView.h"
+
 @interface TMDataVideoController ()
+{
+    LLALoadingView *HUD;
+}
+
+@property (weak, nonatomic) IBOutlet UIButton *chooseVideoButton;
 
 @end
 
@@ -18,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.chooseVideoButton.clipsToBounds = YES;
+    self.chooseVideoButton.layer.cornerRadius = self.chooseVideoButton.frame.size.height/2;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,37 +44,22 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)backBtnClick:(UIButton *)sender {
-    
-    // 推出键盘
-    [self.view endEditing:YES];
 
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.frame = CGRectMake(self.view.width, 0, self.view.width, self.view.height);
-        //        [self.view removeFromSuperview];
-        //        self.view = perfect.view;
-    }];
-    
-    // 推出键盘
-    [self.view endEditing:YES];
 
+- (IBAction)chooseVideoButtonClicked:(id)sender {
+    
 }
 
-- (IBAction)ignore:(UIButton *)sender {
+- (IBAction)uploadVideoButtonClicked:(id)sender {
     
-    // 推出键盘
-    [self.view endEditing:YES];
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[TMTabBarController alloc] init];
+    TMTabBarController *main = [TMTabBarController new];
+    [UIApplication sharedApplication].keyWindow.rootViewController = main;
 }
 
-// 点击屏幕时也推出键盘
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
+- (IBAction)doNotUploadButtonClicked:(id)sender {
+    TMTabBarController *main = [TMTabBarController new];
+    [UIApplication sharedApplication].keyWindow.rootViewController = main;
+    
 }
-
-
 
 @end

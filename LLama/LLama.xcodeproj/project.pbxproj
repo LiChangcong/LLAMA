@@ -12,6 +12,9 @@
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
+		5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */; };
+		5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */; };
+		5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
@@ -184,6 +187,12 @@
 		5CDD97811C40E5B200557CB7 /* LLAQiNiuUploadFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAQiNiuUploadFileManager.h; sourceTree = "<group>"; };
 		5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAQiNiuUploadFileManager.m; sourceTree = "<group>"; };
 		5CDD97841C40E9D800557CB7 /* LLAUploadFileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileHeader.h; sourceTree = "<group>"; };
+		5CE646BC1C44CB3C004DA6D5 /* UIButton+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LLAImageCache.h"; sourceTree = "<group>"; };
+		5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LLAImageCache.m"; sourceTree = "<group>"; };
+		5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LLAImageCache.h"; sourceTree = "<group>"; };
+		5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LLAImageCache.m"; sourceTree = "<group>"; };
+		5CE646C21C44D1B3004DA6D5 /* UIColor+LLACustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LLACustomColor.h"; sourceTree = "<group>"; };
+		5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LLACustomColor.m"; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -680,6 +689,8 @@
 				A3DEDC921C3CAE38009F3D37 /* UIWindow+TMExtension.m */,
 				A3D8E7EB1C3F82CF00B27898 /* UIColor+LLAColorWithHex.h */,
 				A3D8E7EC1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m */,
+				5CE646C21C44D1B3004DA6D5 /* UIColor+LLACustomColor.h */,
+				5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */,
 				A3D8E7F01C3F87F300B27898 /* UIBarButtonItem+Image.h */,
 				A3D8E7F11C3F87F300B27898 /* UIBarButtonItem+Image.m */,
 				A3D8E7F31C3F8DDA00B27898 /* UIFont+LLAFont.h */,
@@ -690,6 +701,10 @@
 				A3D8E7FA1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m */,
 				A3D8E7FC1C3F9E9800B27898 /* UIButton+AlignImageTitle.h */,
 				A3D8E7FD1C3F9E9800B27898 /* UIButton+AlignImageTitle.m */,
+				5CE646BC1C44CB3C004DA6D5 /* UIButton+LLAImageCache.h */,
+				5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */,
+				5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */,
+				5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1400,6 +1415,7 @@
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
+				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
 				A3DEDD981C3CAE38009F3D37 /* EXTScope.m in Sources */,
 				A3DEDE941C3CAEC7009F3D37 /* TMNoticeView.m in Sources */,
@@ -1444,6 +1460,7 @@
 				A3DEDE911C3CAEC7009F3D37 /* YZPersonViewController.m in Sources */,
 				A3DEDEA21C3CAEC7009F3D37 /* TMClearCacheCell.m in Sources */,
 				A3DEDE751C3CAEC7009F3D37 /* TMTopicCell.m in Sources */,
+				5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */,
 				A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */,
 				A3DEDE621C3CAEC6009F3D37 /* TMDetailsTableViewController.m in Sources */,
 				A3DEDE6D1C3CAEC7009F3D37 /* TMMoreView.m in Sources */,
@@ -1463,6 +1480,7 @@
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
 				A3DEDE8C1C3CAEC7009F3D37 /* TMLikeViewController.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
+				5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */,
 				A3DEDD661C3CAE38009F3D37 /* UIView+TMExtension.m in Sources */,
 				A3DEDE741C3CAEC7009F3D37 /* TMTitleButton.m in Sources */,
 				A3DEDE7D1C3CAEC7009F3D37 /* TMLoginViewController.m in Sources */,
