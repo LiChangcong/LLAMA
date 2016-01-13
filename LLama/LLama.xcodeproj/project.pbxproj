@@ -27,6 +27,7 @@
 		5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB861C46424300C6BC79 /* TYTextContainer.m */; };
 		5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB881C46424300C6BC79 /* TYTextStorage.m */; };
 		5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB8B1C46424300C6BC79 /* TYViewStorage.m */; };
+		5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */; };
 		5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */; };
 		5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */; };
 		5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */; };
@@ -240,6 +241,8 @@
 		5CE0EB891C46424300C6BC79 /* TYTextStorageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYTextStorageProtocol.h; sourceTree = "<group>"; };
 		5CE0EB8A1C46424300C6BC79 /* TYViewStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYViewStorage.h; sourceTree = "<group>"; };
 		5CE0EB8B1C46424300C6BC79 /* TYViewStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYViewStorage.m; sourceTree = "<group>"; };
+		5CE0EB961C46469800C6BC79 /* LLAUserHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserHeadView.h; sourceTree = "<group>"; };
+		5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserHeadView.m; sourceTree = "<group>"; };
 		5CE646BC1C44CB3C004DA6D5 /* UIButton+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LLAImageCache.h"; sourceTree = "<group>"; };
 		5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LLAImageCache.m"; sourceTree = "<group>"; };
 		5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LLAImageCache.h"; sourceTree = "<group>"; };
@@ -651,6 +654,8 @@
 			children = (
 				5CE646DD1C4513D3004DA6D5 /* LLATableView.h */,
 				5CE646DE1C4513D3004DA6D5 /* LLATableView.m */,
+				5CE0EB961C46469800C6BC79 /* LLAUserHeadView.h */,
+				5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1680,6 +1685,7 @@
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
+				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,
 				A3E2D90E1C3E1845005885D4 /* LLAUser.m in Sources */,
