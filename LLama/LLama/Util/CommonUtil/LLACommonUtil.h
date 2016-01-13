@@ -10,8 +10,17 @@
 
 @interface LLACommonUtil : NSObject
 
+//phone number,password validate
 +(BOOL)validateMobile:(NSString *)mobileNum;
 
 +(BOOL) validatePassword:(NSString *) password;
+
+//time formator
+
++ (NSString *) formatTimeFromTimeInterval:(long long) timeInterval;
+
+//get value from dictionary
+
++ (id) valueFromDictionary:(NSDictionary *) dic key:(NSString *)key targetClass:(Class) targetClass;
 
 @end

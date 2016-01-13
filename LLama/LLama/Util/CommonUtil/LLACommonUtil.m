@@ -50,5 +50,61 @@
     }
 }
 
+//format time
+
++ (NSString *)formatTimeFromTimeInterval:(long long)timeInterval {
+    
+    NSTimeInterval currentInterval = [[NSDate date] timeIntervalSince1970];
+    
+    NSTimeInterval interval = fabs(currentInterval - timeInterval/1000);
+    
+    if(interval < 60){
+        return @"刚刚";
+    }else if(interval < 60*60){
+        NSInteger time = interval/60;
+        return [NSString stringWithFormat:@"%ld分钟前",(long)time];
+    }else if(interval < 24*60*60){
+        NSInteger time = interval/60/60;
+        return [NSString stringWithFormat:@"%ld小时前",(long)time];
+    }else if(interval < 30*24*60*60){
+        NSInteger time = interval/24/60/60;
+        return [NSString stringWithFormat:@"%ld天前",(long)time];
+    }else if(interval < 12*30*24*60*60){
+        NSInteger time = interval/30/24/60/60;
+        return [NSString stringWithFormat:@"%ld月前",(long)time];
+    }else{
+        NSInteger time = interval/12/30/24/60/60;
+        return [NSString stringWithFormat:@"%ld年前",(long)time];
+    }
+
+    
+}
+
+//value from dictionary
+
++ (id) valueFromDictionary:(NSDictionary *)dic key:(NSString *)key targetClass:(Class)targetClass {
+    
+    if (!dic || !key) {
+        return nil;
+    }
+    
+    id value = [dic valueForKey:key];
+    
+    if ([value isKindOfClass:targetClass]) {
+        return value;
+    }else {
+    
+        if ([value isKindOfClass:[NSValue class]] && [targetClass isSubclassOfClass:[NSString class]]) {
+            return [value stringValue];
+        }else if([value isKindOfClass:[NSString class]] && [targetClass isSubclassOfClass:[NSValue class]]) {
+            return @([value doubleValue]);
+        }else {
+            return nil;
+        }
+        
+    }
+    
+}
+
 
 @end

@@ -11,6 +11,8 @@
 
 #ifdef __OBJC__ //  #ifdef __OBJC__ 和 #endif中的内容只会出现在OC源文件中
 
+//默认请求条数
+#define LLA_LOAD_DATA_DEFAULT_NUMBERS 20
 
 /******************三方框架***********************/
 
@@ -32,7 +34,6 @@
 #define TMGrayColor(v) TMColor(v, v, v)
 #define TMCommonBgColor TMGrayColor(247)
 #define TMYellowColor TMColor(250, 210, 1)
-
 
 
 #endif
