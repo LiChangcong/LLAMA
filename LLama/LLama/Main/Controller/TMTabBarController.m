@@ -132,4 +132,22 @@ static NSString * const publishScriptImage_Selected= @"startH";
 
 }
 
+#pragma mark - Rotating
+
+- (BOOL) shouldAutorotate {
+    return self.selectedViewController.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask) supportedInterfaceOrientations {
+    return self.selectedViewController.supportedInterfaceOrientations;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return self.selectedViewController.preferredInterfaceOrientationForPresentation;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return self.selectedViewController.preferredStatusBarStyle;
+}
+
 @end

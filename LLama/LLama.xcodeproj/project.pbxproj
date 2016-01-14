@@ -12,6 +12,10 @@
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
+		5CDDF44D1C473BDB00168989 /* LLAHallVideoInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF44C1C473BDB00168989 /* LLAHallVideoInfoCell.m */; };
+		5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF44F1C473F6D00168989 /* LLARewardMoneyView.m */; };
+		5CDDF4531C474D2100168989 /* LLAVideoCommentContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */; };
+		5CDDF4561C474D3A00168989 /* LLAVideoCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */; };
 		5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */; };
 		5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB6C1C45EECC00C6BC79 /* LLAHallMainInfo.m */; };
 		5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB6F1C45F4A100C6BC79 /* LLAHallVideoCommentItem.m */; };
@@ -211,6 +215,15 @@
 		5CDD97811C40E5B200557CB7 /* LLAQiNiuUploadFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAQiNiuUploadFileManager.h; sourceTree = "<group>"; };
 		5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAQiNiuUploadFileManager.m; sourceTree = "<group>"; };
 		5CDD97841C40E9D800557CB7 /* LLAUploadFileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileHeader.h; sourceTree = "<group>"; };
+		5CDDF44A1C473AFF00168989 /* LLACellPlayVideoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACellPlayVideoProtocol.h; sourceTree = "<group>"; };
+		5CDDF44B1C473BDB00168989 /* LLAHallVideoInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHallVideoInfoCell.h; sourceTree = "<group>"; };
+		5CDDF44C1C473BDB00168989 /* LLAHallVideoInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHallVideoInfoCell.m; sourceTree = "<group>"; };
+		5CDDF44E1C473F6D00168989 /* LLARewardMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLARewardMoneyView.h; sourceTree = "<group>"; };
+		5CDDF44F1C473F6D00168989 /* LLARewardMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLARewardMoneyView.m; sourceTree = "<group>"; };
+		5CDDF4511C474D2100168989 /* LLAVideoCommentContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentContentView.h; sourceTree = "<group>"; };
+		5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentContentView.m; sourceTree = "<group>"; };
+		5CDDF4541C474D3A00168989 /* LLAVideoCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentView.h; sourceTree = "<group>"; };
+		5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentView.m; sourceTree = "<group>"; };
 		5CE0EB681C45EEA600C6BC79 /* LLAHallVideoItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHallVideoItemInfo.h; sourceTree = "<group>"; };
 		5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHallVideoItemInfo.m; sourceTree = "<group>"; };
 		5CE0EB6B1C45EECC00C6BC79 /* LLAHallMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHallMainInfo.h; sourceTree = "<group>"; };
@@ -598,6 +611,7 @@
 		5CE0EB671C45EE6C00C6BC79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5CDDF44A1C473AFF00168989 /* LLACellPlayVideoProtocol.h */,
 				5CE0EB681C45EEA600C6BC79 /* LLAHallVideoItemInfo.h */,
 				5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */,
 				5CE0EB6E1C45F4A100C6BC79 /* LLAHallVideoCommentItem.h */,
@@ -656,6 +670,8 @@
 				5CE646DE1C4513D3004DA6D5 /* LLATableView.m */,
 				5CE0EB961C46469800C6BC79 /* LLAUserHeadView.h */,
 				5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */,
+				5CDDF44E1C473F6D00168989 /* LLARewardMoneyView.h */,
+				5CDDF44F1C473F6D00168989 /* LLARewardMoneyView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1081,6 +1097,12 @@
 				5CE646CC1C44E6C0004DA6D5 /* LLAHomeTitleView.m */,
 				5CE0EB741C4620FF00C6BC79 /* LLAVideoPlayerView.h */,
 				5CE0EB751C4620FF00C6BC79 /* LLAVideoPlayerView.m */,
+				5CDDF44B1C473BDB00168989 /* LLAHallVideoInfoCell.h */,
+				5CDDF44C1C473BDB00168989 /* LLAHallVideoInfoCell.m */,
+				5CDDF4511C474D2100168989 /* LLAVideoCommentContentView.h */,
+				5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */,
+				5CDDF4541C474D3A00168989 /* LLAVideoCommentView.h */,
+				5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1600,6 +1622,7 @@
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CE646DB1C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m in Sources */,
+				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
@@ -1612,6 +1635,7 @@
 				A3DEDDA01C3CAE38009F3D37 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				A3DEDE961C3CAEC7009F3D37 /* TMProfileLikeCell.m in Sources */,
 				A3DEDE9D1C3CAEC7009F3D37 /* TMChangePwdController.m in Sources */,
+				5CDDF4561C474D3A00168989 /* LLAVideoCommentView.m in Sources */,
 				A3DEDDA31C3CAE38009F3D37 /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
 				A3DEDE8D1C3CAEC7009F3D37 /* TMProfileViewController.m in Sources */,
@@ -1639,10 +1663,12 @@
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
 				5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */,
 				5CE0EB921C46424300C6BC79 /* TYTextContainer+Extended.m in Sources */,
+				5CDDF44D1C473BDB00168989 /* LLAHallVideoInfoCell.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
 				5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */,
 				5CE0EB911C46424300C6BC79 /* TYLinkTextStorage.m in Sources */,
 				A3D8E7F51C3F8DDA00B27898 /* UIFont+LLAFont.m in Sources */,
+				5CDDF4531C474D2100168989 /* LLAVideoCommentContentView.m in Sources */,
 				A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */,
 				5CE0EB8D1C46424300C6BC79 /* TYAttributedLabel.m in Sources */,
 				5CE0EB761C4620FF00C6BC79 /* LLAVideoPlayerView.m in Sources */,
