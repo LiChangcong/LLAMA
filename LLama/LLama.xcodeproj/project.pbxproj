@@ -208,6 +208,7 @@
 		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
 		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
 		5C7298251C438E5500106BA2 /* LLACommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACommonUtil.m; sourceTree = "<group>"; };
+		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
 		5CDD977E1C40E56D00557CB7 /* LLAUploadFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadFileUtil.h; sourceTree = "<group>"; };
@@ -612,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				5CDDF44A1C473AFF00168989 /* LLACellPlayVideoProtocol.h */,
+				5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */,
 				5CE0EB681C45EEA600C6BC79 /* LLAHallVideoItemInfo.h */,
 				5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */,
 				5CE0EB6E1C45F4A100C6BC79 /* LLAHallVideoCommentItem.h */,

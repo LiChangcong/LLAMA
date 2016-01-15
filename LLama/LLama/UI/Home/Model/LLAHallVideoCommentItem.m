@@ -8,10 +8,11 @@
 
 #import "LLAHallVideoCommentItem.h"
 
-#import "LLAUser.h"
 #import "LLACommonUtil.h"
 
 @implementation LLAHallVideoCommentItem
+
+@synthesize textContainer;
 
 + (LLAHallVideoCommentItem *) parseJsonWithDic:(NSDictionary *)data {
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:data error:nil];

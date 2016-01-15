@@ -21,6 +21,8 @@
 
 @property(nonatomic , strong) LLAUser *actorInfo;
 
+@property(nonatomic , copy) NSString *videoCoverImageURL;
+
 @property(nonatomic , copy) NSString *scriptContent;
 
 @property(nonatomic , assign) NSInteger rewardMoney;

@@ -13,6 +13,7 @@
 #import "LLATableView.h"
 #import "LLALoadingView.h"
 #import "LLAVideoPlayerView.h"
+#import "LLAHallVideoInfoCell.h"
 
 //model
 #import "LLAHallMainInfo.h"
@@ -21,7 +22,7 @@
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 
-@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -171,13 +172,26 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    
+    static NSString *cellIden = @"cell";
+    
+    LLAHallVideoInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIden];
+    if (!cell) {
+        cell = [[LLAHallVideoInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIden];
+        cell.delegate = self;
+    }
+    
+    [cell updateCellWithVideoInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
+    
+    return cell;
+    
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
+    
+    return [LLAHallVideoInfoCell calculateHeightWithVideoInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,6 +209,32 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
+
+#pragma mark - LLAHallVideoInfoCellDelegate
+
+- (void) userHeadViewClickedWithUserInfo:(LLAUser *) userInfo itemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
+    
+}
+
+- (void) loveVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo loveButton:(UIButton *)loveButton {
+
+}
+
+- (void) commentVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
+
+}
+
+- (void) shareVideoWithVideoItemInfo:(LLAHallVideoItemInfo *)videoItemInfo {
+
+}
+
+- (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) vieoItemInfo {
+
+}
+
+- (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
     
 }
 

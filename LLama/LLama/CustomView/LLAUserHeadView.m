@@ -80,7 +80,7 @@ static const CGFloat roleImageViewHeightWidth = 8;
     userRoleImageView.clipsToBounds = YES;
     userRoleImageView.layer.cornerRadius = roleImageViewHeightWidth/2;
     
-    [self addSubview:userHeadImageView];
+    [self addSubview:userRoleImageView];
     
     //constraints
     

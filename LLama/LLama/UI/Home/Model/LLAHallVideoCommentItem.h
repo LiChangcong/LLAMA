@@ -8,10 +8,11 @@
 
 #import "MTLModel.h"
 #import "Mantle.h"
+#import "LLASubCommentProtocol.h"
 
-@class LLAUser;
+#import "LLAUser.h"
 
-@interface LLAHallVideoCommentItem : MTLModel<MTLJSONSerializing>
+@interface LLAHallVideoCommentItem : MTLModel<MTLJSONSerializing,LLASubCommentProtocol>
 
 @property(nonatomic , assign) NSInteger commentId;
 
