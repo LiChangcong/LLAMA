@@ -13,8 +13,8 @@
 
 static const CGFloat labelTextFontSize = 13;
 
-static const CGFloat attributeLabelToLeft = 6;
-static const CGFloat attributeLabelToRight = 6;
+static const CGFloat attributeLabelToLeft = 0;
+static const CGFloat attributeLabelToRight = 0;
 
 //color hex
 
@@ -71,7 +71,7 @@ static const NSInteger textColorHex = 0x636363;
     attrLabel.linkColor = userTextColor;
     attrLabel.textColor = contentTextColor;
     attrLabel.highlightedLinkBackgroundColor = userSelectedTextBKColor;
-    
+    attrLabel.backgroundColor = [UIColor whiteColor];
     [self addSubview:attrLabel];
     
     [self addConstraints:
@@ -154,7 +154,7 @@ static const NSInteger textColorHex = 0x636363;
     [[self class] generateTextContainerWihtCommentInfo:currentCommentInfo maxWidth:maxWidth];
     
     attrLabel.textContainer = currentCommentInfo.textContainer;
-    attrLabel.backgroundColor = self.backgroundColor;
+    //attrLabel.backgroundColor = self.backgroundColor;
     
     
     
@@ -194,6 +194,8 @@ static const NSInteger textColorHex = 0x636363;
         
         authorUserNameRange = NSMakeRange(0, authorString.length);
     }
+    
+    [contentText appendString:commentInfo.commentContent];
     
     textContainer.text = contentText;
     

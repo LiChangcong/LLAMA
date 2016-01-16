@@ -32,6 +32,9 @@
 		5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB881C46424300C6BC79 /* TYTextStorage.m */; };
 		5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB8B1C46424300C6BC79 /* TYViewStorage.m */; };
 		5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */; };
+		5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF6E1C4A1F0000991394 /* LLAScriptHallItemInfo.m */; };
+		5CE0FF721C4A315B00991394 /* LLAScriptHallMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */; };
+		5CE0FF751C4A327000991394 /* LLAScriptHallInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */; };
 		5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */; };
 		5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */; };
 		5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */; };
@@ -257,6 +260,12 @@
 		5CE0EB8B1C46424300C6BC79 /* TYViewStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYViewStorage.m; sourceTree = "<group>"; };
 		5CE0EB961C46469800C6BC79 /* LLAUserHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserHeadView.h; sourceTree = "<group>"; };
 		5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserHeadView.m; sourceTree = "<group>"; };
+		5CE0FF6D1C4A1F0000991394 /* LLAScriptHallItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptHallItemInfo.h; sourceTree = "<group>"; };
+		5CE0FF6E1C4A1F0000991394 /* LLAScriptHallItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptHallItemInfo.m; sourceTree = "<group>"; };
+		5CE0FF701C4A315B00991394 /* LLAScriptHallMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptHallMainInfo.h; sourceTree = "<group>"; };
+		5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptHallMainInfo.m; sourceTree = "<group>"; };
+		5CE0FF731C4A327000991394 /* LLAScriptHallInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptHallInfoCell.h; sourceTree = "<group>"; };
+		5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptHallInfoCell.m; sourceTree = "<group>"; };
 		5CE646BC1C44CB3C004DA6D5 /* UIButton+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LLAImageCache.h"; sourceTree = "<group>"; };
 		5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LLAImageCache.m"; sourceTree = "<group>"; };
 		5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LLAImageCache.h"; sourceTree = "<group>"; };
@@ -622,6 +631,10 @@
 				5CE0EB6C1C45EECC00C6BC79 /* LLAHallMainInfo.m */,
 				5CE0EB711C4607AD00C6BC79 /* LLAVideoInfo.h */,
 				5CE0EB721C4607AD00C6BC79 /* LLAVideoInfo.m */,
+				5CE0FF6D1C4A1F0000991394 /* LLAScriptHallItemInfo.h */,
+				5CE0FF6E1C4A1F0000991394 /* LLAScriptHallItemInfo.m */,
+				5CE0FF701C4A315B00991394 /* LLAScriptHallMainInfo.h */,
+				5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1105,6 +1118,8 @@
 				5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */,
 				5CDDF4541C474D3A00168989 /* LLAVideoCommentView.h */,
 				5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */,
+				5CE0FF731C4A327000991394 /* LLAScriptHallInfoCell.h */,
+				5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1625,6 +1640,8 @@
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CE646DB1C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
+				5CE0FF721C4A315B00991394 /* LLAScriptHallMainInfo.m in Sources */,
+				5CE0FF751C4A327000991394 /* LLAScriptHallInfoCell.m in Sources */,
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
@@ -1713,6 +1730,7 @@
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
+				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,

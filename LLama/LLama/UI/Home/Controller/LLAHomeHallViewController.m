@@ -49,7 +49,6 @@
     
     [HUD show:YES];
     [self loadData];
-    
     //
 }
 
@@ -198,7 +197,30 @@
     
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([[cell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+        
+        id<LLACellPlayVideoProtocol> tc = (UITableViewCell<LLACellPlayVideoProtocol> *)cell;
+        
+        LLAHallVideoItemInfo *info = [mainInfo.dataList objectAtIndex:indexPath.row];
+        
+        tc.videoPlayerView.playingVideoInfo = info.videoInfo;
+        [tc.videoPlayerView playVideo];
+    }
+    
+    NSArray *visibleCells = [tableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)] && tempCell != cell) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            [tc.videoPlayerView stopVideo];
+        }
+    }
+    
+
     
 }
 
@@ -231,7 +253,7 @@
 }
 
 - (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) vieoItemInfo {
-
+    
 }
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {

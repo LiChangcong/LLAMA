@@ -128,8 +128,17 @@
 }
 
 - (void) setupUmengSDK {
-    [MobClick startWithAppkey:LLA_UMENG_APPKEY  reportPolicy:BATCH channelId:nil];
+    
+    
     [UMSocialData setAppKey:LLA_UMENG_APPKEY];
+    
+#if DEBUG
+    [MobClick setLogEnabled:YES];
+    
+#else
+    [MobClick startWithAppkey:LLA_UMENG_APPKEY  reportPolicy:BATCH channelId:nil];
+    [MobClick setLogEnabled:NO];
+#endif
     
     //weChat
     [UMSocialWechatHandler setWXAppId:LLA_WEIXIN_APPID appSecret:LLA_WEIXIN_APP_SECRET url:SDK_REDIRECT_URL];

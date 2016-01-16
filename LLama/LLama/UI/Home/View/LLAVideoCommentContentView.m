@@ -66,6 +66,7 @@ static const CGFloat commentToRight = 0;
         LLAVideoCommentView *commentView = [[LLAVideoCommentView alloc] initWithFrame:CGRectMake(commentToLeft, offsetY,width, commentHeight)];
         commentView.delegate = self;
         [commentView updateCommentWithInfo:item maxWidth:width];
+        commentView.backgroundColor = self.backgroundColor;
         
         [self addSubview:commentView];
         
@@ -102,7 +103,7 @@ static const CGFloat commentToRight = 0;
         totalHeight += commentsVerSpace;
     }
     
-    totalHeight = MAX(0,totalHeight-commentsVerSpace);
+    //totalHeight = MAX(0,totalHeight-commentsVerSpace);
     
     return totalHeight;
 }

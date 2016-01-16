@@ -25,6 +25,8 @@ static NSString *const commentVideoImageName_Highlight = @"messageH";
 static NSString *const shareVideoButtonImageName_Normal = @"share";
 static NSString *const shareVideoButtonImageName_Highlight = @"shareH";
 
+static NSString *const praiseNumberImageName = @"";
+
 //
 
 static const CGFloat headViewToTop = 5.3;
@@ -34,12 +36,13 @@ static const CGFloat headViewToNameVerSpace = 2;
 
 static const CGFloat directorLabelToLeft = 9;
 static const CGFloat directorLabelToNameHorSpace = 1;
-static const CGFloat roleLabelWidth = 16;
+static const CGFloat roleLabelWidth = 27;
 static const CGFloat nameLabelHeight = 14;
 
 static const CGFloat playerViewToTop = 62;
 
 static const CGFloat functionButtonsHeight = 56;
+static const CGFloat functionButtonsWidth = 60;
 
 static const CGFloat subContentToLeft = 17;
 static const CGFloat timeLabelToRight = 13;
@@ -58,6 +61,8 @@ static const CGFloat totalCommentLabelToCommentsViewVerSpace = 9;
 
 static const CGFloat scriptLabelToBottom = 10;
 static const CGFloat commentsViewToBottom = 10;
+
+static const CGFloat bottomSepLineHeight = 0.5;
 
 //
 static const CGFloat scriptLabelFontSize = 13;
@@ -92,6 +97,8 @@ static const CGFloat scriptLabelFontSize = 13;
     
     LLAVideoCommentContentView *commentsView;
     
+    UIView *bottomSepLine;
+    
     //font and color
     
     UIColor *roleBackColor;
@@ -122,6 +129,8 @@ static const CGFloat scriptLabelFontSize = 13;
     UIFont *totalCommentLabelFont;
     UIColor *totalCommentLabelTextColor;
     
+    UIColor *bottomSepLineColor;
+    
     //
     LLAHallVideoItemInfo *currentVideoInfo;
     
@@ -146,7 +155,7 @@ static const CGFloat scriptLabelFontSize = 13;
     if (self) {
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initVariables];
         [self initSubViews];
         [self initSubConstraints];
@@ -184,6 +193,8 @@ static const CGFloat scriptLabelFontSize = 13;
     
     totalCommentLabelFont = [UIFont llaFontOfSize:12.5];
     totalCommentLabelTextColor = [UIColor colorWithHex:0x959595];
+    
+    bottomSepLineColor = [UIColor colorWithHex:0xededed];
 
 }
 
@@ -257,6 +268,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     //
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
+    videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.contentView addSubview:videoPlayerView];
     
@@ -306,11 +318,25 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [self.contentView addSubview:seperatorLine];
     
+    //
+    praiseNumbersButton = [[UIButton alloc] init];
+    praiseNumbersButton.translatesAutoresizingMaskIntoConstraints = NO;
+    praiseNumbersButton.userInteractionEnabled = NO;
+    
+    [praiseNumbersButton setImage:[UIImage llaImageWithName:praiseNumberImageName] forState:UIControlStateNormal];
+    [praiseNumbersButton setTitleColor:praiseNumberButtonTextColor forState:UIControlStateNormal];
+    
+    praiseNumbersButton.titleLabel.font = praiseNumberButtonFont;
+    
+    [self.contentView addSubview:praiseNumbersButton];
+    
+    
     //script Label
     scriptLabel = [[UILabel alloc] init];
     scriptLabel.translatesAutoresizingMaskIntoConstraints = NO;
     scriptLabel.font = scriptLabelFont;
     scriptLabel.textColor = scriptLabelTextColor;
+    scriptLabel.numberOfLines = 0;
     
     [self.contentView addSubview:scriptLabel];
     
@@ -318,16 +344,24 @@ static const CGFloat scriptLabelFontSize = 13;
     totalCommentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     totalCommentLabel.font = totalCommentLabelFont;
     totalCommentLabel.textColor = totalCommentLabelTextColor;
-    totalCommentLabel.textAlignment = NSTextAlignmentRight;
+    totalCommentLabel.textAlignment = NSTextAlignmentLeft;
     
     [self.contentView addSubview:totalCommentLabel];
     //sub replys
     
     commentsView = [[LLAVideoCommentContentView alloc] init];
     commentsView.translatesAutoresizingMaskIntoConstraints = NO;
+    commentsView.backgroundColor = self.backgroundColor;
     commentsView.delegate = self;
+    commentsView.clipsToBounds = YES;
     
     [self.contentView addSubview:commentsView];
+    
+    bottomSepLine = [[UIView alloc] init];
+    bottomSepLine.translatesAutoresizingMaskIntoConstraints = NO;
+    bottomSepLine.backgroundColor = bottomSepLineColor;
+    
+    [self.contentView addSubview:bottomSepLine];
     
 }
 
@@ -346,7 +380,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(toTop)-[directorHeadView(headViewHeight)]-(headViewToName)-[directorNameLabel(nameLabelHeight)]"
+      constraintsWithVisualFormat:@"V:|-(toTop)-[directorHeadView(headViewHeight)]-(headViewToName)-[directorNameLabel(nameHeight)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(headViewToTop),@"toTop",
@@ -367,7 +401,7 @@ static const CGFloat scriptLabelFontSize = 13;
     //
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(toTop)-[actorHeadView(headViewHeight)]-(headViewToName)-[actorNameLabel(nameLabelHeight)]"
+      constraintsWithVisualFormat:@"V:|-(toTop)-[actorHeadView(headViewHeight)]-(headViewToName)-[actorNameLabel(nameHeight)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(headViewToTop),@"toTop",
@@ -388,7 +422,7 @@ static const CGFloat scriptLabelFontSize = 13;
     //
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(toTop)-[videoCoverImageView]-(0)-[loveVideoButton(loveButtonHeight)]-(0)-[seperatorLine(sepLineHeight)]-(lineToPraiseNumber)-[praiseNumbersButton(praiseNumHeight)]-(praiseNumerToScriptLabel)-[scriptLabel]-(scriptLabelToTotalComment)-[totalCommentLabel(totalCommentHeight)]-(totalCommentToCommentsView)-[commentsView(10)]"
+      constraintsWithVisualFormat:@"V:|-(toTop)-[videoCoverImageView]-(0)-[loveVideoButton(loveButtonHeight)]-(0)-[seperatorLine(sepLineHeight)]-(lineToPraiseNumber)-[praiseNumbersButton(praiseNumHeight)]-(praiseNumerToScriptLabel)-[scriptLabel]-(scriptLabelToTotalComment)-[totalCommentLabel(totalCommentHeight)]-(totalCommentToCommentsView)-[commentsView(15)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(playerViewToTop),@"toTop",
@@ -421,6 +455,15 @@ static const CGFloat scriptLabelFontSize = 13;
       attribute:NSLayoutAttributeHeight
       multiplier:1.0
       constant:0]];
+    [constrArr addObject:
+     [NSLayoutConstraint
+      constraintWithItem:videoPlayerView
+      attribute:NSLayoutAttributeCenterY
+      relatedBy:NSLayoutRelationEqual
+      toItem:videoCoverImageView
+      attribute:NSLayoutAttributeCenterY
+      multiplier:1.0
+      constant:0]];
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
@@ -442,6 +485,13 @@ static const CGFloat scriptLabelFontSize = 13;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(videoCoverImageView,publishTimeLabel,seperatorLine)]];
+    
+    [constrArr addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:[bottomSepLine(height)]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:[NSDictionary dictionaryWithObjectsAndKeys:@(bottomSepLineHeight),@"height", nil]
+      views:NSDictionaryOfVariableBindings(bottomSepLine)]];
     
     //horizonal
     
@@ -467,7 +517,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(0)-[directorHeadView(width)]"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[directorHeadView(width)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(headViewToBorder),@"toLeft",
@@ -476,7 +526,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[directorLabel(width)]-(directorToName)-[directorNameLabel]-(0)-[rewardView]"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[directorLabel(width)]-(directorToName)-[directorNameLabel]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(directorLabelToLeft),@"toLeft",
@@ -523,12 +573,24 @@ static const CGFloat scriptLabelFontSize = 13;
       constant:0]];
     
     //
+    
+//    [publishTimeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+//    [loveVideoButton setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [commentVideoButton setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+//    [shareButton setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    
+    [publishTimeLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [loveVideoButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [commentVideoButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [shareButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[loveVideoButton]-(0)-[commentVideoButton]-(0)-[shareButton]-(0)-[publishTimeLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[loveVideoButton(width)]-(0)-[commentVideoButton(width)]-(0)-[shareButton(width)]-(0)-[publishTimeLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(subContentToLeft),@"toLeft",
+               @(functionButtonsWidth),@"width",
                @(timeLabelToRight),@"toRight", nil]
       views:NSDictionaryOfVariableBindings(loveVideoButton,commentVideoButton,shareButton,publishTimeLabel)]];
     
@@ -577,12 +639,20 @@ static const CGFloat scriptLabelFontSize = 13;
                @(timeLabelToRight),@"toRight",nil]
       views:NSDictionaryOfVariableBindings(commentsView)]];
     
+    [constrArr addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[bottomSepLine]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(bottomSepLine)]];
+    
     //
     for (NSLayoutConstraint *constr in constrArr) {
-        if (constrArr.firstObject == commentsView && constr.firstAttribute == NSLayoutAttributeHeight) {
+        if (constr.firstItem == commentsView && constr.firstAttribute == NSLayoutAttributeHeight) {
             commentContentViewHeightConstraints = constr;
             break;
         }
+        
     }
     
     //
@@ -736,6 +806,8 @@ static const CGFloat scriptLabelFontSize = 13;
     }else {
         height += scriptLabelToBottom;
     }
+    
+    height += bottomSepLineHeight;
     
     return height;
     
