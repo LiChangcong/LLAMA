@@ -42,6 +42,20 @@
     
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     [HUD hide:NO];
+    
+    // 设置男女按钮普通个/选中时候的颜色
+    // male
+    [self.maleButton setBackgroundColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
+    [self.maleButton setBackgroundColor:[UIColor colorWithHex:0xffd409] forState:UIControlStateSelected];
+    [self.maleButton.layer setBorderWidth:1.5f];
+    [self.maleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+
+    // female
+    [self.femaleButton setBackgroundColor:[UIColor colorWithHex:0xffffff] forState:UIControlStateNormal];
+    [self.femaleButton setBackgroundColor:[UIColor colorWithHex:0xffd409] forState:UIControlStateSelected];
+    [self.femaleButton.layer setBorderWidth:1.5f];
+    [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,6 +174,14 @@
     
     self.maleButton.selected = YES;
     self.femaleButton.selected = NO;
+    // 设置不同状态不同的描边色
+    if (self.femaleButton.state == UIControlStateNormal) {
+        [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+        [self.maleButton.layer setBorderColor:[[UIColor colorWithHex:0x11111e] CGColor]];
+    }else{
+        [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0x11111e] CGColor]];
+        [self.maleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+    }
 
 }
 - (IBAction)femaleButtonClicked:(id)sender {
@@ -167,6 +189,14 @@
     [self.view endEditing:YES];
     self.femaleButton.selected = YES;
     self.maleButton.selected = NO;
+    // 设置不同状态不同的描边色
+    if (self.femaleButton.state == UIControlStateNormal) {
+        [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+        [self.maleButton.layer setBorderColor:[[UIColor colorWithHex:0x11111e] CGColor]];
+    }else{
+        [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0x11111e] CGColor]];
+        [self.maleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+    }
 }
 
 // 点击屏幕时也推出键盘

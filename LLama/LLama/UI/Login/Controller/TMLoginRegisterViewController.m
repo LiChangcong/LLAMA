@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+//    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
 }
 
 - (IBAction)registerButtonClick:(UIButton *)sender {
@@ -38,5 +39,9 @@
     [self.navigationController pushViewController:login animated:YES];
 }
 
-
+// 更改状态栏颜色是黑色
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
 @end

@@ -56,6 +56,7 @@
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     [HUD hide:NO];
     
+    self.navigationItem.title = @"登 陆";
 }
 
 - (void)didReceiveMemoryWarning {

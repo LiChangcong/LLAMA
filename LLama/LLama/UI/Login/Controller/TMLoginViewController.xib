@@ -38,7 +38,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="wJK-ju-iGE"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <state key="normal" title="O K" backgroundImage="finishnew">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -64,7 +64,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewj-Nz-Mjw">
-                            <rect key="frame" x="269" y="381" width="62" height="62"/>
+                            <rect key="frame" x="269" y="375.5" width="62" height="62"/>
                             <state key="normal" image="wechatnew"/>
                             <state key="highlighted" image="wechat"/>
                             <connections>
@@ -72,7 +72,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-oU-rY4">
-                            <rect key="frame" x="171" y="381" width="62" height="62"/>
+                            <rect key="frame" x="171" y="375" width="62" height="62"/>
                             <state key="normal" image="weibonew"/>
                             <state key="highlighted" image="weibo"/>
                             <connections>
@@ -80,7 +80,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBc-Ds-FGI">
-                            <rect key="frame" x="367" y="381" width="62" height="62"/>
+                            <rect key="frame" x="367" y="375" width="62" height="62"/>
                             <state key="normal" image="qqnew"/>
                             <state key="highlighted" image="qq"/>
                             <connections>
@@ -134,21 +134,21 @@ LLAMA用户协议和隐私条款</string>
                                 <constraint firstAttribute="trailing" secondItem="nqc-sa-QjN" secondAttribute="trailing" constant="20" id="ycf-gx-gIf"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="其他方式登陆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6o-j1-tfR">
-                            <rect key="frame" x="292" y="321" width="16" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="其他方式登陆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6o-j1-tfR">
+                            <rect key="frame" x="264" y="321" width="72" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-yG-nqQ">
-                            <rect key="frame" x="328" y="331" width="272" height="1"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-yG-nqQ">
+                            <rect key="frame" x="356" y="328" width="244" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="Zsb-iC-IeS"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ND-k5-DGA">
-                            <rect key="frame" x="0.0" y="331" width="272" height="1"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ND-k5-DGA">
+                            <rect key="frame" x="0.0" y="328" width="244" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="sE8-c5-6Rm"/>
