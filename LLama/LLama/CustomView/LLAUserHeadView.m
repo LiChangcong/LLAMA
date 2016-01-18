@@ -139,7 +139,7 @@ static const CGFloat roleImageViewHeightWidth = 8;
     [userHeadImageView setImageWithURL:[NSURL URLWithString:currentUser.headImageURL] placeholderImage:[UIImage llaImageWithName:@""]];
     
     //role image
-    
+
 }
 
 @end

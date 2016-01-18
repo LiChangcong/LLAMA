@@ -47,9 +47,12 @@ static const CGFloat bottomHeight = 54;
 static const CGFloat functionButtonHeight = 44;
 static const CGFloat functionButtonToRight = 14;
 
+static const NSInteger maxNumberLinesWhenShrink = 4;
+
 //
 
-static NSString *const isPrivateImageName = @"";
+static NSString *const isPrivateImageName = @"secretvideo";
+static NSString *const countingImageName = @"clock";
 
 @interface LLAScriptDetailMainInfoCell()<LLAUserHeadViewDelegate>
 {
@@ -85,14 +88,33 @@ static NSString *const isPrivateImageName = @"";
     UIFont *publishTimeLabelFont;
     UIColor *publishTimeLabelTextColor;
     
+    UIFont *flexButtonFont;
+    UIColor *flexButtonTextColor;
+    
     UIColor *sepLineColor;
     
     UIFont *scriptTotalPartakeUserNumberLabelFont;
     UIColor *scriptTotalPartakeUserNumberLabelTextColor;
     
     //
+    UIFont *functionButtonFont;
+    
+    UIColor *functionButtonNormalTextColor;
+    UIColor *functionButtonHighlightTextColor;
+    UIColor *functionButtonDisableTextColor;
+    
+    UIColor *functionButtonNormalBKColor;
+    UIColor *functionButtonHighlightBKColor;
+    UIColor *functionButtonDisableBKColor;
+    
+    //NSLayoutConstraints
+    
+    NSLayoutConstraint *scriptImageViewHeightConstraint;
+    
+    //
     LLAScriptHallItemInfo *currentScriptInfo;
     
+
 }
 
 @end
@@ -128,11 +150,24 @@ static NSString *const isPrivateImageName = @"";
     publishTimeLabelFont = [UIFont llaFontOfSize:12];
     publishTimeLabelTextColor = [UIColor colorWithHex:0x959595];
     
+    flexButtonFont = [UIFont llaFontOfSize:12];
+    flexButtonTextColor = [UIColor colorWithHex:0x959595];
+    
     sepLineColor = [UIColor colorWithHex:0xededed];
     
     scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:12];
     
     scriptTotalPartakeUserNumberLabelTextColor = [UIColor colorWithHex:0x959595];
+    
+    functionButtonFont = [UIFont llaFontOfSize:15];
+    
+    functionButtonNormalTextColor = [UIColor colorWithHex:0x11111e];
+    functionButtonHighlightTextColor = [UIColor colorWithHex:0x11111e];
+    functionButtonDisableTextColor = [UIColor colorWithHex:0x11111e];
+    
+    functionButtonNormalBKColor = [UIColor themeColor];
+    functionButtonHighlightBKColor = [UIColor colorWithHex:0xeaeaea];
+    functionButtonDisableBKColor = [UIColor colorWithHex:0xeaeaea];
     
 }
 
@@ -198,6 +233,9 @@ static NSString *const isPrivateImageName = @"";
     flexContentButton = [[UIButton alloc] init];
     flexContentButton.translatesAutoresizingMaskIntoConstraints = NO;
     
+    flexContentButton.titleLabel.font = flexButtonFont;
+    [flexContentButton setTitleColor:flexButtonTextColor forState:UIControlStateNormal];
+    
     [flexContentButton addTarget:self action:@selector(flexContentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.contentView addSubview:flexContentButton];
@@ -222,8 +260,15 @@ static NSString *const isPrivateImageName = @"";
     functionButton.translatesAutoresizingMaskIntoConstraints = NO;
     functionButton.clipsToBounds = YES;
     functionButton.layer.cornerRadius = 4;
+    functionButton.titleLabel.font = functionButtonFont;
     
-    [functionButton setBackgroundColor:[UIColor themeColor] forState:UIControlStateNormal];
+    [functionButton setBackgroundColor:functionButtonNormalBKColor forState:UIControlStateNormal];
+    [functionButton setBackgroundColor:functionButtonHighlightBKColor forState:UIControlStateHighlighted];
+    [functionButton setBackgroundColor:functionButtonDisableBKColor forState:UIControlStateDisabled];
+    
+    [functionButton setTitleColor:functionButtonNormalTextColor forState:UIControlStateNormal];
+    [functionButton setTitleColor:functionButtonHighlightTextColor forState:UIControlStateHighlighted];
+    [functionButton setTitleColor:functionButtonDisableBKColor forState:UIControlStateDisabled];
     
     [functionButton addTarget:self action:@selector(functionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -402,6 +447,14 @@ static NSString *const isPrivateImageName = @"";
                @(functionButtonToRight),@"toRight", nil]
       views:NSDictionaryOfVariableBindings(scriptTotalPartakeUserNumberLabel,functionButton)]];
     
+    //
+    for (NSLayoutConstraint *constr in constrArray) {
+        if (constr.firstItem == scriptImageView && constr.firstAttribute == NSLayoutAttributeHeight) {
+            scriptImageViewHeightConstraint = constr;
+            break;
+        }
+    }
+    
     
     [self.contentView addConstraints:constrArray];
 }
@@ -409,18 +462,24 @@ static NSString *const isPrivateImageName = @"";
 
 #pragma mark - LLAUserHeadViewDelegate
 
-- (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
-    
+- (void) headView:(LLAUserHeadView *)uheadView clickedWithUserInfo:(LLAUser *)user {
+    if (delegate && [delegate respondsToSelector:@selector(directorHeadViewClicked:userInfo:scriptInfo:)]) {
+        [delegate directorHeadViewClicked:uheadView userInfo:user scriptInfo:currentScriptInfo];
+    }
 }
 
 #pragma mark - Button Clicked
 
 - (void) flexContentButtonClicked:(UIButton *) sender {
-    
+    if (delegate && [delegate respondsToSelector:@selector(flexOrShrinkScriptContentWithScriptInfo:)]) {
+        [delegate flexOrShrinkScriptContentWithScriptInfo:currentScriptInfo];
+    }
 }
 
 - (void) functionButtonClicked:(UIButton *)sender {
-    
+    if (delegate && [delegate respondsToSelector:@selector(manageScriptWithScriptInfo:)]) {
+        [delegate manageScriptWithScriptInfo:currentScriptInfo];
+    }
 }
 
 
@@ -429,6 +488,254 @@ static NSString *const isPrivateImageName = @"";
 - (void) updateCellWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
     
     currentScriptInfo = scriptInfo;
+    //
+    [headView updateHeadViewWithUser:currentScriptInfo.directorInfo];
+    
+    userNameLabel.text = currentScriptInfo.directorInfo.userName;
+    publishTimeLabel.text = currentScriptInfo.publisthTimeString;
+    
+    isPrivateVideoButton.hidden = !currentScriptInfo.isPrivateVideo;
+    [rewardView updateViewWithRewardMoney:currentScriptInfo.rewardMoney];
+    
+    scriptContentLabel.attributedText = [[self class] generateScriptAttriuteStingWith:currentScriptInfo];
+    
+    if (currentScriptInfo.scriptImageURL) {
+        scriptImageViewHeightConstraint.constant = maxWidth - scriptLabelToLeft - scriptLabelToRight;
+        scriptImageView.hidden = NO;
+        
+        [scriptImageView setImageWithURL:[NSURL URLWithString:currentScriptInfo.scriptImageURL] placeholderImage:nil];
+        
+    }else {
+        scriptImageViewHeightConstraint.constant = 0;
+        scriptImageView.hidden = YES;
+    }
+    
+    if (currentScriptInfo.isStretched) {
+        [flexContentButton setTitle:@"收起" forState:UIControlStateNormal];
+    }else {
+        [flexContentButton setTitle:@"展开" forState:UIControlStateNormal];
+    }
+    
+    //join number
+    
+    NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
+                                            [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.partakeUsersArray.count]];
+    [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.partakeUsersArray.count].length)];
+    
+    scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
+    
+    //
+    [self updateFunctionButtonStatus];
+
+    
+}
+
+- (void) updateFunctionButtonStatus {
+    
+    //update function button
+    
+    UIImage *normalImage = nil;
+    UIImage *highlighImage = nil;
+    UIImage *disableImage = nil;
+    
+    NSString *normalString = nil;
+    NSString *highlightString = nil;
+    NSString *disabledString = nil;
+    
+    BOOL buttonEnabled = NO;
+    
+    switch (currentScriptInfo.status) {
+        case LLAScriptStatus_Normal:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+                
+                
+                if (currentScriptInfo.partakeUsersArray.count > 0) {
+                    normalString = @"选演员";
+                    highlightString = @"选演员";
+                    disabledString = @"选演员";
+                    if (currentScriptInfo.hasTempChoose) {
+                        buttonEnabled = YES;
+                    }else {
+                        buttonEnabled = NO;
+                    }
+                }else {
+                    
+                    normalString = @"一大波演员正在靠近";
+                    highlightString = @"一大波演员正在靠近";
+                    disabledString = @"一大波演员正在靠近";
+                    buttonEnabled = NO;
+                }
+                
+                
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+                normalString = @"等待导演选择";
+                highlightString = @"等待导演选择";
+                disabledString = @"等待导演选择";
+                
+                buttonEnabled = YES;
+                
+            }else {
+                //passer
+                
+                normalString = @"我要报名";
+                highlightString = @"我要报名";
+                disabledString = @"我要报名";
+                
+                buttonEnabled = YES;
+            }
+        }
+            
+            break;
+        case LLAScriptStatus_PayUnvertified:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+            }else {
+                //passer
+            }
+        }
+            
+            break;
+        case LLAScriptStatus_PayVertified:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+                normalString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                highlightString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                disabledString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                
+                normalImage = [UIImage llaImageWithName:countingImageName];
+                highlighImage = [UIImage llaImageWithName:countingImageName];
+                disableImage = [UIImage llaImageWithName:countingImageName];
+                
+                buttonEnabled = NO;
+                
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+                normalString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
+                highlightString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
+                disabledString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
+                
+                buttonEnabled = YES;
+                
+            }else {
+                //passer
+                normalString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                highlightString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                disabledString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                
+                normalImage = [UIImage llaImageWithName:countingImageName];
+                highlighImage = [UIImage llaImageWithName:countingImageName];
+                disableImage = [UIImage llaImageWithName:countingImageName];
+                
+                buttonEnabled = YES;
+            }
+        }
+            break;
+            
+        case LLAScriptStatus_VideoUploaded:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+                normalString = @"好戏上演";
+                highlightString = @"好戏上演";
+                disabledString = @"好戏上演";
+                
+                buttonEnabled = YES;
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+                
+                normalString = @"好戏上演";
+                highlightString = @"好戏上演";
+                disabledString = @"好戏上演";
+                
+                buttonEnabled = YES;
+                
+            }else {
+                //passer
+                
+                normalString = @"好戏上演";
+                highlightString = @"好戏上演";
+                disabledString = @"好戏上演";
+        
+                buttonEnabled = YES;
+            }
+        }
+            
+            break;
+        case LLAScriptStatus_WaitForUploadTimeOut:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+                normalString = @"演员没传片";
+                highlightString = @"演员没传片";
+                disabledString = @"演员没传片";
+                
+                buttonEnabled = NO;
+                
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+                normalString = @"已结束";
+                highlightString = @"已结束";
+                disabledString = @"已结束";
+                
+                buttonEnabled = NO;
+            }else {
+                //passer
+                normalString = @"已结束";
+                highlightString = @"已结束";
+                disabledString = @"已结束";
+                
+                buttonEnabled = NO;
+            }
+        }
+            
+            break;
+            
+        default:
+        {
+            if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
+                //director
+                normalString = @"已结束";
+                highlightString = @"已结束";
+                disabledString = @"已结束";
+                
+                buttonEnabled = NO;
+            }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+                //actor
+                normalString = @"已结束";
+                highlightString = @"已结束";
+                disabledString = @"已结束";
+                
+                buttonEnabled = NO;
+            }else {
+                //passer
+                normalString = @"已结束";
+                highlightString = @"已结束";
+                disabledString = @"已结束";
+                
+                buttonEnabled = NO;
+            }
+        }
+            
+            break;
+    }
+    
+    functionButton.enabled = buttonEnabled;
+    
+    [functionButton setTitle:normalString forState:UIControlStateNormal];
+    [functionButton setTitle:highlightString forState:UIControlStateHighlighted];
+    [functionButton setTitle:disabledString forState:UIControlStateDisabled];
+    
+    [functionButton setImage:normalImage forState:UIControlStateNormal];
+    [functionButton setImage:highlighImage forState:UIControlStateHighlighted];
+    [functionButton setImage:disableImage forState:UIControlStateDisabled];
+
     
 }
 
@@ -459,9 +766,25 @@ static NSString *const isPrivateImageName = @"";
     
     CGFloat textMaxWidth = maxWidth - scriptLabelToLeft - scriptLabelToRight;
     
+    //
+    CGFloat maxHeight = 0;
+    
+    if (scriptInfo.isStretched) {
+        
+        NSString *newText = @"-";
+        for (int i = 1; i < maxNumberLinesWhenShrink; ++i){
+            newText = [newText stringByAppendingString:@"\n|W|"];
+        }
+        
+        maxHeight = [newText boundingRectWithSize:CGSizeMake(320, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName, nil] context:nil].size.height;
+        
+    }else {
+        maxHeight = MAXFLOAT;
+    }
+    
     maxWidth = MAX(0,textMaxWidth);
     
-    return [attr boundingRectWithSize:CGSizeMake(textMaxWidth, MAXFLOAT)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    return [attr boundingRectWithSize:CGSizeMake(textMaxWidth, maxHeight)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
 }
 
 + (CGFloat) calculateHeightWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
@@ -479,7 +802,6 @@ static NSString *const isPrivateImageName = @"";
     height += scriptLabelToFlexButtonVerSpace;
     height += flexButtonHeight;
     height += flexButtonToImageVerSpace;
-    
     
     //imageView Height
     if (scriptInfo.scriptImageURL) {

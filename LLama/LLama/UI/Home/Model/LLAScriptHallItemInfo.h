@@ -10,6 +10,9 @@
 #import "Mantle.h"
 #import "LLAUser.h"
 
+#import "LLATextContentStretchProtocol.h"
+#import "LLAScriptChooseActorTempChooseProtocol.h"
+
 typedef NS_ENUM(NSInteger,LLAScriptStatus) {
     LLAScriptStatus_Unknow = 0,
     LLAScriptStatus_Normal = 1,
@@ -19,7 +22,13 @@ typedef NS_ENUM(NSInteger,LLAScriptStatus) {
     LLAScriptStatus_WaitForUploadTimeOut = 5,
 };
 
-@interface LLAScriptHallItemInfo : MTLModel<MTLJSONSerializing>
+typedef NS_ENUM(NSInteger,LLAUserRoleInScript) {
+    LLAUserRoleInScript_Passer = 0,
+    LLAUserRoleInScript_Actor = 1,
+    LLAUserRoleInScript_Director = 2,
+};
+
+@interface LLAScriptHallItemInfo : MTLModel<MTLJSONSerializing,LLATextContentStretchProtocol,LLAScriptChooseActorTempChooseProtocol>
 
 @property(nonatomic , copy) NSString *scriptIdString;
 
@@ -34,6 +43,8 @@ typedef NS_ENUM(NSInteger,LLAScriptStatus) {
 @property(nonatomic , assign) BOOL isPrivateVideo;
 
 @property(nonatomic , assign) LLAScriptStatus status;
+
+@property(nonatomic , assign) LLAUserRoleInScript currentRole;
 
 @property(nonatomic , strong) NSMutableArray <LLAUser *> *partakeUsersArray;
 

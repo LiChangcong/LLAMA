@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class LLAScriptHallItemInfo;
+@class LLAUserHeadView;
+@class LLAUser;
 
 @protocol LLAScriptDetailMainInfoCellDelegate <NSObject>
+
+- (void) directorHeadViewClicked:(LLAUserHeadView *) headView userInfo:(LLAUser *) userInfo scriptInfo:(LLAScriptHallItemInfo *)scriptInfo;
+
+- (void) flexOrShrinkScriptContentWithScriptInfo:(LLAScriptHallItemInfo *) scriptInfo;
+
+- (void) manageScriptWithScriptInfo:(LLAScriptHallItemInfo *) scriptInfo;
+
 
 @end
 
