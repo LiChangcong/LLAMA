@@ -16,6 +16,7 @@
 		5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF44F1C473F6D00168989 /* LLARewardMoneyView.m */; };
 		5CDDF4531C474D2100168989 /* LLAVideoCommentContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */; };
 		5CDDF4561C474D3A00168989 /* LLAVideoCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */; };
+		5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDF7A501C4BC7A3000CABB0 /* LLAScriptDetailViewController.m */; };
 		5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */; };
 		5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB6C1C45EECC00C6BC79 /* LLAHallMainInfo.m */; };
 		5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0EB6F1C45F4A100C6BC79 /* LLAHallVideoCommentItem.m */; };
@@ -46,6 +47,9 @@
 		5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */; };
 		5CE646DB1C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D91C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m */; };
 		5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646DE1C4513D3004DA6D5 /* LLATableView.m */; };
+		5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */; };
+		5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */; };
+		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
@@ -228,6 +232,8 @@
 		5CDDF4521C474D2100168989 /* LLAVideoCommentContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentContentView.m; sourceTree = "<group>"; };
 		5CDDF4541C474D3A00168989 /* LLAVideoCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentView.h; sourceTree = "<group>"; };
 		5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentView.m; sourceTree = "<group>"; };
+		5CDF7A4F1C4BC7A3000CABB0 /* LLAScriptDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptDetailViewController.h; sourceTree = "<group>"; };
+		5CDF7A501C4BC7A3000CABB0 /* LLAScriptDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptDetailViewController.m; sourceTree = "<group>"; };
 		5CE0EB681C45EEA600C6BC79 /* LLAHallVideoItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHallVideoItemInfo.h; sourceTree = "<group>"; };
 		5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHallVideoItemInfo.m; sourceTree = "<group>"; };
 		5CE0EB6B1C45EECC00C6BC79 /* LLAHallMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHallMainInfo.h; sourceTree = "<group>"; };
@@ -289,6 +295,12 @@
 		5CE646D91C4512D6004DA6D5 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		5CE646DD1C4513D3004DA6D5 /* LLATableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATableView.h; sourceTree = "<group>"; };
 		5CE646DE1C4513D3004DA6D5 /* LLATableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLATableView.m; sourceTree = "<group>"; };
+		5CED5E7D1C4BC853003E09CF /* LLACollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACollectionView.h; sourceTree = "<group>"; };
+		5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACollectionView.m; sourceTree = "<group>"; };
+		5CED5E801C4BC97D003E09CF /* LLAVideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoDetailViewController.h; sourceTree = "<group>"; };
+		5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoDetailViewController.m; sourceTree = "<group>"; };
+		5CED5E831C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptDetailMainInfoCell.h; sourceTree = "<group>"; };
+		5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptDetailMainInfoCell.m; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -687,6 +699,8 @@
 				5CE0EB971C46469800C6BC79 /* LLAUserHeadView.m */,
 				5CDDF44E1C473F6D00168989 /* LLARewardMoneyView.h */,
 				5CDDF44F1C473F6D00168989 /* LLARewardMoneyView.m */,
+				5CED5E7D1C4BC853003E09CF /* LLACollectionView.h */,
+				5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1075,6 +1089,10 @@
 				5CE646CF1C44FB33004DA6D5 /* LLAHomeHallViewController.m */,
 				5CE646D11C44FB59004DA6D5 /* LLAHomeScriptViewController.h */,
 				5CE646D21C44FB59004DA6D5 /* LLAHomeScriptViewController.m */,
+				5CDF7A4F1C4BC7A3000CABB0 /* LLAScriptDetailViewController.h */,
+				5CDF7A501C4BC7A3000CABB0 /* LLAScriptDetailViewController.m */,
+				5CED5E801C4BC97D003E09CF /* LLAVideoDetailViewController.h */,
+				5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1120,6 +1138,8 @@
 				5CDDF4551C474D3A00168989 /* LLAVideoCommentView.m */,
 				5CE0FF731C4A327000991394 /* LLAScriptHallInfoCell.h */,
 				5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */,
+				5CED5E831C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.h */,
+				5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1608,6 +1628,7 @@
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
+				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
@@ -1698,6 +1719,7 @@
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */,
 				A3DEDD661C3CAE38009F3D37 /* UIView+TMExtension.m in Sources */,
+				5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */,
 				A3DEDE741C3CAEC7009F3D37 /* TMTitleButton.m in Sources */,
 				A3DEDE7D1C3CAEC7009F3D37 /* TMLoginViewController.m in Sources */,
 				A3DEDE9A1C3CAEC7009F3D37 /* TMTHistoryCell.m in Sources */,
@@ -1719,6 +1741,7 @@
 				A3DEDE811C3CAEC7009F3D37 /* TMRetrievePasswordViewController.m in Sources */,
 				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
+				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
@@ -1731,6 +1754,7 @@
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
+				5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */,
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,
