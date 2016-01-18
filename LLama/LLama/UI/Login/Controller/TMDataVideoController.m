@@ -28,6 +28,15 @@
     // Do any additional setup after loading the view from its nib.
     self.chooseVideoButton.clipsToBounds = YES;
     self.chooseVideoButton.layer.cornerRadius = self.chooseVideoButton.frame.size.height/2;
+    
+    // 导航栏右边返回按钮
+    UIButton *doNotUploadButton = [[UIButton alloc] init];
+    [doNotUploadButton setTitle:@"跳过" forState:UIControlStateNormal];
+    [doNotUploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [doNotUploadButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [doNotUploadButton sizeToFit];
+    [doNotUploadButton addTarget:self action:@selector(doNotUploadButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doNotUploadButton];
 }
 
 - (void)didReceiveMemoryWarning {

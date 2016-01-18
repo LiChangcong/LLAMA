@@ -34,6 +34,7 @@
     
     self.cellPhoneNumField.keyboardType = UIKeyboardTypePhonePad;
     self.identityCodeField.keyboardType = UIKeyboardTypeASCIICapable;
+//    self.identityCodeField.backgroundColor = [UIColor colorWithHex:0xebebeb];
     self.passwordField.keyboardType = UIKeyboardTypeASCIICapable;
 
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
