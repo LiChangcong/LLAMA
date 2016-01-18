@@ -62,10 +62,13 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrG-8k-4FY">
                     <rect key="frame" x="40" y="353" width="255" height="46"/>
-                    <state key="normal" title="男" backgroundImage="man">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="Xgw-hO-qZH"/>
+                    </constraints>
+                    <state key="normal" title="男">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="manh"/>
                     <state key="highlighted" backgroundImage="manh"/>
                     <connections>
                         <action selector="maleButtonClicked:" destination="-1" eventType="touchUpInside" id="Lw5-SI-hML"/>
@@ -73,10 +76,10 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCU-LC-qB8">
                     <rect key="frame" x="305" y="353" width="254.5" height="46"/>
-                    <state key="normal" title="女" backgroundImage="woman">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="女">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="womanh"/>
                     <connections>
                         <action selector="femaleButtonClicked:" destination="-1" eventType="touchUpInside" id="vSy-ad-fpM"/>
                     </connections>
@@ -113,6 +116,7 @@
                 <constraint firstItem="bg6-vj-WO1" firstAttribute="top" secondItem="idc-Cs-VLl" secondAttribute="bottom" constant="15" id="eWt-Oh-3XM"/>
                 <constraint firstItem="47V-FT-ubh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hH1-so-PgF"/>
                 <constraint firstItem="p04-pT-AX8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="hUN-fW-cUv"/>
+                <constraint firstItem="WCU-LC-qB8" firstAttribute="height" secondItem="zrG-8k-4FY" secondAttribute="height" id="kDw-Lu-Su3"/>
                 <constraint firstAttribute="trailing" secondItem="bg6-vj-WO1" secondAttribute="trailing" id="rtr-vG-FEZ"/>
                 <constraint firstAttribute="trailing" secondItem="idc-Cs-VLl" secondAttribute="trailing" id="w9V-py-o4s"/>
                 <constraint firstItem="WCU-LC-qB8" firstAttribute="leading" secondItem="zrG-8k-4FY" secondAttribute="trailing" constant="10" id="wZh-F1-OpP"/>
@@ -122,11 +126,8 @@
     <resources>
         <image name="finishnew" width="345" height="50"/>
         <image name="loginregestbutton" width="5" height="48"/>
-        <image name="man" width="150" height="46"/>
         <image name="manh" width="150" height="46"/>
         <image name="uploaduserhead" width="90" height="90"/>
         <image name="uploaduserheadh" width="90" height="90"/>
-        <image name="woman" width="150" height="46"/>
-        <image name="womanh" width="150" height="46"/>
     </resources>
 </document>

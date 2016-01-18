@@ -52,6 +52,7 @@
     
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
+    self.navigationItem.title = @"注 册";
 }
 
 - (void)didReceiveMemoryWarning {

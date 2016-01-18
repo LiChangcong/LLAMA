@@ -22,7 +22,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="3FN-2t-bpE"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <state key="normal" title="O K" backgroundImage="finishnew">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

@@ -13,7 +13,6 @@
 #import "LLABaseNavigationController.h"
 #import "TMTabBarController.h"
 
-
 @interface LLADelegate()
 
 @end
@@ -39,7 +38,7 @@
     [self setupShortCutsItems];
     
 
- 
+
     //
     if ([LLAUser me].isLogin) {
         
