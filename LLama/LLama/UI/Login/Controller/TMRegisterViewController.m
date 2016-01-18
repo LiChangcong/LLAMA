@@ -46,6 +46,7 @@
     self.cellPhoneNumerFiled.keyboardType = UIKeyboardTypePhonePad;
     self.passwordField.keyboardType = UIKeyboardTypeASCIICapable;
     self.identityField.keyboardType = UIKeyboardTypeASCIICapable;
+//    self.identityField.backgroundColor = [UIColor colorWithHex:0xebebeb];
     
     [self.sendToGetIDCodeButton setTitle:@"发 送" forState:UIControlStateNormal];
     

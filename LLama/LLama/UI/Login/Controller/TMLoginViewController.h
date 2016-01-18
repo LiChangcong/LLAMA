@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LLACustomNavigationBarViewController.h"
+//#import "LLACustomNavigationBarViewController.h"
+#import "LLACommonViewController.h"
 
-@interface TMLoginViewController : LLACustomNavigationBarViewController
+//@interface TMLoginViewController : LLACustomNavigationBarViewController
+@interface TMLoginViewController : LLACommonViewController
 
 @end

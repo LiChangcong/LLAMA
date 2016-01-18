@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -18,50 +18,64 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="JWf-G8-iVL">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vh3-0L-OnK">
-                    <rect key="frame" x="0.0" y="554" width="600" height="46"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-Zy-AvV">
+                    <rect key="frame" x="20" y="382" width="270" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="46" id="qZA-UU-bTN"/>
+                        <constraint firstAttribute="width" constant="170" id="fKb-NP-PFG"/>
+                        <constraint firstAttribute="height" constant="48" id="sds-5I-Pw4"/>
                     </constraints>
-                    <state key="normal" title="登  陆">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="注册" backgroundImage="loginregestbutton">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="highlighted" backgroundImage="loginregestbutton"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="fKb-NP-PFG"/>
+                        </mask>
+                    </variation>
                     <connections>
-                        <action selector="loginButtonClick:" destination="-1" eventType="touchUpInside" id="SFf-44-FN0"/>
+                        <action selector="registerButtonClick:" destination="-1" eventType="touchUpInside" id="jZv-fL-29a"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="St3-F4-b9Y">
-                    <rect key="frame" x="0.0" y="508" width="600" height="46"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4F-po-qq8">
+                    <rect key="frame" x="310" y="382" width="270" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="46" id="6tF-np-RQj"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="idM-Dy-fA4"/>
+                        <constraint firstAttribute="height" constant="48" id="aXO-DG-xOl"/>
+                        <constraint firstAttribute="width" constant="170" id="viM-hE-3Xc"/>
                     </constraints>
-                    <state key="normal" title="注   册">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="登陆" backgroundImage="loginregestbutton">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="highlighted" backgroundImage="loginregestbutton"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="viM-hE-3Xc"/>
+                        </mask>
+                    </variation>
                     <connections>
-                        <action selector="registerButtonClick:" destination="-1" eventType="touchUpInside" id="ex6-BI-pNW"/>
+                        <action selector="loginButtonClick:" destination="-1" eventType="touchUpInside" id="CoB-Bo-gk0"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="vh3-0L-OnK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="55P-jE-m9q"/>
+                <constraint firstItem="NNg-Zy-AvV" firstAttribute="width" secondItem="y4F-po-qq8" secondAttribute="width" id="7e0-4q-wC6"/>
+                <constraint firstAttribute="bottom" secondItem="NNg-Zy-AvV" secondAttribute="bottom" constant="170" id="9Ld-72-cs2"/>
+                <constraint firstItem="NNg-Zy-AvV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="LP1-nN-kN2"/>
                 <constraint firstItem="JWf-G8-iVL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OPB-OO-en9"/>
-                <constraint firstAttribute="trailing" secondItem="St3-F4-b9Y" secondAttribute="trailing" id="Snq-Yc-Imx"/>
-                <constraint firstAttribute="bottom" secondItem="vh3-0L-OnK" secondAttribute="bottom" id="XKt-ps-Ae2"/>
-                <constraint firstAttribute="trailing" secondItem="vh3-0L-OnK" secondAttribute="trailing" id="ZyL-HH-ROQ"/>
+                <constraint firstAttribute="trailing" secondItem="y4F-po-qq8" secondAttribute="trailing" constant="20" id="Z7N-px-c0R"/>
                 <constraint firstAttribute="bottom" secondItem="JWf-G8-iVL" secondAttribute="bottom" id="bVk-ab-yiu"/>
-                <constraint firstItem="vh3-0L-OnK" firstAttribute="top" secondItem="St3-F4-b9Y" secondAttribute="bottom" id="bgm-nT-mgl"/>
+                <constraint firstAttribute="bottom" secondItem="y4F-po-qq8" secondAttribute="bottom" constant="170" id="ij4-0w-ugr"/>
                 <constraint firstItem="JWf-G8-iVL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mAg-aa-82x"/>
-                <constraint firstItem="St3-F4-b9Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="p3J-dG-lpU"/>
                 <constraint firstAttribute="trailing" secondItem="JWf-G8-iVL" secondAttribute="trailing" id="tSb-As-568"/>
+                <constraint firstItem="y4F-po-qq8" firstAttribute="leading" secondItem="NNg-Zy-AvV" secondAttribute="trailing" constant="20" id="ui3-5c-jeP"/>
             </constraints>
         </view>
     </objects>
     <resources>
         <image name="loginbg" width="375" height="667"/>
+        <image name="loginregestbutton" width="5" height="48"/>
     </resources>
 </document>
