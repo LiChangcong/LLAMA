@@ -98,7 +98,7 @@ static NSString *const rewardBackImageName_High = @"actor_pay_red";
     }
     
     //
-    showMoneyLabel.text = [NSString stringWithFormat:@"%ld",showingMoney];
+    showMoneyLabel.text = [NSString stringWithFormat:@"%ld",(long)showingMoney];
     showMoneyLabel.adjustsFontSizeToFitWidth = YES;
     
     

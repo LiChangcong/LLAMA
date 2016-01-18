@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class LLAScriptHallItemInfo;
+
 @protocol LLAScriptDetailMainInfoCellDelegate <NSObject>
 
 @end
@@ -16,5 +18,8 @@
 
 @property(nonatomic , weak) id<LLAScriptDetailMainInfoCellDelegate> delegate;
 
+- (void) updateCellWithInfo:(LLAScriptHallItemInfo *) scriptInfo maxWidth:(CGFloat) maxWidth;
+
++ (CGFloat) calculateHeightWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat) maxWidth;
 
 @end

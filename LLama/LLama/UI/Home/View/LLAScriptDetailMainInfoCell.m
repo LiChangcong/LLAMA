@@ -42,7 +42,6 @@ static const CGFloat scriptImageToScriptLineVerSpace = 4;
 static const CGFloat scriptLabelToRight = 18;
 static const CGFloat scriptLabelToLeft = 18;
 
-static const CGFloat scriptImageViewToPartakeNumberVerSpace = 8;
 static const CGFloat partakeNumberToLeft = 24;
 static const CGFloat bottomHeight = 54;
 static const CGFloat functionButtonHeight = 44;
@@ -90,6 +89,9 @@ static NSString *const isPrivateImageName = @"";
     
     UIFont *scriptTotalPartakeUserNumberLabelFont;
     UIColor *scriptTotalPartakeUserNumberLabelTextColor;
+    
+    //
+    LLAScriptHallItemInfo *currentScriptInfo;
     
 }
 
@@ -238,7 +240,7 @@ static NSString *const isPrivateImageName = @"";
       constraintsWithVisualFormat:@"V:|-(toTop)-[headView(headViewHeight)]-(headToLine)-[seperatorLineView(lineHeight)]-(lineToScript)-[scriptContentLabel]-(scriptToFlex)-[flexContentButton(flexHeight)]-(flexToImage)-[scriptImageView(10)]-(imageToLine)-[scriptSepLine(lineHeight)]-(0)-[scriptTotalPartakeUserNumberLabel(bottomHeight)]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
-               @(headViewToLeft),@"toTop",
+               @(headViewToTop),@"toTop",
                @(headViewHeightWidth),@"headViewHeight",
                @(headViewToSepLineVerSpace),@"headToLine",
                @(sepLineHeight),@"lineHeight",
@@ -424,6 +426,74 @@ static NSString *const isPrivateImageName = @"";
 
 #pragma mark - Update
 
+- (void) updateCellWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
+    
+    currentScriptInfo = scriptInfo;
+    
+}
+
 #pragma mark - Calculate Cell Height
+
++ (NSAttributedString *) generateScriptAttriuteStingWith:(LLAScriptHallItemInfo*) scriptInfo {
+    
+    NSString *scriptString = [scriptInfo.scriptContent copy];
+    if (!scriptString)
+        scriptString = @"";
+    
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"#剧本#%@",scriptString]];;
+    
+    [attr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                         [UIFont boldLLAFontOfSize:scriptLabelFontSize],NSFontAttributeName,
+                         [UIColor colorWithHex:0x11111e],NSForegroundColorAttributeName , nil] range:NSMakeRange(0, 4)];
+    [attr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                         [UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName,
+                         [UIColor colorWithHex:0x11111e],NSForegroundColorAttributeName , nil] range:NSMakeRange(4, scriptString.length)];
+    
+    return attr;
+    
+}
+
++ (CGSize) scriptStringSizeWithVideoInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat) maxWidth {
+    
+    NSAttributedString *attr = [[self class] generateScriptAttriuteStingWith:scriptInfo];
+    
+    CGFloat textMaxWidth = maxWidth - scriptLabelToLeft - scriptLabelToRight;
+    
+    maxWidth = MAX(0,textMaxWidth);
+    
+    return [attr boundingRectWithSize:CGSizeMake(textMaxWidth, MAXFLOAT)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+}
+
++ (CGFloat) calculateHeightWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
+    
+    CGFloat height = 0;
+    
+    height += headViewToTop;
+    height += headViewHeightWidth;
+    height += headViewToSepLineVerSpace;
+    height += sepLineHeight;
+    
+    //calculate scriptLabelHeight
+    height += [[self class] scriptStringSizeWithVideoInfo:scriptInfo maxWidth: maxWidth].height;
+    //
+    height += scriptLabelToFlexButtonVerSpace;
+    height += flexButtonHeight;
+    height += flexButtonToImageVerSpace;
+    
+    
+    //imageView Height
+    if (scriptInfo.scriptImageURL) {
+        height += maxWidth - scriptLabelToLeft - scriptLabelToRight;
+    }else {
+        
+    }
+    
+    height += scriptImageToScriptLineVerSpace;
+    height += sepLineHeight;
+    height += bottomHeight;
+    
+    return height;
+    
+}
 
 @end
