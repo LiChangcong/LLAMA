@@ -128,6 +128,8 @@ static const CGFloat partakeNumbersHeight = 14.5;
     scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:12];
     
     scriptTotalPartakeUserNumberLabelTextColor = [UIColor colorWithHex:0x959595];
+    
+    
 }
 
 - (void) initSubViews {
@@ -402,7 +404,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
     [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.partakeUsersArray.count].length)];
     
     scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
-    
+
 }
 
 #pragma mark - Calculate Cell Height

@@ -50,6 +50,7 @@
 		5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */; };
 		5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */; };
 		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
+		5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
@@ -303,6 +304,10 @@
 		5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoDetailViewController.m; sourceTree = "<group>"; };
 		5CED5E831C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptDetailMainInfoCell.h; sourceTree = "<group>"; };
 		5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptDetailMainInfoCell.m; sourceTree = "<group>"; };
+		5CF873361C4CB3F500D2D224 /* LLATextContentStretchProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATextContentStretchProtocol.h; sourceTree = "<group>"; };
+		5CF873371C4CE52700D2D224 /* LLAScriptChooseActorTempChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorTempChooseProtocol.h; sourceTree = "<group>"; };
+		5CF873381C4CF31400D2D224 /* LLAChooseActorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseActorCell.h; sourceTree = "<group>"; };
+		5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChooseActorCell.m; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -641,6 +646,8 @@
 			children = (
 				5CDDF44A1C473AFF00168989 /* LLACellPlayVideoProtocol.h */,
 				5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */,
+				5CF873361C4CB3F500D2D224 /* LLATextContentStretchProtocol.h */,
+				5CF873371C4CE52700D2D224 /* LLAScriptChooseActorTempChooseProtocol.h */,
 				5CE0EB681C45EEA600C6BC79 /* LLAHallVideoItemInfo.h */,
 				5CE0EB691C45EEA600C6BC79 /* LLAHallVideoItemInfo.m */,
 				5CE0EB6E1C45F4A100C6BC79 /* LLAHallVideoCommentItem.h */,
@@ -1155,6 +1162,8 @@
 				5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */,
 				5CED5E831C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.h */,
 				5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */,
+				5CF873381C4CF31400D2D224 /* LLAChooseActorCell.h */,
+				5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1763,6 +1772,7 @@
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
+				5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,

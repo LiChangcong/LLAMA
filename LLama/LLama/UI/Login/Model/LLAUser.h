@@ -11,10 +11,17 @@
 
 #define LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION @"LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION"
 
+//用来标识解析
+
+static BOOL isSimpleUserModel;
+
+//性别
+
 typedef NS_ENUM(NSInteger,UserGender){
     UserGender_Female = 0,
     UserGender_Male = 1,
 };
+//用户登陆方式
 
 typedef NS_ENUM(NSInteger,UserLoginType){
     UserLoginType_Unknow = 0,

@@ -10,6 +10,9 @@
 
 @implementation LLAScriptHallItemInfo
 
+@synthesize isStretched;
+@synthesize hasTempChoose;
+
 + (LLAScriptHallItemInfo *) parseJsonWithDic:(NSDictionary *)data {
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:data error:nil];
     
@@ -30,8 +33,7 @@
              @"publisthTimeString":@"createTime",
              @"timeOutInterval":@"countDown",
              
-             
-             
+
              };
     
 }
@@ -56,6 +58,17 @@
         directorInfo.userName = @"heheh";
         
         self.directorInfo = directorInfo;
+        
+        LLAUser *me = [LLAUser me];
+        
+        if ([self.directorInfo isEqual:me]) {
+            self.currentRole = LLAUserRoleInScript_Director;
+            
+        }else if ([self.partakeUsersArray containsObject:me]) {
+            self.currentRole = LLAUserRoleInScript_Actor;
+        }else {
+            self.currentRole = LLAUserRoleInScript_Passer;
+        }
         
     }
     

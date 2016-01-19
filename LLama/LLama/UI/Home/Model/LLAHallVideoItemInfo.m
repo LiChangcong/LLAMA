@@ -19,6 +19,7 @@
 }
 
 + (NSValueTransformer *)directorInfoJSONTransformer {
+    
     return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 

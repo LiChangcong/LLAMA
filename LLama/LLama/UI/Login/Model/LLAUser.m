@@ -12,25 +12,35 @@
 @implementation LLAUser
 
 + (LLAUser *) parseJsonWidthDic:(NSDictionary *)data {
+    isSimpleUserModel = NO;
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:data error:nil];
+    
 }
 
 
 + (NSDictionary *) JSONKeyPathsByPropertyKey {
-    return @{@"userIdString":@"id",
-             @"userName":@"name",
-             @"mobilePhone":@"mobile",
-             @"genderString":@"gender",
-             @"gender":@"gender",
-             @"headImageURL":@"img",
-             @"userVideo":@"myVideo",
-             @"userDescription":@"gxqm",
-             
-             @"sinaWeiBoUid":@"weibouid",
-             @"qqOpenId":@"qqopenid",
-             @"weChatOpenId":@"wxopenid",
-             
-             };
+    
+    if (isSimpleUserModel) {
+        return @{@"userIdString":@"uid",
+                 @"userName":@"uname",
+                 @"headImageURL":@"imgUrl"};
+    }else {
+        return @{@"userIdString":@"id",
+                 @"userName":@"name",
+                 @"mobilePhone":@"mobile",
+                 @"genderString":@"gender",
+                 @"gender":@"gender",
+                 @"headImageURL":@"img",
+                 @"userVideo":@"myVideo",
+                 @"userDescription":@"gxqm",
+                 
+                 @"sinaWeiBoUid":@"weibouid",
+                 @"qqOpenId":@"qqopenid",
+                 @"weChatOpenId":@"wxopenid",
+                 
+                 };
+
+    }
 }
 
 + (NSValueTransformer *)genderJSONJSONTransformer {
@@ -58,6 +68,21 @@
     }else{
         return YES;
     }
+}
+
+- (BOOL) isEqual:(id)object {
+    if (!object || ![object isKindOfClass:[LLAUser class]]) {
+        return NO;
+    }
+    
+    LLAUser *user = (LLAUser *) object;
+    
+    if ([user.userIdString isEqualToString:self.userIdString]) {
+        return YES;
+    }else {
+        return NO;
+    }
+    
 }
 
 @end
