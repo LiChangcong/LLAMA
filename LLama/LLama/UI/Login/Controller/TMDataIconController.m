@@ -247,6 +247,7 @@
 - (void)done:(NSNotification *)note{
     UIImage *image =  note.userInfo[@"selectAssets"];
     dispatch_async(dispatch_get_main_queue(), ^{
+        choosedImage = image;
         // 设置头像为相册挑选的头像
         [self.ChooseHeadImageButton setImage:image forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
