@@ -56,6 +56,8 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */; };
+		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
 		A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A771C3CCCF700CADC51 /* LLAApplication.m */; };
 		A3209A7C1C3D044700CADC51 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3209A7B1C3D044700CADC51 /* TencentOpenAPI.framework */; };
@@ -319,6 +321,10 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerViewController.h; sourceTree = "<group>"; };
+		7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerViewController.m; sourceTree = "<group>"; };
+		7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerCell.h; sourceTree = "<group>"; };
+		7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerCell.m; sourceTree = "<group>"; };
 		A3209A731C3CCB7B00CADC51 /* LLADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLADelegate.h; sourceTree = "<group>"; };
 		A3209A741C3CCB7B00CADC51 /* LLADelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLADelegate.m; sourceTree = "<group>"; };
 		A3209A761C3CCCF700CADC51 /* LLAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAApplication.h; sourceTree = "<group>"; };
@@ -801,6 +807,15 @@
 			path = LLamaUITests;
 			sourceTree = "<group>";
 		};
+		7EC3CAAE1C4DFE83008424E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */,
+				7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8F9C70D89AB8FC851DF90EF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1163,8 +1178,8 @@
 		A3DEDDF81C3CAEC6009F3D37 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				7EC3CAAE1C4DFE83008424E6 /* View */,
 				A3E2D90A1C3E1820005885D4 /* Model */,
-				A3E2D90B1C3E1820005885D4 /* View */,
 				A3DEDDF91C3CAEC6009F3D37 /* Controller */,
 			);
 			path = Login;
@@ -1191,6 +1206,8 @@
 				A3DEDE091C3CAEC6009F3D37 /* TMRetrievePasswordViewController.h */,
 				A3DEDE0A1C3CAEC6009F3D37 /* TMRetrievePasswordViewController.m */,
 				A3DEDE0B1C3CAEC6009F3D37 /* TMRetrievePasswordViewController.xib */,
+				7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */,
+				7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1426,13 +1443,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A3E2D90B1C3E1820005885D4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1641,6 +1651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
+				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
@@ -1765,6 +1776,7 @@
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
+				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,

@@ -13,6 +13,7 @@
 #import "LLABaseNavigationController.h"
 #import "TMTabBarController.h"
 
+
 @interface LLADelegate()
 
 @end
@@ -38,10 +39,9 @@
     [self setupShortCutsItems];
     
 
-
     //
     if ([LLAUser me].isLogin) {
-        
+    
         TMTabBarController *tabbar = [[TMTabBarController alloc] init];
     
         self.window.rootViewController = tabbar;
@@ -52,7 +52,7 @@
         
         self.window.rootViewController = loginNavi;
     }
-    
+
 
     
     return YES;

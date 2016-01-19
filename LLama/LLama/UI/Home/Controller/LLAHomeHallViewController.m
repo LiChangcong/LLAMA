@@ -107,7 +107,6 @@
             mainInfo = tempInfo;
             [dataTableView reloadData];
         }
-        
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:NO];

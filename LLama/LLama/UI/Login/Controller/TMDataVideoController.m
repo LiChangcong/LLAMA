@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.chooseVideoButton.clipsToBounds = YES;
+//    self.chooseVideoButton.clipsToBounds = YES;
     self.chooseVideoButton.layer.cornerRadius = self.chooseVideoButton.frame.size.height/2;
     
     // 导航栏右边返回按钮

@@ -14,7 +14,7 @@
 #import "LLALoadingView.h"
 #import "LLAHttpUtil.h"
 #import "LLAUser.h"
-
+#import "LLAAlbumPickerViewController.h"
 
 @interface TMDataIconController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -55,6 +55,12 @@
     [self.femaleButton setBackgroundColor:[UIColor colorWithHex:0xffd409] forState:UIControlStateSelected];
     [self.femaleButton.layer setBorderWidth:1.5f];
     [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
+    
+    // 监听异步done通知,得知挑选头像操作结束
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(done:) name:@"PICKER_TAKE_DONE" object:nil];
+    });
+
 
 }
 
@@ -151,14 +157,16 @@
 }
 - (IBAction)chooseHeadImageButtonClicked:(id)sender {
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
-    
-    [self.navigationController presentViewController:imagePicker animated:YES completion:^{
-        
-    }];
-    
+//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//    imagePicker.delegate = self;
+//    imagePicker.allowsEditing = YES;
+//    
+//    [self.navigationController presentViewController:imagePicker animated:YES completion:^{
+//        
+//    }];
+    LLAAlbumPickerViewController *albumPicker = [[LLAAlbumPickerViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumPicker];
+    [self presentViewController:nav animated:YES completion:nil];
     
 }
 
@@ -208,7 +216,7 @@
 }
 
 #pragma mark - UIImagePickerViewController
-
+/*
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *image = nil;
@@ -233,6 +241,24 @@
         
     }];
 }
+*/
 
+// 设置头像
+- (void)done:(NSNotification *)note{
+    UIImage *image =  note.userInfo[@"selectAssets"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        choosedImage = image;
+        // 设置头像为相册挑选的头像
+        [self.ChooseHeadImageButton setImage:image forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
+        
+    });
+}
+
+// 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PICKER_TAKE_DONE" object:nil];
+}
 
 @end
