@@ -13,6 +13,9 @@
 //model
 #import "LLAScriptHallItemInfo.h"
 
+//util
+#import "LLACommonUtil.h"
+
 
 static const CGFloat scriptLabelFontSize = 14;
 
@@ -29,7 +32,7 @@ static const CGFloat rewardViewToRight = 12;
 
 static const CGFloat headViewToSepLineVerSpace = 13;
 
-static const CGFloat sepLineHeight = 0.5;
+static const CGFloat sepLineHeight = 0.6;
 static const CGFloat sepLineToLeft = 14;
 static const CGFloat sepLineToRight = 14;
 static const CGFloat sepLineToScriptLabelVerSpace = 10;
@@ -130,10 +133,12 @@ static NSString *const countingImageName = @"clock";
     self = [super initWithFrame:frame];
     if (self) {
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
+
         [self initVariables];
         [self initSubViews];
         [self initSubConstraints];
+        
+        self.contentView.backgroundColor = backViewBKColor;
         
     }
     return self;
@@ -155,7 +160,8 @@ static NSString *const countingImageName = @"clock";
     
     sepLineColor = [UIColor colorWithHex:0xededed];
     
-    scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:12];
+    
+    scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:13];
     
     scriptTotalPartakeUserNumberLabelTextColor = [UIColor colorWithHex:0x959595];
     
@@ -226,7 +232,7 @@ static NSString *const countingImageName = @"clock";
     scriptContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     scriptContentLabel.numberOfLines = 0;
     scriptContentLabel.textAlignment = NSTextAlignmentLeft;
-    scriptContentLabel.contentMode = UIViewContentModeTop;
+    //scriptContentLabel.backgroundColor = [UIColor orangeColor];
     
     [self.contentView addSubview:scriptContentLabel];
     
@@ -238,6 +244,7 @@ static NSString *const countingImageName = @"clock";
     
     [flexContentButton addTarget:self action:@selector(flexContentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    //[flexContentButton setBackgroundColor:[UIColor purpleColor]];
     [self.contentView addSubview:flexContentButton];
     
     //
@@ -250,7 +257,7 @@ static NSString *const countingImageName = @"clock";
     scriptTotalPartakeUserNumberLabel = [[UILabel alloc] init];
     scriptTotalPartakeUserNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    scriptTotalPartakeUserNumberLabel.textAlignment = NSTextAlignmentRight;
+    scriptTotalPartakeUserNumberLabel.textAlignment = NSTextAlignmentLeft;
     scriptTotalPartakeUserNumberLabel.font = scriptTotalPartakeUserNumberLabelFont;
     scriptTotalPartakeUserNumberLabel.textColor = scriptTotalPartakeUserNumberLabelTextColor;
     
@@ -268,7 +275,7 @@ static NSString *const countingImageName = @"clock";
     
     [functionButton setTitleColor:functionButtonNormalTextColor forState:UIControlStateNormal];
     [functionButton setTitleColor:functionButtonHighlightTextColor forState:UIControlStateHighlighted];
-    [functionButton setTitleColor:functionButtonDisableBKColor forState:UIControlStateDisabled];
+    [functionButton setTitleColor:functionButtonDisableTextColor forState:UIControlStateDisabled];
     
     [functionButton addTarget:self action:@selector(functionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -317,6 +324,17 @@ static NSString *const countingImageName = @"clock";
       multiplier:1.0
       constant:0]];
     
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:isPrivateVideoButton
+      attribute:NSLayoutAttributeCenterY
+      relatedBy:NSLayoutRelationEqual
+      toItem:publishTimeLabel
+      attribute:NSLayoutAttributeCenterY
+      multiplier:1.0
+      constant:0]];
+    
+    
     //
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -333,7 +351,7 @@ static NSString *const countingImageName = @"clock";
       attribute:NSLayoutAttributeCenterY
       relatedBy:NSLayoutRelationEqual
       toItem:scriptTotalPartakeUserNumberLabel
-      attribute:NSLayoutAttributeBottom
+      attribute:NSLayoutAttributeCenterY
       multiplier:1.0
       constant:0]];
     
@@ -503,7 +521,7 @@ static NSString *const countingImageName = @"clock";
         scriptImageViewHeightConstraint.constant = maxWidth - scriptLabelToLeft - scriptLabelToRight;
         scriptImageView.hidden = NO;
         
-        [scriptImageView setImageWithURL:[NSURL URLWithString:currentScriptInfo.scriptImageURL] placeholderImage:nil];
+        [scriptImageView setImageWithURL:[NSURL URLWithString:currentScriptInfo.scriptImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
         
     }else {
         scriptImageViewHeightConstraint.constant = 0;
@@ -526,7 +544,15 @@ static NSString *const countingImageName = @"clock";
     
     //
     [self updateFunctionButtonStatus];
-
+    
+    //deside wheather the flexButton should hide
+    
+    if (([LLACommonUtil calculateHeightWithAttributeDic:[NSDictionary dictionaryWithObjectsAndKeys:
+          [UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName, nil]maxLine:maxNumberLinesWhenShrink]) > ([[self class] scriptStringSizeWithVideoInfo:currentScriptInfo maxWidth:maxWidth shouldFullHeight:YES].height)) {
+        flexContentButton.hidden = YES;
+    }else {
+        flexContentButton.hidden = NO;
+    }
     
 }
 
@@ -575,7 +601,7 @@ static NSString *const countingImageName = @"clock";
                 highlightString = @"等待导演选择";
                 disabledString = @"等待导演选择";
                 
-                buttonEnabled = YES;
+                buttonEnabled = NO;
                 
             }else {
                 //passer
@@ -633,7 +659,7 @@ static NSString *const countingImageName = @"clock";
                 highlighImage = [UIImage llaImageWithName:countingImageName];
                 disableImage = [UIImage llaImageWithName:countingImageName];
                 
-                buttonEnabled = YES;
+                buttonEnabled = NO;
             }
         }
             break;
@@ -755,28 +781,33 @@ static NSString *const countingImageName = @"clock";
     [attr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                          [UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName,
                          [UIColor colorWithHex:0x11111e],NSForegroundColorAttributeName , nil] range:NSMakeRange(4, scriptString.length)];
+//    
+//    NSMutableParagraphStyle *paragaph = [[NSMutableParagraphStyle alloc] init];
+//    paragaph.lineSpacing = 0.5;
+    //paragaph.lineBreakMode = NSLineBreakByTruncatingHead;
+    
+    //[attr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:paragaph,NSParagraphStyleAttributeName, nil] range:NSMakeRange(0, attr.length)];
+    
     
     return attr;
     
 }
 
-+ (CGSize) scriptStringSizeWithVideoInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat) maxWidth {
++ (CGSize) scriptStringSizeWithVideoInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat) maxWidth shouldFullHeight:(BOOL) isFullHeight{
     
     NSAttributedString *attr = [[self class] generateScriptAttriuteStingWith:scriptInfo];
     
     CGFloat textMaxWidth = maxWidth - scriptLabelToLeft - scriptLabelToRight;
     
     //
-    CGFloat maxHeight = 0;
+    CGFloat maxHeight = MAXFLOAT;
     
-    if (scriptInfo.isStretched) {
+    if (!scriptInfo.isStretched && !isFullHeight) {
         
-        NSString *newText = @"-";
-        for (int i = 1; i < maxNumberLinesWhenShrink; ++i){
-            newText = [newText stringByAppendingString:@"\n|W|"];
-        }
-        
-        maxHeight = [newText boundingRectWithSize:CGSizeMake(320, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName, nil] context:nil].size.height;
+        maxHeight = [LLACommonUtil calculateHeightWithAttributeDic:
+                     [NSDictionary dictionaryWithObjectsAndKeys:
+                      [UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName, nil]
+                                                           maxLine:maxNumberLinesWhenShrink];
         
     }else {
         maxHeight = MAXFLOAT;
@@ -784,7 +815,8 @@ static NSString *const countingImageName = @"clock";
     
     maxWidth = MAX(0,textMaxWidth);
     
-    return [attr boundingRectWithSize:CGSizeMake(textMaxWidth, maxHeight)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    CGSize textSize = [attr boundingRectWithSize:CGSizeMake(textMaxWidth, maxHeight)  options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+    return textSize;
 }
 
 + (CGFloat) calculateHeightWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
@@ -795,9 +827,10 @@ static NSString *const countingImageName = @"clock";
     height += headViewHeightWidth;
     height += headViewToSepLineVerSpace;
     height += sepLineHeight;
+    height += sepLineToScriptLabelVerSpace;
     
     //calculate scriptLabelHeight
-    height += [[self class] scriptStringSizeWithVideoInfo:scriptInfo maxWidth: maxWidth].height;
+    height += ceilf ([[self class] scriptStringSizeWithVideoInfo:scriptInfo maxWidth: maxWidth shouldFullHeight:NO].height);
     //
     height += scriptLabelToFlexButtonVerSpace;
     height += flexButtonHeight;

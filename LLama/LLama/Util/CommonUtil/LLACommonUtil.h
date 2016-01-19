@@ -23,4 +23,8 @@
 
 + (id) valueFromDictionary:(NSDictionary *) dic key:(NSString *)key targetClass:(Class) targetClass;
 
+//get height for label when limit lines
+
++ (CGFloat) calculateHeightWithAttributeDic:(NSDictionary *) attributes maxLine:(NSInteger) maxLine;
+
 @end

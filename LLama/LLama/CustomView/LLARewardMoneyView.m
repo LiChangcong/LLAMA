@@ -9,13 +9,21 @@
 #import "LLARewardMoneyView.h"
 
 CGFloat videoRewardMoneyViewWidth = 78.0f;
-CGFloat videoRewardMoneyViewHeight = 64.0f;
+CGFloat videoRewardMoneyViewHeight = 55.0f;
 
 static NSString *const rewardBackImageName_Normal = @"actor_pay";
 static NSString *const rewardBackImageName_High = @"actor_pay_red";
 
+static const CGFloat currencyLabelHeight = 18;
+
 @interface LLARewardMoneyView()
 {
+    UILabel *currencyLabel;
+    
+    UIFont *currencyFont;
+    UIColor *currencyNormalTextColor;
+    UIColor *currencyHighTextColor;
+    
     UILabel *showMoneyLabel;
     
     UIFont *showMoneyLabelFont;
@@ -45,12 +53,27 @@ static NSString *const rewardBackImageName_High = @"actor_pay_red";
 }
 
 - (void) initVariables {
-    showMoneyLabelFont = [UIFont llaFontOfSize:14];
-    showMoneyLabelTextColor = [UIColor whiteColor];
+    
+    currencyFont = [UIFont systemFontOfSize:12.5];
+    currencyNormalTextColor = [UIColor themeColor];
+    currencyHighTextColor = [UIColor colorWithHex:0xfd4646];
+    
+    showMoneyLabelFont = [UIFont boldLLAFontOfSize:15];
+    showMoneyLabelTextColor = [UIColor colorWithHex:0x11111e];
 }
 
 - (void) initSubViews {
     
+    currencyLabel = [[UILabel alloc] init];
+    currencyLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    currencyLabel.font = currencyFont;
+    currencyLabel.textColor = currencyNormalTextColor;
+    currencyLabel.textAlignment = NSTextAlignmentCenter;
+    currencyLabel.text = @"片酬(元)";
+    
+    [self addSubview:currencyLabel];
+    
+    //
     showMoneyLabel = [[UILabel alloc] init];
     showMoneyLabel.translatesAutoresizingMaskIntoConstraints = NO;
     showMoneyLabel.font = showMoneyLabelFont;
@@ -72,6 +95,27 @@ static NSString *const rewardBackImageName_High = @"actor_pay_red";
       attribute:NSLayoutAttributeCenterY
       multiplier:1.0
       constant:0]];
+    
+    [constrArr addObject:
+     [NSLayoutConstraint
+      constraintWithItem:currencyLabel
+      attribute:NSLayoutAttributeTop
+      relatedBy:NSLayoutRelationEqual
+      toItem:self
+      attribute:NSLayoutAttributeTop
+      multiplier:1.0
+      constant:0]];
+    
+    [constrArr addObject:
+     [NSLayoutConstraint
+      constraintWithItem:currencyLabel
+      attribute:NSLayoutAttributeHeight
+      relatedBy:NSLayoutRelationEqual
+      toItem:nil
+      attribute:NSLayoutAttributeNotAnAttribute
+      multiplier:0
+      constant:currencyLabelHeight]];
+    
     //horizonal
     
     [constrArr addObjectsFromArray:
@@ -83,6 +127,15 @@ static NSString *const rewardBackImageName_High = @"actor_pay_red";
     
     [self addConstraints:constrArr];
     
+    [constrArr addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[currencyLabel]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(currencyLabel)]];
+    
+    [self addConstraints:constrArr];
+    
 }
 
 #pragma mark - Update Info
@@ -91,10 +144,12 @@ static NSString *const rewardBackImageName_High = @"actor_pay_red";
     
     showingMoney = money;
     
-    if (showingMoney > 100) {
-        [self setImage:[UIImage llaImageWithName:rewardBackImageName_Normal]];
-    }else{
+    if (showingMoney >= 100) {
         [self setImage:[UIImage llaImageWithName:rewardBackImageName_High]];
+        currencyLabel.textColor = currencyHighTextColor;
+    }else{
+        [self setImage:[UIImage llaImageWithName:rewardBackImageName_Normal]];
+        currencyLabel.textColor = currencyNormalTextColor;
     }
     
     //

@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class LLAUser;
+
+@protocol LLAChooseActorCellDelegate <NSObject>
+
+- (void) viewUserDetailWithUserInfo:(LLAUser *) userInfo;
+
+@end
+
 @interface LLAChooseActorCell : UICollectionViewCell
+
+@property(nonatomic , weak) id<LLAChooseActorCellDelegate> delegate;
+
+- (void) updateCellWithUserInfo:(LLAUser *) userInfo;
+
++ (CGFloat) calculateHeightWitthUserInfo:(LLAUser *) userInfo maxWidth:(CGFloat) maxWidth;
 
 @end

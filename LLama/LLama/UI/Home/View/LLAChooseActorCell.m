@@ -8,16 +8,21 @@
 
 #import "LLAChooseActorCell.h"
 
+#import "LLAUser.h"
+
 static NSString *const viewDetailButtonImageName_Normal = @"view_profile";
 static NSString *const viewDetailButtonImageName_Highlight = @"view_profileH";
 
 static NSString *const selectedCoverImageName = @"winner";
 
 //
-static const CGFloat imageViewToBottom = 6;
+static const CGFloat imageViewToBottom = 0;
 
 static const CGFloat viewDetailButtonToTop = 4;
 static const CGFloat viewDetailButtonToRight = 4;
+
+static const CGFloat userNameLabelToBottom = 6;
+static const CGFloat userNameLabelToLeft = 6;
 
 @interface LLAChooseActorCell()
 {
@@ -31,11 +36,16 @@ static const CGFloat viewDetailButtonToRight = 4;
     UIFont *userNameLabelFont;
     UIColor *userNameLabelTextColor;
     
+    //
+    LLAUser *currentUserInfo;
+    
 }
 
 @end
 
 @implementation LLAChooseActorCell
+
+@synthesize delegate;
 
 #pragma mark - Init
 
@@ -65,6 +75,7 @@ static const CGFloat viewDetailButtonToRight = 4;
     userHeadImageView = [[UIImageView alloc] init];
     userHeadImageView.translatesAutoresizingMaskIntoConstraints = NO;
     userHeadImageView.contentMode = UIViewContentModeScaleAspectFill;
+    userHeadImageView.clipsToBounds = YES;
     
     [self.contentView addSubview:userHeadImageView];
     
@@ -83,17 +94,14 @@ static const CGFloat viewDetailButtonToRight = 4;
     userNameLabel.font = userNameLabelFont;
     userNameLabel.textColor = userNameLabelTextColor;
     userNameLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:userNameLabel];
     
     selectedImageCoverView = [[UIImageView alloc] init];
     selectedImageCoverView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    selectedImageCoverView.image = [[UIImage llaImageWithName:selectedCoverImageName] resizableImageWithCapInsets:UIEdgeInsetsMake(30, 30, 8, 8)];
+    selectedImageCoverView.image = [[UIImage llaImageWithName:selectedCoverImageName] resizableImageWithCapInsets:UIEdgeInsetsMake(60, 60, 8, 8)];
     
     [self.contentView addSubview:selectedImageCoverView];
-    
-   
-    
-    [self.contentView addSubview:userNameLabel];
     
     [self.contentView bringSubviewToFront:viewDetailButton];
     
@@ -132,9 +140,9 @@ static const CGFloat viewDetailButtonToRight = 4;
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:[userNameLabel]-(0)-|"
+      constraintsWithVisualFormat:@"V:[userNameLabel]-(toBottom)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:nil
+      metrics:[NSDictionary dictionaryWithObjectsAndKeys:@(userNameLabelToBottom),@"toBottom", nil]
       views:NSDictionaryOfVariableBindings(userNameLabel)]];
     
     //horizonal
@@ -155,14 +163,14 @@ static const CGFloat viewDetailButtonToRight = 4;
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(0)-[userNameLabel]-(0)-|"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[userNameLabel]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:nil
+      metrics:[NSDictionary dictionaryWithObjectsAndKeys:@(userNameLabelToLeft),@"toLeft", nil]
       views:NSDictionaryOfVariableBindings(userNameLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[viewDtailButton]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[viewDetailButton]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:@(viewDetailButtonToRight),@"toRight", nil]
       views:NSDictionaryOfVariableBindings(viewDetailButton)]];
@@ -175,7 +183,31 @@ static const CGFloat viewDetailButtonToRight = 4;
 #pragma mark - ButtonClicked
 
 - (void) viewUserProfile:(UIButton *)sender {
+    if (delegate && [delegate respondsToSelector:@selector(viewUserDetailWithUserInfo:)]) {
+        [delegate viewUserDetailWithUserInfo:currentUserInfo];
+    }
+}
+
+#pragma mark - Update Cell
+
+- (void) updateCellWithUserInfo:(LLAUser *)userInfo {
+    //
+    currentUserInfo = userInfo;
     
+    //
+    [userHeadImageView setImageWithURL:[NSURL URLWithString:currentUserInfo.headImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_200"]];
+    
+    userNameLabel.text = currentUserInfo.userName;
+    
+    selectedImageCoverView.hidden = !currentUserInfo.hasBeenSelected;
+    
+}
+
+
+#pragma mark - Calculate Height
+
++ (CGFloat) calculateHeightWitthUserInfo:(LLAUser *)userInfo maxWidth:(CGFloat)maxWidth  {
+    return MAX(0, maxWidth+imageViewToBottom);
 }
 
 @end

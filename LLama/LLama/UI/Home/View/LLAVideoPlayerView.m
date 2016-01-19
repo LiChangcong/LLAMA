@@ -108,7 +108,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     //videoPlayerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     videoPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     videoPlayerLayer.player = videoPlayer;
-    videoPlayerLayer.backgroundColor = [UIColor orangeColor].CGColor;
+    videoPlayerLayer.backgroundColor = [UIColor blackColor].CGColor;
     [self.layer addSublayer:videoPlayerLayer];
 }
 
@@ -177,7 +177,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     if (noti.object == videoPlayer.currentItem) {
         //play to end
         [videoPlayer seekToTime:kCMTimeZero];
-        [videoPlayer play];
+        //[videoPlayer play];
     }
 }
 
@@ -190,12 +190,15 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     }else {
         [videoPlayer play];
     }
+    self.hidden = NO;
 }
 
 - (void) stopVideo {
     [videoPlayer pause];
     
     [videoPlayer seekToTime:kCMTimeZero];
+    
+    self.hidden = YES;
 }
 
 - (void) pauseVideo {

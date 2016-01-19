@@ -106,5 +106,22 @@
     
 }
 
+//get height for label when limit lines
+
++ (CGFloat) calculateHeightWithAttributeDic:(NSDictionary *) attributes maxLine:(NSInteger) maxLine {
+    
+    if (maxLine < 1) {
+        return 0;
+    }
+    
+    NSString *newText = @"-";
+    for (int i = 1; i < maxLine; i++){
+        newText = [newText stringByAppendingString:@"\n|W|"];
+    }
+    
+    CGFloat maxHeight = [newText boundingRectWithSize:CGSizeMake(320, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:nil].size.height;
+    return ceilf(maxHeight);
+}
+
 
 @end

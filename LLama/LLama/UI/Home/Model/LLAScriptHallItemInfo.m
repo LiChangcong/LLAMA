@@ -8,6 +8,8 @@
 
 #import "LLAScriptHallItemInfo.h"
 
+#import "LLACommonUtil.h"
+
 @implementation LLAScriptHallItemInfo
 
 @synthesize isStretched;
@@ -25,9 +27,10 @@
              @"scriptContent":@"content",
              @"rewardMoney":@"fee",
              @"scriptImageURL":@"imageURL",
-             @"isPrivateVideo":@"isPrivate",
+             @"isPrivateVideo":@"secret",
              @"status":@"stats",
              @"partakeUsersArray":@"signups",
+             @"signupUserNumbers":@"signupNum",
              @"choosedUserIdString":@"chosen",
              @"publishTimeInterval":@"createTime",
              @"publisthTimeString":@"createTime",
@@ -39,11 +42,19 @@
 }
 
 + (NSValueTransformer *)directorInfoJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
     return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 
 + (NSValueTransformer *)partakeUsersArrayJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
     return [MTLJSONAdapter arrayTransformerWithModelClass:LLAUser.class];
+}
+
++ (NSValueTransformer *)publisthTimeStringJSONTransformer {
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+        return [LLACommonUtil formatTimeFromTimeInterval:[value longLongValue]];
+    }];
 }
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionaryValue error:(NSError *__autoreleasing *)error {
@@ -52,12 +63,12 @@
     
     if (self) {
         
-        LLAUser *directorInfo = [LLAUser new];
-        directorInfo.userIdString = @"5690d4371411cd4050d4ca56";
-        directorInfo.headImageURL = @"http://source.hillama.com/5690d4411411cd4050d4ca58";
-        directorInfo.userName = @"heheh";
-        
-        self.directorInfo = directorInfo;
+//        LLAUser *directorInfo = [LLAUser new];
+//        directorInfo.userIdString = @"5690d4371411cd4050d4ca56";
+//        directorInfo.headImageURL = @"http://source.hillama.com/5690d4411411cd4050d4ca58";
+//        directorInfo.userName = @"heheh";
+//        
+//        self.directorInfo = directorInfo;
         
         LLAUser *me = [LLAUser me];
         

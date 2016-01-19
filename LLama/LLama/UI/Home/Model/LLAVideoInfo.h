@@ -14,4 +14,6 @@
 
 @property(nonatomic , copy) NSString *videoPlayURL;
 
+@property(nonatomic , copy) NSString *videoCoverImageURL;
+
 @end

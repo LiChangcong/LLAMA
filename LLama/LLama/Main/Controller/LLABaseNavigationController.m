@@ -45,6 +45,11 @@
         self.interactivePopGestureRecognizer.enabled = NO;
     }
     
+    //hides bottoms bar
+    if (self.viewControllers.count == 1) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    
     [super pushViewController:viewController animated:animated];
 }
 

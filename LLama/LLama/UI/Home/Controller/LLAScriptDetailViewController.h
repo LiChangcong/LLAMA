@@ -10,4 +10,6 @@
 
 @interface LLAScriptDetailViewController : LLACommonViewController
 
+- (instancetype) initWithScriptIdString:(NSString *) idString;
+
 @end

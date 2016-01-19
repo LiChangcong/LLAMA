@@ -48,6 +48,8 @@ typedef NS_ENUM(NSInteger,LLAUserRoleInScript) {
 
 @property(nonatomic , strong) NSMutableArray <LLAUser *> *partakeUsersArray;
 
+@property(nonatomic , assign) NSInteger signupUserNumbers;
+
 @property(nonatomic , copy) NSString *choosedUserIdString;
 
 @property(nonatomic , assign) long long publishTimeInterval;

@@ -400,11 +400,11 @@ static const CGFloat partakeNumbersHeight = 14.5;
     scriptContentLabel.attributedText = [[self class] generateScriptAttriuteStingWith:currentScriptInfo];
     
     NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
-                                            [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.partakeUsersArray.count]];
-    [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.partakeUsersArray.count].length)];
+                                            [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.signupUserNumbers]];
+    [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.signupUserNumbers].length)];
     
     scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
-
+    
 }
 
 #pragma mark - Calculate Cell Height
@@ -438,9 +438,11 @@ static const CGFloat partakeNumbersHeight = 14.5;
         maxWidth = tableWidth - scriptImageViewToLeft - scriptImageViewHeightWidth - scriptImageViewToScriptLabelHorSpace - scriptLabelToRight;
     }
     
-    maxWidth = MAX(0,tableWidth);
+    maxWidth = MAX(0,maxWidth);
     
-    return [attr boundingRectWithSize:CGSizeMake(maxWidth, MAXFLOAT)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    CGSize textSize = [attr boundingRectWithSize:CGSizeMake(maxWidth, MAXFLOAT)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+
+    return textSize;
 }
 
 
@@ -458,7 +460,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
         height += scriptImageViewHeightWidth;
     }else {
         //get text heigh
-        height += [self scriptStringSizeWithVideoInfo:scriptInfo tableWidth:tableWidth].height;
+        height += ceilf([self scriptStringSizeWithVideoInfo:scriptInfo tableWidth:tableWidth].height);
     }
     
     height += scriptImageViewToPartakeNumberVerSpace;

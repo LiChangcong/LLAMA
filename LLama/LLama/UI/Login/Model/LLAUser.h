@@ -8,12 +8,10 @@
 
 #import "MTLModel.h"
 #import "Mantle.h"
+#import "LLAChooseItemProtocol.h"
 
 #define LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION @"LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION"
 
-//用来标识解析
-
-static BOOL isSimpleUserModel;
 
 //性别
 
@@ -31,7 +29,7 @@ typedef NS_ENUM(NSInteger,UserLoginType){
     UserLoginType_QQ = 4,
 };
 
-@interface LLAUser : MTLModel<MTLJSONSerializing>
+@interface LLAUser : MTLModel<MTLJSONSerializing,LLAChooseItemProtocol>
 
 @property(nonatomic , copy) NSString *userIdString;
 
@@ -79,5 +77,8 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 + (void) updateUserInfo:(LLAUser *) newUser;
 
 - (BOOL) hasUserProfile;
+
++ (BOOL) isSimpleUserModel;
++ (void) setIsSimpleUserModel:(BOOL) isSimple;
 
 @end

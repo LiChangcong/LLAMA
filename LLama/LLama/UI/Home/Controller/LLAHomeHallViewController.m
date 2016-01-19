@@ -199,6 +199,9 @@
 
 - (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[cell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
         
         id<LLACellPlayVideoProtocol> tc = (UITableViewCell<LLACellPlayVideoProtocol> *)cell;
@@ -219,9 +222,7 @@
             [tc.videoPlayerView stopVideo];
         }
     }
-    
 
-    
 }
 
 - (void) tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {

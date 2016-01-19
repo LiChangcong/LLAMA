@@ -269,7 +269,7 @@ static const CGFloat scriptLabelFontSize = 13;
     //
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    videoPlayerView.hidden = YES;
     [self.contentView addSubview:videoPlayerView];
     
     //
@@ -718,7 +718,7 @@ static const CGFloat scriptLabelFontSize = 13;
     [actorHeadView updateHeadViewWithUser:currentVideoInfo.actorInfo];
     actorNameLabel.text = currentVideoInfo.actorInfo.userName;
     
-    [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentVideoInfo.videoCoverImageURL] placeholderImage:nil];
+    [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentVideoInfo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
     
     loveVideoButton.selected = currentVideoInfo.hasPraised;
     if (loveVideoButton.selected) {

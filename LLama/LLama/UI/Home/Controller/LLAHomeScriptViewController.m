@@ -6,7 +6,9 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
+//controller
 #import "LLAHomeScriptViewController.h"
+#import "LLAScriptDetailViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -182,6 +184,10 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LLAScriptHallItemInfo *scriptInfo = mainInfo.dataList[indexPath.row];
+    LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:scriptInfo.scriptIdString];
+    [self.navigationController pushViewController:scriptDetail animated:YES];
     
 }
 

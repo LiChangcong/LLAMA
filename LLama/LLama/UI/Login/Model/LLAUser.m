@@ -9,7 +9,13 @@
 #import "LLAUser.h"
 #import "LLASaveUserDefaultUtil.h"
 
+//用来标识解析
+
+static BOOL isSimpleUserModel;
+
 @implementation LLAUser
+
+@synthesize hasBeenSelected;
 
 + (LLAUser *) parseJsonWidthDic:(NSDictionary *)data {
     isSimpleUserModel = NO;
@@ -83,6 +89,16 @@
         return NO;
     }
     
+}
+
+////用来标识解析
+
++ (BOOL) isSimpleUserModel {
+    return isSimpleUserModel;
+}
+
++ (void) setIsSimpleUserModel:(BOOL)isSimple {
+    isSimpleUserModel = isSimple;
 }
 
 @end

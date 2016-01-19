@@ -19,15 +19,17 @@
 }
 
 + (NSValueTransformer *)directorInfoJSONTransformer {
-    
+    [LLAUser setIsSimpleUserModel:YES];
     return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 
 + (NSValueTransformer *)actorInfoJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
     return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 
 + (NSValueTransformer *)commentArrayJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
     return [MTLJSONAdapter arrayTransformerWithModelClass:[LLAHallVideoCommentItem class]];
 }
 
@@ -56,7 +58,8 @@
              @"hasPraised":@"canZan",
              @"commentArray":@"comments",
             //
-             @"videoURL":@"videoURL"
+             @"videoURL":@"videoURL",
+             @"videoCoverImageURL":@"videoThumb",
              };
 }
 
@@ -68,22 +71,23 @@
         if (self.videoURL){
             LLAVideoInfo *video = [[LLAVideoInfo alloc] init];
             video.videoPlayURL = self.videoURL;
+            video.videoCoverImageURL = self.videoCoverImageURL;
             self.videoInfo = video;
         }
-        //test data
-        LLAUser *directorInfo = [LLAUser new];
-        directorInfo.userIdString = @"5690d4371411cd4050d4ca56";
-        directorInfo.headImageURL = @"http://source.hillama.com/5690d4411411cd4050d4ca58";
-        directorInfo.userName = @"heheh";
-        
-        self.directorInfo = directorInfo;
-        
-        LLAUser *actorInfo = [LLAUser new];
-        actorInfo.userIdString = @"5694b3601411556b7b6657ae";
-        actorInfo.headImageURL = @"http://source.hillama.com/5694b3c31411556b7b6657cf";
-        actorInfo.userName = @"lalal";
-        
-        self.actorInfo = actorInfo;
+//        //test data
+//        LLAUser *directorInfo = [LLAUser new];
+//        directorInfo.userIdString = @"5690d4371411cd4050d4ca56";
+//        directorInfo.headImageURL = @"http://source.hillama.com/5690d4411411cd4050d4ca58";
+//        directorInfo.userName = @"heheh";
+//        
+//        self.directorInfo = directorInfo;
+//        
+//        LLAUser *actorInfo = [LLAUser new];
+//        actorInfo.userIdString = @"5694b3601411556b7b6657ae";
+//        actorInfo.headImageURL = @"http://source.hillama.com/5694b3c31411556b7b6657cf";
+//        actorInfo.userName = @"lalal";
+//        
+//        self.actorInfo = actorInfo;
         
         
     }
