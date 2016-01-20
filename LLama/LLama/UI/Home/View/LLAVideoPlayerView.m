@@ -131,6 +131,10 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) setPlayingVideoInfo:(LLAVideoInfo *)videoInfo {
     
+    if (playingVideoInfo == videoInfo) {
+        return;
+    }
+    
     if(isPlaying){
         [self stopVideo];
     }
@@ -189,6 +193,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         return;
     }else {
         [videoPlayer play];
+        [HUD show:YES];
     }
     self.hidden = NO;
 }

@@ -198,39 +198,76 @@
 
 - (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-}
-
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[cell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
         
         id<LLACellPlayVideoProtocol> tc = (UITableViewCell<LLACellPlayVideoProtocol> *)cell;
+        [tc.videoPlayerView stopVideo];
         
-        LLAHallVideoItemInfo *info = [mainInfo.dataList objectAtIndex:indexPath.row];
-        
-        tc.videoPlayerView.playingVideoInfo = info.videoInfo;
-        [tc.videoPlayerView playVideo];
     }
+}
+
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray *visibleCells = [tableView visibleCells];
-    
-    for (UITableViewCell* tempCell in visibleCells) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)] && tempCell != cell) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            
-            [tc.videoPlayerView stopVideo];
-        }
-    }
+//    if ([[cell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+//        
+//        id<LLACellPlayVideoProtocol> tc = (UITableViewCell<LLACellPlayVideoProtocol> *)cell;
+//        
+//        LLAHallVideoItemInfo *info = [mainInfo.dataList objectAtIndex:indexPath.row];
+//        
+//        tc.videoPlayerView.playingVideoInfo = info.videoInfo;
+//        [tc.videoPlayerView playVideo];
+//    }
+//    
+//    NSArray *visibleCells = [tableView visibleCells];
+//    
+//    for (UITableViewCell* tempCell in visibleCells) {
+//        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)] && tempCell != cell) {
+//            
+//            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+//            
+//            [tc.videoPlayerView stopVideo];
+//        }
+//    }
 
 }
 
-- (void) tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
 
 #pragma mark - UIScrollViewDelegate
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    //get the index
+    
+    
+    id <LLACellPlayVideoProtocol> playCell = nil;
+    
+        NSArray *visibleCells = [dataTableView visibleCells];
+    
+        for (UITableViewCell* tempCell in visibleCells) {
+            if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+    
+                UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+                
+                CGRect playerFrame = tc.videoPlayerView.frame;
+                
+                CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
+    
+                if (subViewFrame.origin.y >= scrollView.contentOffset.y && subViewFrame.origin.y+tc.videoPlayerView.frame.size.height <= scrollView.contentOffset.y + scrollView.frame.size.height) {
+                    playCell = tc;
+                }else {
+                    [tc.videoPlayerView stopVideo];
+                }
+            }
+        }
+    
+    playCell.videoPlayerView.playingVideoInfo = playCell.shouldPlayVideoInfo;
+    [playCell.videoPlayerView playVideo];
+
     
 }
 

@@ -140,6 +140,7 @@ static const CGFloat scriptLabelFontSize = 13;
 }
 
 @property(nonatomic , readwrite , strong) LLAVideoPlayerView *videoPlayerView;
+@property(nonatomic , readwrite , strong) LLAVideoInfo *shouldPlayVideoInfo;
 
 @end
 
@@ -147,6 +148,7 @@ static const CGFloat scriptLabelFontSize = 13;
 
 @synthesize videoPlayerView;
 @synthesize delegate;
+@synthesize shouldPlayVideoInfo;
 
 #pragma mark - Init
 
@@ -748,6 +750,10 @@ static const CGFloat scriptLabelFontSize = 13;
     }else {
         commentsView.hidden = YES;
     }
+    
+    //player view
+    //videoPlayerView.playingVideoInfo = videoInfo.videoInfo;
+    shouldPlayVideoInfo = videoInfo.videoInfo;
     
 }
 
