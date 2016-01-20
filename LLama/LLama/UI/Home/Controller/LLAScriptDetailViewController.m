@@ -15,6 +15,9 @@
 #import "LLALoadingView.h"
 #import "LLAScriptChooseActorHeader.h"
 
+//category
+#import "SVPullToRefresh.h"
+
 //model
 #import "LLAScriptHallItemInfo.h"
 
@@ -65,6 +68,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self initNavigationItems];
     [self initSubView];
     
@@ -101,6 +107,14 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     [dataCollectionView registerClass:[LLAChooseActorCell class] forCellWithReuseIdentifier:chooseActorCellIden];
     [dataCollectionView registerClass:[LLAScriptChooseActorHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:chooseActorHeaderIden];
     
+    //
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [dataCollectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadData];
+    }];
+    
     //constraints
     
     [self.view addConstraints:
@@ -134,6 +148,8 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
         
         [HUD hide:YES];
         
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         LLAScriptHallItemInfo *info = [LLAScriptHallItemInfo parseJsonWithDic:responseObject];
         if (info) {
             scriptInfo = info;
@@ -143,11 +159,15 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:YES];
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
         [HUD hide:YES];
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];

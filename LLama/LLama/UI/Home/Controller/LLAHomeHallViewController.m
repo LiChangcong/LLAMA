@@ -14,6 +14,8 @@
 #import "LLALoadingView.h"
 #import "LLAVideoPlayerView.h"
 #import "LLAHallVideoInfoCell.h"
+//category
+#import "SVPullToRefresh.h"
 
 //model
 #import "LLAHallMainInfo.h"
@@ -69,6 +71,16 @@
     
     [self.view addSubview:dataTableView];
     
+    __weak typeof(self) weakSelf = self;
+    
+    [dataTableView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadData];
+    }];
+    
+    [dataTableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMoreData];
+    }];
+    
     //constraints
     
     [self.view addConstraints:
@@ -101,6 +113,7 @@
     [LLAHttpUtil httpPostWithUrl:@"/play/getFinishedPlayList" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
         
         LLAHallMainInfo *tempInfo = [LLAHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
@@ -110,11 +123,15 @@
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];
@@ -128,6 +145,8 @@
     [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
     
     [LLAHttpUtil httpPostWithUrl:@"/play/getFinishedPlayList" param:params responseBlock:^(id responseObject) {
+        
+        [dataTableView.infiniteScrollingView stopAnimating];
         
         LLAHallMainInfo *tempInfo = [LLAHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo.dataList.count > 0){
@@ -147,10 +166,12 @@
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
+        [dataTableView.infiniteScrollingView stopAnimating];
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
+        [dataTableView.infiniteScrollingView stopAnimating];
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];
