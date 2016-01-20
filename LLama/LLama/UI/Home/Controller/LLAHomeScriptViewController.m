@@ -43,7 +43,7 @@
 - (void) viewDidLoad {
     
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor purpleColor];
+    
     [self initNaviItems];
     [self initSubViews];
     
