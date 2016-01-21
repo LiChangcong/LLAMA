@@ -14,6 +14,8 @@
 #import "LLALoadingView.h"
 #import "LLAViewUtil.h"
 
+#import "LLAVideoCacheUtil.h"
+
 static void *AVPlayerStatusObservationContext = &AVPlayerStatusObservationContext;
 static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
@@ -182,6 +184,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         //play to end
         [videoPlayer seekToTime:kCMTimeZero];
         //[videoPlayer play];
+        
+        [[LLAVideoCacheUtil shareInstance] cacheVideoFromPlayerItem:videoPlayer.currentItem videoInfo:playingVideoInfo];
+        
     }
 }
 

@@ -37,23 +37,58 @@ static BOOL isSimpleUserModel;
                  @"genderString":@"gender",
                  @"gender":@"gender",
                  @"headImageURL":@"img",
-                 @"userVideo":@"myVideo",
+                 //@"userVideo":@"myVideo",
                  @"userDescription":@"gxqm",
+                 @"balance":@"balance",
                  
                  @"sinaWeiBoUid":@"weibouid",
                  @"qqOpenId":@"qqopenid",
                  @"weChatOpenId":@"wxopenid",
+                 
+                 //for temp
+                 @"videoCoverImageURL":@"videoThumb",
+                 @"videoPlayURL":@"myVideo",
                  
                  };
 
     }
 }
 
-+ (NSValueTransformer *)genderJSONJSONTransformer {
++ (NSValueTransformer *)genderStringJSONTransformer {
     return [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{@"男":@(UserGender_Male),
                                                                            @"女":@(UserGender_Female)}];
     
 }
+
++ (NSValueTransformer *)userVideoJSONTransformer {
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[LLAVideoInfo class]];
+    
+}
+
++ (NSValueTransformer *)balanceJSONTransformer {
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(NSNumber *value, BOOL *success, NSError *__autoreleasing *error) {
+        return @(((float)value.integerValue) / 100);
+    }];
+    
+}
+
+- (instancetype) initWithDictionary:(NSDictionary *)dictionaryValue error:(NSError *__autoreleasing *)error {
+
+    self = [super initWithDictionary:dictionaryValue error:error];
+    
+    if (self) {
+        if (self.videoPlayURL) {
+            LLAVideoInfo *videoInfo = [LLAVideoInfo new];
+            
+            videoInfo.videoPlayURL = self.videoPlayURL;
+            videoInfo.videoCoverImageURL = self.videoCoverImageURL;
+            
+            self.userVideo = videoInfo;
+        }
+    }
+    return self;
+}
+
 
 + (LLAUser *) me {
     

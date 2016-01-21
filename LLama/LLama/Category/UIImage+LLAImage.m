@@ -19,7 +19,7 @@
     if (!paintColor)
         paintColor = [UIColor whiteColor];
     
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, 2.0f, 2.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [paintColor CGColor]);

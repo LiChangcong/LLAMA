@@ -58,7 +58,10 @@
 		5CA18FD51C4F6C9100A0B5B7 /* lla_Loading_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA51C4F6C9100A0B5B7 /* lla_Loading_9.png */; };
 		5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png */; };
 		5CA18FD71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png */; };
+		5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */; };
 		5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */; };
+		5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */; };
+		5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -86,6 +89,7 @@
 		5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF6E1C4A1F0000991394 /* LLAScriptHallItemInfo.m */; };
 		5CE0FF721C4A315B00991394 /* LLAScriptHallMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */; };
 		5CE0FF751C4A327000991394 /* LLAScriptHallInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */; };
+		5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE162EF1C50AB86006B69DC /* LLAUserProfileNavigationBar.m */; };
 		5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */; };
 		5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */; };
 		5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646C31C44D1B3004DA6D5 /* UIColor+LLACustomColor.m */; };
@@ -317,9 +321,15 @@
 		5CA18FA51C4F6C9100A0B5B7 /* lla_Loading_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lla_Loading_9.png; sourceTree = "<group>"; };
 		5CA18FA61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lla_Loading_9@2x.png"; sourceTree = "<group>"; };
 		5CA18FA71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lla_Loading_9@3x.png"; sourceTree = "<group>"; };
+		5CA194671C4F889100A0B5B7 /* LLAVideoCacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCacheUtil.h; sourceTree = "<group>"; };
+		5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCacheUtil.m; sourceTree = "<group>"; };
 		5CBC57911C4DEBD80001F1A9 /* LLAChooseItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseItemProtocol.h; sourceTree = "<group>"; };
 		5CBC57921C4DF9380001F1A9 /* LLAScriptChooseActorHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorHeader.h; sourceTree = "<group>"; };
 		5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptChooseActorHeader.m; sourceTree = "<group>"; };
+		5CC4D42F1C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyInfoCell.h; sourceTree = "<group>"; };
+		5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyInfoCell.m; sourceTree = "<group>"; };
+		5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyFunctionCell.h; sourceTree = "<group>"; };
+		5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyFunctionCell.m; sourceTree = "<group>"; };
 		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
@@ -377,6 +387,8 @@
 		5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptHallMainInfo.m; sourceTree = "<group>"; };
 		5CE0FF731C4A327000991394 /* LLAScriptHallInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptHallInfoCell.h; sourceTree = "<group>"; };
 		5CE0FF741C4A327000991394 /* LLAScriptHallInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptHallInfoCell.m; sourceTree = "<group>"; };
+		5CE162EE1C50AB86006B69DC /* LLAUserProfileNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileNavigationBar.h; sourceTree = "<group>"; };
+		5CE162EF1C50AB86006B69DC /* LLAUserProfileNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileNavigationBar.m; sourceTree = "<group>"; };
 		5CE646BC1C44CB3C004DA6D5 /* UIButton+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LLAImageCache.h"; sourceTree = "<group>"; };
 		5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LLAImageCache.m"; sourceTree = "<group>"; };
 		5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LLAImageCache.h"; sourceTree = "<group>"; };
@@ -784,6 +796,15 @@
 			path = lla_loading_Image;
 			sourceTree = "<group>";
 		};
+		5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5CA194671C4F889100A0B5B7 /* LLAVideoCacheUtil.h */,
+				5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */,
+			);
+			path = VideoCacheUtil;
+			sourceTree = "<group>";
+		};
 		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -1184,6 +1205,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */,
 				5C7298231C438E4600106BA2 /* CommonUtil */,
 				5C72981F1C43668900106BA2 /* SaveUserDefaultUtil */,
 				5CDD977D1C40E53100557CB7 /* UploadFileUtil */,
@@ -1490,6 +1512,12 @@
 				A3DEDE3F1C3CAEC6009F3D37 /* TMTHistoryCell.h */,
 				A3DEDE401C3CAEC6009F3D37 /* TMTHistoryCell.m */,
 				A3DEDE411C3CAEC6009F3D37 /* TMTHistoryCell.xib */,
+				5CE162EE1C50AB86006B69DC /* LLAUserProfileNavigationBar.h */,
+				5CE162EF1C50AB86006B69DC /* LLAUserProfileNavigationBar.m */,
+				5CC4D42F1C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.h */,
+				5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */,
+				5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */,
+				5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1880,6 +1908,7 @@
 				A3DEDE831C3CAEC7009F3D37 /* TMMessageController.m in Sources */,
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
 				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
+				5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */,
 				5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */,
 				A3DEDEA51C3CAEC7009F3D37 /* TMVersionCell.m in Sources */,
 				A3DEDD911C3CAE38009F3D37 /* TMTabBar.m in Sources */,
@@ -1909,6 +1938,7 @@
 				A3D8E7E11C3F5B7D00B27898 /* LLABaseViewController.m in Sources */,
 				A3D8E7F21C3F87F300B27898 /* UIBarButtonItem+Image.m in Sources */,
 				A3DEDD8F1C3CAE38009F3D37 /* main.m in Sources */,
+				5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */,
 				A3DEDE911C3CAEC7009F3D37 /* YZPersonViewController.m in Sources */,
 				A3DEDEA21C3CAEC7009F3D37 /* TMClearCacheCell.m in Sources */,
 				A3DEDE751C3CAEC7009F3D37 /* TMTopicCell.m in Sources */,
@@ -1919,6 +1949,7 @@
 				A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */,
 				A3D8E7E41C3F5BA800B27898 /* LLACommonViewController.m in Sources */,
 				5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
 				A3DEDE931C3CAEC7009F3D37 /* YZTableView.m in Sources */,
 				A3DEDD901C3CAE38009F3D37 /* TMHTTPSessionManager.m in Sources */,
@@ -1972,6 +2003,7 @@
 				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
+				5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,

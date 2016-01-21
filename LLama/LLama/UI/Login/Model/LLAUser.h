@@ -9,6 +9,7 @@
 #import "MTLModel.h"
 #import "Mantle.h"
 #import "LLAChooseItemProtocol.h"
+#import "LLAVideoInfo.h"
 
 #define LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION @"LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION"
 
@@ -52,9 +53,11 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 
 @property(nonatomic , copy) NSString *headImageURL;
 
-@property(nonatomic , copy) NSString *userVideo;
+@property(nonatomic , strong) LLAVideoInfo *userVideo;
 
 @property(nonatomic , copy) NSString *userDescription;
+
+@property(nonatomic , assign) CGFloat balance;
 //token
 @property(nonatomic , copy) NSString *authenToken;
 //is login
@@ -69,6 +72,10 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 //weChat
 @property(nonatomic , copy) NSString *weChatOpenId;
 @property(nonatomic , copy) NSString *weChatAccess_Token;
+
+//for temp save
+@property(nonatomic , copy) NSString *videoCoverImageURL;
+@property(nonatomic , copy) NSString *videoPlayURL;
 
 + (LLAUser *) parseJsonWidthDic:(NSDictionary *) data;
 

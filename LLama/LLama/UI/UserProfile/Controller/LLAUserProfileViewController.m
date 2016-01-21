@@ -13,41 +13,92 @@
 #import "LLATableView.h"
 
 #import "LLALoadingView.h"
+#import "LLAUserProfileNavigationBar.h"
 
 //category
 #import "UIScrollView+SVPullToRefresh.h"
 
 //model
+#import "LLAUser.h"
 
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 
+static const CGFloat navigationBarHeight = 64;
+
 @interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource>
 {
+    
+    LLAUserProfileNavigationBar *customNaviBar;
+    
     LLATableView *dataTableView;
     
     LLALoadingView *HUD;
 }
 
+@property(nonatomic , readwrite , strong) NSString *uIdString;
+
+@property(nonatomic , readwrite , assign) UserProfileControllerType type;
+
 @end
 
 @implementation LLAUserProfileViewController
 
+@synthesize uIdString;
+@synthesize type;
+
 #pragma mark - Life Cycle
+
+- (instancetype) initWithUserIdString:(NSString *)userIdString {
+    self = [super init];
+    if (self) {
+        uIdString = userIdString;
+        
+        if (uIdString) {
+            if ([uIdString isEqualToString:[LLAUser me].userIdString]) {
+                type = UserProfileControllerType_CurrentUser;
+            }else {
+                type = UserProfileControllerType_OtherUser;
+            }
+            
+        }else {
+            type = UserProfileControllerType_NotLogin;
+        }
+        
+    }
+    return self;
+}
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self initNavigationItems];
     [self initSubViews];
 }
 
+#pragma mark - Init
+
 - (void) initNavigationItems {
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout  = UIRectEdgeNone;
 }
 
 - (void) initSubViews {
+    customNaviBar = [[LLAUserProfileNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, navigationBarHeight)];
+    customNaviBar.translatesAutoresizingMaskIntoConstraints = NO;
+    customNaviBar.clipsToBounds = YES;
+    customNaviBar.layer.masksToBounds = YES;
+
+    [customNaviBar makeBackgroundClear:YES];
+    
+    [self.view addSubview:customNaviBar];
+    
+    [customNaviBar layoutIfNeeded];
+    [customNaviBar setNeedsLayout];
+    //
     dataTableView = [[LLATableView alloc] init];
     dataTableView.translatesAutoresizingMaskIntoConstraints = NO;
     dataTableView.dataSource = self;
@@ -67,10 +118,11 @@
     
     [self.view addConstraints:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(0)-[dataTableView]-(0)-|"
+      constraintsWithVisualFormat:@"V:|-(0)-[customNaviBar(naviHeight)]-(0)-[dataTableView]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:nil
-      views:NSDictionaryOfVariableBindings(dataTableView)]];
+      metrics:[NSDictionary dictionaryWithObjectsAndKeys:
+               @(navigationBarHeight),@"naviHeight", nil]
+      views:NSDictionaryOfVariableBindings(dataTableView,customNaviBar)]];
     
     [self.view addConstraints:
      [NSLayoutConstraint
@@ -79,7 +131,17 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
     
+    [self.view addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[customNaviBar]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(customNaviBar)]];
+
+    
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    
+    [self.view bringSubviewToFront:customNaviBar];
 
 }
 
