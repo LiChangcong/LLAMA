@@ -15,6 +15,22 @@
 #define fequalzero(a) (fabs(a) < FLT_EPSILON)
 
 static CGFloat const SVPullToRefreshViewHeight = 60;
+//pull down image count
+static NSInteger const SVPullToLoadImageCount = 16;
+//loading image count
+static NSInteger const SVPullToRefreshImageCount = 16;
+
+static NSString *const SVPullToRefreshLoadingString = @"";
+static NSString *const SVPullToRefreshTriggeredString = @"";
+static NSString *const SVPullToRefreshStoppedString = @"";
+
+static NSString *const loadingImageName = @"lla_Loading_";
+static NSString *const arrowImageName = @"lla_Loading_";
+
+static const CGFloat loadingIndicatorViewHeight = 60;
+static const CGFloat loadingIndicatorViewWidth = 60;
+static const CGFloat arrowImageViewHeight = 60;
+static const CGFloat arrowImageViewWidth = 60;
 
 @interface SVPullToRefreshArrow : UIView
 
@@ -22,13 +38,36 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
 
 @end
 
+/******
+ 自已定义一个转圈的视图
+ ******/
+
+@interface SVPullToRefreshLoadingView : UIImageView;
+
+@property(nonatomic , assign) BOOL isAnimating;
+
+- (void) startAnimating;
+
+- (void) stopAnimating;
+
+@end
 
 @interface SVPullToRefreshView ()
 
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
 
-@property (nonatomic, strong) SVPullToRefreshArrow *arrow;
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+//@property (nonatomic, strong) SVPullToRefreshArrow *arrow;
+/********
+ 
+ 用自已的 UIImageView 来代替他的 SVPullToRefreshArrow
+ 
+ *******/
+@property (nonatomic, strong) UIImageView *arrow;
+
+//@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) SVPullToRefreshLoadingView *activityIndicatorView;
+@property (nonatomic, strong) UIImageView *pointActivityIndicatorImageView;
+
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
 @property (nonatomic, strong, readwrite) UILabel *subtitleLabel;
 @property (nonatomic, readwrite) SVPullToRefreshState state;
@@ -89,6 +128,7 @@ static char UIScrollViewPullToRefreshView;
         view.position = position;
         self.pullToRefreshView = view;
         self.showsPullToRefresh = YES;
+        
     }
     
 }
@@ -175,7 +215,8 @@ static char UIScrollViewPullToRefreshView;
         
         // default styling values
         self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        self.textColor = [UIColor darkGrayColor];
+        self.textColor = [UIColor colorWithHex:0x999999];
+        
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = SVPullToRefreshStateStopped;
         self.showsDateLabel = NO;
@@ -188,6 +229,11 @@ static char UIScrollViewPullToRefreshView;
         self.subtitles = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
         self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
         self.wasTriggeredByUser = YES;
+        
+        //set title string
+        [self setTitle:SVPullToRefreshTriggeredString forState:SVPullToRefreshStateTriggered];
+        [self setTitle:SVPullToRefreshStoppedString forState:SVPullToRefreshStateStopped];
+        [self setTitle:SVPullToRefreshLoadingString forState:SVPullToRefreshStateLoading];
     }
     
     return self;
@@ -233,14 +279,15 @@ static char UIScrollViewPullToRefreshView;
         switch (self.state) {
             case SVPullToRefreshStateAll:
             case SVPullToRefreshStateStopped:
-                self.arrow.alpha = 1;
-                [self.activityIndicatorView stopAnimating];
+//                self.arrow.alpha = 1;
+//                [self.activityIndicatorView stopAnimating];
+//                [self.pointActivityIndicatorImageView stopAnimating];
                 switch (self.position) {
                     case SVPullToRefreshPositionTop:
-                        [self rotateArrow:0 hide:NO];
+//                        [self rotateArrow:0 hide:NO];
                         break;
                     case SVPullToRefreshPositionBottom:
-                        [self rotateArrow:(float)M_PI hide:NO];
+                        //[self rotateArrow:(float)M_PI hide:NO];
                         break;
                 }
                 break;
@@ -248,7 +295,8 @@ static char UIScrollViewPullToRefreshView;
             case SVPullToRefreshStateTriggered:
                 switch (self.position) {
                     case SVPullToRefreshPositionTop:
-                        [self rotateArrow:(float)M_PI hide:NO];
+                        
+//                        [self rotateArrow:(float)M_PI hide:NO];
                         break;
                     case SVPullToRefreshPositionBottom:
                         [self rotateArrow:0 hide:NO];
@@ -257,19 +305,22 @@ static char UIScrollViewPullToRefreshView;
                 break;
                 
             case SVPullToRefreshStateLoading:
-                [self.activityIndicatorView startAnimating];
+//                [self.activityIndicatorView startAnimating];
+                self.arrow.alpha = 0;
+                [self.pointActivityIndicatorImageView startAnimating];
                 switch (self.position) {
                     case SVPullToRefreshPositionTop:
-                        [self rotateArrow:0 hide:YES];
+//                        [self rotateArrow:0 hide:YES];
                         break;
                     case SVPullToRefreshPositionBottom:
-                        [self rotateArrow:(float)M_PI hide:YES];
+                        //[self rotateArrow:(float)M_PI hide:YES];
                         break;
                 }
                 break;
         }
         
-        CGFloat leftViewWidth = MAX(self.arrow.bounds.size.width,self.activityIndicatorView.bounds.size.width);
+//        CGFloat leftViewWidth = MAX(self.arrow.bounds.size.width,self.activityIndicatorView.bounds.size.width);
+        CGFloat leftViewWidth = MAX(self.arrow.bounds.size.width,self.pointActivityIndicatorImageView.bounds.size.width);
         
         CGFloat margin = 10;
         CGFloat marginY = 2;
@@ -280,6 +331,7 @@ static char UIScrollViewPullToRefreshView;
         NSString *subtitle = [self.subtitles objectAtIndex:self.state];
         self.subtitleLabel.text = subtitle.length > 0 ? subtitle : nil;
         
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         
         CGSize titleSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font
                                             constrainedToSize:CGSizeMake(labelMaxWidth,self.titleLabel.font.lineHeight)
@@ -322,7 +374,8 @@ static char UIScrollViewPullToRefreshView;
                                       (self.bounds.size.height / 2) - (self.arrow.bounds.size.height / 2),
                                       self.arrow.bounds.size.width,
                                       self.arrow.bounds.size.height);
-        self.activityIndicatorView.center = self.arrow.center;
+//        self.activityIndicatorView.center = self.arrow.center;
+        self.pointActivityIndicatorImageView.center = self.arrow.center;
     }
 }
 
@@ -339,7 +392,19 @@ static char UIScrollViewPullToRefreshView;
             currentInsets.top = self.originalTopInset;
             break;
     }
-    [self setScrollViewContentInset:currentInsets];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         self.scrollView.contentInset = currentInsets;
+                     }
+                     completion:^(BOOL finished) {
+                         if (self.state==SVPullToRefreshStateStopped) {
+                             self.arrow.alpha = 1;
+                             [self.pointActivityIndicatorImageView stopAnimating];
+                         }
+                     }];
 }
 
 - (void)setScrollViewContentInsetForLoading {
@@ -357,13 +422,13 @@ static char UIScrollViewPullToRefreshView;
 }
 
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset {
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.5
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          self.scrollView.contentInset = contentInset;
                      }
-                     completion:NULL];
+                     completion:nil];
 }
 
 #pragma mark - Observing
@@ -401,6 +466,9 @@ static char UIScrollViewPullToRefreshView;
                 scrollOffsetThreshold = MAX(self.scrollView.contentSize.height - self.scrollView.bounds.size.height, 0.0f) + self.bounds.size.height + self.originalBottomInset;
                 break;
         }
+        
+        // 更新下拉加载图片
+        [self setPullToLoadImageWithContentOffset:contentOffset];
         
         if(!self.scrollView.isDragging && self.state == SVPullToRefreshStateTriggered)
             self.state = SVPullToRefreshStateLoading;
@@ -440,22 +508,61 @@ static char UIScrollViewPullToRefreshView;
 
 #pragma mark - Getters
 
-- (SVPullToRefreshArrow *)arrow {
-    if(!_arrow) {
-		_arrow = [[SVPullToRefreshArrow alloc]initWithFrame:CGRectMake(0, self.bounds.size.height-54, 22, 48)];
-        _arrow.backgroundColor = [UIColor clearColor];
-		[self addSubview:_arrow];
+//- (SVPullToRefreshArrow *)arrow {
+//    /*
+//    if(!_arrow) {
+//		_arrow = [[SVPullToRefreshArrow alloc]initWithFrame:CGRectMake(0, self.bounds.size.height-54, 22, 48)];
+//        _arrow.backgroundColor = [UIColor clearColor];
+//		[self addSubview:_arrow];
+//    }
+//    return _arrow;
+//     */
+//    
+//}
+
+- (UIImageView *)arrow {
+    if (!_arrow){
+        _arrow = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.bounds.size.height- arrowImageViewHeight)/2, arrowImageViewWidth, arrowImageViewHeight)];
+        _arrow.image = [UIImage imageNamed:arrowImageName];
+        _arrow.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:_arrow];
     }
     return _arrow;
 }
 
-- (UIActivityIndicatorView *)activityIndicatorView {
-    if(!_activityIndicatorView) {
-        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _activityIndicatorView.hidesWhenStopped = YES;
+//- (UIActivityIndicatorView *)activityIndicatorView {
+//    if(!_activityIndicatorView) {
+//        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//        _activityIndicatorView.hidesWhenStopped = YES;
+//        [self addSubview:_activityIndicatorView];
+//    }
+//    return _activityIndicatorView;
+//}
+
+- (SVPullToRefreshLoadingView *) activityIndicatorView {
+    if (!_activityIndicatorView){
+        _activityIndicatorView = [[SVPullToRefreshLoadingView alloc] initWithFrame:CGRectMake(0, 0, loadingIndicatorViewWidth, loadingIndicatorViewHeight)];
+        _activityIndicatorView.image = [UIImage imageNamed:loadingImageName];
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;
+}
+
+- (UIImageView *)pointActivityIndicatorImageView {
+    if (!_pointActivityIndicatorImageView) {
+        _pointActivityIndicatorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, loadingIndicatorViewWidth, loadingIndicatorViewHeight)];
+        NSMutableArray *imageArray = [NSMutableArray array];
+        for (int i=1; i<=SVPullToRefreshImageCount; i++) {
+            NSString *imageName = [NSString stringWithFormat:@"%@%d",loadingImageName, i];
+            [imageArray addObject:[UIImage imageNamed:imageName]];
+        }
+//        _pointActivityIndicatorImageView.image = [imageArray firstObject];
+        _pointActivityIndicatorImageView.animationImages = imageArray;
+        _pointActivityIndicatorImageView.animationDuration = 0.8;
+        [self addSubview:_pointActivityIndicatorImageView];
+    }
+    
+    return _pointActivityIndicatorImageView;
 }
 
 - (UILabel *)titleLabel {
@@ -494,9 +601,11 @@ static char UIScrollViewPullToRefreshView;
     }
     return dateFormatter;
 }
+/***************/
 
 - (UIColor *)arrowColor {
-	return self.arrow.arrowColor; // pass through
+	//return self.arrow.arrowColor; // pass through
+    return [UIColor whiteColor];
 }
 
 - (UIColor *)textColor {
@@ -504,18 +613,22 @@ static char UIScrollViewPullToRefreshView;
 }
 
 - (UIColor *)activityIndicatorViewColor {
-    return self.activityIndicatorView.color;
+    //return self.activityIndicatorView.color;
+    return [UIColor whiteColor];
 }
 
 - (UIActivityIndicatorViewStyle)activityIndicatorViewStyle {
-    return self.activityIndicatorView.activityIndicatorViewStyle;
+    //return self.activityIndicatorView.activityIndicatorViewStyle;
+    return UIActivityIndicatorViewStyleWhite;
 }
+
+/***************/
 
 #pragma mark - Setters
 
 - (void)setArrowColor:(UIColor *)newArrowColor {
-	self.arrow.arrowColor = newArrowColor; // pass through
-	[self.arrow setNeedsDisplay];
+	//self.arrow.arrowColor = newArrowColor; // pass through
+	//[self.arrow setNeedsDisplay];
 }
 
 - (void)setTitle:(NSString *)title forState:(SVPullToRefreshState)state {
@@ -562,13 +675,15 @@ static char UIScrollViewPullToRefreshView;
 	self.subtitleLabel.textColor = newTextColor;
 }
 
+/*****************/
 - (void)setActivityIndicatorViewColor:(UIColor *)color {
-    self.activityIndicatorView.color = color;
+    //self.activityIndicatorView.color = color;
 }
 
 - (void)setActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle)viewStyle {
-    self.activityIndicatorView.activityIndicatorViewStyle = viewStyle;
+    //self.activityIndicatorView.activityIndicatorViewStyle = viewStyle;
 }
+/********************/
 
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
     self.showsDateLabel = YES;
@@ -642,8 +757,9 @@ static char UIScrollViewPullToRefreshView;
     
     switch (newState) {
         case SVPullToRefreshStateAll:
-        case SVPullToRefreshStateStopped:
-            [self resetScrollViewContentInset];
+        case SVPullToRefreshStateStopped: {
+            [self performSelector:@selector(resetScrollViewContentInset) withObject:nil afterDelay:1.0];
+        }
             break;
             
         case SVPullToRefreshStateTriggered:
@@ -665,6 +781,20 @@ static char UIScrollViewPullToRefreshView;
         self.arrow.layer.opacity = !hide;
         //[self.arrow setNeedsDisplay];//ios 4
     } completion:NULL];
+}
+
+- (void)setPullToLoadImageWithContentOffset:(CGPoint)contentOffset {
+    NSInteger index = (int)(-contentOffset.y / SVPullToLoadImageCount);
+    if (index<1) {
+        index = 1;
+    }
+    if (index>SVPullToLoadImageCount) {
+        index = SVPullToLoadImageCount;
+    }
+    
+    NSString *imageName = [NSString stringWithFormat:@"%@%ld", arrowImageName,(long)index];
+    UIImage *image = [UIImage imageNamed:imageName];
+    self.arrow.image = image;
 }
 
 @end
@@ -743,4 +873,42 @@ static char UIScrollViewPullToRefreshView;
 	CGGradientRelease(alphaGradient);
 	CGColorSpaceRelease(colorSpace);
 }
+
+@end
+
+#pragma mark - SVPullToRefreshLoadingView
+
+static NSString *const rotationKey = @"pullLoadingViewAnimationKey";
+
+@implementation SVPullToRefreshLoadingView
+
+
+@synthesize isAnimating;
+
+- (void) startAnimating {
+    
+    self.hidden= NO;
+    if (!isAnimating){
+        CABasicAnimation *rotateAni = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotateAni.fromValue = @(0);
+        rotateAni.toValue = @(2*M_PI);
+        rotateAni.duration = 0.8;
+        rotateAni.removedOnCompletion = NO;
+        rotateAni.repeatCount = INFINITY;
+        rotateAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        
+        [self.layer addAnimation:rotateAni forKey:rotationKey];
+        
+        
+        isAnimating = YES;
+    }
+}
+
+- (void) stopAnimating {
+    isAnimating = NO;
+    
+    [self.layer removeAllAnimations];
+    self.hidden = YES;
+}
+
 @end

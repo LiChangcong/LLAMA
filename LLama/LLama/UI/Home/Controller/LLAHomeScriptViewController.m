@@ -15,6 +15,9 @@
 #import "LLAScriptHallInfoCell.h"
 #import "LLALoadingView.h"
 
+//category
+#import "SVPullToRefresh.h"
+
 //model
 #import "LLAScriptHallMainInfo.h"
 
@@ -102,6 +105,7 @@
     [LLAHttpUtil httpPostWithUrl:@"/play/getUnfinishedPlayList" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
         
         LLAScriptHallMainInfo *tempInfo = [LLAScriptHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
@@ -112,11 +116,15 @@
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
         [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];
@@ -129,6 +137,8 @@
     [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
     
     [LLAHttpUtil httpPostWithUrl:@"/play/getUnfinishedPlayList" param:params responseBlock:^(id responseObject) {
+        
+        [dataTableView.infiniteScrollingView stopAnimating];
         
         LLAScriptHallMainInfo *tempInfo = [LLAScriptHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo.dataList.count > 0){
@@ -148,10 +158,12 @@
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
+        [dataTableView.infiniteScrollingView stopAnimating];
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
+        [dataTableView.infiniteScrollingView stopAnimating];
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];

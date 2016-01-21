@@ -15,6 +15,9 @@
 #import "LLALoadingView.h"
 #import "LLAScriptChooseActorHeader.h"
 
+//category
+#import "SVPullToRefresh.h"
+
 //model
 #import "LLAScriptHallItemInfo.h"
 
@@ -138,6 +141,8 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
         
         [HUD hide:YES];
         
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         LLAScriptHallItemInfo *info = [LLAScriptHallItemInfo parseJsonWithDic:responseObject];
         if (info) {
             scriptInfo = info;
@@ -147,11 +152,15 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:YES];
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:errorMessage];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
         [HUD hide:YES];
+        [dataCollectionView.pullToRefreshView stopAnimating];
+        
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         
     }];
