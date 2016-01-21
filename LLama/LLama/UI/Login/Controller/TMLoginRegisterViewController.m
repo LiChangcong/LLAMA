@@ -25,8 +25,8 @@
 
 - (IBAction)registerButtonClick:(UIButton *)sender {
     
+    // 注册
     TMRegisterViewController *registerVC = [[TMRegisterViewController alloc] initWithNibName:nil bundle:nil];
-    
     [self.navigationController pushViewController:registerVC animated:YES];
 
 
@@ -34,12 +34,12 @@
 
 - (IBAction)loginButtonClick:(UIButton *)sender {
     
+    // 登陆
     TMLoginViewController *login = [[TMLoginViewController alloc] init];
-    
     [self.navigationController pushViewController:login animated:YES];
 }
 
-// 更改状态栏颜色是黑色
+// 设置状态栏为黑色
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleDefault;

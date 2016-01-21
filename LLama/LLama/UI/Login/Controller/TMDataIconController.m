@@ -16,7 +16,7 @@
 #import "LLAUser.h"
 #import "LLAAlbumPickerViewController.h"
 
-@interface TMDataIconController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface TMDataIconController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
     UIImage *choosedImage;
     
@@ -60,7 +60,9 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(done:) name:@"PICKER_TAKE_DONE" object:nil];
     });
-
+    
+    // 限制昵称长度
+    [self.nickNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
 }
 
@@ -80,6 +82,13 @@
         
         return;
     }
+    
+//    if (self.nickNameTextField.text.length > 14) {
+//        
+//        [LLAViewUtil showAlter:self.view withText:@"昵称需要小于14个字符"];
+//        
+//        return;
+//    }
     
     if (!choosedImage) {
         
@@ -260,5 +269,17 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PICKER_TAKE_DONE" object:nil];
 }
+
+// 限制昵称长度
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == self.nickNameTextField) {
+        if (textField.text.length > 14) {
+            [LLAViewUtil showAlter:self.view withText:@"昵称需要小于14个字符"];
+            textField.text = [textField.text substringToIndex:14];
+        }
+    }
+}
+
 
 @end

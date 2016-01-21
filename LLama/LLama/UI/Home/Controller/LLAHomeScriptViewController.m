@@ -43,31 +43,41 @@
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor purpleColor];
     
+    // 初始化导航栏
+
     [self initNaviItems];
+    
+    // 初始化子控件
     [self initSubViews];
     
+    // 加载数据
     [self loadData];
     
     [HUD show:YES];
 }
 
 #pragma mark - Init
-
+// 初始化导航栏
 - (void) initNaviItems {
     self.navigationItem.title = @"剧本";
 }
 
+// 初始化子控件
 - (void) initSubViews {
+    
+    // tableView
     dataTableView = [[LLATableView alloc] init];
     dataTableView.translatesAutoresizingMaskIntoConstraints = NO;
     dataTableView.dataSource = self;
     dataTableView.delegate = self;
     dataTableView.showsVerticalScrollIndicator = NO;
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     [self.view addSubview:dataTableView];
     
+
     __weak typeof(self) weakSelf = self;
     
     [dataTableView addPullToRefreshWithActionHandler:^{
@@ -80,6 +90,9 @@
     
     //constraints
     
+
+    // 约束
+
     [self.view addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|-(0)-[dataTableView]-(0)-|"
@@ -94,11 +107,12 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
     
+    // 显示加载菊花
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
 }
 
 #pragma mark - Load Data
-
+ // 加载数据
 - (void) loadData {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
@@ -192,6 +206,7 @@
         cell.delegate = self;
     }
     
+    // 给cell设置数据
     [cell updateCellWithScriptInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
     
     return cell;
@@ -202,12 +217,16 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // 返回每行cell的高度
     return [LLAScriptHallInfoCell calculateHeightWithScriptInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // 每行cell的模型
     LLAScriptHallItemInfo *scriptInfo = mainInfo.dataList[indexPath.row];
+    
+    // 传入对于的剧本ID跳到对应剧本详情页
     LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:scriptInfo.scriptIdString];
     [self.navigationController pushViewController:scriptDetail animated:YES];
     

@@ -53,6 +53,7 @@ static NSString * const publishScriptImage_Selected= @"startH";
     [self setupTabBar];
 }
 
+// view布局完子控件的时候设置发布按钮的位置
 - (void) viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     

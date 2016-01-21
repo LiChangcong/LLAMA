@@ -14,15 +14,25 @@
 @class LLAHallVideoCommentItem;
 
 @protocol LLAHallVideoInfoCellDelegate <NSObject>
-
+/**
+ *  点击了头像
+ */
 - (void) userHeadViewClickedWithUserInfo:(LLAUser *) userInfo itemInfo:(LLAHallVideoItemInfo *) videoItemInfo;
-
+/**
+ *  点赞按钮点击
+ */
 - (void) loveVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo loveButton:(UIButton *)loveButton;
-
+/**
+ *  评论按钮点击
+ */
 - (void) commentVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo;
-
+/**
+ *  分享按钮点击
+ */
 - (void) shareVideoWithVideoItemInfo:(LLAHallVideoItemInfo *)videoItemInfo ;
-
+/**
+ *  评论中用户名按钮点击
+ */
 - (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) vieoItemInfo;
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo;
