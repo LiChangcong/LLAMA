@@ -64,28 +64,33 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    
+
+    // 设置导航栏
     [self initNavigationItems];
+    // 设置子控件
     [self initSubView];
-    
+    // 加载数据
     [self loadData];
+    // 显示加载菊花
     [HUD show:YES];
 }
 
 #pragma mark - Init
 
+// 设置导航栏
 - (void) initNavigationItems {
     self.navigationItem.title = @"详情";
 }
 
+// 设置子控件
 - (void) initSubView {
-    
+    // collectionView布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumInteritemSpacing = chooseActorCellsHorSpace;
     flowLayout.minimumLineSpacing = chooseActorCellsVerSpace;
 
-    
+    // collectionView
     dataCollectionView = [[LLACollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     dataCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
     dataCollectionView.delegate = self;
@@ -93,16 +98,14 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     dataCollectionView.bounces = YES;
     dataCollectionView.alwaysBounceVertical = YES;
     dataCollectionView.backgroundColor = [UIColor colorWithHex:0xeaeaea];
-    
     [self.view addSubview:dataCollectionView];
     
-    //register class
+    // 注册cell
     [dataCollectionView registerClass:[LLAScriptDetailMainInfoCell class] forCellWithReuseIdentifier:scriptInfoCellIden];
     [dataCollectionView registerClass:[LLAChooseActorCell class] forCellWithReuseIdentifier:chooseActorCellIden];
     [dataCollectionView registerClass:[LLAScriptChooseActorHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:chooseActorHeaderIden];
     
-    //constraints
-    
+    // 约束
     [self.view addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|-(0)-[dataCollectionView]-(0)-|"
@@ -116,20 +119,21 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataCollectionView)]];
-    
+
+    // 菊花控件
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
 
 #pragma mark - Load Data
-
+// 加载数据
 - (void) loadData {
-    
+    // 参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
     [params setValue:scriptIDString forKey:@"playId"];
     
+    // 请求
     [LLAHttpUtil httpPostWithUrl:@"/play/getPlayDetails" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:YES];
@@ -154,6 +158,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     
 }
 
+// 加载更多数据
 - (void) loadMoreData {
     
 }
@@ -161,17 +166,21 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
     return 2;
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    // 第一组显示剧本详情，第二组显示挑选演员
     if (section == mainInfoSectionIndex) {
+        // 获取数据有值时才返回1
         if (scriptInfo){
             return 1;
         }else {
             return 0;
         }
     }else if (section == chooseActorInfoSectionIndex) {
+        // 返回报名演员个数
         return scriptInfo.partakeUsersArray.count;
     }else {
         return 0;
@@ -179,12 +188,13 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // 第一组显示基本详情，第二组显示报名演员
     if (indexPath.section == mainInfoSectionIndex) {
         
         LLAScriptDetailMainInfoCell *mainCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:scriptInfoCellIden forIndexPath:indexPath];
         mainCell.delegate = self;
         
+        // 设置数据
         [mainCell updateCellWithInfo:scriptInfo maxWidth:collectionView.frame.size.width];
         return mainCell;
         
@@ -192,6 +202,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
         LLAChooseActorCell *actorCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:chooseActorCellIden forIndexPath:indexPath];
         actorCell.delegate = self;
         
+        // 设置数据
         [actorCell updateCellWithUserInfo:scriptInfo.partakeUsersArray[indexPath.row]];
         return actorCell;
     }
@@ -200,7 +211,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 - (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     //header footer
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        
+        // 报名演员的header
         LLAScriptChooseActorHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:chooseActorHeaderIden forIndexPath:indexPath];
         return header;
         
@@ -214,7 +225,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // 选演员
     if (indexPath.section == chooseActorInfoSectionIndex) {
         //select,or,deselect
         
@@ -240,7 +251,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 #pragma mark - UICollectionViewFlowLayout
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // 通过判断来确定剧本详情cell和挑选演员cell的尺寸
     if (mainInfoSectionIndex == indexPath.section) {
         
         return CGSizeMake(collectionView.frame.size.width, [LLAScriptDetailMainInfoCell calculateHeightWithInfo:scriptInfo maxWidth:collectionView.frame.size.width]);
@@ -256,9 +267,11 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 }
 
 - (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if (section == mainInfoSectionIndex) {
+    
+    if (section == mainInfoSectionIndex) { // 剧本详情cell
+        // 组间隙0
         return UIEdgeInsetsZero;
-    }else {
+    }else { // 挑选演员cell
         return UIEdgeInsetsMake(0, chooseActorCellsHorSpace,6, chooseActorCellsHorSpace);
     }
 }
@@ -277,11 +290,12 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 }
 
 #pragma mark - LLAScriptDetailMainInfoCellDelegate
-
+// 选中导演头像
 - (void) directorHeadViewClicked:(LLAUserHeadView *) headView userInfo:(LLAUser *) userInfo scriptInfo:(LLAScriptHallItemInfo *)scriptInfo {
     //go to user profile
 }
 
+// 点击更多信息后收起或者展开基本详情
 - (void) flexOrShrinkScriptContentWithScriptInfo:(LLAScriptHallItemInfo *) cellScriptInfo {
     //
     cellScriptInfo.isStretched = !cellScriptInfo.isStretched;
@@ -289,8 +303,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     [dataCollectionView reloadData];
 }
 
+// 不同状态下的剧本
 - (void) manageScriptWithScriptInfo:(LLAScriptHallItemInfo *) cellScriptInfo {
-    //
+    // 剧本状态信息
     switch (scriptInfo.status) {
         case LLAScriptStatus_Normal:
         {
@@ -391,14 +406,14 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 }
 
 #pragma mark - LLAChooseActorCellDelegate
-
+// 点击演员头像后查看详细信息
 - (void) viewUserDetailWithUserInfo:(LLAUser *)userInfo  {
     //go to user profile
     
 }
 
 #pragma mark - Private Method
-
+// 申请演剧本
 - (void) signUpTheScript {
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -409,7 +424,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     [LLAHttpUtil httpPostWithUrl:@"/play/applyPlay" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
-        //sign up success,join me to the sign up array
+        //sign up success,join me to the sign up array，申请成功就显示在演员列表中
         
         LLAUser *user = [LLAUser me];
         
@@ -435,6 +450,7 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     
 }
 
+// 选择的演员
 - (LLAUser *) selectedUserInfoScriptInfo {
     
     for (LLAUser *user in scriptInfo.partakeUsersArray) {

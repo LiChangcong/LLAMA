@@ -13,7 +13,6 @@
 #import "LLABaseNavigationController.h"
 #import "TMTabBarController.h"
 
-
 @interface LLADelegate()
 
 @end
@@ -25,20 +24,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // 创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-
     
-    
-
+    // 显示窗口
     [self.window makeKeyAndVisible];
     
-    //
+    // 三方SDK
     [self setupThirdSDK];
     
-    //
+    // 3DTouch
     [self setupShortCutsItems];
     
-
     //
     if ([LLAUser me].isLogin) {
     

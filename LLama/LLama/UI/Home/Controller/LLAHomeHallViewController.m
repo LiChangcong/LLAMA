@@ -43,34 +43,39 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    // 设置导航栏
     [self initNaviItems];
+    
+    // 设置内部子控件
     [self initSubViews];
     
+    // 显示菊花
     [HUD show:YES];
+    
+    // 刷新数据
     [self loadData];
-    //
+    
 }
 
 #pragma mark - Init
-
+// 设置导航栏
 - (void) initNaviItems {
     self.navigationItem.title = @"大厅";
 }
 
+// 设置内部子控件
 - (void) initSubViews {
     
+    // tableView
     dataTableView = [[LLATableView alloc] init];
     dataTableView.translatesAutoresizingMaskIntoConstraints = NO;
     dataTableView.dataSource = self;
     dataTableView.delegate = self;
     dataTableView.showsVerticalScrollIndicator = NO;
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     [self.view addSubview:dataTableView];
     
-    //constraints
-    
+    // 添加约束
     [self.view addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|-(0)-[dataTableView]-(0)-|"
@@ -85,19 +90,22 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
     
+    // 菊花控件
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
 #pragma mark - Load Data
 
+// 刷新数据
 - (void) loadData {
     
+    // 参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
     [params setValue:@(0) forKey:@"pageNumber"];
     [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
     
+    // 发送请求
     [LLAHttpUtil httpPostWithUrl:@"/play/getFinishedPlayList" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
@@ -120,6 +128,7 @@
     }];
 }
 
+// 加载更多的数据
 - (void) loadMoreData {
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -164,7 +173,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
-    
+    // 行数
     return mainInfo.dataList.count;
     
 }
@@ -179,6 +188,7 @@
         cell.delegate = self;
     }
     
+    // 设置每个cell的数据
     [cell updateCellWithVideoInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
     
     return cell;
@@ -188,7 +198,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // 返回每行高度
     return [LLAHallVideoInfoCell calculateHeightWithVideoInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
 }
 
@@ -200,6 +210,7 @@
     
 }
 
+//
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[cell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
         
@@ -217,7 +228,7 @@
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)] && tempCell != cell) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            
+            // 停止视频
             [tc.videoPlayerView stopVideo];
         }
     }

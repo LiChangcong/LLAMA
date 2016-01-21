@@ -17,73 +17,80 @@
 
 static const CGFloat scriptLabelFontSize = 14;
 
-//
-
+// 背景到底部距离
 static const CGFloat backViewToBottom = 12;
 
-static const CGFloat headViewToTop = 26;
-static const CGFloat headViewHeightWidth = 42;
-static const CGFloat headViewToLeft = 21;
-static const CGFloat headViewToNameLabelHorSpace = 12;
+// 头像
+static const CGFloat headViewToTop = 26; // 距离顶部
+static const CGFloat headViewHeightWidth = 42; // 宽高
+static const CGFloat headViewToLeft = 21; // 距离左边
+static const CGFloat headViewToNameLabelHorSpace = 12; // 距离用户名间隙
 
-static const CGFloat rewardViewToTop = 13;
-static const CGFloat rewardViewToRight = 14;
+// 片酬
+static const CGFloat rewardViewToTop = 13; // 距离顶部
+static const CGFloat rewardViewToRight = 14; // 距离右边
 
-static const CGFloat headViewToSepLineVerSpace = 12;
+// 分隔线
+static const CGFloat headViewToSepLineVerSpace = 12; // 距离头像
+static const CGFloat sepLineHeight = 0.5; // 高度
+static const CGFloat sepLineToLeft = 14; // 距离左边
+static const CGFloat sepLineToRight = 14; // 距离右边
+static const CGFloat sepLineToImageViewVerSpace = 8; // 距离剧本内容图片
 
-static const CGFloat sepLineHeight = 0.5;
-static const CGFloat sepLineToLeft = 14;
-static const CGFloat sepLineToRight = 14;
-static const CGFloat sepLineToImageViewVerSpace = 8;
+// 剧本图片内容
+static const CGFloat scriptImageViewHeightWidth = 84; // 宽高
+static const CGFloat scriptImageViewToLeft = 14; // 距离左边
+static const CGFloat scriptImageViewToScriptLabelHorSpace = 8; // 距离剧本内容文字
 
-static const CGFloat scriptImageViewHeightWidth = 84;
-static const CGFloat scriptImageViewToLeft = 14;
-static const CGFloat scriptImageViewToScriptLabelHorSpace = 8;
-static const CGFloat scriptLabelToRight = 18;
-static const CGFloat scriptLabelToLeftWithoutImage = 18;
+// 剧本文字内容
+static const CGFloat scriptLabelToRight = 18; // 距离左边
+static const CGFloat scriptLabelToLeftWithoutImage = 18; //距离左边距离（没有剧本图片的情况）
 
-static const CGFloat scriptImageViewToPartakeNumberVerSpace = 8;
-static const CGFloat partakeNumberToRight = 18;
-static const CGFloat partakeNumbersToBottom = 17;
-static const CGFloat partakeNumbersHeight = 14.5;
+// 参与人数
+static const CGFloat scriptImageViewToPartakeNumberVerSpace = 8; // 距离剧本图片内容间隙
+static const CGFloat partakeNumberToRight = 18; // 距离屏幕右边
+static const CGFloat partakeNumbersToBottom = 17; // 距离cell底部
+static const CGFloat partakeNumbersHeight = 14.5; // 高度
 
 
 @interface LLAScriptHallInfoCell()<LLAUserHeadViewDelegate>
 {
+    // cell背景
     UIView *backView;
     
+    // 用户
     LLAUserHeadView *headView;
     UILabel *userNameLabel;
     UILabel *publishTimeLabel;
     
+    // 片酬
     LLARewardMoneyView *rewardView;
     
+    // 分割线
     UIView *seperatorLineView;
     
+    // 剧本内容
     UIImageView *scriptImageView;
     UILabel *scriptContentLabel;
     
+    // 参与人数
     UILabel *scriptTotalPartakeUserNumberLabel;
     
-    //
+    // 颜色
     UIColor *contentViewBKColor;
-    
     UIColor *backViewBKColor;
-    
-    UIFont *userNameLabelFont;
     UIColor *userNameLabelTextColor;
-    
-    UIFont *publishTimeLabelFont;
     UIColor *publishTimeLabelTextColor;
-    
     UIColor *sepLineColor;
-    
-    UIFont *scriptTotalPartakeUserNumberLabelFont;
     UIColor *scriptTotalPartakeUserNumberLabelTextColor;
+
+    // 字体
+    UIFont *userNameLabelFont;
+    UIFont *publishTimeLabelFont;
+    UIFont *scriptTotalPartakeUserNumberLabelFont;
     
     //
     NSLayoutConstraint *scriptLabelToLeftConstraints;
-    
     LLAScriptHallItemInfo *currentScriptInfo;
     
 }
@@ -102,8 +109,11 @@ static const CGFloat partakeNumbersHeight = 14.5;
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubViews];
+        // 设置约束
         [self initSubConstraints];
         
         self.contentView.backgroundColor = contentViewBKColor;
@@ -112,6 +122,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
     return self;
 }
 
+// 设置变量
 - (void) initVariables {
     contentViewBKColor = [UIColor colorWithHex:0xf1f1f1];
     
@@ -132,80 +143,77 @@ static const CGFloat partakeNumbersHeight = 14.5;
     
 }
 
+// 设置Cell内部子控件
 - (void) initSubViews {
-    
+    // 背景
     backView = [[UIView alloc] init];
     backView.translatesAutoresizingMaskIntoConstraints = NO;
     backView.backgroundColor = backViewBKColor;
-    
     [self.contentView addSubview:backView];
     
-    //
+    // 头部
     headView = [[LLAUserHeadView alloc] init];
     headView.translatesAutoresizingMaskIntoConstraints = NO;
     headView.delegate = self;
-    
     [backView addSubview:headView];
     
+    // 用户名
     userNameLabel = [[UILabel alloc] init];
     userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     userNameLabel.textAlignment = NSTextAlignmentLeft;
     userNameLabel.font = userNameLabelFont;
     userNameLabel.textColor = userNameLabelTextColor;
-    
     [backView addSubview:userNameLabel];
     
+    // 发布时间
     publishTimeLabel = [[UILabel alloc] init];
     publishTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     publishTimeLabel.textAlignment = NSTextAlignmentLeft;
     publishTimeLabel.font = publishTimeLabelFont;
     publishTimeLabel.textColor = publishTimeLabelTextColor;
-    
     [backView addSubview:publishTimeLabel];
     
+    // 片酬
     rewardView = [[LLARewardMoneyView alloc] init];
     rewardView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [backView addSubview:rewardView];
     
-    //
+    // 分割线
     seperatorLineView = [[UIView alloc] init];
     seperatorLineView.translatesAutoresizingMaskIntoConstraints = NO;
     seperatorLineView.backgroundColor = sepLineColor;
-    
     [backView addSubview:seperatorLineView];
     
+    // 剧本图片内容
     scriptImageView = [[UIImageView alloc] init];
     scriptImageView.translatesAutoresizingMaskIntoConstraints = NO;
     scriptImageView.contentMode = UIViewContentModeScaleAspectFill;
     scriptImageView.clipsToBounds = YES;
-    
     [backView addSubview:scriptImageView];
     
+    // 剧本文字内容
     scriptContentLabel = [[UILabel alloc] init];
     scriptContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     scriptContentLabel.numberOfLines = 0;
     scriptContentLabel.textAlignment = NSTextAlignmentLeft;
     scriptContentLabel.contentMode = UIViewContentModeTop;
-    
     [backView addSubview:scriptContentLabel];
     
+    // 参与人数
     scriptTotalPartakeUserNumberLabel = [[UILabel alloc] init];
     scriptTotalPartakeUserNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
     scriptTotalPartakeUserNumberLabel.textAlignment = NSTextAlignmentRight;
     scriptTotalPartakeUserNumberLabel.font = scriptTotalPartakeUserNumberLabelFont;
     scriptTotalPartakeUserNumberLabel.textColor = scriptTotalPartakeUserNumberLabelTextColor;
-    
     [backView addSubview:scriptTotalPartakeUserNumberLabel];
     
     
 }
 
+// 设置约束
 - (void) initSubConstraints {
     
-    //backView
-    
+    //***************************backView***************************
     [self.contentView addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|-(0)-[backView]-(toBottom@999)-|"
@@ -221,11 +229,11 @@ static const CGFloat partakeNumbersHeight = 14.5;
       metrics:nil
       views:NSDictionaryOfVariableBindings(backView)]];
     
-    //sub view on backView
+    //***************************sub view on backView***************************
     
     NSMutableArray *constrArray = [NSMutableArray array];
     
-    //vertical
+    //************vertical************
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -282,7 +290,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
                @(scriptImageViewHeightWidth),@"height", nil]
       views:NSDictionaryOfVariableBindings(seperatorLineView,scriptImageView)]];
     
-    //horizonal
+    //************horizonal************
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -374,17 +382,23 @@ static const CGFloat partakeNumbersHeight = 14.5;
 }
 
 #pragma mark - Update
-
+/**
+ *  设置剧本cell的数据
+ *
+ *  @param scriptInfo 对应每行的模型
+ *  @param tableWidth tableView的宽度
+ */
 - (void) updateCellWithScriptInfo:(LLAScriptHallItemInfo *)scriptInfo tableWidth:(CGFloat)tableWidth {
     
     currentScriptInfo = scriptInfo;
     
+    // 头像/时间/用户名/片酬
     [headView updateHeadViewWithUser:currentScriptInfo.directorInfo];
     publishTimeLabel.text = currentScriptInfo.publisthTimeString;
     userNameLabel.text = currentScriptInfo.directorInfo.userName;
-    
     [rewardView updateViewWithRewardMoney:currentScriptInfo.rewardMoney];
     
+    // 有无图片的情况下更改剧本文字内容的约束
     if (currentScriptInfo.scriptImageURL) {
         scriptImageView.hidden = NO;
         
@@ -399,16 +413,22 @@ static const CGFloat partakeNumbersHeight = 14.5;
     
     scriptContentLabel.attributedText = [[self class] generateScriptAttriuteStingWith:currentScriptInfo];
     
+    // 参与人数
     NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
                                             [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.signupUserNumbers]];
     [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.signupUserNumbers].length)];
-    
     scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
     
 }
 
 #pragma mark - Calculate Cell Height
-
+/**
+ *  剧本内容文字处理
+ *
+ *  @param scriptInfo 对应每行的模型
+ *
+ *  @return 带属性的文字
+ */
 + (NSAttributedString *) generateScriptAttriuteStingWith:(LLAScriptHallItemInfo*) scriptInfo {
     
     NSString *scriptString = [scriptInfo.scriptContent copy];
@@ -427,7 +447,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
     return attr;
     
 }
-
+// 计算剧本文字内容占据的尺寸
 + (CGSize) scriptStringSizeWithVideoInfo:(LLAScriptHallItemInfo *)scriptInfo tableWidth:(CGFloat) tableWidth {
     
     NSAttributedString *attr = [[self class] generateScriptAttriuteStingWith:scriptInfo];
@@ -445,8 +465,14 @@ static const CGFloat partakeNumbersHeight = 14.5;
     return textSize;
 }
 
-
-
+/**
+ *  计算cell高度
+ *
+ *  @param scriptInfo 对应每行的模型
+ *  @param tableWidth tableView的宽度
+ *
+ *  @return cell的高度
+ */
 + (CGFloat) calculateHeightWithScriptInfo:(LLAScriptHallItemInfo *)scriptInfo tableWidth:(CGFloat)tableWidth {
     
     CGFloat height = 0;
@@ -456,6 +482,7 @@ static const CGFloat partakeNumbersHeight = 14.5;
     height += headViewToSepLineVerSpace;
     height += sepLineHeight;
     height += sepLineToImageViewVerSpace;
+    // 有图片就加上图片高度，否则只用加上文字高度
     if (scriptInfo.scriptImageURL) {
         height += scriptImageViewHeightWidth;
     }else {

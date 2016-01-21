@@ -15,8 +15,10 @@ static NSString *const titleLabelTextString = @"已报名演员";
 
 @interface LLAScriptChooseActorHeader()
 {
+    // 标题
     UILabel *titleLabel;
     
+    // 字体颜色
     UIFont *titleLabelFont;
     UIColor *titleLabelTextColor;
 }
@@ -30,20 +32,24 @@ static NSString *const titleLabelTextString = @"已报名演员";
         
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor colorWithHex:0xeaeaea];
-        
+        // 设置变量
         [self initVariables];
+        // 设置子控件与约束
         [self initSubViews];
     }
     return self;
 }
 
+// 设置变量
 - (void) initVariables {
     titleLabelFont = [UIFont llaFontOfSize:14];
     titleLabelTextColor = [UIColor colorWithHex:0x11111e];
 }
 
+// 设置子控件与约束
 - (void) initSubViews {
     
+    // 标题
     titleLabel = [[UILabel alloc] init];
     titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     titleLabel.font = titleLabelFont;
@@ -52,10 +58,8 @@ static NSString *const titleLabelTextString = @"已报名演员";
     titleLabel.text = titleLabelTextString;
     [self addSubview:titleLabel];
     
-    //constraints
+    // 约束
     NSMutableArray *constrArray = [NSMutableArray array];
-    
-    //vertical
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
