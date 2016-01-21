@@ -16,6 +16,7 @@
 #import "LLAUser.h"
 #import "LLAHallVideoItemInfo.h"
 
+// 普通/高亮图片
 static NSString *const loveVideoImageName_Normal = @"support";
 static NSString *const loveVideoImageName_Highlight = @"supportH";
 
@@ -27,20 +28,22 @@ static NSString *const shareVideoButtonImageName_Highlight = @"shareH";
 
 static NSString *const praiseNumberImageName = @"";
 
-//
-
+// 头像
 static const CGFloat headViewToTop = 5.3;
 static const CGFloat headViewToBorder = 30;
 static const CGFloat headViewHeightWidth = 32;
 static const CGFloat headViewToNameVerSpace = 2;
 
+// 导演/演员
 static const CGFloat directorLabelToLeft = 9;
 static const CGFloat directorLabelToNameHorSpace = 1;
 static const CGFloat roleLabelWidth = 27;
 static const CGFloat nameLabelHeight = 14;
 
+// 播放器
 static const CGFloat playerViewToTop = 62;
 
+// function按钮
 static const CGFloat functionButtonsHeight = 56;
 static const CGFloat functionButtonsWidth = 60;
 
@@ -69,71 +72,74 @@ static const CGFloat scriptLabelFontSize = 13;
 
 @interface LLAHallVideoInfoCell()<LLAUserHeadViewDelegate,LLAVideoCommentContentViewDelegate>
 {
+    // 导演
     LLAUserHeadView *directorHeadView;
     UILabel *directorLabel;
     UILabel *directorNameLabel;
     
+    // 演员
     LLAUserHeadView *actorHeadView;
     UILabel *actorLabel;
     UILabel *actorNameLabel;
     
+    // 片酬
     LLARewardMoneyView *rewardView;
     
+    // 视频封面
     UIImageView *videoCoverImageView;
-    
+
+    // 点赞/评论/分享按钮
     UIButton *loveVideoButton;
     UIButton *commentVideoButton;
     UIButton *shareButton;
     
+    // 发布时间
     UILabel *publishTimeLabel;
     
+    // 分隔线
     UIView *seperatorLine;
     
+    // 点赞数
     UIButton *praiseNumbersButton;
     
+    // 剧本
     UILabel *scriptLabel;
     
+    // 评论总数
     UILabel *totalCommentLabel;
     
+    //
     LLAVideoCommentContentView *commentsView;
     
+    // 分割线
     UIView *bottomSepLine;
     
     //font and color
-    
+    // 颜色
     UIColor *roleBackColor;
-    
-    UIFont *directorLabelFont;
     UIColor *directorLabelTextColor;
-    
-    UIFont *actorLabelFont;
     UIColor *actorLabelTextColor;
-    
-    UIFont *directorNameLabelFont;
     UIColor *directorNameLabelTextColor;
-    
-    UIFont *actorNameLabelFont;
     UIColor *actorNameLabelTextColor;
-    
-    UIFont *publishTimeLabelFont;
     UIColor *publishTimeLabelTextColor;
-    
     UIColor *seperatorLineColor;
-    
-    UIFont *praiseNumberButtonFont;
     UIColor *praiseNumberButtonTextColor;
-    
-    UIFont *scriptLabelFont;
     UIColor *scriptLabelTextColor;
-    
-    UIFont *totalCommentLabelFont;
     UIColor *totalCommentLabelTextColor;
-    
     UIColor *bottomSepLineColor;
+    
+    // 字体
+    UIFont *directorLabelFont;
+    UIFont *actorLabelFont;
+    UIFont *directorNameLabelFont;
+    UIFont *actorNameLabelFont;
+    UIFont *publishTimeLabelFont;
+    UIFont *praiseNumberButtonFont;
+    UIFont *scriptLabelFont;
+    UIFont *totalCommentLabelFont;
     
     //
     LLAHallVideoItemInfo *currentVideoInfo;
-    
     //
     NSLayoutConstraint *commentContentViewHeightConstraints;
     
@@ -158,60 +164,57 @@ static const CGFloat scriptLabelFontSize = 13;
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubViews];
+        // 设置子控件约束
         [self initSubConstraints];
         
     }
     return self;
 }
 
+// 设置变量
 - (void) initVariables {
     
+    // 颜色
     roleBackColor = [UIColor themeColor];
-    
-    directorLabelFont = [UIFont llaFontOfSize:12];
     directorLabelTextColor = [UIColor colorWithHex:0x11111e];
-    
-    actorLabelFont = [UIFont llaFontOfSize:12];
     actorLabelTextColor =[UIColor colorWithHex:0x11111e];
-    
-    directorNameLabelFont = [UIFont llaFontOfSize:12];
     directorNameLabelTextColor = [UIColor colorWithHex:0x11111e];
-    
-    actorNameLabelFont = [UIFont llaFontOfSize:12];
     actorNameLabelTextColor = [UIColor colorWithHex:0x11111e];
-    
-    publishTimeLabelFont = [UIFont llaFontOfSize:12];
     publishTimeLabelTextColor = [UIColor colorWithHex:0x959595];
-    
     seperatorLineColor = [UIColor colorWithHex:0x959595];
-    
-    praiseNumberButtonFont = [UIFont llaFontOfSize:12.5];
     praiseNumberButtonTextColor = [UIColor colorWithHex:0xffc409];
-    
-    scriptLabelFont = [UIFont llaFontOfSize:scriptLabelFontSize];
     scriptLabelTextColor = [UIColor colorWithHex:0x11111e];
-    
-    totalCommentLabelFont = [UIFont llaFontOfSize:12.5];
     totalCommentLabelTextColor = [UIColor colorWithHex:0x959595];
-    
     bottomSepLineColor = [UIColor colorWithHex:0xededed];
+    
+    // 字体
+    directorLabelFont = [UIFont llaFontOfSize:12];
+    actorLabelFont = [UIFont llaFontOfSize:12];
+    directorNameLabelFont = [UIFont llaFontOfSize:12];
+    actorNameLabelFont = [UIFont llaFontOfSize:12];
+    publishTimeLabelFont = [UIFont llaFontOfSize:12];
+    praiseNumberButtonFont = [UIFont llaFontOfSize:12.5];
+    scriptLabelFont = [UIFont llaFontOfSize:scriptLabelFontSize];
+    totalCommentLabelFont = [UIFont llaFontOfSize:12.5];
 
 }
 
+// 设置子控件
 - (void) initSubViews {
     
+    // 片酬
     rewardView = [[LLARewardMoneyView alloc] init];
     rewardView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [self.contentView addSubview:rewardView];
     
-    //
+    // 导演
     directorHeadView  = [[LLAUserHeadView alloc] init];
     directorHeadView.translatesAutoresizingMaskIntoConstraints = NO;
     directorHeadView.delegate = self;
-    
     [self.contentView addSubview:directorHeadView];
     
     directorLabel = [[UILabel alloc] init];
@@ -223,7 +226,6 @@ static const CGFloat scriptLabelFontSize = 13;
     directorLabel.clipsToBounds = YES;
     directorLabel.layer.cornerRadius = 3;
     directorLabel.text = @"导演";
-    
     [self.contentView addSubview:directorLabel];
     
     directorNameLabel = [UILabel new];
@@ -231,14 +233,12 @@ static const CGFloat scriptLabelFontSize = 13;
     directorNameLabel.font = directorNameLabelFont;
     directorNameLabel.textColor = directorNameLabelTextColor;
     directorNameLabel.textAlignment = NSTextAlignmentLeft;
-    
     [self.contentView addSubview:directorNameLabel];
     
-    //
+    // 演员
     actorHeadView = [[LLAUserHeadView alloc] init];
     actorHeadView.translatesAutoresizingMaskIntoConstraints = NO;
     actorHeadView.delegate = self;
-    
     [self.contentView addSubview:actorHeadView];
     
     actorLabel = [UILabel new];
@@ -250,7 +250,6 @@ static const CGFloat scriptLabelFontSize = 13;
     actorLabel.clipsToBounds = YES;
     actorLabel.layer.cornerRadius = 3;
     actorLabel.text = @"演员";
-    
     [self.contentView addSubview:actorLabel];
     
     actorNameLabel = [UILabel new];
@@ -258,115 +257,102 @@ static const CGFloat scriptLabelFontSize = 13;
     actorNameLabel.font = actorNameLabelFont;
     actorNameLabel.textColor = actorNameLabelTextColor;
     actorNameLabel.textAlignment = NSTextAlignmentLeft;
-    
     [self.contentView addSubview:actorNameLabel];
     
-    //
+    // 视频封面
     videoCoverImageView = [[UIImageView alloc] init];
     videoCoverImageView.translatesAutoresizingMaskIntoConstraints = NO;
     videoCoverImageView.contentMode = UIViewContentModeScaleAspectFill;
-    
     [self.contentView addSubview:videoCoverImageView];
     
-    //
+    // 视频播放器
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     videoPlayerView.hidden = YES;
     [self.contentView addSubview:videoPlayerView];
     
-    //
+    // 点赞按钮
     loveVideoButton = [[UIButton alloc] init];
     loveVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [loveVideoButton setImage:[UIImage llaImageWithName:loveVideoImageName_Normal] forState:UIControlStateNormal];
     [loveVideoButton setImage:[UIImage llaImageWithName:loveVideoImageName_Highlight] forState:UIControlStateHighlighted];
     [loveVideoButton setImage:[UIImage llaImageWithName:loveVideoImageName_Highlight] forState:UIControlStateSelected];
-    
     [loveVideoButton addTarget:self action:@selector(loveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.contentView addSubview:loveVideoButton];
-    //
+
+    // 评论按钮
     commentVideoButton = [[UIButton alloc] init];
     commentVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [commentVideoButton setImage:[UIImage llaImageWithName:commentVideoImageName_Normal] forState:UIControlStateNormal];
     [commentVideoButton setImage:[UIImage llaImageWithName:commentVideoImageName_Highlight] forState:UIControlStateHighlighted];
-    
     [commentVideoButton addTarget:self action:@selector(commentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:commentVideoButton];
     
-    //
+    // 分享按钮
     shareButton = [[UIButton alloc] init];
     shareButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [shareButton setImage:[UIImage llaImageWithName:shareVideoButtonImageName_Normal] forState:UIControlStateNormal];
     [shareButton setImage:[UIImage llaImageWithName:shareVideoButtonImageName_Highlight] forState:UIControlStateHighlighted];
     [shareButton addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.contentView addSubview:shareButton];
     
+    // 发布时间
     publishTimeLabel = [[UILabel alloc] init];
     publishTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     publishTimeLabel.font = publishTimeLabelFont;
     publishTimeLabel.textColor = publishTimeLabelTextColor;
     publishTimeLabel.textAlignment = NSTextAlignmentRight;
-    
     [self.contentView addSubview:publishTimeLabel];
     
-    //
+    // 分割线
     seperatorLine = [[UIView alloc] init];
     seperatorLine.translatesAutoresizingMaskIntoConstraints = NO;
     seperatorLine.backgroundColor = seperatorLineColor;
-    
     [self.contentView addSubview:seperatorLine];
     
-    //
+    // 点赞数
     praiseNumbersButton = [[UIButton alloc] init];
     praiseNumbersButton.translatesAutoresizingMaskIntoConstraints = NO;
     praiseNumbersButton.userInteractionEnabled = NO;
-    
     [praiseNumbersButton setImage:[UIImage llaImageWithName:praiseNumberImageName] forState:UIControlStateNormal];
     [praiseNumbersButton setTitleColor:praiseNumberButtonTextColor forState:UIControlStateNormal];
-    
     praiseNumbersButton.titleLabel.font = praiseNumberButtonFont;
-    
     [self.contentView addSubview:praiseNumbersButton];
     
     
-    //script Label
+    // 剧本
     scriptLabel = [[UILabel alloc] init];
     scriptLabel.translatesAutoresizingMaskIntoConstraints = NO;
     scriptLabel.font = scriptLabelFont;
     scriptLabel.textColor = scriptLabelTextColor;
     scriptLabel.numberOfLines = 0;
-    
     [self.contentView addSubview:scriptLabel];
     
+    // 评论总数
     totalCommentLabel = [[UILabel alloc] init];
     totalCommentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     totalCommentLabel.font = totalCommentLabelFont;
     totalCommentLabel.textColor = totalCommentLabelTextColor;
     totalCommentLabel.textAlignment = NSTextAlignmentLeft;
-    
     [self.contentView addSubview:totalCommentLabel];
-    //sub replys
     
+    // 评论
     commentsView = [[LLAVideoCommentContentView alloc] init];
     commentsView.translatesAutoresizingMaskIntoConstraints = NO;
     commentsView.backgroundColor = self.backgroundColor;
     commentsView.delegate = self;
     commentsView.clipsToBounds = YES;
-    
     [self.contentView addSubview:commentsView];
     
+    // 分隔线
     bottomSepLine = [[UIView alloc] init];
     bottomSepLine.translatesAutoresizingMaskIntoConstraints = NO;
     bottomSepLine.backgroundColor = bottomSepLineColor;
-    
     [self.contentView addSubview:bottomSepLine];
     
 }
 
+// 设置子控件约束
 - (void) initSubConstraints {
     
     NSMutableArray *constrArr = [NSMutableArray array];
@@ -662,13 +648,13 @@ static const CGFloat scriptLabelFontSize = 13;
 }
 
 #pragma mark - UserHeadViewDelegate
-
+// 点击头像
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
     
 }
 
 #pragma mark - ButtonClicked
-
+// 点击点赞按钮
 - (void)loveButtonClicked:(UIButton *)sender {
     
     if (delegate && [delegate respondsToSelector:@selector(loveVideoWithVideoItemInfo:loveButton:)]) {
@@ -676,14 +662,14 @@ static const CGFloat scriptLabelFontSize = 13;
     }
     
 }
-
+// 点击评论按钮
 - (void) commentButtonClicked:(UIButton *)sender {
     if (delegate && [delegate respondsToSelector:@selector(commentVideoWithVideoItemInfo:)]) {
         [delegate commentVideoWithVideoItemInfo:currentVideoInfo];
     }
 
 }
-
+// 点击分享按钮
 - (void) shareButtonClicked:(UIButton *) sender {
     if (delegate && [delegate respondsToSelector:@selector(shareVideoWithVideoItemInfo:)]) {
         [delegate shareVideoWithVideoItemInfo:currentVideoInfo];
@@ -691,7 +677,7 @@ static const CGFloat scriptLabelFontSize = 13;
 }
 
 #pragma mark - LLAVideoCommentContentViewDelegate
-
+// 点击用户名
 - (void) commentViewUserNameClickedWithUserInfo:(LLAUser *)userInfo commentInfo:(LLAHallVideoCommentItem *)commentInfo {
     if (delegate && [delegate respondsToSelector:@selector(chooseUserFromComment:userInfo:videoInfo:)]) {
         [delegate chooseUserFromComment:commentInfo userInfo:userInfo videoInfo:currentVideoInfo];
@@ -705,7 +691,7 @@ static const CGFloat scriptLabelFontSize = 13;
 }
 
 #pragma mark - Update
-
+// 设置数据
 - (void) updateCellWithVideoInfo:(LLAHallVideoItemInfo *)videoInfo tableWidth:(CGFloat)tableWidth {
     
     currentVideoInfo = videoInfo;
@@ -758,7 +744,7 @@ static const CGFloat scriptLabelFontSize = 13;
 }
 
 #pragma mark - Calculate Height
-
+// 返回属性文字
 + (NSAttributedString *) generateScriptAttriuteStingWith:(LLAHallVideoItemInfo *) videoInfo {
     
     NSString *scriptString = [videoInfo.scriptContent copy];
@@ -778,6 +764,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
 }
 
+// 返回文字尺寸
 + (CGSize) scriptStringSizeWithVideoInfo:(LLAHallVideoItemInfo *)videoInfo tableWidth:(CGFloat) tableWidth {
     
     NSAttributedString *attr = [[self class] generateScriptAttriuteStingWith:videoInfo];
@@ -787,6 +774,7 @@ static const CGFloat scriptLabelFontSize = 13;
     return [attr boundingRectWithSize:CGSizeMake(maxWidth, MAXFLOAT)  options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil].size;
 }
 
+// 返回cell高度
 + (CGFloat) calculateHeightWithVideoInfo:(LLAHallVideoItemInfo *)videoInfo tableWidth:(CGFloat)tableWith {
     
     CGFloat height = 0;

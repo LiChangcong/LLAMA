@@ -29,8 +29,9 @@ static const CGFloat commentToRight = 0;
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubView];
         
         self.userInteractionEnabled = YES;
@@ -38,17 +39,18 @@ static const CGFloat commentToRight = 0;
     }
     return self;
 }
-
+// 设置变量
 - (void) initVariables {
     
 }
 
+// 设置子控件
 - (void) initSubView {
     
 }
 
 #pragma mark - Update
-
+// 设置数据
 - (void) updateCommentContentViewWithInfo:(NSArray<LLAHallVideoCommentItem *> *)comments maxWidth:(CGFloat)maxWidth {
     
     //remove
@@ -91,7 +93,7 @@ static const CGFloat commentToRight = 0;
 }
 
 #pragma mark - CalculateHeight
-
+// 计算高度
 + (CGFloat) calculateHeightWithCommentsInfo:(NSArray<LLAHallVideoCommentItem *> *)comments maxWidth:(CGFloat)maxWidth {
     
     CGFloat width = MAX(maxWidth - commentToLeft - commentToRight,0);

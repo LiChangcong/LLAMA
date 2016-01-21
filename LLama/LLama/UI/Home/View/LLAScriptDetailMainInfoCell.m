@@ -19,99 +19,102 @@
 
 static const CGFloat scriptLabelFontSize = 14;
 
-//
-
+// 头像
 static const CGFloat headViewToTop = 17;
 static const CGFloat headViewHeightWidth = 42;
 static const CGFloat headViewToLeft = 23;
 static const CGFloat headViewToNameLabelHorSpace = 12;
+
+
+// 发布时间
 static const CGFloat publishTimeToPrivateHorSpace = 2;
 
+// 片酬
 static const CGFloat rewardViewToTop = 5;
 static const CGFloat rewardViewToRight = 12;
 
+// 分隔线
 static const CGFloat headViewToSepLineVerSpace = 13;
-
 static const CGFloat sepLineHeight = 0.6;
 static const CGFloat sepLineToLeft = 14;
 static const CGFloat sepLineToRight = 14;
 static const CGFloat sepLineToScriptLabelVerSpace = 10;
 
+// 更多按钮
 static const CGFloat scriptLabelToFlexButtonVerSpace = 4;
-static const CGFloat flexButtonHeight = 16;
+static const CGFloat flexButtonHeight = 16; //
 static const CGFloat flexButtonToImageVerSpace = 4;
 static const CGFloat flexButtonToRight = 29;
+
+// 剧本图片和文字内容
 static const CGFloat scriptImageToScriptLineVerSpace = 4;
 static const CGFloat scriptLabelToRight = 18;
 static const CGFloat scriptLabelToLeft = 18;
 
-static const CGFloat partakeNumberToLeft = 24;
+// 底部整体（报名人数/功能按钮）
 static const CGFloat bottomHeight = 54;
 static const CGFloat functionButtonHeight = 44;
 static const CGFloat functionButtonToRight = 14;
+static const CGFloat partakeNumberToLeft = 24;
 
+// 其他
 static const NSInteger maxNumberLinesWhenShrink = 4;
-
-//
-
 static NSString *const isPrivateImageName = @"secretvideo";
 static NSString *const countingImageName = @"clock";
 
 @interface LLAScriptDetailMainInfoCell()<LLAUserHeadViewDelegate>
 {
+    // 头像/名字/发布时间
     LLAUserHeadView *headView;
     UILabel *userNameLabel;
     UILabel *publishTimeLabel;
     
+    // 片酬
     LLARewardMoneyView *rewardView;
     
+    // 私密视频
     UIButton *isPrivateVideoButton;
     
+    // 分割线
     UIView *seperatorLineView;
     
+    // 剧本内容
     UIImageView *scriptImageView;
     UILabel *scriptContentLabel;
     
+    // 更多按钮
     UIButton *flexContentButton;
     
+    // 分割线
     UIView *scriptSepLine;
     
+    // 报名人数/功能按钮
     UILabel *scriptTotalPartakeUserNumberLabel;
-    
     UIButton *functionButton;
     
-    //
-    UIColor *contentViewBKColor;
-    
-    UIColor *backViewBKColor;
-    
+    // 字体
     UIFont *userNameLabelFont;
-    UIColor *userNameLabelTextColor;
-    
     UIFont *publishTimeLabelFont;
-    UIColor *publishTimeLabelTextColor;
-    
     UIFont *flexButtonFont;
-    UIColor *flexButtonTextColor;
-    
-    UIColor *sepLineColor;
-    
     UIFont *scriptTotalPartakeUserNumberLabelFont;
     UIColor *scriptTotalPartakeUserNumberLabelTextColor;
-    
-    //
     UIFont *functionButtonFont;
     
+    // 颜色
+    UIColor *contentViewBKColor;
+    UIColor *backViewBKColor;
+    UIColor *userNameLabelTextColor;
+    UIColor *publishTimeLabelTextColor;
+    UIColor *flexButtonTextColor;
+    UIColor *sepLineColor;
     UIColor *functionButtonNormalTextColor;
     UIColor *functionButtonHighlightTextColor;
     UIColor *functionButtonDisableTextColor;
-    
     UIColor *functionButtonNormalBKColor;
     UIColor *functionButtonHighlightBKColor;
     UIColor *functionButtonDisableBKColor;
     
-    //NSLayoutConstraints
-    
+    // 约束
     NSLayoutConstraint *scriptImageViewHeightConstraint;
     
     //
@@ -133,11 +136,13 @@ static NSString *const countingImageName = @"clock";
     self = [super initWithFrame:frame];
     if (self) {
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubViews];
+        // 设置子控件约束
         [self initSubConstraints];
-        
+        // 设置背景色
         self.contentView.backgroundColor = backViewBKColor;
         
     }
@@ -145,147 +150,134 @@ static NSString *const countingImageName = @"clock";
     
 }
 
+// 设置变量
 - (void) initVariables {
     
+    // 颜色
     backViewBKColor = [UIColor whiteColor];
-    
-    userNameLabelFont = [UIFont boldLLAFontOfSize:15];
     userNameLabelTextColor = [UIColor colorWithHex:0x11111e];
-    
-    publishTimeLabelFont = [UIFont llaFontOfSize:12];
     publishTimeLabelTextColor = [UIColor colorWithHex:0x959595];
-    
-    flexButtonFont = [UIFont llaFontOfSize:12];
     flexButtonTextColor = [UIColor colorWithHex:0x959595];
-    
     sepLineColor = [UIColor colorWithHex:0xededed];
-    
-    
-    scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:13];
-    
     scriptTotalPartakeUserNumberLabelTextColor = [UIColor colorWithHex:0x959595];
-    
-    functionButtonFont = [UIFont llaFontOfSize:15];
-    
     functionButtonNormalTextColor = [UIColor colorWithHex:0x11111e];
     functionButtonHighlightTextColor = [UIColor colorWithHex:0x11111e];
     functionButtonDisableTextColor = [UIColor colorWithHex:0x11111e];
-    
     functionButtonNormalBKColor = [UIColor themeColor];
     functionButtonHighlightBKColor = [UIColor colorWithHex:0xeaeaea];
     functionButtonDisableBKColor = [UIColor colorWithHex:0xeaeaea];
     
-}
+    // 字体
+    userNameLabelFont = [UIFont boldLLAFontOfSize:15];
+    publishTimeLabelFont = [UIFont llaFontOfSize:12];
+    flexButtonFont = [UIFont llaFontOfSize:12];
+    scriptTotalPartakeUserNumberLabelFont = [UIFont llaFontOfSize:13];
+    functionButtonFont = [UIFont llaFontOfSize:15];
 
+
+}
+// 设置子控件
 - (void) initSubViews {
 
+    // 头像
     headView = [[LLAUserHeadView alloc] init];
     headView.translatesAutoresizingMaskIntoConstraints = NO;
     headView.delegate = self;
-    
     [self.contentView addSubview:headView];
     
+    // 导演名
     userNameLabel = [[UILabel alloc] init];
     userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     userNameLabel.textAlignment = NSTextAlignmentLeft;
     userNameLabel.font = userNameLabelFont;
     userNameLabel.textColor = userNameLabelTextColor;
-    
     [self.contentView addSubview:userNameLabel];
     
+    // 发布时间
     publishTimeLabel = [[UILabel alloc] init];
     publishTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     publishTimeLabel.textAlignment = NSTextAlignmentLeft;
     publishTimeLabel.font = publishTimeLabelFont;
     publishTimeLabel.textColor = publishTimeLabelTextColor;
-    
     [self.contentView addSubview:publishTimeLabel];
     
+    // 片酬
     rewardView = [[LLARewardMoneyView alloc] init];
     rewardView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [self.contentView addSubview:rewardView];
     
+    // 私密视频
     isPrivateVideoButton = [[UIButton alloc] init];
     isPrivateVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
     isPrivateVideoButton.userInteractionEnabled = NO;
-    
     [isPrivateVideoButton setImage:[UIImage llaImageWithName:isPrivateImageName] forState:UIControlStateNormal];
-    
     [self.contentView addSubview:isPrivateVideoButton];
     
-    //
+    // 分割线
     seperatorLineView = [[UIView alloc] init];
     seperatorLineView.translatesAutoresizingMaskIntoConstraints = NO;
     seperatorLineView.backgroundColor = sepLineColor;
-    
     [self.contentView addSubview:seperatorLineView];
     
+    // 剧本图片内容
     scriptImageView = [[UIImageView alloc] init];
     scriptImageView.translatesAutoresizingMaskIntoConstraints = NO;
     scriptImageView.contentMode = UIViewContentModeScaleAspectFill;
     scriptImageView.clipsToBounds = YES;
-    
     [self.contentView addSubview:scriptImageView];
     
+    // 剧本文字内容
     scriptContentLabel = [[UILabel alloc] init];
     scriptContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     scriptContentLabel.numberOfLines = 0;
     scriptContentLabel.textAlignment = NSTextAlignmentLeft;
     //scriptContentLabel.backgroundColor = [UIColor orangeColor];
-    
     [self.contentView addSubview:scriptContentLabel];
     
+    // 更多按钮
     flexContentButton = [[UIButton alloc] init];
     flexContentButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
     flexContentButton.titleLabel.font = flexButtonFont;
     [flexContentButton setTitleColor:flexButtonTextColor forState:UIControlStateNormal];
-    
     [flexContentButton addTarget:self action:@selector(flexContentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     //[flexContentButton setBackgroundColor:[UIColor purpleColor]];
     [self.contentView addSubview:flexContentButton];
     
-    //
+    // 分割线
     scriptSepLine = [[UIView alloc] init];
     scriptSepLine.translatesAutoresizingMaskIntoConstraints = NO;
     scriptSepLine.backgroundColor = sepLineColor;
-    
     [self.contentView addSubview:scriptSepLine];
     
+    // 报名人数
     scriptTotalPartakeUserNumberLabel = [[UILabel alloc] init];
     scriptTotalPartakeUserNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
     scriptTotalPartakeUserNumberLabel.textAlignment = NSTextAlignmentLeft;
     scriptTotalPartakeUserNumberLabel.font = scriptTotalPartakeUserNumberLabelFont;
     scriptTotalPartakeUserNumberLabel.textColor = scriptTotalPartakeUserNumberLabelTextColor;
-    
     [self.contentView addSubview:scriptTotalPartakeUserNumberLabel];
     
+    // 功能按钮
     functionButton = [[UIButton alloc] init];
     functionButton.translatesAutoresizingMaskIntoConstraints = NO;
     functionButton.clipsToBounds = YES;
     functionButton.layer.cornerRadius = 4;
     functionButton.titleLabel.font = functionButtonFont;
-    
     [functionButton setBackgroundColor:functionButtonNormalBKColor forState:UIControlStateNormal];
     [functionButton setBackgroundColor:functionButtonHighlightBKColor forState:UIControlStateHighlighted];
     [functionButton setBackgroundColor:functionButtonDisableBKColor forState:UIControlStateDisabled];
-    
     [functionButton setTitleColor:functionButtonNormalTextColor forState:UIControlStateNormal];
     [functionButton setTitleColor:functionButtonHighlightTextColor forState:UIControlStateHighlighted];
     [functionButton setTitleColor:functionButtonDisableTextColor forState:UIControlStateDisabled];
-    
     [functionButton addTarget:self action:@selector(functionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.contentView addSubview:functionButton];
 }
 
+// 设置子控件约束
 - (void) initSubConstraints {
     NSMutableArray *constrArray = [NSMutableArray array];
     
-    //vertical
+    //***************************vertical***************************
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -366,7 +358,7 @@ static NSString *const countingImageName = @"clock";
       constant:functionButtonHeight]];
     
     
-    //horizonal
+    //***************************horizonal***************************
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -473,13 +465,13 @@ static NSString *const countingImageName = @"clock";
         }
     }
     
-    
     [self.contentView addConstraints:constrArray];
 }
 
 
 #pragma mark - LLAUserHeadViewDelegate
 
+// 点击导演头像
 - (void) headView:(LLAUserHeadView *)uheadView clickedWithUserInfo:(LLAUser *)user {
     if (delegate && [delegate respondsToSelector:@selector(directorHeadViewClicked:userInfo:scriptInfo:)]) {
         [delegate directorHeadViewClicked:uheadView userInfo:user scriptInfo:currentScriptInfo];
@@ -488,12 +480,14 @@ static NSString *const countingImageName = @"clock";
 
 #pragma mark - Button Clicked
 
+// 点击更多按钮
 - (void) flexContentButtonClicked:(UIButton *) sender {
     if (delegate && [delegate respondsToSelector:@selector(flexOrShrinkScriptContentWithScriptInfo:)]) {
         [delegate flexOrShrinkScriptContentWithScriptInfo:currentScriptInfo];
     }
 }
 
+// 点击功能按钮
 - (void) functionButtonClicked:(UIButton *)sender {
     if (delegate && [delegate respondsToSelector:@selector(manageScriptWithScriptInfo:)]) {
         [delegate manageScriptWithScriptInfo:currentScriptInfo];
@@ -502,25 +496,29 @@ static NSString *const countingImageName = @"clock";
 
 
 #pragma mark - Update
-
+// 设置数据
 - (void) updateCellWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
     
     currentScriptInfo = scriptInfo;
-    //
+    // 头像/用户名/发布时间
     [headView updateHeadViewWithUser:currentScriptInfo.directorInfo];
-    
     userNameLabel.text = currentScriptInfo.directorInfo.userName;
     publishTimeLabel.text = currentScriptInfo.publisthTimeString;
     
+    // 私密视频
     isPrivateVideoButton.hidden = !currentScriptInfo.isPrivateVideo;
+    
+    // 片酬
     [rewardView updateViewWithRewardMoney:currentScriptInfo.rewardMoney];
     
+    // 剧本文字内容
     scriptContentLabel.attributedText = [[self class] generateScriptAttriuteStingWith:currentScriptInfo];
     
+    // 有无图片约束不同位置，并是否显示图片
     if (currentScriptInfo.scriptImageURL) {
+        
         scriptImageViewHeightConstraint.constant = maxWidth - scriptLabelToLeft - scriptLabelToRight;
         scriptImageView.hidden = NO;
-        
         [scriptImageView setImageWithURL:[NSURL URLWithString:currentScriptInfo.scriptImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
         
     }else {
@@ -528,25 +526,23 @@ static NSString *const countingImageName = @"clock";
         scriptImageView.hidden = YES;
     }
     
+    // 展开/收回
     if (currentScriptInfo.isStretched) {
         [flexContentButton setTitle:@"收起" forState:UIControlStateNormal];
     }else {
         [flexContentButton setTitle:@"展开" forState:UIControlStateNormal];
     }
     
-    //join number
-    
+    //参与人数
     NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
                                             [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.partakeUsersArray.count]];
     [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.partakeUsersArray.count].length)];
-    
     scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
     
-    //
+    // 设置功能按钮
     [self updateFunctionButtonStatus];
     
-    //deside wheather the flexButton should hide
-    
+    //flexButton 是否隐藏
     if (([LLACommonUtil calculateHeightWithAttributeDic:[NSDictionary dictionaryWithObjectsAndKeys:
           [UIFont llaFontOfSize:scriptLabelFontSize],NSFontAttributeName, nil]maxLine:maxNumberLinesWhenShrink]) > ([[self class] scriptStringSizeWithVideoInfo:currentScriptInfo maxWidth:maxWidth shouldFullHeight:YES].height)) {
         flexContentButton.hidden = YES;
@@ -556,6 +552,7 @@ static NSString *const countingImageName = @"clock";
     
 }
 
+// 设置Function按钮
 - (void) updateFunctionButtonStatus {
     
     //update function button
@@ -766,7 +763,7 @@ static NSString *const countingImageName = @"clock";
 }
 
 #pragma mark - Calculate Cell Height
-
+// 设置剧本内容文字的样式
 + (NSAttributedString *) generateScriptAttriuteStingWith:(LLAScriptHallItemInfo*) scriptInfo {
     
     NSString *scriptString = [scriptInfo.scriptContent copy];
@@ -792,7 +789,7 @@ static NSString *const countingImageName = @"clock";
     return attr;
     
 }
-
+// 计算剧本文字的尺寸
 + (CGSize) scriptStringSizeWithVideoInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat) maxWidth shouldFullHeight:(BOOL) isFullHeight{
     
     NSAttributedString *attr = [[self class] generateScriptAttriuteStingWith:scriptInfo];
@@ -819,6 +816,7 @@ static NSString *const countingImageName = @"clock";
     return textSize;
 }
 
+// 计算每个cell的高度
 + (CGFloat) calculateHeightWithInfo:(LLAScriptHallItemInfo *)scriptInfo maxWidth:(CGFloat)maxWidth {
     
     CGFloat height = 0;

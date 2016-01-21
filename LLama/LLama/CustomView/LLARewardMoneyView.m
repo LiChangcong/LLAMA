@@ -18,14 +18,14 @@ static const CGFloat currencyLabelHeight = 18;
 
 @interface LLARewardMoneyView()
 {
+    // 片酬
     UILabel *currencyLabel;
-    
     UIFont *currencyFont;
     UIColor *currencyNormalTextColor;
     UIColor *currencyHighTextColor;
     
+    // 金额
     UILabel *showMoneyLabel;
-    
     UIFont *showMoneyLabelFont;
     UIColor *showMoneyLabelTextColor;
 }
@@ -44,8 +44,9 @@ static const CGFloat currencyLabelHeight = 18;
     
     self = [super initWithFrame:frame];
     if (self) {
-        
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubViews];
         self.contentMode = UIViewContentModeScaleToFill;
     }

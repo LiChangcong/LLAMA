@@ -48,22 +48,27 @@ static const NSInteger textColorHex = 0x636363;
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        // 设置变量
         [self initVariables];
+        // 设置子控件
         [self initSubViews];
         
     }
     return self;
 }
-
+// 设置变量
 - (void) initVariables {
+    // 字体
     labelFont = [UIFont systemFontOfSize:labelTextFontSize];
+    
+    // 颜色
     userTextColor = [UIColor themeColor];
     userSelectedTextBKColor = [UIColor colorWithHex:0xdddddd];
     contentTextColor = [UIColor colorWithHex:textColorHex];
-    
     highLightViewBKColor = [UIColor colorWithHex:0x222222 alpha:0.1];
 }
 
+// 设置子控件
 - (void) initSubViews {
     attrLabel = [[TYAttributedLabel alloc] init];
     attrLabel.translatesAutoresizingMaskIntoConstraints = NO;
