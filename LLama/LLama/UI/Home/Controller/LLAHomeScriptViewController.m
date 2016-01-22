@@ -43,8 +43,6 @@
 - (void) viewDidLoad {
     
     [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor purpleColor];
     
     // 初始化导航栏
 
@@ -91,8 +89,8 @@
     //constraints
     
 
+ 
     // 约束
-
     [self.view addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|-(0)-[dataTableView]-(0)-|"

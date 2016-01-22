@@ -10,6 +10,7 @@
 #import "Mantle.h"
 
 @interface LLAVideoInfo : MTLModel<MTLJSONSerializing>
+
 /**
  *  视频ID
  */

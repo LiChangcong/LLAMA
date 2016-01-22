@@ -112,7 +112,6 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     [dataCollectionView registerClass:[LLAScriptDetailMainInfoCell class] forCellWithReuseIdentifier:scriptInfoCellIden];
     [dataCollectionView registerClass:[LLAChooseActorCell class] forCellWithReuseIdentifier:chooseActorCellIden];
     [dataCollectionView registerClass:[LLAScriptChooseActorHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:chooseActorHeaderIden];
-    
 
     //
     
