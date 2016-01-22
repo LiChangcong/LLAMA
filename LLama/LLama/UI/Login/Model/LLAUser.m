@@ -40,6 +40,7 @@ static BOOL isSimpleUserModel;
                  //@"userVideo":@"myVideo",
                  @"userDescription":@"gxqm",
                  @"balance":@"balance",
+                 @"bePraisedNumber":@"zan",
                  
                  @"sinaWeiBoUid":@"weibouid",
                  @"qqOpenId":@"qqopenid",
@@ -85,6 +86,9 @@ static BOOL isSimpleUserModel;
             
             self.userVideo = videoInfo;
         }
+        
+        //test data
+        //self.userDescription = @"lalfklsdfasldfksadlfasdfkljsadlfkjsaldfjksdkfjsadlkfjksdfjsdkfjasdfkadslflasdfjsdklfjsdf";
     }
     return self;
 }

@@ -42,13 +42,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) dealloc {
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [self stopVideo];
-    [videoPlayer removeTimeObserver:playerTimeObserver];
     @try {
-        [self removeObserver:self forKeyPath:@"status"];
-        [self removeObserver:self forKeyPath:@"rate"];
+        [videoPlayer removeObserver:self forKeyPath:@"status"];
+        [videoPlayer removeObserver:self forKeyPath:@"rate"];
     }
     @catch (NSException *exception) {
         
@@ -56,6 +52,13 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     @finally {
         
     }
+    
+    [self stopVideo];
+    [videoPlayer removeTimeObserver:playerTimeObserver];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
     
 }
 

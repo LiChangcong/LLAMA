@@ -58,6 +58,9 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 @property(nonatomic , copy) NSString *userDescription;
 
 @property(nonatomic , assign) CGFloat balance;
+
+@property(nonatomic , assign) NSInteger bePraisedNumber;
+
 //token
 @property(nonatomic , copy) NSString *authenToken;
 //is login

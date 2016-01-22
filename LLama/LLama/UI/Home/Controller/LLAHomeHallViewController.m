@@ -8,6 +8,7 @@
 
 //controller
 #import "LLAHomeHallViewController.h"
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -278,6 +279,8 @@
 
 - (void) userHeadViewClickedWithUserInfo:(LLAUser *) userInfo itemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
     
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
 }
 
 - (void) loveVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo loveButton:(UIButton *)loveButton {

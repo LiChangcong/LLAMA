@@ -10,11 +10,11 @@
 
 #import "LLAUser.h"
 
-static NSString *const propertyButtonImageName_Normal = @"";
-static NSString *const propertyButtonImageName_Highlight = @"";
+static NSString *const propertyButtonImageName_Normal = @"UserProfile_Property_Normal";
+static NSString *const propertyButtonImageName_Highlight = @"UserProfile_Property_Highlight";
 
-static NSString *const orderListButtonImageName_Normal = @"";
-static NSString *const orderListButtonImageName_Highlight = @"";
+static NSString *const orderListButtonImageName_Normal = @"UserProfile_OrderList_Normal";
+static NSString *const orderListButtonImageName_Highlight = @"UserProfile_OrderList_Highlight";
 
 //
 static const CGFloat functionButtonHeight = 40;

@@ -650,7 +650,9 @@ static const CGFloat scriptLabelFontSize = 13;
 #pragma mark - UserHeadViewDelegate
 // 点击头像
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
-    
+    if (delegate && [delegate respondsToSelector:@selector(userHeadViewClickedWithUserInfo:itemInfo:)]) {
+        [delegate userHeadViewClickedWithUserInfo:user itemInfo:currentVideoInfo];
+    }
 }
 
 #pragma mark - ButtonClicked

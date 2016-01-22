@@ -10,4 +10,8 @@
 
 @implementation LLAVideoInfo
 
++ (NSDictionary *) JSONKeyPathsByPropertyKey {
+    return @{};
+}
+
 @end

@@ -14,6 +14,8 @@
 
 #import "TMPublishView.h"
 
+#import "LLAUser.h"
+
 
 static NSString * const homeTabarImage_Normal = @"home";
 static NSString * const homeTabarImage_Selected = @"homeH";
@@ -92,7 +94,7 @@ static NSString * const publishScriptImage_Selected= @"startH";
     UIViewController *empty = [UIViewController new];
     
     //user profile
-    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] init];
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:[LLAUser me].userIdString];
     
     userProfileNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:userProfile];
     

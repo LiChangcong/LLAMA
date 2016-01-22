@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */; };
+		5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */; };
+		5C4684C41C52076E00705FA9 /* LLAUserProfileMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */; };
 		5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */; };
 		5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298251C438E5500106BA2 /* LLACommonUtil.m */; };
 		5CA18F761C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA18F751C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m */; };
@@ -267,6 +270,12 @@
 /* Begin PBXFileReference section */
 		17DA4835DA331D5811427335 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5C4684B81C51F85900705FA9 /* LLAUserProfileOtherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileOtherInfoCell.h; sourceTree = "<group>"; };
+		5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileOtherInfoCell.m; sourceTree = "<group>"; };
+		5C4684BE1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileVideoHeaderView.h; sourceTree = "<group>"; };
+		5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileVideoHeaderView.m; sourceTree = "<group>"; };
+		5C4684C21C52076E00705FA9 /* LLAUserProfileMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMainInfo.h; sourceTree = "<group>"; };
+		5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMainInfo.m; sourceTree = "<group>"; };
 		5C7298201C4366A700106BA2 /* LLASaveUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASaveUserDefaultUtil.h; sourceTree = "<group>"; };
 		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
 		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
@@ -723,6 +732,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C4684C11C52074E00705FA9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C4684C21C52076E00705FA9 /* LLAUserProfileMainInfo.h */,
+				5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5C72981F1C43668900106BA2 /* SaveUserDefaultUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -1443,6 +1461,7 @@
 		A3DEDE1A1C3CAEC6009F3D37 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				5C4684C11C52074E00705FA9 /* Model */,
 				A3DEDE1B1C3CAEC6009F3D37 /* Controller */,
 				A3DEDE351C3CAEC6009F3D37 /* View */,
 			);
@@ -1518,6 +1537,10 @@
 				5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */,
 				5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */,
 				5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */,
+				5C4684B81C51F85900705FA9 /* LLAUserProfileOtherInfoCell.h */,
+				5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */,
+				5C4684BE1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.h */,
+				5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1878,6 +1901,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */,
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
 				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
@@ -1917,6 +1941,7 @@
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
+				5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */,
 				5CE0FF721C4A315B00991394 /* LLAScriptHallMainInfo.m in Sources */,
 				5CE0FF751C4A327000991394 /* LLAScriptHallInfoCell.m in Sources */,
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
@@ -1970,6 +1995,7 @@
 				A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */,
 				5CE0EB8D1C46424300C6BC79 /* TYAttributedLabel.m in Sources */,
 				5CE0EB761C4620FF00C6BC79 /* LLAVideoPlayerView.m in Sources */,
+				5C4684C41C52076E00705FA9 /* LLAUserProfileMainInfo.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
 				5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */,
 				5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */,

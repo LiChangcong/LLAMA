@@ -1,18 +1,18 @@
 //
-//  LLAUserProfileMyInfoCell.m
+//  LLAUserProfileOtherInfoCell.m
 //  LLama
 //
-//  Created by Live on 16/1/21.
+//  Created by Live on 16/1/22.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAUserProfileMyInfoCell.h"
+#import "LLAUserProfileOtherInfoCell.h"
 
 #import "LLAUserHeadView.h"
 #import "LLAUser.h"
 
 static const CGFloat headViewHeightWidth = 59;
-static const CGFloat headViewToUploadButtonVerSpace = 17;
+//static const CGFloat headViewToUploadButtonVerSpace = 17;
 //static const CGFloat uploadButtonHeight = 23;
 //static const CGFloat uploadButtonToDescription = 10;
 
@@ -22,13 +22,11 @@ static const CGFloat descriptionToHorBorder = 45;
 static NSString *const uploadViewButtonImageName_Normal = @"userProfile_NewVideo_Normal";
 static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVideo_Highlight";
 
-@interface LLAUserProfileMyInfoCell()<LLAUserHeadViewDelegate>
+@interface LLAUserProfileOtherInfoCell()<LLAUserHeadViewDelegate>
 {
     //without video
     
     LLAUserHeadView *headView;
-    
-    UIButton *uploadUserVideoButton;
     
     //common view
     
@@ -46,16 +44,17 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     //
     LLAUser *currentUser;
-    
+
 }
 
 @property(nonatomic , readwrite , strong) LLAVideoPlayerView *videoPlayerView;
 
 @property(nonatomic , readwrite , strong) LLAVideoInfo *shouldPlayVideoInfo;
 
+
 @end
 
-@implementation LLAUserProfileMyInfoCell
+@implementation LLAUserProfileOtherInfoCell
 
 @synthesize videoPlayerView;
 @synthesize shouldPlayVideoInfo;
@@ -69,7 +68,8 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor colorWithHex:0x11111e];
+        self.contentView.backgroundColor = [UIColor colorWithHex:0x11111e];
+        
         [self initVariables];
         [self initSubViews];
         [self initSubConstraints];
@@ -91,7 +91,6 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     //
     videoCoverImageView = [[UIImageView alloc] init];
     videoCoverImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    videoCoverImageView.clipsToBounds = YES;
     
     [self.contentView addSubview:videoCoverImageView];
     
@@ -112,15 +111,6 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     [self.contentView addSubview:headView];
     
-    uploadUserVideoButton = [[UIButton alloc] init];
-    uploadUserVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [uploadUserVideoButton setImage:[UIImage llaImageWithName:uploadViewButtonImageName_Normal] forState:UIControlStateNormal];
-    [uploadUserVideoButton setImage:[UIImage llaImageWithName:uploadViewButtonImageName_Highlight] forState:UIControlStateHighlighted];
-    
-    [uploadUserVideoButton addTarget:self action:@selector(uploadVideo:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.contentView addSubview:uploadUserVideoButton];
     
     //
     personDescriptionBackView = [[UIView alloc] init];
@@ -133,8 +123,8 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     personDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     personDescriptionLabel.font = personDescriptionLabelFont;
     personDescriptionLabel.textColor = personDescriptionLabelTextColor;
-    personDescriptionLabel.numberOfLines = 3;
     personDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    personDescriptionLabel.numberOfLines = 3;
     
     [self.contentView addSubview:personDescriptionLabel];
     
@@ -164,18 +154,11 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       attribute:NSLayoutAttributeNotAnAttribute
       multiplier:0
       constant:headViewHeightWidth]];
+
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:[headView]-(headToUpload)-[uploadUserVideoButton]"
-      options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:[NSDictionary dictionaryWithObjectsAndKeys:
-               @(headViewToUploadButtonVerSpace),@"headToUpload", nil]
-      views:NSDictionaryOfVariableBindings(headView,uploadUserVideoButton)]];
-    
-    [constrArray addObjectsFromArray:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:[personDescriptionLabel]-(0)-|"
+      constraintsWithVisualFormat:@"V:[personDescriptionLabel(<=40)]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(personDescriptionLabel)]];
@@ -222,17 +205,6 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       attribute:NSLayoutAttributeCenterX
       multiplier:1.0
       constant:0]];
-    
-    [constrArray addObject:
-     [NSLayoutConstraint
-      constraintWithItem:uploadUserVideoButton
-      attribute:NSLayoutAttributeCenterX
-      relatedBy:NSLayoutRelationEqual
-      toItem:self.contentView
-      attribute:NSLayoutAttributeCenterX
-      multiplier:1.0
-      constant:0]];
-    
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:headView
@@ -278,6 +250,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
 //
 #pragma mark - Button Clicked
 
+
 - (void) uploadVideo:(UIButton *) sender {
     if (delegate && [delegate respondsToSelector:@selector(uploadVieoToggled:)]) {
         [delegate uploadVieoToggled:currentUser];
@@ -300,12 +273,10 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     currentUser = userInfo;
     
     if (!userInfo.userVideo) {
-
-        //no video
+        
+        //has video
         headView.hidden = NO;
         [headView updateHeadViewWithUser:currentUser];
-        
-        uploadUserVideoButton.hidden = NO;
         
         //
         videoCoverImageView.hidden = YES;
@@ -314,11 +285,10 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         
         shouldPlayVideoInfo = nil;
         
-    
+        
     }else {
         
         headView.hidden = YES;
-        uploadUserVideoButton.hidden = YES;
         
         videoCoverImageView.hidden = NO;
         [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentUser.userVideo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
@@ -328,6 +298,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     }
     
     personDescriptionLabel.text = currentUser.userDescription;
+    
 }
 
 #pragma makr - Calculate height
@@ -335,5 +306,6 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
 + (CGFloat) calculateHeightWithUserInfo:(LLAUser *)userInfo tableWidth:(CGFloat)tableWidth {
     return tableWidth;
 }
+
 
 @end
