@@ -63,6 +63,7 @@
 		5CA18FD71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png */; };
 		5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */; };
 		5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */; };
+		5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */; };
 		5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */; };
 		5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
@@ -335,6 +336,8 @@
 		5CBC57911C4DEBD80001F1A9 /* LLAChooseItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseItemProtocol.h; sourceTree = "<group>"; };
 		5CBC57921C4DF9380001F1A9 /* LLAScriptChooseActorHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorHeader.h; sourceTree = "<group>"; };
 		5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptChooseActorHeader.m; sourceTree = "<group>"; };
+		5CBF9A9D1C532A30001A4EA0 /* LLAUserProfileSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileSettingController.h; sourceTree = "<group>"; };
+		5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileSettingController.m; sourceTree = "<group>"; };
 		5CC4D42F1C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyInfoCell.h; sourceTree = "<group>"; };
 		5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyInfoCell.m; sourceTree = "<group>"; };
 		5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyFunctionCell.h; sourceTree = "<group>"; };
@@ -1488,6 +1491,8 @@
 				A3DEDE2A1C3CAEC6009F3D37 /* YZPerson */,
 				5CE646C81C44DBBB004DA6D5 /* LLAUserProfileViewController.h */,
 				5CE646C91C44DBBB004DA6D5 /* LLAUserProfileViewController.m */,
+				5CBF9A9D1C532A30001A4EA0 /* LLAUserProfileSettingController.h */,
+				5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1974,6 +1979,7 @@
 				A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */,
 				A3D8E7E41C3F5BA800B27898 /* LLACommonViewController.m in Sources */,
 				5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */,
 				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
 				A3DEDE931C3CAEC7009F3D37 /* YZTableView.m in Sources */,

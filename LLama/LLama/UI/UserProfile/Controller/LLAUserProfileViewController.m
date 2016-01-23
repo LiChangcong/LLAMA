@@ -654,11 +654,15 @@ static const CGFloat navigationBarHeight = 64;
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    
     if (scrollView.contentOffset.y > 2 * navigationBarHeight) {
         [customNaviBar makeBackgroundClear:NO];
+        
     }else {
         [customNaviBar makeBackgroundClear:YES];
+        
     }
+    
 }
 
 #pragma mark - LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,
