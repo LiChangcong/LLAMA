@@ -91,4 +91,6 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 + (BOOL) isSimpleUserModel;
 + (void) setIsSimpleUserModel:(BOOL) isSimple;
 
++ (void) logout;
+
 @end

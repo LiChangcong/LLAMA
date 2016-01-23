@@ -123,5 +123,11 @@
     return ceilf(maxHeight);
 }
 
+//app version
+
++ (NSString *) appVersion {
+    NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+    return [infoDict objectForKey:@"CFBundleShortVersionString"];
+}
 
 @end

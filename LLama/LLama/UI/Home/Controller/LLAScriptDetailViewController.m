@@ -7,6 +7,7 @@
 //
 
 #import "LLAScriptDetailViewController.h"
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLACollectionView.h"
@@ -319,6 +320,11 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 // 选中导演头像
 - (void) directorHeadViewClicked:(LLAUserHeadView *) headView userInfo:(LLAUser *) userInfo scriptInfo:(LLAScriptHallItemInfo *)scriptInfo {
     //go to user profile
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    
+    [self.navigationController pushViewController:userProfile animated:YES];
+    
 }
 
 // 点击更多信息后收起或者展开基本详情
@@ -435,6 +441,11 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 // 点击演员头像后查看详细信息
 - (void) viewUserDetailWithUserInfo:(LLAUser *)userInfo  {
     //go to user profile
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    
+    [self.navigationController pushViewController:userProfile animated:YES];
+
     
 }
 

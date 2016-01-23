@@ -27,4 +27,10 @@
 
 + (CGFloat) calculateHeightWithAttributeDic:(NSDictionary *) attributes maxLine:(NSInteger) maxLine;
 
+//app version
+
++ (NSString *) appVersion;
+
+
+
 @end

@@ -415,7 +415,7 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
     
     // 参与人数
     NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
-                                            [NSString stringWithFormat:@"%ld人参与",(long)currentScriptInfo.signupUserNumbers]];
+                                            [NSString stringWithFormat:@"%ld 人参与",(long)currentScriptInfo.signupUserNumbers]];
     [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.signupUserNumbers].length)];
     scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
     

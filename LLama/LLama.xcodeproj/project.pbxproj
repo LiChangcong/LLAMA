@@ -64,6 +64,12 @@
 		5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */; };
 		5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */; };
 		5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */; };
+		5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AA11C533136001A4EA0 /* LLAUserProfileSettingCell.m */; };
+		5CBF9AA51C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AA41C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m */; };
+		5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AA71C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m */; };
+		5CBF9AAB1C535942001A4EA0 /* LLAChangeRootControllerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AAA1C535942001A4EA0 /* LLAChangeRootControllerUtil.m */; };
+		5CBF9AAE1C535DA6001A4EA0 /* LLAMyOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AAD1C535DA6001A4EA0 /* LLAMyOrderListViewController.m */; };
+		5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */; };
 		5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */; };
 		5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
@@ -338,6 +344,18 @@
 		5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptChooseActorHeader.m; sourceTree = "<group>"; };
 		5CBF9A9D1C532A30001A4EA0 /* LLAUserProfileSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileSettingController.h; sourceTree = "<group>"; };
 		5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileSettingController.m; sourceTree = "<group>"; };
+		5CBF9AA01C533136001A4EA0 /* LLAUserProfileSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileSettingCell.h; sourceTree = "<group>"; };
+		5CBF9AA11C533136001A4EA0 /* LLAUserProfileSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileSettingCell.m; sourceTree = "<group>"; };
+		5CBF9AA31C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileSettingItemInfo.h; sourceTree = "<group>"; };
+		5CBF9AA41C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileSettingItemInfo.m; sourceTree = "<group>"; };
+		5CBF9AA61C534AA8001A4EA0 /* LLAUserProfileLogoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileLogoutCell.h; sourceTree = "<group>"; };
+		5CBF9AA71C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileLogoutCell.m; sourceTree = "<group>"; };
+		5CBF9AA91C535942001A4EA0 /* LLAChangeRootControllerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChangeRootControllerUtil.h; sourceTree = "<group>"; };
+		5CBF9AAA1C535942001A4EA0 /* LLAChangeRootControllerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChangeRootControllerUtil.m; sourceTree = "<group>"; };
+		5CBF9AAC1C535DA6001A4EA0 /* LLAMyOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMyOrderListViewController.h; sourceTree = "<group>"; };
+		5CBF9AAD1C535DA6001A4EA0 /* LLAMyOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMyOrderListViewController.m; sourceTree = "<group>"; };
+		5CBF9AB21C536600001A4EA0 /* LLAUserOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserOrderListCell.h; sourceTree = "<group>"; };
+		5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserOrderListCell.m; sourceTree = "<group>"; };
 		5CC4D42F1C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyInfoCell.h; sourceTree = "<group>"; };
 		5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyInfoCell.m; sourceTree = "<group>"; };
 		5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyFunctionCell.h; sourceTree = "<group>"; };
@@ -740,6 +758,8 @@
 			children = (
 				5C4684C21C52076E00705FA9 /* LLAUserProfileMainInfo.h */,
 				5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */,
+				5CBF9AA31C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.h */,
+				5CBF9AA41C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -758,6 +778,8 @@
 			children = (
 				5C7298241C438E5500106BA2 /* LLACommonUtil.h */,
 				5C7298251C438E5500106BA2 /* LLACommonUtil.m */,
+				5CBF9AA91C535942001A4EA0 /* LLAChangeRootControllerUtil.h */,
+				5CBF9AAA1C535942001A4EA0 /* LLAChangeRootControllerUtil.m */,
 			);
 			path = CommonUtil;
 			sourceTree = "<group>";
@@ -1493,6 +1515,8 @@
 				5CE646C91C44DBBB004DA6D5 /* LLAUserProfileViewController.m */,
 				5CBF9A9D1C532A30001A4EA0 /* LLAUserProfileSettingController.h */,
 				5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */,
+				5CBF9AAC1C535DA6001A4EA0 /* LLAMyOrderListViewController.h */,
+				5CBF9AAD1C535DA6001A4EA0 /* LLAMyOrderListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1546,6 +1570,12 @@
 				5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */,
 				5C4684BE1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.h */,
 				5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */,
+				5CBF9AA01C533136001A4EA0 /* LLAUserProfileSettingCell.h */,
+				5CBF9AA11C533136001A4EA0 /* LLAUserProfileSettingCell.m */,
+				5CBF9AA61C534AA8001A4EA0 /* LLAUserProfileLogoutCell.h */,
+				5CBF9AA71C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m */,
+				5CBF9AB21C536600001A4EA0 /* LLAUserOrderListCell.h */,
+				5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1912,6 +1942,7 @@
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
+				5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */,
 				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
@@ -1922,6 +1953,7 @@
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
+				5CBF9AA51C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				A3DEDE771C3CAEC7009F3D37 /* TMDataIconController.m in Sources */,
 				5CE646D31C44FB59004DA6D5 /* LLAHomeScriptViewController.m in Sources */,
@@ -1941,6 +1973,7 @@
 				5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */,
 				A3DEDEA51C3CAEC7009F3D37 /* TMVersionCell.m in Sources */,
 				A3DEDD911C3CAE38009F3D37 /* TMTabBar.m in Sources */,
+				5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */,
 				A3DEDD9B1C3CAE38009F3D37 /* MTLModel+NSCoding.m in Sources */,
 				A3DEDEA41C3CAEC7009F3D37 /* TMSwitch.m in Sources */,
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
@@ -1981,6 +2014,7 @@
 				5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */,
 				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
+				5CBF9AAB1C535942001A4EA0 /* LLAChangeRootControllerUtil.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
 				A3DEDE931C3CAEC7009F3D37 /* YZTableView.m in Sources */,
 				A3DEDD901C3CAE38009F3D37 /* TMHTTPSessionManager.m in Sources */,
@@ -1992,6 +2026,7 @@
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
 				5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */,
 				5CE0EB921C46424300C6BC79 /* TYTextContainer+Extended.m in Sources */,
+				5CBF9AAE1C535DA6001A4EA0 /* LLAMyOrderListViewController.m in Sources */,
 				5CDDF44D1C473BDB00168989 /* LLAHallVideoInfoCell.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
 				5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */,
@@ -2037,6 +2072,7 @@
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
 				5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
+				5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */,
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,

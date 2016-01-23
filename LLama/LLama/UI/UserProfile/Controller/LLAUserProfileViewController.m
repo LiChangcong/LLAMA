@@ -8,6 +8,8 @@
 
 //controller
 #import "LLAUserProfileViewController.h"
+#import "LLAUserProfileSettingController.h"
+#import "LLAMyOrderListViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -129,6 +131,7 @@ static const CGFloat navigationBarHeight = 64;
     dataTableView.delegate = self;
     dataTableView.showsVerticalScrollIndicator = NO;
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    dataTableView.backgroundColor = [UIColor colorWithHex:0xededed];
     
     [self.view addSubview:dataTableView];
     
@@ -466,6 +469,9 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) showSetting {
     //go setting
+    LLAUserProfileSettingController *setting = [[LLAUserProfileSettingController alloc] init];
+    
+    [self.navigationController pushViewController:setting animated:YES];
 }
 
 - (void) changeUserVideo {
@@ -683,6 +689,9 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) showPersonalOrderListWithUserInfo:(LLAUser *) userInfo {
     
+    LLAMyOrderListViewController *orderList = [[LLAMyOrderListViewController alloc] init];
+    
+    [self.navigationController pushViewController:orderList animated:YES];
 }
 
 #pragma mark - LLAUserProfileVideoHeaderViewDelegate

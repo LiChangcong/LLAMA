@@ -130,6 +130,12 @@ static BOOL isSimpleUserModel;
     
 }
 
+//logout
++ (void) logout {
+    [LLASaveUserDefaultUtil clearUserInfo];
+    [LLASaveUserDefaultUtil clearUserToken];
+}
+
 ////用来标识解析
 
 + (BOOL) isSimpleUserModel {

@@ -98,7 +98,7 @@ static NSString * const publishScriptImage_Selected= @"startH";
     
     userProfileNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:userProfile];
     
-    [self setViewControllers:@[homeNavigationController,empty,userProfile]];
+    [self setViewControllers:@[homeNavigationController,empty,userProfileNavigationController]];
     
     NSArray *titlesArray = @[@"",@"",@""];
     NSArray *normalImages = @[homeTabarImage_Normal,@"",userProfileTabbarImage_Normal];
