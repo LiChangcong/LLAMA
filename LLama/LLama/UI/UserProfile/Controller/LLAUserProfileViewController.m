@@ -10,6 +10,8 @@
 #import "LLAUserProfileViewController.h"
 #import "LLAUserProfileSettingController.h"
 #import "LLAMyOrderListViewController.h"
+#import "LLAUserProfileEditUserInfoController.h"
+#import "LLAUserAccountDetailViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -69,6 +71,11 @@ static const CGFloat navigationBarHeight = 64;
 
 #pragma mark - Life Cycle
 
+- (void) dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype) initWithUserIdString:(NSString *)userIdString {
     self = [super init];
     if (self) {
@@ -94,6 +101,8 @@ static const CGFloat navigationBarHeight = 64;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserInfoChanged:) name:LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION object:nil];
+    
     [self initNavigationItems];
     [self initSubViews];
     
@@ -118,8 +127,6 @@ static const CGFloat navigationBarHeight = 64;
     customNaviBar.clipsToBounds = YES;
     customNaviBar.layer.masksToBounds = YES;
 
-    [customNaviBar makeBackgroundClear:YES];
-    
     [self.view addSubview:customNaviBar];
     
     [customNaviBar layoutIfNeeded];
@@ -310,6 +317,20 @@ static const CGFloat navigationBarHeight = 64;
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
     }];
     
+    
+}
+
+#pragma mark - UserInfoChange Notification
+
+- (void) handleUserInfoChanged:(NSNotification *) noti {
+    //update UserInfo
+    if (mainInfo.userInfo) {
+        
+        mainInfo.userInfo = [LLAUser me];
+        [dataTableView reloadData];
+        
+        customNaviBar.title = mainInfo.userInfo.userName;
+    }
     
 }
 
@@ -675,6 +696,12 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) headViewTapped:(LLAUser *) userInfo {
     
+    if ([userInfo isEqual:[LLAUser me]]) {
+        
+        LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+        
+        [self.navigationController pushViewController:editUserInfo animated:YES];
+    }
 }
 
 - (void) uploadVieoToggled:(LLAUser *) userInfo {
@@ -685,6 +712,8 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) showPersonalPropertyWithUserInfo:(LLAUser *) userInfo {
     
+    LLAUserAccountDetailViewController *property = [[LLAUserAccountDetailViewController alloc] init];
+    [self.navigationController pushViewController:property animated:YES];
 }
 
 - (void) showPersonalOrderListWithUserInfo:(LLAUser *) userInfo {

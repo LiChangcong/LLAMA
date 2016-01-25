@@ -11,11 +11,15 @@
 //view
 #import "LLAUserHeadView.h"
 #import "LLATextView.h"
+#import "LLALoadingView.h"
 
 //model
+#import "LLAUser.h"
 
 //util
 #import "LLAHttpUtil.h"
+#import "LLAViewUtil.h"
+#import "LLAUploadFileUtil.h"
 
 static const CGFloat topBackViewHeight = 150;
 
@@ -36,6 +40,8 @@ static const CGFloat userDescTextViewHeight = 127;
     UITextField *userNameTextField;
     LLATextView *userDescTextView;
     
+    LLALoadingView *HUD;
+    
     //
     UIFont *userNameTextFont;
     UIColor *userNameTextColor;
@@ -45,6 +51,9 @@ static const CGFloat userDescTextViewHeight = 127;
     
     UIFont *userDescPlaceHolderTextFont;
     UIColor *userDescPlaceHolderTextColor;
+    
+    //
+    UIImage *tempImage;
 }
 
 @end
@@ -55,12 +64,21 @@ static const CGFloat userDescTextViewHeight = 127;
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    [self initNavigationItems];
+    [self initVariables];
+    [self initSubViews];
 }
 
 #pragma mark - Init
 
 - (void) initNavigationItems {
+    self.navigationItem.title = @"修改个人信息";
     
+    //
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishEditUserInfo)];
+    
+    self.navigationItem.rightBarButtonItem = doneItem;
 }
 
 - (void) initVariables {
@@ -100,12 +118,17 @@ static const CGFloat userDescTextViewHeight = 127;
     
     //
     [self initTopView];
+    [self initInputInfoView];
+    
+    //
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
 - (void) initTopView {
     //
     topBackView = [[UIView alloc] init];
+    topBackView.translatesAutoresizingMaskIntoConstraints = NO;
     
     topBackView.backgroundColor = [UIColor colorWithHex:0x11111e];
     
@@ -115,7 +138,9 @@ static const CGFloat userDescTextViewHeight = 127;
     headView.translatesAutoresizingMaskIntoConstraints = NO;
     headView.delegate = self;
     
-    [topBackView addSubview:topBackView];
+    [headView updateHeadViewWithUser:[LLAUser me]];
+    
+    [topBackView addSubview:headView];
     
     //
     NSMutableArray *constrArray = [NSMutableArray array];
@@ -173,6 +198,11 @@ static const CGFloat userDescTextViewHeight = 127;
     userNameTextField.font = userNameTextFont;
     userNameTextField.textAlignment = NSTextAlignmentCenter;
     userNameTextField.textColor = userNameTextColor;
+    userNameTextField.backgroundColor = [UIColor whiteColor];
+    userNameTextField.text = [LLAUser me].userName;
+    
+    userNameTextField.layer.borderWidth = 0.5;
+    userNameTextField.layer.borderColor = [UIColor colorWithHex:0x11111e].CGColor;
     
     [backScrollView addSubview:userNameTextField];
     
@@ -182,7 +212,11 @@ static const CGFloat userDescTextViewHeight = 127;
     userDescTextView.font = userDescTextFont;
     userDescTextView.textColor  = userDescTextColor;
     userDescTextView.placeholder = @"写一段关于你的个人简介";
-    userDescTextView.originView = backScrollView;
+    userDescTextView.originView = self.view;
+    userDescTextView.text = [LLAUser me].userDescription;
+    
+    userDescTextView.layer.borderWidth = 0.5;
+    userDescTextView.layer.borderColor = [UIColor colorWithHex:0x11111e].CGColor;
     
     [backScrollView addSubview:userDescTextView];
     
@@ -261,7 +295,141 @@ static const CGFloat userDescTextViewHeight = 127;
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
     
     //show choose imageViewController
+    NSLog(@"show selected view controller");
     
 }
+
+#pragma mark - edit finish
+
+- (void) finishEditUserInfo {
+    
+    if ([self hasChangedInfo]) {
+        //
+        if ([self validateInputInfo]) {
+            
+            
+            __weak typeof(self) blockSelf = self;
+            
+            [HUD show:YES];
+            
+            if (tempImage) {
+                
+                [LLAUploadFileUtil llaUploadWithFileType:LLAUploadFileType_Image file:tempImage tokenBlock:^(NSString *uploadToken, NSString *uploadKey) {
+                    
+                } uploadProgress:^(NSString *uploadKey, float percent) {
+                    
+                } complete:^(LLAUploadFileResponseCode responseCode, NSString *uploadToken, NSString *uploadKey, NSDictionary *respDic) {
+                    
+                    if (uploadKey && uploadToken && respDic) {
+                        //change user's profiles
+                        
+                        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                        
+                        [params setValue:userNameTextField.text forKey:@"name"];
+                        [params setValue:uploadKey forKey:@"imgKey"];
+                        [params setValue:userDescTextView.text forKey:@"gxqm"];
+            
+                        [blockSelf changeUserInfoWithParams:params];
+                        
+                        
+                    }else {
+                        
+                        [HUD hide:YES];
+                        
+                        [LLAViewUtil showAlter:blockSelf.view withText:[LLAUploadFileUtil llaUploadResponseCodeToDescription:responseCode]];
+                        
+                    }
+                    
+                }];
+                
+            }else {
+                
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                
+                [params setValue:userNameTextField.text forKey:@"name"];
+                [params setValue:userDescTextView.text forKey:@"gxqm"];
+                
+                [blockSelf changeUserInfoWithParams:params];
+            }
+            
+        }
+        
+    }else {
+        //
+        
+    }
+    
+}
+
+- (void) changeUserInfoWithParams:(NSDictionary *) params {
+    [LLAHttpUtil httpPostWithUrl:@"/user/updateUserInfo" param:params responseBlock:^(id responseObject) {
+        //
+        
+        [HUD hide:YES];
+        
+        LLAUser *user = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
+        user.isLogin = YES;
+        
+        [LLAUser updateUserInfo:user];
+        
+        //go back
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
+    
+
+}
+
+#pragma mark - Check
+
+- (BOOL) hasChangedInfo {
+    
+    if (tempImage) {
+        return YES;
+    }
+    
+    if (![userNameTextField.text isEqualToString:[LLAUser me].userName]) {
+        return YES;
+    }
+    
+    if (![userDescTextView.text isEqualToString:[LLAUser me].userDescription]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL) validateInputInfo {
+    
+    if (!tempImage && ![LLAUser me].headImageURL) {
+        [LLAViewUtil showAlter:self.view withText:@"给自己找个头像吧"];
+        return NO;
+    }
+    
+    if (userNameTextField.text.length <1) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"给自己起个名字吧"];
+        return NO;
+    }
+    
+    if (userNameTextField.text.length > 14) {
+        [LLAViewUtil showAlter:self.view withText:@"昵称需要小于14个字符"];
+        return NO;
+    }
+    
+    return YES;
+    
+}
+
+#pragma mark - 
 
 @end
