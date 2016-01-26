@@ -1,27 +1,24 @@
 //
-//  TMChangePwdController.m
+//  LLAChangBoundPhonesViewController.m
 //  LLama
 //
-//  Created by tommin on 15/12/28.
-//  Copyright © 2015年 heihei. All rights reserved.
+//  Created by tommin on 16/1/26.
+//  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "TMChangePwdController.h"
 #import "LLAChangBoundPhonesViewController.h"
 
-@interface TMChangePwdController ()
+@interface LLAChangBoundPhonesViewController ()
 
 @end
 
-@implementation TMChangePwdController
+@implementation LLAChangBoundPhonesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = TMCommonBgColor;
-    
-    self.navigationItem.title = @"更换绑定的手机号";
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,11 +35,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)nextStep:(UIButton *)sender {
-    
-    LLAChangBoundPhonesViewController *changeBounds = [[LLAChangBoundPhonesViewController alloc] init];
-    [self.navigationController pushViewController:changeBounds animated:YES];
-}
 
 @end

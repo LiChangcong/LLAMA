@@ -21,6 +21,9 @@
 #import "LLAViewUtil.h"
 #import "LLAChangeRootControllerUtil.h"
 
+//setting
+#import "TMAccountSecurityController.h"
+
 static const NSInteger accountSaftySectionIndex = 0;
 static const NSInteger mainInfoSaftySectionIndex = 1;
 static const NSInteger logoutSection = 2;
@@ -196,6 +199,11 @@ static const CGFloat logoutHeaderHeight = 28;
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
+        [self.navigationController pushViewController:accountSecurity animated:YES];
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

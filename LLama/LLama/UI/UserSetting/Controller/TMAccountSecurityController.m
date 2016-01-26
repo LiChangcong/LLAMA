@@ -9,6 +9,7 @@
 #import "TMAccountSecurityController.h"
 #import "TMSwitch.h"
 #import "TMChangePwdController.h"
+#import "LLABoundPhonesViewController.h"
 
 @interface TMAccountSecurityController ()
 
@@ -28,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = TMCommonBgColor;
+//    self.view.backgroundColor = TMCommonBgColor;
 
     
     // 去除多余的cell
@@ -157,7 +158,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        TMLog(@"点击了绑定手机号");
+//        TMLog(@"点击了绑定手机号");
+        LLABoundPhonesViewController *boundPhones = [[LLABoundPhonesViewController alloc] init];
+        [self.navigationController pushViewController:boundPhones animated:YES];
+        
     }else if (indexPath.section == 0 && indexPath.row == 1){
 //        TMLog(@"点击了更改密码");
         TMChangePwdController *pwd = [[TMChangePwdController alloc] init];
