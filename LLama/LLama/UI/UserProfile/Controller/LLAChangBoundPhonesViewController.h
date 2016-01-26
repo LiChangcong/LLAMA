@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLACommonViewController.h"
 
-@interface LLAChangBoundPhonesViewController : UIViewController
+@interface LLAChangBoundPhonesViewController : LLACommonViewController
 
 @end

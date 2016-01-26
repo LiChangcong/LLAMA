@@ -24,6 +24,12 @@
 //util
 #import "LLAViewUtil.h"
 
+//edit alipy
+#import "LLAAlipayWithDrawalsViewController.h"
+
+// cell phone number
+#import "LLAChangBoundPhonesViewController.h"
+
 static const NSInteger cashInfoSectionIndex = 0;
 static const NSInteger alipayInfoSectionIndex = 1;
 static const NSInteger cellPhoneInfoSectionIndex = 2;
@@ -245,8 +251,14 @@ static const CGFloat cashButtonToHorborder = 16;
     if (indexPath.section == alipayInfoSectionIndex) {
         //go to edit alipy
         
+        LLAAlipayWithDrawalsViewController *alipay = [[LLAAlipayWithDrawalsViewController alloc] init];
+        [self.navigationController pushViewController:alipay animated:YES];
+        
     }else if (indexPath.section == cellPhoneInfoSectionIndex) {
+        
         //go to edit cell phone number
+        LLAChangBoundPhonesViewController *changeBoundPhones = [[LLAChangBoundPhonesViewController alloc] init];
+        [self.navigationController pushViewController:changeBoundPhones animated:YES];
         
     }
     

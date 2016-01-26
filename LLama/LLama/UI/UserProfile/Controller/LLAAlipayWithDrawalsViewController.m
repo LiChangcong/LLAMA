@@ -1,22 +1,25 @@
 //
-//  LLAChangBoundPhonesViewController.m
+//  LLAAlipayWithDrawalsViewController.m
 //  LLama
 //
 //  Created by tommin on 16/1/26.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAChangBoundPhonesViewController.h"
+#import "LLAAlipayWithDrawalsViewController.h"
 
-@interface LLAChangBoundPhonesViewController ()
+@interface LLAAlipayWithDrawalsViewController ()
 
 @end
 
-@implementation LLAChangBoundPhonesViewController
+@implementation LLAAlipayWithDrawalsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.title = @"提现信息";
+    
     self.view.backgroundColor = TMCommonBgColor;
 
 }
