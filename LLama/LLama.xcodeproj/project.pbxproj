@@ -131,6 +131,8 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7EA6FC2E1C576DFE00F78099 /* LLAAccountSecurityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */; };
+		7EA6FC311C57729700F78099 /* LLAAccountSecurityController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */; };
 		7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */; };
 		7EAA2F4B1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */; };
 		7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */; };
@@ -506,6 +508,9 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EA6FC2B1C576DFE00F78099 /* LLAAccountSecurityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecurityController.h; sourceTree = "<group>"; };
+		7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecurityController.m; sourceTree = "<group>"; };
+		7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LLAAccountSecurityController.storyboard; sourceTree = "<group>"; };
 		7EAA2F471C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlipayWithDrawalsViewController.h; sourceTree = "<group>"; };
 		7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlipayWithDrawalsViewController.m; sourceTree = "<group>"; };
 		7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAlipayWithDrawalsViewController.xib; sourceTree = "<group>"; };
@@ -1701,6 +1706,9 @@
 				A3DEDE4C1C3CAEC6009F3D37 /* TMSettingViewController.m */,
 				A3DEDE4D1C3CAEC6009F3D37 /* TMUserAgreementViewController.h */,
 				A3DEDE4E1C3CAEC6009F3D37 /* TMUserAgreementViewController.m */,
+				7EA6FC2B1C576DFE00F78099 /* LLAAccountSecurityController.h */,
+				7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */,
+				7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1918,6 +1926,7 @@
 				5CA18FCD1C4F6C9100A0B5B7 /* lla_Loading_6@2x.png in Resources */,
 				5CA18FBE1C4F6C9100A0B5B7 /* lla_Loading_1@2x.png in Resources */,
 				5CA18FB41C4F6C9100A0B5B7 /* lla_Loading_13@3x.png in Resources */,
+				7EA6FC311C57729700F78099 /* LLAAccountSecurityController.storyboard in Resources */,
 				5CA18FC11C4F6C9100A0B5B7 /* lla_Loading_2@2x.png in Resources */,
 				5CA18FC31C4F6C9100A0B5B7 /* lla_Loading_3.png in Resources */,
 				5CA18FB01C4F6C9100A0B5B7 /* lla_Loading_12@2x.png in Resources */,
@@ -2132,6 +2141,7 @@
 				A3DEDEA31C3CAEC7009F3D37 /* TMSettingCell.m in Sources */,
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
+				7EA6FC2E1C576DFE00F78099 /* LLAAccountSecurityController.m in Sources */,
 				5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */,
 				5C5D68E71C56103D008A1230 /* LLAUserAccountDetailInfoCell.m in Sources */,
 				5CE0EB921C46424300C6BC79 /* TYTextContainer+Extended.m in Sources */,
