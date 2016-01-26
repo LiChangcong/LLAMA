@@ -234,7 +234,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
         [params setValue:@"DIRECTOR" forKey:@"type"];
     }
     
-    [LLAHttpUtil httpPostWithUrl:@"/user/getMyOrders" param:params responseBlock:^(id responseObject) {
+    [LLAHttpUtil httpPostWithUrl:@"/play/getMyOrders" param:params responseBlock:^(id responseObject) {
         
         [dataCollectionView.pullToRefreshView stopAnimating];
         [HUD hide:YES];
