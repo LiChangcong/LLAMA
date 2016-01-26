@@ -263,6 +263,7 @@ static const CGFloat scriptLabelFontSize = 13;
     videoCoverImageView = [[UIImageView alloc] init];
     videoCoverImageView.translatesAutoresizingMaskIntoConstraints = NO;
     videoCoverImageView.contentMode = UIViewContentModeScaleAspectFill;
+    videoCoverImageView.clipsToBounds = YES;
     [self.contentView addSubview:videoCoverImageView];
     
     // 视频播放器

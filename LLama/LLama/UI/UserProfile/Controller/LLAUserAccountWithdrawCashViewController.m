@@ -15,6 +15,7 @@
 #import "LLAUserAccountWithdrawCashInfoCell.h"
 #import "LLAUserAccountWithdrawCashAlipayInfoCell.h"
 #import "LLAUserAccountWithdrawCashCellPhoneInfoCell.h"
+#import "LLAUserWithdrawCashSuccessView.h"
 
 //category
 
@@ -256,6 +257,8 @@ static const CGFloat cashButtonToHorborder = 16;
 
 - (void) withdrawCashToAccount:(UIButton *) sender {
     //draw cache
+    LLAUserWithdrawCashSuccessView *success = [[LLAUserWithdrawCashSuccessView alloc] init];
+    [success show];
 }
 
 @end
