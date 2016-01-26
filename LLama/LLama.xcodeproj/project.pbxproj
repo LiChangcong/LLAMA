@@ -139,12 +139,16 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */; };
+		7EAA2F4B1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */; };
+		7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */; };
+		7EAA2F501C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F4E1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib */; };
+		7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */; };
+		7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */; };
 		7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */; };
 		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
 		7EC47D2B1C570F860055E6CE /* LLABoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC47D291C570F860055E6CE /* LLABoundPhonesViewController.m */; };
 		7EC47D2C1C570F860055E6CE /* LLABoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC47D2A1C570F860055E6CE /* LLABoundPhonesViewController.xib */; };
-		7EC47D331C571EEF0055E6CE /* LLAChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC47D311C571EEF0055E6CE /* LLAChangBoundPhonesViewController.m */; };
-		7EC47D341C571EEF0055E6CE /* LLAChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC47D321C571EEF0055E6CE /* LLAChangBoundPhonesViewController.xib */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
 		A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A771C3CCCF700CADC51 /* LLAApplication.m */; };
 		A3209A7C1C3D044700CADC51 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3209A7B1C3D044700CADC51 /* TencentOpenAPI.framework */; };
@@ -528,6 +532,15 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EAA2F471C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlipayWithDrawalsViewController.h; sourceTree = "<group>"; };
+		7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlipayWithDrawalsViewController.m; sourceTree = "<group>"; };
+		7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAlipayWithDrawalsViewController.xib; sourceTree = "<group>"; };
+		7EAA2F4C1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChangBoundPhonesViewController.h; sourceTree = "<group>"; };
+		7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChangBoundPhonesViewController.m; sourceTree = "<group>"; };
+		7EAA2F4E1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAChangBoundPhonesViewController.xib; sourceTree = "<group>"; };
+		7EAA2F511C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANextChangBoundPhonesViewController.h; sourceTree = "<group>"; };
+		7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANextChangBoundPhonesViewController.m; sourceTree = "<group>"; };
+		7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLANextChangBoundPhonesViewController.xib; sourceTree = "<group>"; };
 		7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerViewController.h; sourceTree = "<group>"; };
 		7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerViewController.m; sourceTree = "<group>"; };
 		7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerCell.h; sourceTree = "<group>"; };
@@ -535,9 +548,6 @@
 		7EC47D281C570F860055E6CE /* LLABoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABoundPhonesViewController.h; sourceTree = "<group>"; };
 		7EC47D291C570F860055E6CE /* LLABoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABoundPhonesViewController.m; sourceTree = "<group>"; };
 		7EC47D2A1C570F860055E6CE /* LLABoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLABoundPhonesViewController.xib; sourceTree = "<group>"; };
-		7EC47D301C571EEF0055E6CE /* LLAChangBoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChangBoundPhonesViewController.h; sourceTree = "<group>"; };
-		7EC47D311C571EEF0055E6CE /* LLAChangBoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChangBoundPhonesViewController.m; sourceTree = "<group>"; };
-		7EC47D321C571EEF0055E6CE /* LLAChangBoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAChangBoundPhonesViewController.xib; sourceTree = "<group>"; };
 		A3209A731C3CCB7B00CADC51 /* LLADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLADelegate.h; sourceTree = "<group>"; };
 		A3209A741C3CCB7B00CADC51 /* LLADelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLADelegate.m; sourceTree = "<group>"; };
 		A3209A761C3CCCF700CADC51 /* LLAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAApplication.h; sourceTree = "<group>"; };
@@ -1628,6 +1638,15 @@
 				5C5D68D41C55EF59008A1230 /* LLAUserAccountDetailViewController.m */,
 				5C5D68E81C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.h */,
 				5C5D68E91C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.m */,
+				7EAA2F471C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.h */,
+				7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */,
+				7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */,
+				7EAA2F4C1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.h */,
+				7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */,
+				7EAA2F4E1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib */,
+				7EAA2F511C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.h */,
+				7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */,
+				7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1728,9 +1747,6 @@
 				A3DEDE461C3CAEC6009F3D37 /* TMChangePwdController.h */,
 				A3DEDE471C3CAEC6009F3D37 /* TMChangePwdController.m */,
 				A3DEDE481C3CAEC6009F3D37 /* TMChangePwdController.xib */,
-				7EC47D301C571EEF0055E6CE /* LLAChangBoundPhonesViewController.h */,
-				7EC47D311C571EEF0055E6CE /* LLAChangBoundPhonesViewController.m */,
-				7EC47D321C571EEF0055E6CE /* LLAChangBoundPhonesViewController.xib */,
 				A3DEDE491C3CAEC6009F3D37 /* TMFriendValidationController.h */,
 				A3DEDE4A1C3CAEC6009F3D37 /* TMFriendValidationController.m */,
 				A3DEDE4B1C3CAEC6009F3D37 /* TMSettingViewController.h */,
@@ -1949,7 +1965,6 @@
 				A3E2D9021C3E0F42005885D4 /* AlipaySDK.bundle in Resources */,
 				A3DEDE921C3CAEC7009F3D37 /* YZPersonViewController.xib in Resources */,
 				A3DEDE9E1C3CAEC7009F3D37 /* TMChangePwdController.xib in Resources */,
-				7EC47D341C571EEF0055E6CE /* LLAChangBoundPhonesViewController.xib in Resources */,
 				5CA18FBA1C4F6C9100A0B5B7 /* lla_Loading_15@3x.png in Resources */,
 				A3DEDE871C3CAEC7009F3D37 /* TMPublishView.xib in Resources */,
 				5CA18FAB1C4F6C9100A0B5B7 /* lla_Loading_10@3x.png in Resources */,
@@ -1961,6 +1976,7 @@
 				5CA18FB01C4F6C9100A0B5B7 /* lla_Loading_12@2x.png in Resources */,
 				A3DEDE6A1C3CAEC7009F3D37 /* TMDetailsCell.xib in Resources */,
 				A3DEDE6C1C3CAEC7009F3D37 /* TMLikeCell.xib in Resources */,
+				7EAA2F4B1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib in Resources */,
 				5CA18FC91C4F6C9100A0B5B7 /* lla_Loading_5.png in Resources */,
 				5CA18FD21C4F6C9100A0B5B7 /* lla_Loading_8.png in Resources */,
 				A3DEDE6E1C3CAEC7009F3D37 /* TMMoreView.xib in Resources */,
@@ -1976,6 +1992,7 @@
 				5CA18FB11C4F6C9100A0B5B7 /* lla_Loading_12@3x.png in Resources */,
 				5CA18FC81C4F6C9100A0B5B7 /* lla_Loading_4@3x.png in Resources */,
 				5CA18FD31C4F6C9100A0B5B7 /* lla_Loading_8@2x.png in Resources */,
+				7EAA2F501C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib in Resources */,
 				5CA18FB51C4F6C9100A0B5B7 /* lla_Loading_14.png in Resources */,
 				5CA18FCC1C4F6C9100A0B5B7 /* lla_Loading_6.png in Resources */,
 				5CA18FAD1C4F6C9100A0B5B7 /* lla_Loading_11@2x.png in Resources */,
@@ -1985,6 +2002,7 @@
 				A3DEDE971C3CAEC7009F3D37 /* TMProfileLikeCell.xib in Resources */,
 				5CA18FD11C4F6C9100A0B5B7 /* lla_Loading_7@3x.png in Resources */,
 				5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */,
+				7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */,
 				A3DEDE7A1C3CAEC7009F3D37 /* TMDataVideoController.xib in Resources */,
 				A3DEDE9B1C3CAEC7009F3D37 /* TMTHistoryCell.xib in Resources */,
 				5CA18FC21C4F6C9100A0B5B7 /* lla_Loading_2@3x.png in Resources */,
@@ -2075,6 +2093,7 @@
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
 				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
+				7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
 				5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */,
@@ -2124,6 +2143,7 @@
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
+				7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
@@ -2207,6 +2227,7 @@
 				A3DEDD8E1C3CAE38009F3D37 /* TMTabBarController.m in Sources */,
 				A3DEDE8E1C3CAEC7009F3D37 /* TMPurseViewController.m in Sources */,
 				A3DEDD9A1C3CAE38009F3D37 /* MTLJSONAdapter.m in Sources */,
+				7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */,
 				A3DEDD8D1C3CAE38009F3D37 /* TMNavigationController.m in Sources */,
 				5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */,
 				5CE0EB8C1C46424300C6BC79 /* NSMutableAttributedString+TY.m in Sources */,
@@ -2234,7 +2255,6 @@
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
-				7EC47D331C571EEF0055E6CE /* LLAChangBoundPhonesViewController.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
 				5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */,
 				5C8275121C5726A500DD547F /* MMPopupView.m in Sources */,
