@@ -14,15 +14,15 @@
 		5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68D71C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m */; };
 		5C5D68DB1C55F9EB008A1230 /* LLAUserAccountDetailMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68DA1C55F9EB008A1230 /* LLAUserAccountDetailMainInfo.m */; };
 		5C5D68DE1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68DD1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m */; };
-		5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.m */; };
+		5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m */; };
 		5C5D68E41C560DCC008A1230 /* LLAUserAccountHistoryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68E31C560DCC008A1230 /* LLAUserAccountHistoryHeader.m */; };
 		5C5D68E71C56103D008A1230 /* LLAUserAccountDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68E61C56103D008A1230 /* LLAUserAccountDetailInfoCell.m */; };
 		5C5D68EA1C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68E91C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.m */; };
-		5C5D68ED1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68EC1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.m */; };
-		5C5D68F01C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.m */; };
+		5C5D68F01C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m */; };
 		5C5D68F31C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68F21C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m */; };
 		5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */; };
 		5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298251C438E5500106BA2 /* LLACommonUtil.m */; };
+		5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8979341C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m */; };
 		5CA18F761C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA18F751C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m */; };
 		5CA18FA81C4F6C9100A0B5B7 /* lla_Loading_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18F781C4F6C9100A0B5B7 /* lla_Loading_1.png */; };
 		5CA18FA91C4F6C9100A0B5B7 /* lla_Loading_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18F791C4F6C9100A0B5B7 /* lla_Loading_10.png */; };
@@ -304,24 +304,24 @@
 		5C5D68DA1C55F9EB008A1230 /* LLAUserAccountDetailMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountDetailMainInfo.m; sourceTree = "<group>"; };
 		5C5D68DC1C55FB5D008A1230 /* LLAUserAccountBalanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountBalanceCell.h; sourceTree = "<group>"; };
 		5C5D68DD1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountBalanceCell.m; sourceTree = "<group>"; };
-		5C5D68DF1C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCacheCell.h; sourceTree = "<group>"; };
-		5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCacheCell.m; sourceTree = "<group>"; };
+		5C5D68DF1C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashCell.h; sourceTree = "<group>"; };
+		5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashCell.m; sourceTree = "<group>"; };
 		5C5D68E21C560DCC008A1230 /* LLAUserAccountHistoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountHistoryHeader.h; sourceTree = "<group>"; };
 		5C5D68E31C560DCC008A1230 /* LLAUserAccountHistoryHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountHistoryHeader.m; sourceTree = "<group>"; };
 		5C5D68E51C56103D008A1230 /* LLAUserAccountDetailInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountDetailInfoCell.h; sourceTree = "<group>"; };
 		5C5D68E61C56103D008A1230 /* LLAUserAccountDetailInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountDetailInfoCell.m; sourceTree = "<group>"; };
 		5C5D68E81C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashViewController.h; sourceTree = "<group>"; };
 		5C5D68E91C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashViewController.m; sourceTree = "<group>"; };
-		5C5D68EB1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashInfoCell.h; sourceTree = "<group>"; };
-		5C5D68EC1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashInfoCell.m; sourceTree = "<group>"; };
-		5C5D68EE1C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCacheAlipayInfoCell.h; sourceTree = "<group>"; };
-		5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCacheAlipayInfoCell.m; sourceTree = "<group>"; };
+		5C5D68EE1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashAlipayInfoCell.h; sourceTree = "<group>"; };
+		5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashAlipayInfoCell.m; sourceTree = "<group>"; };
 		5C5D68F11C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashCellPhoneInfoCell.h; sourceTree = "<group>"; };
 		5C5D68F21C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashCellPhoneInfoCell.m; sourceTree = "<group>"; };
 		5C7298201C4366A700106BA2 /* LLASaveUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASaveUserDefaultUtil.h; sourceTree = "<group>"; };
 		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
 		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
 		5C7298251C438E5500106BA2 /* LLACommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACommonUtil.m; sourceTree = "<group>"; };
+		5C8979331C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashInfoCell.h; sourceTree = "<group>"; };
+		5C8979341C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashInfoCell.m; sourceTree = "<group>"; };
 		5CA18F741C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		5CA18F751C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		5CA18F781C4F6C9100A0B5B7 /* lla_Loading_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lla_Loading_1.png; sourceTree = "<group>"; };
@@ -1629,16 +1629,16 @@
 				5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */,
 				5C5D68DC1C55FB5D008A1230 /* LLAUserAccountBalanceCell.h */,
 				5C5D68DD1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m */,
-				5C5D68DF1C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.h */,
-				5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.m */,
+				5C5D68DF1C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.h */,
+				5C5D68E01C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m */,
 				5C5D68E21C560DCC008A1230 /* LLAUserAccountHistoryHeader.h */,
 				5C5D68E31C560DCC008A1230 /* LLAUserAccountHistoryHeader.m */,
 				5C5D68E51C56103D008A1230 /* LLAUserAccountDetailInfoCell.h */,
 				5C5D68E61C56103D008A1230 /* LLAUserAccountDetailInfoCell.m */,
-				5C5D68EB1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.h */,
-				5C5D68EC1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.m */,
-				5C5D68EE1C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.h */,
-				5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.m */,
+				5C8979331C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.h */,
+				5C8979341C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m */,
+				5C5D68EE1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.h */,
+				5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m */,
 				5C5D68F11C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.h */,
 				5C5D68F21C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m */,
 			);
@@ -2071,7 +2071,7 @@
 				A3DEDD8F1C3CAE38009F3D37 /* main.m in Sources */,
 				5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */,
 				A3DEDE911C3CAEC7009F3D37 /* YZPersonViewController.m in Sources */,
-				5C5D68F01C562F3B008A1230 /* LLAUserAccountWithdrawCacheAlipayInfoCell.m in Sources */,
+				5C5D68F01C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m in Sources */,
 				A3DEDEA21C3CAEC7009F3D37 /* TMClearCacheCell.m in Sources */,
 				A3DEDE751C3CAEC7009F3D37 /* TMTopicCell.m in Sources */,
 				5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */,
@@ -2098,7 +2098,6 @@
 				5C5D68E71C56103D008A1230 /* LLAUserAccountDetailInfoCell.m in Sources */,
 				5CE0EB921C46424300C6BC79 /* TYTextContainer+Extended.m in Sources */,
 				5CBF9AAE1C535DA6001A4EA0 /* LLAMyOrderListViewController.m in Sources */,
-				5C5D68ED1C562F0A008A1230 /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
 				5CDDF44D1C473BDB00168989 /* LLAHallVideoInfoCell.m in Sources */,
 				5C5D68DB1C55F9EB008A1230 /* LLAUserAccountDetailMainInfo.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
@@ -2145,6 +2144,7 @@
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */,
 				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
+				5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
 				5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */,
@@ -2160,7 +2160,7 @@
 				5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
-				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCacheCell.m in Sources */,
+				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
 				5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */,
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,

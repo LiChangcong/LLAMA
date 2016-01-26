@@ -75,6 +75,9 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 //weChat
 @property(nonatomic , copy) NSString *weChatOpenId;
 @property(nonatomic , copy) NSString *weChatAccess_Token;
+//alipay info
+@property(nonatomic , copy) NSString *alipayAccount;
+@property(nonatomic , copy) NSString *alipayAccountUserName;
 
 //for temp save
 @property(nonatomic , copy) NSString *videoCoverImageURL;

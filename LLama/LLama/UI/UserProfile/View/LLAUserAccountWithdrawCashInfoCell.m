@@ -16,6 +16,8 @@ static const CGFloat headViewToTop = 40;
 static const CGFloat balanceLabelToBottom = 20;
 static const CGFloat balanceToBalaceTitle = 10;
 
+static NSString *const moneyImageName = @"dollar-yellow";
+
 @interface LLAUserAccountWithdrawCashInfoCell()<LLAUserHeadViewDelegate>
 {
     LLAUserHeadView *headView;
@@ -67,6 +69,7 @@ static const CGFloat balanceToBalaceTitle = 10;
     headView = [[LLAUserHeadView alloc] init];
     headView.translatesAutoresizingMaskIntoConstraints = NO;
     headView.delegate = self;
+    headView.userHeadImageView.image = [UIImage llaImageWithName:moneyImageName];
     
     [self.contentView addSubview:headView];
     
@@ -76,7 +79,7 @@ static const CGFloat balanceToBalaceTitle = 10;
     balanceTitleLabel.font = balanceTitleLabelFont;
     balanceTitleLabel.textColor = balanceTitleLabelTextColor;
     balanceTitleLabel.textAlignment = NSTextAlignmentCenter;
-    balanceTitleLabel.text = @"帐户余额";
+    balanceTitleLabel.text = @"提现金额";
     
     [self.contentView addSubview:balanceTitleLabel];
     
@@ -164,17 +167,15 @@ static const CGFloat balanceToBalaceTitle = 10;
 
 #pragma mark - Update
 
-- (void) updateCellWithUserInfo:(LLAUser *)userInfo tableWith:(CGFloat)tableWidth {
+- (void) updateCellWithUserInfo:(CGFloat)withdrawCashAmount tableWith:(CGFloat)tableWidth {
     
-    [headView updateHeadViewWithUser:userInfo];
-    
-    balanceLabel.text = [NSString stringWithFormat:@"￥ %.2f",userInfo.balance];
+    balanceLabel.text = [NSString stringWithFormat:@"￥ %.0f",withdrawCashAmount];
     
 }
 
 #pragma mark - Calculate height
 
-+ (CGFloat) calculateHeightWithUserInfo:(LLAUser *)userInfo tableWidth:(CGFloat)tableWidth {
++ (CGFloat) calculateHeightWithUserInfo:(CGFloat)withdrawCashAmount tableWidth:(CGFloat)tableWidth {
     
     return 230;
     

@@ -12,8 +12,8 @@
 
 @interface LLAUserAccountWithdrawCashInfoCell : UITableViewCell
 
-- (void) updateCellWithUserInfo:(LLAUser *)userInfo tableWith:(CGFloat) tableWidth;
+- (void) updateCellWithUserInfo:(CGFloat)withdrawCashAmount tableWith:(CGFloat) tableWidth;
 
-+ (CGFloat) calculateHeightWithUserInfo:(LLAUser *) userInfo tableWidth:(CGFloat) tableWidth;
++ (CGFloat) calculateHeightWithUserInfo:(CGFloat) withdrawCashAmount tableWidth:(CGFloat) tableWidth;
 
 @end

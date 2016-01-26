@@ -6,7 +6,7 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAUserAccountWithdrawCacheCell.h"
+#import "LLAUserAccountWithdrawCashCell.h"
 
 static const CGFloat cashTextFieldToTop = 20;
 static const CGFloat cashTextFieldHeight = 50;
@@ -19,7 +19,7 @@ static const CGFloat brokerageLabelToBottom = 50;
 static const CGFloat cashTextFieldToBorder = 10;
 static const CGFloat functionButtonToBorder  = 60;
 
-@interface LLAUserAccountWithdrawCacheCell()
+@interface LLAUserAccountWithdrawCashCell()
 {
     UIButton *functionButton;
     UILabel *brokerageLabel;
@@ -45,8 +45,9 @@ static const CGFloat functionButtonToBorder  = 60;
 
 @end
 
-@implementation LLAUserAccountWithdrawCacheCell
+@implementation LLAUserAccountWithdrawCashCell
 @synthesize cashTextField;
+@synthesize delegate;
 
 #pragma mark - Init
 
@@ -93,20 +94,28 @@ static const CGFloat functionButtonToBorder  = 60;
     cashTextField.placeholder = @"最低单次提现金额100";
     cashTextField.leftViewMode = UITextFieldViewModeAlways;
     cashTextField.backgroundColor = [UIColor whiteColor];
-    cashTextField.layer.cornerRadius = 6;
-    
+    cashTextField.layer.cornerRadius = 4;
+    cashTextField.rightViewMode = UITextFieldViewModeAlways;
+    cashTextField.keyboardType = UIKeyboardTypeNumberPad;
     //left View
     
     UILabel *leftLabel = [[UILabel alloc] init];
     leftLabel.font = cashTextFieldFont;
     leftLabel.textColor = cashTextFieldTextColor;
     leftLabel.text = @"提现(元)";
-    leftLabel.textAlignment = NSTextAlignmentRight;
+    leftLabel.textAlignment = NSTextAlignmentCenter;
     [leftLabel sizeToFit];
     
-    leftLabel.frame = CGRectMake(4, 0, leftLabel.frame.size.width+4, leftLabel.frame.size.height);
+    leftLabel.frame = CGRectMake(0, 0, leftLabel.frame.size.width+6, leftLabel.frame.size.height);
     
     cashTextField.leftView = leftLabel;
+    
+    //
+    //right view for fill
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, cashTextFieldHeight)];
+    rightView.backgroundColor = cashTextField.backgroundColor;
+
+    cashTextField.rightView = rightView;
     
     [self.contentView addSubview:cashTextField];
     
@@ -194,6 +203,9 @@ static const CGFloat functionButtonToBorder  = 60;
 
 - (void) functionButtonClicked:(UIButton *) sender {
     
+    if (delegate && [delegate respondsToSelector:@selector(withDrawcache)]) {
+        [delegate withDrawcache];
+    }
 }
 
 #pragma mark - Update

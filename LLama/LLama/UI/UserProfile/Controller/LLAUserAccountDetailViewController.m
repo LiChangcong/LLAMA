@@ -8,12 +8,13 @@
 
 //controller
 #import "LLAUserAccountDetailViewController.h"
+#import "LLAUserAccountWithdrawCashViewController.h"
 
 //view
 #import "LLATableView.h"
 #import "LLALoadingView.h"
 #import "LLAUserAccountBalanceCell.h"
-#import "LLAUserAccountWithdrawCacheCell.h"
+#import "LLAUserAccountWithdrawCashCell.h"
 #import "LLAUserAccountHistoryHeader.h"
 #import "LLAUserAccountDetailInfoCell.h"
 
@@ -34,7 +35,7 @@ static const NSInteger withdrawCashSectionIndex = 1;
 
 static const NSInteger detailInfoSection = 2;
 
-@interface LLAUserAccountDetailViewController()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface LLAUserAccountDetailViewController()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LLAUserAccountWithdrawCashCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -66,7 +67,13 @@ static const NSInteger detailInfoSection = 2;
     
     [self loadData];
     [HUD show:YES];
+    
+    //
+    UITapGestureRecognizer *tapToHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToHide:)];
+    
+    [self.view addGestureRecognizer:tapToHide];
 }
+
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -86,6 +93,13 @@ static const NSInteger detailInfoSection = 2;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self  name:UITextFieldTextDidChangeNotification object:nil];
 }
+
+#pragma mark - TapToHide
+
+- (void) tapToHide:(UITapGestureRecognizer *) ges {
+    [currentField resignFirstResponder];
+}
+
 
 #pragma mark - Init
 
@@ -260,10 +274,11 @@ static const NSInteger detailInfoSection = 2;
         
         static NSString *withdrawCashIden = @"withdrawCashIden";
         
-        LLAUserAccountWithdrawCacheCell *cell = [tableView dequeueReusableCellWithIdentifier:withdrawCashIden];
+        LLAUserAccountWithdrawCashCell *cell = [tableView dequeueReusableCellWithIdentifier:withdrawCashIden];
         if (!cell) {
-            cell = [[LLAUserAccountWithdrawCacheCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:withdrawCashIden];
+            cell = [[LLAUserAccountWithdrawCashCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:withdrawCashIden];
             cell.cashTextField.delegate = self;
+            cell.delegate = self;
         }
         
         [cell updateCellWithDrawCash:withdrawCash];
@@ -312,7 +327,7 @@ static const NSInteger detailInfoSection = 2;
     if (indexPath.section == balanceSectionIndex) {
         return [LLAUserAccountBalanceCell calculateHeightWithUserInfo:userInfo tableWidth:tableView.frame.size.width];
     }else if(indexPath.section == withdrawCashSectionIndex) {
-        return [LLAUserAccountWithdrawCacheCell calculateCellHeight];
+        return [LLAUserAccountWithdrawCashCell calculateCellHeight];
     }else if (indexPath.section == detailInfoSection) {
         return [LLAUserAccountDetailInfoCell calculateHeightWithItemInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.frame.size.width];
     }else{
@@ -346,7 +361,8 @@ static const NSInteger detailInfoSection = 2;
         NSInteger newInterger = [textField.text integerValue];
         
         withdrawCash = newInterger;
-        [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
+        //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
+        textField.text = [NSString stringWithFormat:@"%ld",newInterger];
     }
 }
 
@@ -410,6 +426,12 @@ static const NSInteger detailInfoSection = 2;
     
 }
 
+#pragma mark - drawCash
+
+- (void) withDrawcache {
+    LLAUserAccountWithdrawCashViewController *drawCache = [[LLAUserAccountWithdrawCashViewController alloc] initWithCashAmount:withdrawCash];
+    [self.navigationController pushViewController:drawCache animated:YES];
+}
 
 
 @end

@@ -1,5 +1,5 @@
 //
-//  LLAUserAccountWithdrawCashCellPhoneInfoCell.h
+//  LLAUserAccountWithdrawCacheAlipayInfoCell.h
 //  LLama
 //
 //  Created by Live on 16/1/25.
@@ -10,11 +10,10 @@
 
 @class LLAUser;
 
-@interface LLAUserAccountWithdrawCashCellPhoneInfoCell : UITableViewCell
+@interface LLAUserAccountWithdrawCashAlipayInfoCell : UITableViewCell
 
 - (void) updateCellWithUserInfo:(LLAUser *) userInfo;
 
 + (CGFloat) calculateHeightWithUserInfo:(LLAUser *) userInfo tableWidth:(CGFloat) tableWidth;
-
 
 @end

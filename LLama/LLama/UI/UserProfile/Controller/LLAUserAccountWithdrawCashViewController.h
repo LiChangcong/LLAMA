@@ -10,4 +10,6 @@
 
 @interface LLAUserAccountWithdrawCashViewController : LLACommonViewController
 
+- (instancetype) initWithCashAmount:(CGFloat) cashAmount;
+
 @end

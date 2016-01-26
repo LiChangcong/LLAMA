@@ -46,6 +46,10 @@ static BOOL isSimpleUserModel;
                  @"qqOpenId":@"qqopenid",
                  @"weChatOpenId":@"wxopenid",
                  
+                 //alipay info
+                 @"alipayAccount":@"alipay",
+                 @"alipayAccountUserName":@"alipayRealname",
+                 
                  //for temp
                  @"videoCoverImageURL":@"videoThumb",
                  @"videoPlayURL":@"myVideo",

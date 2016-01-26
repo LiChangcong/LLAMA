@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLAUserAccountWithdrawCacheCell : UITableViewCell
+@protocol LLAUserAccountWithdrawCashCellDelegate <NSObject>
+
+- (void) withDrawcache;
+
+@end
+
+@interface LLAUserAccountWithdrawCashCell : UITableViewCell
 
 @property(nonatomic , readonly) UITextField *cashTextField;
+
+@property(nonatomic , assign) id<LLAUserAccountWithdrawCashCellDelegate> delegate;
 
 - (void) updateCellWithDrawCash:(NSInteger) cashNum;
 

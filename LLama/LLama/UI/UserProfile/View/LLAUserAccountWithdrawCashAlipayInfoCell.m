@@ -6,14 +6,15 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAUserAccountWithdrawCacheAlipayInfoCell.h"
+#import "LLAUserAccountWithdrawCashAlipayInfoCell.h"
+#import "LLAUser.h"
 
-static NSString *const arrowImageName = @"";
+static NSString *const arrowImageName = @"arrowgreg";
 
 static const CGFloat toLeftSpace = 8;
 static const CGFloat toRightSpace = 8;
 
-@interface LLAUserAccountWithdrawCacheAlipayInfoCell()
+@interface LLAUserAccountWithdrawCashAlipayInfoCell()
 {
     UILabel *alipayInfoLabel;
     
@@ -26,7 +27,7 @@ static const CGFloat toRightSpace = 8;
 
 @end
 
-@implementation LLAUserAccountWithdrawCacheAlipayInfoCell
+@implementation LLAUserAccountWithdrawCashAlipayInfoCell
 
 #pragma mark - Init
 
@@ -35,7 +36,7 @@ static const CGFloat toRightSpace = 8;
     if (self) {
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.contentView.backgroundColor = [UIColor whiteColor];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        //self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [self initVariables];
         [self initSubViews];
@@ -98,6 +99,24 @@ static const CGFloat toRightSpace = 8;
     [self.contentView addConstraints:constrArray];
     
     
+}
+
+#pragma mark - Update
+
+- (void) updateCellWithUserInfo:(LLAUser *)userInfo {
+    
+    if (userInfo.alipayAccount && userInfo.alipayAccountUserName) {
+        alipayInfoLabel.text = [NSString stringWithFormat:@"%@\n帐户名：%@",userInfo.alipayAccount,userInfo.alipayAccountUserName];
+    }else {
+        alipayInfoLabel.text = @"还未绑定支付宝";
+    }
+    
+}
+
+#pragma mark - Calculate height
+
++ (CGFloat) calculateHeightWithUserInfo:(LLAUser *)userInfo tableWidth:(CGFloat)tableWidth {
+    return  70;
 }
 
 @end
