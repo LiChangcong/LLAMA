@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LLANextChangBoundPhonesViewController">
             <connections>
+                <outlet property="BoundPhoneNew" destination="PMt-rw-28z" id="kvu-I3-bAe"/>
+                <outlet property="identityField" destination="gkt-LS-hq7" id="qhc-I3-DbA"/>
+                <outlet property="sendToGetIDCodeButton" destination="pve-d4-wKw" id="2bt-Ms-vUy"/>
                 <outlet property="view" destination="OMs-sd-nhx" id="33s-HH-q3H"/>
             </connections>
         </placeholder>
@@ -43,6 +46,9 @@
                     <state key="normal" title="确  认" backgroundImage="finishnew">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="determineButtonClick:" destination="-1" eventType="touchUpInside" id="VgR-zV-EGm"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omy-3A-vPB">
                     <rect key="frame" x="40" y="84" width="520" height="33.5"/>
@@ -80,6 +86,9 @@
                     <state key="normal" title="发送验证码">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="sendToGetIdCodeClicked:" destination="-1" eventType="touchUpInside" id="x5I-qY-1G1"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="0.5" colorSpace="calibratedRGB"/>

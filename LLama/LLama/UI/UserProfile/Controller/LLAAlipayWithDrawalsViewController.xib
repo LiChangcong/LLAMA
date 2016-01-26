@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LLAAlipayWithDrawalsViewController">
             <connections>
+                <outlet property="accountNumberTextField" destination="N31-dv-Y6K" id="Ps9-WX-uNb"/>
+                <outlet property="nameTextField" destination="kh4-f4-Xuq" id="Ftl-yn-bT8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

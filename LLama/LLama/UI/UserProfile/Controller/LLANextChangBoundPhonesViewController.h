@@ -11,4 +11,6 @@
 
 @interface LLANextChangBoundPhonesViewController : LLACommonViewController
 
+@property (nonatomic, strong) NSString *changeToken;
+
 @end

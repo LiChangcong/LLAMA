@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LLAChangBoundPhonesViewController">
             <connections>
+                <outlet property="identityField" destination="jUF-pa-RJb" id="fuX-hj-8L2"/>
+                <outlet property="passwordField" destination="Pqu-GQ-CdC" id="OMM-i7-hRm"/>
+                <outlet property="sendToGetIDCodeButton" destination="xnr-ba-kDE" id="0ET-8a-o2s"/>
                 <outlet property="view" destination="vJa-5e-yWX" id="sOG-GR-Ts0"/>
             </connections>
         </placeholder>
@@ -81,9 +84,12 @@
                         <constraint firstAttribute="height" constant="40" id="lJH-QQ-lpH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="发送验证码">
+                    <state key="normal">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="sendToGetIdCodeClicked:" destination="-1" eventType="touchUpInside" id="8ZO-pn-Gwv"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="0.5" colorSpace="calibratedRGB"/>

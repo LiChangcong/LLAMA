@@ -159,8 +159,8 @@
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
 //        TMLog(@"点击了绑定手机号");
-        LLABoundPhonesViewController *boundPhones = [[LLABoundPhonesViewController alloc] init];
-        [self.navigationController pushViewController:boundPhones animated:YES];
+//        LLABoundPhonesViewController *boundPhones = [[LLABoundPhonesViewController alloc] init];
+//        [self.navigationController pushViewController:boundPhones animated:YES];
         
     }else if (indexPath.section == 0 && indexPath.row == 1){
 //        TMLog(@"点击了更改密码");

@@ -137,10 +137,10 @@
 		7EAA2F501C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F4E1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib */; };
 		7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */; };
 		7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */; };
+		7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */; };
+		7EAA2F5A1C575448002DF3B1 /* LLABoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */; };
 		7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */; };
 		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
-		7EC47D2B1C570F860055E6CE /* LLABoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC47D291C570F860055E6CE /* LLABoundPhonesViewController.m */; };
-		7EC47D2C1C570F860055E6CE /* LLABoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC47D2A1C570F860055E6CE /* LLABoundPhonesViewController.xib */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
 		A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A771C3CCCF700CADC51 /* LLAApplication.m */; };
 		A3209A7C1C3D044700CADC51 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3209A7B1C3D044700CADC51 /* TencentOpenAPI.framework */; };
@@ -515,13 +515,13 @@
 		7EAA2F511C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANextChangBoundPhonesViewController.h; sourceTree = "<group>"; };
 		7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANextChangBoundPhonesViewController.m; sourceTree = "<group>"; };
 		7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLANextChangBoundPhonesViewController.xib; sourceTree = "<group>"; };
+		7EAA2F561C575448002DF3B1 /* LLABoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABoundPhonesViewController.h; sourceTree = "<group>"; };
+		7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABoundPhonesViewController.m; sourceTree = "<group>"; };
+		7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLABoundPhonesViewController.xib; sourceTree = "<group>"; };
 		7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerViewController.h; sourceTree = "<group>"; };
 		7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerViewController.m; sourceTree = "<group>"; };
 		7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerCell.h; sourceTree = "<group>"; };
 		7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerCell.m; sourceTree = "<group>"; };
-		7EC47D281C570F860055E6CE /* LLABoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABoundPhonesViewController.h; sourceTree = "<group>"; };
-		7EC47D291C570F860055E6CE /* LLABoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABoundPhonesViewController.m; sourceTree = "<group>"; };
-		7EC47D2A1C570F860055E6CE /* LLABoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLABoundPhonesViewController.xib; sourceTree = "<group>"; };
 		A3209A731C3CCB7B00CADC51 /* LLADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLADelegate.h; sourceTree = "<group>"; };
 		A3209A741C3CCB7B00CADC51 /* LLADelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLADelegate.m; sourceTree = "<group>"; };
 		A3209A761C3CCCF700CADC51 /* LLAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAApplication.h; sourceTree = "<group>"; };
@@ -1591,6 +1591,9 @@
 				7EAA2F471C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.h */,
 				7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */,
 				7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */,
+				7EAA2F561C575448002DF3B1 /* LLABoundPhonesViewController.h */,
+				7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */,
+				7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */,
 				7EAA2F4C1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.h */,
 				7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */,
 				7EAA2F4E1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib */,
@@ -1689,9 +1692,6 @@
 			children = (
 				A3DEDE441C3CAEC6009F3D37 /* TMAccountSecurityController.h */,
 				A3DEDE451C3CAEC6009F3D37 /* TMAccountSecurityController.m */,
-				7EC47D281C570F860055E6CE /* LLABoundPhonesViewController.h */,
-				7EC47D291C570F860055E6CE /* LLABoundPhonesViewController.m */,
-				7EC47D2A1C570F860055E6CE /* LLABoundPhonesViewController.xib */,
 				A3DEDE461C3CAEC6009F3D37 /* TMChangePwdController.h */,
 				A3DEDE471C3CAEC6009F3D37 /* TMChangePwdController.m */,
 				A3DEDE481C3CAEC6009F3D37 /* TMChangePwdController.xib */,
@@ -1894,7 +1894,6 @@
 				5CA18FA81C4F6C9100A0B5B7 /* lla_Loading_1.png in Resources */,
 				A3DEDE7E1C3CAEC7009F3D37 /* TMLoginViewController.xib in Resources */,
 				A3DEDE951C3CAEC7009F3D37 /* TMNoticeView.xib in Resources */,
-				7EC47D2C1C570F860055E6CE /* LLABoundPhonesViewController.xib in Resources */,
 				7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */,
 				5CA18FAE1C4F6C9100A0B5B7 /* lla_Loading_11@3x.png in Resources */,
 				5CA18FD51C4F6C9100A0B5B7 /* lla_Loading_9.png in Resources */,
@@ -1962,6 +1961,7 @@
 				A3209A9B1C3D0E5100CADC51 /* WeiboSDK.bundle in Resources */,
 				A3209A841C3D06EF00CADC51 /* read_me.txt in Resources */,
 				5CA18FBB1C4F6C9100A0B5B7 /* lla_Loading_16.png in Resources */,
+				7EAA2F5A1C575448002DF3B1 /* LLABoundPhonesViewController.xib in Resources */,
 				5CA18FC71C4F6C9100A0B5B7 /* lla_Loading_4@2x.png in Resources */,
 				5CA18FBC1C4F6C9100A0B5B7 /* lla_Loading_16@2x.png in Resources */,
 				A3DEDE821C3CAEC7009F3D37 /* TMRetrievePasswordViewController.xib in Resources */,
@@ -2095,7 +2095,6 @@
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
 				5CE0EB901C46424300C6BC79 /* TYImageStorage.m in Sources */,
 				A3DEDE901C3CAEC7009F3D37 /* YZPersonTableViewController.m in Sources */,
-				7EC47D2B1C570F860055E6CE /* LLABoundPhonesViewController.m in Sources */,
 				A3E2D9111C3E3865005885D4 /* LLABaseNavigationController.m in Sources */,
 				5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */,
 				A3DEDDA01C3CAE38009F3D37 /* NSArray+MTLManipulationAdditions.m in Sources */,
@@ -2191,6 +2190,7 @@
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */,
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
+				7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
