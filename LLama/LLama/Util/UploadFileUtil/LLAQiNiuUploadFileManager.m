@@ -42,7 +42,7 @@
                              key:(NSString *)keyString
                            token:(NSString *)uploadToken
                         progress:(LLAUploadProgressBlock) progress
-                        complete:(LLAUploadCompleteBlock) complete; {
+                        complete:(LLAUploadCompleteBlock) complete {
 
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
         if (progress){
@@ -59,5 +59,6 @@
     
 
 }
+
 
 @end

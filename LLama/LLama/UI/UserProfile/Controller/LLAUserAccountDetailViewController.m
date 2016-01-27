@@ -362,7 +362,7 @@ static const NSInteger detailInfoSection = 2;
         
         withdrawCash = newInterger;
         //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
-        textField.text = [NSString stringWithFormat:@"%ld",newInterger];
+        textField.text = [NSString stringWithFormat:@"%ld",(long)newInterger];
     }
 }
 
