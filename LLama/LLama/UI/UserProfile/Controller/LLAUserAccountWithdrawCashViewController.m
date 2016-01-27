@@ -31,6 +31,8 @@
 // cell phone number
 #import "LLAChangBoundPhonesViewController.h"
 
+#import "LLABoundPhonesViewController.h"
+
 static const NSInteger cashInfoSectionIndex = 0;
 static const NSInteger alipayInfoSectionIndex = 1;
 static const NSInteger cellPhoneInfoSectionIndex = 2;
@@ -256,10 +258,18 @@ static const CGFloat cashButtonToHorborder = 16;
         [self.navigationController pushViewController:alipay animated:YES];
         
     }else if (indexPath.section == cellPhoneInfoSectionIndex) {
-        
         //go to edit cell phone number
-        LLAChangBoundPhonesViewController *changeBoundPhones = [[LLAChangBoundPhonesViewController alloc] init];
-        [self.navigationController pushViewController:changeBoundPhones animated:YES];
+
+        if ([LLAUser me].mobilePhone) {
+            // 绑定手机号
+            LLAChangBoundPhonesViewController *changeBoundPhones = [[LLAChangBoundPhonesViewController alloc] init];
+            [self.navigationController pushViewController:changeBoundPhones animated:YES];
+
+        }else {
+            // 更换绑定的手机号
+            LLABoundPhonesViewController *boundPhones = [[LLABoundPhonesViewController alloc] init];
+            [self.navigationController pushViewController:boundPhones animated:YES];
+        }
         
     }
     

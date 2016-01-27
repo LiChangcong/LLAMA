@@ -1,26 +1,31 @@
 //
-//  LLABoundPhonesViewController.m
+//  LLAAccountSecurityController.m
 //  LLama
 //
 //  Created by tommin on 16/1/26.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLABoundPhonesViewController.h"
+#import "LLAAccountSecurityController.h"
 
-@interface LLABoundPhonesViewController ()
+@interface LLAAccountSecurityController ()
+
+@property (nonatomic, weak) IBOutlet UIView *mainTableView;
 
 @end
 
-@implementation LLABoundPhonesViewController
+@implementation LLAAccountSecurityController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.view.backgroundColor = TMCommonBgColor;
+    // 背景色
+    self.view.backgroundColor = [UIColor colorWithHex:0xeaeaea];
     
-    self.navigationItem.title = @"绑定手机号";
+    // 导航栏标题
+    self.navigationItem.title = @"设置";
+
 }
 
 - (void)didReceiveMemoryWarning {

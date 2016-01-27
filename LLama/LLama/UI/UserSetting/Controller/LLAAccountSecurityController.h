@@ -1,5 +1,5 @@
 //
-//  LLANextChangBoundPhonesViewController.h
+//  LLAAccountSecurityController.h
 //  LLama
 //
 //  Created by tommin on 16/1/26.
@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "LLACommonViewController.h"
 
-@interface LLANextChangBoundPhonesViewController : LLACommonViewController
-
-@property (nonatomic, strong) NSString *changeToken;
+@interface LLAAccountSecurityController : LLACommonViewController
 
 @end

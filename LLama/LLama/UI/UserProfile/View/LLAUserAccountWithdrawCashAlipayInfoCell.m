@@ -56,6 +56,7 @@ static const CGFloat toRightSpace = 8;
     alipayInfoLabel.font = alipayInfoLabelFont;
     alipayInfoLabel.textColor = alipayInfoLabelTextColor;
     alipayInfoLabel.textAlignment = NSTextAlignmentLeft;
+    alipayInfoLabel.numberOfLines = 2;
     
     [self.contentView addSubview:alipayInfoLabel];
     

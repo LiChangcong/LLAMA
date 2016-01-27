@@ -22,7 +22,8 @@
 #import "LLAChangeRootControllerUtil.h"
 
 //setting
-#import "TMAccountSecurityController.h"
+//#import "TMAccountSecurityController.h"
+#import "LLAAccountSecurityController.h"
 
 static const NSInteger accountSaftySectionIndex = 0;
 static const NSInteger mainInfoSaftySectionIndex = 1;
@@ -201,7 +202,14 @@ static const CGFloat logoutHeaderHeight = 28;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
-        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
+//        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
+//        [self.navigationController pushViewController:accountSecurity animated:YES];
+        
+//        LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
+//        [self.navigationController pushViewController:accountSecurity animated:YES];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
+        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:accountSecurity animated:YES];
     }
 }

@@ -1,12 +1,12 @@
 //
-//  LLANextChangBoundPhonesViewController.m
+//  LLABoundPhonesViewController.m
 //  LLama
 //
 //  Created by tommin on 16/1/26.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLANextChangBoundPhonesViewController.h"
+#import "LLABoundPhonesViewController.h"
 
 #import "LLALoadingView.h"
 #import "LLAViewUtil.h"
@@ -15,44 +15,43 @@
 
 #import "LLAUser.h"
 
-#import "LLAUserAccountWithdrawCashViewController.h"
-
-@interface LLANextChangBoundPhonesViewController ()
+@interface LLABoundPhonesViewController ()
 {
     LLALoadingView *HUD;
     
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *identityField;
-
-@property (weak, nonatomic) IBOutlet UITextField *BoundPhoneNew;
+@property (weak, nonatomic) IBOutlet UITextField *BoundPhoneTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendToGetIDCodeButton;
 
+@property (weak, nonatomic) IBOutlet UITextField *identityField;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+
 @end
 
-@implementation LLANextChangBoundPhonesViewController
+@implementation LLABoundPhonesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = TMCommonBgColor;
-
 }
 
-// 获取验证码
-- (IBAction)sendToGetIdCodeClicked:(UIButton *)sender {
+- (IBAction)sendToGetIDCodeButton:(UIButton *)sender {
+    
     
     [self.view endEditing:YES];
     
-    NSString *phoneNumber = self.BoundPhoneNew.text;
+    NSString *phoneNumber = self.BoundPhoneTextField.text;
     
     if (![LLACommonUtil validateMobile:phoneNumber]) {
         [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
         return;
     }
-
+    
     [HUD show:NO];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -121,14 +120,26 @@
 
 - (IBAction)determineButtonClick:(UIButton *)sender {
     
+    
     [self.view endEditing:YES];
     
     //check
-    if (![LLACommonUtil validateMobile:self.BoundPhoneNew.text]) {
+    if (![LLACommonUtil validateMobile:self.BoundPhoneTextField.text]) {
         [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
         return;
     }
     
+    if (self.passwordField.text.length < 1) {
+        [LLAViewUtil showAlter:self.view withText:@"请填写密码"];
+        return;
+    }
+    
+    if (self.passwordField.text.length > 16) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"密码长度不能超过16位"];
+        return;
+    }
+
     
     if (self.identityField.text.length < 1) {
         
@@ -141,24 +152,21 @@
     //register
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
-    [params setValue:self.BoundPhoneNew.text forKey:@"newMobile"];
+    [params setValue:self.BoundPhoneTextField.text forKey:@"mobile"];
+    [params setValue:self.passwordField forKey:@"pwd"];
     [params setValue:self.identityField.text forKey:@"smsCode"];
-    [params setValue:self.changeToken forKey:@"changeToken"];
     
     __weak  typeof(self) blockSelf = self;
     
-    [LLAHttpUtil httpPostWithUrl:@"/user/changeMobileStep2" param:params progress:NULL responseBlock:^(id responseObject) {
+    [LLAHttpUtil httpPostWithUrl:@"/user/bindMobile" param:params progress:NULL responseBlock:^(id responseObject) {
         
         //[HUD hide:YES];
+        LLAUser *me = [LLAUser me];
+        me.mobilePhone = self.BoundPhoneTextField.text;
+        [LLAUser updateUserInfo:me];
         
-        NSString *newMobile = [responseObject valueForKey:@"newMobile"];
-        
-        LLAUser *newUser = [LLAUser me];
-        newUser.mobilePhone = newMobile;
-        [LLAUser updateUserInfo:newUser];
-        
-        // 跳到提现信息
-        [self.navigationController popToViewController:[[LLAUserAccountWithdrawCashViewController alloc] init] animated:YES];
+        // 跳转到提现信息页面
+        [self.navigationController popViewControllerAnimated:YES];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -170,6 +178,7 @@
         [HUD hide:YES];
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
     }];
+    
 
     
 }
