@@ -15,6 +15,8 @@
 #import "LLAHttpUtil.h"
 
 
+#import "LLAUser.h"
+
 @interface LLAChangBoundPhonesViewController ()
 {
     LLALoadingView *HUD;
@@ -29,6 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sendToGetIDCodeButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *sendSmsCodePhoneLabel;
+
 @end
 
 @implementation LLAChangBoundPhonesViewController
@@ -37,11 +41,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.view.backgroundColor = TMCommonBgColor;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.title = @"更换绑定的手机号";
     [self.sendToGetIDCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
 
+    // 显示：将发送验证码到绑定的手机
+    NSString *boundPhones = [LLAUser me].mobilePhone;
+    self.sendSmsCodePhoneLabel.text = [NSString stringWithFormat:@"将发送验证码到手机: %@",boundPhones];
+    
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
 
 

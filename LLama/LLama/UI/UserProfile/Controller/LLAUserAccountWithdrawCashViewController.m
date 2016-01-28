@@ -261,12 +261,14 @@ static const CGFloat cashButtonToHorborder = 16;
         //go to edit cell phone number
 
         if ([LLAUser me].mobilePhone) {
-            // 绑定手机号
+            
+            // 更换绑定的手机号
             LLAChangBoundPhonesViewController *changeBoundPhones = [[LLAChangBoundPhonesViewController alloc] init];
             [self.navigationController pushViewController:changeBoundPhones animated:YES];
 
         }else {
-            // 更换绑定的手机号
+            
+            // 绑定手机号
             LLABoundPhonesViewController *boundPhones = [[LLABoundPhonesViewController alloc] init];
             [self.navigationController pushViewController:boundPhones animated:YES];
         }

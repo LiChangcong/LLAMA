@@ -23,6 +23,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWn-yH-xSp" userLabel="手机号码">
                     <rect key="frame" x="20" y="84" width="560" height="40"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginregestbutton" translatesAutoresizingMaskIntoConstraints="NO" id="fek-qR-njh">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
+                        </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入要绑定的手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G9t-7Z-V4W">
                             <rect key="frame" x="20" y="0.0" width="520" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -32,8 +35,12 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="G9t-7Z-V4W" firstAttribute="top" secondItem="gWn-yH-xSp" secondAttribute="top" id="2CG-N1-HTF"/>
+                        <constraint firstItem="fek-qR-njh" firstAttribute="top" secondItem="gWn-yH-xSp" secondAttribute="top" id="2ua-Ku-tUz"/>
+                        <constraint firstAttribute="bottom" secondItem="fek-qR-njh" secondAttribute="bottom" id="S6a-Kg-JVP"/>
+                        <constraint firstAttribute="trailing" secondItem="fek-qR-njh" secondAttribute="trailing" id="YWt-um-Lnk"/>
                         <constraint firstAttribute="trailing" secondItem="G9t-7Z-V4W" secondAttribute="trailing" constant="20" id="ZNL-Ol-kOK"/>
                         <constraint firstItem="G9t-7Z-V4W" firstAttribute="leading" secondItem="gWn-yH-xSp" secondAttribute="leading" constant="20" id="tWy-ll-kiq"/>
+                        <constraint firstItem="fek-qR-njh" firstAttribute="leading" secondItem="gWn-yH-xSp" secondAttribute="leading" id="vMd-uy-6lz"/>
                         <constraint firstAttribute="bottom" secondItem="G9t-7Z-V4W" secondAttribute="bottom" id="wcA-BB-tQd"/>
                         <constraint firstAttribute="height" constant="40" id="yW6-Om-W2B"/>
                     </constraints>
@@ -41,6 +48,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afs-ON-ini" userLabel="登陆密码">
                     <rect key="frame" x="20" y="134" width="560" height="40"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginregestbutton" translatesAutoresizingMaskIntoConstraints="NO" id="LFU-iI-WQN">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
+                        </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入登陆密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bjw-VW-EPp">
                             <rect key="frame" x="20" y="0.0" width="520" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -50,23 +60,27 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="8uI-cj-sjb"/>
+                        <constraint firstItem="LFU-iI-WQN" firstAttribute="leading" secondItem="Afs-ON-ini" secondAttribute="leading" id="BLg-ev-hAs"/>
+                        <constraint firstAttribute="trailing" secondItem="LFU-iI-WQN" secondAttribute="trailing" id="Edn-5P-gt0"/>
+                        <constraint firstAttribute="bottom" secondItem="LFU-iI-WQN" secondAttribute="bottom" id="McK-y8-lJ6"/>
                         <constraint firstAttribute="bottom" secondItem="bjw-VW-EPp" secondAttribute="bottom" id="Qro-LA-ebP"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="epq-wQ-n8V"/>
                         <constraint firstItem="bjw-VW-EPp" firstAttribute="top" secondItem="Afs-ON-ini" secondAttribute="top" id="m4A-gO-dKa"/>
                         <constraint firstAttribute="trailing" secondItem="bjw-VW-EPp" secondAttribute="trailing" constant="20" id="s7e-7S-BYz"/>
                         <constraint firstItem="bjw-VW-EPp" firstAttribute="leading" secondItem="Afs-ON-ini" secondAttribute="leading" constant="20" id="yhD-Ae-FtH"/>
+                        <constraint firstItem="LFU-iI-WQN" firstAttribute="top" secondItem="Afs-ON-ini" secondAttribute="top" id="z6c-bc-jbm"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr8-OL-E2x" userLabel="验证码">
                     <rect key="frame" x="20" y="194" width="412.5" height="40"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入登陆密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n0y-KI-z3V">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n0y-KI-z3V">
                             <rect key="frame" x="20" y="0.0" width="372.5" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="9Hl-Iw-E0h"/>
                         <constraint firstItem="n0y-KI-z3V" firstAttribute="leading" secondItem="Hr8-OL-E2x" secondAttribute="leading" constant="20" id="SKd-Za-3kG"/>
@@ -78,7 +92,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-d6-07W">
-                    <rect key="frame" x="442.5" y="194" width="137.5" height="40"/>
+                    <rect key="frame" x="442" y="194" width="137.5" height="40"/>
                     <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="SHR-Zw-sNN"/>
@@ -135,5 +149,6 @@
     </objects>
     <resources>
         <image name="finishnew" width="345" height="50"/>
+        <image name="loginregestbutton" width="5" height="48"/>
     </resources>
 </document>

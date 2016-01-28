@@ -37,7 +37,7 @@
     
     self.navigationItem.title = @"提现信息";
     
-    self.view.backgroundColor = TMCommonBgColor;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *confirmBarItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"ok"] highlightedImage:[UIImage llaImageWithName:@"okh"] target:self action:@selector(confirm)];
     

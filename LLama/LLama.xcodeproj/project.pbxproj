@@ -178,8 +178,9 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F7B0F1C58BE5C00620ED2 /* LLAModifyPasswordViewController.m */; };
+		7E9F7B121C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E9F7B101C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib */; };
 		7EA6FC2E1C576DFE00F78099 /* LLAAccountSecurityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */; };
-		7EA6FC311C57729700F78099 /* LLAAccountSecurityController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */; };
 		7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */; };
 		7EAA2F4B1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */; };
 		7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F4D1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m */; };
@@ -188,6 +189,12 @@
 		7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */; };
 		7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */; };
 		7EAA2F5A1C575448002DF3B1 /* LLABoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */; };
+		7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08ECD1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m */; };
+		7EC08ED01C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC08ECE1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib */; };
+		7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08ED21C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m */; };
+		7EC08ED51C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC08ED31C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib */; };
+		7EC08ED91C58778B00C4B46A /* LLAAccountSecuritySectionOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08ED81C58778B00C4B46A /* LLAAccountSecuritySectionOne.m */; };
+		7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08EDB1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m */; };
 		7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */; };
 		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
@@ -652,9 +659,11 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E9F7B0E1C58BE5C00620ED2 /* LLAModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAModifyPasswordViewController.h; sourceTree = "<group>"; };
+		7E9F7B0F1C58BE5C00620ED2 /* LLAModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAModifyPasswordViewController.m; sourceTree = "<group>"; };
+		7E9F7B101C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAModifyPasswordViewController.xib; sourceTree = "<group>"; };
 		7EA6FC2B1C576DFE00F78099 /* LLAAccountSecurityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecurityController.h; sourceTree = "<group>"; };
 		7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecurityController.m; sourceTree = "<group>"; };
-		7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LLAAccountSecurityController.storyboard; sourceTree = "<group>"; };
 		7EAA2F471C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlipayWithDrawalsViewController.h; sourceTree = "<group>"; };
 		7EAA2F481C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlipayWithDrawalsViewController.m; sourceTree = "<group>"; };
 		7EAA2F491C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAlipayWithDrawalsViewController.xib; sourceTree = "<group>"; };
@@ -667,6 +676,16 @@
 		7EAA2F561C575448002DF3B1 /* LLABoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABoundPhonesViewController.h; sourceTree = "<group>"; };
 		7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABoundPhonesViewController.m; sourceTree = "<group>"; };
 		7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLABoundPhonesViewController.xib; sourceTree = "<group>"; };
+		7EC08ECC1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecuritySectionOneCell.h; sourceTree = "<group>"; };
+		7EC08ECD1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecuritySectionOneCell.m; sourceTree = "<group>"; };
+		7EC08ECE1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAccountSecuritySectionOneCell.xib; sourceTree = "<group>"; };
+		7EC08ED11C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecuritySectionTwoCell.h; sourceTree = "<group>"; };
+		7EC08ED21C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecuritySectionTwoCell.m; sourceTree = "<group>"; };
+		7EC08ED31C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAccountSecuritySectionTwoCell.xib; sourceTree = "<group>"; };
+		7EC08ED71C58778B00C4B46A /* LLAAccountSecuritySectionOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecuritySectionOne.h; sourceTree = "<group>"; };
+		7EC08ED81C58778B00C4B46A /* LLAAccountSecuritySectionOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecuritySectionOne.m; sourceTree = "<group>"; };
+		7EC08EDA1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecuritySectionTwo.h; sourceTree = "<group>"; };
+		7EC08EDB1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecuritySectionTwo.m; sourceTree = "<group>"; };
 		7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerViewController.h; sourceTree = "<group>"; };
 		7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerViewController.m; sourceTree = "<group>"; };
 		7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerCell.h; sourceTree = "<group>"; };
@@ -1372,6 +1391,17 @@
 			path = LLamaUITests;
 			sourceTree = "<group>";
 		};
+		7EC08ED61C58777E00C4B46A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7EC08ED71C58778B00C4B46A /* LLAAccountSecuritySectionOne.h */,
+				7EC08ED81C58778B00C4B46A /* LLAAccountSecuritySectionOne.m */,
+				7EC08EDA1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.h */,
+				7EC08EDB1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7EC3CAAE1C4DFE83008424E6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1969,8 +1999,8 @@
 		A3DEDE421C3CAEC6009F3D37 /* UserSetting */ = {
 			isa = PBXGroup;
 			children = (
+				7EC08ED61C58777E00C4B46A /* Model */,
 				A3DEDE431C3CAEC6009F3D37 /* Controller */,
-				A3DEDE4F1C3CAEC6009F3D37 /* Model */,
 				A3DEDE501C3CAEC6009F3D37 /* View */,
 			);
 			path = UserSetting;
@@ -1992,16 +2022,11 @@
 				A3DEDE4E1C3CAEC6009F3D37 /* TMUserAgreementViewController.m */,
 				7EA6FC2B1C576DFE00F78099 /* LLAAccountSecurityController.h */,
 				7EA6FC2C1C576DFE00F78099 /* LLAAccountSecurityController.m */,
-				7EA6FC301C57729700F78099 /* LLAAccountSecurityController.storyboard */,
+				7E9F7B0E1C58BE5C00620ED2 /* LLAModifyPasswordViewController.h */,
+				7E9F7B0F1C58BE5C00620ED2 /* LLAModifyPasswordViewController.m */,
+				7E9F7B101C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		A3DEDE4F1C3CAEC6009F3D37 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A3DEDE501C3CAEC6009F3D37 /* View */ = {
@@ -2015,6 +2040,12 @@
 				A3DEDE561C3CAEC6009F3D37 /* TMSwitch.m */,
 				A3DEDE571C3CAEC6009F3D37 /* TMVersionCell.h */,
 				A3DEDE581C3CAEC6009F3D37 /* TMVersionCell.m */,
+				7EC08ECC1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.h */,
+				7EC08ECD1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m */,
+				7EC08ECE1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib */,
+				7EC08ED11C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.h */,
+				7EC08ED21C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m */,
+				7EC08ED31C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2203,6 +2234,7 @@
 				A3209AAF1C3D2D0C00CADC51 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				A3E2D9021C3E0F42005885D4 /* AlipaySDK.bundle in Resources */,
 				A3DEDE921C3CAEC7009F3D37 /* YZPersonViewController.xib in Resources */,
+				7EC08ED51C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib in Resources */,
 				A3DEDE9E1C3CAEC7009F3D37 /* TMChangePwdController.xib in Resources */,
 				5CA18FBA1C4F6C9100A0B5B7 /* lla_Loading_15@3x.png in Resources */,
 				A3DEDE871C3CAEC7009F3D37 /* TMPublishView.xib in Resources */,
@@ -2210,7 +2242,6 @@
 				5CA18FCD1C4F6C9100A0B5B7 /* lla_Loading_6@2x.png in Resources */,
 				5CA18FBE1C4F6C9100A0B5B7 /* lla_Loading_1@2x.png in Resources */,
 				5CA18FB41C4F6C9100A0B5B7 /* lla_Loading_13@3x.png in Resources */,
-				7EA6FC311C57729700F78099 /* LLAAccountSecurityController.storyboard in Resources */,
 				5CA18FC11C4F6C9100A0B5B7 /* lla_Loading_2@2x.png in Resources */,
 				5CA18FC31C4F6C9100A0B5B7 /* lla_Loading_3.png in Resources */,
 				5CA18FB01C4F6C9100A0B5B7 /* lla_Loading_12@2x.png in Resources */,
@@ -2237,11 +2268,13 @@
 				5CA18FCC1C4F6C9100A0B5B7 /* lla_Loading_6.png in Resources */,
 				5CA18FAD1C4F6C9100A0B5B7 /* lla_Loading_11@2x.png in Resources */,
 				A3DEDE711C3CAEC7009F3D37 /* TMScriptCell.xib in Resources */,
+				7EC08ED01C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib in Resources */,
 				A3DEDE781C3CAEC7009F3D37 /* TMDataIconController.xib in Resources */,
 				5CA18FD41C4F6C9100A0B5B7 /* lla_Loading_8@3x.png in Resources */,
 				A3DEDE971C3CAEC7009F3D37 /* TMProfileLikeCell.xib in Resources */,
 				5CA18FD11C4F6C9100A0B5B7 /* lla_Loading_7@3x.png in Resources */,
 				5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */,
+				7E9F7B121C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib in Resources */,
 				7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */,
 				A3DEDE7A1C3CAEC7009F3D37 /* TMDataVideoController.xib in Resources */,
 				A3DEDE9B1C3CAEC7009F3D37 /* TMTHistoryCell.xib in Resources */,
@@ -2395,8 +2428,10 @@
 				5CE0FF721C4A315B00991394 /* LLAScriptHallMainInfo.m in Sources */,
 				5CE0FF751C4A327000991394 /* LLAScriptHallInfoCell.m in Sources */,
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
+				7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */,
 				5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
+				7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */,
 				7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
@@ -2476,6 +2511,7 @@
 				5C6D7A4F1C58B73200119A3A /* SCWeakSelectorTarget.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
 				5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */,
+				7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */,
 				5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */,
 				5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */,
 				5C6D7A411C58B73200119A3A /* SCPhotoConfiguration.m in Sources */,
@@ -2518,6 +2554,7 @@
 				5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */,
 				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
 				5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
+				7EC08ED91C58778B00C4B46A /* LLAAccountSecuritySectionOne.m in Sources */,
 				5C8275141C5726A500DD547F /* MMSheetView.m in Sources */,
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5C6D7A3F1C58B73200119A3A /* SCIOPixelBuffers.m in Sources */,
@@ -2528,6 +2565,7 @@
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
 				7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
+				7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,

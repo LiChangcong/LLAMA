@@ -17,9 +17,12 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghp-BQ-rNx">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghp-BQ-rNx" userLabel="支付宝账号">
                     <rect key="frame" x="20" y="84" width="560" height="40"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginregestbutton" translatesAutoresizingMaskIntoConstraints="NO" id="XjE-GT-uVL">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
+                        </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的支付宝账号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N31-dv-Y6K">
                             <rect key="frame" x="20" y="0.0" width="520" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -28,16 +31,23 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="XjE-GT-uVL" secondAttribute="bottom" id="1Tr-4M-60F"/>
+                        <constraint firstItem="XjE-GT-uVL" firstAttribute="top" secondItem="Ghp-BQ-rNx" secondAttribute="top" id="2vV-KY-5Rj"/>
                         <constraint firstAttribute="trailing" secondItem="N31-dv-Y6K" secondAttribute="trailing" constant="20" id="HRa-mE-2UH"/>
+                        <constraint firstItem="XjE-GT-uVL" firstAttribute="leading" secondItem="Ghp-BQ-rNx" secondAttribute="leading" id="XRp-P2-u8E"/>
                         <constraint firstAttribute="height" constant="40" id="XaN-I0-nuf"/>
                         <constraint firstAttribute="bottom" secondItem="N31-dv-Y6K" secondAttribute="bottom" id="Yle-7u-NJs"/>
                         <constraint firstItem="N31-dv-Y6K" firstAttribute="top" secondItem="Ghp-BQ-rNx" secondAttribute="top" id="hsg-kl-3JD"/>
                         <constraint firstItem="N31-dv-Y6K" firstAttribute="leading" secondItem="Ghp-BQ-rNx" secondAttribute="leading" constant="20" id="nx0-h7-jaC"/>
+                        <constraint firstAttribute="trailing" secondItem="XjE-GT-uVL" secondAttribute="trailing" id="wD2-vS-sRn"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KL5-go-RF5">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KL5-go-RF5" userLabel="支付宝姓名">
                     <rect key="frame" x="20" y="144" width="560" height="40"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginregestbutton" translatesAutoresizingMaskIntoConstraints="NO" id="Sru-ej-ykX">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
+                        </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入支付宝账号对应的姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kh4-f4-Xuq">
                             <rect key="frame" x="20" y="0.0" width="520" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -51,6 +61,10 @@
                         <constraint firstAttribute="height" constant="40" id="PnV-MC-dd7"/>
                         <constraint firstAttribute="trailing" secondItem="kh4-f4-Xuq" secondAttribute="trailing" constant="20" id="Tug-qb-Qi9"/>
                         <constraint firstItem="kh4-f4-Xuq" firstAttribute="leading" secondItem="KL5-go-RF5" secondAttribute="leading" constant="20" id="Yq5-hD-0E5"/>
+                        <constraint firstAttribute="bottom" secondItem="Sru-ej-ykX" secondAttribute="bottom" id="adc-Ig-44C"/>
+                        <constraint firstItem="Sru-ej-ykX" firstAttribute="top" secondItem="KL5-go-RF5" secondAttribute="top" id="crc-iN-gud"/>
+                        <constraint firstAttribute="trailing" secondItem="Sru-ej-ykX" secondAttribute="trailing" id="kMV-EC-De1"/>
+                        <constraint firstItem="Sru-ej-ykX" firstAttribute="leading" secondItem="KL5-go-RF5" secondAttribute="leading" id="oY9-iG-7aq"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="tos-tq-Egv"/>
                     </constraints>
                 </view>
@@ -66,4 +80,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="loginregestbutton" width="5" height="48"/>
+    </resources>
 </document>

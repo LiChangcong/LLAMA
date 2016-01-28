@@ -65,7 +65,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ANM-Jl-v7k" secondAttribute="trailing" constant="20" id="Etu-P0-umz"/>
                         <constraint firstAttribute="height" constant="40" id="Hrv-xf-Rwf"/>
