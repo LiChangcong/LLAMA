@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */; };
+		5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */; };
 		5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */; };
 		5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */; };
 		5C4684C41C52076E00705FA9 /* LLAUserProfileMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */; };
@@ -354,6 +356,10 @@
 /* Begin PBXFileReference section */
 		17DA4835DA331D5811427335 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5C1FEF511C59E9C500C71A9B /* LLAEditVideoTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoTopToolBar.h; sourceTree = "<group>"; };
+		5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAEditVideoTopToolBar.m; sourceTree = "<group>"; };
+		5C1FEF541C5A022D00C71A9B /* LLAEditVideoProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoProgressView.h; sourceTree = "<group>"; };
+		5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAEditVideoProgressView.m; sourceTree = "<group>"; };
 		5C4684B81C51F85900705FA9 /* LLAUserProfileOtherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileOtherInfoCell.h; sourceTree = "<group>"; };
 		5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileOtherInfoCell.m; sourceTree = "<group>"; };
 		5C4684BE1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileVideoHeaderView.h; sourceTree = "<group>"; };
@@ -1100,6 +1106,10 @@
 				5C6D7A671C58B9C500119A3A /* LLACaptureVideoToolBar.m */,
 				5C6D7A691C58BF1000119A3A /* LLACaptureVideoProgressView.h */,
 				5C6D7A6A1C58BF1000119A3A /* LLACaptureVideoProgressView.m */,
+				5C1FEF511C59E9C500C71A9B /* LLAEditVideoTopToolBar.h */,
+				5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */,
+				5C1FEF541C5A022D00C71A9B /* LLAEditVideoProgressView.h */,
+				5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2448,6 +2458,7 @@
 				5C6D7A491C58B73200119A3A /* SCRecordSessionSegment.m in Sources */,
 				5CDDF4561C474D3A00168989 /* LLAVideoCommentView.m in Sources */,
 				A3DEDDA31C3CAE38009F3D37 /* NSDictionary+MTLMappingAdditions.m in Sources */,
+				5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */,
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
 				A3DEDE8D1C3CAEC7009F3D37 /* TMProfileViewController.m in Sources */,
 				A3D8E7E11C3F5B7D00B27898 /* LLABaseViewController.m in Sources */,
@@ -2569,6 +2580,7 @@
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
 				5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */,
+				5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
 				5C6D7A4A1C58B73200119A3A /* SCSampleBufferHolder.m in Sources */,

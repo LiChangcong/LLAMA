@@ -8,6 +8,7 @@
 
 //controller
 #import "LLACaptureVideoViewController.h"
+#import "LLAEditVideoViewController.h"
 
 //view
 #import "LLACaptureVideoToolBar.h"
@@ -19,8 +20,8 @@
 //util
 #import "SCRecorder.h"
 
-static const minVideoSecond = 5.0;
-static const maxVideoSecond = 60.0;
+static const CGFloat minVideoSecond = 5.0;
+static const CGFloat maxVideoSecond = 60.0;
 
 //
 static const CGFloat topBarHeight = 44;
@@ -352,6 +353,12 @@ static NSString *const recordFoucusImageName = @"";
 
 - (void) videoEditorButtonClicked:(UIButton *) sender {
     //export
+    
+    [shareRecorder pause];
+    
+    LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:shareRecorder.session.assetRepresentingSegments];
+    
+    [self.navigationController pushViewController:editVideo animated:YES];
    
 }
 
