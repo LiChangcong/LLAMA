@@ -25,6 +25,6 @@
 
 - (void) updateLastVideoClipInfoWithNewDuration:(CGFloat) duration;
 
-- (void) deleteVideoClipInfo;
+- (void) deleteVideoClipInfo:(void(^)(BOOL hasDelete)) callback;
 
 @end

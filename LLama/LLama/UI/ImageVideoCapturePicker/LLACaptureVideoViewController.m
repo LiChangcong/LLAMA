@@ -19,6 +19,10 @@
 //util
 #import "SCRecorder.h"
 
+static const minVideoSecond = 5.0;
+static const maxVideoSecond = 60.0;
+
+//
 static const CGFloat topBarHeight = 44;
 static const CGFloat progressViewHeight = 6;
 
@@ -26,17 +30,19 @@ static const CGFloat deleteButtonToLeft = 38;
 static const CGFloat editButtonToRight = 38;
 
 //
-static NSString *const deleteButtonImageName_Normal = @"";
-static NSString *const deleteButtonImageName_Highlight = @"";
-static NSString *const deleteButtonImageName_Disable = @"";
+static NSString *const deleteButtonImageName_Normal = @"cancelvideo";
+static NSString *const deleteButtonImageName_Highlight = @"cancelvideoh";
+static NSString *const deleteButtonImageName_Disable = @"cancelvideoh";
 
-static NSString *const recordButtonImageName_Normal = @"";
-static NSString *const recordButtonImageName_Highlight = @"";
+static NSString *const recordButtonImageName_Normal = @"startvideo";
+static NSString *const recordButtonImageName_Highlight = @"startvideoh";
 
-static NSString *const editVideoButtonImageName_Normal = @"";
-static NSString *const editVideoButtonImageName_Highlight = @"";
+static NSString *const editVideoButtonImageName_Normal = @"chosevideo";
+static NSString *const editVideoButtonImageName_Highlight = @"chosevideoh";
 
-@interface LLACaptureVideoViewController()<LLACaptureVideoToolBarDelegate>
+static NSString *const recordFoucusImageName = @"";
+
+@interface LLACaptureVideoViewController()<LLACaptureVideoToolBarDelegate,SCRecorderDelegate>
 {
     LLACaptureVideoToolBar *topBar;
     
@@ -47,6 +53,8 @@ static NSString *const editVideoButtonImageName_Highlight = @"";
     UIButton *pressToRecordButton;
     UIButton *videoEditButton;
     
+    //av recorder
+    SCRecorder *shareRecorder;
 }
 
 @end
@@ -55,22 +63,49 @@ static NSString *const editVideoButtonImageName_Highlight = @"";
 
 #pragma mark - Life Cycle
 
+- (void) dealloc {
+    shareRecorder.previewView = nil;
+}
+
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithHex:0x202031];
+    
+    [self initVariables];
+    [self initTopBars];
+    [self initSubViews];
+    [self initConstraints];
+    [self initialiseRecorder];
+    
+    [recordProgressView startBlinkIndicator];
 }
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [shareRecorder previewViewFrameChanged];
+}
+
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self prepareRecordSession];
 
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    //
+    [shareRecorder startRunning];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+ 
+    [shareRecorder stopRunning];
 }
 
 #pragma mark - Init
@@ -93,7 +128,8 @@ static NSString *const editVideoButtonImageName_Highlight = @"";
     
     videoPreView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width)];
     videoPreView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    videoPreView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:1.0];
+    videoPreView.userInteractionEnabled = YES;
     [self.view addSubview:videoPreView];
     
     //
@@ -217,7 +253,7 @@ static NSString *const editVideoButtonImageName_Highlight = @"";
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(deleteButtonToLeft)-[deleteClipButton]"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[deleteClipButton]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"toLeft":@(deleteButtonToLeft)}
       views:NSDictionaryOfVariableBindings(deleteClipButton)]];
@@ -234,24 +270,169 @@ static NSString *const editVideoButtonImageName_Highlight = @"";
     
 }
 
+- (void) initialiseRecorder {
+    
+    shareRecorder = [SCRecorder sharedRecorder];
+    shareRecorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
+    shareRecorder.delegate = self;
+    
+    //video configuration
+    SCVideoConfiguration *videoConfig = shareRecorder.videoConfiguration;
+    
+    videoConfig.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);
+    videoConfig.bitrate = 900000;
+    //videoConfig.filter = [SCFilter emptyFilter];
+    //videoConfig.filter = [SCFilter filterWithCIFilterName:@"CIPhotoEffectInstant"];
+    videoConfig.enabled = YES;
+    
+    //audio configuration
+    
+    SCAudioConfiguration *audioConfig = shareRecorder.audioConfiguration;
+    
+    audioConfig.enabled = YES;
+    audioConfig.bitrate = 64000;
+    audioConfig.channelsCount = 1;
+    
+    //preview
+    shareRecorder.previewView = videoPreView;
+    
+    //focus view
+    SCRecorderToolsView *focusView = [[SCRecorderToolsView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
+    focusView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    focusView.recorder = shareRecorder;
+    
+    focusView.outsideFocusTargetImage = [UIImage imageNamed:recordFoucusImageName];
+    focusView.insideFocusTargetImage = [UIImage imageNamed:recordFoucusImageName];
+    
+    [videoPreView addSubview:focusView];
+    
+    if (!shareRecorder.isPrepared) {
+        NSError *error;
+        if (![shareRecorder prepare:&error]) {
+            NSLog(@"Prepare error: %@", error.localizedDescription);
+        }
+
+    }
+    
+
+}
+
 #pragma mark - Button Clicked
 
 - (void) deleteClipButtonClicked:(UIButton *) sender {
     
+    if (shareRecorder.isRecording) {
+        return;
+    }
+    
+    [recordProgressView deleteVideoClipInfo:^(BOOL hasDelete) {
+        if (hasDelete) {
+            //remove last
+            if (hasDelete)
+                [shareRecorder.session removeLastSegment];
+        }
+    }];
 }
 
 - (void) recordTouchDown:(UIButton *) sender {
+    //begin record
+    [shareRecorder record];
     
+    [recordProgressView addVideoClipInfo];
+    [recordProgressView stopBlinkIndicator];
 }
 
 - (void) recordTouchUp:(UIButton *) sender {
+    //stop
+    [shareRecorder pause];
+    
+    [recordProgressView startBlinkIndicator];
     
 }
 
 - (void) videoEditorButtonClicked:(UIButton *) sender {
-
+    //export
+   
 }
 
+#pragma mark - Status Bar Style
+
+- (BOOL) prefersStatusBarHidden {
+    return YES;
+}
+
+#pragma mark - Private Method
+
+- (void) prepareRecordSession {
+    if (shareRecorder.session == nil) {
+        SCRecordSession *session = [SCRecordSession recordSession];
+        session.fileType = AVFileTypeMPEG4;
+        
+        shareRecorder.session = session;
+    }
+}
+
+#pragma mark - LLACaptureVideoToolBarDelegate
+
+- (void) closeCapture {
+    
+    [recordProgressView stopBlinkIndicator];
+    [shareRecorder.session removeAllSegments:YES];
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) changeflashMode {
+    if (shareRecorder.flashMode == SCFlashModeOff) {
+        shareRecorder.flashMode = SCFlashModeLight;
+    }else if (shareRecorder.flashMode == SCFlashModeLight) {
+        shareRecorder.flashMode = SCFlashModeOff;
+    }
+}
+
+- (void) changeCamera {
+    
+    shareRecorder.flashMode = SCFlashModeOff;
+    [shareRecorder switchCaptureDevices];
+    
+}
+
+#pragma mark - SCShareRecorderDelegate
+
+- (void)recorder:(SCRecorder *)recorder didCompleteSession:(SCRecordSession *)recordSession {
+    NSLog(@"didCompleteSession:");
+    
+}
+
+- (void)recorder:(SCRecorder *)recorder didInitializeAudioInSession:(SCRecordSession *)recordSession error:(NSError *)error {
+    if (error == nil) {
+        NSLog(@"Initialized audio in record session");
+    } else {
+        NSLog(@"Failed to initialize audio in record session: %@", error.localizedDescription);
+    }
+}
+
+- (void)recorder:(SCRecorder *)recorder didInitializeVideoInSession:(SCRecordSession *)recordSession error:(NSError *)error {
+    if (error == nil) {
+        NSLog(@"Initialized video in record session");
+    } else {
+        NSLog(@"Failed to initialize video in record session: %@", error.localizedDescription);
+    }
+}
+
+- (void)recorder:(SCRecorder *)recorder didBeginSegmentInSession:(SCRecordSession *)recordSession error:(NSError *)error {
+    NSLog(@"Began record segment: %@", error);
+}
+
+- (void)recorder:(SCRecorder *)recorder didCompleteSegment:(SCRecordSessionSegment *)segment inSession:(SCRecordSession *)recordSession error:(NSError *)error {
+    NSLog(@"Completed record segment at %@: %@ (frameRate: %f)", segment.url, error, segment.frameRate);
+    
+}
+
+- (void)recorder:(SCRecorder *)recorder didAppendVideoSampleBufferInSession:(SCRecordSession *)recordSession {
+    
+    [recordProgressView updateLastVideoClipInfoWithNewDuration:CMTimeGetSeconds(recordSession.currentSegmentDuration)];
+}
 
 
 

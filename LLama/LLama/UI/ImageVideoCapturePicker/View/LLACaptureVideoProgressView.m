@@ -51,6 +51,26 @@ static const CGFloat sepLineWidth = 0.5;
 @synthesize minSecond,maxSecond;
 @synthesize videoClipArray;
 
+#pragma mark - Life Cycle
+
+- (void) layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    CGFloat offsetX = 0;
+    
+    if (maxSecond > minSecond && maxSecond > 0 & minSecond > 0) {
+        offsetX = minSecond/maxSecond * self.bounds.size.width;
+    }else {
+        offsetX = 0;
+    }
+    
+    limitView.frame = CGRectMake(offsetX, 0, limitView.frame.size.width,limitView.frame.size.height);
+    
+}
+
+#pragma mark - Init
+
 - (instancetype) initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
@@ -59,6 +79,8 @@ static const CGFloat sepLineWidth = 0.5;
         [self initVariables];
         [self initSubViews];
         [self initSubContraints];
+        
+        self.backgroundColor = progressBackColor;
     }
     
     return self;
@@ -92,7 +114,7 @@ static const CGFloat sepLineWidth = 0.5;
     blinkIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
     blinkIndicatorView.backgroundColor = blinkIndicatorBKColor;
     
-    [self addSubview:limitView];
+    [self addSubview:blinkIndicatorView];
 }
 
 - (void) initSubContraints {
@@ -161,7 +183,7 @@ static const CGFloat sepLineWidth = 0.5;
 
 - (void) updateLimitViewPosition {
     if (maxSecond > minSecond && maxSecond > 0 & minSecond > 0) {
-        limitViewToLeftConstraint.constant = minSecond/maxSecond;
+        limitViewToLeftConstraint.constant = minSecond/maxSecond * self.bounds.size.width;
     }else {
         limitViewToLeftConstraint.constant = 0;
     }
@@ -184,6 +206,9 @@ static const CGFloat sepLineWidth = 0.5;
 }
 
 - (void) doBlinkIndicator:(NSTimer *) timer {
+    
+    blinkIndicatorView.alpha = 1.0;
+    
     [UIView animateWithDuration:blinkInterval / 2 animations:^{
         
         blinkIndicatorView.alpha = 0;
@@ -198,6 +223,7 @@ static const CGFloat sepLineWidth = 0.5;
 #pragma mark - Public Method
 
 - (void) startBlinkIndicator {
+    blinkIndicatorView.hidden = NO;
     blinkTimer = [NSTimer scheduledTimerWithTimeInterval:blinkInterval target:self selector:@selector(doBlinkIndicator:) userInfo:nil repeats:YES];
 }
 
@@ -205,6 +231,7 @@ static const CGFloat sepLineWidth = 0.5;
     [blinkTimer invalidate];
     blinkTimer = nil;
     blinkIndicatorView.alpha = 0;
+    blinkIndicatorView.hidden = YES;
 }
 
 - (void) addVideoClipInfo {
@@ -232,7 +259,7 @@ static const CGFloat sepLineWidth = 0.5;
     }
     
     UIView *progressView = [[UIView alloc] initWithFrame:CGRectMake(offsetX, 0, 0, self.frame.size.height)];
-    progressView.backgroundColor = progressBackColor;
+    progressView.backgroundColor = progressColor;
     
     [self addSubview:progressView];
     
@@ -249,14 +276,15 @@ static const CGFloat sepLineWidth = 0.5;
         clipInfo.videoClipDuration = duration;
         
         CGRect progressRect = clipInfo.progressView.frame;
-        progressRect.size.width = clipInfo.videoClipDuration / maxSecond;
+        progressRect.size.width = clipInfo.videoClipDuration / maxSecond * self.bounds.size.width;
+        clipInfo.progressView.frame = progressRect;
         
         [self updateBlinkPosition];
     }
     
 }
 
-- (void) deleteVideoClipInfo {
+- (void) deleteVideoClipInfo:(void (^)(BOOL))callback {
     
     LLACaptureVideoClipInfo *clipInfo = [videoClipArray lastObject];
     
@@ -268,10 +296,18 @@ static const CGFloat sepLineWidth = 0.5;
             [clipInfo.progressView removeFromSuperview];
             [videoClipArray removeLastObject];
             
+            [self updateBlinkPosition];
+            if (callback) {
+                callback(YES);
+            }
+            
         }else {
             //mark to delete
             clipInfo.shouldDelete = YES;
             clipInfo.progressView.backgroundColor = progressMarkColor;
+            if (callback) {
+                callback(NO);
+            }
         }
         
     }

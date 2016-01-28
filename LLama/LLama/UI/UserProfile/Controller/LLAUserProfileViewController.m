@@ -12,6 +12,9 @@
 #import "LLAMyOrderListViewController.h"
 #import "LLAUserProfileEditUserInfoController.h"
 #import "LLAUserAccountDetailViewController.h"
+#import "LLACaptureVideoViewController.h"
+
+#import "LLABaseNavigationController.h"
 
 //view
 #import "LLATableView.h"
@@ -497,6 +500,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) changeUserVideo {
     //change userVideo
+    
 }
 
 - (void) praiseButtonClick {
@@ -705,7 +709,14 @@ static const CGFloat navigationBarHeight = 64;
 }
 
 - (void) uploadVieoToggled:(LLAUser *) userInfo {
-    
+    if ([userInfo isEqual:[LLAUser me]]) {
+
+        LLACaptureVideoViewController *videoCaptrue = [[LLACaptureVideoViewController alloc] init];
+        
+        LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:videoCaptrue];
+        
+        [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+    }
 }
 
 #pragma mark - LLAUserProfileMyFunctionCellDelegate
