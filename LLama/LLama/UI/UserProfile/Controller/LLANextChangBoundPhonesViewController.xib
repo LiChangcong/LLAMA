@@ -22,6 +22,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymd-hV-dtN" userLabel="旧密码">
                     <rect key="frame" x="20" y="147.5" width="560" height="40"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginregestbutton" translatesAutoresizingMaskIntoConstraints="NO" id="tv4-gF-Nr2">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
+                        </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="填写需要更换绑定的手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PMt-rw-28z">
                             <rect key="frame" x="20" y="0.0" width="520" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -31,8 +34,12 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="PMt-rw-28z" firstAttribute="top" secondItem="ymd-hV-dtN" secondAttribute="top" id="68x-3a-GQr"/>
+                        <constraint firstItem="tv4-gF-Nr2" firstAttribute="top" secondItem="ymd-hV-dtN" secondAttribute="top" id="BVv-dK-aye"/>
+                        <constraint firstAttribute="bottom" secondItem="tv4-gF-Nr2" secondAttribute="bottom" id="JLp-Jt-m0k"/>
                         <constraint firstAttribute="height" constant="40" id="Nxi-Do-Qom"/>
                         <constraint firstItem="PMt-rw-28z" firstAttribute="leading" secondItem="ymd-hV-dtN" secondAttribute="leading" constant="20" id="Vaz-aV-14h"/>
+                        <constraint firstAttribute="trailing" secondItem="tv4-gF-Nr2" secondAttribute="trailing" id="bLK-RK-dUc"/>
+                        <constraint firstItem="tv4-gF-Nr2" firstAttribute="leading" secondItem="ymd-hV-dtN" secondAttribute="leading" id="tRP-LF-Zsz"/>
                         <constraint firstAttribute="bottom" secondItem="PMt-rw-28z" secondAttribute="bottom" id="vIw-fh-gMQ"/>
                         <constraint firstAttribute="trailing" secondItem="PMt-rw-28z" secondAttribute="trailing" constant="20" id="vu7-Sg-mfT"/>
                     </constraints>
@@ -58,7 +65,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhJ-3I-hPc">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhJ-3I-hPc" userLabel="验证码">
                     <rect key="frame" x="20" y="207" width="412.5" height="40"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gkt-LS-hq7">
@@ -67,7 +74,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="gkt-LS-hq7" firstAttribute="top" secondItem="fhJ-3I-hPc" secondAttribute="top" id="EyR-6A-up4"/>
                         <constraint firstAttribute="bottom" secondItem="gkt-LS-hq7" secondAttribute="bottom" id="P2Y-i1-ySd"/>
@@ -121,5 +128,6 @@
     </objects>
     <resources>
         <image name="finishnew" width="345" height="50"/>
+        <image name="loginregestbutton" width="5" height="48"/>
     </resources>
 </document>
