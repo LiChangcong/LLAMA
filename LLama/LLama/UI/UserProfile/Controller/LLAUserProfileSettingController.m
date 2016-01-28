@@ -205,12 +205,12 @@ static const CGFloat logoutHeaderHeight = 28;
 //        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
 //        [self.navigationController pushViewController:accountSecurity animated:YES];
         
-//        LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
-//        [self.navigationController pushViewController:accountSecurity animated:YES];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
-        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
+        LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
         [self.navigationController pushViewController:accountSecurity animated:YES];
+        
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
+//        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
+//        [self.navigationController pushViewController:accountSecurity animated:YES];
     }
 }
 

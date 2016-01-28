@@ -38,6 +38,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = TMCommonBgColor;
+    self.navigationItem.title = @"绑定手机号";
 }
 
 - (IBAction)sendToGetIDCodeButton:(UIButton *)sender {
