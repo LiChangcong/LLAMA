@@ -9,6 +9,7 @@
 //controller
 #import "LLACaptureVideoViewController.h"
 #import "LLAEditVideoViewController.h"
+#import "LLAVideoPickerViewController.h"
 
 //view
 #import "LLACaptureVideoToolBar.h"
@@ -277,22 +278,28 @@ static NSString *const recordFoucusImageName = @"";
     shareRecorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
     shareRecorder.delegate = self;
     
-    //video configuration
+//    //video configuration
     SCVideoConfiguration *videoConfig = shareRecorder.videoConfiguration;
     
-    videoConfig.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);
+//    videoConfig.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width);
     videoConfig.bitrate = 900000;
+    videoConfig.maxFrameRate = 30;
+    //videoConfig.timeScale = 400;
     //videoConfig.filter = [SCFilter emptyFilter];
-    //videoConfig.filter = [SCFilter filterWithCIFilterName:@"CIPhotoEffectInstant"];
+//    //videoConfig.filter = [SCFilter filterWithCIFilterName:@"CIPhotoEffectInstant"];
     videoConfig.enabled = YES;
-    
-    //audio configuration
-    
+    videoConfig.scalingMode = AVVideoScalingModeResizeAspectFill;
+    videoConfig.sizeAsSquare = YES;
+//
+//    
+//    //audio configuration
+//    
     SCAudioConfiguration *audioConfig = shareRecorder.audioConfiguration;
     
     audioConfig.enabled = YES;
-    audioConfig.bitrate = 64000;
+    audioConfig.bitrate = 48000;
     audioConfig.channelsCount = 1;
+    audioConfig.sampleRate = 0;
     
     //preview
     shareRecorder.previewView = videoPreView;
@@ -356,9 +363,12 @@ static NSString *const recordFoucusImageName = @"";
     
     [shareRecorder pause];
     
-    LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:shareRecorder.session.assetRepresentingSegments];
+    LLAVideoPickerViewController *videoPicker = [[LLAVideoPickerViewController alloc] init];
+    [self.navigationController pushViewController:videoPicker animated:YES];
     
-    [self.navigationController pushViewController:editVideo animated:YES];
+//    LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:shareRecorder.session.assetRepresentingSegments];
+//    
+//    [self.navigationController pushViewController:editVideo animated:YES];
    
 }
 

@@ -28,6 +28,10 @@ const CGFloat editVideo_progressViewHeight = 6;
     UIColor *progressBackViewBKColor;
     UIColor *cutProgressViewBKColor;
     
+    //
+    NSLayoutConstraint *cutProgressViewLeftConstraint;
+    NSLayoutConstraint *cutProgressViewRightConstraint;
+    
 }
 
 @property(nonatomic , readwrite , assign) CGFloat editBeginRatio;
@@ -76,7 +80,7 @@ const CGFloat editVideo_progressViewHeight = 6;
     numberOfThumbImages = 8;
     
     editBeginRatio = 0;
-    editBeginRatio = 1.0;
+    editEndRatio = 1.0;
     
     progressBackViewBKColor = [UIColor colorWithHex:0x18182d];
     cutProgressViewBKColor = [UIColor colorWithHex:0xffd409];
@@ -138,9 +142,10 @@ const CGFloat editVideo_progressViewHeight = 6;
     //preView
     UIView *preView = nil;
     
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:editAsset];
+    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:editAsset];
     imageGenerator.appliesPreferredTrackTransform = YES;
 
+    CGFloat assetDuration = CMTimeGetSeconds(editAsset.duration);
     
     for (int i=0;i<numberOfThumbImages;i++) {
         
@@ -148,16 +153,20 @@ const CGFloat editVideo_progressViewHeight = 6;
         thumb.translatesAutoresizingMaskIntoConstraints = NO;
         thumb.contentMode = UIViewContentModeScaleAspectFill;
         
+        //place holder image
+        thumb.image = [UIImage llaImageWithName:@"placeHolder_200"];
         //set image
         
-        NSError *error = nil;
-        CGImageRef thumbnailImage = [imageGenerator copyCGImageAtTime:CMTimeMake(i/(float)numberOfThumbImages, 1) actualTime:nil error:&error];
-        if (!error){
-            thumb.image = [UIImage imageWithCGImage:thumbnailImage];
-        }else {
-            thumb.image = [UIImage llaImageWithName:@"placeHolder_200"];
-        }
-
+        [imageGenerator generateCGImagesAsynchronouslyForTimes:@[[NSValue valueWithCMTime:CMTimeMake(i/(float)numberOfThumbImages*assetDuration, 1)]] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error) {
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (result == AVAssetImageGeneratorSucceeded) {
+                    thumb.image = [[UIImage alloc] initWithCGImage:image];
+                }
+            });
+            
+        }];
+        
         [thumbImageContentView addSubview:thumb];
         
         //constraints
@@ -245,6 +254,18 @@ const CGFloat editVideo_progressViewHeight = 6;
     
     [self addConstraints:constrArray];
     
+    //
+    for (NSLayoutConstraint *constr in constrArray) {
+        if (constr.firstAttribute == NSLayoutAttributeLeading && constr.firstItem == cutProgressView) {
+            cutProgressViewLeftConstraint = constr;
+            
+        }else if (constr.secondAttribute == NSLayoutAttributeTrailing && constr.secondItem == cutProgressView) {
+            cutProgressViewRightConstraint = constr;
+            
+        }
+        
+    }
+    
 }
 
 #pragma mark - Update Left Right toggle Position
@@ -279,9 +300,31 @@ const CGFloat editVideo_progressViewHeight = 6;
         case UIGestureRecognizerStateChanged:
         {
             CGFloat offset = point.x - originalX;
-            originalX = point.x;
             
-            touchedView.center = CGPointMake(touchedView.center.x+offset, touchedView.center.y);
+            CGFloat newCenterX = touchedView.center.x+offset;
+            
+            if (touchedView == leftToggleView) {
+                //left toggle
+                newCenterX = MAX(newCenterX, leftToggleView.bounds.size.width/2);
+                newCenterX = MIN(rightToggleView.frame.origin.x-leftToggleView.bounds.size.width/2, newCenterX);
+                
+                editBeginRatio = (newCenterX - leftToggleView.bounds.size.width/2)/(self.bounds.size.width-leftToggleView.bounds.size.width/2-rightToggleView.bounds.size.width/2);
+                
+                cutProgressViewLeftConstraint.constant = newCenterX;
+                
+            }else {
+                //right toggle
+                newCenterX = MIN(self.bounds.size.width-rightToggleView.bounds.size.width/2, newCenterX);
+                newCenterX = MAX(leftToggleView.frame.origin.x+leftToggleView.bounds.size.width+rightToggleView.bounds.size.width/2, newCenterX);
+                
+                editEndRatio = (newCenterX - leftToggleView.bounds.size.width/2)/(self.bounds.size.width-leftToggleView.bounds.size.width/2-rightToggleView.bounds.size.width/2);
+                
+                cutProgressViewRightConstraint.constant = self.bounds.size.width - newCenterX - rightToggleView.bounds.size.width/2;
+            }
+            
+            touchedView.center = CGPointMake(newCenterX, touchedView.center.y);
+            
+            originalX = newCenterX;
             
         }
             break;

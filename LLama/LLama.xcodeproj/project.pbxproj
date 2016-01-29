@@ -132,6 +132,14 @@
 		5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */; };
 		5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB61C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m */; };
 		5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB91C5382CB001A4EA0 /* LLATextView.m */; };
+		5CC324DA1C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */; };
+		5CC324DD1C5B65FB00413E25 /* LLAPickVideoItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324DC1C5B65FB00413E25 /* LLAPickVideoItemInfo.m */; };
+		5CC324E31C5B694300413E25 /* LLAVideoPickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324E21C5B694300413E25 /* LLAVideoPickerCollectionCell.m */; };
+		5CC324E71C5B814800413E25 /* LLAPayUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324E61C5B814800413E25 /* LLAPayUserViewController.m */; };
+		5CC324EA1C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324E91C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m */; };
+		5CC324EF1C5B836F00413E25 /* LLAPayUserPayTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324EE1C5B836F00413E25 /* LLAPayUserPayTypeCell.m */; };
+		5CC324F21C5B83D000413E25 /* LLAPayUserPayTypeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324F11C5B83D000413E25 /* LLAPayUserPayTypeItem.m */; };
+		5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324F41C5B882B00413E25 /* LLAPayUserPayInfo.m */; };
 		5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */; };
 		5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
@@ -562,6 +570,22 @@
 		5CBF9AB61C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileEditUserInfoController.m; sourceTree = "<group>"; };
 		5CBF9AB81C5382CB001A4EA0 /* LLATextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATextView.h; sourceTree = "<group>"; };
 		5CBF9AB91C5382CB001A4EA0 /* LLATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLATextView.m; sourceTree = "<group>"; };
+		5CC324D81C5B58DA00413E25 /* LLAVideoPickerTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPickerTopToolBar.h; sourceTree = "<group>"; };
+		5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPickerTopToolBar.m; sourceTree = "<group>"; };
+		5CC324DB1C5B65FB00413E25 /* LLAPickVideoItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickVideoItemInfo.h; sourceTree = "<group>"; };
+		5CC324DC1C5B65FB00413E25 /* LLAPickVideoItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickVideoItemInfo.m; sourceTree = "<group>"; };
+		5CC324E11C5B694300413E25 /* LLAVideoPickerCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPickerCollectionCell.h; sourceTree = "<group>"; };
+		5CC324E21C5B694300413E25 /* LLAVideoPickerCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPickerCollectionCell.m; sourceTree = "<group>"; };
+		5CC324E51C5B814800413E25 /* LLAPayUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPayUserViewController.h; sourceTree = "<group>"; };
+		5CC324E61C5B814800413E25 /* LLAPayUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPayUserViewController.m; sourceTree = "<group>"; };
+		5CC324E81C5B833B00413E25 /* LLAPayUserInfoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLAPayUserInfoCollectionCell.h; path = ../LLAPayUserInfoCollectionCell.h; sourceTree = "<group>"; };
+		5CC324E91C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLAPayUserInfoCollectionCell.m; path = ../LLAPayUserInfoCollectionCell.m; sourceTree = "<group>"; };
+		5CC324ED1C5B836F00413E25 /* LLAPayUserPayTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPayUserPayTypeCell.h; sourceTree = "<group>"; };
+		5CC324EE1C5B836F00413E25 /* LLAPayUserPayTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPayUserPayTypeCell.m; sourceTree = "<group>"; };
+		5CC324F01C5B83D000413E25 /* LLAPayUserPayTypeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPayUserPayTypeItem.h; sourceTree = "<group>"; };
+		5CC324F11C5B83D000413E25 /* LLAPayUserPayTypeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPayUserPayTypeItem.m; sourceTree = "<group>"; };
+		5CC324F31C5B882B00413E25 /* LLAPayUserPayInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPayUserPayInfo.h; sourceTree = "<group>"; };
+		5CC324F41C5B882B00413E25 /* LLAPayUserPayInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPayUserPayInfo.m; sourceTree = "<group>"; };
 		5CC4D42F1C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyInfoCell.h; sourceTree = "<group>"; };
 		5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyInfoCell.m; sourceTree = "<group>"; };
 		5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyFunctionCell.h; sourceTree = "<group>"; };
@@ -1095,6 +1119,8 @@
 			children = (
 				5C6D7A6C1C58CBFB00119A3A /* LLACaptureVideoClipInfo.h */,
 				5C6D7A6D1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m */,
+				5CC324DB1C5B65FB00413E25 /* LLAPickVideoItemInfo.h */,
+				5CC324DC1C5B65FB00413E25 /* LLAPickVideoItemInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1110,6 +1136,10 @@
 				5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */,
 				5C1FEF541C5A022D00C71A9B /* LLAEditVideoProgressView.h */,
 				5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */,
+				5CC324D81C5B58DA00413E25 /* LLAVideoPickerTopToolBar.h */,
+				5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */,
+				5CC324E11C5B694300413E25 /* LLAVideoPickerCollectionCell.h */,
+				5CC324E21C5B694300413E25 /* LLAVideoPickerCollectionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1219,6 +1249,39 @@
 				5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */,
 			);
 			path = VideoCacheUtil;
+			sourceTree = "<group>";
+		};
+		5CC324E41C5B810000413E25 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				5CC324EB1C5B834E00413E25 /* Model */,
+				5CC324EC1C5B834E00413E25 /* View */,
+				5CC324E51C5B814800413E25 /* LLAPayUserViewController.h */,
+				5CC324E61C5B814800413E25 /* LLAPayUserViewController.m */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
+		5CC324EB1C5B834E00413E25 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CC324F01C5B83D000413E25 /* LLAPayUserPayTypeItem.h */,
+				5CC324F11C5B83D000413E25 /* LLAPayUserPayTypeItem.m */,
+				5CC324F31C5B882B00413E25 /* LLAPayUserPayInfo.h */,
+				5CC324F41C5B882B00413E25 /* LLAPayUserPayInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CC324EC1C5B834E00413E25 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CC324E81C5B833B00413E25 /* LLAPayUserInfoCollectionCell.h */,
+				5CC324E91C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m */,
+				5CC324ED1C5B836F00413E25 /* LLAPayUserPayTypeCell.h */,
+				5CC324EE1C5B836F00413E25 /* LLAPayUserPayTypeCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
@@ -1663,6 +1726,7 @@
 		A3DEDDC91C3CAEC6009F3D37 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5CC324E41C5B810000413E25 /* Pay */,
 				5C6D7A511C58B81800119A3A /* ImageVideoCapturePicker */,
 				A3DEDDCA1C3CAEC6009F3D37 /* Guid */,
 				A3DEDDCE1C3CAEC6009F3D37 /* Home */,
@@ -2377,6 +2441,7 @@
 				5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */,
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
 				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
+				5CC324DD1C5B65FB00413E25 /* LLAPickVideoItemInfo.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
@@ -2486,6 +2551,7 @@
 				5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */,
 				5C6D7A391C58B73200119A3A /* SCFilter+UIImage.m in Sources */,
 				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
+				5CC324EF1C5B836F00413E25 /* LLAPayUserPayTypeCell.m in Sources */,
 				5CBF9AAB1C535942001A4EA0 /* LLAChangeRootControllerUtil.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
 				5C5D68E41C560DCC008A1230 /* LLAUserAccountHistoryHeader.m in Sources */,
@@ -2495,6 +2561,7 @@
 				A3DEDDA21C3CAE38009F3D37 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				A3DEDE861C3CAEC7009F3D37 /* TMPublishView.m in Sources */,
 				A3D8E7FB1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m in Sources */,
+				5CC324EA1C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m in Sources */,
 				5C6D7A3C1C58B73200119A3A /* SCFilterAnimation.m in Sources */,
 				A3DEDEA31C3CAEC7009F3D37 /* TMSettingCell.m in Sources */,
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
@@ -2529,6 +2596,7 @@
 				A3DEDE8C1C3CAEC7009F3D37 /* TMLikeViewController.m in Sources */,
 				5C6D7A371C58B73200119A3A /* SCAudioTools.m in Sources */,
 				5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */,
+				5CC324F21C5B83D000413E25 /* LLAPayUserPayTypeItem.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C6D7A361C58B73200119A3A /* SCAudioConfiguration.m in Sources */,
@@ -2562,7 +2630,9 @@
 				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */,
+				5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */,
 				5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */,
+				5CC324E71C5B814800413E25 /* LLAPayUserViewController.m in Sources */,
 				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
 				5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
 				7EC08ED91C58778B00C4B46A /* LLAAccountSecuritySectionOne.m in Sources */,
@@ -2574,6 +2644,7 @@
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */,
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
+				5CC324DA1C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m in Sources */,
 				7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */,
@@ -2596,6 +2667,7 @@
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,
 				A3E2D90E1C3E1845005885D4 /* LLAUser.m in Sources */,
 				A3DEDE631C3CAEC6009F3D37 /* TMHallTableViewController.m in Sources */,
+				5CC324E31C5B694300413E25 /* LLAVideoPickerCollectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

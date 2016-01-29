@@ -60,5 +60,24 @@
 
 }
 
+- (void) qiNiuUploadFileWithURL:(NSURL *) fileURL
+                            key:(NSString *)keyString
+                          token:(NSString *)uploadToken
+                       progress:(LLAUploadProgressBlock) progress
+                       complete:(LLAUploadCompleteBlock) complete {
+    
+    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
+        if (progress){
+            progress(key,percent);
+        }
+    }];
+    
+    [qiNiuUploadManager putFile:fileURL.path key:keyString token:uploadToken complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+        if (complete)
+            complete(info.statusCode,uploadToken,key,resp);
+    } option:uploadOption];
+    
+}
+
 
 @end

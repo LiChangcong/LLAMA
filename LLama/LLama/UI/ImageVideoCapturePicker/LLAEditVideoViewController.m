@@ -13,14 +13,24 @@
 #import "LLAEditVideoTopToolBar.h"
 #import "LLAEditVideoProgressView.h"
 
+#import "LLALoadingView.h"
+
 //model
 
 //util
 #import "SCVideoPlayerView.h"
+#import "SCRecorder.h"
+#import "LLAViewUtil.h"
 
-static const CGFloat topBarHeight = 80;
+//
+#import "LLAUploadFileUtil.h"
 
-@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate>
+static const CGFloat topBarHeight = 70;
+
+static NSString *playPauseButtonImageName_Normal = @"play";
+static NSString *playPasueButtonImageName_Highlight = @"playh";
+
+@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate,SCPlayerDelegate>
 {
     AVAsset *editAsset;
     
@@ -29,6 +39,8 @@ static const CGFloat topBarHeight = 80;
     SCVideoPlayerView *videoPlayerView;
     
     LLAEditVideoProgressView *editProgressView;
+    
+    UIButton *playPauseButton;
     
     
 }
@@ -50,7 +62,7 @@ static const CGFloat topBarHeight = 80;
     [self initSubContraints];
     
     [videoPlayerView.player setItemByAsset:editAsset];
-    [videoPlayerView.player play];
+    //[videoPlayerView.player play];
 }
 
 #pragma mark - Init
@@ -85,9 +97,22 @@ static const CGFloat topBarHeight = 80;
     videoPlayerView = [[SCVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     videoPlayerView.delegate = self;
+    videoPlayerView.player.delegate = self;
+    videoPlayerView.tapToPauseEnabled = YES;
     
     [self.view addSubview:videoPlayerView];
     
+    playPauseButton = [[UIButton alloc] init];
+    playPauseButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [playPauseButton setImage:[UIImage llaImageWithName:playPauseButtonImageName_Normal] forState:UIControlStateNormal];
+    [playPauseButton setImage:[UIImage llaImageWithName:playPasueButtonImageName_Highlight] forState:UIControlStateHighlighted];
+    
+    [playPauseButton addTarget:self action:@selector(playPauseButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:playPauseButton];
+    
+    //
     editProgressView = [[LLAEditVideoProgressView alloc] initWithAsset:editAsset];
     editProgressView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -109,6 +134,16 @@ static const CGFloat topBarHeight = 80;
                 @"playerHeight":@(self.view.frame.size.width),
                 @"editHeight":@(editVideo_progressViewHeight+self.view.frame.size.width/editProgressView.numberOfThumbImages)}
       views:NSDictionaryOfVariableBindings(topBar,videoPlayerView,editProgressView)]];
+    
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:playPauseButton
+      attribute:NSLayoutAttributeCenterY
+      relatedBy:NSLayoutRelationEqual
+      toItem:videoPlayerView
+      attribute:NSLayoutAttributeCenterY
+      multiplier:1.0
+      constant:0]];
     
     //horizonal
     [constrArray addObjectsFromArray:
@@ -132,8 +167,29 @@ static const CGFloat topBarHeight = 80;
       metrics:nil
       views:NSDictionaryOfVariableBindings(editProgressView)]];
     
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:playPauseButton
+      attribute:NSLayoutAttributeCenterX
+      relatedBy:NSLayoutRelationEqual
+      toItem:videoPlayerView
+      attribute:NSLayoutAttributeCenterX
+      multiplier:1.0
+      constant:0]];
+
+    
     [self.view addConstraints:constrArray];
     
+}
+
+#pragma mark - Button Clicked
+
+- (void) playPauseButtonClicked:(UIButton *) sender {
+    //
+    if (!videoPlayerView.player.isPlaying) {
+        [videoPlayerView.player play];
+        sender.hidden = YES;
+    }
 }
 
 #pragma mark - Status Bar
@@ -150,18 +206,108 @@ static const CGFloat topBarHeight = 80;
 
 - (void) editVideoDone {
     
+    //
+
+    
+    //edit done,test,upload
+    SCAssetExportSession *exportSession = [[SCAssetExportSession alloc] initWithAsset:editAsset];
+    
+    //
+    
+    
+    CGFloat assetDuration = CMTimeGetSeconds(editAsset.duration);
+    
+    exportSession.outputUrl = [SCRecorder sharedRecorder].session.outputUrl;
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    exportSession.contextType = SCContextTypeAuto;
+    exportSession.videoConfiguration.size = CGSizeMake(480, 480);
+    
+    //
+    
+    CMTime startTime = CMTimeMakeWithSeconds(assetDuration*editProgressView.editBeginRatio, editAsset.duration.timescale);
+    
+    CMTime durationTime = CMTimeMakeWithSeconds(assetDuration*(editProgressView.editEndRatio-editProgressView.editBeginRatio), editAsset.duration.timescale);
+    
+    exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
+    
+
+    LLALoadingView *loadingView = [LLAViewUtil addLLALoadingViewToView:self.view];
+    [loadingView show:YES];
+    
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        if (!exportSession.error) {
+            //upload
+            
+            [loadingView hide:YES];
+            
+            [exportSession.outputUrl saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
+                NSLog(@"error:%@",error);
+            }];
+            
+            
+        }else {
+            NSLog(@"exportError:%@",exportSession.error);
+            [loadingView hide:YES];
+        }
+    }];
+    
 }
 
 #pragma mark - SCVideoPlayerViewDelegate
 
 - (void)videoPlayerViewTappedToPlay:(SCVideoPlayerView *__nonnull)playerView {
-    
+    //[[playerView player] play];
+    playPauseButton.hidden = YES;
 }
 
 - (void)videoPlayerViewTappedToPause:(SCVideoPlayerView *__nonnull)playerView {
+    //[[playerView player] pause];
+    playPauseButton.hidden = NO;
+}
+
+#pragma mark - SCPlayerDelegate
+
+/**
+ Called when the player has played some frames. The loopsCount will contains the number of
+ loop if the curent item was set using setSmoothItem.
+ */
+- (void)player:(SCPlayer *__nonnull)player didPlay:(CMTime)currentTime loopsCount:(NSInteger)loopsCount {
+    
+    if (CMTimeGetSeconds(currentTime) < CMTimeGetSeconds(player.currentItem.duration)*editProgressView.editBeginRatio) {
+        [player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+            
+        }];
+    }
+    
+    if (CMTimeGetSeconds(currentTime) > CMTimeGetSeconds(player.currentItem.duration) * editProgressView.editEndRatio) {
+        
+        [player pause];
+        
+        [player seekToTime:CMTimeMake(editProgressView.editEndRatio*CMTimeGetSeconds(player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+            
+        }];
+    }
     
 }
 
-#pragma mark - Pangesture
+/**
+ Called when the item has reached end
+ */
+- (void)player:(SCPlayer *__nonnull)player didReachEndForItem:(AVPlayerItem *__nonnull)item {
+    
+    //if (player.isPlaying) {
+        //seek to cutting time
+        
+        [player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(item.duration), 1) completionHandler:^(BOOL finished) {
+            
+        }];
+        
+//    }else {
+        playPauseButton.hidden = NO;
+//    }
+    
+    
+}
+
 
 @end
