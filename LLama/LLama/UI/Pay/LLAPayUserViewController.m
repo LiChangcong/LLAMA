@@ -21,6 +21,8 @@
 
 //util
 #import "LLAViewUtil.h"
+#import "LLAHttpUtil.h"
+#import "LLAThirdPayManager.h"
 
 static NSString *const payInfoCellIdentifier = @"payInfoCellIdentifier";
 static NSString *const payTypeCellIdentifier = @"payTypeCellIdentifier";
@@ -230,6 +232,47 @@ static const CGFloat payTypeCellsVerSpace = 8;
 
 - (void) choosePayType:(LLAPayUserPayTypeItem *)payTypeInfo {
     //
+    if (payTypeInfo.payType == LLAPayUserType_AccountBalance) {
+    
+    }else if (payTypeInfo.payType == LLAPayUserType_Alipay) {
+        
+    }else if (payTypeInfo.payType == LLAPayUserType_WeChat) {
+        //request
+        
+        LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+        HUD.removeFromSuperViewOnHide = YES;
+        [HUD show:YES];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        [params setValue:payInfo.payToScriptIdString forKey:@"playId"];
+        [params setValue:payInfo.payToUser.userIdString forKey:@"userId"];
+        [params setValue:@"WX" forKey:@"payType"];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/play/choosePlay" param:params responseBlock:^(id responseObject) {
+            
+            [HUD hide:YES];
+            
+            
+            [[LLAThirdPayManager shareManager] payWithPayType:LLAThirdPayType_WeChat data:responseObject response:^(LLAThirdPayResponseStatus code, NSError *error) {
+                //response
+                NSLog(@"return code:%ld",code);
+            }];
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+            
+        }];
+        
+        
+    }
 }
 
 @end

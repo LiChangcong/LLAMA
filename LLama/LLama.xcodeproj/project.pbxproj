@@ -142,6 +142,7 @@
 		5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324F41C5B882B00413E25 /* LLAPayUserPayInfo.m */; };
 		5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */; };
 		5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */; };
+		5CC696711C5CA58500E4BA89 /* LLAThirdPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696701C5CA58500E4BA89 /* LLAThirdPayManager.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -592,6 +593,8 @@
 		5CC4D4301C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyInfoCell.m; sourceTree = "<group>"; };
 		5CC4D4321C50E1A600BD3D57 /* LLAUserProfileMyFunctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileMyFunctionCell.h; sourceTree = "<group>"; };
 		5CC4D4331C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileMyFunctionCell.m; sourceTree = "<group>"; };
+		5CC6966F1C5CA58500E4BA89 /* LLAThirdPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAThirdPayManager.h; sourceTree = "<group>"; };
+		5CC696701C5CA58500E4BA89 /* LLAThirdPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAThirdPayManager.m; sourceTree = "<group>"; };
 		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
@@ -1263,6 +1266,8 @@
 				5CC324EC1C5B834E00413E25 /* View */,
 				5CC324E51C5B814800413E25 /* LLAPayUserViewController.h */,
 				5CC324E61C5B814800413E25 /* LLAPayUserViewController.m */,
+				5CC6966F1C5CA58500E4BA89 /* LLAThirdPayManager.h */,
+				5CC696701C5CA58500E4BA89 /* LLAThirdPayManager.m */,
 			);
 			path = Pay;
 			sourceTree = "<group>";
@@ -2588,6 +2593,7 @@
 				5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */,
 				5CE0EB911C46424300C6BC79 /* TYLinkTextStorage.m in Sources */,
 				A3D8E7F51C3F8DDA00B27898 /* UIFont+LLAFont.m in Sources */,
+				5CC696711C5CA58500E4BA89 /* LLAThirdPayManager.m in Sources */,
 				5CDDF4531C474D2100168989 /* LLAVideoCommentContentView.m in Sources */,
 				A3D8E7EA1C3F5C2800B27898 /* LLACustomNavigationBarViewController.m in Sources */,
 				5CE0EB8D1C46424300C6BC79 /* TYAttributedLabel.m in Sources */,

@@ -10,7 +10,7 @@
 
 #import "LLAHttpUtil.h"
 #import "LLASaveUserDefaultUtil.h"
-
+#import "LLAThirdPayManager.h"
 
 @interface LLAThirdSDKDelegate()
 {
@@ -211,10 +211,13 @@
             case WXSuccess:
             {
                 //服务器端查询支付通知或查询API返回的结果再提示成功
+                [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_WeChat responseCode:LLAThirdPayResponseStatus_Success error:nil];
                 break;
             }
             default:
             {
+                [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_WeChat responseCode:LLAThirdPayResponseStatus_Failed error:nil];
+                
                 break;
             }
         }

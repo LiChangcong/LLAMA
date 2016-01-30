@@ -87,7 +87,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-//    NSString *urlStr = [url absoluteString];
+    NSString *urlStr = [url absoluteString];
 //    
 //    if([urlStr hasPrefix:@"wx"]){
 //        return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
@@ -107,8 +107,11 @@
     BOOL umResult = [UMSocialSnsService handleOpenURL:url];
     
     if (!umResult){
-        
+        if([urlStr hasPrefix:@"wx"]){
+            return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+        }
     }
+    
     
     return YES;
 }
@@ -139,6 +142,7 @@
     
     //weChat
     [UMSocialWechatHandler setWXAppId:LLA_WEIXIN_APPID appSecret:LLA_WEIXIN_APP_SECRET url:SDK_REDIRECT_URL];
+    //[WXApi registerApp:LLA_WEIXIN_APPID withDescription:@"LLAMA"];
     //qq
     [UMSocialQQHandler setQQWithAppId:LLA_QQ_APPID appKey:LLA_QQ_APPKEY url:SDK_REDIRECT_URL];
     //sina

@@ -267,9 +267,11 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
             
             if (oldSelectedUser == newSelectedUser) {
                 oldSelectedUser.hasBeenSelected = NO;
+                scriptInfo.hasTempChoose = NO;
             }else {
                 oldSelectedUser.hasBeenSelected = NO;
                 newSelectedUser.hasBeenSelected = YES;
+                scriptInfo.hasTempChoose = YES;
             }
             
             [dataCollectionView reloadData];
@@ -348,7 +350,18 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
                 //director,this time choose actor
                 
                 if (scriptInfo.partakeUsersArray.count > 0) {
-
+                    LLAUser *selectedUser = [self selectedUserInfoScriptInfo];
+                    
+                    //
+                    LLAPayUserPayInfo *payInfo = [LLAPayUserPayInfo new];
+                    payInfo.payToUser = selectedUser;
+                    payInfo.payMoney = scriptInfo.rewardMoney;
+                    payInfo.payToScriptIdString = scriptInfo.scriptIdString;
+                    
+                    //
+                    LLAPayUserViewController *pay = [[LLAPayUserViewController alloc] initWithPayInfo:payInfo];
+                    [self.navigationController pushViewController:pay animated:YES];
+                    
                 }else {
                     
                 }
@@ -445,9 +458,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 - (void) viewUserDetailWithUserInfo:(LLAUser *)userInfo  {
     //go to user profile
     
-//    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
-//    
-//    [self.navigationController pushViewController:userProfile animated:YES];
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    
+    [self.navigationController pushViewController:userProfile animated:YES];
 
     
 }

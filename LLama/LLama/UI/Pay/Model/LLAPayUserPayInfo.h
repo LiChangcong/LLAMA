@@ -15,4 +15,6 @@
 
 @property(nonatomic , assign) CGFloat payMoney;
 
+@property(nonatomic , copy) NSString *payToScriptIdString;
+
 @end
