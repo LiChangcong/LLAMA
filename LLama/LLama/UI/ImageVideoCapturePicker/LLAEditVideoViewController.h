@@ -8,6 +8,10 @@
 
 #import "LLACustomNavigationBarViewController.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @interface LLAEditVideoViewController : LLACustomNavigationBarViewController
+
+- (instancetype) initWithAVAsset:(AVAsset *) asset;
 
 @end

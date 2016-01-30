@@ -111,7 +111,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     
     videoPlayerLayer = [[AVPlayerLayer alloc] init];
     //videoPlayerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    videoPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    videoPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     videoPlayerLayer.player = videoPlayer;
     videoPlayerLayer.backgroundColor = [UIColor blackColor].CGColor;
     [self.layer addSublayer:videoPlayerLayer];

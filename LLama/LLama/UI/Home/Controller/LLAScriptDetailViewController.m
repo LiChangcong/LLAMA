@@ -6,8 +6,10 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
+//controller
 #import "LLAScriptDetailViewController.h"
 #import "LLAUserProfileViewController.h"
+#import "LLAPayUserViewController.h"
 
 //view
 #import "LLACollectionView.h"
@@ -21,6 +23,7 @@
 
 //model
 #import "LLAScriptHallItemInfo.h"
+#import "LLAPayUserPayInfo.h"
 
 //util
 #import "LLAViewUtil.h"
@@ -442,9 +445,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 - (void) viewUserDetailWithUserInfo:(LLAUser *)userInfo  {
     //go to user profile
     
-    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
-    
-    [self.navigationController pushViewController:userProfile animated:YES];
+//    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+//    
+//    [self.navigationController pushViewController:userProfile animated:YES];
 
     
 }

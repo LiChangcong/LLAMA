@@ -89,6 +89,7 @@ static const CGFloat moneyToRight = 10;
     timeAndTypeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     timeAndTypeLabel.font = timeAndTypeLabelFont;
     timeAndTypeLabel.textColor = timeAndTypeLabelTextColor;
+    timeAndTypeLabel.numberOfLines = 2;
     
     [self.contentView addSubview:timeAndTypeLabel];
     
@@ -97,6 +98,7 @@ static const CGFloat moneyToRight = 10;
     contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     contentLabel.font = contentLabelFont;
     contentLabel.textColor = contentLabelTextColor;
+    contentLabel.numberOfLines = 0;
     
     [self.contentView addSubview:contentLabel];
     
@@ -163,6 +165,12 @@ static const CGFloat moneyToRight = 10;
       views:NSDictionaryOfVariableBindings(sepLine)]];
     
     [self.contentView addConstraints:constrArray];
+    
+    [timeAndTypeLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
+    [contentLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    
+    [moneyLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
 }
 

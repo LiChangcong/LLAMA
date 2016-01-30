@@ -19,4 +19,10 @@
                         progress:(LLAUploadProgressBlock) progress
                         complete:(LLAUploadCompleteBlock) complete;
 
+- (void) qiNiuUploadFileWithURL:(NSURL *) fileURL
+                             key:(NSString *)keyString
+                           token:(NSString *)uploadToken
+                        progress:(LLAUploadProgressBlock) progress
+                        complete:(LLAUploadCompleteBlock) complete;
+
 @end

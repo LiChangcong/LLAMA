@@ -8,14 +8,14 @@
 
 #import "LLACaptureVideoToolBar.h"
 
-static NSString *const closeButtonImageName_Normal = @"";
-static NSString *const closeButtonImageName_Highlight = @"";
+static NSString *const closeButtonImageName_Normal = @"close";
+static NSString *const closeButtonImageName_Highlight = @"closeh";
 
-static NSString *const flashModeButtonImageName_Normal = @"";
-static NSString *const flashModeButtonImageName_Highlight = @"";
+static NSString *const flashModeButtonImageName_Normal = @"lighting";
+static NSString *const flashModeButtonImageName_Highlight = @"lightingh";
 
-static NSString *const changeCameraImageName_Normal = @"";
-static NSString *const changeCameraImageName_Highlight = @"";
+static NSString *const changeCameraImageName_Normal = @"camerchange";
+static NSString *const changeCameraImageName_Highlight = @"camerchangeh";
 
 //
 static const CGFloat closeButtonToLeft = 17;
@@ -49,6 +49,7 @@ static const CGFloat flashModeToChangeCameraHorSpace = 17;
         
         [self initVariables];
         [self initSubViews];
+        [self initSubContraints];
         self.backgroundColor = backColor;
     }
     return self;

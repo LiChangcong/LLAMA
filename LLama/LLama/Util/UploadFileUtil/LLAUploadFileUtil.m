@@ -55,11 +55,16 @@
                 
             }else if (fileType == LLAUploadFileType_Video) {
                 //video
-                
+                if ([fileForUpload isKindOfClass:[NSURL class]]) {
+                    [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithURL:fileForUpload key:fileKey token:uploadToken progress:progress complete:complete];
+                }else {
+                    //data
+                }
             }
             
             // use qiniu to upload
-            [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadData key:fileKey token:uploadToken progress:progress complete:complete];
+            if (uploadData && fileType != LLAUploadFileType_Video)
+                [[LLAQiNiuUploadFileManager shareManager] qiNiuUploadFileWithData:uploadData key:fileKey token:uploadToken progress:progress complete:complete];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {
