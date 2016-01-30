@@ -8,9 +8,15 @@
 
 #import "TMPostScriptViewController.h"
 
+#import "LLAAlbumPickerViewController.h"
+#import "LLABaseNavigationController.h"
+
 #import "LLATextView.h"
 
-@interface TMPostScriptViewController ()
+static const CGFloat textViewToLeftWithoutImage = 20;
+static const CGFloat textViewToLeftWithImage = 118;
+
+@interface TMPostScriptViewController ()<LLAAlbumPickerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTrailConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *rewardMoneyTextField;
@@ -26,6 +32,8 @@
 
 @implementation TMPostScriptViewController
 
+@synthesize scriptType;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -33,11 +41,29 @@
     // 设置标题
     self.navigationItem.title = @"剧本";
     
+    //back item
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
     //
-    _rewardMoneyTextField.placeholder = @"点击此处偷入金额";
+    if (scriptType == LLAPublishScriptType_Text) {
+        _textViewTrailConstraint.constant = textViewToLeftWithoutImage;
+        _preViewImageView.hidden = YES;
+    }else {
+        _textViewTrailConstraint.constant = textViewToLeftWithImage;
+        _preViewImageView.hidden = NO;
+        //show choose image
+        [self chooseImageView:nil];
+    }
+    
+    //
+    _rewardMoneyTextField.placeholder = @"点击此处输入金额";
     _rewardMoneyTextField.textAlignment = NSTextAlignmentRight;
     //
     _preViewImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _preViewImageView.userInteractionEnabled = YES;
+    _preViewImageView.clipsToBounds = YES;
+    
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseImageView:)];
+    [_preViewImageView addGestureRecognizer:tapGes];
     
     //
     _scriptContentTextView.placeholder = @"这里写剧本";
@@ -99,7 +125,7 @@
     _qqFriend.selected = !_qqFriend.selected;
 }
 
-- (void)backButtonClick
+- (void)back
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -109,4 +135,28 @@
 {
     [self.view endEditing:YES];
 }
+
+#pragma mark - Image Tap
+
+- (void) chooseImageView:(UITapGestureRecognizer *) ges {
+    
+    //
+    LLAAlbumPickerViewController *imagePicker = [[LLAAlbumPickerViewController alloc] init];
+    imagePicker.delegate = self;
+    
+    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
+    
+    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+    
+}
+
+#pragma mark - LLAAlbumPickerViewControllerDelegate
+
+- (void) didFinishChooseImage:(UIImage *)image {
+    _preViewImageView.image = image;
+    if (scriptType == LLAPublishScriptType_Image && !image) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
 @end

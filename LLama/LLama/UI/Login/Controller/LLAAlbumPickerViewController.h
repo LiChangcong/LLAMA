@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LLAAlbumPickerViewControllerDelegate <NSObject>
+
+- (void) didFinishChooseImage:(UIImage *) image;
+
+@end
+
 @interface LLAAlbumPickerViewController : UIViewController
+
+@property(nonatomic , weak) id<LLAAlbumPickerViewControllerDelegate> delegate;
 
 @end

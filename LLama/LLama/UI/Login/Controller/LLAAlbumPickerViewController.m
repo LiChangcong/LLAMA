@@ -11,7 +11,7 @@
 #import <Masonry.h>
 #import "LLAAlbumPickerCell.h"
 
-@interface LLAAlbumPickerViewController ()<LLAAlbumPickerCellDelegate,UICollectionViewDataSource>
+@interface LLAAlbumPickerViewController ()<LLAAlbumPickerCellDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UICollectionView * __collectionView;
     CGSize size;
@@ -28,6 +28,8 @@
 @end
 
 @implementation LLAAlbumPickerViewController
+
+@synthesize delegate;
 
 - (NSMutableArray *)dataArray
 {
@@ -55,13 +57,13 @@
 {
     self.navigationItem.title = @"相册";
     // 设置导航栏背景颜色
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"tabbar_bg"] forBarMetrics:UIBarMetricsDefault];
+
     // 状态栏设置为白色
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     // 导航栏左边按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"back" highImage:@"backH" target:self action:@selector(back)];
     // 导航栏右边按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"okyellow" highImage:@"okyellow" target:self action:@selector(finish)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"pickImage_Finish_Normal" highImage:@"pickImage_Finish_Highlight" target:self action:@selector(finish)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
 }
@@ -199,22 +201,77 @@
 #pragma mark - 按钮事件处理
 - (void)back
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (delegate && [delegate respondsToSelector:@selector(didFinishChooseImage:)]) {
+            [delegate didFinishChooseImage:nil];
+        }
+
+    }];
 }
 - (void)finish
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName: @"PICKER_TAKE_DONE" object:nil userInfo:@{@"selectAssets":self.selectdCell.imageView.image}];
-    });
-    NSLog(@"%@",self.selectdCell.imageView.image);
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [[NSNotificationCenter defaultCenter] postNotificationName: @"PICKER_TAKE_DONE" object:nil userInfo:@{@"selectAssets":self.selectdCell.imageView.image}];
+//    });
+//    NSLog(@"%@",self.selectdCell.imageView.image);
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    //
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        //
+        if (delegate && [delegate respondsToSelector:@selector(didFinishChooseImage:)]) {
+            [delegate didFinishChooseImage:self.selectdCell.imageView.image];
+        }
+    }];
     
 }
 
 - (void)takePhoto
 {
-    TMLog(@"点击了拍照");
+    //
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+        
+        UIImagePickerController *imagePikcer = [[UIImagePickerController alloc] init];
+        imagePikcer.allowsEditing = YES;
+        imagePikcer.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePikcer.delegate = self;
+        [self.navigationController presentViewController:imagePikcer animated:YES completion:^{
+            
+        }];
+        
+        
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"相机不可用" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
+#pragma mark - UIImagePickerDelegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info  {
+    
+    //
+    UIImage *image = [info valueForKey:UIImagePickerControllerEditedImage];
+    if (!image) {
+        [info valueForKey:UIImagePickerControllerOriginalImage];
+    }
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            //
+            if (delegate && [delegate respondsToSelector:@selector(didFinishChooseImage:)]) {
+                [delegate didFinishChooseImage:image];
+            }
+        }];
+
+    }];
+    
+}
+
+- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end

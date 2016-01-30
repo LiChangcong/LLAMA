@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TMPostScriptViewController : UIViewController
+#import "LLACommonViewController.h"
+
+typedef NS_ENUM(NSInteger,LLAPublishScriptType){
+    LLAPublishScriptType_Text,
+    LLAPublishScriptType_Image,
+} ;
+
+@interface TMPostScriptViewController : LLACommonViewController
+
+@property(nonatomic , assign) LLAPublishScriptType scriptType;
 
 @end
