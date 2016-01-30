@@ -8,6 +8,10 @@
 
 #import "LLACommonViewController.h"
 
+@class LLAPayUserPayInfo;
+
 @interface LLAPayUserViewController : LLACommonViewController
+
+- (instancetype) initWithPayInfo:(LLAPayUserPayInfo *) info;
 
 @end

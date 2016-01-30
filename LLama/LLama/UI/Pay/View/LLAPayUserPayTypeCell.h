@@ -10,7 +10,15 @@
 
 @class LLAPayUserPayTypeItem;
 
+@protocol LLAPayUserPayTypeCellDelegate <NSObject>
+
+- (void) choosePayType:(LLAPayUserPayTypeItem *) payTypeInfo;
+
+@end
+
 @interface LLAPayUserPayTypeCell : UICollectionViewCell
+
+@property(nonatomic , weak) id<LLAPayUserPayTypeCellDelegate> delegate;
 
 - (void) updateCellWithPayTypeInfo:(LLAPayUserPayTypeItem *) payTypeInfo;
 

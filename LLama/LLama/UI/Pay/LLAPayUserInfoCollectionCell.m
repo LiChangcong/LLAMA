@@ -53,6 +53,7 @@ static const CGFloat userImageViewToInfoLabelVerSpace = 10;
     userImageView = [[UIImageView alloc] init];
     userImageView.translatesAutoresizingMaskIntoConstraints = NO;
     userImageView.contentMode = UIViewContentModeScaleAspectFill;
+    userImageView.clipsToBounds = YES;
     
     [self.contentView addSubview:userImageView];
     

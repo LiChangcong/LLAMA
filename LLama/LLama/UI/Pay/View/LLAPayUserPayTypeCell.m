@@ -10,8 +10,8 @@
 
 #import "LLAPayUserPayTypeItem.h"
 
-static const CGFloat imageViewHeightWidth = 59;
-static const CGFloat imageViewToRight = 60;
+static const CGFloat imageViewHeightWidth = 49;
+static const CGFloat imageViewToRight = 30;
 
 @interface LLAPayUserPayTypeCell()
 {
@@ -24,11 +24,15 @@ static const CGFloat imageViewToRight = 60;
     //
     UIFont *titleLabelFont;
     UIColor *titleLabelTextColor;
+    
+    LLAPayUserPayTypeItem *currentPayType;
 }
 
 @end
 
 @implementation LLAPayUserPayTypeCell
+
+@synthesize delegate;
 
 #pragma mark - Init
 
@@ -55,8 +59,14 @@ static const CGFloat imageViewToRight = 60;
     
     backButton = [[UIButton alloc] init];
     backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    backButton.clipsToBounds = YES;
+    
+    backButton.layer.cornerRadius = 4;
     
     [backButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [backButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    
     [self.contentView addSubview:backButton];
     
     titleLabel = [[UILabel alloc] init];
@@ -69,6 +79,7 @@ static const CGFloat imageViewToRight = 60;
     
     imageView = [[UIImageView alloc] init];
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    imageView.clipsToBounds = YES;
     
     [self.contentView addSubview:imageView];
     
@@ -129,13 +140,30 @@ static const CGFloat imageViewToRight = 60;
 
 #pragma mark - Button Clicked
 
+- (void) buttonTouchDown:(UIButton *) sender {
+    
+    //imageView.highlighted  = YES;
+    imageView.alpha = 0.5;
+    titleLabel.alpha = 0.5;
+}
+
 - (void) buttonClicked:(UIButton *) sender {
+    //imageView.highlighted = NO;
+    
+    imageView.alpha = 1.0;
+    titleLabel.alpha = 1.0;
+    
+    if (delegate && [delegate respondsToSelector:@selector(choosePayType:)]) {
+        [delegate choosePayType:currentPayType];
+    }
     
 }
 
 #pragma mark - Update
 
 - (void) updateCellWithPayTypeInfo:(LLAPayUserPayTypeItem *) payTypeInfo {
+    
+    currentPayType = payTypeInfo;
     
     [backButton setBackgroundColor:payTypeInfo.backColor forState:UIControlStateNormal];
     imageView.image = payTypeInfo.payTypeNormalImage;
