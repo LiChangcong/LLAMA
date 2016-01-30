@@ -6,12 +6,24 @@
 //  Copyright © 2015年 heihei. All rights reserved.
 //
 
+//controller
 #import "TMPostScriptViewController.h"
 
 #import "LLAAlbumPickerViewController.h"
 #import "LLABaseNavigationController.h"
+#import "LLAScriptDetailViewController.h"
+#import "TMTabBarController.h"
 
+//view
 #import "LLATextView.h"
+#import "LLALoadingView.h"
+
+//model
+
+//util
+#import "LLAViewUtil.h"
+#import "LLAHttpUtil.h"
+#import "LLAUploadFileUtil.h"
 
 static const CGFloat textViewToLeftWithoutImage = 20;
 static const CGFloat textViewToLeftWithImage = 118;
@@ -185,6 +197,134 @@ static const CGFloat textViewToLeftWithImage = 118;
     if (scriptType == LLAPublishScriptType_Image && !image) {
         [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
     }
+}
+
+#pragma mark - Publish Script
+- (IBAction)publishScript:(id)sender {
+    
+    [self.view endEditing:YES];
+    
+    //validate
+    if ([_rewardMoneyTextField.text integerValue] <= 1) {
+        [LLAViewUtil showAlter:self.view withText:@"片酬太少啦"];
+        return;
+    }
+    
+    if ([_scriptContentTextView.text length] <= 1) {
+        [LLAViewUtil showAlter:self.view withText:@"请输入剧本"];
+        return;
+    }
+    
+    if (scriptType == LLAPublishScriptType_Image && !_preViewImageView.image) {
+        [LLAViewUtil showAlter:self.view withText:@"请选择剧本图片"];
+        return;
+    }
+
+    
+    //
+    LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    HUD.removeFromSuperViewOnHide = YES;
+    
+    [HUD show:YES];
+    
+    //
+    if (scriptType == LLAPublishScriptType_Text) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        [params setValue:@([_rewardMoneyTextField.text integerValue])forKey:@"fee"];
+        [params setValue:@(_isPrivateButton.selected) forKey:@"secret"];
+        [params setValue:_scriptContentTextView.text forKey:@"content"];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/play/createPlay" param:params responseBlock:^(id responseObject) {
+            
+            [HUD hide:YES];
+            //
+            NSString *playId = [responseObject valueForKey:@"playId"];
+            if ([playId isKindOfClass:[NSString class]]) {
+                //success
+                [self handlePublishSuccessWithPlayId:playId];
+            }
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+
+            
+        }];
+        
+    }else {
+    
+        //upload image first
+        [LLAUploadFileUtil llaUploadWithFileType:LLAUploadFileType_Image file:_preViewImageView.image tokenBlock:NULL uploadProgress:NULL complete:^(LLAUploadFileResponseCode responseCode, NSString *uploadToken, NSString *uploadKey, NSDictionary *respDic) {
+            
+            if (responseCode >=0) {
+                
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                
+                [params setValue:@([_rewardMoneyTextField.text integerValue])forKey:@"fee"];
+                [params setValue:@(_isPrivateButton.selected) forKey:@"secret"];
+                [params setValue:_scriptContentTextView.text forKey:@"content"];
+                [params setValue:uploadKey forKey:@"image"];
+                
+                [LLAHttpUtil httpPostWithUrl:@"/play/createPlay" param:params responseBlock:^(id responseObject) {
+                    
+                    [HUD hide:YES];
+                    //
+                    NSString *playId = [responseObject valueForKey:@"playId"];
+                    if ([playId isKindOfClass:[NSString class]]) {
+                        //success
+                        [self handlePublishSuccessWithPlayId:playId];
+                    }
+                    
+                } exception:^(NSInteger code, NSString *errorMessage) {
+                    
+                    [HUD hide:YES];
+                    [LLAViewUtil showAlter:self.view withText:errorMessage];
+                    
+                } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+                    
+                    [HUD hide:YES];
+                    [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+                    
+                    
+                }];
+            
+            }else {
+                //
+                [HUD hide:YES];
+                
+                [LLAViewUtil showAlter:self.view withText:[LLAUploadFileUtil llaUploadResponseCodeToDescription:responseCode]];
+                
+            }
+            
+        }];
+        
+    }
+    
+}
+
+#pragma mark - Publish Success
+
+- (void) handlePublishSuccessWithPlayId:(NSString *) playId {
+
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        UIViewController *controller = [[UIApplication sharedApplication].delegate window].rootViewController;
+        if ([controller isKindOfClass:[TMTabBarController class]]) {
+            UINavigationController *navi = ((TMTabBarController *)controller).selectedViewController;
+            if ([navi isKindOfClass:[UINavigationController class]]) {
+                
+                //
+                LLAScriptDetailViewController *detail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:playId];
+                [navi pushViewController:detail animated:YES];
+            }
+        }
+    }];
 }
 
 @end
