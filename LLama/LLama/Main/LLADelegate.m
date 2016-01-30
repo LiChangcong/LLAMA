@@ -13,6 +13,10 @@
 #import "LLABaseNavigationController.h"
 #import "TMTabBarController.h"
 
+#import "LLAThirdPayManager.h"
+
+#import <AlipaySDK/AlipaySDK.h>
+
 @interface LLADelegate()
 
 @end
@@ -112,6 +116,32 @@
         }
     }
     
+    //alipay
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            
+            LLAThirdPayResponseStatus status = LLAThirdPayResponseStatus_Failed;
+            if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
+                status = LLAThirdPayResponseStatus_Success;
+            }else {
+                status = LLAThirdPayResponseStatus_Failed;
+            }
+            [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_AliPay responseCode:status error:nil];
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){ //支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            LLAThirdPayResponseStatus status = LLAThirdPayResponseStatus_Failed;
+            if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
+                status = LLAThirdPayResponseStatus_Success;
+            }else {
+                status = LLAThirdPayResponseStatus_Failed;
+            }
+            [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_AliPay responseCode:status error:nil];
+        }];
+    }
+    return YES;
     
     return YES;
 }

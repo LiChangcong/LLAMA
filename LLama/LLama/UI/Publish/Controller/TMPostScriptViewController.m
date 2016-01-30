@@ -205,12 +205,12 @@ static const CGFloat textViewToLeftWithImage = 118;
     [self.view endEditing:YES];
     
     //validate
-    if ([_rewardMoneyTextField.text integerValue] <= 1) {
+    if ([_rewardMoneyTextField.text integerValue] < 1) {
         [LLAViewUtil showAlter:self.view withText:@"片酬太少啦"];
         return;
     }
     
-    if ([_scriptContentTextView.text length] <= 1) {
+    if ([_scriptContentTextView.text length] < 1) {
         [LLAViewUtil showAlter:self.view withText:@"请输入剧本"];
         return;
     }
