@@ -185,6 +185,8 @@
 		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
 		5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
+		7E06066D1C5C90B50089329D /* LLAUserAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */; };
+		7E06066E1C5C90B50089329D /* LLAUserAgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06066C1C5C90B50089329D /* LLAUserAgreementViewController.xib */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
@@ -680,6 +682,9 @@
 		5CF873371C4CE52700D2D224 /* LLAScriptChooseActorTempChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorTempChooseProtocol.h; sourceTree = "<group>"; };
 		5CF873381C4CF31400D2D224 /* LLAChooseActorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseActorCell.h; sourceTree = "<group>"; };
 		5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChooseActorCell.m; sourceTree = "<group>"; };
+		7E06066A1C5C90B50089329D /* LLAUserAgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAgreementViewController.h; sourceTree = "<group>"; };
+		7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAgreementViewController.m; sourceTree = "<group>"; };
+		7E06066C1C5C90B50089329D /* LLAUserAgreementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAUserAgreementViewController.xib; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1991,6 +1996,9 @@
 				7EAA2F511C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.h */,
 				7EAA2F521C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m */,
 				7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */,
+				7E06066A1C5C90B50089329D /* LLAUserAgreementViewController.h */,
+				7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */,
+				7E06066C1C5C90B50089329D /* LLAUserAgreementViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2336,6 +2344,7 @@
 				5CA18FA91C4F6C9100A0B5B7 /* lla_Loading_10.png in Resources */,
 				5CA18FB11C4F6C9100A0B5B7 /* lla_Loading_12@3x.png in Resources */,
 				5CA18FC81C4F6C9100A0B5B7 /* lla_Loading_4@3x.png in Resources */,
+				7E06066E1C5C90B50089329D /* LLAUserAgreementViewController.xib in Resources */,
 				5CA18FD31C4F6C9100A0B5B7 /* lla_Loading_8@2x.png in Resources */,
 				7EAA2F501C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib in Resources */,
 				5CA18FB51C4F6C9100A0B5B7 /* lla_Loading_14.png in Resources */,
@@ -2587,6 +2596,7 @@
 				5CE0EB761C4620FF00C6BC79 /* LLAVideoPlayerView.m in Sources */,
 				5C4684C41C52076E00705FA9 /* LLAUserProfileMainInfo.m in Sources */,
 				5C6D7A4F1C58B73200119A3A /* SCWeakSelectorTarget.m in Sources */,
+				7E06066D1C5C90B50089329D /* LLAUserAgreementViewController.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
 				5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */,
 				7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */,

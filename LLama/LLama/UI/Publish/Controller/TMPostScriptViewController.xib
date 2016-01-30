@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -29,13 +29,13 @@
                     <rect key="frame" x="0.0" y="64" width="600" height="57"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="片酬(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPH-5F-gmo">
-                            <rect key="frame" x="40" y="18" width="63" height="21"/>
+                            <rect key="frame" x="40" y="18" width="62.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VHu-FN-a6o">
-                            <rect key="frame" x="123" y="20" width="438" height="17"/>
+                            <rect key="frame" x="122" y="20" width="437.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                         </textField>
@@ -124,7 +124,7 @@
                     <rect key="frame" x="0.0" y="272" width="600" height="34"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享到" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-z7-wYu">
-                            <rect key="frame" x="16" y="7" width="51" height="21"/>
+                            <rect key="frame" x="16" y="7" width="51" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -140,32 +140,44 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwt-JT-gXG">
                     <rect key="frame" x="0.0" y="306" width="600" height="88"/>
                     <subviews>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-gO-FDX">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-gO-FDX">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
                             <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="  微信">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.81176470588235294" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ck-kl-52C" userLabel="朋友圈">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ck-kl-52C" userLabel="朋友圈">
                             <rect key="frame" x="301" y="0.0" width="299" height="44"/>
                             <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="  朋友圈">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.81176470590000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afu-o1-vqE">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afu-o1-vqE">
                             <rect key="frame" x="0.0" y="45" width="300" height="43"/>
                             <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="  微博">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.81176470590000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oz-0G-BM2">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oz-0G-BM2">
                             <rect key="frame" x="301" y="45" width="299" height="43"/>
                             <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="  QQ">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="1" green="0.81176470590000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                     </subviews>
@@ -194,6 +206,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jX-GA-Ja6">
+                    <rect key="frame" x="10" y="550" width="580" height="40"/>
+                    <color key="backgroundColor" red="0.99607843137254903" green="0.80000000000000004" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="PTq-NZ-I43"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="O K">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -208,8 +231,11 @@
                 <constraint firstItem="NDn-kl-5ea" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="PfM-rs-Bmt"/>
                 <constraint firstAttribute="trailing" secondItem="xwt-JT-gXG" secondAttribute="trailing" id="PnQ-gG-r1e"/>
                 <constraint firstItem="inc-JD-hd2" firstAttribute="top" secondItem="trc-6c-s4e" secondAttribute="bottom" id="QQb-zR-hqh"/>
+                <constraint firstAttribute="bottom" secondItem="4jX-GA-Ja6" secondAttribute="bottom" constant="10" id="Wed-9z-c3Q"/>
+                <constraint firstItem="4jX-GA-Ja6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="XfI-ra-FpZ"/>
                 <constraint firstAttribute="trailing" secondItem="4Rb-nm-BwM" secondAttribute="trailing" id="Z2a-PU-ebj"/>
                 <constraint firstItem="4Rb-nm-BwM" firstAttribute="top" secondItem="inc-JD-hd2" secondAttribute="bottom" id="ZIk-wk-EUQ"/>
+                <constraint firstAttribute="trailing" secondItem="4jX-GA-Ja6" secondAttribute="trailing" constant="10" id="bMx-Rc-kkd"/>
                 <constraint firstItem="NDn-kl-5ea" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fRw-87-tg4"/>
                 <constraint firstItem="trc-6c-s4e" firstAttribute="top" secondItem="NDn-kl-5ea" secondAttribute="bottom" id="njy-3P-2iA"/>
                 <constraint firstItem="ZKF-p6-6OR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rVE-hP-gYm"/>

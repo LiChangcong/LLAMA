@@ -25,6 +25,8 @@
 //#import "TMAccountSecurityController.h"
 #import "LLAAccountSecurityController.h"
 
+#import "LLAUserAgreementViewController.h"
+
 static const NSInteger accountSaftySectionIndex = 0;
 static const NSInteger mainInfoSaftySectionIndex = 1;
 static const NSInteger logoutSection = 2;
@@ -201,17 +203,26 @@ static const CGFloat logoutHeaderHeight = 28;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0) {
-//        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
-//        [self.navigationController pushViewController:accountSecurity animated:YES];
-        
-        LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
-        [self.navigationController pushViewController:accountSecurity animated:YES];
-        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
-//        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
-//        [self.navigationController pushViewController:accountSecurity animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            //        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
+            //        [self.navigationController pushViewController:accountSecurity animated:YES];
+            
+            LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
+            [self.navigationController pushViewController:accountSecurity animated:YES];
+            
+            //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
+            //        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
+            //        [self.navigationController pushViewController:accountSecurity animated:YES];
+        }
+    }else if(indexPath.section == 1){
+        if (indexPath.row == 2) {
+            
+            LLAUserAgreementViewController *userAgreement = [[LLAUserAgreementViewController alloc] init];
+            [self.navigationController pushViewController:userAgreement animated:YES];
+        }
     }
+
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
