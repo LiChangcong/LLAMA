@@ -84,19 +84,47 @@
 
 - (void) weChatFriendClicked:(UIButton *) sender {
     _weChatFriend.selected = !_weChatFriend.selected;
+    
+    if (_weChatFriend.selected) {
+        _weChatFriend.backgroundColor = [UIColor colorWithHex:0x555555];
+    }else {
+        _weChatFriend.backgroundColor = [UIColor colorWithHex:0xcfcfcf];
+    }
+
 }
 
 - (void) weChatTimeLineClicked:(UIButton *) sender {
     _weChatTimeLine.selected = !_weChatTimeLine.selected;
+    
+    if (_weChatTimeLine.selected) {
+        _weChatTimeLine.backgroundColor = [UIColor colorWithHex:0x555555];
+    }else {
+        _weChatTimeLine.backgroundColor = [UIColor colorWithHex:0xcfcfcf];
+    }
+
 }
 
 - (void) sinaWeiBoClicked:(UIButton *) sender {
     _sinaWeiBo.selected = !_sinaWeiBo.selected;
+    
+    if (_sinaWeiBo.selected) {
+        _sinaWeiBo.backgroundColor = [UIColor colorWithHex:0x555555];
+    }else {
+        _sinaWeiBo.backgroundColor = [UIColor colorWithHex:0xcfcfcf];
+    }
+
 }
 
 
 - (void) qqFriendClicked:(UIButton *) sender {
     _qqFriend.selected = !_qqFriend.selected;
+    
+    if (_qqFriend.selected) {
+        _qqFriend.backgroundColor = [UIColor colorWithHex:0x555555];
+    }else {
+        _qqFriend.backgroundColor = [UIColor colorWithHex:0xcfcfcf];
+    }
+
 }
 
 - (void)backButtonClick
