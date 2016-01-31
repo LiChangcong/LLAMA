@@ -34,7 +34,9 @@ static const CGFloat loveSuccessDefaultDuration = 0.4;
     HUD.margin = 10.f;
     HUD.yOffset = offset;
     HUD.removeFromSuperViewOnHide = YES;
+    HUD.userInteractionEnabled = NO;
     [HUD hide:YES afterDelay:duration];
+    
     
     return HUD;
 

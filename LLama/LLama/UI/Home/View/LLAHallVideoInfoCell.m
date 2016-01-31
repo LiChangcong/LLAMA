@@ -270,6 +270,7 @@ static const CGFloat scriptLabelFontSize = 13;
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     videoPlayerView.hidden = YES;
+    videoPlayerView.delegate = delegate;
     [self.contentView addSubview:videoPlayerView];
     
     // 点赞按钮

@@ -171,6 +171,16 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
         LLAScriptHallItemInfo *info = [LLAScriptHallItemInfo parseJsonWithDic:responseObject];
         if (info) {
             scriptInfo = info;
+            //
+            if (info.choosedUserIdString) {
+                for (LLAUser *user in info.partakeUsersArray) {
+                    if ([user.userIdString isEqualToString:info.choosedUserIdString]) {
+                        user.hasBeenSelected = YES;
+                        break;
+                    }
+                }
+            }
+            
             [dataCollectionView reloadData];
         }
         

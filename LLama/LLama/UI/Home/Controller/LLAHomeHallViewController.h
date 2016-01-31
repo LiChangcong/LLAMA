@@ -8,7 +8,15 @@
 
 #import "LLACommonViewController.h"
 
+@protocol LLAHomeHallViewControllerDelegate <NSObject>
+
+- (BOOL) shouldPlayVideo;
+
+@end
+
 @interface LLAHomeHallViewController : LLACommonViewController
+
+@property(nonatomic , weak) id<LLAHomeHallViewControllerDelegate> delegate;
 
 - (void) stopAllVideo;
 

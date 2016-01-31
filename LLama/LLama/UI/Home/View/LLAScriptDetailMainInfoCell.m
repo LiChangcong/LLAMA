@@ -628,9 +628,9 @@ static NSString *const countingImageName = @"clock";
         {
             if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
                 //director
-                normalString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
-                highlightString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
-                disabledString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                normalString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                highlightString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                disabledString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
                 
                 normalImage = [UIImage llaImageWithName:countingImageName];
                 highlighImage = [UIImage llaImageWithName:countingImageName];
@@ -640,17 +640,17 @@ static NSString *const countingImageName = @"clock";
                 
             }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
                 //actor
-                normalString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
-                highlightString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
-                disabledString = [NSString stringWithFormat:@"%lld 上传视频",currentScriptInfo.timeOutInterval];
+                normalString = [NSString stringWithFormat:@"%@ 上传视频",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                highlightString = [NSString stringWithFormat:@"%@ 上传视频",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                disabledString = [NSString stringWithFormat:@"%@ 上传视频",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
                 
                 buttonEnabled = YES;
                 
             }else {
                 //passer
-                normalString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
-                highlightString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
-                disabledString = [NSString stringWithFormat:@"%lld 演员拍摄中",currentScriptInfo.timeOutInterval];
+                normalString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                highlightString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
+                disabledString = [NSString stringWithFormat:@"%@ 演员拍摄中",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
                 
                 normalImage = [UIImage llaImageWithName:countingImageName];
                 highlighImage = [UIImage llaImageWithName:countingImageName];

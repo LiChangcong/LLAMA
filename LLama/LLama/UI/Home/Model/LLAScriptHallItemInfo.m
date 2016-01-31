@@ -87,4 +87,18 @@
     
 }
 
+#pragma mark - format String
+
++ (NSString *) timeIntervalToFormatString:(long long) timeOutInterval {
+    
+    if (timeOutInterval > 3600) {
+        NSString *formatedString = [NSString stringWithFormat:@"%02lld:%02lld:%02lld",timeOutInterval /3600,(timeOutInterval % 3600)/60,(timeOutInterval % 60)];
+        return formatedString;
+    }else {
+       NSString *formatedString = [NSString stringWithFormat:@"%02lld:%02lld",(timeOutInterval % 3600)/60,(timeOutInterval % 60)];
+        return formatedString;
+    }
+    
+}
+
 @end
