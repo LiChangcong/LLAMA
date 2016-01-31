@@ -205,7 +205,7 @@
     // 导航栏左边按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"back" highImage:@"backH" target:self action:@selector(back)];
     // 导航栏右边按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"okyellow" highImage:@"okyellow" target:self action:@selector(finish)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"pickImage_Finish_Normal" highImage:@"pickImage_Finish_Highlight" target:self action:@selector(finish)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
 }
@@ -398,7 +398,7 @@
 
 - (void)camera
 {
-    NSLog(@"点击了拍照");
+//    NSLog(@"点击了拍照");
 //    ZLCameraViewController *cameraVc = [[ZLCameraViewController alloc] init];
 //    __weak typeof(self)weakSelf = self;
 //    __weak typeof(cameraVc)weakCameraVc = cameraVc;
@@ -430,6 +430,9 @@
         [self.navigationController presentViewController:controller animated:YES completion:^{
             
         }];
+    }else {
+    
+        NSLog(@"没有摄像头");
     }
 
 

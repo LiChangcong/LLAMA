@@ -53,8 +53,7 @@
         
         self.window.rootViewController = loginNavi;
     }
-
-
+    
     
     return YES;
 }

@@ -202,6 +202,7 @@
         
         ZLPhotoAssets *asset = self.assets[0];
 //    [self.ChooseHeadImageButton setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        choosedImage = asset.aspectRatioImage;
         [self.ChooseHeadImageButton setImage:asset.aspectRatioImage forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
         
@@ -214,6 +215,7 @@
         ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
 //        [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
+        choosedImage = ima;
         [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
         
