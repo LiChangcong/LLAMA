@@ -213,8 +213,8 @@
                                         icon:[UIApplicationShortcutIcon iconWithType:
                                               UIApplicationShortcutIconTypeMessage]
                                         userInfo:nil];
-    
-    [UIApplication sharedApplication].shortcutItems = @[item1,item2];
+    if (item1 && item2)
+        [UIApplication sharedApplication].shortcutItems = @[item1,item2];
 }
 
 @end
