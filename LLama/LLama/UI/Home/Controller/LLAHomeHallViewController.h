@@ -10,4 +10,8 @@
 
 @interface LLAHomeHallViewController : LLACommonViewController
 
+- (void) stopAllVideo;
+
+- (void) startPlayVideo;
+
 @end

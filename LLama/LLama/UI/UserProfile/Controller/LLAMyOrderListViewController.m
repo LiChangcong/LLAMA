@@ -276,7 +276,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
         [params setValue:@"DIRECTOR" forKey:@"type"];
     }
     
-    [LLAHttpUtil httpPostWithUrl:@"/user/getMyOrders" param:params responseBlock:^(id responseObject) {
+    [LLAHttpUtil httpPostWithUrl:@"/play/getMyOrders" param:params responseBlock:^(id responseObject) {
         
         [dataCollectionView.infiniteScrollingView stopAnimating];
         
@@ -293,6 +293,8 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
             mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
             
             [dataCollectionView reloadData];
+        }else {
+            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {

@@ -76,6 +76,9 @@
 		5C9353B71C5DC2C800DD75DC /* LLAUploadVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353B61C5DC2C800DD75DC /* LLAUploadVideoProgressView.m */; };
 		5C9353BA1C5DC7B400DD75DC /* LLAUploadVideoShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353B91C5DC7B400DD75DC /* LLAUploadVideoShareManager.m */; };
 		5C9353BE1C5DE64500DD75DC /* LLAPickVideoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353BD1C5DE64500DD75DC /* LLAPickVideoNavigationController.m */; };
+		5C9353C11C5E0C4F00DD75DC /* UIViewController+IsVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353C01C5E0C4F00DD75DC /* UIViewController+IsVisible.m */; };
+		5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353C31C5E18AB00DD75DC /* LLAVideoCommentViewController.m */; };
+		5C9353C71C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353C61C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m */; };
 		5CA18F761C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA18F751C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m */; };
 		5CA18FA81C4F6C9100A0B5B7 /* lla_Loading_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18F781C4F6C9100A0B5B7 /* lla_Loading_1.png */; };
 		5CA18FA91C4F6C9100A0B5B7 /* lla_Loading_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18F791C4F6C9100A0B5B7 /* lla_Loading_10.png */; };
@@ -531,6 +534,12 @@
 		5C9353BB1C5DD71800DD75DC /* LLAUploadVideoObserverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadVideoObserverProtocol.h; sourceTree = "<group>"; };
 		5C9353BC1C5DE64500DD75DC /* LLAPickVideoNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickVideoNavigationController.h; sourceTree = "<group>"; };
 		5C9353BD1C5DE64500DD75DC /* LLAPickVideoNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickVideoNavigationController.m; sourceTree = "<group>"; };
+		5C9353BF1C5E0C4F00DD75DC /* UIViewController+IsVisible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+IsVisible.h"; sourceTree = "<group>"; };
+		5C9353C01C5E0C4F00DD75DC /* UIViewController+IsVisible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+IsVisible.m"; sourceTree = "<group>"; };
+		5C9353C21C5E18AB00DD75DC /* LLAVideoCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentViewController.h; sourceTree = "<group>"; };
+		5C9353C31C5E18AB00DD75DC /* LLAVideoCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentViewController.m; sourceTree = "<group>"; };
+		5C9353C51C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentMainInfo.h; sourceTree = "<group>"; };
+		5C9353C61C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentMainInfo.m; sourceTree = "<group>"; };
 		5CA18F741C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		5CA18F751C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		5CA18F781C4F6C9100A0B5B7 /* lla_Loading_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lla_Loading_1.png; sourceTree = "<group>"; };
@@ -1590,6 +1599,8 @@
 				5CE0FF6E1C4A1F0000991394 /* LLAScriptHallItemInfo.m */,
 				5CE0FF701C4A315B00991394 /* LLAScriptHallMainInfo.h */,
 				5CE0FF711C4A315B00991394 /* LLAScriptHallMainInfo.m */,
+				5C9353C51C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.h */,
+				5C9353C61C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1879,6 +1890,8 @@
 				5CE646BD1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m */,
 				5CE646BF1C44CB5B004DA6D5 /* UIImageView+LLAImageCache.h */,
 				5CE646C01C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m */,
+				5C9353BF1C5E0C4F00DD75DC /* UIViewController+IsVisible.h */,
+				5C9353C01C5E0C4F00DD75DC /* UIViewController+IsVisible.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2090,6 +2103,8 @@
 				5CDF7A501C4BC7A3000CABB0 /* LLAScriptDetailViewController.m */,
 				5CED5E801C4BC97D003E09CF /* LLAVideoDetailViewController.h */,
 				5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */,
+				5C9353C21C5E18AB00DD75DC /* LLAVideoCommentViewController.h */,
+				5C9353C31C5E18AB00DD75DC /* LLAVideoCommentViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2767,6 +2782,7 @@
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
+				5C9353C71C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m in Sources */,
 				5CBF9AA51C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m in Sources */,
 				5C6D7A421C58B73200119A3A /* SCPlayer.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
@@ -2922,6 +2938,7 @@
 				5CC696D01C5CDEA100E4BA89 /* base64.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
+				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,
 				5C6D7A361C58B73200119A3A /* SCAudioConfiguration.m in Sources */,
 				5CE646C41C44D1B3004DA6D5 /* UIColor+LLACustomColor.m in Sources */,
 				A3DEDD661C3CAE38009F3D37 /* UIView+TMExtension.m in Sources */,
@@ -2942,6 +2959,7 @@
 				A3DEDD9A1C3CAE38009F3D37 /* MTLJSONAdapter.m in Sources */,
 				7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */,
 				A3DEDD8D1C3CAE38009F3D37 /* TMNavigationController.m in Sources */,
+				5C9353C11C5E0C4F00DD75DC /* UIViewController+IsVisible.m in Sources */,
 				5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */,
 				7E0607261C5E05D50089329D /* ZLPhotoAssets.m in Sources */,
 				5CE0EB8C1C46424300C6BC79 /* NSMutableAttributedString+TY.m in Sources */,

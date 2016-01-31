@@ -168,8 +168,9 @@
             mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
             
             [dataTableView reloadData];
+        }else {
+            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
         }
-        
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         

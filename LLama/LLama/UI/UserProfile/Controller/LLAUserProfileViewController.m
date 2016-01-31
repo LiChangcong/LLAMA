@@ -114,6 +114,20 @@ static const CGFloat navigationBarHeight = 64;
     [self loadData];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //play
+    [self startPlayVideo];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self stopAllVideo];
+}
+
+
 #pragma mark - Init
 
 - (void) initNavigationItems {
@@ -132,6 +146,7 @@ static const CGFloat navigationBarHeight = 64;
     customNaviBar.clipsToBounds = YES;
     customNaviBar.layer.masksToBounds = YES;
 
+    [customNaviBar makeBackgroundClear:YES];
     [self.view addSubview:customNaviBar];
     
     [customNaviBar layoutIfNeeded];
@@ -149,9 +164,9 @@ static const CGFloat navigationBarHeight = 64;
     
    __weak typeof(self) weakSelf = self;
 //    
-//    [dataTableView addPullToRefreshWithActionHandler:^{
-//        [weakSelf loadData];
-//    }];
+    [dataTableView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadData];
+    }];
     
     [dataTableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMoreData];
@@ -205,13 +220,27 @@ static const CGFloat navigationBarHeight = 64;
     
     NSMutableDictionary *userParams = [NSMutableDictionary dictionary];
     
-    [userParams setValue:uIdString forKey:@"id"];
+    NSString *urlString = @"/user/getUserInfoByUid";
     
-    [LLAHttpUtil httpPostWithUrl:@"/user/getUserInfoByUid" param:userParams responseBlock:^(id responseObject) {
+    if (type == UserProfileControllerType_CurrentUser) {
+        urlString = @"/user/getUserInfo";
+    }else {
+        urlString = @"/user/getUserInfoByUid";
+        [userParams setValue:uIdString forKey:@"id"];
+    }
+    
+    
+    [LLAHttpUtil httpPostWithUrl:urlString param:userParams responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
+        if (type == UserProfileControllerType_CurrentUser) {
+            mainInfo.userInfo = [LLAUser parseJsonWidthDic:[responseObject valueForKey:@"user"]];
+            [LLAUser updateUserInfo:mainInfo.userInfo];
+            
+        }else {
         
-        mainInfo.userInfo = [LLAUser parseJsonWidthDic:responseObject];
+            mainInfo.userInfo = [LLAUser parseJsonWidthDic:responseObject];
+        }
         
         [dataTableView reloadData];
         
@@ -234,7 +263,9 @@ static const CGFloat navigationBarHeight = 64;
         [LLAHttpUtil httpPostWithUrl:@"/play/getPlayByUser" param:videoParams responseBlock:^(id responseObject) {
             
             [HUD hide:YES];
-            
+            //
+            [dataTableView.pullToRefreshView stopAnimating];
+            //
             LLAHallMainInfo *info = [LLAHallMainInfo parseJsonWithDic:responseObject];
             
             if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {
@@ -247,14 +278,19 @@ static const CGFloat navigationBarHeight = 64;
             
             [dataTableView reloadData];
             
+            //play
+            [self startPlayVideo];
+            
         } exception:^(NSInteger code, NSString *errorMessage) {
             
             [HUD hide:YES];
+            [dataTableView.pullToRefreshView stopAnimating];
             [LLAViewUtil showAlter:self.view withText:errorMessage];
             
         } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
             
             [HUD hide:YES];
+            [dataTableView.pullToRefreshView stopAnimating];
             [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         }];
         
@@ -263,11 +299,13 @@ static const CGFloat navigationBarHeight = 64;
         
         [HUD hide:NO];
         [LLAViewUtil showAlter:self.view withText:errorMessage];
+        [dataTableView.pullToRefreshView stopAnimating];
         
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
         
         [HUD hide:NO];
         [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        [dataTableView.pullToRefreshView stopAnimating];
         
     }];
     
@@ -305,6 +343,10 @@ static const CGFloat navigationBarHeight = 64;
         }else {
             
             [mainInfo.actorVideoArray addObjectsFromArray:info.dataList];
+        }
+        
+        if (info.dataList.count < 1) {
+            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
         }
         
         [dataTableView reloadData];
@@ -684,10 +726,6 @@ static const CGFloat navigationBarHeight = 64;
 
 #pragma mark - UIScrollViewDelegate
 
-- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    //
-}
-
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (scrollView.contentOffset.y > 2 * navigationBarHeight) {
@@ -699,6 +737,64 @@ static const CGFloat navigationBarHeight = 64;
     }
     
 }
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    //get the index
+    
+    
+    id <LLACellPlayVideoProtocol> playCell = nil;
+    
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    CGFloat maxHeight = 0;
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            CGRect playerFrame = tc.videoPlayerView.bounds;
+            
+            CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
+            
+            CGFloat heightInWindow =  0;
+            
+            if (subViewFrame.origin.y < scrollView.contentOffset.y) {
+                heightInWindow = subViewFrame.origin.y+subViewFrame.size.height-scrollView.contentOffset.y;
+            }else if(subViewFrame.origin.y+subViewFrame.size.height > scrollView.contentOffset.y+scrollView.bounds.size.height) {
+                heightInWindow = scrollView.contentOffset.y+scrollView.bounds.size.height-subViewFrame.origin.y;
+                
+            }else {
+                heightInWindow = subViewFrame.size.height;
+            }
+            
+            
+            if (heightInWindow >= maxHeight) {
+                maxHeight = heightInWindow;
+                playCell = tc;
+            }
+        }
+    }
+    
+    //
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            if (tc == playCell) {
+                playCell.videoPlayerView.playingVideoInfo = playCell.shouldPlayVideoInfo;
+                [playCell.videoPlayerView playVideo];
+            }else {
+                [tc.videoPlayerView stopVideo];
+            }
+            
+        }
+    }
+    
+}
+
 
 #pragma mark - LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,
 
@@ -761,11 +857,35 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) userHeadViewClickedWithUserInfo:(LLAUser *) userInfo itemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
     
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
 }
 /**
  *  点赞按钮点击
  */
 - (void) loveVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo loveButton:(UIButton *)loveButton {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:videoItemInfo.scriptID forKey:@"playId"];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/play/zan" param:params responseBlock:^(id responseObject) {
+        
+        //
+        [LLAViewUtil showLoveSuccessAnimationInView:self.view fromView:loveButton.imageView duration:0 compeleteBlock:^(BOOL finished) {
+            videoItemInfo.hasPraised = YES;
+            videoItemInfo.praiseNumbers ++;
+            [dataTableView reloadData];
+        }];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
+    
     
 }
 /**
@@ -788,7 +908,12 @@ static const CGFloat navigationBarHeight = 64;
 }
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
-
+    
+    if (userInfo.userIdString.length > 0) {
+    
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
 }
 
 #pragma mark - LLAPickVideoNavigationControllerDelegate
@@ -802,6 +927,31 @@ static const CGFloat navigationBarHeight = 64;
 - (void) videoPickerDidCancelPick:(LLAPickVideoNavigationController *)videoPicker {
     
 }
+
+
+#pragma mark - Start Stop Video
+
+#pragma mark - Public Method
+
+- (void) stopAllVideo {
+    
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            [tc.videoPlayerView stopVideo];
+        }
+    }
+    
+}
+
+- (void) startPlayVideo {
+    
+    [self scrollViewDidEndDecelerating:dataTableView];
+}
+
 
 
 @end

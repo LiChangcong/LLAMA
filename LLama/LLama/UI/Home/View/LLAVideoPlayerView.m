@@ -26,7 +26,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     
     id playerTimeObserver;
     
-    LLALoadingView *HUD;
+    UIActivityIndicatorView *loadingIndicator;
 }
 
 @property(nonatomic , assign , readwrite) BOOL isPlaying;
@@ -37,6 +37,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 @synthesize playingVideoInfo;
 @synthesize isPlaying;
+@synthesize delegate;
 
 #pragma mark - Life Cycle
 
@@ -68,6 +69,8 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     //
     videoPlayerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
+    loadingIndicator.center = self.center;
+    
 }
 
 #pragma mark - Init
@@ -82,7 +85,11 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         [self initAVPlayer];
         [self initPlayerLayer];
         
-        [LLAViewUtil addLLALoadingViewToView:self];
+        loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        loadingIndicator.hidesWhenStopped = YES;
+        
+        [self addSubview:loadingIndicator];
+        
     }
     return self;
 }
@@ -158,14 +165,14 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         
         switch (videoPlayer.status) {
             case AVPlayerStatusFailed:
-                [HUD hide:YES];
+                [loadingIndicator stopAnimating];
                 break;
             case AVPlayerStatusReadyToPlay:
-                [HUD hide:YES];
+                [loadingIndicator stopAnimating];
                 break;
             case AVPlayerStatusUnknown:
                 //
-                [HUD show:YES];
+                [loadingIndicator startAnimating];
                 break;
                 
             default:
@@ -173,7 +180,11 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         }
         
     }else if(context == AVPlayerRateObservationContext) {
-        
+        if (videoPlayer.rate > 0) {
+            [loadingIndicator stopAnimating];
+        }else {
+            [loadingIndicator startAnimating];
+        }
     }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -201,7 +212,6 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         return;
     }else {
         [videoPlayer play];
-        [HUD show:YES];
     }
     self.hidden = NO;
 }

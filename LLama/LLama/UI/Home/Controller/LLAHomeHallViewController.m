@@ -66,6 +66,19 @@
     
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //play
+    [self startPlayVideo];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self stopAllVideo];
+}
+
 #pragma mark - Init
 // 设置导航栏
 - (void) initNaviItems {
@@ -165,7 +178,12 @@
         if (tempInfo){
             mainInfo = tempInfo;
             [dataTableView reloadData];
+            //
+            [self startPlayVideo];
         }
+        
+        
+        
     } exception:^(NSInteger code, NSString *errorMessage) {
         
         [HUD hide:NO];
@@ -208,6 +226,8 @@
             mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
         
             [dataTableView reloadData];
+        }else {
+            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
         }
         
         
@@ -267,6 +287,13 @@
 
 - (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if ([cell conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+        
+        UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)cell;
+        
+        [tc.videoPlayerView stopVideo];
+    }
+    
 }
 
 
@@ -283,28 +310,53 @@
     
     id <LLACellPlayVideoProtocol> playCell = nil;
     
-        NSArray *visibleCells = [dataTableView visibleCells];
+    NSArray *visibleCells = [dataTableView visibleCells];
     
-        for (UITableViewCell* tempCell in visibleCells) {
-            if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+    CGFloat maxHeight = 0;
     
-                UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            CGRect playerFrame = tc.videoPlayerView.bounds;
+            
+            CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
+            
+            CGFloat heightInWindow =  0;
+            
+            if (subViewFrame.origin.y < scrollView.contentOffset.y) {
+                heightInWindow = subViewFrame.origin.y+subViewFrame.size.height-scrollView.contentOffset.y;
+            }else if(subViewFrame.origin.y+subViewFrame.size.height > scrollView.contentOffset.y+scrollView.bounds.size.height) {
+                heightInWindow = scrollView.contentOffset.y+scrollView.bounds.size.height-subViewFrame.origin.y;
                 
-                CGRect playerFrame = tc.videoPlayerView.frame;
-                
-                CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
-    
-                if (subViewFrame.origin.y >= scrollView.contentOffset.y && subViewFrame.origin.y+tc.videoPlayerView.frame.size.height <= scrollView.contentOffset.y + scrollView.frame.size.height) {
-                    playCell = tc;
-                }else {
-                    [tc.videoPlayerView stopVideo];
-                }
+            }else {
+                heightInWindow = subViewFrame.size.height;
+            }
+            
+            
+            if (heightInWindow >= maxHeight) {
+                maxHeight = heightInWindow;
+                playCell = tc;
             }
         }
+    }
     
-    playCell.videoPlayerView.playingVideoInfo = playCell.shouldPlayVideoInfo;
-    [playCell.videoPlayerView playVideo];
-
+    //
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            if (tc == playCell) {
+                playCell.videoPlayerView.playingVideoInfo = playCell.shouldPlayVideoInfo;
+                [playCell.videoPlayerView playVideo];
+            }else {
+                [tc.videoPlayerView stopVideo];
+            }
+            
+        }
+    }
     
 }
 
@@ -312,27 +364,51 @@
 
 - (void) userHeadViewClickedWithUserInfo:(LLAUser *) userInfo itemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
     
-    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
-    [self.navigationController pushViewController:userProfile animated:YES];
+    [self pushToUserProfile:userInfo];
 }
 
 - (void) loveVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo loveButton:(UIButton *)loveButton {
-
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:videoItemInfo.scriptID forKey:@"playId"];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/play/zan" param:params responseBlock:^(id responseObject) {
+        
+        //
+        [LLAViewUtil showLoveSuccessAnimationInView:self.view fromView:loveButton.imageView duration:0 compeleteBlock:^(BOOL finished) {
+            videoItemInfo.hasPraised = YES;
+            videoItemInfo.praiseNumbers ++;
+            [dataTableView reloadData];
+        }];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
+    
 }
 
 - (void) commentVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
-
+    [self pushToCommentViewControllerWithInfo:videoItemInfo];
 }
 
 - (void) shareVideoWithVideoItemInfo:(LLAHallVideoItemInfo *)videoItemInfo {
 
 }
 
-- (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) vieoItemInfo {
-    
+- (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
+    [self pushToCommentViewControllerWithInfo:videoItemInfo];
 }
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
+    
+    if (userInfo.userIdString.length > 0) {
+        [self pushToUserProfile:userInfo];
+    }
     
 }
 
@@ -345,6 +421,40 @@
 
 - (void) uploadVideoFailed:(LLAUploadVideoProgressView *)progressView {
     
+}
+
+#pragma mark - Private Method
+
+- (void) pushToUserProfile:(LLAUser *) user {
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:user.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
+    
+}
+
+- (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) itemInfo {
+    
+}
+
+#pragma mark - Public Method
+
+- (void) stopAllVideo {
+    
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            [tc.videoPlayerView stopVideo];
+        }
+    }
+    
+}
+
+- (void) startPlayVideo {
+    
+    [self scrollViewDidEndDecelerating:dataTableView];
 }
 
 @end

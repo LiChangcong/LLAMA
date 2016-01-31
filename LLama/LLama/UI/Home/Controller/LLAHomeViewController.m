@@ -44,6 +44,12 @@
     [self initSubViews];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self scrollViewDidScroll:contentScrollView];
+}
+
 #pragma mark - Init
 // 设置状态栏
 - (void) initNaviBarItems {
@@ -173,15 +179,30 @@
 // 点击了顶部标题view按钮跳到不同子控制器
 - (void) titleView:(LLAHomeTitleView *)titleView didSelectedIndex:(NSInteger)index {
     [contentScrollView setContentOffset:CGPointMake(self.view.frame.size.width*index, contentScrollView.contentOffset.y) animated:YES];
+    
 }
 
 #pragma mark - UIScrollViewDelegate
 
 // 滑动scrollView时候调用
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat propotion = scrollView.contentOffset.x / scrollView.frame.size.width;
+    CGFloat propotion = (scrollView.contentOffset.x) / scrollView.frame.size.width;
     
     [titleView scrollWithProportion:propotion];
+    
+    NSInteger selectedIndex = (NSInteger)((scrollView.contentOffset.x+scrollView.bounds.size.width/2) /scrollView.frame.size.width);
+    
+    [self handlePlayWithIndex:selectedIndex];
+}
+
+#pragma mark - handle play stop
+
+- (void) handlePlayWithIndex:(NSInteger) index {
+    if (index == 0) {
+        [hallController startPlayVideo];
+    }else {
+        [hallController stopAllVideo];
+    }
 }
 
 @end

@@ -10,7 +10,19 @@
 
 @class LLAVideoInfo;
 
+@class LLAVideoPlayerView;
+
+@protocol LLAVideoPlayerViewDelegate <NSObject>
+
+- (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView;
+
+- (void) playerViewTappToPause:(LLAVideoPlayerView *)playerView;
+
+@end
+
 @interface LLAVideoPlayerView : UIView
+
+@property(nonatomic , weak) id<LLAVideoPlayerViewDelegate> delegate;
 
 @property(nonatomic , assign , readonly) BOOL isPlaying;
 

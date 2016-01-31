@@ -14,6 +14,9 @@
 //默认请求条数
 #define LLA_LOAD_DATA_DEFAULT_NUMBERS 20
 
+//no more
+#define LLA_LOAD_DATA_NO_MORE_TIPS @"没有更多了"
+
 #define LLAInitVariables(className)  \
 - (void)initVariables##className
 
