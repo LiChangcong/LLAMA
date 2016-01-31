@@ -158,7 +158,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:[personDescriptionLabel(<=40)]-(0)-|"
+      constraintsWithVisualFormat:@"V:[personDescriptionLabel(<=40)]-(2)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(personDescriptionLabel)]];
@@ -178,7 +178,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       toItem:personDescriptionLabel
       attribute:NSLayoutAttributeHeight
       multiplier:1.0
-      constant:0]];
+      constant:4]];
     //
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint

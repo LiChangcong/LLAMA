@@ -8,6 +8,7 @@
 
 //controller
 #import "LLAEditVideoViewController.h"
+#import "LLAPickVideoNavigationController.h"
 
 //view
 #import "LLAEditVideoTopToolBar.h"
@@ -24,6 +25,7 @@
 
 //
 #import "LLAUploadFileUtil.h"
+
 
 static const CGFloat topBarHeight = 70;
 
@@ -214,7 +216,6 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     //
     
-    
     CGFloat assetDuration = CMTimeGetSeconds(editAsset.duration);
     
     exportSession.outputUrl = [SCRecorder sharedRecorder].session.outputUrl;
@@ -230,7 +231,16 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
     
-
+    //get thumb image
+    
+    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:editAsset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    
+    CMTime actualTime;
+    
+    CGImageRef cgImage = [imageGenerator copyCGImageAtTime:startTime actualTime:&actualTime error:nil];
+    UIImage *thumbImage = [UIImage imageWithCGImage:cgImage];
+    
     LLALoadingView *loadingView = [LLAViewUtil addLLALoadingViewToView:self.view];
     [loadingView show:YES];
     
@@ -240,9 +250,20 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
             
             [loadingView hide:YES];
             
-            [exportSession.outputUrl saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
-                NSLog(@"error:%@",error);
-            }];
+//            [exportSession.outputUrl saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
+//                NSLog(@"error:%@",error);
+//            }];
+            
+            LLAPickVideoNavigationController *pick = (LLAPickVideoNavigationController *)self.navigationController;
+            
+            if ([pick isKindOfClass:[LLAPickVideoNavigationController class]]) {
+                
+                [pick dismissViewControllerAnimated:YES completion:^{
+                    if (pick.videoPickerDelegate && [pick.videoPickerDelegate respondsToSelector:@selector(videoPicker:didFinishPickVideo:thumbImage:)]) {
+                        [pick.videoPickerDelegate videoPicker:pick didFinishPickVideo:exportSession.outputUrl thumbImage:thumbImage];
+                    }
+                }];
+            }
             
             
         }else {

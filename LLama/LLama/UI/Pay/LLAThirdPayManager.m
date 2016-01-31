@@ -90,17 +90,7 @@ static
                            orderSpec, signedString, @"RSA"];
             
             [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                
-                BOOL success = NO;
-                if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
-                    success = YES;
-                }else {
-                    success = NO;
-                }
-                if (self.responseBlock) {
-                    self.responseBlock(success,nil);
-                    self.responseBlock = nil;
-                }
+                [self handleAlipayCallBackWithDic:resultDic];
             }];
         
         }
@@ -118,6 +108,21 @@ static
         req.package             = weChatPackage;
         
         [WXApi sendReq:req];
+    }
+    
+}
+
+- (void) handleAlipayCallBackWithDic:(NSDictionary *) resultDic {
+    
+    LLAThirdPayResponseStatus statusCode;
+    if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
+        statusCode = LLAThirdPayResponseStatus_Success;
+    }else {
+        statusCode = LLAThirdPayResponseStatus_Failed;
+    }
+    if (self.responseBlock) {
+        self.responseBlock(statusCode,nil);
+        self.responseBlock = nil;
     }
     
 }

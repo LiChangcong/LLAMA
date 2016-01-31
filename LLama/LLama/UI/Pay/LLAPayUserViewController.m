@@ -14,6 +14,7 @@
 #import "LLALoadingView.h"
 #import "LLAPayUserInfoCollectionCell.h"
 #import "LLAPayUserPayTypeCell.h"
+#import "LLAPayUserPaySuccessView.h"
 
 //model
 #import "LLAPayUserPayTypeItem.h"
@@ -52,6 +53,8 @@ static const CGFloat payTypeCellsVerSpace = 8;
 @end
 
 @implementation LLAPayUserViewController
+
+@synthesize delegate;
 
 #pragma mark - Life Cycle
 
@@ -232,80 +235,101 @@ static const CGFloat payTypeCellsVerSpace = 8;
 
 - (void) choosePayType:(LLAPayUserPayTypeItem *)payTypeInfo {
     //
-    if (payTypeInfo.payType == LLAPayUserType_AccountBalance) {
     
+    LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD show:YES];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:payInfo.payToScriptIdString forKey:@"playId"];
+    [params setValue:payInfo.payToUser.userIdString forKey:@"userId"];
+
+    
+    if (payTypeInfo.payType == LLAPayUserType_AccountBalance) {
+        [params setValue:@"DEFAULT" forKey:@"payType"];
     }else if (payTypeInfo.payType == LLAPayUserType_Alipay) {
         
-        LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
-        HUD.removeFromSuperViewOnHide = YES;
-        [HUD show:YES];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        
-        [params setValue:payInfo.payToScriptIdString forKey:@"playId"];
-        [params setValue:payInfo.payToUser.userIdString forKey:@"userId"];
         [params setValue:@"ALIPAY" forKey:@"payType"];
-        
-        [LLAHttpUtil httpPostWithUrl:@"/play/choosePlay" param:params responseBlock:^(id responseObject) {
-            
-            [HUD hide:YES];
-            
-            
-            [[LLAThirdPayManager shareManager] payWithPayType:LLAThirdPayType_AliPay data:responseObject response:^(LLAThirdPayResponseStatus code, NSError *error) {
-                //response
-                NSLog(@"return code:%ld",code);
-            }];
-            
-        } exception:^(NSInteger code, NSString *errorMessage) {
-            
-            [HUD hide:YES];
-            [LLAViewUtil showAlter:self.view withText:errorMessage];
-            
-        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-            
-            [HUD hide:YES];
-            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
-            
-        }];
-
         
     }else if (payTypeInfo.payType == LLAPayUserType_WeChat) {
         //request
-        
-        LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
-        HUD.removeFromSuperViewOnHide = YES;
-        [HUD show:YES];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        
-        [params setValue:payInfo.payToScriptIdString forKey:@"playId"];
-        [params setValue:payInfo.payToUser.userIdString forKey:@"userId"];
         [params setValue:@"WX" forKey:@"payType"];
+    }
+    
+    [LLAHttpUtil httpPostWithUrl:@"/play/choosePlay" param:params responseBlock:^(id responseObject) {
         
-        [LLAHttpUtil httpPostWithUrl:@"/play/choosePlay" param:params responseBlock:^(id responseObject) {
+        [HUD hide:YES];
+        
+        if (payTypeInfo.payType == LLAPayUserType_AccountBalance) {
+            //balance
             
-            [HUD hide:YES];
+            CGFloat balance = [[responseObject valueForKey:@"balance"] floatValue] / 100.0;
             
+            LLAUser *me = [LLAUser me];
+            me.balance = balance;
             
-            [[LLAThirdPayManager shareManager] payWithPayType:LLAThirdPayType_WeChat data:responseObject response:^(LLAThirdPayResponseStatus code, NSError *error) {
+            [LLAUser updateUserInfo:me];
+            
+            //show success
+            [self showPaySuccessView];
+        
+        }else {
+            
+            LLAThirdPayType payType = LLAThirdPayType_AliPay;
+            if (payTypeInfo.payType == LLAPayUserType_WeChat) {
+                payType = LLAThirdPayType_WeChat;
+            }
+            
+            [[LLAThirdPayManager shareManager] payWithPayType:payType data:responseObject response:^(LLAThirdPayResponseStatus code, NSError *error) {
                 //response
-                NSLog(@"return code:%ld",code);
+                if (code == LLAThirdPayResponseStatus_Success) {
+                    // show success
+                    [self showPaySuccessView];
+                }else if (code == LLAThirdPayResponseStatus_Unknow) {
+                    //pop to pre and refresh
+                    if (delegate && [delegate respondsToSelector:@selector(refreshData)]) {
+                        [delegate refreshData];
+                    }
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             }];
             
-        } exception:^(NSInteger code, NSString *errorMessage) {
-            
-            [HUD hide:YES];
-            [LLAViewUtil showAlter:self.view withText:errorMessage];
-            
-        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-            
-            [HUD hide:YES];
-            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
-            
-        }];
+
+        }
         
         
-    }
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+    
+}
+
+//
+
+- (void) showPaySuccessView {
+    //
+    LLAPayUserPaySuccessView *paySuccess = [[LLAPayUserPaySuccessView alloc] init];
+    
+    paySuccess.hideCompletionBlock = ^ (MMPopupView *popupView) {
+        //pop to pre and refresh
+        if (delegate && [delegate respondsToSelector:@selector(refreshData)]) {
+            [delegate refreshData];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    };
+    
+    [paySuccess show];
 }
 
 @end

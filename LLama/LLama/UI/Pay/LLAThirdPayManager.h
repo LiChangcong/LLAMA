@@ -16,8 +16,9 @@ typedef NS_ENUM(NSInteger,LLAThirdPayType) {
 };
 
 typedef NS_ENUM(NSInteger,LLAThirdPayResponseStatus) {
-    LLAThirdPayResponseStatus_Failed = 0,
-    LLAThirdPayResponseStatus_Success = 1,
+    LLAThirdPayResponseStatus_Unknow = 0,
+    LLAThirdPayResponseStatus_Failed = 1,
+    LLAThirdPayResponseStatus_Success = 2,
 };
 
 typedef void(^LLAThirdPayResponseBlock)(LLAThirdPayResponseStatus code,NSError *error);
@@ -31,5 +32,7 @@ typedef void(^LLAThirdPayResponseBlock)(LLAThirdPayResponseStatus code,NSError *
 - (void) payResponseFromThirdPartyWithType:(LLAThirdPayType) payType
                               responseCode:(LLAThirdPayResponseStatus) code
                                      error:(NSError *) error;
+
+- (void) handleAlipayCallBackWithDic:(NSDictionary *) resultDic;
 
 @end

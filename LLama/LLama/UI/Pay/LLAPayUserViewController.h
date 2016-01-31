@@ -10,7 +10,15 @@
 
 @class LLAPayUserPayInfo;
 
+@protocol LLAPayUserViewControllerDelegate <NSObject>
+
+- (void) refreshData;
+
+@end
+
 @interface LLAPayUserViewController : LLACommonViewController
+
+@property(nonatomic , weak) id<LLAPayUserViewControllerDelegate> delegate;
 
 - (instancetype) initWithPayInfo:(LLAPayUserPayInfo *) info;
 

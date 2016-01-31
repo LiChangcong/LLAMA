@@ -15,6 +15,8 @@
 #import "LLALoadingView.h"
 #import "LLAVideoPlayerView.h"
 #import "LLAHallVideoInfoCell.h"
+
+#import "LLAUploadVideoProgressView.h"
 //category
 #import "SVPullToRefresh.h"
 
@@ -24,14 +26,18 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
+#import "LLAUploadVideoShareManager.h"
 
-@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate>
+@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate>
 {
     LLATableView *dataTableView;
     
     LLALoadingView *HUD;
     
     LLAHallMainInfo *mainInfo;
+    
+    //
+    LLAUploadVideoProgressView *videoProgressView;
 
 }
 
@@ -89,6 +95,18 @@
         [weakSelf loadMoreData];
     }];
     
+    //
+    videoProgressView = [[LLAUploadVideoProgressView alloc] init];
+    videoProgressView.translatesAutoresizingMaskIntoConstraints = NO;
+    videoProgressView.delegate = self;
+    videoProgressView.hidden = YES;
+    [self.view addSubview:videoProgressView];
+    
+    if (![LLAUploadVideoShareManager shareManager].uploadScriptVideoObserver) {
+        
+        [LLAUploadVideoShareManager shareManager].uploadScriptVideoObserver = videoProgressView;
+    }
+    
     //constraints
     
     // 添加约束
@@ -102,10 +120,25 @@
     
     [self.view addConstraints:
      [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(0)-[videoProgressView(progressHeight)]"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{@"progressHeight":@(LLAUploadVideoProgressViewHeight)}
+      views:NSDictionaryOfVariableBindings(videoProgressView)]];
+    
+    //
+    [self.view addConstraints:
+     [NSLayoutConstraint
       constraintsWithVisualFormat:@"H:|-(0)-[dataTableView]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
+    
+    [self.view addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[videoProgressView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(videoProgressView)]];
     
     // 菊花控件
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
@@ -300,6 +333,17 @@
 }
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
+    
+}
+
+#pragma mark - Progress Delegate
+
+- (void) uploadVideoFinished:(LLAUploadVideoProgressView *)progressView {
+    //
+    [dataTableView triggerPullToRefresh];
+}
+
+- (void) uploadVideoFailed:(LLAUploadVideoProgressView *)progressView {
     
 }
 

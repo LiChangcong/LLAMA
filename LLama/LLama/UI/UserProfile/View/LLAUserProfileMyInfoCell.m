@@ -11,6 +11,9 @@
 #import "LLAUserHeadView.h"
 #import "LLAUser.h"
 
+#import "LLAUploadVideoProgressView.h"
+#import "LLAUploadVideoShareManager.h"
+
 static const CGFloat headViewHeightWidth = 59;
 static const CGFloat headViewToUploadButtonVerSpace = 17;
 //static const CGFloat uploadButtonHeight = 23;
@@ -22,7 +25,7 @@ static const CGFloat descriptionToHorBorder = 45;
 static NSString *const uploadViewButtonImageName_Normal = @"userProfile_NewVideo_Normal";
 static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVideo_Highlight";
 
-@interface LLAUserProfileMyInfoCell()<LLAUserHeadViewDelegate>
+@interface LLAUserProfileMyInfoCell()<LLAUserHeadViewDelegate,LLAUploadVideoProgressViewDelegate>
 {
     //without video
     
@@ -37,6 +40,8 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     UIView *personDescriptionBackView;
     
     UILabel *personDescriptionLabel;
+    
+    LLAUploadVideoProgressView *videoProgressView;
     
     //
     UIColor *personDescriptionBackViewBKColor;
@@ -133,10 +138,23 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     personDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     personDescriptionLabel.font = personDescriptionLabelFont;
     personDescriptionLabel.textColor = personDescriptionLabelTextColor;
-    personDescriptionLabel.numberOfLines = 3;
+    //personDescriptionLabel.numberOfLines = 3;
     personDescriptionLabel.textAlignment = NSTextAlignmentCenter;
     
     [self.contentView addSubview:personDescriptionLabel];
+    
+    //
+    videoProgressView = [[LLAUploadVideoProgressView alloc] init];
+    videoProgressView.translatesAutoresizingMaskIntoConstraints = NO;
+    videoProgressView.delegate = self;
+    videoProgressView.hidden = YES;
+    [self.contentView addSubview:videoProgressView];
+    
+    if (![LLAUploadVideoShareManager shareManager].uploadUserVideoObserver) {
+        
+        [LLAUploadVideoShareManager shareManager].uploadUserVideoObserver = videoProgressView;
+    }
+
     
 }
 
@@ -175,7 +193,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:[personDescriptionLabel]-(0)-|"
+      constraintsWithVisualFormat:@"V:[personDescriptionLabel(<=40)]-(2)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(personDescriptionLabel)]];
@@ -195,7 +213,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       toItem:personDescriptionLabel
       attribute:NSLayoutAttributeHeight
       multiplier:1.0
-      constant:0]];
+      constant:4]];
     //
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -210,6 +228,13 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(videoPlayerView)]];
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:[videoProgressView(progressHeight)]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{@"progressHeight":@(LLAUploadVideoProgressViewHeight)}
+      views:NSDictionaryOfVariableBindings(videoProgressView)]];
     
     //horizonal
     
@@ -271,6 +296,13 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
       metrics:nil
       views:NSDictionaryOfVariableBindings(videoPlayerView)]];
     
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[videoProgressView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(videoProgressView)]];
+    
     
     [self.contentView addConstraints:constrArray];
 }
@@ -292,6 +324,19 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         [delegate headViewTapped:currentUser];
     }
 }
+
+#pragma mark - UploadVideoProgressViewDelegate
+
+- (void) uploadVideoFinished:(LLAUploadVideoProgressView *) progressView {
+    if (delegate && [delegate respondsToSelector:@selector(uploadVieoFinished:)]) {
+        [delegate uploadVieoFinished:currentUser];
+    }
+}
+
+- (void) uploadVideoFailed:(LLAUploadVideoProgressView *) progressView {
+
+}
+
 
 #pragma mark - update
 

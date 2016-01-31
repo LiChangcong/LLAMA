@@ -75,6 +75,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //
+    
+    //pay call back to deal with when
+    [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_Unknow responseCode:LLAThirdPayResponseStatus_Unknow error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -121,24 +125,15 @@
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             
-            LLAThirdPayResponseStatus status = LLAThirdPayResponseStatus_Failed;
-            if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
-                status = LLAThirdPayResponseStatus_Success;
-            }else {
-                status = LLAThirdPayResponseStatus_Failed;
-            }
-            [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_AliPay responseCode:status error:nil];
+            [[LLAThirdPayManager shareManager] handleAlipayCallBackWithDic:resultDic];
         }];
     }
-    if ([url.host isEqualToString:@"platformapi"]){ //支付宝钱包快登授权返回 authCode
+    if ([url.host isEqualToString:@"platformapi"]){
+        //支付宝钱包快登授权返回 authCode
+        
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            LLAThirdPayResponseStatus status = LLAThirdPayResponseStatus_Failed;
-            if ([[resultDic valueForKey:@"resultStatus"] integerValue] == 9000) {
-                status = LLAThirdPayResponseStatus_Success;
-            }else {
-                status = LLAThirdPayResponseStatus_Failed;
-            }
-            [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_AliPay responseCode:status error:nil];
+            
+            [[LLAThirdPayManager shareManager] handleAlipayCallBackWithDic:resultDic];
         }];
     }
     return YES;
