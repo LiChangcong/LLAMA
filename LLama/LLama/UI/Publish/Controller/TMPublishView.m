@@ -10,6 +10,7 @@
 #import <POP.h>
 #import "TMPostScriptViewController.h"
 #import "TMNavigationController.h"
+#import "LLABaseNavigationController.h"
 
 #define TMRootView [UIApplication sharedApplication].keyWindow.rootViewController.view
 
@@ -81,17 +82,21 @@ static CGFloat const XMGSpringFactor = 10;
 - (void)buttonClick:(UIButton *)button
 {
     [self cancelWithCompletionBlock:^{
+        
+        TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+        
         if (button.tag == 0) {
-            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
-                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TMNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+            postS.scriptType = LLAPublishScriptType_Text;
+            
         } else if (button.tag == 1) {
-            
-            
+            postS.scriptType = LLAPublishScriptType_Image;
+
             TMLog(@"正在添加");
 //            TMPhotoAlbumViewController *photoAlbum = [[TMPhotoAlbumViewController alloc] init];
 //                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TMNavigationController alloc] initWithRootViewController:photoAlbum] animated:YES completion:nil];
         
         }
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
     }];
 }
 

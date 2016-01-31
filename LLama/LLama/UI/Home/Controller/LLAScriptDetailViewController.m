@@ -10,6 +10,9 @@
 #import "LLAScriptDetailViewController.h"
 #import "LLAUserProfileViewController.h"
 #import "LLAPayUserViewController.h"
+#import "LLACaptureVideoViewController.h"
+
+#import "LLAPickVideoNavigationController.h"
 
 //view
 #import "LLACollectionView.h"
@@ -28,6 +31,7 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
+#import "LLAUploadVideoShareManager.h"
 
 //
 static NSString *const scriptInfoCellIden = @"scriptInfoCellIden";
@@ -43,7 +47,7 @@ static const CGFloat chooseActorCellsVerSpace = 6;
 static const NSInteger mainInfoSectionIndex = 0;
 static const NSInteger chooseActorInfoSectionIndex = 1;
 
-@interface LLAScriptDetailViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LLAScriptDetailMainInfoCellDelegate,LLAChooseActorCellDelegate>
+@interface LLAScriptDetailViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LLAScriptDetailMainInfoCellDelegate,LLAChooseActorCellDelegate,LLAPayUserViewControllerDelegate,LLAPickVideoNavigationControllerDelegate>
 
 {
     LLACollectionView *dataCollectionView;
@@ -267,9 +271,11 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
             
             if (oldSelectedUser == newSelectedUser) {
                 oldSelectedUser.hasBeenSelected = NO;
+                scriptInfo.hasTempChoose = NO;
             }else {
                 oldSelectedUser.hasBeenSelected = NO;
                 newSelectedUser.hasBeenSelected = YES;
+                scriptInfo.hasTempChoose = YES;
             }
             
             [dataCollectionView reloadData];
@@ -348,7 +354,19 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
                 //director,this time choose actor
                 
                 if (scriptInfo.partakeUsersArray.count > 0) {
-
+                    LLAUser *selectedUser = [self selectedUserInfoScriptInfo];
+                    
+                    //
+                    LLAPayUserPayInfo *payInfo = [LLAPayUserPayInfo new];
+                    payInfo.payToUser = selectedUser;
+                    payInfo.payMoney = scriptInfo.rewardMoney;
+                    payInfo.payToScriptIdString = scriptInfo.scriptIdString;
+                    
+                    //
+                    LLAPayUserViewController *pay = [[LLAPayUserViewController alloc] initWithPayInfo:payInfo];
+                    pay.delegate = self;
+                    [self.navigationController pushViewController:pay animated:YES];
+                    
                 }else {
                     
                 }
@@ -382,7 +400,14 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
                 //director,should wait,do nothing
                 
             }else if (scriptInfo.currentRole == LLAUserRoleInScript_Actor) {
-                //actor,should upload viedeo
+                //actor,should upload video
+                
+                LLACaptureVideoViewController *videoCaptrue = [[LLACaptureVideoViewController alloc] init];
+                
+                LLAPickVideoNavigationController *baseNavi = [[LLAPickVideoNavigationController alloc] initWithRootViewController:videoCaptrue];
+                baseNavi.videoPickerDelegate = self;
+                
+                [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
                 
             }else {
                 //passer,do nothing
@@ -445,9 +470,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 - (void) viewUserDetailWithUserInfo:(LLAUser *)userInfo  {
     //go to user profile
     
-//    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
-//    
-//    [self.navigationController pushViewController:userProfile animated:YES];
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    
+    [self.navigationController pushViewController:userProfile animated:YES];
 
     
 }
@@ -502,5 +527,22 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     return nil;
 }
 
+
+#pragma mark - LLAPayUserViewControllerDelegate
+
+- (void) refreshData {
+    
+    [dataCollectionView triggerPullToRefresh];
+    
+}
+
+#pragma mark - LLAPickVideoNavigationControllerDelegate
+
+- (void) videoPicker:(LLAPickVideoNavigationController *)videoPicker didFinishPickVideo:(NSURL *)videoURL thumbImage:(UIImage *)thumbImage {
+    
+    [[LLAUploadVideoShareManager shareManager] uploadScriptVideoWithScriptId:scriptInfo.scriptIdString image:thumbImage videoURL:videoURL];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 @end

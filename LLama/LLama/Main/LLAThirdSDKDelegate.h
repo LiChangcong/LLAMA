@@ -54,8 +54,7 @@ typedef void(^fetchAccessTokenCallBack)(NSString *token,NSError *error);
 
 typedef void(^fetchUserDetailInfoCallBack)(LLAUser *userInfo,NSError *error);
 
-@interface LLAThirdSDKDelegate : NSObject
-//<WeiboSDKDelegate,WXApiDelegate,TencentSessionDelegate,QQApiInterfaceDelegate>
+@interface LLAThirdSDKDelegate : NSObject<WXApiDelegate>
 
 + (instancetype) shareInstance;
 

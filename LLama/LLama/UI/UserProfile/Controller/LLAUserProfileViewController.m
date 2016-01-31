@@ -14,7 +14,8 @@
 #import "LLAUserAccountDetailViewController.h"
 #import "LLACaptureVideoViewController.h"
 
-#import "LLABaseNavigationController.h"
+#import "LLAPickVideoNavigationController.h"
+
 
 //view
 #import "LLATableView.h"
@@ -40,6 +41,7 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
+#import "LLAUploadVideoShareManager.h"
 
 //
 static const NSInteger userInfoSectionIndex = 0;
@@ -49,7 +51,7 @@ static const NSInteger videoInfosectionIndex = 2;
 //
 static const CGFloat navigationBarHeight = 64;
 
-@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate>
+@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate>
 {
     
     LLAUserProfileNavigationBar *customNaviBar;
@@ -501,6 +503,8 @@ static const CGFloat navigationBarHeight = 64;
 - (void) changeUserVideo {
     //change userVideo
     
+    [self uploadVieoToggled:mainInfo.userInfo];
+    
 }
 
 - (void) praiseButtonClick {
@@ -711,12 +715,20 @@ static const CGFloat navigationBarHeight = 64;
 - (void) uploadVieoToggled:(LLAUser *) userInfo {
     if ([userInfo isEqual:[LLAUser me]]) {
 
+        //actor,should upload video
+        
         LLACaptureVideoViewController *videoCaptrue = [[LLACaptureVideoViewController alloc] init];
         
-        LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:videoCaptrue];
+        LLAPickVideoNavigationController *baseNavi = [[LLAPickVideoNavigationController alloc] initWithRootViewController:videoCaptrue];
+        baseNavi.videoPickerDelegate = self;
         
         [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
     }
+}
+
+- (void) uploadVieoFinished:(LLAUser *)userInfo {
+    
+    [dataTableView triggerPullToRefresh];
 }
 
 #pragma mark - LLAUserProfileMyFunctionCellDelegate
@@ -778,5 +790,18 @@ static const CGFloat navigationBarHeight = 64;
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
 
 }
+
+#pragma mark - LLAPickVideoNavigationControllerDelegate
+
+- (void) videoPicker:(LLAPickVideoNavigationController *)videoPicker didFinishPickVideo:(NSURL *)videoURL thumbImage:(UIImage *)thumbImage {
+    
+    [[LLAUploadVideoShareManager shareManager] uploadUserVideoWithImage:thumbImage videoURL:videoURL];
+    
+}
+
+- (void) videoPickerDidCancelPick:(LLAPickVideoNavigationController *)videoPicker {
+    
+}
+
 
 @end

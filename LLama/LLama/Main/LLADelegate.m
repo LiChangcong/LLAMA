@@ -13,6 +13,10 @@
 #import "LLABaseNavigationController.h"
 #import "TMTabBarController.h"
 
+#import "LLAThirdPayManager.h"
+
+#import <AlipaySDK/AlipaySDK.h>
+
 @interface LLADelegate()
 
 @end
@@ -71,6 +75,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //
+    
+    //pay call back to deal with when
+    [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_Unknow responseCode:LLAThirdPayResponseStatus_Unknow error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -87,7 +95,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-//    NSString *urlStr = [url absoluteString];
+    NSString *urlStr = [url absoluteString];
 //    
 //    if([urlStr hasPrefix:@"wx"]){
 //        return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
@@ -107,8 +115,28 @@
     BOOL umResult = [UMSocialSnsService handleOpenURL:url];
     
     if (!umResult){
-        
+        if([urlStr hasPrefix:@"wx"]){
+            return  [WXApi handleOpenURL:url delegate:[LLAThirdSDKDelegate shareInstance]];
+        }
     }
+    
+    //alipay
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            
+            [[LLAThirdPayManager shareManager] handleAlipayCallBackWithDic:resultDic];
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){
+        //支付宝钱包快登授权返回 authCode
+        
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            
+            [[LLAThirdPayManager shareManager] handleAlipayCallBackWithDic:resultDic];
+        }];
+    }
+    return YES;
     
     return YES;
 }
@@ -139,6 +167,7 @@
     
     //weChat
     [UMSocialWechatHandler setWXAppId:LLA_WEIXIN_APPID appSecret:LLA_WEIXIN_APP_SECRET url:SDK_REDIRECT_URL];
+    //[WXApi registerApp:LLA_WEIXIN_APPID withDescription:@"LLAMA"];
     //qq
     [UMSocialQQHandler setQQWithAppId:LLA_QQ_APPID appKey:LLA_QQ_APPKEY url:SDK_REDIRECT_URL];
     //sina

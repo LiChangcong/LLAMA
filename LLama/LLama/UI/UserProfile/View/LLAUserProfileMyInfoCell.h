@@ -18,6 +18,8 @@
 
 - (void) uploadVieoToggled:(LLAUser *) userInfo;
 
+- (void) uploadVieoFinished:(LLAUser *) userInfo;
+
 @end
 
 @interface LLAUserProfileMyInfoCell : UITableViewCell<LLACellPlayVideoProtocol>
