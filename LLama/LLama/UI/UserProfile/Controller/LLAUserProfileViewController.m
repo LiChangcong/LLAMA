@@ -555,6 +555,14 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) praiseWithHeadClicked:(UITapGestureRecognizer *) tag {
     //praise user with head
+    
+    if (type == UserProfileControllerType_CurrentUser) {
+        
+        LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+        
+        [self.navigationController pushViewController:editUserInfo animated:YES];
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource
