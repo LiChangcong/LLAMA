@@ -555,4 +555,8 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     
 }
 
+- (void) videoPickerDidCancelPick:(LLAPickVideoNavigationController *)videoPicker {
+    
+}
+
 @end
