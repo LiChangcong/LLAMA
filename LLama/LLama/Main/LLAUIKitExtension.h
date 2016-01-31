@@ -24,5 +24,6 @@
 #import "UIColor+LLACustomColor.h"
 #import "UIImageView+LLAImageCache.h"
 #import "UIButton+LLAImageCache.h"
+#import "UIViewController+IsVisible.h"
 
 #endif /* LLAUIKitExtension_h */

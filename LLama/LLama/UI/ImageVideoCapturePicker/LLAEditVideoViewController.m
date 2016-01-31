@@ -101,6 +101,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     videoPlayerView.delegate = self;
     videoPlayerView.player.delegate = self;
     videoPlayerView.tapToPauseEnabled = YES;
+    videoPlayerView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
     [self.view addSubview:videoPlayerView];
     

@@ -17,6 +17,7 @@
 #import "LLAUserAccountWithdrawCashCell.h"
 #import "LLAUserAccountHistoryHeader.h"
 #import "LLAUserAccountDetailInfoCell.h"
+#import "LLAUserWithdrawCashSuccessView.h"
 
 //category
 #import "SVPullToRefresh.h"
@@ -35,7 +36,7 @@ static const NSInteger withdrawCashSectionIndex = 1;
 
 static const NSInteger detailInfoSection = 2;
 
-@interface LLAUserAccountDetailViewController()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LLAUserAccountWithdrawCashCellDelegate>
+@interface LLAUserAccountDetailViewController()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LLAUserAccountWithdrawCashCellDelegate,LLAUserAccountWithdrawCashViewControllerDelegate>
 {
     LLATableView *dataTableView;
     
@@ -47,6 +48,9 @@ static const NSInteger detailInfoSection = 2;
     
     //
     UITextField *currentField;
+    
+    //
+    BOOL shouldShowSuccess;
 }
 
 @end
@@ -83,6 +87,16 @@ static const NSInteger detailInfoSection = 2;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldValueChanged:) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
+- (void) viewDidAppear:(BOOL)animated  {
+    [super viewDidAppear:animated];
+    
+    if (shouldShowSuccess) {
+        LLAUserWithdrawCashSuccessView *success = [[LLAUserWithdrawCashSuccessView alloc] init];
+        [success show];
+        shouldShowSuccess = NO;
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -216,6 +230,8 @@ static const NSInteger detailInfoSection = 2;
             mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
             
             [dataTableView reloadData];
+        }else {
+            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
         }
         
         
@@ -429,8 +445,23 @@ static const NSInteger detailInfoSection = 2;
 #pragma mark - drawCash
 
 - (void) withDrawcache {
+    
+    [currentField resignFirstResponder];
+    
+    if (withdrawCash < 100) {
+        [LLAViewUtil showAlter:self.view withText:@"提现金额不能小于100"];
+        return ;
+    }
+    
     LLAUserAccountWithdrawCashViewController *drawCache = [[LLAUserAccountWithdrawCashViewController alloc] initWithCashAmount:withdrawCash];
+    drawCache.delegate = self;
     [self.navigationController pushViewController:drawCache animated:YES];
+}
+
+#pragma mark - DrawCacheSuccess
+
+- (void) drawCacheSuccess {
+    shouldShowSuccess = YES;
 }
 
 

@@ -90,7 +90,7 @@ static BOOL isSimpleUserModel;
             
             self.userVideo = videoInfo;
         }
-        
+        self.isLogin = YES;
         //test data
         //self.userDescription = @"lalfklsdfasldfksadlfasdfkljsadlfkjsaldfjksdkfjsadlkfjksdfjsdkfjasdfkadslflasdfjsdklfjsdf";
     }

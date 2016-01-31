@@ -23,4 +23,11 @@
 
 + (LLALoadingView *) addLLALoadingViewToView:(UIView *) view;
 
+//
++ (void) showLoveSuccessAnimationInView:(UIView *) inView
+                               fromView:(UIView *) fromView
+                               duration:(CGFloat) duration
+                         compeleteBlock:(void(^)(BOOL finished)) complete;
+
+
 @end

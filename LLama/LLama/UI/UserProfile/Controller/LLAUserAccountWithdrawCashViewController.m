@@ -24,6 +24,7 @@
 
 //util
 #import "LLAViewUtil.h"
+#import "LLAHttpUtil.h"
 
 //edit alipy
 #import "LLAAlipayWithDrawalsViewController.h"
@@ -58,6 +59,8 @@ static const CGFloat cashButtonToHorborder = 16;
 @end
 
 @implementation LLAUserAccountWithdrawCashViewController
+
+@synthesize delegate;
 
 #pragma mark - Life Cycle
 
@@ -281,8 +284,54 @@ static const CGFloat cashButtonToHorborder = 16;
 
 - (void) withdrawCashToAccount:(UIButton *) sender {
     //draw cache
-    LLAUserWithdrawCashSuccessView *success = [[LLAUserWithdrawCashSuccessView alloc] init];
-    [success show];
+    
+
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    LLAUser *me = [LLAUser me];
+    
+    if (me.alipayAccount.length <1 || me.alipayAccountUserName.length <1) {
+        [LLAViewUtil showAlter:self.view withText:@"请完善支付宝信息"];
+        return;
+    }
+    
+    [params setValue:@(withdrawCashAmount*100) forKey:@"amount"];
+    [params setValue:me.alipayAccount forKey:@"alipay"];
+    [params setValue:me.alipayAccountUserName forKey:@"alipayRealname"];
+    
+        [HUD show:YES];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/user/withdrawToAlipay" param:params responseBlock:^(id responseObject) {
+        
+        //
+        [HUD hide:YES];
+        
+        CGFloat balance = [[responseObject valueForKey:@"balance"] integerValue ]/(float)100;
+        
+        LLAUser *me = [LLAUser me];
+        me.balance = balance;
+        
+        [LLAUser updateUserInfo:me];
+        
+        if (delegate && [delegate respondsToSelector:@selector(drawCacheSuccess)]) {
+            [delegate drawCacheSuccess];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
+    
 }
 
 @end

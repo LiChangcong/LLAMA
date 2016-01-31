@@ -11,6 +11,8 @@
 
 static const CGFloat defaultDuration = 1.0;
 
+static const CGFloat loveSuccessDefaultDuration = 0.4;
+
 @implementation LLAViewUtil
 
 + (MBProgressHUD *) showAlter:(UIView *)view withText:(NSString *)text {
@@ -49,6 +51,34 @@ static const CGFloat defaultDuration = 1.0;
     [view addSubview:loadinView];
     
     return loadinView;
+}
+
+//
++ (void) showLoveSuccessAnimationInView:(UIView *)inView fromView:(UIView *)fromView duration:(CGFloat)duration compeleteBlock:(void (^)(BOOL))complete{
+    if (!inView || !fromView) {
+        return;
+    }
+    
+    CGFloat animationDuration = duration;
+    
+    if (animationDuration <= 0) {
+        animationDuration = loveSuccessDefaultDuration;
+    }
+    fromView.transform = CGAffineTransformMakeScale(1.8,1.8);
+    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        fromView.transform = CGAffineTransformMakeScale(1.8, 1.8);
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            fromView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            if (complete) {
+                complete(finished);
+            }
+        }];
+    }];
+    
 }
 
 @end

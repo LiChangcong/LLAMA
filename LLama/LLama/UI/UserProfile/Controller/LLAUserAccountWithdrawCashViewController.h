@@ -8,7 +8,15 @@
 
 #import "LLACommonViewController.h"
 
+@protocol LLAUserAccountWithdrawCashViewControllerDelegate <NSObject>
+
+- (void) drawCacheSuccess;
+
+@end
+
 @interface LLAUserAccountWithdrawCashViewController : LLACommonViewController
+
+@property(nonatomic , assign) id<LLAUserAccountWithdrawCashViewControllerDelegate> delegate;
 
 - (instancetype) initWithCashAmount:(CGFloat) cashAmount;
 

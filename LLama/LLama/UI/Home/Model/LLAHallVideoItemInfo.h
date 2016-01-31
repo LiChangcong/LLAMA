@@ -15,7 +15,7 @@
 
 @interface LLAHallVideoItemInfo : MTLModel<MTLJSONSerializing>
 
-@property(nonatomic , assign) NSInteger scriptID;
+@property(nonatomic , copy) NSString *scriptID;
 
 @property(nonatomic , strong) LLAUser *directorInfo;
 
