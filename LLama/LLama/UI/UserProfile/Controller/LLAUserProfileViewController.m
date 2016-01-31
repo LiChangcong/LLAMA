@@ -824,7 +824,8 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) uploadVieoFinished:(LLAUser *)userInfo {
     
-    [dataTableView triggerPullToRefresh];
+    //[dataTableView triggerPullToRefresh];
+    [self loadData];
 }
 
 #pragma mark - LLAUserProfileMyFunctionCellDelegate

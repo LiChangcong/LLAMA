@@ -149,6 +149,7 @@
     
     [self setupUmengSDK];
     [self setupAliPaySDK];
+    [self setupBugtags];
 }
 
 - (void) setupUmengSDK {
@@ -188,6 +189,10 @@
 
 - (void) setupAliPaySDK {
     
+}
+
+- (void) setupBugtags {
+    [Bugtags startWithAppKey:LLA_BUGTAGS_APPKEY invocationEvent:BTGInvocationEventBubble];
 }
 
 #pragma mark - Setup ShortCuts
