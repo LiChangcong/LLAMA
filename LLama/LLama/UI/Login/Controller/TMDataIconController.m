@@ -16,6 +16,11 @@
 #import "LLAUser.h"
 #import "LLAAlbumPickerViewController.h"
 
+// temp
+#import "TMAlbumPickerViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ZLPhotoAssets.h"
+
 @interface TMDataIconController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
     UIImage *choosedImage;
@@ -26,6 +31,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
+
+// temp
+@property (nonatomic , strong) NSArray *assets;
+@property (nonatomic , strong) UIImage *icon;
+
 
 @end
 
@@ -55,12 +65,12 @@
     [self.femaleButton setBackgroundColor:[UIColor colorWithHex:0xffd409] forState:UIControlStateSelected];
     [self.femaleButton.layer setBorderWidth:1.5f];
     [self.femaleButton.layer setBorderColor:[[UIColor colorWithHex:0xb7b7b7] CGColor]];
-    
+/*
     // 监听异步done通知,得知挑选头像操作结束
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(done:) name:@"PICKER_TAKE_DONE" object:nil];
     });
-    
+*/    
     // 限制昵称长度
     [self.nickNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
@@ -173,10 +183,42 @@
 //    [self.navigationController presentViewController:imagePicker animated:YES completion:^{
 //        
 //    }];
-    LLAAlbumPickerViewController *albumPicker = [[LLAAlbumPickerViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumPicker];
+//    LLAAlbumPickerViewController *albumPicker = [[LLAAlbumPickerViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumPicker];
+//    [self presentViewController:nav animated:YES completion:nil];
+    
+    TMAlbumPickerViewController *album = [[TMAlbumPickerViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:album];
+    //    album.maxImageCount = 1;
+    album.maxCount = 1;
+    album.topShowPhotoPicker = YES;
+    album.status = PickerViewShowStatusCameraRoll;
     [self presentViewController:nav animated:YES completion:nil];
     
+    
+    __weak typeof(self) weakSelf = self;
+    album.callBack = ^(NSArray *assets){
+        weakSelf.assets = assets;
+        
+        ZLPhotoAssets *asset = self.assets[0];
+//    [self.ChooseHeadImageButton setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:asset.aspectRatioImage forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
+        
+    };
+    
+    album.callBack1 = ^(UIImage *ima){
+        
+        
+        weakSelf.icon = ima;
+        ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+//        [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
+        
+    };
+
 }
 
 - (IBAction)backBtnClick:(UIButton *)sender {
@@ -252,6 +294,7 @@
 }
 */
 
+/*
 // 设置头像
 - (void)done:(NSNotification *)note{
     UIImage *image =  note.userInfo[@"selectAssets"];
@@ -269,6 +312,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PICKER_TAKE_DONE" object:nil];
 }
+*/
 
 // 限制昵称长度
 - (void)textFieldDidChange:(UITextField *)textField
