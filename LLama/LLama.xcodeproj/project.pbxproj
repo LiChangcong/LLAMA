@@ -187,6 +187,13 @@
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E06066D1C5C90B50089329D /* LLAUserAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */; };
 		7E06066E1C5C90B50089329D /* LLAUserAgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06066C1C5C90B50089329D /* LLAUserAgreementViewController.xib */; };
+		7E0607231C5E05D50089329D /* TMAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0607141C5E05D50089329D /* TMAlbumPickerViewController.m */; };
+		7E0607251C5E05D50089329D /* UIImage+ZLPhotoLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0607181C5E05D50089329D /* UIImage+ZLPhotoLib.m */; };
+		7E0607261C5E05D50089329D /* ZLPhotoAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06071A1C5E05D50089329D /* ZLPhotoAssets.m */; };
+		7E0607271C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06071C1C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m */; };
+		7E0607281C5E05D50089329D /* ZLPhotoPickerDatas.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06071E1C5E05D50089329D /* ZLPhotoPickerDatas.m */; };
+		7E0607291C5E05D50089329D /* ZLPhotoPickerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0607201C5E05D50089329D /* ZLPhotoPickerGroup.m */; };
+		7E06072A1C5E05D50089329D /* ZLPhotoPickerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0607221C5E05D50089329D /* ZLPhotoPickerImageView.m */; };
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
@@ -685,6 +692,20 @@
 		7E06066A1C5C90B50089329D /* LLAUserAgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAgreementViewController.h; sourceTree = "<group>"; };
 		7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAgreementViewController.m; sourceTree = "<group>"; };
 		7E06066C1C5C90B50089329D /* LLAUserAgreementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAUserAgreementViewController.xib; sourceTree = "<group>"; };
+		7E0607131C5E05D50089329D /* TMAlbumPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMAlbumPickerViewController.h; sourceTree = "<group>"; };
+		7E0607141C5E05D50089329D /* TMAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMAlbumPickerViewController.m; sourceTree = "<group>"; };
+		7E0607171C5E05D50089329D /* UIImage+ZLPhotoLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ZLPhotoLib.h"; sourceTree = "<group>"; };
+		7E0607181C5E05D50089329D /* UIImage+ZLPhotoLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ZLPhotoLib.m"; sourceTree = "<group>"; };
+		7E0607191C5E05D50089329D /* ZLPhotoAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoAssets.h; sourceTree = "<group>"; };
+		7E06071A1C5E05D50089329D /* ZLPhotoAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoAssets.m; sourceTree = "<group>"; };
+		7E06071B1C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoPickerCollectionViewCell.h; sourceTree = "<group>"; };
+		7E06071C1C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoPickerCollectionViewCell.m; sourceTree = "<group>"; };
+		7E06071D1C5E05D50089329D /* ZLPhotoPickerDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoPickerDatas.h; sourceTree = "<group>"; };
+		7E06071E1C5E05D50089329D /* ZLPhotoPickerDatas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoPickerDatas.m; sourceTree = "<group>"; };
+		7E06071F1C5E05D50089329D /* ZLPhotoPickerGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoPickerGroup.h; sourceTree = "<group>"; };
+		7E0607201C5E05D50089329D /* ZLPhotoPickerGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoPickerGroup.m; sourceTree = "<group>"; };
+		7E0607211C5E05D50089329D /* ZLPhotoPickerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoPickerImageView.h; sourceTree = "<group>"; };
+		7E0607221C5E05D50089329D /* ZLPhotoPickerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoPickerImageView.m; sourceTree = "<group>"; };
 		7E1A14511C15D4A700693F3E /* LLama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14601C15D4A700693F3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1A14651C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1405,6 +1426,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E0607121C5E05D50089329D /* temp */ = {
+			isa = PBXGroup;
+			children = (
+				7E0607131C5E05D50089329D /* TMAlbumPickerViewController.h */,
+				7E0607141C5E05D50089329D /* TMAlbumPickerViewController.m */,
+				7E0607171C5E05D50089329D /* UIImage+ZLPhotoLib.h */,
+				7E0607181C5E05D50089329D /* UIImage+ZLPhotoLib.m */,
+				7E0607191C5E05D50089329D /* ZLPhotoAssets.h */,
+				7E06071A1C5E05D50089329D /* ZLPhotoAssets.m */,
+				7E06071B1C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.h */,
+				7E06071C1C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m */,
+				7E06071D1C5E05D50089329D /* ZLPhotoPickerDatas.h */,
+				7E06071E1C5E05D50089329D /* ZLPhotoPickerDatas.m */,
+				7E06071F1C5E05D50089329D /* ZLPhotoPickerGroup.h */,
+				7E0607201C5E05D50089329D /* ZLPhotoPickerGroup.m */,
+				7E0607211C5E05D50089329D /* ZLPhotoPickerImageView.h */,
+				7E0607221C5E05D50089329D /* ZLPhotoPickerImageView.m */,
+			);
+			path = temp;
+			sourceTree = "<group>";
+		};
 		7E1A14481C15D4A700693F3E = {
 			isa = PBXGroup;
 			children = (
@@ -1886,6 +1928,7 @@
 				A3DEDE0B1C3CAEC6009F3D37 /* TMRetrievePasswordViewController.xib */,
 				7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */,
 				7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */,
+				7E0607121C5E05D50089329D /* temp */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2501,8 +2544,10 @@
 				5C6D7A4D1C58B73200119A3A /* SCVideoConfiguration.m in Sources */,
 				A3DEDD9B1C3CAE38009F3D37 /* MTLModel+NSCoding.m in Sources */,
 				5C6D7A4B1C58B73200119A3A /* SCSaveToCameraRollOperation.m in Sources */,
+				7E0607281C5E05D50089329D /* ZLPhotoPickerDatas.m in Sources */,
 				A3DEDEA41C3CAEC7009F3D37 /* TMSwitch.m in Sources */,
 				5C6D7A3D1C58B73200119A3A /* SCFilterImageView.m in Sources */,
+				7E0607251C5E05D50089329D /* UIImage+ZLPhotoLib.m in Sources */,
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
@@ -2515,6 +2560,7 @@
 				7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */,
 				5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
+				7E0607291C5E05D50089329D /* ZLPhotoPickerGroup.m in Sources */,
 				7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */,
 				7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
@@ -2553,6 +2599,7 @@
 				5C6D7A341C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m in Sources */,
 				5C6D7A471C58B73200119A3A /* SCRecorderToolsView.m in Sources */,
 				A3DEDE6D1C3CAEC7009F3D37 /* TMMoreView.m in Sources */,
+				7E06072A1C5E05D50089329D /* ZLPhotoPickerImageView.m in Sources */,
 				A3DEDD651C3CAE38009F3D37 /* UIBarButtonItem+TMExtension.m in Sources */,
 				A3D8E7E41C3F5BA800B27898 /* LLACommonViewController.m in Sources */,
 				5C6D7A451C58B73200119A3A /* SCRecorderFocusTargetView.m in Sources */,
@@ -2574,6 +2621,7 @@
 				5C6D7A3C1C58B73200119A3A /* SCFilterAnimation.m in Sources */,
 				A3DEDEA31C3CAEC7009F3D37 /* TMSettingCell.m in Sources */,
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
+				7E0607271C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m in Sources */,
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
 				5C6D7A441C58B73200119A3A /* SCRecorder.m in Sources */,
 				7EA6FC2E1C576DFE00F78099 /* LLAAccountSecurityController.m in Sources */,
@@ -2629,6 +2677,7 @@
 				7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */,
 				A3DEDD8D1C3CAE38009F3D37 /* TMNavigationController.m in Sources */,
 				5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */,
+				7E0607261C5E05D50089329D /* ZLPhotoAssets.m in Sources */,
 				5CE0EB8C1C46424300C6BC79 /* NSMutableAttributedString+TY.m in Sources */,
 				A3DEDE7B1C3CAEC7009F3D37 /* TMLoginRegisterViewController.m in Sources */,
 				5C5D68DE1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m in Sources */,
@@ -2664,6 +2713,7 @@
 				5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */,
 				A3DEDDC71C3CAE38009F3D37 /* LLAHttpUtil.m in Sources */,
 				A3DEDEA61C3CAEC7009F3D37 /* TMZoomController.m in Sources */,
+				7E0607231C5E05D50089329D /* TMAlbumPickerViewController.m in Sources */,
 				5C6D7A4A1C58B73200119A3A /* SCSampleBufferHolder.m in Sources */,
 				5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */,
 				5C8275121C5726A500DD547F /* MMPopupView.m in Sources */,
