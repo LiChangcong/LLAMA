@@ -41,7 +41,7 @@
 
 @interface LLAHallVideoInfoCell : UITableViewCell<LLACellPlayVideoProtocol>
 
-@property(nonatomic , weak) id<LLAHallVideoInfoCellDelegate> delegate;
+@property(nonatomic , weak) id<LLAHallVideoInfoCellDelegate,LLAVideoPlayerViewDelegate> delegate;
 
 - (void) updateCellWithVideoInfo:(LLAHallVideoItemInfo *) videoInfo tableWidth:(CGFloat) tableWidth;
 

@@ -7,6 +7,8 @@
 //
 
 #import "LLAUserProfileEditUserInfoController.h"
+#import "TMAlbumPickerViewController.h"
+#import "LLABaseNavigationController.h"
 
 //view
 #import "LLAUserHeadView.h"
@@ -15,6 +17,9 @@
 
 //model
 #import "LLAUser.h"
+
+#import "ZLPhotoAssets.h"
+
 
 //util
 #import "LLAHttpUtil.h"
@@ -292,10 +297,37 @@ static const CGFloat userDescTextViewHeight = 127;
 
 #pragma mark - LLAUserHeadViewDelegate
 
-- (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
+- (void) headView:(LLAUserHeadView *)userheadView clickedWithUserInfo:(LLAUser *)user {
     
     //show choose imageViewController
     NSLog(@"show selected view controller");
+    
+    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
+    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
+    imagePicker.maxCount = 1;
+    imagePicker.topShowPhotoPicker = YES;
+    imagePicker.status = PickerViewShowStatusCameraRoll;
+    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+
+    imagePicker.callBack = ^(NSArray *assets){
+        
+        ZLPhotoAssets *asset = assets[0];
+        //        [self.head setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        headView.userHeadImageView.image = asset.aspectRatioImage;
+        tempImage = asset.aspectRatioImage;
+        
+    };
+    
+    imagePicker.callBack1 = ^(UIImage *ima){
+        
+        
+        headView.userHeadImageView.image = ima;
+        
+        tempImage = ima;
+        
+    };
+
+    
     
 }
 

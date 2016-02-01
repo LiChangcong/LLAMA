@@ -18,6 +18,8 @@
 
 #define LLA_UMENG_APPKEY @"5620659c67e58e8d6c002da9"
 
+#define LLA_BUGTAGS_APPKEY @"9247052791beea701ecdf36a1bb11b8e"
+
 #define SDK_REDIRECT_URL @"http://www.hillama.com"
 
 //sina
@@ -38,6 +40,9 @@
 #import "UMSocialSinaSSOHandler.h"
 //
 #import "LLAUser.h"
+
+//bug tags
+#import <Bugtags/Bugtags.h>
 
 typedef NS_ENUM(NSInteger,LLAThirdLoginState) {
 

@@ -92,4 +92,6 @@ typedef NS_ENUM(NSInteger,LLAUserRoleInScript) {
 
 + (LLAScriptHallItemInfo *) parseJsonWithDic:(NSDictionary *) data;
 
++ (NSString *) timeIntervalToFormatString:(long long) timeOutInterval;
+
 @end

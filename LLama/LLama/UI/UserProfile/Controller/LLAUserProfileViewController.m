@@ -51,7 +51,7 @@ static const NSInteger videoInfosectionIndex = 2;
 //
 static const CGFloat navigationBarHeight = 64;
 
-@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate>
+@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate,LLAVideoPlayerViewDelegate>
 {
     
     LLAUserProfileNavigationBar *customNaviBar;
@@ -555,6 +555,14 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) praiseWithHeadClicked:(UITapGestureRecognizer *) tag {
     //praise user with head
+    
+    if (type == UserProfileControllerType_CurrentUser) {
+        
+        LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+        
+        [self.navigationController pushViewController:editUserInfo animated:YES];
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -824,7 +832,8 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) uploadVieoFinished:(LLAUser *)userInfo {
     
-    [dataTableView triggerPullToRefresh];
+    //[dataTableView triggerPullToRefresh];
+    [self loadData];
 }
 
 #pragma mark - LLAUserProfileMyFunctionCellDelegate
@@ -928,6 +937,27 @@ static const CGFloat navigationBarHeight = 64;
     
 }
 
+#pragma mark - PlayerViewDelegate
+
+- (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView {
+    //
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            if (playerView != tc.videoPlayerView) {
+                [tc.videoPlayerView stopVideo];
+            }
+        }
+    }
+    
+}
+
+- (void) playerViewTappToPause:(LLAVideoPlayerView *)playerView {
+    
+}
 
 #pragma mark - Start Stop Video
 

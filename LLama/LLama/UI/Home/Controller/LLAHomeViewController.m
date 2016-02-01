@@ -14,7 +14,7 @@
 //view
 #import "LLAHomeTitleView.h"
 
-@interface LLAHomeViewController()<UIScrollViewDelegate,LLAHomeTitleViewDelegate>
+@interface LLAHomeViewController()<UIScrollViewDelegate,LLAHomeTitleViewDelegate,LLAHomeHallViewControllerDelegate>
 
 {
     LLAHomeTitleView *titleView;
@@ -90,6 +90,7 @@
     
     // 添加大厅子控制器
     hallController = [[LLAHomeHallViewController alloc] init];
+    hallController.delegate = self;
     [self addChildViewController:hallController];
     [hallController didMoveToParentViewController:self];
     UIView *hallView = hallController.view;
@@ -203,6 +204,15 @@
     }else {
         [hallController stopAllVideo];
     }
+}
+
+#pragma mark - LLAHomeHallViewControllerDelegate
+
+-(BOOL) shouldPlayVideo {
+    
+    NSInteger selectedIndex = (NSInteger)((contentScrollView.contentOffset.x+contentScrollView.bounds.size.width/2) /contentScrollView.frame.size.width);
+    
+    return selectedIndex == 0;
 }
 
 @end

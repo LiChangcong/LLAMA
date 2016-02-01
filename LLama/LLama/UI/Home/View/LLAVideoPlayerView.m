@@ -90,6 +90,11 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         
         [self addSubview:loadingIndicator];
         
+        //
+        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerViewTapped:)];
+        [self addGestureRecognizer:tapGes];
+        self.userInteractionEnabled = YES;
+        
     }
     return self;
 }
@@ -182,7 +187,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     }else if(context == AVPlayerRateObservationContext) {
         if (videoPlayer.rate > 0) {
             [loadingIndicator stopAnimating];
-        }else {
+        }else if (videoPlayer.status != AVPlayerStatusReadyToPlay){
             [loadingIndicator startAnimating];
         }
     }else {
@@ -201,6 +206,24 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         
         [[LLAVideoCacheUtil shareInstance] cacheVideoFromPlayerItem:videoPlayer.currentItem videoInfo:playingVideoInfo];
         
+    }
+}
+
+#pragma mark - playerViewTapped
+
+- (void) playerViewTapped:(UITapGestureRecognizer *) ges {
+
+    if (self.isPlaying) {
+        [self pauseVideo];
+        if (delegate && [delegate respondsToSelector:@selector(playerViewTappToPause:)]) {
+            [delegate playerViewTappToPause:self];
+        }
+    }else {
+        [self playVideo];
+        if (delegate && [delegate respondsToSelector:@selector(playerViewTappToPlay:)]) {
+            [delegate playerViewTappToPlay:self];
+        }
+
     }
 }
 

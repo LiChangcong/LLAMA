@@ -148,6 +148,7 @@
     
     [self setupUmengSDK];
     [self setupAliPaySDK];
+    [self setupBugtags];
 }
 
 - (void) setupUmengSDK {
@@ -189,6 +190,10 @@
     
 }
 
+- (void) setupBugtags {
+    [Bugtags startWithAppKey:LLA_BUGTAGS_APPKEY invocationEvent:BTGInvocationEventBubble];
+}
+
 #pragma mark - Setup ShortCuts
 
 - (void) setupShortCutsItems {
@@ -207,8 +212,8 @@
                                         icon:[UIApplicationShortcutIcon iconWithType:
                                               UIApplicationShortcutIconTypeMessage]
                                         userInfo:nil];
-    
-    [UIApplication sharedApplication].shortcutItems = @[item1,item2];
+    if (item1 && item2)
+        [UIApplication sharedApplication].shortcutItems = @[item1,item2];
 }
 
 @end

@@ -28,7 +28,7 @@
 #import "LLAHttpUtil.h"
 #import "LLAUploadVideoShareManager.h"
 
-@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate>
+@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate,LLAVideoPlayerViewDelegate>
 {
     LLATableView *dataTableView;
     
@@ -44,6 +44,8 @@
 @end
 
 @implementation LLAHomeHallViewController
+
+@synthesize delegate;
 
 #pragma mark - Life Cycle
 
@@ -70,7 +72,13 @@
     [super viewDidAppear:animated];
     
     //play
-    [self startPlayVideo];
+    if (delegate && [delegate respondsToSelector:@selector(shouldPlayVideo)]) {
+        if ([delegate shouldPlayVideo]) {
+            [self startPlayVideo];
+        }
+    }else {
+        [self startPlayVideo];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -421,6 +429,28 @@
 
 - (void) uploadVideoFailed:(LLAUploadVideoProgressView *)progressView {
     
+}
+
+#pragma mark - playerViewDelegate
+
+- (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView {
+    //
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            if (playerView != tc.videoPlayerView) {
+                [tc.videoPlayerView stopVideo];
+            }
+        }
+    }
+
+}
+
+- (void) playerViewTappToPause:(LLAVideoPlayerView *)playerView {
+    //
 }
 
 #pragma mark - Private Method

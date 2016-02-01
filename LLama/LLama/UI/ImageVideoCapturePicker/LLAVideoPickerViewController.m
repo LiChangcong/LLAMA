@@ -169,6 +169,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
     } failureBlock:^(NSError *error) {
        //failed,has no right to access album
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        
     }];
     
 }
