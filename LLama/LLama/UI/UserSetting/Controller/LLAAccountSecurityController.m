@@ -323,9 +323,18 @@ static NSString *const accountSecuritySectionTwoCell = @"LLAAccountSecuritySecti
             }
         }else if (indexPath.row == 1) {
             
-            // 更改密码
-            LLAModifyPasswordViewController *modifyPwd = [[LLAModifyPasswordViewController alloc] init];
-            [self.navigationController pushViewController:modifyPwd animated:YES];
+//            NSLog(@"%@",)
+            if (myUserInfo.mobilePhone) {
+                
+                // 更改密码
+                LLAModifyPasswordViewController *modifyPwd = [[LLAModifyPasswordViewController alloc] init];
+                [self.navigationController pushViewController:modifyPwd animated:YES];
+            }else {
+                
+                [LLAViewUtil showAlter:self.view withText:@"三方登陆无法修改密码"];
+
+            }
+           
         }
     }
 }
