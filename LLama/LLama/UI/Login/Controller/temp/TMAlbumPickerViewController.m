@@ -92,27 +92,46 @@
     // Do any additional setup after loading the view.
     
     
-//    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-//    if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied) {
-//        // 判断没有权限获取用户相册的话，就提示个View
-//        UIImageView *lockView = [[UIImageView alloc] init];
-//        lockView.image = [UIImage imageNamed:@"lock"];
-//        lockView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 200);
-//        lockView.contentMode = UIViewContentModeCenter;
-//        [self.view addSubview:lockView];
-//        
-//        UILabel *lockLbl = [[UILabel alloc] init];
-//        lockLbl.text = @"123";
-//        lockLbl.numberOfLines = 0;
-//        lockLbl.textAlignment = NSTextAlignmentCenter;
-//        lockLbl.frame = CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height);
-//        [self.view addSubview:lockLbl];
-//    }else{
-////        [self tableView];
-////        // 获取图片
-////        [self getImgs];
-//    }
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied) {
+        
+        UILabel *lockLbl = [[UILabel alloc] init];
+        lockLbl.text = @"您屏蔽了选择相册的权限，开启请去系统设置->隐私->我的App来打开权限";
+        lockLbl.numberOfLines = 0;
+        lockLbl.textAlignment = NSTextAlignmentCenter;
+        lockLbl.frame = CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height);
+        [self.view addSubview:lockLbl];
+    }else{
+        
+        
+        // 设置子控件
+        [self setUpSubViews];
+        
+        // 设置约束
+        [self setUpConstraints];
+        
+        //    [self layoutSubviews1];
+        
+        [self setUpImg];
 
+
+    }
+
+
+}
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+//
+//
+//}
+
+/*************************************************************/
+
+- (void)setUpImg
+{
     
     _selectAssets = [NSMutableArray array];
     
@@ -121,7 +140,6 @@
         
         ZLPhotoPickerGroup *gp = nil;
         for (ZLPhotoPickerGroup *group in obj) {
-            NSLog(@"group的名字是%@",group.groupName);
             if ((self.status == PickerViewShowStatusCameraRoll || self.status == PickerViewShowStatusVideo) && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
                 gp = group;
                 break;
@@ -148,36 +166,13 @@
             }];
             
             weakSelf.dataArray = assetsM;
-            NSLog(@"%@",weakSelf.dataArray);
         }];
         
         
     }];
     
-
-//    NSLog(@"assetsGroup %@",self.assetsGroup);
     
-    
-    // 设置子控件
-    [self setUpSubViews];
-    
-    // 设置约束
-    [self setUpConstraints];
-
-//    [self layoutSubviews1];
-
 }
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    
-//
-//
-//}
-
-/*************************************************************/
-
 
 // 设置子控件
 - (void)setUpSubViews
@@ -232,7 +227,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"cell个数 %lu",(unsigned long)self.dataArray.count);
     return self.dataArray.count;
 
 }
@@ -374,7 +368,6 @@
     
     }
     
-//    NSLog(@"%d",self.selectAssets.count);
     
     if (self.selectAssets.count) {
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -398,23 +391,6 @@
 
 - (void)camera
 {
-//    NSLog(@"点击了拍照");
-//    ZLCameraViewController *cameraVc = [[ZLCameraViewController alloc] init];
-//    __weak typeof(self)weakSelf = self;
-//    __weak typeof(cameraVc)weakCameraVc = cameraVc;
-//    cameraVc.callback = ^(NSArray *camera){
-//        [weakSelf.selectAssets addObjectsFromArray:camera];
-////        [weakSelf.toolBarThumbCollectionView reloadData];
-////        [weakSelf.takePhotoImages addObjectsFromArray:camera];
-//        weakSelf.selectAssets = weakSelf.selectAssets;
-//        
-//        NSInteger count = self.selectAssets.count;
-////        weakSelf.makeView.hidden = !count;
-////        weakSelf.makeView.text = [NSString stringWithFormat:@"%ld",(NSInteger)count];
-////        weakSelf.doneBtn.enabled = (count > 0);
-//        [weakCameraVc dismissViewControllerAnimated:YES completion:nil];
-//    };
-//    [cameraVc presentViewController:cameraVc animated:YES completion:nil];
     //打开相机
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         UIImagePickerController *controller = [[UIImagePickerController alloc] init];
@@ -462,7 +438,6 @@
             UIImage * image =[info objectForKey:UIImagePickerControllerOriginalImage];
             
 //            [self.dataArray ];
-            NSLog(@"点击了选择");
             self.shot = image;
             self.callBack1(_shot);
             [self dismissViewControllerAnimated:YES completion:^{
@@ -475,7 +450,6 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    NSLog(@"点击了取消");
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
