@@ -66,6 +66,10 @@
 		5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */; };
 		5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845D1C5F0AB7002EC705 /* YYAlertView.m */; };
 		5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */; };
+		5C7884651C5F5555002EC705 /* LLAVideoCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7884641C5F5555002EC705 /* LLAVideoCommentCell.m */; };
+		5C7884681C5F79C0002EC705 /* LLAVideoCommentInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7884671C5F79C0002EC705 /* LLAVideoCommentInputViewController.m */; };
+		5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */; };
+		5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */; };
 		5C82750E1C5726A500DD547F /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8274FF1C5726A500DD547F /* MMAlertView.m */; };
 		5C82750F1C5726A500DD547F /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275011C5726A500DD547F /* MMDateView.m */; };
 		5C8275101C5726A500DD547F /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275041C5726A500DD547F /* MMPopupCategory.m */; };
@@ -514,6 +518,14 @@
 		5C78845D1C5F0AB7002EC705 /* YYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAlertView.m; sourceTree = "<group>"; };
 		5C78845E1C5F0AB7002EC705 /* YYShowAlertUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYShowAlertUtil.h; sourceTree = "<group>"; };
 		5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYShowAlertUtil.m; sourceTree = "<group>"; };
+		5C7884631C5F5555002EC705 /* LLAVideoCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentCell.h; sourceTree = "<group>"; };
+		5C7884641C5F5555002EC705 /* LLAVideoCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentCell.m; sourceTree = "<group>"; };
+		5C7884661C5F79C0002EC705 /* LLAVideoCommentInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCommentInputViewController.h; sourceTree = "<group>"; };
+		5C7884671C5F79C0002EC705 /* LLAVideoCommentInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCommentInputViewController.m; sourceTree = "<group>"; };
+		5C78846A1C5F7A6E002EC705 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		5C78846C1C5F7A6E002EC705 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		5C8274FE1C5726A500DD547F /* MMAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlertView.h; sourceTree = "<group>"; };
 		5C8274FF1C5726A500DD547F /* MMAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlertView.m; sourceTree = "<group>"; };
 		5C8275001C5726A500DD547F /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = "<group>"; };
@@ -1346,6 +1358,17 @@
 			path = YYShowAlertUtil;
 			sourceTree = "<group>";
 		};
+		5C7884691C5F7A6E002EC705 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				5C78846A1C5F7A6E002EC705 /* HPGrowingTextView.h */,
+				5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */,
+				5C78846C1C5F7A6E002EC705 /* HPTextViewInternal.h */,
+				5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */,
+			);
+			path = HPGrowingTextView;
+			sourceTree = "<group>";
+		};
 		5C8274FD1C5726A500DD547F /* MMPopupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1971,6 +1994,7 @@
 		A3DEDCF21C3CAE38009F3D37 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5C7884691C5F7A6E002EC705 /* HPGrowingTextView */,
 				5C6D79F51C58B73200119A3A /* SCRecorder */,
 				5C8274FD1C5726A500DD547F /* MMPopupView */,
 				5CE0EB771C46424300C6BC79 /* TYAttributedLabel */,
@@ -2128,6 +2152,8 @@
 				5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */,
 				5C9353C21C5E18AB00DD75DC /* LLAVideoCommentViewController.h */,
 				5C9353C31C5E18AB00DD75DC /* LLAVideoCommentViewController.m */,
+				5C7884661C5F79C0002EC705 /* LLAVideoCommentInputViewController.h */,
+				5C7884671C5F79C0002EC705 /* LLAVideoCommentInputViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2179,6 +2205,8 @@
 				5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */,
 				5CBC57921C4DF9380001F1A9 /* LLAScriptChooseActorHeader.h */,
 				5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */,
+				5C7884631C5F5555002EC705 /* LLAVideoCommentCell.h */,
+				5C7884641C5F5555002EC705 /* LLAVideoCommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2826,6 +2854,7 @@
 				5CE0EB731C4607AD00C6BC79 /* LLAVideoInfo.m in Sources */,
 				A3DEDE831C3CAEC7009F3D37 /* TMMessageController.m in Sources */,
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
+				5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */,
 				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
 				5C6D7A571C58B85C00119A3A /* LLAEditVideoViewController.m in Sources */,
 				5C6D7A3A1C58B73200119A3A /* SCFilter+VideoComposition.m in Sources */,
@@ -2920,6 +2949,7 @@
 				5CC324EA1C5B833B00413E25 /* LLAPayUserInfoCollectionCell.m in Sources */,
 				5C9353BA1C5DC7B400DD75DC /* LLAUploadVideoShareManager.m in Sources */,
 				5C6D7A3C1C58B73200119A3A /* SCFilterAnimation.m in Sources */,
+				5C7884681C5F79C0002EC705 /* LLAVideoCommentInputViewController.m in Sources */,
 				A3DEDEA31C3CAEC7009F3D37 /* TMSettingCell.m in Sources */,
 				A3DEDE641C3CAEC6009F3D37 /* TMHomeViewController.m in Sources */,
 				7E0607271C5E05D50089329D /* ZLPhotoPickerCollectionViewCell.m in Sources */,
@@ -2962,6 +2992,7 @@
 				5CC324F21C5B83D000413E25 /* LLAPayUserPayTypeItem.m in Sources */,
 				5CC696D01C5CDEA100E4BA89 /* base64.m in Sources */,
 				5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */,
+				5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,
@@ -2986,6 +3017,7 @@
 				7EAA2F541C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.m in Sources */,
 				A3DEDD8D1C3CAE38009F3D37 /* TMNavigationController.m in Sources */,
 				5C9353C11C5E0C4F00DD75DC /* UIViewController+IsVisible.m in Sources */,
+				5C7884651C5F5555002EC705 /* LLAVideoCommentCell.m in Sources */,
 				5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */,
 				7E0607261C5E05D50089329D /* ZLPhotoAssets.m in Sources */,
 				5CE0EB8C1C46424300C6BC79 /* NSMutableAttributedString+TY.m in Sources */,

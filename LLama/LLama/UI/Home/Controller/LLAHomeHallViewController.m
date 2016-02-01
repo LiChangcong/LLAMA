@@ -9,6 +9,7 @@
 //controller
 #import "LLAHomeHallViewController.h"
 #import "LLAUserProfileViewController.h"
+#import "LLAVideoCommentViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -463,7 +464,8 @@
 }
 
 - (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) itemInfo {
-    
+    LLAVideoCommentViewController *comment = [[LLAVideoCommentViewController alloc] initWithVideoIdString:itemInfo.scriptID];
+    [self.navigationController pushViewController:comment animated:YES];
 }
 
 #pragma mark - Public Method

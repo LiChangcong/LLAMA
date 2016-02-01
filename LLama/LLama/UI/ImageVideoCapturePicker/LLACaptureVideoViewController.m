@@ -84,16 +84,22 @@ static NSString *const recordFoucusImageName = @"";
         
         if (!granted) {
             //
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"没有访问相机的权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"没有访问相机的权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            });
+
         }
     }];
     
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
         
         if (!granted) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"没有访问麦克风的权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"没有访问麦克风的权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+
+            });
         }
         
     }];

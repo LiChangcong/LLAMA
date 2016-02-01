@@ -145,6 +145,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
             
             if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 //video
+                
                 LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
                 
                 itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
@@ -161,6 +162,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 
             }else {
                 //photo
+                if (stop)
+                    [HUD hide:YES];
             }
             
         }];
