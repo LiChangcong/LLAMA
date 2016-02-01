@@ -196,12 +196,14 @@ static const CGFloat textViewToLeftWithImage = 118;
 
     TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
     LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
+//    UINavigationController *baseNavi = [[UINavigationController alloc] initWithRootViewController:imagePicker];
     imagePicker.maxCount = 1;
     imagePicker.topShowPhotoPicker = YES;
     imagePicker.status = PickerViewShowStatusCameraRoll;
-    [self addChildViewController:baseNavi];
-    [self.view addSubview:baseNavi.view];
-//    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+    baseNavi.view.frame = self.view.bounds;
+//    [self addChildViewController:baseNavi];
+//    [self.view addSubview:baseNavi.view];
+    [self.navigationController presentViewController:baseNavi animated:NO completion:NULL];
     
     
     __weak typeof(self) weakSelf = self;

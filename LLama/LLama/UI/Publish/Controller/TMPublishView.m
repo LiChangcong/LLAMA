@@ -91,7 +91,7 @@ static CGFloat const XMGSpringFactor = 10;
         } else if (button.tag == 1) {
             postS.scriptType = LLAPublishScriptType_Image;
 
-            TMLog(@"正在添加");
+//            TMLog(@"正在添加");
 //            TMPhotoAlbumViewController *photoAlbum = [[TMPhotoAlbumViewController alloc] init];
 //                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TMNavigationController alloc] initWithRootViewController:photoAlbum] animated:YES completion:nil];
         

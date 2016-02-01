@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qle-cE-tnq" customClass="LLALoveCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qle-cE-tnq" id="dv3-BD-IKp">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHm-pA-Mib">
+                        <rect key="frame" x="50" y="42" width="270" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ZdS-fd-R9t"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cD-c5-SCw">
+                        <rect key="frame" x="61" y="11" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likered" translatesAutoresizingMaskIntoConstraints="NO" id="ihN-1E-hTE">
+                        <rect key="frame" x="280" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="6e6-cd-oYC"/>
+                            <constraint firstAttribute="width" constant="20" id="zrw-26-7dJ"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jo8-Fb-ltG" customClass="LLAUserHeadView">
+                        <rect key="frame" x="11" y="6" width="40" height="31.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="64Y-4c-IUR"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jo8-Fb-ltG" firstAttribute="top" secondItem="dv3-BD-IKp" secondAttribute="top" constant="6" id="6YT-pj-2ED"/>
+                    <constraint firstItem="0cD-c5-SCw" firstAttribute="centerY" secondItem="jo8-Fb-ltG" secondAttribute="centerY" id="EIs-iS-7IC"/>
+                    <constraint firstAttribute="bottom" secondItem="fHm-pA-Mib" secondAttribute="bottom" id="Eam-ah-C3j"/>
+                    <constraint firstAttribute="bottom" secondItem="jo8-Fb-ltG" secondAttribute="bottom" constant="6" id="H7Z-rB-4JP"/>
+                    <constraint firstItem="0cD-c5-SCw" firstAttribute="leading" secondItem="jo8-Fb-ltG" secondAttribute="trailing" constant="10" id="P3Q-yu-yGa"/>
+                    <constraint firstItem="jo8-Fb-ltG" firstAttribute="leading" secondItem="dv3-BD-IKp" secondAttribute="leading" constant="11" id="Usy-Om-eiZ"/>
+                    <constraint firstItem="fHm-pA-Mib" firstAttribute="leading" secondItem="dv3-BD-IKp" secondAttribute="leading" constant="50" id="hUc-xW-Ilj"/>
+                    <constraint firstAttribute="trailing" secondItem="ihN-1E-hTE" secondAttribute="trailing" constant="20" id="lOq-mu-9fa"/>
+                    <constraint firstItem="ihN-1E-hTE" firstAttribute="centerY" secondItem="0cD-c5-SCw" secondAttribute="centerY" id="uE1-W1-d7g"/>
+                    <constraint firstAttribute="trailing" secondItem="fHm-pA-Mib" secondAttribute="trailing" id="zGR-9h-19C"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headView" destination="jo8-Fb-ltG" id="y8D-wq-Fu1"/>
+                <outlet property="userName" destination="0cD-c5-SCw" id="x2s-S1-MCY"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="likered" width="19" height="19"/>
+    </resources>
+</document>

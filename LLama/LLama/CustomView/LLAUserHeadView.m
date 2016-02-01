@@ -35,20 +35,19 @@ static const CGFloat roleImageViewHeightWidth = 8;
 
 #pragma mark - Init
 
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupViews];
+    }
+    return self;
+}
+
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self) {
-        [self initVariables];
-        [self initSubViews];
-        
-        
-        self.userInteractionEnabled = YES;
-        
-        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headViewTapped:)];
-        
-        [self addGestureRecognizer:tapGes];
-        
+        [self setupViews];
     }
     return self;
 }
@@ -57,6 +56,19 @@ static const CGFloat roleImageViewHeightWidth = 8;
     [super layoutSubviews];
     
     userHeadImageView.layer.cornerRadius = userHeadImageView.frame.size.height/2;
+
+}
+
+- (void) setupViews {
+    [self initVariables];
+    [self initSubViews];
+    
+    
+    self.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headViewTapped:)];
+    
+    [self addGestureRecognizer:tapGes];
 
 }
 
