@@ -9,6 +9,14 @@
 #import "MTLModel.h"
 #import "Mantle.h"
 
+typedef NS_ENUM(NSInteger,LLAHttpResonseCode){
+    
+    LLAHttpResonseCode_RequestSuccess = 0,
+    
+    LLAHttpResonseCode_TokenUnavailable = 401,
+    
+};
+
 @interface LLAHttpResponseData : MTLModel<MTLJSONSerializing>
 
 @property(nonatomic , assign) NSInteger responseCode;

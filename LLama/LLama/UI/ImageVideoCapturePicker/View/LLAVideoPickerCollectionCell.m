@@ -59,6 +59,7 @@ static const CGFloat timeLabelToBottom = 5;
     videoThumbView = [[UIImageView alloc] init];
     videoThumbView.translatesAutoresizingMaskIntoConstraints = NO;
     videoThumbView.contentMode = UIViewContentModeScaleAspectFill;
+    videoThumbView.clipsToBounds = YES;
     
     [self.contentView addSubview:videoThumbView];
     

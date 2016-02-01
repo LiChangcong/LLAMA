@@ -127,6 +127,13 @@ static NSString *const recordFoucusImageName = @"";
     
     //
     [shareRecorder startRunning];
+    
+    //
+    if (!shareRecorder.previewView) {
+        shareRecorder.previewView = videoPreView;
+    }
+    
+    
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -155,7 +162,7 @@ static NSString *const recordFoucusImageName = @"";
     
     videoPreView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width)];
     videoPreView.translatesAutoresizingMaskIntoConstraints = NO;
-    videoPreView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:1.0];
+    videoPreView.backgroundColor = [UIColor blackColor];
     videoPreView.userInteractionEnabled = YES;
     [self.view addSubview:videoPreView];
     
@@ -359,7 +366,8 @@ static NSString *const recordFoucusImageName = @"";
     audioConfig.sampleRate = 0;
     
     //preview
-    shareRecorder.previewView = videoPreView;
+    
+    //shareRecorder.previewView = videoPreView;
     
     //focus view
     SCRecorderToolsView *focusView = [[SCRecorderToolsView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
@@ -508,24 +516,24 @@ static NSString *const recordFoucusImageName = @"";
 #pragma mark - SCShareRecorderDelegate
 
 - (void)recorder:(SCRecorder *)recorder didCompleteSession:(SCRecordSession *)recordSession {
-   // NSLog(@"didCompleteSession:");
+    //NSLog(@"didCompleteSession:");
     
 }
 
 - (void)recorder:(SCRecorder *)recorder didInitializeAudioInSession:(SCRecordSession *)recordSession error:(NSError *)error {
-//    if (error == nil) {
-//        NSLog(@"Initialized audio in record session");
-//    } else {
-//        NSLog(@"Failed to initialize audio in record session: %@", error.localizedDescription);
-//    }
+    if (error == nil) {
+        //NSLog(@"Initialized audio in record session");
+    } else {
+        //NSLog(@"Failed to initialize audio in record session: %@", error.localizedDescription);
+    }
 }
 
 - (void)recorder:(SCRecorder *)recorder didInitializeVideoInSession:(SCRecordSession *)recordSession error:(NSError *)error {
-//    if (error == nil) {
-//        NSLog(@"Initialized video in record session");
-//    } else {
-//        NSLog(@"Failed to initialize video in record session: %@", error.localizedDescription);
-//    }
+    if (error == nil) {
+        //NSLog(@"Initialized video in record session");
+    } else {
+       // NSLog(@"Failed to initialize video in record session: %@", error.localizedDescription);
+    }
 }
 
 - (void)recorder:(SCRecorder *)recorder didBeginSegmentInSession:(SCRecordSession *)recordSession error:(NSError *)error {

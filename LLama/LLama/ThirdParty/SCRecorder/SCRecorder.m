@@ -1266,6 +1266,9 @@ static char* SCRecorderPhotoOptionsContext = "PhotoOptionsContext";
     _previewView = previewView;
     
     if (_previewView != nil) {
+        
+        [CATransaction setDisableActions:YES];
+        
         [_previewView.layer insertSublayer:_previewLayer atIndex:0];
         
         [self previewViewFrameChanged];
