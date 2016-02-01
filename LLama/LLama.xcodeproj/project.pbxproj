@@ -63,6 +63,9 @@
 		5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7A6D1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m */; };
 		5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */; };
 		5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298251C438E5500106BA2 /* LLACommonUtil.m */; };
+		5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */; };
+		5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845D1C5F0AB7002EC705 /* YYAlertView.m */; };
+		5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */; };
 		5C82750E1C5726A500DD547F /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8274FF1C5726A500DD547F /* MMAlertView.m */; };
 		5C82750F1C5726A500DD547F /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275011C5726A500DD547F /* MMDateView.m */; };
 		5C8275101C5726A500DD547F /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275041C5726A500DD547F /* MMPopupCategory.m */; };
@@ -513,6 +516,12 @@
 		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
 		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
 		5C7298251C438E5500106BA2 /* LLACommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACommonUtil.m; sourceTree = "<group>"; };
+		5C78845A1C5F0AB7002EC705 /* YYActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYActionSheetView.h; sourceTree = "<group>"; };
+		5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYActionSheetView.m; sourceTree = "<group>"; };
+		5C78845C1C5F0AB7002EC705 /* YYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAlertView.h; sourceTree = "<group>"; };
+		5C78845D1C5F0AB7002EC705 /* YYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAlertView.m; sourceTree = "<group>"; };
+		5C78845E1C5F0AB7002EC705 /* YYShowAlertUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYShowAlertUtil.h; sourceTree = "<group>"; };
+		5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYShowAlertUtil.m; sourceTree = "<group>"; };
 		5C8274FE1C5726A500DD547F /* MMAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlertView.h; sourceTree = "<group>"; };
 		5C8274FF1C5726A500DD547F /* MMAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlertView.m; sourceTree = "<group>"; };
 		5C8275001C5726A500DD547F /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = "<group>"; };
@@ -1351,6 +1360,19 @@
 			path = CommonUtil;
 			sourceTree = "<group>";
 		};
+		5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C78845A1C5F0AB7002EC705 /* YYActionSheetView.h */,
+				5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */,
+				5C78845C1C5F0AB7002EC705 /* YYAlertView.h */,
+				5C78845D1C5F0AB7002EC705 /* YYAlertView.m */,
+				5C78845E1C5F0AB7002EC705 /* YYShowAlertUtil.h */,
+				5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */,
+			);
+			path = YYShowAlertUtil;
+			sourceTree = "<group>";
+		};
 		5C8274FD1C5726A500DD547F /* MMPopupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2039,6 +2061,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */,
 				5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */,
 				5C7298231C438E4600106BA2 /* CommonUtil */,
 				5C72981F1C43668900106BA2 /* SaveUserDefaultUtil */,
@@ -2804,6 +2827,7 @@
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
 				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
 				5CC324DD1C5B65FB00413E25 /* LLAPickVideoItemInfo.m in Sources */,
+				5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				5CC696DA1C5CDEBF00E4BA89 /* AlipayOrder.m in Sources */,
 				7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */,
@@ -2832,6 +2856,7 @@
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
 				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
+				5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */,
 				A3DEDE6F1C3CAEC7009F3D37 /* TMPhotoView.m in Sources */,
 				A3DEDD9F1C3CAE38009F3D37 /* MTLValueTransformer.m in Sources */,
 				A3DEDE691C3CAEC7009F3D37 /* TMDetailsCell.m in Sources */,
@@ -2979,6 +3004,7 @@
 				5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */,
 				5CC324F21C5B83D000413E25 /* LLAPayUserPayTypeItem.m in Sources */,
 				5CC696D01C5CDEA100E4BA89 /* base64.m in Sources */,
+				5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,
@@ -3244,7 +3270,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fundu.thunderfund;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
@@ -3316,7 +3342,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fundu.thunderfund;
+				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";

@@ -156,7 +156,7 @@
             
             [self fetchUserInfoWithUser:user loginType:UserLoginType_SinaWeiBo];
             
-        }else {
+        }else if (state == LLAThirdLoginState_Failed){
             [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         }
         
@@ -176,7 +176,7 @@
             //fetch token;
             [self fetchUserInfoWithUser:user loginType:UserLoginType_WeChat];
 
-        }else {
+        }else if (state == LLAThirdLoginState_Failed){
             [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         }
         
@@ -198,7 +198,7 @@
             [self fetchUserInfoWithUser:user loginType:UserLoginType_QQ];
 
             
-        }else {
+        }else if(state == LLAThirdLoginState_Failed) {
             [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
         }
         

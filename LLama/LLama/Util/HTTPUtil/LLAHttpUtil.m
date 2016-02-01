@@ -9,6 +9,10 @@
 #import "LLAHttpUtil.h"
 #import "LLAHttpResponseData.h"
 #import "LLASaveUserDefaultUtil.h"
+#import "YYShowAlertUtil.h"
+
+#import "LLAUser.h"
+#import "LLAChangeRootControllerUtil.h"
 
 static NSString *const httpBaseURL = @"https://api.hillama.com";
 
@@ -93,12 +97,33 @@ static NSString *const httpBaseURL = @"https://api.hillama.com";
     }  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //
         LLAHttpResponseData *data = [LLAHttpResponseData parseJsonWithDic:responseObject];
-        if (data && data.responseCode == 0) {
+        if (data && data.responseCode == LLAHttpResonseCode_RequestSuccess) {
             if (responseBlock)
                 responseBlock(data.responseData);
         }else {
-            if (exceptionBlock)
-                exceptionBlock(data.responseCode,data.responseMessage);
+            if (data.responseCode == LLAHttpResonseCode_TokenUnavailable) {
+                //show ohter login
+                
+                //
+                [LLAUser logout];
+                //change root view controller
+                
+                [LLAChangeRootControllerUtil changeToLoginViewController];
+                
+                if ([UIApplication sharedApplication].keyWindow) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"你的帐号在别处登录，请重新登录" delegate:nil cancelButtonTitle:@"重新登录" otherButtonTitles:nil];
+                    [alertView show];
+                }
+                
+                
+                
+                
+            }else {
+            //
+                if (exceptionBlock)
+                    exceptionBlock(data.responseCode,data.responseMessage);
+
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

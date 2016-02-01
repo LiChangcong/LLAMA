@@ -147,7 +147,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 //video
                 LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
                 
-                itemInfo.thumbImage = [UIImage imageWithCGImage:result.thumbnail];
+                itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
                 itemInfo.videoDuration =[[result valueForProperty:ALAssetPropertyDuration] floatValue];
                 itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
                 
