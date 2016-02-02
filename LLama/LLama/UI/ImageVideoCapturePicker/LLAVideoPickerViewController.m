@@ -7,6 +7,8 @@
 //
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
+#import <AVFoundation/AVFoundation.h>
 
 //controller
 #import "LLAVideoPickerViewController.h"
@@ -137,46 +139,126 @@ static NSString *cellIdentifier = @"cellIdentifier";
 #pragma mark - Load Video Data
 
 - (void) loadVideoData {
-    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
     
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    if (NSClassFromString(@"PHPhotoLibrary")) {
+        //ios 8 and later
         
-        [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *groupStop) {
+        if ([PHPhotoLibrary authorizationStatus] ==  PHAuthorizationStatusDenied) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+
+        }
+        
+        PHFetchOptions *options = [[PHFetchOptions alloc] init];
+        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+        PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
+
+        //
+        PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+        
+        for (int i=0; i<assetsFetchResults.count;i++) {
+            //
+            PHAsset *asset = assetsFetchResults[i];
             
-            if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-                //video
+            [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                 
-                LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
+//                if (i== assetsFetchResults.count-1) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [HUD hide:YES];
+//
+//                    });
+//                }
                 
-                itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
-                itemInfo.videoDuration =[[result valueForProperty:ALAssetPropertyDuration] floatValue];
-                itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
-                
-                [dataArray addObject:itemInfo];
-                
-                if (groupStop && stop) {
+                if (asset && [asset isKindOfClass:[AVURLAsset class]]) {
                     
-                    [HUD hide:YES];
-                    [dataCollectionView reloadData];
+                    
+                    AVURLAsset *urlAsset = (AVURLAsset *) asset;
+                    
+                    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+                    imageGenerator.appliesPreferredTrackTransform = YES;
+                    
+                    CMTime time = kCMTimeZero;
+                    CMTime actualTime;
+                    
+                    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
+                    UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
+                
+                    LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
+                    itemInfo.videoDuration = CMTimeGetSeconds(urlAsset.duration);
+                    itemInfo.videoURL = urlAsset.URL;
+                    itemInfo.thumbImage = thumbImage;
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [dataArray addObject:itemInfo];
+                        [dataCollectionView reloadData];
+                        [HUD hide:YES];
+                    });
+
+
                 }
                 
-            }else {
-                //photo
-                if (stop)
-                    [HUD hide:YES];
-            }
+                
+            }];
+            
+            
+            
+            
+            //
+            
+            
+        }
+        
+        
+    }else {
+        
+        //ios 7
+        
+        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+        
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            
+            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *groupStop) {
+                
+                if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                    //video
+                    
+                    LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
+                    
+                    itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
+                    itemInfo.videoDuration =[[result valueForProperty:ALAssetPropertyDuration] floatValue];
+                    itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
+                    
+                    [dataArray addObject:itemInfo];
+                    
+                    if (groupStop && stop) {
+                        
+                        [HUD hide:YES];
+                        [dataCollectionView reloadData];
+                    }
+                    
+                }else {
+                    //photo
+                    if (stop)
+                        [HUD hide:YES];
+                }
+                
+            }];
+            
+            
+        } failureBlock:^(NSError *error) {
+            //failed,has no right to access album
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+
+            });
             
         }];
 
-        
-    } failureBlock:^(NSError *error) {
-       //failed,has no right to access album
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
-        
-    }];
-    
+    }
+
 }
 
 #pragma mark - Status Bar

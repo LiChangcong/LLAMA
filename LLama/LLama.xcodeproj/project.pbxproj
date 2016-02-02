@@ -136,6 +136,7 @@
 		5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png */; };
 		5CA18FD71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA18FA71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png */; };
 		5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */; };
+		5CB5EBFD1C60ACBD00ED74C5 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB5EBFC1C60ACBD00ED74C5 /* Photos.framework */; };
 		5CBC57941C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */; };
 		5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9A9E1C532A30001A4EA0 /* LLAUserProfileSettingController.m */; };
 		5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AA11C533136001A4EA0 /* LLAUserProfileSettingCell.m */; };
@@ -621,6 +622,7 @@
 		5CA18FA71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lla_Loading_9@3x.png"; sourceTree = "<group>"; };
 		5CA194671C4F889100A0B5B7 /* LLAVideoCacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoCacheUtil.h; sourceTree = "<group>"; };
 		5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoCacheUtil.m; sourceTree = "<group>"; };
+		5CB5EBFC1C60ACBD00ED74C5 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		5CBC57911C4DEBD80001F1A9 /* LLAChooseItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseItemProtocol.h; sourceTree = "<group>"; };
 		5CBC57921C4DF9380001F1A9 /* LLAScriptChooseActorHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorHeader.h; sourceTree = "<group>"; };
 		5CBC57931C4DF9380001F1A9 /* LLAScriptChooseActorHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptChooseActorHeader.m; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB5EBFD1C60ACBD00ED74C5 /* Photos.framework in Frameworks */,
 				A3209A8C1C3D07D500CADC51 /* libc++.tbd in Frameworks */,
 				A3209A881C3D07AD00CADC51 /* libz.tbd in Frameworks */,
 				5CC696DE1C5CE4C200E4BA89 /* libssl.a in Frameworks */,
@@ -1737,6 +1740,7 @@
 		660179C1F0CA8536FA315666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CB5EBFC1C60ACBD00ED74C5 /* Photos.framework */,
 				5C6D7A621C58B94800119A3A /* GLKit.framework */,
 				5C6D7A601C58B93500119A3A /* CoreAudio.framework */,
 				5C6D7A5E1C58B92C00119A3A /* AudioToolbox.framework */,
