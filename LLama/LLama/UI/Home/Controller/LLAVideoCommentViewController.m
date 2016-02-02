@@ -309,9 +309,10 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
     
     NSString *placeHoler = [NSString stringWithFormat:@"回复%@",commentItem.authorUser.userName];
     inputController.placeHolder = placeHoler;
+    replyToUser = commentItem.authorUser;
+
     [inputController inputViewBecomeFirstResponder];
     
-    replyToUser = commentItem.authorUser;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -326,7 +327,7 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
 - (void) sendMessageWithContent:(NSString *)content {
     //send message
     
-    [inputController inputViewResignFirstResponder];
+    
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
@@ -340,6 +341,7 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
     }
     
     [HUD show:YES];
+    [inputController inputViewResignFirstResponder];
     
     [LLAHttpUtil httpPostWithUrl:@"/play/addComment" param:params responseBlock:^(id responseObject) {
         [HUD hide:NO];
