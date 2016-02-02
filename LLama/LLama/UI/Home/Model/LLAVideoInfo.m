@@ -14,4 +14,18 @@
     return @{};
 }
 
+- (BOOL) isEqual:(id)object {
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    LLAVideoInfo *videoInfo = (LLAVideoInfo *) object;
+    if ([videoInfo.videoPlayURL isEqualToString:self.videoPlayURL]) {
+        return YES;
+    }else {
+        return NO;
+    }
+    
+}
+
 @end

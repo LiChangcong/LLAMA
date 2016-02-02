@@ -10,4 +10,6 @@
 
 @interface LLAVideoDetailViewController : LLACommonViewController
 
+- (instancetype) initWithVideoId:(NSString *) videoId;
+
 @end

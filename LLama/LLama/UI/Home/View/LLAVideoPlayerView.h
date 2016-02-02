@@ -14,6 +14,8 @@
 
 @protocol LLAVideoPlayerViewDelegate <NSObject>
 
+@optional
+
 - (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView;
 
 - (void) playerViewTappToPause:(LLAVideoPlayerView *)playerView;

@@ -10,6 +10,7 @@
 #import "LLAMyOrderListViewController.h"
 #import "LLAScriptDetailViewController.h"
 #import "LLAUserProfileViewController.h"
+#import "LLAVideoDetailViewController.h"
 
 //view
 #import "LLACollectionView.h"
@@ -336,9 +337,16 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     
     LLAScriptHallItemInfo *itemInfo = [mainInfo.dataList objectAtIndex:indexPath.row];
     
-    LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:itemInfo.scriptIdString];
+    if (itemInfo.status == LLAScriptStatus_VideoUploaded) {
+        LLAVideoDetailViewController *videoDetail = [[LLAVideoDetailViewController alloc] initWithVideoId:itemInfo.scriptIdString];
+        [self.navigationController pushViewController:videoDetail animated:YES];
+        
+    }else {
     
-    [self.navigationController pushViewController:scriptDetail animated:YES];
+        LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:itemInfo.scriptIdString];
+    
+        [self.navigationController pushViewController:scriptDetail animated:YES];
+    }
 }
 
 
@@ -362,9 +370,16 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
 
 - (void) manageScriptWithScriptInfo:(LLAScriptHallItemInfo *)scriptInfo {
     
-    LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:scriptInfo.scriptIdString];
-    
-    [self.navigationController pushViewController:scriptDetail animated:YES];
+    if (scriptInfo.status == LLAScriptStatus_VideoUploaded) {
+        LLAVideoDetailViewController *videoDetail = [[LLAVideoDetailViewController alloc] initWithVideoId:scriptInfo.scriptIdString];
+        [self.navigationController pushViewController:videoDetail animated:YES];
+        
+    }else {
+        
+        LLAScriptDetailViewController *scriptDetail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:scriptInfo.scriptIdString];
+        
+        [self.navigationController pushViewController:scriptDetail animated:YES];
+    }
 
 }
 

@@ -148,7 +148,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) setPlayingVideoInfo:(LLAVideoInfo *)videoInfo {
     
-    if (playingVideoInfo == videoInfo) {
+    if ([playingVideoInfo isEqual: videoInfo]) {
         return;
     }
     

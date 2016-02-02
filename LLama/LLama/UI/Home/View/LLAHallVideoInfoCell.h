@@ -14,6 +14,9 @@
 @class LLAHallVideoCommentItem;
 
 @protocol LLAHallVideoInfoCellDelegate <NSObject>
+
+@optional
+
 /**
  *  点击了头像
  */

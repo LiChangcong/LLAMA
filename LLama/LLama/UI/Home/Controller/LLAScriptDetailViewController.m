@@ -13,6 +13,7 @@
 #import "LLACaptureVideoViewController.h"
 
 #import "LLAPickVideoNavigationController.h"
+#import "LLAVideoDetailViewController.h"
 
 //view
 #import "LLACollectionView.h"
@@ -428,16 +429,18 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
             
         case LLAScriptStatus_VideoUploaded:
         {
-            if (scriptInfo.currentRole == LLAUserRoleInScript_Director) {
-                //director,show the video
-                
-            }else if (scriptInfo.currentRole == LLAUserRoleInScript_Actor) {
-                //actor,show the video
-            
-                
-            }else {
-                //passer,show the video
-            }
+//            if (scriptInfo.currentRole == LLAUserRoleInScript_Director) {
+//                //director,show the video
+//                
+//            }else if (scriptInfo.currentRole == LLAUserRoleInScript_Actor) {
+//                //actor,show the video
+//            
+//                
+//            }else {
+//                //passer,show the video
+//            }
+            LLAVideoDetailViewController *detail = [[LLAVideoDetailViewController alloc] initWithVideoId:scriptInfo.scriptIdString];
+            [self.navigationController pushViewController:detail animated:YES];
         }
             
             break;
