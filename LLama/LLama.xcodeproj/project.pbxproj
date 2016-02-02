@@ -3304,7 +3304,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -3376,7 +3376,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;

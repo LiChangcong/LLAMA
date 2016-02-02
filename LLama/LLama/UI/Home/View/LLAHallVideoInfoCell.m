@@ -142,6 +142,7 @@ static const CGFloat scriptLabelFontSize = 13;
     LLAHallVideoItemInfo *currentVideoInfo;
     //
     NSLayoutConstraint *commentContentViewHeightConstraints;
+    NSLayoutConstraint *actorLabelWidthConstraint;
     
 }
 
@@ -516,7 +517,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[directorLabel(width)]-(directorToName)-[directorNameLabel]"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[directorLabel(width)]-(directorToName)-[directorNameLabel]-(0)-[rewardView]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(directorLabelToLeft),@"toLeft",
@@ -535,7 +536,7 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [constrArr addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[actorLabel(width)]-(directorToName)-[actorNameLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[actorLabel(width)]-(directorToName)-[actorNameLabel(<=100)]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(directorLabelToLeft),@"toRight",
@@ -640,7 +641,12 @@ static const CGFloat scriptLabelFontSize = 13;
     for (NSLayoutConstraint *constr in constrArr) {
         if (constr.firstItem == commentsView && constr.firstAttribute == NSLayoutAttributeHeight) {
             commentContentViewHeightConstraints = constr;
-            break;
+        }else if (constr.firstAttribute == NSLayoutAttributeWidth && constr.firstItem == actorNameLabel) {
+            actorLabelWidthConstraint = constr;
+        }else {
+            if (actorLabelWidthConstraint && commentContentViewHeightConstraints) {
+                break;
+            }
         }
         
     }
@@ -709,6 +715,9 @@ static const CGFloat scriptLabelFontSize = 13;
     
     [actorHeadView updateHeadViewWithUser:currentVideoInfo.actorInfo];
     actorNameLabel.text = currentVideoInfo.actorInfo.userName;
+    
+    //update constraint
+    actorLabelWidthConstraint.constant = (tableWidth - videoRewardMoneyViewWidth)/2 - directorLabelToLeft - roleLabelWidth;
     
     [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentVideoInfo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
     

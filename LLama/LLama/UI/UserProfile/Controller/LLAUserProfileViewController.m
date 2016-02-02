@@ -13,6 +13,7 @@
 #import "LLAUserProfileEditUserInfoController.h"
 #import "LLAUserAccountDetailViewController.h"
 #import "LLACaptureVideoViewController.h"
+#import "LLAVideoCommentViewController.h"
 
 #import "LLAPickVideoNavigationController.h"
 
@@ -907,7 +908,7 @@ static const CGFloat navigationBarHeight = 64;
  *  评论按钮点击
  */
 - (void) commentVideoWithVideoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo {
-    
+    [self pushToCommentViewControllerWithInfo:videoItemInfo];
 }
 /**
  *  分享按钮点击
@@ -919,7 +920,7 @@ static const CGFloat navigationBarHeight = 64;
  *  评论中用户名按钮点击
  */
 - (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) vieoItemInfo {
-    
+    [self pushToCommentViewControllerWithInfo:vieoItemInfo];
 }
 
 - (void) chooseUserFromComment:(LLAHallVideoCommentItem *) commentInfo userInfo:(LLAUser *)userInfo videoInfo:(LLAHallVideoItemInfo *) videoItemInfo {
@@ -965,7 +966,17 @@ static const CGFloat navigationBarHeight = 64;
     
 }
 
+
+
 #pragma mark - Start Stop Video
+
+#pragma mark - Private Method
+
+- (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) videoImteInfo {
+    LLAVideoCommentViewController *comment = [[LLAVideoCommentViewController alloc] initWithVideoIdString:videoImteInfo.scriptID];
+    [self.navigationController pushViewController:comment animated:YES];
+
+}
 
 #pragma mark - Public Method
 

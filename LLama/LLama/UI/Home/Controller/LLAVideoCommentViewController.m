@@ -23,7 +23,10 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
+#import "LLACommonUtil.h"
 
+
+static NSString *const replyToViewPlaceHolder = @"添加评论...";
 
 @interface LLAVideoCommentViewController()<UITableViewDataSource,UITableViewDelegate,LLAVideoCommentInputViewControllerDelegate,LLAVideoCommentCellDelegate>
 {
@@ -38,9 +41,13 @@
     
     LLAVideoCommentMainInfo *mainInfo;
     
+    UIControl *coverView;
     //
     NSLayoutConstraint *inputViewHeightConstraints;
+    
+    //reply to user
 
+    LLAUser *replyToUser;
 }
 
 @end
@@ -61,6 +68,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     // 设置导航栏
     [self initNavigationItems];
     
@@ -104,15 +113,32 @@
     //
     inputController = [[LLAVideoCommentInputViewController alloc] init];
     inputController.delegate = self;
+    inputController.placeHolder = @"添加评论";
     
     [self addChildViewController:inputController];
     [inputController didMoveToParentViewController:self];
+    
     //
     
     UIView *inputView = inputController.view;
     inputView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.view addSubview:inputView];
+    
+    //
+    //cover view
+    coverView = [[UIControl alloc] init];
+    coverView.translatesAutoresizingMaskIntoConstraints = NO;
+    coverView.backgroundColor = [UIColor clearColor];
+    coverView.hidden = YES;
+    
+    [coverView addTarget:self action:@selector(hideIputView:) forControlEvents:UIControlEventTouchDown];
+    
+    [self.view addSubview:coverView];
+
+    [self.view bringSubviewToFront:inputView];
+    
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
     //constraints
     
@@ -141,7 +167,7 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(inputView)]];
     
-    [self.view addConstraints:constrArray];
+
     
     for (NSLayoutConstraint *constr in constrArray) {
         if (constr.firstAttribute == NSLayoutAttributeHeight && constr.firstItem == inputController.view) {
@@ -150,6 +176,22 @@
             break;
         }
     }
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(0)-[coverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(coverView)]];
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[coverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(coverView)]];
+    
+    [self.view addConstraints:constrArray];
     
     
 }
@@ -262,6 +304,17 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    //
+    LLAHallVideoCommentItem *commentItem = mainInfo.dataList[indexPath.row];
+    
+    NSString *placeHoler = [NSString stringWithFormat:@"回复%@",commentItem.authorUser.userName];
+    inputController.placeHolder = placeHoler;
+    [inputController inputViewBecomeFirstResponder];
+    
+    replyToUser = commentItem.authorUser;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,6 +325,54 @@
 
 - (void) sendMessageWithContent:(NSString *)content {
     //send message
+    
+    [inputController inputViewResignFirstResponder];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:videoIdString forKey:@"playId"];
+    [params setValue:content forKey:@"content"];
+    
+    LLAUser *user = nil;
+    if (replyToUser) {
+        [params setValue:replyToUser.userIdString forKey:@"userId"];
+        user = [replyToUser copy];
+    }
+    
+    [HUD show:YES];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/play/addComment" param:params responseBlock:^(id responseObject) {
+        [HUD hide:NO];
+        //
+        
+        LLAHallVideoCommentItem *comment = [LLAHallVideoCommentItem new];
+        comment.scriptIdString = videoIdString;
+        comment.authorUser = [LLAUser me];
+        comment.replyToUser = user;
+        comment.commentContent = content ;
+        comment.commentTime = [[NSDate date] timeIntervalSince1970];
+        comment.commentIdString = @"刚刚";
+        
+        [mainInfo.dataList insertObject:comment atIndex:0];
+        
+        [dataTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+        [inputController resetContent];
+        
+        replyToUser = nil;
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        [LLAViewUtil showAlter:dataTableView withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:NO];
+        [LLAViewUtil showAlter:dataTableView withText:error.localizedDescription];
+        
+    }];
 }
 
 - (void) inputViewWillChangeHeight:(CGFloat)newHeight duration:(CGFloat)duration animationCurve:(UIViewAnimationCurve)animationCurve {
@@ -303,6 +404,24 @@
     
 }
 
+- (void) inputViewControllerWillBecomeFirstResponder {
+    
+    //show cover
+    coverView.hidden = NO;
+}
+
+- (void) inputViewControllerWillResignFirstResponder {
+    coverView.hidden = YES;
+    inputController.placeHolder = replyToViewPlaceHolder;
+    replyToUser = nil;
+}
+
+#pragma mark - hide 
+
+- (void)  hideIputView:(UIButton *) sender {
+    [inputController inputViewResignFirstResponder];
+}
+
 #pragma mark - LLAVideoCommentCellDelegate
 
 - (void) toggleUser:(LLAUser *)userInfo commentInfo:(LLAHallVideoCommentItem *)commentInfo {
@@ -312,6 +431,8 @@
         [self.navigationController pushViewController:userProfile animated:YES];
     }
 }
+
+
 
 
 @end

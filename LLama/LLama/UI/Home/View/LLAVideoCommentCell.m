@@ -119,6 +119,13 @@ static const CGFloat commentContentToRight = 12;
     
     [self.contentView addSubview:commentContentLabel];
     
+    //
+    sepLineView = [[UIView alloc] init];
+    sepLineView.translatesAutoresizingMaskIntoConstraints = NO;
+    sepLineView.backgroundColor = sepLineColor;
+    
+    [self.contentView addSubview:sepLineView];
+    
 }
 
 - (void) initSubConstraints {
@@ -137,7 +144,7 @@ static const CGFloat commentContentToRight = 12;
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(toTop)-[athuorUserNameLabel(height)]-(nameToContent)-[commentContentLabel]-(contentToSepLineSpace)-[sepLineView(sepLineHeight)]-(0)-|"
+      constraintsWithVisualFormat:@"V:|-(toTop)-[athuorUserNameLabel(height)]-(nameToContent)-[commentContentLabel]-(contentToSepLine)-[sepLineView(lineHeight)]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"toTop":@(nameLabelToTop),
                 @"height":@(nameLabelHeight),
@@ -167,16 +174,21 @@ static const CGFloat commentContentToRight = 12;
                 @"toRight":@(timeLabelToRight)}
       views:NSDictionaryOfVariableBindings(authorHeadView,athuorUserNameLabel,timeLabel)]];
     
+    [timeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [timeLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
+    [athuorUserNameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [athuorUserNameLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    
     //
+    
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[authorHeadView]-(headToContent)-[athuorUserNameLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[authorHeadView]-(headToContent)-[commentContentLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"headToContent":@(headViewToCenterHorSpace),
                 @"toRight":@(commentContentToRight)}
-      views:NSDictionaryOfVariableBindings(authorHeadView,athuorUserNameLabel)]];
+      views:NSDictionaryOfVariableBindings(authorHeadView,commentContentLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -227,6 +239,7 @@ static const CGFloat commentContentToRight = 12;
     
     athuorUserNameLabel.textContainer = [self authorNameTextContainer];
     
+    commentContentLabel.textContainer = commentInfo.textContainer;
 }
 
 - (TYTextContainer *) authorNameTextContainer {
@@ -235,10 +248,10 @@ static const CGFloat commentContentToRight = 12;
     textContainer.linkColor = [UIColor themeColor];
     textContainer.font = [UIFont systemFontOfSize:authorNameFontSize];
     textContainer.textColor = [UIColor colorWithHex:userNameNormalColorHex];
-    
     textContainer.text = currentComment.authorUser.userName;
     
     [textContainer addLinkWithLinkData:currentComment.authorUser linkColor:nil underLineStyle:kCTUnderlineStyleNone range:NSMakeRange(0, currentComment.authorUser.userName.length)];
+    textContainer = [textContainer createTextContainerWithTextWidth:400];
     
     return textContainer;
     
@@ -261,7 +274,7 @@ static const CGFloat commentContentToRight = 12;
     
     if (commentInfo.replyToUser) {
         
-        [contentText appendString:commentInfo.replyToUser.userName];
+        [contentText appendString:[NSString stringWithFormat:@"@%@ ",commentInfo.replyToUser.userName]];
     }
     
     if (commentInfo.commentContent.length >0)
@@ -271,8 +284,12 @@ static const CGFloat commentContentToRight = 12;
     
     //add arrange
     if (commentInfo.replyToUser.userName.length > 0) {
-        [textContainer addLinkWithLinkData:commentInfo.replyToUser linkColor:nil underLineStyle:kCTUnderlineStyleNone range:NSMakeRange(0, commentInfo.replyToUser.userName.length)];
+        [textContainer addLinkWithLinkData:commentInfo.replyToUser linkColor:nil underLineStyle:kCTUnderlineStyleNone range:NSMakeRange(0, commentInfo.replyToUser.userName.length+1)];
     }
+    
+    textContainer= [textContainer createTextContainerWithTextWidth:maxWidth];
+    
+    commentInfo.textContainer = textContainer;
 
     
 }

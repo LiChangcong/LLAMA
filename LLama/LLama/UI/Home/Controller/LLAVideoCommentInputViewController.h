@@ -12,9 +12,15 @@ extern CGFloat llaVideoCommentIputViewHeight;
 
 @protocol LLAVideoCommentInputViewControllerDelegate <NSObject>
 
+@optional
+
 - (void) inputViewWillChangeHeight:(CGFloat) newHeight duration:(CGFloat) duration animationCurve:(UIViewAnimationCurve) animationCurve;
 
 - (void) sendMessageWithContent:(NSString *) content;
+
+- (void) inputViewControllerWillBecomeFirstResponder;
+
+- (void) inputViewControllerWillResignFirstResponder;
 
 @end
 
@@ -22,8 +28,12 @@ extern CGFloat llaVideoCommentIputViewHeight;
 
 @property(nonatomic, weak) id<LLAVideoCommentInputViewControllerDelegate> delegate;
 
+@property(nonatomic , copy) NSString *placeHolder;
+
 - (void) inputViewBecomeFirstResponder;
 
 - (void) inputViewResignFirstResponder;
+
+- (void) resetContent;
 
 @end

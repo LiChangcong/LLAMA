@@ -14,9 +14,9 @@
 
 @interface LLAHallVideoCommentItem : MTLModel<MTLJSONSerializing,LLASubCommentProtocol>
 
-@property(nonatomic , assign) NSInteger commentId;
+@property(nonatomic , assign) NSString  *commentIdString;
 
-@property(nonatomic , assign) NSInteger scriptId;
+@property(nonatomic , assign) NSString *scriptIdString;
 
 @property(nonatomic , strong) LLAUser *authorUser;
 

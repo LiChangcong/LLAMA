@@ -14,7 +14,12 @@
 #import "LLAUser.h"
 #import "LLAChangeRootControllerUtil.h"
 
-static NSString *const httpBaseURL = @"https://api.hillama.com";
+//正式服
+//static NSString *const httpBaseURL = @"https://api.hillama.com";
+
+//测试服
+static NSString *const httpBaseURL = @"https://test-api.hillama.com/";
+
 
 @implementation LLAHttpUtil
 

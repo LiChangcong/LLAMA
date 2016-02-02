@@ -73,6 +73,7 @@
     dataTableView.delegate = self;
     dataTableView.showsVerticalScrollIndicator = NO;
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    dataTableView.backgroundColor = [UIColor colorWithHex:0xf1f1f1];
     [self.view addSubview:dataTableView];
     
 

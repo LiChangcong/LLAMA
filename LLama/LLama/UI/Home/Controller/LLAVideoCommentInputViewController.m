@@ -51,6 +51,7 @@ CGFloat llaVideoCommentIputViewHeight = inputViewToTop + inputViewMinHeight + in
 @implementation LLAVideoCommentInputViewController
 
 @synthesize delegate;
+@synthesize placeHolder;
 
 #pragma mark - Life Cycle
 
@@ -100,12 +101,12 @@ CGFloat llaVideoCommentIputViewHeight = inputViewToTop + inputViewMinHeight + in
     //messageTextView.minNumberOfLines = 1;
     contentInputView.minHeight = inputViewMinHeight;
     contentInputView.maxNumberOfLines = 5;
-    contentInputView.hidden = YES;
+    contentInputView.hidden = NO;
     contentInputView.layer.cornerRadius = 4;
     contentInputView.clipsToBounds = YES;
     contentInputView.delegate = self;
     contentInputView.isScrollable = YES;
-    contentInputView.placeholder = @"添加评论...";
+    contentInputView.placeholder = placeHolder;
     
     [self.view addSubview:contentInputView];
     
@@ -142,8 +143,7 @@ CGFloat llaVideoCommentIputViewHeight = inputViewToTop + inputViewMinHeight + in
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:[sendMessageButton(height)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:@{
-                @"height":@(inputViewMinHeight)}
+      metrics:@{@"height":@(inputViewMinHeight)}
       views:NSDictionaryOfVariableBindings(sendMessageButton)]];
     
     [constrArray addObject:
@@ -243,13 +243,21 @@ CGFloat llaVideoCommentIputViewHeight = inputViewToTop + inputViewMinHeight + in
 
 #pragma mark - HPGrowingTextViewDelegate
 
+- (BOOL) growingTextViewShouldBeginEditing:(HPGrowingTextView *)growingTextView {
+    
+    if (delegate && [delegate respondsToSelector:@selector(inputViewControllerWillBecomeFirstResponder)]) {
+        [delegate inputViewControllerWillBecomeFirstResponder];
+    }
+    return YES;
+}
+
 - (void) growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
     
-    CGFloat newHeight = MAX(height,inputViewMinHeight);
-    newHeight += inputViewToTop;
-    newHeight += inputViewToBottom;
+    CGFloat offset = height - growingTextView.bounds.size.height;
     
-    inputViewHeightConstraints.constant = newHeight;
+    CGFloat newHeight = self.view.bounds.size.height + offset;
+    
+    inputViewHeightConstraints.constant = height;
     
     if (delegate && [delegate respondsToSelector:@selector(inputViewWillChangeHeight:duration:animationCurve:)]) {
         [delegate inputViewWillChangeHeight:newHeight duration:0.1 animationCurve:UIViewAnimationCurveEaseInOut];
@@ -320,20 +328,40 @@ CGFloat llaVideoCommentIputViewHeight = inputViewToTop + inputViewMinHeight + in
         sendMessageButton.enabled = YES;
     }else {
         sendMessageButton.enabled = NO;
+        growingTextView.placeholder = placeHolder;
     }
 }
 
+#pragma mark - Set
+
+- (void) setPlaceHolder:(NSString *)holder {
+    //
+    placeHolder = holder;
+    contentInputView.placeholder = placeHolder;
+}
 
 #pragma mark - Public Method
 
 - (void) inputViewBecomeFirstResponder {
-    [contentInputView becomeFirstResponder];
+    if (delegate && [delegate respondsToSelector:@selector(inputViewControllerWillBecomeFirstResponder)]) {
+        [delegate inputViewControllerWillBecomeFirstResponder];
+    }
+    [contentInputView.internalTextView becomeFirstResponder];
 }
 
 - (void) inputViewResignFirstResponder {
     
+    if (delegate && [delegate respondsToSelector:@selector(inputViewControllerWillResignFirstResponder)]) {
+        [delegate inputViewControllerWillResignFirstResponder];
+    }
+    
     [contentInputView resignFirstResponder];
     
+}
+
+- (void) resetContent {
+    [contentInputView setText:@""];
+    contentInputView.placeholder = placeHolder;
 }
 
 @end

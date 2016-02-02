@@ -19,8 +19,8 @@
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{@"commentId":@"id",
-             @"scriptId":@"uid",
+    return @{@"commentIdString":@"id",
+             //@"scriptIdString":@"uid",
              @"commentContent":@"content",
              @"commentTimeString":@"time",
              @"commentTime":@"time",
