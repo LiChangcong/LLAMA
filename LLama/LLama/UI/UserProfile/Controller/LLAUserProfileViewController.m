@@ -743,13 +743,32 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    if (scrollView.contentOffset.y > 2 * navigationBarHeight) {
+    if (scrollView.contentOffset.y >  navigationBarHeight) {
         [customNaviBar makeBackgroundClear:NO];
         
     }else {
         [customNaviBar makeBackgroundClear:YES];
         
     }
+    //stop those which is out of screen
+    NSArray *visibleCells = [dataTableView visibleCells];
+    
+    for (UITableViewCell* tempCell in visibleCells) {
+        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
+            
+            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
+            
+            CGRect playerFrame = tc.videoPlayerView.bounds;
+            
+            CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
+            if (subViewFrame.origin.y >= scrollView.contentOffset.y+scrollView.bounds.size.height || scrollView.contentOffset.y>subViewFrame.origin.y+subViewFrame.size.height) {
+                
+                [tc.videoPlayerView stopVideo];
+            }
+            
+        }
+    }
+
     
 }
 
