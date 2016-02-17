@@ -312,16 +312,16 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 
     
     //edit done,test,upload
-    SCAssetExportSession *exportSession = [[SCAssetExportSession alloc] initWithAsset:editAsset];
+//    SCAssetExportSession *exportSession = [[SCAssetExportSession alloc] initWithAsset:editAsset];
     
     //
     
     CGFloat assetDuration = CMTimeGetSeconds(editAsset.duration);
     
-    exportSession.outputUrl = [SCRecorder sharedRecorder].session.outputUrl;
-    exportSession.outputFileType = AVFileTypeMPEG4;
-    exportSession.contextType = SCContextTypeAuto;
-    exportSession.videoConfiguration.size = CGSizeMake(480, 480);
+//    exportSession.outputUrl = [SCRecorder sharedRecorder].session.outputUrl;
+//    exportSession.outputFileType = AVFileTypeMPEG4;
+//    exportSession.contextType = SCContextTypeAuto;
+//    exportSession.videoConfiguration.size = CGSizeMake(480, 480);
     
     //
     
@@ -329,7 +329,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     CMTime durationTime = CMTimeMakeWithSeconds(assetDuration*(editProgressView.editEndRatio-editProgressView.editBeginRatio), editAsset.duration.timescale);
     
-    exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
+    //exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
     
     //get thumb image
     
@@ -387,30 +387,30 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     [encoder exportAsynchronouslyWithCompletionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!exportSession.error) {
+            if (!encoder.error) {
                 //upload
                 
                 [loadingView hide:YES];
                 
-                [encoder.outputURL saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
-                    NSLog(@"error:%@",error);
-                }];
+//                [encoder.outputURL saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
+//                    NSLog(@"error:%@",error);
+//                }];
                 
                 
-//                LLAPickVideoNavigationController *pick = (LLAPickVideoNavigationController *)self.navigationController;
-//                
-//                if ([pick isKindOfClass:[LLAPickVideoNavigationController class]]) {
-//                    
-//                    [pick dismissViewControllerAnimated:YES completion:^{
-//                        if (pick.videoPickerDelegate && [pick.videoPickerDelegate respondsToSelector:@selector(videoPicker:didFinishPickVideo:thumbImage:)]) {
-//                            [pick.videoPickerDelegate videoPicker:pick didFinishPickVideo:exportSession.outputUrl thumbImage:thumbImage];
-//                        }
-//                    }];
-//                }
+                LLAPickVideoNavigationController *pick = (LLAPickVideoNavigationController *)self.navigationController;
+                
+                if ([pick isKindOfClass:[LLAPickVideoNavigationController class]]) {
+                    
+                    [pick dismissViewControllerAnimated:YES completion:^{
+                        if (pick.videoPickerDelegate && [pick.videoPickerDelegate respondsToSelector:@selector(videoPicker:didFinishPickVideo:thumbImage:)]) {
+                            [pick.videoPickerDelegate videoPicker:pick didFinishPickVideo:encoder.outputURL thumbImage:thumbImage];
+                        }
+                    }];
+                }
 
                 
             }else {
-                NSLog(@"exportError:%@",exportSession.error);
+                //NSLog(@"exportError:%@",encoder.error);
                 [loadingView hide:YES];
             }
 
