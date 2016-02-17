@@ -16,7 +16,8 @@
 
 #import "LLAVideoCacheUtil.h"
 
-static void *AVPlayerStatusObservationContext = &AVPlayerStatusObservationContext;
+static void *AVPlayerCurrentItemObservationContext = &AVPlayerCurrentItemObservationContext;
+static void *AVPlayerItemStatusObservationContext = &AVPlayerItemStatusObservationContext;
 static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 @interface LLAVideoPlayerView()
@@ -27,6 +28,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     id playerTimeObserver;
     
     UIActivityIndicatorView *loadingIndicator;
+    
+    //
+    UIImageView *coverImageView;
 }
 
 @property(nonatomic , assign , readwrite) BOOL isPlaying;
@@ -44,8 +48,10 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 - (void) dealloc {
     
     @try {
-        [videoPlayer removeObserver:self forKeyPath:@"status"];
+        [videoPlayer.currentItem removeObserver:self forKeyPath:@"status"];
+        
         [videoPlayer removeObserver:self forKeyPath:@"rate"];
+        [videoPlayer removeObserver:self forKeyPath:@"currentItem"];
     }
     @catch (NSException *exception) {
         
@@ -69,8 +75,10 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     //
     videoPlayerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
-    loadingIndicator.center = self.center;
+    loadingIndicator.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     
+    coverImageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+
 }
 
 #pragma mark - Init
@@ -84,6 +92,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         
         [self initAVPlayer];
         [self initPlayerLayer];
+        [self initCoverImageView];
         
         loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         loadingIndicator.hidesWhenStopped = YES;
@@ -103,8 +112,10 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     
     videoPlayer = [[AVPlayer alloc] init];
     
-    [videoPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:AVPlayerStatusObservationContext];
-    [videoPlayer addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:AVPlayerRateObservationContext];
+//    [videoPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld context:AVPlayerStatusObservationContext];
+    [videoPlayer addObserver:self forKeyPath:@"rate" options: NSKeyValueObservingOptionOld context:AVPlayerRateObservationContext];
+    
+    [videoPlayer addObserver:self forKeyPath:@"currentItem" options:NSKeyValueObservingOptionNew context:AVPlayerCurrentItemObservationContext];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidPlayToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
@@ -129,14 +140,32 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     [self.layer addSublayer:videoPlayerLayer];
 }
 
+- (void) initCoverImageView {
+    coverImageView = [[UIImageView alloc] init];
+    coverImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    coverImageView.userInteractionEnabled = NO;
+    coverImageView.clipsToBounds = YES;
+    coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+    //coverImageView.hidden = YES;
+    
+    [self addSubview:coverImageView];
+    
+}
+
 - (void) replacePlayerItem {
     
     AVPlayerItem *newItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:playingVideoInfo.videoPlayURL]];
     
     if (newItem) {
+        
+        [self removePlayerItemObserver];
+        
         [videoPlayer replaceCurrentItemWithPlayerItem:newItem];
+        
+        [self initPlayerItemObserver];
     }
 }
+
 
 #pragma mark - Getter
 
@@ -160,24 +189,37 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     
     [self replacePlayerItem];
     
+    //
+    [coverImageView setImageWithURL:[NSURL URLWithString:playingVideoInfo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
+    
 }
 
 #pragma mark - Observer
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     
-    if (context == AVPlayerStatusObservationContext) {
+    if (context == AVPlayerCurrentItemObservationContext) {
+        //change item
         
-        switch (videoPlayer.status) {
-            case AVPlayerStatusFailed:
+        
+    }else if (context == AVPlayerItemStatusObservationContext) {
+        
+        switch (videoPlayer.currentItem.status) {
+            case AVPlayerItemStatusFailed:
                 [loadingIndicator stopAnimating];
+                [self removePlayerItemObserver];
+                
+                [LLAViewUtil showAlter:self withText:@"视频播放失败"];
                 break;
-            case AVPlayerStatusReadyToPlay:
-                [loadingIndicator stopAnimating];
+            case AVPlayerItemStatusReadyToPlay:
+                //[loadingIndicator stopAnimating];
+                NSLog(@"ready to Play");
                 break;
-            case AVPlayerStatusUnknown:
+            case AVPlayerItemStatusUnknown:
                 //
                 [loadingIndicator startAnimating];
+                NSLog(@"unknown");
+
                 break;
                 
             default:
@@ -185,11 +227,24 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         }
         
     }else if(context == AVPlayerRateObservationContext) {
-        if (videoPlayer.rate > 0) {
-            [loadingIndicator stopAnimating];
-        }else if (videoPlayer.status != AVPlayerStatusReadyToPlay){
-            [loadingIndicator startAnimating];
+//        if (videoPlayer.rate > 0) {
+//            [loadingIndicator stopAnimating];
+//        }else if (videoPlayer.status != AVPlayerStatusReadyToPlay){
+//            [loadingIndicator startAnimating];
+//        }
+        if (videoPlayer.rate == 0 && (CMTimeGetSeconds(videoPlayer.currentTime)) == 0) {
+            coverImageView.hidden = NO;
+            NSLog(@"show cover");
+        }else {
+            coverImageView.hidden = YES;
+            NSLog(@"hide cover");
         }
+        
+        if (videoPlayer.rate != 0) {
+            [loadingIndicator stopAnimating];
+            NSLog(@"stop indicator");
+        }
+        
     }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -227,6 +282,32 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     }
 }
 
+#pragma mark - Publick Mehtod
+
+- (void) removePlayerItemObserver {
+    
+    if (videoPlayer.currentItem) {
+        @try {
+            [videoPlayer.currentItem removeObserver:self forKeyPath:@"status"];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
+
+    }
+}
+
+- (void) initPlayerItemObserver {
+    
+    if (videoPlayer.currentItem) {
+    
+        [videoPlayer.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld context:AVPlayerItemStatusObservationContext];
+    }
+}
+
 #pragma mark - Public Method
 
 - (void) playVideo {
@@ -236,19 +317,28 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     }else {
         [videoPlayer play];
     }
-    self.hidden = NO;
+    
 }
 
 - (void) stopVideo {
-    [videoPlayer pause];
     
-    [videoPlayer seekToTime:kCMTimeZero];
+    if (self.isPlaying || CMTimeGetSeconds(videoPlayer.currentTime) > 0) {
     
-    self.hidden = YES;
+        [videoPlayer pause];
+    
+        [videoPlayer seekToTime:kCMTimeZero];
+    }
+    //
+    coverImageView.hidden = NO;
 }
 
 - (void) pauseVideo {
     [videoPlayer pause];
+}
+
+
+- (void) updateCoverImageWithVideoInfo:(LLAVideoInfo *)videoInfo {
+    [coverImageView setImageWithURL:[NSURL URLWithString:videoInfo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
 }
 
 @end

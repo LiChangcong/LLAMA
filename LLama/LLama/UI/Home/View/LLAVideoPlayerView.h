@@ -36,4 +36,6 @@
 
 - (void) stopVideo;
 
+- (void) updateCoverImageWithVideoInfo:(LLAVideoInfo *) videoInfo;
+
 @end

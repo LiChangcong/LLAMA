@@ -270,7 +270,7 @@ static const CGFloat scriptLabelFontSize = 13;
     // 视频播放器
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
-    videoPlayerView.hidden = YES;
+    videoPlayerView.hidden = NO;
     videoPlayerView.delegate = delegate;
     [self.contentView addSubview:videoPlayerView];
     
@@ -754,6 +754,9 @@ static const CGFloat scriptLabelFontSize = 13;
     //videoPlayerView.playingVideoInfo = videoInfo.videoInfo;
     shouldPlayVideoInfo = videoInfo.videoInfo;
     
+    [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
+    
+    //
 }
 
 #pragma mark - Calculate Height
