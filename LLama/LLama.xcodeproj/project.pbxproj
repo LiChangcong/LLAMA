@@ -226,6 +226,9 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */; };
+		7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */; };
+		7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */; };
 		7E96C3A71C5F6EDC00B13415 /* LLAILoveWhoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E96C3A61C5F6EDC00B13415 /* LLAILoveWhoInfo.m */; };
 		7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F7B0F1C58BE5C00620ED2 /* LLAModifyPasswordViewController.m */; };
 		7E9F7B121C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E9F7B101C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib */; };
@@ -238,6 +241,7 @@
 		7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F531C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib */; };
 		7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */; };
 		7EAA2F5A1C575448002DF3B1 /* LLABoundPhonesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */; };
+		7EAF3D2F1C7418BC00AA91BA /* LLACameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAF3D2E1C7418BC00AA91BA /* LLACameraCell.m */; };
 		7EB0BA5B1C5F384B00D4A43C /* LLALoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0BA5A1C5F384B00D4A43C /* LLALoveViewController.m */; };
 		7EB0BA5E1C5F38D400D4A43C /* LLAWhoLoveMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0BA5D1C5F38D400D4A43C /* LLAWhoLoveMeViewController.m */; };
 		7EB0BA611C5F38E300D4A43C /* LLAILoveWhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0BA601C5F38E300D4A43C /* LLAILoveWhoViewController.m */; };
@@ -884,6 +888,12 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E3376821C72E79F00CA6E26 /* LLAPickImageItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageItemInfo.h; sourceTree = "<group>"; };
+		7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageItemInfo.m; sourceTree = "<group>"; };
+		7E3376851C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAImagePickerCollectionCell.h; sourceTree = "<group>"; };
+		7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAImagePickerCollectionCell.m; sourceTree = "<group>"; };
+		7E3376881C72F12200CA6E26 /* LLAImagePickerTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAImagePickerTopToolBar.h; sourceTree = "<group>"; };
+		7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAImagePickerTopToolBar.m; sourceTree = "<group>"; };
 		7E96C3A51C5F6EDC00B13415 /* LLAILoveWhoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAILoveWhoInfo.h; sourceTree = "<group>"; };
 		7E96C3A61C5F6EDC00B13415 /* LLAILoveWhoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAILoveWhoInfo.m; sourceTree = "<group>"; };
 		7E9F7B0E1C58BE5C00620ED2 /* LLAModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAModifyPasswordViewController.h; sourceTree = "<group>"; };
@@ -903,6 +913,8 @@
 		7EAA2F561C575448002DF3B1 /* LLABoundPhonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABoundPhonesViewController.h; sourceTree = "<group>"; };
 		7EAA2F571C575448002DF3B1 /* LLABoundPhonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABoundPhonesViewController.m; sourceTree = "<group>"; };
 		7EAA2F581C575448002DF3B1 /* LLABoundPhonesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLABoundPhonesViewController.xib; sourceTree = "<group>"; };
+		7EAF3D2D1C7418BC00AA91BA /* LLACameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACameraCell.h; sourceTree = "<group>"; };
+		7EAF3D2E1C7418BC00AA91BA /* LLACameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACameraCell.m; sourceTree = "<group>"; };
 		7EB0BA591C5F384B00D4A43C /* LLALoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoveViewController.h; sourceTree = "<group>"; };
 		7EB0BA5A1C5F384B00D4A43C /* LLALoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoveViewController.m; sourceTree = "<group>"; };
 		7EB0BA5C1C5F38D400D4A43C /* LLAWhoLoveMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAWhoLoveMeViewController.h; sourceTree = "<group>"; };
@@ -1338,6 +1350,8 @@
 				5C6D7A6D1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m */,
 				5CC324DB1C5B65FB00413E25 /* LLAPickVideoItemInfo.h */,
 				5CC324DC1C5B65FB00413E25 /* LLAPickVideoItemInfo.m */,
+				7E3376821C72E79F00CA6E26 /* LLAPickImageItemInfo.h */,
+				7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1357,6 +1371,12 @@
 				5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */,
 				5CC324E11C5B694300413E25 /* LLAVideoPickerCollectionCell.h */,
 				5CC324E21C5B694300413E25 /* LLAVideoPickerCollectionCell.m */,
+				7E3376881C72F12200CA6E26 /* LLAImagePickerTopToolBar.h */,
+				7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */,
+				7E3376851C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.h */,
+				7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */,
+				7EAF3D2D1C7418BC00AA91BA /* LLACameraCell.h */,
+				7EAF3D2E1C7418BC00AA91BA /* LLACameraCell.m */,
 				5C6C770F1C73357500D59A88 /* LLAEditVideoScaleView.h */,
 				5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */,
 			);
@@ -3043,6 +3063,7 @@
 				5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */,
 				5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */,
 				5C6D7A411C58B73200119A3A /* SCPhotoConfiguration.m in Sources */,
+				7EAF3D2F1C7418BC00AA91BA /* LLACameraCell.m in Sources */,
 				A3DEDE8C1C3CAEC7009F3D37 /* TMLikeViewController.m in Sources */,
 				5C6D7A371C58B73200119A3A /* SCAudioTools.m in Sources */,
 				5CC696D61C5CDEA100E4BA89 /* RSADataSigner.m in Sources */,
@@ -3051,6 +3072,7 @@
 				5CC696D01C5CDEA100E4BA89 /* base64.m in Sources */,
 				5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */,
 				5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */,
+				7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,
@@ -3104,6 +3126,7 @@
 				5C9353B71C5DC2C800DD75DC /* LLAUploadVideoProgressView.m in Sources */,
 				5C6D7A3F1C58B73200119A3A /* SCIOPixelBuffers.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
+				7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */,
 				5CC4D4311C50CB5800BD3D57 /* LLAUserProfileMyInfoCell.m in Sources */,
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */,
@@ -3124,6 +3147,7 @@
 				5C6D7A4A1C58B73200119A3A /* SCSampleBufferHolder.m in Sources */,
 				5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */,
 				5C8275121C5726A500DD547F /* MMPopupView.m in Sources */,
+				7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
 				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
@@ -3320,7 +3344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -3392,7 +3416,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;
