@@ -179,12 +179,15 @@ static const NSInteger detailInfoSection = 2;
         
         [HUD hide:YES];
         [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
         
         LLAUserAccountDetailMainInfo *tempInfo = [LLAUserAccountDetailMainInfo parseJsonWidthDic:responseObject];
         if (tempInfo) {
             mainInfo = tempInfo;
             userInfo = [LLAUser me];
         }
+        
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
         
         [dataTableView reloadData];
         
@@ -231,7 +234,8 @@ static const NSInteger detailInfoSection = 2;
             
             [dataTableView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
         

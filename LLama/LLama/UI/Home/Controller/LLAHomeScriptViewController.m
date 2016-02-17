@@ -122,12 +122,15 @@
         
         [HUD hide:NO];
         [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
         
         LLAScriptHallMainInfo *tempInfo = [LLAScriptHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
             mainInfo = tempInfo;
             [dataTableView reloadData];
         }
+        
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -170,7 +173,7 @@
             
             [dataTableView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {

@@ -26,6 +26,7 @@ enum {
 	SVInfiniteScrollingStateStopped = 0,
     SVInfiniteScrollingStateTriggered,
     SVInfiniteScrollingStateLoading,
+    SVInfiniteScrollingStateNoMore,
     SVInfiniteScrollingStateAll = 10
 };
 
@@ -41,5 +42,9 @@ typedef NSUInteger SVInfiniteScrollingState;
 
 - (void)startAnimating;
 - (void)stopAnimating;
+
+- (void)setInfiniteNoMoreLoading;
+
+- (void)resetInfiniteScroll;
 
 @end

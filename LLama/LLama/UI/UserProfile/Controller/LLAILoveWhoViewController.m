@@ -134,6 +134,8 @@
         
         [HUD hide:NO];
         [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
+
         
         
         LLAILoveWhoInfo *tempInfo = [LLAILoveWhoInfo parseJsonWithDic:responseObject];
@@ -142,6 +144,7 @@
             [dataTableView reloadData];
         }
         
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -195,7 +198,8 @@
             
             [dataTableView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
         
