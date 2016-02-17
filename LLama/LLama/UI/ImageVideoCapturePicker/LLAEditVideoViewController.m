@@ -15,6 +15,7 @@
 #import "LLAEditVideoProgressView.h"
 
 #import "LLALoadingView.h"
+#import "LLAEditVideoScaleView.h"
 
 //model
 
@@ -25,6 +26,8 @@
 
 //
 #import "LLAUploadFileUtil.h"
+
+#import "SDAVAssetExportSession.h"
 
 
 static const CGFloat topBarHeight = 70;
@@ -38,12 +41,15 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     LLAEditVideoTopToolBar *topBar;
     
+    UIScrollView *playerViewBackScrollView;
+    
+    LLAEditVideoScaleView *scaleView;
+    
     SCVideoPlayerView *videoPlayerView;
     
     LLAEditVideoProgressView *editProgressView;
     
     UIButton *playPauseButton;
-    
     
 }
 
@@ -96,6 +102,17 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 
 - (void) initSubViews {
     
+    playerViewBackScrollView = [[UIScrollView alloc] init];
+    playerViewBackScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    playerViewBackScrollView.backgroundColor = self.view.backgroundColor;
+    playerViewBackScrollView.clipsToBounds = YES;
+    playerViewBackScrollView.bounces = NO;
+    playerViewBackScrollView.showsHorizontalScrollIndicator = NO;
+    playerViewBackScrollView.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:playerViewBackScrollView];
+    
+    
+    //put playerView on player back Scroll View
     videoPlayerView = [[SCVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     videoPlayerView.delegate = self;
@@ -103,7 +120,16 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     videoPlayerView.tapToPauseEnabled = YES;
     videoPlayerView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
-    [self.view addSubview:videoPlayerView];
+    [playerViewBackScrollView addSubview:videoPlayerView];
+    
+    //
+    scaleView = [[LLAEditVideoScaleView alloc] init];
+    scaleView.translatesAutoresizingMaskIntoConstraints = NO;
+    scaleView.userInteractionEnabled = NO;
+    
+    [self.view addSubview:scaleView];
+    
+    //
     
     playPauseButton = [[UIButton alloc] init];
     playPauseButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -131,19 +157,27 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     //vertical
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(0)-[topBar(topBarHeight)]-(0)-[videoPlayerView(playerHeight)]-(0)-[editProgressView(editHeight)]"
+      constraintsWithVisualFormat:@"V:|-(0)-[topBar(topBarHeight)]-(0)-[playerViewBackScrollView(playerHeight)]-(0)-[editProgressView(editHeight)]"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"topBarHeight":@(topBarHeight),
                 @"playerHeight":@(self.view.frame.size.width),
                 @"editHeight":@(editVideo_progressViewHeight+self.view.frame.size.width/editProgressView.numberOfThumbImages)}
-      views:NSDictionaryOfVariableBindings(topBar,videoPlayerView,editProgressView)]];
+      views:NSDictionaryOfVariableBindings(topBar,playerViewBackScrollView,editProgressView)]];
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:[topBar]-(0)-[scaleView(scaleHeight)]"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{
+                @"scaleHeight":@(self.view.frame.size.width)}
+      views:NSDictionaryOfVariableBindings(topBar,scaleView)]];
     
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:playPauseButton
       attribute:NSLayoutAttributeCenterY
       relatedBy:NSLayoutRelationEqual
-      toItem:videoPlayerView
+      toItem:playerViewBackScrollView
       attribute:NSLayoutAttributeCenterY
       multiplier:1.0
       constant:0]];
@@ -158,10 +192,17 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(0)-[videoPlayerView]-(0)-|"
+      constraintsWithVisualFormat:@"H:|-(0)-[playerViewBackScrollView]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
-      views:NSDictionaryOfVariableBindings(videoPlayerView)]];
+      views:NSDictionaryOfVariableBindings(playerViewBackScrollView)]];
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[scaleView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(scaleView)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -175,13 +216,37 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
       constraintWithItem:playPauseButton
       attribute:NSLayoutAttributeCenterX
       relatedBy:NSLayoutRelationEqual
-      toItem:videoPlayerView
+      toItem:playerViewBackScrollView
       attribute:NSLayoutAttributeCenterX
       multiplier:1.0
       constant:0]];
 
     
     [self.view addConstraints:constrArray];
+    
+    //constraints on player backScroll
+    
+    NSMutableArray *backScrollConstraints = [NSMutableArray array];
+    
+    
+    CGSize videoSize = [self playerViewSizeForScroll];
+    
+    //vertical
+    [backScrollConstraints addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(0)-[videoPlayerView(height)]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{@"height":@(videoSize.height)}
+      views:NSDictionaryOfVariableBindings(videoPlayerView)]];
+    //horizonal
+    [backScrollConstraints addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[videoPlayerView(width)]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{@"width":@(videoSize.width)}
+      views:NSDictionaryOfVariableBindings(videoPlayerView)]];
+    
+    [playerViewBackScrollView addConstraints:backScrollConstraints];
     
 }
 
@@ -198,6 +263,40 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 #pragma mark - Status Bar
 - (BOOL) prefersStatusBarHidden {
     return YES;
+}
+
+#pragma mark - Video Size
+
+- (CGSize) naturalSizeForEditAsset {
+    
+    AVAssetTrack *videoTrack = [[editAsset tracksWithMediaType:AVMediaTypeVideo] firstObject];
+    
+    if (!videoTrack) {
+        return CGSizeZero;
+    }
+    
+    CGSize naturalSize = [videoTrack naturalSize];
+    CGAffineTransform transform = videoTrack.preferredTransform;
+    CGFloat videoAngleInDegree  = atan2(transform.b, transform.a) * 180 / M_PI;
+    if (videoAngleInDegree == 90 || videoAngleInDegree == -90) {
+        CGFloat width = naturalSize.width;
+        naturalSize.width = naturalSize.height;
+        naturalSize.height = width;
+    }
+    return naturalSize;
+}
+
+- (CGSize) playerViewSizeForScroll {
+    
+    CGSize videoNaturalSize = [self naturalSizeForEditAsset];
+    
+    float ratio;
+    float xratio = self.view.bounds.size.width / videoNaturalSize.width;
+    float yratio =self.view.bounds.size.width / videoNaturalSize.height;
+    ratio = MAX(xratio, yratio);
+    
+    return CGSizeMake(videoNaturalSize.width * ratio, videoNaturalSize.height * ratio);
+    
 }
 
 #pragma mark - LLAEditVideoTopToolBarDelegate
@@ -245,32 +344,77 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     LLALoadingView *loadingView = [LLAViewUtil addLLALoadingViewToView:self.view];
     [loadingView show:YES];
     
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        if (!exportSession.error) {
-            //upload
-            
-            [loadingView hide:YES];
-            
-//            [exportSession.outputUrl saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
-//                NSLog(@"error:%@",error);
-//            }];
-            
-            LLAPickVideoNavigationController *pick = (LLAPickVideoNavigationController *)self.navigationController;
-            
-            if ([pick isKindOfClass:[LLAPickVideoNavigationController class]]) {
+    //system export
+    
+//    AVAssetExportSession *avExport = [[AVAssetExportSession alloc] initWithAsset:editAsset presetName:AVAssetExportPresetPassthrough];
+//    avExport.outputURL = [SCRecorder sharedRecorder].session.outputUrl;
+//    avExport.outputFileType = AVFileTypeMPEG4;
+//    avExport.timeRange = CMTimeRangeMake(startTime, durationTime);
+    
+    //sdexport
+    SDAVAssetExportSession *encoder = [[SDAVAssetExportSession alloc] initWithAsset:editAsset];
+    encoder.outputFileType = AVFileTypeMPEG4;
+    encoder.outputURL = [SCRecorder sharedRecorder].session.outputUrl;
+    encoder.shouldOptimizeForNetworkUse = YES;
+    encoder.timeRange = CMTimeRangeMake(startTime, durationTime);
+
+    encoder.videoSettings = @
+    {
+    AVVideoCodecKey: AVVideoCodecH264,
+    AVVideoWidthKey: @480,
+    AVVideoHeightKey: @480,
+    AVVideoCompressionPropertiesKey: @
+        {
+        AVVideoAverageBitRateKey: @6000000,
+        AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
+        },
+    };
+    
+    encoder.audioSettings = @
+    {
+    AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+    AVNumberOfChannelsKey: @1,
+    AVSampleRateKey: @44100,
+    AVEncoderBitRateKey: @64000,
+    };
+
+    //trim position
+    CGFloat left = playerViewBackScrollView.contentOffset.x / playerViewBackScrollView.contentSize.width;
+    CGFloat top = playerViewBackScrollView.contentOffset.y / playerViewBackScrollView.contentSize.height;
+    encoder.trimEdgeInsets = UIEdgeInsetsMake(top, left, 0, 0);
+    
+    //
+    
+    [encoder exportAsynchronouslyWithCompletionHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!exportSession.error) {
+                //upload
                 
-                [pick dismissViewControllerAnimated:YES completion:^{
-                    if (pick.videoPickerDelegate && [pick.videoPickerDelegate respondsToSelector:@selector(videoPicker:didFinishPickVideo:thumbImage:)]) {
-                        [pick.videoPickerDelegate videoPicker:pick didFinishPickVideo:exportSession.outputUrl thumbImage:thumbImage];
-                    }
+                [loadingView hide:YES];
+                
+                [encoder.outputURL saveToCameraRollWithCompletion:^(NSString * _Nullable path, NSError * _Nullable error) {
+                    NSLog(@"error:%@",error);
                 }];
+                
+                
+//                LLAPickVideoNavigationController *pick = (LLAPickVideoNavigationController *)self.navigationController;
+//                
+//                if ([pick isKindOfClass:[LLAPickVideoNavigationController class]]) {
+//                    
+//                    [pick dismissViewControllerAnimated:YES completion:^{
+//                        if (pick.videoPickerDelegate && [pick.videoPickerDelegate respondsToSelector:@selector(videoPicker:didFinishPickVideo:thumbImage:)]) {
+//                            [pick.videoPickerDelegate videoPicker:pick didFinishPickVideo:exportSession.outputUrl thumbImage:thumbImage];
+//                        }
+//                    }];
+//                }
+
+                
+            }else {
+                NSLog(@"exportError:%@",exportSession.error);
+                [loadingView hide:YES];
             }
-            
-            
-        }else {
-            NSLog(@"exportError:%@",exportSession.error);
-            [loadingView hide:YES];
-        }
+
+        });
     }];
     
 }
