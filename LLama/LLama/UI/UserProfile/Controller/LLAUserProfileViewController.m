@@ -268,15 +268,21 @@ static const CGFloat navigationBarHeight = 64;
             [HUD hide:YES];
             //
             [dataTableView.pullToRefreshView stopAnimating];
+            [dataTableView.infiniteScrollingView resetInfiniteScroll];
             //
             LLAHallMainInfo *info = [LLAHallMainInfo parseJsonWithDic:responseObject];
             
             if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {
                 [mainInfo.directorVideoArray removeAllObjects];
                 [mainInfo.directorVideoArray addObjectsFromArray:info.dataList];
+                
+                dataTableView.showsInfiniteScrolling = mainInfo.directorVideoArray.count > 0;
+                
             }else {
                 [mainInfo.actorVideoArray removeAllObjects];
                 [mainInfo.actorVideoArray addObjectsFromArray:info.dataList];
+                
+                dataTableView.showsInfiniteScrolling = mainInfo.actorVideoArray.count > 0;
             }
             
             [dataTableView reloadData];
@@ -349,7 +355,8 @@ static const CGFloat navigationBarHeight = 64;
         }
         
         if (info.dataList.count < 1) {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
         [dataTableView reloadData];

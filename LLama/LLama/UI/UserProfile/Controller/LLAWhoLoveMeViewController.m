@@ -133,6 +133,7 @@
         
         [HUD hide:NO];
         [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
         
         
         LLAWhoLoveMeInfo *tempInfo = [LLAWhoLoveMeInfo parseJsonWithDic:responseObject];
@@ -140,6 +141,8 @@
             mainInfo = tempInfo;
             [dataTableView reloadData];
         }
+        
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
 
         
     } exception:^(NSInteger code, NSString *errorMessage) {
@@ -172,7 +175,6 @@
     [params setValue:@(mainInfo.currentPage+1) forKey:@"pageNumber"];
     [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
     
-    NSLog(@"currentPage个数%d",mainInfo.currentPage);
     // 发送请求
     [LLAHttpUtil httpPostWithUrl:@"/user/getLikeList" param:params responseBlock:^(id responseObject) {
         
@@ -180,7 +182,6 @@
         
         
         LLAWhoLoveMeInfo *tempInfo = [LLAWhoLoveMeInfo parseJsonWithDic:responseObject];
-        NSLog(@"dataList个数%d",tempInfo.dataList.count);
         if (tempInfo.dataList.count > 0){
 
             [mainInfo.dataList addObjectsFromArray:tempInfo.dataList];
@@ -194,7 +195,9 @@
             
             [dataTableView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
+
         }
         
         

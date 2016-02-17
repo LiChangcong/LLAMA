@@ -209,12 +209,15 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
         
         [HUD hide:NO];
         [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
         
         LLAVideoCommentMainInfo *tempInfo = [LLAVideoCommentMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
             mainInfo = tempInfo;
             [dataTableView reloadData];
         }
+        
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -258,7 +261,7 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
             
             [dataTableView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {

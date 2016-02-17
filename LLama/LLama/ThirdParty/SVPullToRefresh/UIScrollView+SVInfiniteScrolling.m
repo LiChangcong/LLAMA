@@ -18,6 +18,7 @@ static NSString *const SVInfiniteScrollingLoadingString = @"正在加载...";
 //static NSString *const SVInfiniteScrollingStoppedString = @"加载更多";
 static NSString *const SVInfiniteScrollingTriggeredString = @"正在加载...";
 static NSString *const SVInfiniteScrollingStoppedString = @"加载更多...";
+static NSString *const SVInfiniteScrollingNoMoreString = @"没有更多了";
 
 static NSString *const loadingImageName = @"pullToRefreshLoadingImage";
 static NSString *const arrowImageName = @"pullToRefreshLoadingImage";
@@ -167,7 +168,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         self.state = SVInfiniteScrollingStateStopped;
         self.enabled = YES;
 
-        self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
+        self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", @"", nil];
     }
     
     return self;
@@ -228,6 +229,9 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 }
 
 - (void)scrollViewDidScroll:(CGPoint)contentOffset {
+    
+    if (self.state == SVInfiniteScrollingStateNoMore)
+        return;
     
     if(self.state != SVInfiniteScrollingStateLoading && self.enabled) {
         CGFloat scrollViewContentHeight = self.scrollView.contentSize.height;
@@ -328,7 +332,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         viewPlaceholder = @"";
     
     if(state == SVInfiniteScrollingStateAll)
-        [self.viewForState replaceObjectsInRange:NSMakeRange(0, 3) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder]];
+        [self.viewForState replaceObjectsInRange:NSMakeRange(0, 4) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder ,viewPlaceholder]];
     else
         [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
     
@@ -351,6 +355,14 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 }
 
 - (void)stopAnimating {
+    self.state = SVInfiniteScrollingStateStopped;
+}
+
+- (void) setInfiniteNoMoreLoading {
+    self.state = SVInfiniteScrollingStateNoMore;
+}
+
+- (void) resetInfiniteScroll {
     self.state = SVInfiniteScrollingStateStopped;
 }
 
@@ -423,6 +435,18 @@ UIEdgeInsets scrollViewOriginalContentInsets;
                 
                 titleString = SVInfiniteScrollingLoadingString;
                 self.hidden = NO;
+                break;
+            case SVInfiniteScrollingStateNoMore:
+                
+                [self.activityIndicatorView stopAnimating];
+                [self.loadingView stopAnimating];
+                self.hidden = NO;
+                
+                titleString = SVInfiniteScrollingNoMoreString;
+                
+                margin = 0;
+                leftViewWidth = 0;
+                
                 break;
         }
         

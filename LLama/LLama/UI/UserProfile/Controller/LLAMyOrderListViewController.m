@@ -239,12 +239,16 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
         
         [dataCollectionView.pullToRefreshView stopAnimating];
         [HUD hide:YES];
+        [dataCollectionView.infiniteScrollingView resetInfiniteScroll];
+
         
         LLAScriptHallMainInfo *tempInfo = [LLAScriptHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
             mainInfo = tempInfo;
             [dataCollectionView reloadData];
         }
+        
+        dataCollectionView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
 
         
     } exception:^(NSInteger code, NSString *errorMessage) {
@@ -295,7 +299,8 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
             
             [dataCollectionView reloadData];
         }else {
-            [LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
+            [dataCollectionView.infiniteScrollingView setInfiniteNoMoreLoading];
         }
         
     } exception:^(NSInteger code, NSString *errorMessage) {
