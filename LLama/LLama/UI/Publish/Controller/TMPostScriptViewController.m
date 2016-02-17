@@ -25,7 +25,9 @@
 #import "LLAHttpUtil.h"
 #import "LLAUploadFileUtil.h"
 
-#import "TMAlbumPickerViewController.h"
+//#import "TMAlbumPickerViewController.h"
+#import "LLAImagePickerViewController.h"
+#import "LLAPickImageItemInfo.h"
 #import "ZLPhotoAssets.h"
 static const CGFloat textViewToLeftWithoutImage = 20;
 static const CGFloat textViewToLeftWithImage = 118;
@@ -186,46 +188,40 @@ static const CGFloat textViewToLeftWithImage = 118;
 
 - (void) chooseImageView:(UITapGestureRecognizer *) ges {
 
-    //
-//    LLAAlbumPickerViewController *imagePicker = [[LLAAlbumPickerViewController alloc] init];
-//    imagePicker.delegate = self;
-//    
+ 
+//    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
 //    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
+//    imagePicker.maxCount = 1;
+//    imagePicker.topShowPhotoPicker = YES;
+//    imagePicker.status = PickerViewShowStatusCameraRoll;
+//    baseNavi.view.frame = self.view.bounds;
+//    [self.navigationController presentViewController:baseNavi animated:NO completion:NULL];
 //    
-//    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
-
-    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
-    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
-//    UINavigationController *baseNavi = [[UINavigationController alloc] initWithRootViewController:imagePicker];
-    imagePicker.maxCount = 1;
-    imagePicker.topShowPhotoPicker = YES;
-    imagePicker.status = PickerViewShowStatusCameraRoll;
-    baseNavi.view.frame = self.view.bounds;
-//    [self addChildViewController:baseNavi];
-//    [self.view addSubview:baseNavi.view];
-    [self.navigationController presentViewController:baseNavi animated:NO completion:NULL];
+//    
+//    __weak typeof(self) weakSelf = self;
+//    imagePicker.callBack = ^(NSArray *assets){
+//        weakSelf.assets = assets;
+//        
+//        ZLPhotoAssets *asset = self.assets[0];
+//        _preViewImageView.image = asset.aspectRatioImage;
+//        
+//    };
+//    
+//    imagePicker.callBack1 = ^(UIImage *ima){
+//        
+//        
+//        weakSelf.icon = ima;
+//        ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//        
+//        _preViewImageView.image = weakSelf.icon;
+//    };
+    LLAImagePickerViewController *imagepicker = [[LLAImagePickerViewController alloc] init];
+    [self presentViewController:imagepicker animated:YES completion:nil];
     
+    imagepicker.callBack = ^(LLAPickImageItemInfo *itemInfo){
     
-    __weak typeof(self) weakSelf = self;
-    imagePicker.callBack = ^(NSArray *assets){
-        weakSelf.assets = assets;
-        
-        ZLPhotoAssets *asset = self.assets[0];
-//        [self.head setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        _preViewImageView.image = asset.aspectRatioImage;
-        
+        _preViewImageView.image = itemInfo.thumbImage;
     };
-    
-    imagePicker.callBack1 = ^(UIImage *ima){
-        
-        
-        weakSelf.icon = ima;
-        ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-//        [self.head setImage:weakSelf.icon forState:UIControlStateNormal];
-        _preViewImageView.image = weakSelf.icon;
-    };
-
 }
 
 #pragma mark - LLAAlbumPickerViewControllerDelegate

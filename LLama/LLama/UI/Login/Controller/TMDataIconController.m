@@ -21,6 +21,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ZLPhotoAssets.h"
 
+#import "LLAImagePickerViewController.h"
+#import "LLAPickImageItemInfo.h"
+
 @interface TMDataIconController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
     UIImage *choosedImage;
@@ -176,20 +179,9 @@
 }
 - (IBAction)chooseHeadImageButtonClicked:(id)sender {
     
-//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.delegate = self;
-//    imagePicker.allowsEditing = YES;
-//    
-//    [self.navigationController presentViewController:imagePicker animated:YES completion:^{
-//        
-//    }];
-//    LLAAlbumPickerViewController *albumPicker = [[LLAAlbumPickerViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumPicker];
-//    [self presentViewController:nav animated:YES completion:nil];
-    
+/*
     TMAlbumPickerViewController *album = [[TMAlbumPickerViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:album];
-    //    album.maxImageCount = 1;
     album.maxCount = 1;
     album.topShowPhotoPicker = YES;
     album.status = PickerViewShowStatusCameraRoll;
@@ -201,7 +193,6 @@
         weakSelf.assets = assets;
         
         ZLPhotoAssets *asset = self.assets[0];
-//    [self.ChooseHeadImageButton setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         choosedImage = asset.aspectRatioImage;
         [self.ChooseHeadImageButton setImage:asset.aspectRatioImage forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
@@ -213,14 +204,24 @@
         
         weakSelf.icon = ima;
         ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-//        [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
         choosedImage = ima;
         [self.ChooseHeadImageButton setImage:weakSelf.icon forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
         
     };
+*/
+    LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+    imagePicker.callBack = ^(LLAPickImageItemInfo *itemInfo){
+        
+        UIImage *headImage = itemInfo.thumbImage;
+        
+        [self.ChooseHeadImageButton setImage:headImage forState:UIControlStateNormal];
+        [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
+    };
 
+    
 }
 
 - (IBAction)backBtnClick:(UIButton *)sender {
