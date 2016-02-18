@@ -553,7 +553,8 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 
 - (void) videoPicker:(LLAPickVideoNavigationController *)videoPicker didFinishPickVideo:(NSURL *)videoURL thumbImage:(UIImage *)thumbImage {
     
-    [[LLAUploadVideoShareManager shareManager] uploadScriptVideoWithScriptId:scriptInfo.scriptIdString image:thumbImage videoURL:videoURL];
+    [[LLAUploadVideoShareManager shareManager] addScriptVideoTaskWithScriptId:scriptInfo.scriptIdString image:thumbImage videoURL:videoURL];
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -8,6 +8,8 @@
 
 #import "LLAUploadVideoProgressView.h"
 
+
+
 CGFloat LLAUploadVideoProgressViewHeight = 22;
 
 static const CGFloat progressViewHeight = 3;
@@ -38,9 +40,13 @@ static const CGFloat progressViewHeight = 3;
 
 @synthesize delegate;
 
-- (instancetype) initWithFrame:(CGRect)frame {
-    
-    self = [super initWithFrame:frame];
+- (void) dealloc {
+    [[LLAUploadVideoShareManager shareManager] removeScriptVideoUploadObserver:self];
+    [[LLAUploadVideoShareManager shareManager] removeUserVideoUploadObserver:self];
+}
+
+- (instancetype) initWithViewType:(videoUploadType)type {
+    self = [super init];
     if (self) {
         
         [self initVaraibles];
@@ -48,9 +54,18 @@ static const CGFloat progressViewHeight = 3;
         [self initSubContraints];
         
         self.backgroundColor = backColor;
+        
+        if (type == videoUploadType_ScriptVideo) {
+            [[LLAUploadVideoShareManager shareManager] addScriptVideoUploadObserver:self];
+        }else {
+            [[LLAUploadVideoShareManager shareManager] addUserVideoUploadObserver:self];
+        }
+        
+        
     }
     
     return self;
+
 }
 
 - (void) initVaraibles {

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LLAUploadVideoObserverProtocol.h"
+#import "LLAUploadVideoShareManager.h"
 
 extern CGFloat LLAUploadVideoProgressViewHeight;
 
@@ -24,5 +25,7 @@ extern CGFloat LLAUploadVideoProgressViewHeight;
 @interface LLAUploadVideoProgressView : UIView<LLAUploadVideoObserverProtocol>
 
 @property(nonatomic , weak) id<LLAUploadVideoProgressViewDelegate> delegate;
+
+- (instancetype) initWithViewType:(videoUploadType) type;
 
 @end

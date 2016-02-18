@@ -962,8 +962,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) videoPicker:(LLAPickVideoNavigationController *)videoPicker didFinishPickVideo:(NSURL *)videoURL thumbImage:(UIImage *)thumbImage {
     
-    [[LLAUploadVideoShareManager shareManager] uploadUserVideoWithImage:thumbImage videoURL:videoURL];
-    
+    [[LLAUploadVideoShareManager shareManager] addUserVideoTashWithThumbImage:thumbImage videoFileURL:videoURL];
 }
 
 - (void) videoPickerDidCancelPick:(LLAPickVideoNavigationController *)videoPicker {

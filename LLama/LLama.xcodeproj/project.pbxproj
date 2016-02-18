@@ -23,6 +23,8 @@
 		5C5D68F01C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68EF1C562F3B008A1230 /* LLAUserAccountWithdrawCashAlipayInfoCell.m */; };
 		5C5D68F31C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D68F21C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m */; };
 		5C6C77111C73357500D59A88 /* LLAEditVideoScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */; };
+		5C6D26951C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */; };
+		5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */; };
 		5C6D7A341C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79F71C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m */; };
 		5C6D7A351C58B73200119A3A /* SCAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79F91C58B73200119A3A /* SCAssetExportSession.m */; };
 		5C6D7A361C58B73200119A3A /* SCAudioConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79FB1C58B73200119A3A /* SCAudioConfiguration.m */; };
@@ -446,6 +448,10 @@
 		5C5D68F21C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashCellPhoneInfoCell.m; sourceTree = "<group>"; };
 		5C6C770F1C73357500D59A88 /* LLAEditVideoScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoScaleView.h; sourceTree = "<group>"; };
 		5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAEditVideoScaleView.m; sourceTree = "<group>"; };
+		5C6D26931C75B4CE003CD77A /* LLAUploadVideoTaskInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadVideoTaskInfo.h; sourceTree = "<group>"; };
+		5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUploadVideoTaskInfo.m; sourceTree = "<group>"; };
+		5C6D26961C75B530003CD77A /* LLAUploadVideoObserverInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadVideoObserverInfo.h; sourceTree = "<group>"; };
+		5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUploadVideoObserverInfo.m; sourceTree = "<group>"; };
 		5C6D79F61C58B73200119A3A /* NSURL+SCSaveToCameraRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+SCSaveToCameraRoll.h"; sourceTree = "<group>"; };
 		5C6D79F71C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SCSaveToCameraRoll.m"; sourceTree = "<group>"; };
 		5C6D79F81C58B73200119A3A /* SCAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAssetExportSession.h; sourceTree = "<group>"; };
@@ -1677,6 +1683,10 @@
 				5CDD97841C40E9D800557CB7 /* LLAUploadFileHeader.h */,
 				5C9353B81C5DC7B400DD75DC /* LLAUploadVideoShareManager.h */,
 				5C9353B91C5DC7B400DD75DC /* LLAUploadVideoShareManager.m */,
+				5C6D26931C75B4CE003CD77A /* LLAUploadVideoTaskInfo.h */,
+				5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */,
+				5C6D26961C75B530003CD77A /* LLAUploadVideoObserverInfo.h */,
+				5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */,
 				5C9353BB1C5DD71800DD75DC /* LLAUploadVideoObserverProtocol.h */,
 			);
 			path = UploadFileUtil;
@@ -2961,6 +2971,7 @@
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */,
 				5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */,
+				5C6D26951C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
 				7E0607291C5E05D50089329D /* ZLPhotoPickerGroup.m in Sources */,
 				7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */,
@@ -3073,6 +3084,7 @@
 				5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */,
 				5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */,
 				7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */,
+				5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,

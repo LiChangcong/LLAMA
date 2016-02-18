@@ -10,16 +10,33 @@
 
 #import "LLAUploadVideoObserverProtocol.h"
 
+typedef NS_ENUM(NSInteger , videoUploadType) {
+    videoUploadType_ScriptVideo = 0,
+    videoUploadType_UserVideo = 1,
+};
+
 @interface LLAUploadVideoShareManager : NSObject
 
 + (instancetype) shareManager;
 
-@property(nonatomic , weak) id<LLAUploadVideoObserverProtocol> uploadScriptVideoObserver;
+- (void) addScriptVideoTaskWithScriptId:(NSString *) scriptId image:(UIImage *) thumbImage videoURL:(NSURL *) videoFileURL;
 
-@property(nonatomic , weak) id<LLAUploadVideoObserverProtocol> uploadUserVideoObserver;
+- (void) addUserVideoTashWithThumbImage:(UIImage *) thumbImage videoFileURL:(NSURL *) videoFileURL;
 
-- (void) uploadScriptVideoWithScriptId:(NSString *) scriptId image:(UIImage *) thumbImage videoURL:(NSURL *) videoFileURL;
+/**
+ *observer
+ *
+ **/
 
-- (void) uploadUserVideoWithImage:(UIImage *) thumbImage videoURL:(NSURL *) videoFileURL;
+//script Video observer
+
+- (void) addScriptVideoUploadObserver:(id<LLAUploadVideoObserverProtocol>) observer;
+
+- (void) removeScriptVideoUploadObserver:(id<LLAUploadVideoObserverProtocol> ) observer;
+
+//user Video Observer
+
+- (void) addUserVideoUploadObserver:(id<LLAUploadVideoObserverProtocol> ) observer;
+- (void) removeUserVideoUploadObserver:(id<LLAUploadVideoObserverProtocol> ) observer;
 
 @end

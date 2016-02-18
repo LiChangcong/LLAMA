@@ -144,17 +144,11 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     [self.contentView addSubview:personDescriptionLabel];
     
     //
-    videoProgressView = [[LLAUploadVideoProgressView alloc] init];
+    videoProgressView = [[LLAUploadVideoProgressView alloc] initWithViewType:videoUploadType_UserVideo];
     videoProgressView.translatesAutoresizingMaskIntoConstraints = NO;
     videoProgressView.delegate = self;
     videoProgressView.hidden = YES;
     [self.contentView addSubview:videoProgressView];
-    
-    if (![LLAUploadVideoShareManager shareManager].uploadUserVideoObserver) {
-        
-        [LLAUploadVideoShareManager shareManager].uploadUserVideoObserver = videoProgressView;
-    }
-
     
 }
 

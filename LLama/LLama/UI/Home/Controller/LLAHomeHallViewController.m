@@ -118,17 +118,12 @@
     }];
     
     //
-    videoProgressView = [[LLAUploadVideoProgressView alloc] init];
+    videoProgressView = [[LLAUploadVideoProgressView alloc] initWithViewType:videoUploadType_ScriptVideo];
     videoProgressView.translatesAutoresizingMaskIntoConstraints = NO;
     videoProgressView.delegate = self;
     videoProgressView.hidden = YES;
     [self.view addSubview:videoProgressView];
-    
-    if (![LLAUploadVideoShareManager shareManager].uploadScriptVideoObserver) {
         
-        [LLAUploadVideoShareManager shareManager].uploadScriptVideoObserver = videoProgressView;
-    }
-    
     //constraints
     
     // 添加约束
