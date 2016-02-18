@@ -40,6 +40,52 @@
     
 }
 
+/**
+ *change type from enum
+ *
+ **/
+
++ (NSValueTransformer *)transactionTypeJSONTransformer {
+    
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+        
+        if ([value isKindOfClass:[NSString class]]) {
+            
+            NSString *typeString = (NSString *)value;
+            
+            if ([typeString isEqualToString:@"余额收入"]) {
+                return @(LLAUserAccounTransactionType_BalanceIncom);
+                
+            }else if ([typeString isEqualToString:@"剧本退款"]) {
+                return @(LLAUserAccounTransactionType_BalanceRefund);
+                
+            }else if ([typeString isEqualToString:@"余额支出"]) {
+                return @(LLAUserAccounTransactionType_BalancePay);
+                
+            }else if ([typeString isEqualToString:@"支付宝支付"]) {
+                return @(LLAUserAccounTransactionType_AlipayPay);
+                
+            }else if ([typeString isEqualToString:@"微信支付"]) {
+                return @(LLAUserAccounTransactionType_WeiXinPay);
+                
+            }else if ([typeString isEqualToString:@"正在提现中"]) {
+                return @(LLAUserAccounTransactionType_WithdrawCashBegin);
+                
+            }else if ([typeString isEqualToString:@"提现成功"]) {
+                return @(LLAUserAccounTransactionType_WithdrawCashSuccess);
+                
+            }else{
+                return nil;
+            }
+            
+            
+        }else{
+            return value;
+        }
+    }];
+    
+}
+
 //
 + (NSString *) transactionDescFromType:(LLAUserAccounTransactionType )transactionType {
     

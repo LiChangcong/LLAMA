@@ -197,12 +197,18 @@ static const CGFloat moneyToRight = 10;
         moneyLabel.textColor = moneyLabelPayTextColor;
     }
     
+    
     //money
-    if (currentInfo.manaMoney > 0) {
-        moneyLabel.text = [NSString stringWithFormat:@"+%.0f",currentInfo.manaMoney];
+    
+    NSString *symbolString = nil;
+    
+    if (currentInfo.transactionType == LLAUserAccounTransactionType_BalanceIncom) {
+        symbolString = @"+";
     }else {
-        moneyLabel.text = [NSString stringWithFormat:@"-%.0f",fabs(currentInfo.manaMoney)];
+        symbolString = @"-";
     }
+    
+    moneyLabel.text = [NSString stringWithFormat:@"%@%.2f",symbolString,fabs(currentInfo.manaMoney)];
     
 }
 

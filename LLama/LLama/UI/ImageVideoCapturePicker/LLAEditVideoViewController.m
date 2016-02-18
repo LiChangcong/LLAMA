@@ -463,11 +463,12 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     //if (player.isPlaying) {
         //seek to cutting time
-        
+    
+    
         [player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(item.duration), 1) completionHandler:^(BOOL finished) {
             
         }];
-        
+    
 //    }else {
         playPauseButton.hidden = NO;
 //    }

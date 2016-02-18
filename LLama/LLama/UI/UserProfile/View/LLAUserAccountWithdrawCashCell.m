@@ -96,7 +96,7 @@ static const CGFloat functionButtonToBorder  = 60;
     cashTextField.backgroundColor = [UIColor whiteColor];
     cashTextField.layer.cornerRadius = 4;
     cashTextField.rightViewMode = UITextFieldViewModeAlways;
-    cashTextField.keyboardType = UIKeyboardTypeNumberPad;
+    cashTextField.keyboardType = UIKeyboardTypeDecimalPad;
     //left View
     
     UILabel *leftLabel = [[UILabel alloc] init];

@@ -41,7 +41,7 @@ static const NSInteger detailInfoSection = 2;
     LLATableView *dataTableView;
     
     LLAUser *userInfo;
-    NSInteger withdrawCash;
+    CGFloat withdrawCash;
     LLAUserAccountDetailMainInfo *mainInfo;
     
     LLALoadingView *HUD;
@@ -374,16 +374,38 @@ static const NSInteger detailInfoSection = 2;
     currentField = textField;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([textField.text containsString:@"."] && [string isEqualToString:@"."]){
+        return NO;
+    }else if ([textField.text isEqualToString:@"0"] && [string isEqualToString:@"0"]) {
+        return NO;
+    }else if ([textField.text isEqualToString:@"0"] && ![string isEqualToString:@"0"]) {
+        textField.text = string;
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
+
 -(void) textFieldValueChanged:(NSNotification *) info{
     
     UITextField *textField = [info object];
-    if (textField == currentField) {
-        NSInteger newInterger = [textField.text integerValue];
-        
-        withdrawCash = newInterger;
-        //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
-        textField.text = [NSString stringWithFormat:@"%ld",(long)newInterger];
+//    if (textField == currentField) {
+//        NSInteger newInterger = [textField.text integerValue];
+//        
+//        withdrawCash = newInterger;
+//        //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
+//        textField.text = [NSString stringWithFormat:@"%ld",(long)newInterger];
+//    }
+    if ([textField.text isEqualToString:@"."]) {
+        textField.text = @"0.";
     }
+    
+    withdrawCash = [textField.text floatValue];
+    //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:withdrawCashSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
+    
 }
 
 

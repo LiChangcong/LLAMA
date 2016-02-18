@@ -241,7 +241,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         }
         
     }else if(context == AVPlayerRateObservationContext) {
-            
+        
     }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }

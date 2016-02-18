@@ -296,7 +296,7 @@ static const CGFloat cashButtonToHorborder = 16;
         return;
     }
     
-    [params setValue:@(withdrawCashAmount*100) forKey:@"amount"];
+    [params setValue:@((NSInteger)(withdrawCashAmount*100)) forKey:@"amount"];
     [params setValue:me.alipayAccount forKey:@"alipay"];
     [params setValue:me.alipayAccountUserName forKey:@"alipayRealname"];
     

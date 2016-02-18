@@ -169,7 +169,7 @@ static NSString *const moneyImageName = @"dollar-yellow";
 
 - (void) updateCellWithUserInfo:(CGFloat)withdrawCashAmount tableWith:(CGFloat)tableWidth {
     
-    balanceLabel.text = [NSString stringWithFormat:@"￥ %.0f",withdrawCashAmount];
+    balanceLabel.text = [NSString stringWithFormat:@"￥ %.2f",withdrawCashAmount];
     
 }
 
