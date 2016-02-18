@@ -25,6 +25,7 @@
 		5C6C77111C73357500D59A88 /* LLAEditVideoScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */; };
 		5C6D26951C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */; };
 		5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */; };
+		5C6D269C1C75D122003CD77A /* LLARedirectUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D269B1C75D122003CD77A /* LLARedirectUtil.m */; };
 		5C6D7A341C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79F71C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m */; };
 		5C6D7A351C58B73200119A3A /* SCAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79F91C58B73200119A3A /* SCAssetExportSession.m */; };
 		5C6D7A361C58B73200119A3A /* SCAudioConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D79FB1C58B73200119A3A /* SCAudioConfiguration.m */; };
@@ -452,6 +453,8 @@
 		5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUploadVideoTaskInfo.m; sourceTree = "<group>"; };
 		5C6D26961C75B530003CD77A /* LLAUploadVideoObserverInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadVideoObserverInfo.h; sourceTree = "<group>"; };
 		5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUploadVideoObserverInfo.m; sourceTree = "<group>"; };
+		5C6D269A1C75D122003CD77A /* LLARedirectUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLARedirectUtil.h; sourceTree = "<group>"; };
+		5C6D269B1C75D122003CD77A /* LLARedirectUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLARedirectUtil.m; sourceTree = "<group>"; };
 		5C6D79F61C58B73200119A3A /* NSURL+SCSaveToCameraRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+SCSaveToCameraRoll.h"; sourceTree = "<group>"; };
 		5C6D79F71C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SCSaveToCameraRoll.m"; sourceTree = "<group>"; };
 		5C6D79F81C58B73200119A3A /* SCAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAssetExportSession.h; sourceTree = "<group>"; };
@@ -1261,6 +1264,15 @@
 				7E96C3A61C5F6EDC00B13415 /* LLAILoveWhoInfo.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5C6D26991C75D110003CD77A /* JumpUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C6D269A1C75D122003CD77A /* LLARedirectUtil.h */,
+				5C6D269B1C75D122003CD77A /* LLARedirectUtil.m */,
+			);
+			path = JumpUtil;
 			sourceTree = "<group>";
 		};
 		5C6D79F51C58B73200119A3A /* SCRecorder */ = {
@@ -2129,6 +2141,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5C6D26991C75D110003CD77A /* JumpUtil */,
 				5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */,
 				5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */,
 				5C7298231C438E4600106BA2 /* CommonUtil */,
@@ -3114,6 +3127,7 @@
 				5CE0EB6D1C45EECC00C6BC79 /* LLAHallMainInfo.m in Sources */,
 				7E0607261C5E05D50089329D /* ZLPhotoAssets.m in Sources */,
 				5CE0EB8C1C46424300C6BC79 /* NSMutableAttributedString+TY.m in Sources */,
+				5C6D269C1C75D122003CD77A /* LLARedirectUtil.m in Sources */,
 				5C9353BE1C5DE64500DD75DC /* LLAPickVideoNavigationController.m in Sources */,
 				A3DEDE7B1C3CAEC7009F3D37 /* TMLoginRegisterViewController.m in Sources */,
 				5C5D68DE1C55FB5D008A1230 /* LLAUserAccountBalanceCell.m in Sources */,

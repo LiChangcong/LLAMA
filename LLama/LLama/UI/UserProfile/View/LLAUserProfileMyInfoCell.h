@@ -24,7 +24,7 @@
 
 @interface LLAUserProfileMyInfoCell : UITableViewCell<LLACellPlayVideoProtocol>
 
-@property(nonatomic , weak) id<LLAUserProfileMyInfoCellDelegate> delegate;
+@property(nonatomic , weak) id<LLAUserProfileMyInfoCellDelegate,LLAVideoPlayerViewDelegate> delegate;
 
 - (void) updateCellWithUserInfo:(LLAUser *) userInfo tableWidth:(CGFloat) tableWidth;
 

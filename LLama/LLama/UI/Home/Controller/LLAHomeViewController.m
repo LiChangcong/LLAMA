@@ -215,4 +215,15 @@
     return selectedIndex == 0;
 }
 
+#pragma mark - Public Method
+
+- (void) showHallViewController {
+    [self titleView:titleView didSelectedIndex:0];
+}
+
+- (void) showScriptHallViewController {
+    [self titleView:titleView didSelectedIndex:1];
+}
+
+
 @end

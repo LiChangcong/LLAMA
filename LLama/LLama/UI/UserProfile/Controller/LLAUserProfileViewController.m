@@ -890,9 +890,62 @@ static const CGFloat navigationBarHeight = 64;
     mainInfo.showingVideoType = videoType;
     //[dataTableView reloadData];
     
-    [HUD show:YES];
+    //[HUD show:YES];
     
-    [self loadData];
+    //[self loadData];
+    
+    NSMutableDictionary *videoParams = [NSMutableDictionary dictionary];
+    
+    [videoParams setValue:uIdString forKey:@"userId"];
+    [videoParams setValue:@(0) forKey:@"pageNumber"];
+    [videoParams setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
+    
+    if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {
+        [videoParams setValue:@"DIRECTOR" forKey:@"type"];
+    }else {
+        [videoParams setValue:@"ACTOR" forKey:@"type"];
+    }
+    
+    [LLAHttpUtil httpPostWithUrl:@"/play/getPlayByUser" param:videoParams responseBlock:^(id responseObject) {
+        
+        [HUD hide:YES];
+        //
+        //[dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
+        //
+        LLAHallMainInfo *info = [LLAHallMainInfo parseJsonWithDic:responseObject];
+        
+        if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {
+            [mainInfo.directorVideoArray removeAllObjects];
+            [mainInfo.directorVideoArray addObjectsFromArray:info.dataList];
+            
+            dataTableView.showsInfiniteScrolling = mainInfo.directorVideoArray.count > 0;
+            
+        }else {
+            [mainInfo.actorVideoArray removeAllObjects];
+            [mainInfo.actorVideoArray addObjectsFromArray:info.dataList];
+            
+            dataTableView.showsInfiniteScrolling = mainInfo.actorVideoArray.count > 0;
+        }
+        
+        [dataTableView reloadData];
+        
+        //play
+        [self startPlayVideo];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:YES];
+        //[dataTableView.pullToRefreshView stopAnimating];
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:YES];
+        //[dataTableView.pullToRefreshView stopAnimating];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
+    
 }
 
 #pragma mark - LLAHallVideoInfoCellDelegate

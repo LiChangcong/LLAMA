@@ -412,6 +412,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
             }else {
                 //NSLog(@"exportError:%@",encoder.error);
                 [loadingView hide:YES];
+                [LLAViewUtil showAlter:self.view withText:encoder.error.localizedDescription];
             }
 
         });

@@ -96,7 +96,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
-    videoPlayerView.hidden = YES;
+    //videoPlayerView.hidden = YES;
     
     [self.contentView addSubview:videoPlayerView];
     

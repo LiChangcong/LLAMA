@@ -10,4 +10,9 @@
 
 @interface LLAHomeViewController : LLACommonViewController
 
+//
+- (void) showHallViewController;
+
+- (void) showScriptHallViewController;
+
 @end

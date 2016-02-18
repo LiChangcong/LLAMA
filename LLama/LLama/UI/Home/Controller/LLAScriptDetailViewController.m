@@ -33,6 +33,7 @@
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 #import "LLAUploadVideoShareManager.h"
+#import "LLARedirectUtil.h"
 
 //
 static NSString *const scriptInfoCellIden = @"scriptInfoCellIden";
@@ -555,8 +556,9 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     
     [[LLAUploadVideoShareManager shareManager] addScriptVideoTaskWithScriptId:scriptInfo.scriptIdString image:thumbImage videoURL:videoURL];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
     
+    [[LLARedirectUtil shareInstance] redirectWithNewType:LLARedirectType_HomeHall];
 }
 
 - (void) videoPickerDidCancelPick:(LLAPickVideoNavigationController *)videoPicker {

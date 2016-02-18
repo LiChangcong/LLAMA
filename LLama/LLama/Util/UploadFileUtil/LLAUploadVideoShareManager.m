@@ -142,7 +142,7 @@
     
     //first upload image , then upload video
     
-    [self dispatchUploadFailedWithType:videoUploadType_UserVideo];
+    [self dispatchStartUploadWithType:videoUploadType_UserVideo];
     
     __weak typeof(self) weakSelf = self;
     isUserVideoUploading = YES;
@@ -261,7 +261,7 @@
         return;
     }else {
         //
-        LLAUploadVideoTaskInfo *taskInfo = [scriptVideoTaskArray firstObject];
+        LLAUploadVideoTaskInfo *taskInfo = [userVideoTaskArray firstObject];
         
         [self uploadUserVideoWithImage:taskInfo.coverImage videoURL:taskInfo.videoPathURL];
     }

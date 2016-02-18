@@ -53,6 +53,7 @@
 }
 + (LLAUserProfileSettingItemInfo *) cacheItem {
     LLAUserProfileSettingItemInfo *item = [LLAUserProfileSettingItemInfo new];
+    item.itemType = LLASettingItemType_Cache;
     item.titleString = @"清除缓存";
     item.detailContentString = @"正在检测...";
     return item;

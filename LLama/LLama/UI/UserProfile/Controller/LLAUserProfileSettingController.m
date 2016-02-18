@@ -12,6 +12,7 @@
 #import "LLATableView.h"
 #import "LLAUserProfileSettingCell.h"
 #import "LLAUserProfileLogoutCell.h"
+#import "LLALoadingView.h"
 
 //model
 #import "LLAUserProfileSettingItemInfo.h"
@@ -20,6 +21,7 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAChangeRootControllerUtil.h"
+#import "SDImageCache.h"
 
 //setting
 //#import "TMAccountSecurityController.h"
@@ -44,6 +46,7 @@ static const CGFloat logoutHeaderHeight = 28;
     
     NSMutableArray  *loginOutArray;
     
+    LLALoadingView *HUD;
     
 }
 
@@ -86,12 +89,32 @@ static const CGFloat logoutHeaderHeight = 28;
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo userAgreementItem]];
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo userCommentItem]];
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo versionItem]];
-    [mainInfoArray addObject:[LLAUserProfileSettingItemInfo cacheItem]];
+    
+    //
+    LLAUserProfileSettingItemInfo *cacheItem = [LLAUserProfileSettingItemInfo cacheItem];
+    
+    [mainInfoArray addObject:cacheItem];
     
     //
     loginOutArray = [NSMutableArray array];
     
     [loginOutArray addObject:[LLAUser me]];
+    
+    //check caches
+    
+    dispatch_after(0, dispatch_get_main_queue(), ^(void){
+        
+        float tmpSize = [[SDImageCache sharedImageCache] getSize];
+        tmpSize = tmpSize / 1024.0 / 1024.0;
+        NSString *bufferSize = tmpSize >= 1 ? [NSString stringWithFormat:@"%.2fM",tmpSize] : [NSString stringWithFormat:@"%.2fK",tmpSize * 1024];
+        cacheItem.detailContentString = bufferSize;
+        [dataTableView reloadData];
+        
+        });
+    
+    
+
+    
 }
 
 - (void) initSubViews {
@@ -119,6 +142,9 @@ static const CGFloat logoutHeaderHeight = 28;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
+    
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -201,28 +227,36 @@ static const CGFloat logoutHeaderHeight = 28;
 #pragma mark - UITableViewDelegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
+    NSLog(@"indexPath:{%ld,%ld}",indexPath.section,indexPath.row);
+    
+    if (indexPath.section == accountSaftySectionIndex) {
         if (indexPath.row == 0) {
-            //        TMAccountSecurityController *accountSecurity = [[TMAccountSecurityController alloc] init];
-            //        [self.navigationController pushViewController:accountSecurity animated:YES];
             
             LLAAccountSecurityController *accountSecurity = [[LLAAccountSecurityController alloc] init];
             [self.navigationController pushViewController:accountSecurity animated:YES];
             
-            //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LLAAccountSecurityController" bundle:nil];
-            //        LLAAccountSecurityController *accountSecurity = [storyboard instantiateInitialViewController];
-            //        [self.navigationController pushViewController:accountSecurity animated:YES];
         }
-    }else if(indexPath.section == 1){
-        if (indexPath.row == 2) {
-            
+    }else if(indexPath.section == mainInfoSaftySectionIndex){
+        
+        LLAUserProfileSettingItemInfo *item = [mainInfoArray objectAtIndex:indexPath.row];
+        
+        if (item.itemType == LLASettingItemType_UserAgreement) {
             LLAUserAgreementViewController *userAgreement = [[LLAUserAgreementViewController alloc] init];
             [self.navigationController pushViewController:userAgreement animated:YES];
+        }else if (item.itemType == LLASettingItemType_Cache) {
+            //clear cache
+            [HUD show:YES];
+                        
+            [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+                [HUD hide:YES];
+                item.detailContentString = @"0M";
+                [dataTableView reloadData];
+            }];
         }
     }
-
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
