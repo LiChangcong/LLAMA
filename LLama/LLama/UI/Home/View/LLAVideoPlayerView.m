@@ -94,6 +94,21 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         [self initPlayerLayer];
         [self initCoverImageView];
         
+        //
+        __weak typeof(coverImageView) weakCoverImageView = coverImageView;
+        __weak typeof(videoPlayer) weakVideoPlayer = videoPlayer;
+        
+        playerTimeObserver = [videoPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 5) queue:NULL usingBlock:^(CMTime time) {
+            //playing call back
+            if (weakVideoPlayer.currentItem.currentTime.value > 0) {
+                weakCoverImageView.hidden = YES;
+            }else {
+                weakCoverImageView.hidden = NO;
+            }
+        }];
+        
+        //
+        
         loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         loadingIndicator.hidesWhenStopped = YES;
         
@@ -113,15 +128,13 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     videoPlayer = [[AVPlayer alloc] init];
     
 //    [videoPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld context:AVPlayerStatusObservationContext];
-    [videoPlayer addObserver:self forKeyPath:@"rate" options: NSKeyValueObservingOptionOld context:AVPlayerRateObservationContext];
+    [videoPlayer addObserver:self forKeyPath:@"rate" options: NSKeyValueObservingOptionNew |  NSKeyValueObservingOptionInitial context:AVPlayerRateObservationContext];
     
     [videoPlayer addObserver:self forKeyPath:@"currentItem" options:NSKeyValueObservingOptionNew context:AVPlayerCurrentItemObservationContext];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidPlayToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
-    playerTimeObserver = [videoPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 5) queue:NULL usingBlock:^(CMTime time) {
-        //playing call back
-    }];
+    
     
 }
 
@@ -208,17 +221,18 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
             case AVPlayerItemStatusFailed:
                 [loadingIndicator stopAnimating];
                 [self removePlayerItemObserver];
+                coverImageView.hidden = NO;
                 
                 [LLAViewUtil showAlter:self withText:@"视频播放失败"];
                 break;
             case AVPlayerItemStatusReadyToPlay:
-                //[loadingIndicator stopAnimating];
-                NSLog(@"ready to Play");
+                [loadingIndicator stopAnimating];
                 break;
+                
             case AVPlayerItemStatusUnknown:
                 //
                 [loadingIndicator startAnimating];
-                NSLog(@"unknown");
+                coverImageView.hidden = NO;
 
                 break;
                 
@@ -227,24 +241,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         }
         
     }else if(context == AVPlayerRateObservationContext) {
-//        if (videoPlayer.rate > 0) {
-//            [loadingIndicator stopAnimating];
-//        }else if (videoPlayer.status != AVPlayerStatusReadyToPlay){
-//            [loadingIndicator startAnimating];
-//        }
-        if (videoPlayer.rate == 0 && (CMTimeGetSeconds(videoPlayer.currentTime)) == 0) {
-            coverImageView.hidden = NO;
-            NSLog(@"show cover");
-        }else {
-            coverImageView.hidden = YES;
-            NSLog(@"hide cover");
-        }
-        
-        if (videoPlayer.rate != 0) {
-            [loadingIndicator stopAnimating];
-            NSLog(@"stop indicator");
-        }
-        
+            
     }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
