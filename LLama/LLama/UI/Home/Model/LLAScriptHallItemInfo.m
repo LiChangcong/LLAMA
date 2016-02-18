@@ -75,7 +75,7 @@
         if ([self.directorInfo isEqual:me]) {
             self.currentRole = LLAUserRoleInScript_Director;
             
-        }else if ([self.partakeUsersArray containsObject:me]) {
+        }else if ([self.partakeUsersArray containsObject:me] || [self.choosedUserIdString isEqualToString:me.userIdString]) {
             self.currentRole = LLAUserRoleInScript_Actor;
         }else {
             self.currentRole = LLAUserRoleInScript_Passer;

@@ -450,12 +450,37 @@ static NSString *const countingImageName = @"clock";
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[scriptTotalPartakeUserNumberLabel(==functionButton)]-(2)-[functionButton]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[scriptTotalPartakeUserNumberLabel]-(2)-[functionButton]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:[NSDictionary dictionaryWithObjectsAndKeys:
                @(partakeNumberToLeft),@"toLeft",
                @(functionButtonToRight),@"toRight", nil]
       views:NSDictionaryOfVariableBindings(scriptTotalPartakeUserNumberLabel,functionButton)]];
+    
+    //
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:functionButton
+      attribute:NSLayoutAttributeWidth
+      relatedBy:NSLayoutRelationGreaterThanOrEqual
+      toItem:self.contentView
+      attribute:NSLayoutAttributeWidth
+      multiplier:0.5
+      constant:(-partakeNumberToLeft-functionButtonToRight-2)*0.5]];
+    
+    NSLayoutConstraint *widthConstraints = [NSLayoutConstraint
+                                            constraintWithItem:functionButton
+                                            attribute:NSLayoutAttributeWidth
+                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                            toItem:self.contentView
+                                            attribute:NSLayoutAttributeWidth
+                                            multiplier:2.0/3.0
+                                            constant:(-partakeNumberToLeft-functionButtonToRight-2)*2/3];
+    widthConstraints.priority = UILayoutPriorityDefaultHigh;
+    
+    [constrArray addObject:widthConstraints];
+    
+    [functionButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
     //
     for (NSLayoutConstraint *constr in constrArray) {
@@ -575,9 +600,9 @@ static NSString *const countingImageName = @"clock";
                 
                 
                 if (currentScriptInfo.partakeUsersArray.count > 0) {
-                    normalString = @"选演员";
-                    highlightString = @"选演员";
-                    disabledString = @"选演员";
+                    normalString = @"挑选演员";
+                    highlightString = @"挑选演员";
+                    disabledString = @"挑选演员";
                     if (currentScriptInfo.hasTempChoose) {
                         buttonEnabled = YES;
                     }else {
@@ -644,6 +669,10 @@ static NSString *const countingImageName = @"clock";
                 highlightString = [NSString stringWithFormat:@"%@ 上传视频",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
                 disabledString = [NSString stringWithFormat:@"%@ 上传视频",[LLAScriptHallItemInfo timeIntervalToFormatString:currentScriptInfo.timeOutInterval]];
                 
+                normalImage = [UIImage llaImageWithName:countingImageName];
+                highlighImage = [UIImage llaImageWithName:countingImageName];
+                disableImage = [UIImage llaImageWithName:countingImageName];
+                
                 buttonEnabled = YES;
                 
             }else {
@@ -665,26 +694,26 @@ static NSString *const countingImageName = @"clock";
         {
             if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
                 //director
-                normalString = @"好戏上演";
-                highlightString = @"好戏上演";
-                disabledString = @"好戏上演";
+                normalString = @"看视频";
+                highlightString = @"看视频";
+                disabledString = @"看视频";
                 
                 buttonEnabled = YES;
             }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
                 //actor
                 
-                normalString = @"好戏上演";
-                highlightString = @"好戏上演";
-                disabledString = @"好戏上演";
+                normalString = @"看视频";
+                highlightString = @"看视频";
+                disabledString = @"看视频";
                 
                 buttonEnabled = YES;
                 
             }else {
                 //passer
                 
-                normalString = @"好戏上演";
-                highlightString = @"好戏上演";
-                disabledString = @"好戏上演";
+                normalString = @"看视频";
+                highlightString = @"看视频";
+                disabledString = @"看视频";
         
                 buttonEnabled = YES;
             }
@@ -695,24 +724,24 @@ static NSString *const countingImageName = @"clock";
         {
             if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
                 //director
-                normalString = @"演员没传片";
-                highlightString = @"演员没传片";
-                disabledString = @"演员没传片";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
                 
             }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
                 //actor
-                normalString = @"已结束";
-                highlightString = @"已结束";
-                disabledString = @"已结束";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
             }else {
                 //passer
-                normalString = @"已结束";
-                highlightString = @"已结束";
-                disabledString = @"已结束";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
             }
@@ -724,23 +753,23 @@ static NSString *const countingImageName = @"clock";
         {
             if (currentScriptInfo.currentRole == LLAUserRoleInScript_Director) {
                 //director
-                normalString = @"已结束";
-                highlightString = @"已结束";
-                disabledString = @"已结束";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
             }else if (currentScriptInfo.currentRole == LLAUserRoleInScript_Actor) {
                 //actor
-                normalString = @"已结束";
-                highlightString = @"已结束";
-                disabledString = @"已结束";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
             }else {
                 //passer
-                normalString = @"已结束";
-                highlightString = @"已结束";
-                disabledString = @"已结束";
+                normalString = @"未上传视频";
+                highlightString = @"未上传视频";
+                disabledString = @"未上传视频";
                 
                 buttonEnabled = NO;
             }

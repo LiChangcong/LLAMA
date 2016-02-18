@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     [self initNavigationItems];
     [self initSubViews];
     
-    asActorButton.selected = YES;
+    asDirctorButton.selected = YES;
     
     [self loadData];
     
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     [asActorButton setTitleColor:[UIColor themeColor] forState:UIControlStateHighlighted];
     [asActorButton setTitleColor:[UIColor themeColor] forState:UIControlStateSelected];
     
-    [asActorButton setTitle:@"演员订单" forState:UIControlStateNormal];
+    [asActorButton setTitle:@"演员接单" forState:UIControlStateNormal];
     
     [asActorButton addTarget:self action:@selector(asActorButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
                                                                                                                                     
     backView.backgroundColor = [UIColor clearColor];
     
-    asDirctorButton.frame = CGRectMake(backView.frame.size.width-asDirctorButton.frame.size.width, 0, asDirctorButton.frame.size.width, asDirctorButton.frame.size.height);
+    asActorButton.frame = CGRectMake(backView.frame.size.width-asActorButton.frame.size.width, 0, asActorButton.frame.size.width, asActorButton.frame.size.height);
     
     [backView addSubview:asActorButton];
     [backView addSubview:asDirctorButton];
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
 }
 
 - (void) initVariables {
-    
+    orderListType = MyOrderListType_AsDirector;
 }
 
 - (void) initSubViews {

@@ -30,6 +30,8 @@ static const CGFloat headViewToNameLabelHorSpace = 12; // 距离用户名间隙
 static const CGFloat rewardViewToTop = 13; // 距离顶部
 static const CGFloat rewardViewToRight = 14; // 距离右边
 
+static const CGFloat publishTimeToPrivateHorSpace = 2;
+
 // 分隔线
 static const CGFloat headViewToSepLineVerSpace = 12; // 距离头像
 static const CGFloat sepLineHeight = 0.5; // 高度
@@ -52,6 +54,8 @@ static const CGFloat partakeNumberToRight = 18; // 距离屏幕右边
 static const CGFloat partakeNumbersToBottom = 17; // 距离cell底部
 static const CGFloat partakeNumbersHeight = 14.5; // 高度
 
+//
+static NSString *const isPrivateImageName = @"secretvideo";
 
 @interface LLAScriptHallInfoCell()<LLAUserHeadViewDelegate>
 {
@@ -62,6 +66,9 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
     LLAUserHeadView *headView;
     UILabel *userNameLabel;
     UILabel *publishTimeLabel;
+    
+    //isPrivate
+    UIButton *isPrivateVideoButton;
     
     // 片酬
     LLARewardMoneyView *rewardView;
@@ -178,6 +185,13 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
     rewardView.translatesAutoresizingMaskIntoConstraints = NO;
     [backView addSubview:rewardView];
     
+    // 私密视频
+    isPrivateVideoButton = [[UIButton alloc] init];
+    isPrivateVideoButton.translatesAutoresizingMaskIntoConstraints = NO;
+    isPrivateVideoButton.userInteractionEnabled = NO;
+    [isPrivateVideoButton setImage:[UIImage llaImageWithName:isPrivateImageName] forState:UIControlStateNormal];
+    [backView addSubview:isPrivateVideoButton];
+    
     // 分割线
     seperatorLineView = [[UIView alloc] init];
     seperatorLineView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -271,6 +285,16 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
       multiplier:1.0
       constant:0]];
     
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:isPrivateVideoButton
+      attribute:NSLayoutAttributeCenterY
+      relatedBy:NSLayoutRelationEqual
+      toItem:publishTimeLabel
+      attribute:NSLayoutAttributeCenterY
+      multiplier:1.0
+      constant:0]];
+    
     //
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -304,25 +328,35 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
                @(rewardViewToRight),@"toRight", nil]
       views:NSDictionaryOfVariableBindings(headView,userNameLabel,rewardView)]];
     
-    [constrArray addObject:
+    [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintWithItem:publishTimeLabel
-      attribute:NSLayoutAttributeLeading
-      relatedBy:NSLayoutRelationEqual
-      toItem:userNameLabel
-      attribute:NSLayoutAttributeLeading
-      multiplier:1.0
-      constant:0]];
+      constraintsWithVisualFormat:@"H:[headView]-(headToTime)-[publishTimeLabel]-(timeToPrivate)-[isPrivateVideoButton]"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:[NSDictionary dictionaryWithObjectsAndKeys:
+               @(headViewToNameLabelHorSpace),@"headToTime",
+               @(publishTimeToPrivateHorSpace),@"timeToPrivate",
+               @(rewardViewToRight),@"toRight", nil]
+      views:NSDictionaryOfVariableBindings(headView,publishTimeLabel,isPrivateVideoButton)]];
     
-    [constrArray addObject:
-     [NSLayoutConstraint
-      constraintWithItem:publishTimeLabel
-      attribute:NSLayoutAttributeTrailing
-      relatedBy:NSLayoutRelationEqual
-      toItem:userNameLabel
-      attribute:NSLayoutAttributeTrailing
-      multiplier:1.0
-      constant:0]];
+//    [constrArray addObject:
+//     [NSLayoutConstraint
+//      constraintWithItem:publishTimeLabel
+//      attribute:NSLayoutAttributeLeading
+//      relatedBy:NSLayoutRelationEqual
+//      toItem:userNameLabel
+//      attribute:NSLayoutAttributeLeading
+//      multiplier:1.0
+//      constant:0]];
+//    
+//    [constrArray addObject:
+//     [NSLayoutConstraint
+//      constraintWithItem:publishTimeLabel
+//      attribute:NSLayoutAttributeTrailing
+//      relatedBy:NSLayoutRelationEqual
+//      toItem:userNameLabel
+//      attribute:NSLayoutAttributeTrailing
+//      multiplier:1.0
+//      constant:0]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -398,6 +432,8 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
     userNameLabel.text = currentScriptInfo.directorInfo.userName;
     [rewardView updateViewWithRewardMoney:currentScriptInfo.rewardMoney];
     
+    isPrivateVideoButton.hidden = !currentScriptInfo.isPrivateVideo;
+    
     // 有无图片的情况下更改剧本文字内容的约束
     if (currentScriptInfo.scriptImageURL) {
         scriptImageView.hidden = NO;
@@ -414,11 +450,16 @@ static const CGFloat partakeNumbersHeight = 14.5; // 高度
     scriptContentLabel.attributedText = [[self class] generateScriptAttriuteStingWith:currentScriptInfo];
     
     // 参与人数
-    NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
-                                            [NSString stringWithFormat:@"%ld 人参与",(long)currentScriptInfo.signupUserNumbers]];
-    [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.signupUserNumbers].length)];
-    scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
-    
+    if (currentScriptInfo.status == LLAScriptStatus_PayVertified) {
+        scriptTotalPartakeUserNumberLabel.attributedText = nil;
+        scriptTotalPartakeUserNumberLabel.text = @"视频拍摄中";
+    }else {
+        NSMutableAttributedString *numAttStr = [[NSMutableAttributedString alloc] initWithString:
+                                                [NSString stringWithFormat:@"%ld 人参与",(long)currentScriptInfo.signupUserNumbers]];
+        [numAttStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor themeColor],NSForegroundColorAttributeName, nil] range:NSMakeRange(0, [NSString stringWithFormat:@"%ld",(long)currentScriptInfo.signupUserNumbers].length)];
+        scriptTotalPartakeUserNumberLabel.attributedText = numAttStr;
+
+    }
 }
 
 #pragma mark - Calculate Cell Height

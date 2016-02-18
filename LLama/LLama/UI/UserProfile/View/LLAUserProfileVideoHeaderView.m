@@ -206,11 +206,11 @@ static const CGFloat indicatorViewWidth = 6;
     currentInfo = mainInfo;
     
     if ([mainInfo.userInfo isEqual:[LLAUser me]]) {
-        [dirctorVideoButton setTitle:@"我导的片儿" forState:UIControlStateNormal];
-        [actorVideoButton setTitle:@"我演的片儿" forState:UIControlStateNormal];
+        [dirctorVideoButton setTitle:@"我订的视频" forState:UIControlStateNormal];
+        [actorVideoButton setTitle:@"我演的视频" forState:UIControlStateNormal];
     }else {
-        [dirctorVideoButton setTitle:@"TA导的片儿" forState:UIControlStateNormal];
-        [actorVideoButton setTitle:@"TA演的片儿" forState:UIControlStateNormal];
+        [dirctorVideoButton setTitle:@"TA订的视频" forState:UIControlStateNormal];
+        [actorVideoButton setTitle:@"TA演的视频" forState:UIControlStateNormal];
     }
     
     if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {

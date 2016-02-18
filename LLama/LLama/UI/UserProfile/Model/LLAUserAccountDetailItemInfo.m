@@ -40,6 +40,12 @@
     
 }
 
++ (NSValueTransformer *) manaMoneyJSONTransformer {
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(NSNumber *value, BOOL *success, NSError *__autoreleasing *error) {
+        return @(((float)value.integerValue) / 100);
+    }];
+}
+
 /**
  *change type from enum
  *
