@@ -79,6 +79,8 @@ static const CGFloat textViewToLeftWithImage = 118;
     
     //
     _rewardMoneyTextField.placeholder = @"点击此处输入金额";
+    [_rewardMoneyTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     _rewardMoneyTextField.textAlignment = NSTextAlignmentRight;
     //
     _preViewImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -339,6 +341,19 @@ static const CGFloat textViewToLeftWithImage = 118;
             }
         }
     }];
+}
+
+
+// 限制昵称长度
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == _rewardMoneyTextField) {
+
+        if (textField.text.length > 6) {
+//            [LLAViewUtil showAlter:self.view withText:@"金额须小于6个字符"];
+            textField.text = [textField.text substringToIndex:6];
+        }
+    }
 }
 
 @end

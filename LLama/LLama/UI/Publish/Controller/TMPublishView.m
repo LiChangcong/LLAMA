@@ -16,7 +16,7 @@
 
 #import "LLAImagePickerViewController.h"
 
-static CGFloat const XMGAnimationDelay = 0.5;
+static CGFloat const XMGAnimationDelay = 0.08;
 static CGFloat const XMGSpringFactor = 10;
 #define XMGScreenW [UIScreen mainScreen].bounds.size.width
 #define XMGScreenH [UIScreen mainScreen].bounds.size.height
