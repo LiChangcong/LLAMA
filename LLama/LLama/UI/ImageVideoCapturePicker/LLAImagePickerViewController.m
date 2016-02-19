@@ -350,11 +350,13 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 
 - (void)LLAImagePickerCollectionCellDidClickSelectedButton:(LLAImagePickerCollectionCell *)imagePickerCollectionCell andIndexPath:(NSIndexPath *)indexPath andButtonIsSelected:(BOOL)isSelected
 {
-    
+
     LLAPickImageItemInfo *iteminfo = dataArray[indexPath.row - 1];
-    iteminfo.IsSelected = isSelected;
+    iteminfo.IsSelected = !iteminfo.IsSelected;
     
-    if (isSelected) { // 选中状态
+    NSLog(@"%d",indexPath.row);
+    
+    if (iteminfo.IsSelected) { // 选中状态
         // 之前保存选中状态的模型变成非选中状态
         _currentPickImgItemInfo.IsSelected = NO;
         // 把新的为选中状态的图片存到选中模型

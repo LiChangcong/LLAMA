@@ -217,7 +217,7 @@
     imagePicker.callBack = ^(LLAPickImageItemInfo *itemInfo){
         
         UIImage *headImage = itemInfo.thumbImage;
-        
+        choosedImage = headImage;
         [self.ChooseHeadImageButton setImage:headImage forState:UIControlStateNormal];
         [self.ChooseHeadImageButton setImage:nil forState:UIControlStateHighlighted];
     };
