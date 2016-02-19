@@ -198,25 +198,25 @@
 
 - (void) setupShortCutsItems {
     
-    if (NSClassFromString(@"UIApplicationShortcutItem")) {
-    
-        UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc]
-                                        initWithType:@"typeString1"
-                                        localizedTitle:@"拍照片"
-                                        localizedSubtitle:nil
-                                        icon:[UIApplicationShortcutIcon iconWithType:
-                                              UIApplicationShortcutIconTypeCapturePhoto]
-                                        userInfo:nil];
-        UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc]
-                                        initWithType:@"typeString2"
-                                        localizedTitle:@"信息"
-                                        localizedSubtitle:@"描述"
-                                        icon:[UIApplicationShortcutIcon iconWithType:
-                                              UIApplicationShortcutIconTypeMessage]
-                                        userInfo:nil];
-        if (item1 && item2)
-            [UIApplication sharedApplication].shortcutItems = @[item1,item2];
-    }
+//    if (NSClassFromString(@"UIApplicationShortcutItem")) {
+//    
+//        UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc]
+//                                        initWithType:@"typeString1"
+//                                        localizedTitle:@"拍照片"
+//                                        localizedSubtitle:nil
+//                                        icon:[UIApplicationShortcutIcon iconWithType:
+//                                              UIApplicationShortcutIconTypeCapturePhoto]
+//                                        userInfo:nil];
+//        UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc]
+//                                        initWithType:@"typeString2"
+//                                        localizedTitle:@"信息"
+//                                        localizedSubtitle:@"描述"
+//                                        icon:[UIApplicationShortcutIcon iconWithType:
+//                                              UIApplicationShortcutIconTypeMessage]
+//                                        userInfo:nil];
+//        if (item1 && item2)
+//            [UIApplication sharedApplication].shortcutItems = @[item1,item2];
+//    }
 }
 
 @end
