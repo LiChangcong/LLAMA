@@ -22,6 +22,7 @@
 #import "LLAViewUtil.h"
 #import "LLAChangeRootControllerUtil.h"
 #import "SDImageCache.h"
+#import "LLAVideoCacheUtil.h"
 
 //setting
 //#import "TMAccountSecurityController.h"
@@ -106,6 +107,9 @@ static const CGFloat logoutHeaderHeight = 28;
     dispatch_after(0, dispatch_get_main_queue(), ^(void){
         
         float tmpSize = [[SDImageCache sharedImageCache] getSize];
+        
+        tmpSize += [[LLAVideoCacheUtil shareInstance] videoCacheSize];
+        
         tmpSize = tmpSize / 1024.0 / 1024.0;
         NSString *bufferSize = tmpSize >= 1 ? [NSString stringWithFormat:@"%.2fM",tmpSize] : [NSString stringWithFormat:@"%.2fK",tmpSize * 1024];
         cacheItem.detailContentString = bufferSize;
@@ -251,6 +255,7 @@ static const CGFloat logoutHeaderHeight = 28;
             
             [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
                 [HUD hide:YES];
+                [[LLAVideoCacheUtil shareInstance] clearCache];
                 item.detailContentString = @"0M";
                 [dataTableView reloadData];
             }];

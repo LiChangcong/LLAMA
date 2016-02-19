@@ -90,6 +90,7 @@
 		5C75347B1C7714450058F93C /* PSTGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C75346C1C7714450058F93C /* PSTGridLayoutItem.m */; };
 		5C75347C1C7714450058F93C /* PSTGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C75346E1C7714450058F93C /* PSTGridLayoutRow.m */; };
 		5C75347D1C7714450058F93C /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7534701C7714450058F93C /* PSTGridLayoutSection.m */; };
+		5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */; };
 		5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */; };
 		5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845D1C5F0AB7002EC705 /* YYAlertView.m */; };
 		5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */; };
@@ -611,6 +612,8 @@
 		5C75346E1C7714450058F93C /* PSTGridLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutRow.m; sourceTree = "<group>"; };
 		5C75346F1C7714450058F93C /* PSTGridLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSTGridLayoutSection.h; sourceTree = "<group>"; };
 		5C7534701C7714450058F93C /* PSTGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutSection.m; sourceTree = "<group>"; };
+		5C75347E1C7718F90058F93C /* LLACachingVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACachingVideoInfo.h; sourceTree = "<group>"; };
+		5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACachingVideoInfo.m; sourceTree = "<group>"; };
 		5C78845A1C5F0AB7002EC705 /* YYActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYActionSheetView.h; sourceTree = "<group>"; };
 		5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYActionSheetView.m; sourceTree = "<group>"; };
 		5C78845C1C5F0AB7002EC705 /* YYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAlertView.h; sourceTree = "<group>"; };
@@ -1698,6 +1701,8 @@
 			children = (
 				5CA194671C4F889100A0B5B7 /* LLAVideoCacheUtil.h */,
 				5CA194681C4F889100A0B5B7 /* LLAVideoCacheUtil.m */,
+				5C75347E1C7718F90058F93C /* LLACachingVideoInfo.h */,
+				5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */,
 			);
 			path = VideoCacheUtil;
 			sourceTree = "<group>";
@@ -3276,6 +3281,7 @@
 				7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */,
 				5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */,
 				5C7534431C7711920058F93C /* MWTapDetectingView.m in Sources */,
+				5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
 				5C9353C41C5E18AB00DD75DC /* LLAVideoCommentViewController.m in Sources */,

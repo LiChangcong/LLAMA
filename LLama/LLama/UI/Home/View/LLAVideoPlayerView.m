@@ -168,7 +168,12 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) replacePlayerItem {
     
-    AVPlayerItem *newItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:playingVideoInfo.videoPlayURL]];
+    NSURL *playURL = [NSURL URLWithString:playingVideoInfo.videoPlayURL];
+    
+    playURL = [[LLAVideoCacheUtil shareInstance] cacheURLForVideoURL:playURL];
+    [[LLAVideoCacheUtil shareInstance] cacheVideoWithURL:playURL];
+    
+    AVPlayerItem *newItem = [AVPlayerItem playerItemWithURL:playURL];
     
     if (newItem) {
         
@@ -225,6 +230,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
                 
                 coverImageView.hidden = NO;
                 [LLAViewUtil showAlter:self withText:@"视频播放失败"];
+                NSLog(@"playerError:%@",videoPlayer.currentItem.error);
                 [self removePlayerItemObserver];
                 break;
             case AVPlayerItemStatusReadyToPlay:

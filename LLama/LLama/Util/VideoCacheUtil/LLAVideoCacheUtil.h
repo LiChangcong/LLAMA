@@ -15,4 +15,12 @@
 
 + (instancetype) shareInstance;
 
+- (void) cacheVideoWithURL:(NSURL *) videoURL;
+
+- (NSURL *) cacheURLForVideoURL:(NSURL *) videoURL;
+
+- (NSInteger) videoCacheSize;
+
+- (void) clearCache;
+
 @end
