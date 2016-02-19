@@ -9,8 +9,8 @@
 #import "LLAUserProfileVideoHeaderView.h"
 
 
-static const CGFloat indicatorViewHeight =  4;
-static const CGFloat indicatorViewWidth = 6;
+static const CGFloat indicatorViewHeight =  8;
+static const CGFloat indicatorViewWidth = 12;
 
 @interface LLAUserProfileVideoHeaderView()
 
@@ -94,8 +94,25 @@ static const CGFloat indicatorViewWidth = 6;
     indicatorView = [[UIImageView alloc] init];
     indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    indicatorView.image = [UIImage llaImageWithName:@""];
-    indicatorView.backgroundColor = [UIColor lightGrayColor];
+    //indicatorView.image = [UIImage llaImageWithName:@""];
+    //indicatorView.backgroundColor = [UIColor lightGrayColor];
+    
+    //shape layer
+    
+    UIBezierPath *trianglePath = [UIBezierPath bezierPath];
+    
+    [trianglePath moveToPoint:CGPointMake(indicatorViewWidth/2, 0)];
+    [trianglePath addLineToPoint:CGPointMake(0, indicatorViewHeight)];
+    [trianglePath addLineToPoint:CGPointMake(indicatorViewWidth, indicatorViewHeight)];
+    
+    [trianglePath closePath];
+    
+    CAShapeLayer *triangleLayer = [CAShapeLayer layer];
+    triangleLayer.fillColor = [UIColor lightGrayColor].CGColor;
+    
+    triangleLayer.path = trianglePath.CGPath;
+    
+    [indicatorView.layer addSublayer:triangleLayer];
     
     [self.contentView addSubview:indicatorView];
     

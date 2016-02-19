@@ -196,9 +196,10 @@ static NSString *const recordFoucusImageName = @"";
     [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Normal] forState:UIControlStateNormal];
     
     [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateHighlighted];
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateSelected];
     
-    [pressToRecordButton addTarget:self action:@selector(recordTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [pressToRecordButton addTarget:self action:@selector(recordTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    //[pressToRecordButton addTarget:self action:@selector(recordTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [pressToRecordButton addTarget:self action:@selector(recordClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:pressToRecordButton];
     
     //
@@ -426,6 +427,18 @@ static NSString *const recordFoucusImageName = @"";
     }];
 }
 
+- (void) recordClicked:(UIButton *) sender {
+    
+    if (sender.selected) {
+        sender.selected =  NO;
+        [self recordTouchUp:sender];
+    }else {
+        sender.selected = YES;
+        [self recordTouchDown:sender];
+    }
+    
+}
+
 - (void) recordTouchDown:(UIButton *) sender {
     //begin record
     [shareRecorder record];
@@ -462,11 +475,31 @@ static NSString *const recordFoucusImageName = @"";
 - (void) videoEditorButtonClicked:(UIButton *) sender {
     //export
     
-    [shareRecorder pause];
+    if (shareRecorder.isRecording)
+        //[self recordClicked:pressToRecordButton];
+        pressToRecordButton.selected = NO;
+    [recordProgressView startBlinkIndicator];
     
-    LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:shareRecorder.session.assetRepresentingSegments];
+    //
+    if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
+        videoEditButton.enabled = YES;
+        videoEditButton.selected = YES;
+        
+        chooseVideoButton.hidden = YES;
+    }else {
+        chooseVideoButton.hidden = NO;
+        videoEditButton.enabled = NO;
+        videoEditButton.hidden = YES;
+    }
+
     
-    [self.navigationController pushViewController:editVideo animated:YES];
+    [shareRecorder pause:^{
+            LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:shareRecorder.session.assetRepresentingSegments];
+            
+            [self.navigationController pushViewController:editVideo animated:YES];
+
+        }];
+    
    
 }
 
@@ -561,6 +594,11 @@ static NSString *const recordFoucusImageName = @"";
     }
     
     [recordProgressView updateLastVideoClipInfoWithNewDuration:CMTimeGetSeconds(recordSession.currentSegmentDuration)];
+    
+    if (CMTimeGetSeconds(recordSession.duration) >= maxVideoSecond) {
+        [self recordClicked:pressToRecordButton];
+        [self videoEditorButtonClicked:videoEditButton];
+    }
 }
 
 

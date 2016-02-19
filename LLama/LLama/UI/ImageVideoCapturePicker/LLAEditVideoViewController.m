@@ -126,7 +126,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     scaleView = [[LLAEditVideoScaleView alloc] init];
     scaleView.translatesAutoresizingMaskIntoConstraints = NO;
     scaleView.userInteractionEnabled = NO;
-    
+    scaleView.hidden = YES;
     [self.view addSubview:scaleView];
     
     //
@@ -437,6 +437,23 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 - (void)videoPlayerViewTappedToPlay:(SCVideoPlayerView *__nonnull)playerView {
     //[[playerView player] play];
     playPauseButton.hidden = YES;
+    
+    if (CMTimeGetSeconds(playerView.player.currentTime) < CMTimeGetSeconds(playerView.player.currentItem.duration)*editProgressView.editBeginRatio) {
+        
+        [playerView.player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(playerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+            
+        }];
+    }
+    
+    if (CMTimeGetSeconds(playerView.player.currentTime) > CMTimeGetSeconds(playerView.player.currentItem.duration) * editProgressView.editEndRatio) {
+        
+        [playerView.player pause];
+        
+        [playerView.player seekToTime:CMTimeMake(editProgressView.editEndRatio*CMTimeGetSeconds(playerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+            
+        }];
+    }
+    
 }
 
 - (void)videoPlayerViewTappedToPause:(SCVideoPlayerView *__nonnull)playerView {
@@ -453,6 +470,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 - (void)player:(SCPlayer *__nonnull)player didPlay:(CMTime)currentTime loopsCount:(NSInteger)loopsCount {
     
     if (CMTimeGetSeconds(currentTime) < CMTimeGetSeconds(player.currentItem.duration)*editProgressView.editBeginRatio) {
+        
         [player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
             
         }];
