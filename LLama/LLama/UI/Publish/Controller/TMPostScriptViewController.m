@@ -133,6 +133,13 @@ static const CGFloat textViewToLeftWithImage = 118;
     [_qqFriend setImage:[UIImage llaImageWithName:@"qqtinyh"] forState:UIControlStateSelected];
     _qqFriend.tintColor = nil;
     [_qqFriend addTarget:self action:@selector(qqFriendClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.weixinButton.hidden = YES;
+    self.weiboButton.hidden = YES;
+    self.qqButton.hidden = YES;
+    self.friendCircle.hidden = YES;
+    self.shareToView.hidden = YES;
+
 }
 
 
@@ -141,21 +148,21 @@ static const CGFloat textViewToLeftWithImage = 118;
 - (void) isPrivateButtonClicked:(UIButton *) sender {
     
     _isPrivateButton.selected = !_isPrivateButton.selected;
-    
-    if (_isPrivateButton.selected == YES) {
-        self.weixinButton.hidden = YES;
-        self.weiboButton.hidden = YES;
-        self.qqButton.hidden = YES;
-        self.friendCircle.hidden = YES;
-        self.shareToView.hidden = YES;
-    }else{
-        self.weixinButton.hidden = NO;
-        self.weiboButton.hidden = NO;
-        self.qqButton.hidden = NO;
-        self.friendCircle.hidden = NO;
-        self.shareToView.hidden = NO;
-        
-    }
+//
+//    if (_isPrivateButton.selected == YES) {
+//        self.weixinButton.hidden = YES;
+//        self.weiboButton.hidden = YES;
+//        self.qqButton.hidden = YES;
+//        self.friendCircle.hidden = YES;
+//        self.shareToView.hidden = YES;
+//    }else{
+//        self.weixinButton.hidden = NO;
+//        self.weiboButton.hidden = NO;
+//        self.qqButton.hidden = NO;
+//        self.friendCircle.hidden = NO;
+//        self.shareToView.hidden = NO;
+//        
+//    }
 
 }
 
