@@ -54,6 +54,8 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
 
 @implementation LLAVideoCommentViewController
 
+@synthesize delegate;
+
 #pragma mark - Life Cycle
 
 - (instancetype) initWithVideoIdString:(NSString *)videoId {
@@ -330,8 +332,6 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
 - (void) sendMessageWithContent:(NSString *)content {
     //send message
     
-    
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     [params setValue:videoIdString forKey:@"playId"];
@@ -350,13 +350,13 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
         [HUD hide:NO];
         //
         
-        LLAHallVideoCommentItem *comment = [LLAHallVideoCommentItem new];
-        comment.scriptIdString = videoIdString;
-        comment.authorUser = [LLAUser me];
-        comment.replyToUser = user;
-        comment.commentContent = content ;
-        comment.commentTime = [[NSDate date] timeIntervalSince1970];
-        comment.commentIdString = @"刚刚";
+        LLAHallVideoCommentItem *comment = [LLAHallVideoCommentItem parseJsonWithDic:[responseObject valueForKey:@"comment"]];
+//        comment.scriptIdString = videoIdString;
+//        comment.authorUser = [LLAUser me];
+//        comment.replyToUser = user;
+//        comment.commentContent = content ;
+//        comment.commentTime = [[NSDate date] timeIntervalSince1970];
+//        comment.commentIdString = @"刚刚";
         
         [mainInfo.dataList insertObject:comment atIndex:0];
         
@@ -366,6 +366,14 @@ static NSString *const replyToViewPlaceHolder = @"添加评论...";
         [inputController resetContent];
         
         replyToUser = nil;
+        //
+        if (delegate && [delegate respondsToSelector:@selector(commentSuccess:videoId:)]) {
+            
+            LLAHallVideoCommentItem *cmt = [comment copy];
+            cmt.textContainer = nil;
+            
+            [delegate commentSuccess:cmt videoId:videoIdString];
+        }
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         

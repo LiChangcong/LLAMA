@@ -217,7 +217,7 @@ static const CGFloat functionButtonToBorder  = 60;
     }else {
         functionButton.selected = NO;
     }
-    cashTextField.text = [NSString stringWithFormat:@"%ld",(long)cashNum];
+    //cashTextField.text = [NSString stringWithFormat:@"%ld",(long)cashNum];
     
 }
 

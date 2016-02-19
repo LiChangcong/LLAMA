@@ -339,6 +339,10 @@ static const CGFloat scriptLabelFontSize = 13;
     totalCommentLabel.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:totalCommentLabel];
     
+    UITapGestureRecognizer *totalCommentTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(totalCommentLabelTapped:)];
+    totalCommentLabel.userInteractionEnabled = YES;
+    [totalCommentLabel addGestureRecognizer:totalCommentTapped];
+    
     // 评论
     commentsView = [[LLAVideoCommentContentView alloc] init];
     commentsView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -684,6 +688,10 @@ static const CGFloat scriptLabelFontSize = 13;
     if (delegate && [delegate respondsToSelector:@selector(shareVideoWithVideoItemInfo:)]) {
         [delegate shareVideoWithVideoItemInfo:currentVideoInfo];
     }
+}
+
+- (void) totalCommentLabelTapped:(UIGestureRecognizer *) ges {
+    [self commentButtonClicked:commentVideoButton];
 }
 
 #pragma mark - LLAVideoCommentContentViewDelegate

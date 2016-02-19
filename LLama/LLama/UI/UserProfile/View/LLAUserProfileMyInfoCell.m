@@ -351,7 +351,6 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         videoCoverImageView.hidden = YES;
         videoPlayerView.hidden = YES;
         [videoPlayerView stopVideo];
-        
         shouldPlayVideoInfo = nil;
         
     
@@ -361,9 +360,12 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         uploadUserVideoButton.hidden = YES;
         
         videoCoverImageView.hidden = NO;
+        videoPlayerView.hidden = NO;
         [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentUser.userVideo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
         
         shouldPlayVideoInfo = currentUser.userVideo;
+        
+        [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
         
     }
     

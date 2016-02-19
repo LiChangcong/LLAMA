@@ -97,6 +97,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     videoPlayerView = [[LLAVideoPlayerView alloc] init];
     videoPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     //videoPlayerView.hidden = YES;
+    videoPlayerView.delegate = self.delegate;
     
     [self.contentView addSubview:videoPlayerView];
     
@@ -289,11 +290,13 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     }else {
         
         headView.hidden = YES;
-        
+        videoPlayerView.hidden = NO;
         videoCoverImageView.hidden = NO;
         [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentUser.userVideo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
         
         shouldPlayVideoInfo = currentUser.userVideo;
+        
+        [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
         
     }
     

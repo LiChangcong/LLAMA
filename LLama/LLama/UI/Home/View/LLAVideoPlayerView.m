@@ -48,10 +48,11 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 - (void) dealloc {
     
     @try {
-        [videoPlayer.currentItem removeObserver:self forKeyPath:@"status"];
         
         [videoPlayer removeObserver:self forKeyPath:@"rate"];
         [videoPlayer removeObserver:self forKeyPath:@"currentItem"];
+        
+        [videoPlayer.currentItem removeObserver:self forKeyPath:@"status"];
     }
     @catch (NSException *exception) {
         
@@ -219,11 +220,12 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         
         switch (videoPlayer.currentItem.status) {
             case AVPlayerItemStatusFailed:
-                [loadingIndicator stopAnimating];
-                [self removePlayerItemObserver];
-                coverImageView.hidden = NO;
                 
+                [loadingIndicator stopAnimating];
+                
+                coverImageView.hidden = NO;
                 [LLAViewUtil showAlter:self withText:@"视频播放失败"];
+                [self removePlayerItemObserver];
                 break;
             case AVPlayerItemStatusReadyToPlay:
                 [loadingIndicator stopAnimating];
@@ -319,7 +321,7 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) stopVideo {
     
-    if (self.isPlaying || CMTimeGetSeconds(videoPlayer.currentTime) > 0) {
+    if (self.isPlaying || CMTimeGetSeconds(videoPlayer.currentTime) > 0 || videoPlayer.currentItem.status == AVPlayerItemStatusUnknown) {
     
         [videoPlayer pause];
     
