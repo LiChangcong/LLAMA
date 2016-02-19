@@ -21,6 +21,7 @@
 #import "LLAChooseActorCell.h"
 #import "LLALoadingView.h"
 #import "LLAScriptChooseActorHeader.h"
+#import "MMPopup.h"
 
 //category
 #import "SVPullToRefresh.h"
@@ -366,18 +367,41 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
                 //director,this time choose actor
                 
                 if (scriptInfo.partakeUsersArray.count > 0) {
-                    LLAUser *selectedUser = [self selectedUserInfoScriptInfo];
+                
+                    [MMPopupWindow sharedWindow].touchWildToHide = NO;
                     
-                    //
-                    LLAPayUserPayInfo *payInfo = [LLAPayUserPayInfo new];
-                    payInfo.payToUser = selectedUser;
-                    payInfo.payMoney = scriptInfo.rewardMoney;
-                    payInfo.payToScriptIdString = scriptInfo.scriptIdString;
+                    MMSheetViewConfig *config = [MMSheetViewConfig globalConfig];
+                    config.itemHighlightColor = [UIColor themeColor];
+                    config.cancelTextNormalColor = [UIColor colorWithHex:0x00aeff];
                     
-                    //
-                    LLAPayUserViewController *pay = [[LLAPayUserViewController alloc] initWithPayInfo:payInfo];
-                    pay.delegate = self;
-                    [self.navigationController pushViewController:pay animated:YES];
+                    MMPopupItem *cancelItem = MMItemMake(@"取消", MMItemTypeNormal, ^(NSInteger index) {
+                        //cancel
+                        
+                    });
+
+                    
+                    MMPopupItem *okItem = MMItemMake(@"确定", MMItemTypeHighlight, ^(NSInteger index) {
+                        
+                        LLAUser *selectedUser = [self selectedUserInfoScriptInfo];
+                        
+                        //
+                        LLAPayUserPayInfo *payInfo = [LLAPayUserPayInfo new];
+                        payInfo.payToUser = selectedUser;
+                        payInfo.payMoney = scriptInfo.rewardMoney;
+                        payInfo.payToScriptIdString = scriptInfo.scriptIdString;
+                        
+                        //
+                        LLAPayUserViewController *pay = [[LLAPayUserViewController alloc] initWithPayInfo:payInfo];
+                        pay.delegate = self;
+                        [self.navigationController pushViewController:pay animated:YES];
+                        
+                    });
+                    
+                    NSArray *items = @[cancelItem,okItem];
+                    
+                    [[[MMAlertView alloc] initWithTitle:@"选TA拍视频" detail:@"" items:items] showWithBlock:^(MMPopupView * popView) {
+                        
+                    }];
                     
                 }else {
                     
@@ -389,7 +413,32 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
                 
             }else {
                 //passer,join to act the script
-                [self signUpTheScript];
+                
+                [MMPopupWindow sharedWindow].touchWildToHide = NO;
+                
+                MMSheetViewConfig *config = [MMSheetViewConfig globalConfig];
+                config.itemHighlightColor = [UIColor themeColor];
+                config.cancelTextNormalColor = [UIColor colorWithHex:0x00aeff];
+                
+                MMPopupItem *cancelItem = MMItemMake(@"取消", MMItemTypeNormal, ^(NSInteger index) {
+                    //cancel
+                    
+                });
+                
+                
+                MMPopupItem *okItem = MMItemMake(@"确定", MMItemTypeHighlight, ^(NSInteger index) {
+
+                    [self signUpTheScript];
+                });
+                
+                NSArray *items = @[cancelItem,okItem];
+                
+                [[[MMAlertView alloc] initWithTitle:@"确定报名吗?" detail:@"" items:items] showWithBlock:^(MMPopupView * popView) {
+                    
+                }];
+
+                
+
             }
         }
             

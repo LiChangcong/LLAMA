@@ -16,6 +16,7 @@
 #import "LLALoadingView.h"
 #import "LLAVideoPlayerView.h"
 #import "LLAHallVideoInfoCell.h"
+#import "MMPopup.h"
 
 #import "LLAUploadVideoProgressView.h"
 //category
@@ -424,6 +425,45 @@
 
 - (void) shareVideoWithVideoItemInfo:(LLAHallVideoItemInfo *)videoItemInfo {
 
+    [MMPopupWindow sharedWindow].touchWildToHide = YES;
+    
+    MMSheetViewConfig *config = [MMSheetViewConfig globalConfig];
+    config.itemHighlightColor = [UIColor redColor];
+    config.cancelTextNormalColor = [UIColor colorWithHex:0x00aeff];
+    
+    MMPopupItem *reportItem = MMItemMake(@"举报", MMItemTypeHighlight, ^(NSInteger index) {
+        //report
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        [params setValue:videoItemInfo.scriptID forKey:@"playId"];
+        
+        [HUD show:YES];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/play/reportPlay" param:params responseBlock:^(id responseObject) {
+            
+            //
+            [HUD hide:YES];
+            
+            [LLAViewUtil showAlter:self.view withText:@"感谢你的举报，我们会尽快处理"];
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }];
+        
+    });
+    
+    NSArray *items = @[reportItem];
+
+    [[[MMSheetView alloc] initWithTitle:@"操作" items:items] showWithBlock:^(MMPopupView * popView) {
+        
+    }];
 }
 
 - (void) commentVideoChooseWithCommentInfo:(LLAHallVideoCommentItem *) commentInfo videoItemInfo:(LLAHallVideoItemInfo *) videoItemInfo {

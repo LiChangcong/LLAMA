@@ -84,7 +84,6 @@ static NSString * const  TMTHistoryCellId= @"history";
 // 点赞按钮点击后显示点赞用户页面
 - (void)purseHeadCellDidClickPurseButton:(TMPurseHeadCell *)purseHeadCell
 {
-    TMLog(@"123");
     TMNoticeView *noticeView = [TMNoticeView noticeView];
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     noticeView.frame = window.bounds;
