@@ -34,6 +34,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *identityField;
 @property (weak, nonatomic) IBOutlet UIButton *sendToGetIDCodeButton;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *weiboButton;
+@property (weak, nonatomic) IBOutlet UIButton *weixinButton;
+@property (weak, nonatomic) IBOutlet UIButton *qqButton;
+
+
 @end
 
 @implementation TMRegisterViewController
@@ -53,6 +59,16 @@
     HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
     self.navigationItem.title = @"注 册";
+    
+    if (![QQApiInterface isQQInstalled]) {
+        self.qqButton.hidden = YES;
+    }
+    if (![WXApi isWXAppInstalled]) {
+        self.weixinButton.hidden = YES;
+    }
+    if (![WeiboSDK isWeiboAppInstalled]) {
+        self.weiboButton.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

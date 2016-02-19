@@ -34,6 +34,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *weiboButton;
+@property (weak, nonatomic) IBOutlet UIButton *weixinButton;
+@property (weak, nonatomic) IBOutlet UIButton *qqButton;
+
 @end
 
 @implementation TMLoginViewController
@@ -57,6 +62,17 @@
     [HUD hide:NO];
     
     self.navigationItem.title = @"登 陆";
+    
+    if (![QQApiInterface isQQInstalled]) {
+        self.qqButton.hidden = YES;
+    }
+    if (![WXApi isWXAppInstalled]) {
+        self.weixinButton.hidden = YES;
+    }
+    if (![WeiboSDK isWeiboAppInstalled]) {
+        self.weiboButton.hidden = YES;
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

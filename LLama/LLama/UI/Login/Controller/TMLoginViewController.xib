@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TMLoginViewController">
@@ -10,8 +10,11 @@
                 <outlet property="loginButton" destination="eIG-Ir-J9a" id="ZS1-17-jwX"/>
                 <outlet property="passwordField" destination="3Ci-DR-cPt" id="gmj-8Q-S7r"/>
                 <outlet property="phoneNumField" destination="nqc-sa-QjN" id="8g7-6x-utN"/>
+                <outlet property="qqButton" destination="CBc-Ds-FGI" id="pj3-8p-z8b"/>
                 <outlet property="registerButton" destination="fGd-RN-2y2" id="qGQ-hU-Rmg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weiboButton" destination="WCx-oU-rY4" id="RKC-Ng-mH8"/>
+                <outlet property="weixinButton" destination="Ewj-Nz-Mjw" id="pxk-yK-dTF"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
