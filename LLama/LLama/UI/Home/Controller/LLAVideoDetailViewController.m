@@ -290,7 +290,7 @@
     
     NSArray *items = @[reportItem];
     
-    [[[MMSheetView alloc] initWithTitle:@"操作" items:items] showWithBlock:^(MMPopupView * popView) {
+    [[[MMSheetView alloc] initWithTitle:@"" items:items] showWithBlock:^(MMPopupView * popView) {
         
     }];
 

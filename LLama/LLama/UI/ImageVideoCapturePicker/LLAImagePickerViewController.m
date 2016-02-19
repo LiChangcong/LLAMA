@@ -67,6 +67,13 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
     
     [HUD show:YES];
     
+    if ([PHPhotoLibrary authorizationStatus] ==  PHAuthorizationStatusDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+        
+    }
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadImagesData];
     });
@@ -152,13 +159,6 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
     
     if (NSClassFromString(@"PHPhotoLibrary")) {
         //ios 8 and later
-        
-        if ([PHPhotoLibrary authorizationStatus] ==  PHAuthorizationStatusDenied) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alert show];
-            return;
-            
-        }
         
         PHFetchOptions *onlyOptions = [PHFetchOptions new];
         onlyOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType = %i", PHAssetMediaTypeImage];
