@@ -17,6 +17,7 @@
 
 #import "LLAPickVideoNavigationController.h"
 
+#import "MWPhotoBrowser.h"
 
 //view
 #import "LLATableView.h"
@@ -54,7 +55,7 @@ static const NSInteger videoInfosectionIndex = 2;
 //
 static const CGFloat navigationBarHeight = 64;
 
-@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
+@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate,MWPhotoBrowserDelegate>
 {
     
     LLAUserProfileNavigationBar *customNaviBar;
@@ -65,11 +66,15 @@ static const CGFloat navigationBarHeight = 64;
     
     LLALoadingView *HUD;
     
+
     UIView *backView;
     // 对有头像用户的点赞
     UIButton *zanButton;
     // 对没头像用户的点赞
     UIButton *praiseNumItemButton;
+
+    //for MWPhotoBrower
+    NSMutableArray *photoArray;
 }
 
 @property(nonatomic , readwrite , strong) NSString *uIdString;
@@ -611,6 +616,8 @@ static const CGFloat navigationBarHeight = 64;
         
 //        UITouch *touch = [[UITouch alloc] init];
         
+        LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+        
         CGPoint curP = [tap locationInView:backView];
         
         
@@ -917,6 +924,22 @@ static const CGFloat navigationBarHeight = 64;
         LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
         
         [self.navigationController pushViewController:editUserInfo animated:YES];
+    }else {
+        //
+        
+        if (!photoArray) {
+            photoArray = [NSMutableArray array];
+        }
+        [photoArray removeAllObjects];
+        [photoArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:userInfo.headImageURL]]];
+        
+        MWPhotoBrowser *photoBrower = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        [photoBrower showToolBar:NO];
+        LLABaseNavigationController *photoNavi = [[LLABaseNavigationController alloc] initWithRootViewController:photoBrower];
+        
+        photoNavi.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:photoNavi animated:YES completion:nil];
+        
     }
 }
 
@@ -1140,6 +1163,17 @@ static const CGFloat navigationBarHeight = 64;
         
     }
     
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return photoArray.count;
+}
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < photoArray.count)
+        return photoArray[index];
+    return nil;
 }
 
 

@@ -257,9 +257,6 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         //play to end
         [videoPlayer seekToTime:kCMTimeZero];
         //[videoPlayer play];
-        
-        [[LLAVideoCacheUtil shareInstance] cacheVideoFromPlayerItem:videoPlayer.currentItem videoInfo:playingVideoInfo];
-        
     }
 }
 

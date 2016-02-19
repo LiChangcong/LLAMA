@@ -53,7 +53,7 @@
 + (LLAUserProfileSettingItemInfo *) versionItem {
     
     LLAUserProfileSettingItemInfo *item = [LLAUserProfileSettingItemInfo new];
-    item.titleString = @"版本信息(点击检测新版本)";
+    item.titleString = @"版本信息";
     item.detailContentString = [LLACommonUtil appVersion];
     item.itemType = LLASettingItemType_Version;
     return item;
