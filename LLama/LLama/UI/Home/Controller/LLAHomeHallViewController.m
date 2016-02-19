@@ -41,6 +41,8 @@
     //
     LLAUploadVideoProgressView *videoProgressView;
 
+    //
+    NSMutableArray *playerCellsArray;
 }
 
 @end
@@ -58,6 +60,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 设置导航栏
     [self initNaviItems];
+    
+    playerCellsArray = [NSMutableArray array];
     
     // 设置内部子控件
     [self initSubViews];
@@ -272,6 +276,8 @@
     if (!cell) {
         cell = [[LLAHallVideoInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIden];
         cell.delegate = self;
+        
+        [playerCellsArray addObject:cell];
     }
     
     // 设置每个cell的数据
@@ -309,9 +315,8 @@
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     
     //stop those which is out of screen
-    NSArray *visibleCells = [dataTableView visibleCells];
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -337,11 +342,10 @@
     
     id <LLACellPlayVideoProtocol> playCell = nil;
     
-    NSArray *visibleCells = [dataTableView visibleCells];
     
     CGFloat maxHeight = 0;
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -370,7 +374,7 @@
     }
     
     //
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -461,7 +465,7 @@
     
     NSArray *items = @[reportItem];
 
-    [[[MMSheetView alloc] initWithTitle:@"操作" items:items] showWithBlock:^(MMPopupView * popView) {
+    [[[MMSheetView alloc] initWithTitle:@"" items:items] showWithBlock:^(MMPopupView * popView) {
         
     }];
 }
@@ -520,9 +524,8 @@
 
 - (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView {
     //
-    NSArray *visibleCells = [dataTableView visibleCells];
-    
-    for (UITableViewCell* tempCell in visibleCells) {
+
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -557,9 +560,8 @@
 
 - (void) stopAllVideo {
     
-    NSArray *visibleCells = [dataTableView visibleCells];
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;

@@ -144,9 +144,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
         //ios 8 and later
         
         if ([PHPhotoLibrary authorizationStatus] ==  PHAuthorizationStatusDenied) {
+            
+            [HUD hide:YES];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             return;
+
 
         }
         
@@ -181,22 +184,29 @@ static NSString *cellIdentifier = @"cellIdentifier";
                 
                 if (videoAsset && [videoAsset isKindOfClass:[AVURLAsset class]]) {
                     
+                        AVURLAsset *urlAsset = (AVURLAsset *) videoAsset;
                     
-                    AVURLAsset *urlAsset = (AVURLAsset *) videoAsset;
-                    
-                    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:videoAsset];
-                    imageGenerator.appliesPreferredTrackTransform = YES;
-                    
-                    CMTime time = kCMTimeZero;
-                    CMTime actualTime;
-                    
-                    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
-                    UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
-                
-                    itemInfo.videoURL = urlAsset.URL;
-                    itemInfo.thumbImage = thumbImage;
+                        AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:videoAsset];
+                        imageGenerator.appliesPreferredTrackTransform = YES;
+                        
+                        CMTime time = kCMTimeZero;
+                        CMTime actualTime;
+                        
+                        CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
+                        UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
+                        
+                        itemInfo.videoURL = urlAsset.URL;
+                        itemInfo.thumbImage = thumbImage;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        [dataCollectionView reloadData];
+                    });
+
+                    
+                }else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [dataArray removeObject:itemInfo];
                         [dataCollectionView reloadData];
                     });
 

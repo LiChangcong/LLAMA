@@ -77,6 +77,9 @@ static const CGFloat navigationBarHeight = 64;
 
     //for MWPhotoBrower
     NSMutableArray *photoArray;
+    
+    //
+    NSMutableArray *playerCellsArray;
 }
 
 @property(nonatomic , readwrite , strong) NSString *uIdString;
@@ -123,7 +126,7 @@ static const CGFloat navigationBarHeight = 64;
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserInfoChanged:) name:LLA_USER_LOGIN_STATE_CHANGED_NOTIFICATION object:nil];
-    
+    [self initVariables];
     [self initNavigationItems];
     [self initSubViews];
     
@@ -145,6 +148,10 @@ static const CGFloat navigationBarHeight = 64;
 
 
 #pragma mark - Init
+
+- (void) initVariables {
+        playerCellsArray = [NSMutableArray array];
+}
 
 - (void) initNavigationItems {
     
@@ -508,7 +515,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (UIBarButtonItem *) praiseNumItemWithUserHead {
     
-    backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     backView.userInteractionEnabled = YES;
     backView.backgroundColor = [UIColor clearColor];
     
@@ -590,11 +597,11 @@ static const CGFloat navigationBarHeight = 64;
         [LLAHttpUtil httpPostWithUrl:@"/user/zanUser" param:zanUser responseBlock:^(id responseObject) {
             
             //
-            id zan =  [responseObject valueForKey:@"zan"];
-            mainInfo.userInfo.bePraisedNumber = (int)zan;
+            //mainInfo.userInfo.bePraisedNumber = [[responseObject valueForKey:@"zan"] integerValue];
             
-            [praiseNumItemButton setTitle:[NSString stringWithFormat:@" %ld",(long)mainInfo.userInfo.bePraisedNumber] forState:UIControlStateNormal];
-//            [self updateNavigationItem];
+            mainInfo.userInfo.bePraisedNumber ++;
+            
+            [self updateNavigationItem];
 
 
             
@@ -698,6 +705,8 @@ static const CGFloat navigationBarHeight = 64;
             if (!cell) {
                 cell = [[LLAUserProfileMyInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myInfoCellIden];
                 cell.delegate = self;
+                //
+                [playerCellsArray addObject:cell];
             }
             
             [cell updateCellWithUserInfo:mainInfo.userInfo tableWidth:tableView.frame.size.width];
@@ -713,6 +722,8 @@ static const CGFloat navigationBarHeight = 64;
             if (!cell) {
                 cell = [[LLAUserProfileOtherInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:otherInfoCellIden];
                 cell.delegate = self;
+                //
+                [playerCellsArray addObject:cell];
             }
             
             [cell updateCellWithUserInfo:mainInfo.userInfo tableWidth:tableView.frame.size.width];
@@ -744,6 +755,7 @@ static const CGFloat navigationBarHeight = 64;
         if (!cell) {
             cell = [[LLAHallVideoInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:videCellIden];
             cell.delegate = self;
+            [playerCellsArray addObject:cell];
         }
         
         if (mainInfo.showingVideoType == UserProfileHeadVideoType_Director) {
@@ -836,9 +848,9 @@ static const CGFloat navigationBarHeight = 64;
         
     }
     //stop those which is out of screen
-    NSArray *visibleCells = [dataTableView visibleCells];
+
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray  ) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -864,11 +876,10 @@ static const CGFloat navigationBarHeight = 64;
     
     id <LLACellPlayVideoProtocol> playCell = nil;
     
-    NSArray *visibleCells = [dataTableView visibleCells];
     
     CGFloat maxHeight = 0;
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -897,7 +908,7 @@ static const CGFloat navigationBarHeight = 64;
     }
     
     //
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -1124,7 +1135,7 @@ static const CGFloat navigationBarHeight = 64;
     
     NSArray *items = @[reportItem];
     
-    [[[MMSheetView alloc] initWithTitle:@"操作" items:items] showWithBlock:^(MMPopupView * popView) {
+    [[[MMSheetView alloc] initWithTitle:@"" items:items] showWithBlock:^(MMPopupView * popView) {
         
     }];
 
@@ -1161,9 +1172,8 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView {
     //
-    NSArray *visibleCells = [dataTableView visibleCells];
     
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
@@ -1234,9 +1244,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) stopAllVideo {
     
-    NSArray *visibleCells = [dataTableView visibleCells];
-    
-    for (UITableViewCell* tempCell in visibleCells) {
+    for (UITableViewCell* tempCell in playerCellsArray) {
         if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
             
             UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;

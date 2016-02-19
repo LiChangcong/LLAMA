@@ -8,7 +8,7 @@
 
 #import "LLAEditVideoProgressView.h"
 
-static NSString *const leftToggleImageName = @"arrow_time";
+static NSString *const leftToggleImageName = @"editVideoLeftTogle";
 static NSString *const rightToggleImageName = @"arrow_time";
 
 //

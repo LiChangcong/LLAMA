@@ -39,6 +39,9 @@ static NSString *const deleteButtonImageName_Disable = @"cancelvideoh";
 static NSString *const recordButtonImageName_Normal = @"startvideo";
 static NSString *const recordButtonImageName_Highlight = @"startvideoh";
 
+static NSString *const stopRecordImageName_Normal = @"stoptvideo_Highlight";
+static NSString *const stopRecordImageName_Highlight = @"stoptvideo_Normal";
+
 static NSString *const editVideoButtonImageName_Normal = @"finishedvideo";
 static NSString *const editVideoButtonImageName_Highlight = @"finishedvideo";
 
@@ -443,6 +446,11 @@ static NSString *const recordFoucusImageName = @"";
     //begin record
     [shareRecorder record];
     
+    [pressToRecordButton setImage:[UIImage llaImageWithName:stopRecordImageName_Normal] forState:UIControlStateNormal];
+    
+    [pressToRecordButton setImage:[UIImage llaImageWithName:stopRecordImageName_Highlight] forState:UIControlStateHighlighted];
+    [pressToRecordButton setImage:[UIImage llaImageWithName:stopRecordImageName_Highlight] forState:UIControlStateSelected];
+    
     [recordProgressView addVideoClipInfo];
     [recordProgressView stopBlinkIndicator];
     
@@ -456,6 +464,12 @@ static NSString *const recordFoucusImageName = @"";
     [shareRecorder pause];
     
     [recordProgressView startBlinkIndicator];
+    
+    //
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Normal] forState:UIControlStateNormal];
+    
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateHighlighted];
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateSelected];
     
     //
     if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
@@ -481,6 +495,12 @@ static NSString *const recordFoucusImageName = @"";
     [recordProgressView startBlinkIndicator];
     
     //
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Normal] forState:UIControlStateNormal];
+    
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateHighlighted];
+    [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateSelected];
+
+    
     if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
         videoEditButton.enabled = YES;
         videoEditButton.selected = YES;
@@ -596,7 +616,7 @@ static NSString *const recordFoucusImageName = @"";
     [recordProgressView updateLastVideoClipInfoWithNewDuration:CMTimeGetSeconds(recordSession.currentSegmentDuration)];
     
     if (CMTimeGetSeconds(recordSession.duration) >= maxVideoSecond) {
-        [self recordClicked:pressToRecordButton];
+        //[self recordClicked:pressToRecordButton];
         [self videoEditorButtonClicked:videoEditButton];
     }
 }

@@ -55,6 +55,10 @@ static const NSInteger maxCacheCount = 50;
 
 - (NSURL *) cacheURLForVideoURL:(NSURL *)videoURL {
     
+    if (!videoURL) {
+        return nil;
+    }
+    
     if (videoURL.isFileURL) {
         return videoURL;
     }
