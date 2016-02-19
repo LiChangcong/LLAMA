@@ -15,6 +15,4 @@
 
 + (instancetype) shareInstance;
 
-- (void) cacheVideoFromPlayerItem:(AVPlayerItem *) playerItem videoInfo:(LLAVideoInfo *) videoInfo;
-
 @end
