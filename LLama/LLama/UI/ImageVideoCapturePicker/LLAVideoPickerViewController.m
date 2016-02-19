@@ -151,7 +151,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
         }
         
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
-        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+        options.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld",PHAssetMediaTypeVideo];
+        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
         PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
 
         //
@@ -161,7 +162,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
             //
             PHAsset *asset = assetsFetchResults[i];
             
-            [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            if (asset.mediaType != PHAssetMediaTypeVideo) {
+                continue;
+            }
+            
+            LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
+            itemInfo.videoDuration = asset.duration;
+            [dataArray addObject:itemInfo];
+            
+            [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable videoAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                 
 //                if (i== assetsFetchResults.count-1) {
 //                    dispatch_async(dispatch_get_main_queue(), ^{
@@ -170,12 +179,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
 //                    });
 //                }
                 
-                if (asset && [asset isKindOfClass:[AVURLAsset class]]) {
+                if (videoAsset && [videoAsset isKindOfClass:[AVURLAsset class]]) {
                     
                     
-                    AVURLAsset *urlAsset = (AVURLAsset *) asset;
+                    AVURLAsset *urlAsset = (AVURLAsset *) videoAsset;
                     
-                    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+                    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:videoAsset];
                     imageGenerator.appliesPreferredTrackTransform = YES;
                     
                     CMTime time = kCMTimeZero;
@@ -184,17 +193,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
                     CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
                     UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
                 
-                    LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
-                    itemInfo.videoDuration = CMTimeGetSeconds(urlAsset.duration);
                     itemInfo.videoURL = urlAsset.URL;
                     itemInfo.thumbImage = thumbImage;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [dataArray addObject:itemInfo];
                         [dataCollectionView reloadData];
-                        [HUD hide:YES];
                     });
-
 
                 }
                 
@@ -208,6 +212,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
             
             
         }
+        [dataCollectionView reloadData];
+        [HUD hide:YES];
         
         
     }else {
@@ -229,7 +235,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
                     itemInfo.videoDuration =[[result valueForProperty:ALAssetPropertyDuration] floatValue];
                     itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
                     
-                    [dataArray addObject:itemInfo];
+                    [dataArray insertObject:itemInfo atIndex:0];
                     
                     if (groupStop && stop) {
                         
@@ -315,6 +321,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     //did selected
     
     LLAPickVideoItemInfo *itemInfo = dataArray[indexPath.row];
+    
+    //
+    if (itemInfo.videoDuration < 5) {
+        [LLAViewUtil showAlter:self.view withText:@"你选的片太短了"];
+        return;
+    }
     
     AVAsset *asset = [AVAsset assetWithURL:itemInfo.videoURL];
     

@@ -10,7 +10,7 @@
 
 #import "LLAPickVideoItemInfo.h"
 
-static NSString *const cameraImageName = @"camerchange";
+static NSString *const cameraImageName = @"VideoSendIcon";
 
 static const CGFloat cameraToLeft = 3;
 static const CGFloat cameraToBottom = 5;
