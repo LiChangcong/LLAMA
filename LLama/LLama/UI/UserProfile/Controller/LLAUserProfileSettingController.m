@@ -83,6 +83,7 @@ static const CGFloat logoutHeaderHeight = 28;
     //
     mainInfoArray = [NSMutableArray array];
     
+    
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo friendAuthItem]];
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo vipItem]];
     

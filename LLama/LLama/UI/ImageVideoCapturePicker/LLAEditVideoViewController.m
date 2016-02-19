@@ -329,6 +329,18 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     
     CMTime durationTime = CMTimeMakeWithSeconds(assetDuration*(editProgressView.editEndRatio-editProgressView.editBeginRatio), editAsset.duration.timescale);
     
+    if (CMTimeGetSeconds(durationTime) < 5) {
+    
+        [LLAViewUtil showAlter:self.view withText:@"片长不能小于5秒"];
+        
+        return;
+    }else if (CMTimeGetSeconds(durationTime) > 60) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"片长不能大于60秒"];
+        
+        return;
+    }
+    
     //exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
     
     //get thumb image
