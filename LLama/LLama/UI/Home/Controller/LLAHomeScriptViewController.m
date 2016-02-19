@@ -9,6 +9,7 @@
 //controller
 #import "LLAHomeScriptViewController.h"
 #import "LLAScriptDetailViewController.h"
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -239,6 +240,13 @@
 
 - (void) userHeadViewTapped:(LLAUser *)userInfo scriptInfo:(LLAScriptHallItemInfo *)scriptInfo {
     //go to user profile
+    
+    if (userInfo.userIdString.length > 0) {
+        
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
+    
 }
 
 @end

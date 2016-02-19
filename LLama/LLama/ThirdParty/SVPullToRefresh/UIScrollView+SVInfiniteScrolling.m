@@ -372,7 +372,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
      现在不要这箭头
    */
     self.infiniteArrowImageView.hidden = YES;
-    self.loadingView.hidden = NO;
+    //self.loadingView.hidden = NO;
     //
     
     if(_state == newState)

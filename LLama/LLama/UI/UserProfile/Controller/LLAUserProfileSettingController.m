@@ -229,9 +229,7 @@ static const CGFloat logoutHeaderHeight = 28;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSLog(@"indexPath:{%ld,%ld}",indexPath.section,indexPath.row);
-    
+        
     if (indexPath.section == accountSaftySectionIndex) {
         if (indexPath.row == 0) {
             
@@ -249,7 +247,7 @@ static const CGFloat logoutHeaderHeight = 28;
         }else if (item.itemType == LLASettingItemType_Cache) {
             //clear cache
             [HUD show:YES];
-                        
+            
             [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
                 [HUD hide:YES];
                 item.detailContentString = @"0M";

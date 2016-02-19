@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,LLASettingItemType) {
     LLASettingItemType_FriendAuth = 1,
     LLASettingItemType_VIP = 2,
     LLASettingItemType_UserAgreement = 3,
-    LLASettingItemType_UserCommnet = 4,
+    LLASettingItemType_UserComment = 4,
     LLASettingItemType_Version = 5,
     LLASettingItemType_Cache = 6,
     LLASettingItemType_LoginOut = 7,

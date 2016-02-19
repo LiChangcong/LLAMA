@@ -29,7 +29,7 @@
 #import "LLAHttpUtil.h"
 #import "LLAUploadVideoShareManager.h"
 
-@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate,LLAVideoPlayerViewDelegate>
+@interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
 {
     LLATableView *dataTableView;
     
@@ -438,6 +438,33 @@
     
 }
 
+#pragma mark - LLAVideoCommentViewControllerDelegate
+
+- (void) commentSuccess:(LLAHallVideoCommentItem *)commentContent videoId:(NSString *)videoIdString {
+    
+    if (commentContent && videoIdString.length > 0) {
+        //find
+        
+        for (LLAHallVideoItemInfo *videoInfo in mainInfo.dataList) {
+            if ([videoIdString isEqualToString:videoInfo.scriptID]) {
+                
+                NSMutableArray *commentArray = [NSMutableArray array];
+                [commentArray addObject:commentContent];
+                
+                [commentArray addObjectsFromArray:videoInfo.commentArray];
+                
+                videoInfo.commentArray = commentArray;
+                videoInfo.commentNumbers ++;
+                [dataTableView reloadData];
+                
+                break;
+            }
+        }
+        
+    }
+    
+}
+
 #pragma mark - Progress Delegate
 
 - (void) uploadVideoFinished:(LLAUploadVideoProgressView *)progressView {
@@ -482,6 +509,7 @@
 
 - (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) itemInfo {
     LLAVideoCommentViewController *comment = [[LLAVideoCommentViewController alloc] initWithVideoIdString:itemInfo.scriptID];
+    comment.delegate = self;
     [self.navigationController pushViewController:comment animated:YES];
 }
 

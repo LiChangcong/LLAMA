@@ -27,7 +27,7 @@
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 
-@interface LLAVideoDetailViewController()<UITableViewDataSource,UITableViewDelegate,LLAHallVideoInfoCellDelegate,LLAVideoPlayerViewDelegate>
+@interface LLAVideoDetailViewController()<UITableViewDataSource,UITableViewDelegate,LLAHallVideoInfoCellDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
 {
     LLATableView *dataTableView;
     
@@ -57,6 +57,10 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     
     [self initNavigationItems];
     [self initSubViews];
@@ -264,6 +268,31 @@
     
 }
 
+#pragma mark - LLAVideoCommentViewControllerDelegate
+
+- (void) commentSuccess:(LLAHallVideoCommentItem *)commentContent videoId:(NSString *)videoIdStr {
+    
+    if (commentContent && [videoIdStr isEqualToString:videoIdString]) {
+        //find
+        if ([videoIdString isEqualToString:videoInfo.scriptID]) {
+            
+            NSMutableArray *commentArray = [NSMutableArray array];
+            [commentArray addObject:commentContent];
+            
+            [commentArray addObjectsFromArray:videoInfo.commentArray];
+            
+            videoInfo.commentArray = commentArray;
+            videoInfo.commentNumbers ++;
+            [dataTableView reloadData];
+
+        }
+
+        
+    }
+    
+}
+
+
 #pragma mark - Private Method
 
 - (void) pushToUserProfile:(LLAUser *) user {
@@ -275,6 +304,7 @@
 
 - (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) itemInfo {
     LLAVideoCommentViewController *comment = [[LLAVideoCommentViewController alloc] initWithVideoIdString:itemInfo.scriptID];
+    comment.delegate = self;
     [self.navigationController pushViewController:comment animated:YES];
 }
 

@@ -54,7 +54,7 @@ static const NSInteger videoInfosectionIndex = 2;
 //
 static const CGFloat navigationBarHeight = 64;
 
-@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate,LLAVideoPlayerViewDelegate>
+@interface LLAUserProfileViewController()<UITableViewDelegate,UITableViewDataSource,LLAUserProfileMyInfoCellDelegate,LLAUserProfileOtherInfoCellDelegate,LLAUserProfileMyFunctionCellDelegate,LLAUserProfileVideoHeaderViewDelegate,LLAHallVideoInfoCellDelegate,LLAPickVideoNavigationControllerDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
 {
     
     LLAUserProfileNavigationBar *customNaviBar;
@@ -1043,6 +1043,33 @@ static const CGFloat navigationBarHeight = 64;
     
 }
 
+#pragma mark - LLAVideoCommentViewControllerDelegate
+
+- (void) commentSuccess:(LLAHallVideoCommentItem *)commentContent videoId:(NSString *)videoIdString {
+    
+    if (commentContent && videoIdString.length > 0) {
+        //find
+        
+        for (LLAHallVideoItemInfo *videoInfo in mainInfo.showingVideoType == UserProfileHeadVideoType_Director?mainInfo.directorVideoArray:mainInfo.actorVideoArray) {
+            if ([videoIdString isEqualToString:videoInfo.scriptID]) {
+                
+                NSMutableArray *commentArray = [NSMutableArray array];
+                [commentArray addObject:commentContent];
+                
+                [commentArray addObjectsFromArray:videoInfo.commentArray];
+                
+                videoInfo.commentArray = commentArray;
+                videoInfo.commentNumbers ++;
+                [dataTableView reloadData];
+                
+                break;
+            }
+        }
+        
+    }
+    
+}
+
 
 
 #pragma mark - Start Stop Video
@@ -1051,6 +1078,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) pushToCommentViewControllerWithInfo:(LLAHallVideoItemInfo *) videoImteInfo {
     LLAVideoCommentViewController *comment = [[LLAVideoCommentViewController alloc] initWithVideoIdString:videoImteInfo.scriptID];
+    comment.delegate = self;
     [self.navigationController pushViewController:comment animated:YES];
 
 }
