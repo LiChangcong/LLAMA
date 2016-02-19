@@ -64,6 +64,12 @@ static const CGFloat navigationBarHeight = 64;
     LLAUserProfileMainInfo *mainInfo;
     
     LLALoadingView *HUD;
+    
+    UIView *backView;
+    // 对有头像用户的点赞
+    UIButton *zanButton;
+    // 对没头像用户的点赞
+    UIButton *praiseNumItemButton;
 }
 
 @property(nonatomic , readwrite , strong) NSString *uIdString;
@@ -495,7 +501,7 @@ static const CGFloat navigationBarHeight = 64;
 
 - (UIBarButtonItem *) praiseNumItemWithUserHead {
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     backView.userInteractionEnabled = YES;
     backView.backgroundColor = [UIColor clearColor];
     
@@ -515,7 +521,7 @@ static const CGFloat navigationBarHeight = 64;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [button setTitle:[NSString stringWithFormat:@" %ld",(long)mainInfo.userInfo.bePraisedNumber] forState:UIControlStateNormal];
-    
+    zanButton = button;
     [button sizeToFit];
     
     [backView addSubview:button];
@@ -531,7 +537,7 @@ static const CGFloat navigationBarHeight = 64;
     button.center = CGPointMake(backView.frame.size.width/2, backView.frame.size.height-button.frame.size.height/2);
     
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(praiseWithHeadClicked:)];
-    
+
     [backView addGestureRecognizer:tapGes];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backView];
@@ -539,7 +545,6 @@ static const CGFloat navigationBarHeight = 64;
     return item;
     
 }
-
 
 - (void) backToPre {
     [self.navigationController popViewControllerAnimated:YES];
@@ -562,20 +567,87 @@ static const CGFloat navigationBarHeight = 64;
 - (void) praiseButtonClick {
     //praise user
     
-    LLALoveViewController *love = [[LLALoveViewController alloc] init];
-    [self.navigationController pushViewController:love animated:YES];
+    
+    if (type == UserProfileControllerType_CurrentUser) {
+        // 谁喜欢我，我喜欢谁列表
+        
+        LLALoveViewController *love = [[LLALoveViewController alloc] init];
+        [self.navigationController pushViewController:love animated:YES];
+      
+    }else{
+        // 对其他用户点赞
+        NSMutableDictionary *zanUser = [NSMutableDictionary dictionary];
+        
+        [zanUser setValue:uIdString forKey:@"userId"];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/user/zanUser" param:zanUser responseBlock:^(id responseObject) {
+            
+            //
+            id zan =  [responseObject valueForKey:@"zan"];
+            mainInfo.userInfo.bePraisedNumber = (int)zan;
+            
+            [praiseNumItemButton setTitle:[NSString stringWithFormat:@" %ld",(long)mainInfo.userInfo.bePraisedNumber] forState:UIControlStateNormal];
+//            [self updateNavigationItem];
+
+
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }];
+    }
+
+    
+    
 }
 
-- (void) praiseWithHeadClicked:(UITapGestureRecognizer *) tag {
+- (void) praiseWithHeadClicked:(UITapGestureRecognizer *) tap {
     //praise user with head
     
     if (type == UserProfileControllerType_CurrentUser) {
         
-        LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+//        UITouch *touch = [[UITouch alloc] init];
         
-        [self.navigationController pushViewController:editUserInfo animated:YES];
+        CGPoint curP = [tap locationInView:backView];
+        
+        
+        if (curP.y < backView.bounds.size.height * 0.5) { // 点击了编辑个人信息
+            
+            LLAUserProfileEditUserInfoController *editUserInfo = [[LLAUserProfileEditUserInfoController alloc] init];
+            
+            [self.navigationController pushViewController:editUserInfo animated:YES];
+
+        }else { // 点击了喜欢
+        
+            LLALoveViewController *love = [[LLALoveViewController alloc] init];
+            [self.navigationController pushViewController:love animated:YES];
+        }
+    }else{
+        
+        NSMutableDictionary *zanUser = [NSMutableDictionary dictionary];
+        
+        [zanUser setValue:uIdString forKey:@"userId"];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/user/zanUser" param:zanUser responseBlock:^(id responseObject) {
+            
+            //
+            id zan =  [responseObject valueForKey:@"zan"];
+            mainInfo.userInfo.bePraisedNumber = (int)zan;
+//            [dataTableView reloadData];
+
+            [zanButton setTitle:[NSString stringWithFormat:@" %ld",(long)mainInfo.userInfo.bePraisedNumber] forState:UIControlStateNormal];
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }];
     }
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -1103,6 +1175,7 @@ static const CGFloat navigationBarHeight = 64;
     
     [self scrollViewDidEndDecelerating:dataTableView];
 }
+
 
 
 
