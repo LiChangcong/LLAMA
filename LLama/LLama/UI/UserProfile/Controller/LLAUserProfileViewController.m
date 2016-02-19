@@ -561,7 +561,6 @@ static const CGFloat navigationBarHeight = 64;
 
 - (void) praiseButtonClick {
     //praise user
-    NSLog(@"点击了喜欢");
     
     LLALoveViewController *love = [[LLALoveViewController alloc] init];
     [self.navigationController pushViewController:love animated:YES];

@@ -43,11 +43,17 @@
     imageThumbView.clipsToBounds = YES;
     [self.contentView addSubview:imageThumbView];
     
+    // 扩大选中照片区域，点击cell的时候选中该cell
+    imageThumbView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectButtonClick)];
+    [imageThumbView addGestureRecognizer:tap];
+    
     selectedButton = [[UIButton alloc] init];
     selectedButton.translatesAutoresizingMaskIntoConstraints = NO;
     [selectedButton setImage:[UIImage imageNamed:@"chosepicdot"] forState:UIControlStateNormal];
     [selectedButton setImage:[UIImage imageNamed:@"chosepicdoth"] forState:UIControlStateSelected];
     [selectedButton addTarget:self action:@selector(selectButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    _selectedButtonFaceToPublich = selectedButton;
     [self.contentView addSubview:selectedButton];
     
 }
@@ -109,7 +115,9 @@
 
 - (void)selectButtonClick
 {
-    selectedButton.selected = !selectedButton.selected;
+    NSLog(@"123");
+    // 不要直接操作cell，要操作模型，那不是会带来循环利用的问题。
+//    selectedButton.selected = !selectedButton.selected;
     
     // respondsToSelector:能判断某个对象是否实现了某个方法
     if ([self.delegate respondsToSelector:@selector(LLAImagePickerCollectionCellDidClickSelectedButton:andIndexPath:andButtonIsSelected:)]) {
