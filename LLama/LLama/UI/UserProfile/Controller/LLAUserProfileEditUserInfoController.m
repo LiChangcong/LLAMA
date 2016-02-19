@@ -26,6 +26,9 @@
 #import "LLAViewUtil.h"
 #import "LLAUploadFileUtil.h"
 
+#import "LLAImagePickerViewController.h"
+#import "LLAPickImageItemInfo.h"
+
 static const CGFloat topBackViewHeight = 150;
 
 static const CGFloat headViewHeightWidth = 90;
@@ -300,34 +303,44 @@ static const CGFloat userDescTextViewHeight = 127;
 - (void) headView:(LLAUserHeadView *)userheadView clickedWithUserInfo:(LLAUser *)user {
     
     //show choose imageViewController
-    NSLog(@"show selected view controller");
-    
-    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
-    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
-    imagePicker.maxCount = 1;
-    imagePicker.topShowPhotoPicker = YES;
-    imagePicker.status = PickerViewShowStatusCameraRoll;
-    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+//    NSLog(@"show selected view controller");
+//    
+//    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
+//    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
+//    imagePicker.maxCount = 1;
+//    imagePicker.topShowPhotoPicker = YES;
+//    imagePicker.status = PickerViewShowStatusCameraRoll;
+//    [self.navigationController presentViewController:baseNavi animated:YES completion:NULL];
+//
+//    imagePicker.callBack = ^(NSArray *assets){
+//        
+//        ZLPhotoAssets *asset = assets[0];
+//        //        [self.head setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+//        headView.userHeadImageView.image = asset.aspectRatioImage;
+//        tempImage = asset.aspectRatioImage;
+//        
+//    };
+//    
+//    imagePicker.callBack1 = ^(UIImage *ima){
+//        
+//        
+//        headView.userHeadImageView.image = ima;
+//        
+//        tempImage = ima;
+//        
+//    };
 
-    imagePicker.callBack = ^(NSArray *assets){
-        
-        ZLPhotoAssets *asset = assets[0];
-        //        [self.head setBackgroundImage:[asset.aspectRatioImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        headView.userHeadImageView.image = asset.aspectRatioImage;
-        tempImage = asset.aspectRatioImage;
-        
-    };
+    LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
+    imagePicker.status = PickerImgOrHeadStatusHead;
+    [self presentViewController:imagePicker animated:YES completion:nil];
     
-    imagePicker.callBack1 = ^(UIImage *ima){
+    imagePicker.callBack = ^(LLAPickImageItemInfo *itemInfo){
         
-        
-        headView.userHeadImageView.image = ima;
-        
-        tempImage = ima;
-        
+        UIImage *headImage = itemInfo.thumbImage;
+        headView.userHeadImageView.image = headImage;
+        tempImage = headImage;
     };
 
-    
     
 }
 
