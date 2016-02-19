@@ -48,6 +48,15 @@ static const CGFloat textViewToLeftWithImage = 118;
 @property (nonatomic , strong) NSArray *assets;
 @property (nonatomic , strong) UIImage *icon;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *weixinButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *weiboButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *qqButton;
+@property (weak, nonatomic) IBOutlet UIButton *friendCircle;
+@property (weak, nonatomic) IBOutlet UIView *shareToView;
+
 @end
 
 @implementation TMPostScriptViewController
@@ -132,6 +141,22 @@ static const CGFloat textViewToLeftWithImage = 118;
 - (void) isPrivateButtonClicked:(UIButton *) sender {
     
     _isPrivateButton.selected = !_isPrivateButton.selected;
+    
+    if (_isPrivateButton.selected == YES) {
+        self.weixinButton.hidden = YES;
+        self.weiboButton.hidden = YES;
+        self.qqButton.hidden = YES;
+        self.friendCircle.hidden = YES;
+        self.shareToView.hidden = YES;
+    }else{
+        self.weixinButton.hidden = NO;
+        self.weiboButton.hidden = NO;
+        self.qqButton.hidden = NO;
+        self.friendCircle.hidden = NO;
+        self.shareToView.hidden = NO;
+        
+    }
+
 }
 
 - (void) weChatFriendClicked:(UIButton *) sender {

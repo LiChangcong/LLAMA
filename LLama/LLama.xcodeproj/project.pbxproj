@@ -2882,7 +2882,7 @@
 				TargetAttributes = {
 					7E1A14501C15D4A700693F3E = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = FQ6KWM8G2Y;
+						DevelopmentTeam = BL36ZB3LKL;
 					};
 					7E1A14691C15D4A700693F3E = {
 						CreatedOnToolsVersion = 7.1;
@@ -3562,7 +3562,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -3634,7 +3634,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ad1cc29e-dd2d-4c06-ae17-64f980404a88";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;
