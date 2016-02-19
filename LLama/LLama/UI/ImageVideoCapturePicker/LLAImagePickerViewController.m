@@ -26,6 +26,9 @@
 #import "LLAViewUtil.h"
 
 
+#import "TMPostScriptViewController.h"
+#import "LLABaseNavigationController.h"
+
 static const CGFloat topBarHeight = 70;
 static const CGFloat cellToHorBorder = 10;
 static const CGFloat cellToVerBorder = 17;
@@ -182,7 +185,7 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
                         PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
                         
                         [imageManager requestImageForAsset:asset
-                                                     targetSize:CGSizeMake(321/3, 321/3)
+                                                    targetSize:CGSizeMake(321/3, 321/3)//targetSize:CGSizeMake(321/3, 321/3)
                                                     contentMode:PHImageContentModeAspectFill
                                                         options:options
                                                   resultHandler:^(UIImage *result, NSDictionary *info) {
@@ -270,7 +273,27 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 
 - (void) backToPre {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+//    if (self.status == PickerImgOrHeadStatusImg) {
+//        
+//
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            
+//            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+//            
+//            postS.scriptType = LLAPublishScriptType_Image;
+//            
+//            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+//            //        [self presentViewController:postS animated:YES completion:nil];
+//            
+//
+//        }];
+//        
+//
+//    } else {
+    
+        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
 }
 
 
@@ -351,7 +374,7 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         topBar.determineButtonFaceToPublich.enabled = NO;
 
     }
-    
+
 }
 
 #pragma mark - LLACameraCellDelegate
@@ -387,9 +410,31 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         LLAPickImageItemInfo *itemInfo = [[LLAPickImageItemInfo alloc] init];
         itemInfo.thumbImage = image;
         _currentPickImgItemInfo = itemInfo;
-        NSLog(@"%@",_currentPickImgItemInfo);
-        self.callBack(_currentPickImgItemInfo);
 
+        
+        if (self.status == PickerImgOrHeadStatusImg) {
+
+    //        self.callBack(_currentPickImgItemInfo);
+            if (self.PickerTimesStatus == PickerTimesStatusOne) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+
+                TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+                postS.scriptType = LLAPublishScriptType_Image;
+                postS.pickImgInfo = _currentPickImgItemInfo;
+                
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+                self.callBack(_currentPickImgItemInfo);
+
+        }
+        }else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            self.callBack(_currentPickImgItemInfo);
+
+        }
+        
+        
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
@@ -399,7 +444,7 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
             } completionHandler:^(BOOL success, NSError *error) {
                 
                 if (success) {
-                    NSLog(@"保存照片成功");
+                    // 保存照片成功
                 }
                 
             }];
@@ -438,9 +483,47 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 
 - (void)LLAImagePickerTopToolBarDidClickDetermineButton:(LLAImagePickerTopToolBar *)imagePickerTopToolBar
 {
-    NSLog(@"点击了确定按钮");
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.callBack(_currentPickImgItemInfo);
+    
+    if (self.status == PickerImgOrHeadStatusImg) {
+        
+        
+        if (self.PickerTimesStatus == PickerTimesStatusOne) {
+
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+                
+            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+            
+            postS.scriptType = LLAPublishScriptType_Image;
+            
+            
+            postS.pickImgInfo = _currentPickImgItemInfo;
+            
+            
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+            //        [self presentViewController:postS animated:YES completion:nil];
+            
+            
+            //            self.callBack(_currentPickImgItemInfo);
+                
+                
+        
+
+        }else if(self.PickerTimesStatus == PickerTimesStatusTwo){
+            [self dismissViewControllerAnimated:YES completion:nil];
+            self.callBack(_currentPickImgItemInfo);
+            
+            
+        }
+
+        
+        
+    } else {
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        self.callBack(_currentPickImgItemInfo);
+    }
+
 }
 
 @end

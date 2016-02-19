@@ -14,6 +14,7 @@
 
 #define TMRootView [UIApplication sharedApplication].keyWindow.rootViewController.view
 
+#import "LLAImagePickerViewController.h"
 
 static CGFloat const XMGAnimationDelay = 0.5;
 static CGFloat const XMGSpringFactor = 10;
@@ -83,20 +84,29 @@ static CGFloat const XMGSpringFactor = 10;
 {
     [self cancelWithCompletionBlock:^{
         
-        TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
         
         if (button.tag == 0) {
+            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+
             postS.scriptType = LLAPublishScriptType_Text;
             
-        } else if (button.tag == 1) {
-            postS.scriptType = LLAPublishScriptType_Image;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
 
-//            TMLog(@"正在添加");
-//            TMPhotoAlbumViewController *photoAlbum = [[TMPhotoAlbumViewController alloc] init];
-//                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TMNavigationController alloc] initWithRootViewController:photoAlbum] animated:YES completion:nil];
+        } else if (button.tag == 1) {
+            
+            LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
+            imagePicker.status = PickerImgOrHeadStatusImg;
+            imagePicker.PickerTimesStatus = PickerTimesStatusOne;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:imagePicker animated:YES completion:nil];
+            
+//            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+//
+//            postS.scriptType = LLAPublishScriptType_Image;
+//            
+//            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+
         
         }
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
     }];
 }
 
