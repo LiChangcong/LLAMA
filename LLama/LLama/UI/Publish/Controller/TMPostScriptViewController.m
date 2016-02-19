@@ -71,8 +71,11 @@ static const CGFloat textViewToLeftWithImage = 118;
         _textViewTrailConstraint.constant = textViewToLeftWithImage;
         _preViewImageView.hidden = NO;
         //show choose image
-        [self chooseImageView:nil];
+//        [self chooseImageView:nil];
     }
+    
+    _preViewImageView.image = self.pickImgInfo.thumbImage;
+
     
     //
     _rewardMoneyTextField.placeholder = @"点击此处输入金额";
@@ -120,6 +123,7 @@ static const CGFloat textViewToLeftWithImage = 118;
     _qqFriend.tintColor = nil;
     [_qqFriend addTarget:self action:@selector(qqFriendClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 #pragma mark - Button Touch up Inside
 
@@ -175,6 +179,7 @@ static const CGFloat textViewToLeftWithImage = 118;
 
 - (void)back
 {
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -189,33 +194,8 @@ static const CGFloat textViewToLeftWithImage = 118;
 - (void) chooseImageView:(UITapGestureRecognizer *) ges {
 
  
-//    TMAlbumPickerViewController *imagePicker = [[TMAlbumPickerViewController alloc] init];
-//    LLABaseNavigationController *baseNavi = [[LLABaseNavigationController alloc] initWithRootViewController:imagePicker];
-//    imagePicker.maxCount = 1;
-//    imagePicker.topShowPhotoPicker = YES;
-//    imagePicker.status = PickerViewShowStatusCameraRoll;
-//    baseNavi.view.frame = self.view.bounds;
-//    [self.navigationController presentViewController:baseNavi animated:NO completion:NULL];
-//    
-//    
-//    __weak typeof(self) weakSelf = self;
-//    imagePicker.callBack = ^(NSArray *assets){
-//        weakSelf.assets = assets;
-//        
-//        ZLPhotoAssets *asset = self.assets[0];
-//        _preViewImageView.image = asset.aspectRatioImage;
-//        
-//    };
-//    
-//    imagePicker.callBack1 = ^(UIImage *ima){
-//        
-//        
-//        weakSelf.icon = ima;
-//        ima = [ima imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//        
-//        _preViewImageView.image = weakSelf.icon;
-//    };
     LLAImagePickerViewController *imagepicker = [[LLAImagePickerViewController alloc] init];
+    imagepicker.PickerTimesStatus = PickerTimesStatusTwo;
     [self presentViewController:imagepicker animated:YES completion:nil];
     
     imagepicker.callBack = ^(LLAPickImageItemInfo *itemInfo){

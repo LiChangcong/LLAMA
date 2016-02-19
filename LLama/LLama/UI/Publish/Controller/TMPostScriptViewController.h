@@ -10,6 +10,8 @@
 
 #import "LLACommonViewController.h"
 
+@class LLAPickImageItemInfo;
+
 typedef NS_ENUM(NSInteger,LLAPublishScriptType){
     LLAPublishScriptType_Text,
     LLAPublishScriptType_Image,
@@ -18,5 +20,7 @@ typedef NS_ENUM(NSInteger,LLAPublishScriptType){
 @interface TMPostScriptViewController : LLACommonViewController
 
 @property(nonatomic , assign) LLAPublishScriptType scriptType;
+
+@property(nonatomic, strong) LLAPickImageItemInfo *pickImgInfo;
 
 @end

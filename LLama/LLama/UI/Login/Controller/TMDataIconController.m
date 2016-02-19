@@ -211,6 +211,7 @@
     };
 */
     LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
+    imagePicker.status = PickerImgOrHeadStatusHead;
     [self presentViewController:imagePicker animated:YES completion:nil];
     
     imagePicker.callBack = ^(LLAPickImageItemInfo *itemInfo){
