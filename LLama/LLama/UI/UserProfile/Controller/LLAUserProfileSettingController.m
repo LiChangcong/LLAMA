@@ -89,7 +89,7 @@ static const CGFloat logoutHeaderHeight = 28;
 //    [mainInfoArray addObject:[LLAUserProfileSettingItemInfo vipItem]];
     
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo userAgreementItem]];
-    [mainInfoArray addObject:[LLAUserProfileSettingItemInfo userCommentItem]];
+//    [mainInfoArray addObject:[LLAUserProfileSettingItemInfo userCommentItem]];
     [mainInfoArray addObject:[LLAUserProfileSettingItemInfo versionItem]];
     
     //
