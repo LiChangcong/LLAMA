@@ -77,10 +77,14 @@
         newUser.mobileLoginPsd = self.pwdextFieldNew.text;
         [LLAUser updateUserInfo:newUser];
         
-//        [LLAViewUtil showAlter:self.view withText:@"密码修改成功"];
+        [LLAViewUtil showAlter:self.view withText:@"密码修改成功"];
         
-        // 跳到上个页面
-        [self.navigationController popViewControllerAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 跳到上个页面
+            [self.navigationController popViewControllerAnimated:YES];
+
+        });
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -97,5 +101,8 @@
     
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 @end
