@@ -23,6 +23,7 @@
 #import "LLAILoveWhoInfo.h"
 
 //#import "LLAWhoLoveMeInfo.h"
+#import "LLAUserProfileViewController.h"
 
 @interface LLAILoveWhoViewController () <UITableViewDelegate, UITableViewDataSource>
 {
@@ -261,6 +262,15 @@
 }
 
 
+#pragma mark - UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:mainInfo.dataList[indexPath.row].userIdString];
+    
+    [self.navigationController pushViewController:userProfile animated:YES];
+
+}
 
 @end
