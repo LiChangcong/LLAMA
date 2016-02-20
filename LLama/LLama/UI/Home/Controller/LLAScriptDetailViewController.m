@@ -99,6 +99,59 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
 // 设置导航栏
 - (void) initNavigationItems {
     self.navigationItem.title = @"详情";
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStylePlain target:self action:@selector(reportScript)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+}
+
+- (void) reportScript {
+    //
+    
+    [MMPopupWindow sharedWindow].touchWildToHide = YES;
+    
+    MMSheetViewConfig *config = [MMSheetViewConfig globalConfig];
+    config.itemHighlightColor = [UIColor redColor];
+    config.cancelTextNormalColor = [UIColor colorWithHex:0x00aeff];
+    
+    MMPopupItem *cancelItem = MMItemMake(@"取消", MMItemTypeNormal, ^(NSInteger index) {
+        
+    });
+    
+    MMPopupItem *reportItem = MMItemMake(@"举报", MMItemTypeHighlight, ^(NSInteger index) {
+        //report
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        [params setValue:scriptIDString forKey:@"playId"];
+        
+        [HUD show:YES];
+        
+        [LLAHttpUtil httpPostWithUrl:@"/play/reportPlay" param:params responseBlock:^(id responseObject) {
+            
+            //
+            [HUD hide:YES];
+            
+            [LLAViewUtil showAlter:self.view withText:@"感谢你的举报，我们会尽快处理"];
+            
+        } exception:^(NSInteger code, NSString *errorMessage) {
+            
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:errorMessage];
+            
+        } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }];
+        
+    });
+    
+    NSArray *items = @[cancelItem,reportItem];
+    
+    [[[MMAlertView alloc] initWithTitle:@"举报剧本" detail:@"" items:items] showWithBlock:^(MMPopupView * popview){
+        
+    }];
+
 }
 
 // 设置子控件

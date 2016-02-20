@@ -66,9 +66,9 @@
     if (![WXApi isWXAppInstalled]) {
         self.weixinButton.hidden = YES;
     }
-    if (![WeiboSDK isWeiboAppInstalled]) {
-        self.weiboButton.hidden = YES;
-    }
+//    if (![WeiboSDK isWeiboAppInstalled]) {
+//        self.weiboButton.hidden = YES;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
