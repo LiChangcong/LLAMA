@@ -13,6 +13,7 @@
                 <outlet property="passwordField" destination="asE-2K-sOV" id="kjx-46-On9"/>
                 <outlet property="qqButton" destination="hqT-N3-qQn" id="MsV-zK-soL"/>
                 <outlet property="sendToGetIDCodeButton" destination="17m-q5-k1s" id="FTc-zz-BD4"/>
+                <outlet property="userPrivacyLabel" destination="HoN-Gk-h4M" id="TaY-Sh-tt5"/>
                 <outlet property="view" destination="qVP-Of-aay" id="Ksg-hu-LQW"/>
                 <outlet property="weiboButton" destination="qDb-ah-KGj" id="dbX-2R-6wM"/>
                 <outlet property="weixinButton" destination="f58-dc-n1C" id="d5L-uO-28T"/>

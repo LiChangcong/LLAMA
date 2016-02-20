@@ -17,7 +17,7 @@
 
 #import "LLAThirdSDKDelegate.h"
 
-
+#import "LLAUserAgreementViewController.h"
 
 @interface TMRegisterViewController ()
 {
@@ -38,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *weiboButton;
 @property (weak, nonatomic) IBOutlet UIButton *weixinButton;
 @property (weak, nonatomic) IBOutlet UIButton *qqButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *userPrivacyLabel;
 
 
 @end
@@ -69,6 +71,12 @@
 //    if (![WeiboSDK isWeiboAppInstalled]) {
 //        self.weiboButton.hidden = YES;
 //    }
+    
+    // 添加手势
+    UITapGestureRecognizer *tapUserPrivacy = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserPrivacyLabel)];
+    self.userPrivacyLabel.userInteractionEnabled = YES;
+    [self.userPrivacyLabel addGestureRecognizer:tapUserPrivacy];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -403,6 +411,13 @@
     }
 }
 
+- (void)tapUserPrivacyLabel
+{
+    //    NSLog(@"点击了用户隐私");
+    LLAUserAgreementViewController *userAgreement = [[LLAUserAgreementViewController alloc] init];
+    [self.navigationController pushViewController:userAgreement animated:YES];
+    
+}
 
 
 @end
