@@ -212,6 +212,7 @@ static const CGFloat userDescTextViewHeight = 127;
     userNameTextField.layer.borderWidth = 0.5;
     userNameTextField.layer.borderColor = [UIColor colorWithHex:0x11111e].CGColor;
     
+    [userNameTextField addTarget:self action:@selector(userNameTextFieldHasChanged:) forControlEvents:UIControlEventEditingChanged];
     [backScrollView addSubview:userNameTextField];
     
     //
@@ -480,6 +481,18 @@ static const CGFloat userDescTextViewHeight = 127;
     [self.view endEditing:YES];
 }
 
-#pragma mark - 
+#pragma mark - 限制昵称的更改长度
 
+- (void)userNameTextFieldHasChanged:(UITextField *)textField
+{
+
+    if (textField == userNameTextField) {
+        
+        if (textField.text.length > 8) {
+            //            [LLAViewUtil showAlter:self.view withText:@"金额须小于6个字符"];
+            textField.text = [textField.text substringToIndex:8];
+        }
+    }
+
+}
 @end

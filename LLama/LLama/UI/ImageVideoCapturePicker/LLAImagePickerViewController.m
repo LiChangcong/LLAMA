@@ -381,23 +381,45 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 - (void)LLACameraCellDidClickCameraCell:(LLACameraCell *)cameraCell
 {
 
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if (authStatus ==AVAuthorizationStatusDenied)
+    { // 相机访问被拒绝
+        UIAlertController *noticeAlert = [UIAlertController alertControllerWithTitle:@"相机没有访问权限"
+                                                                       message:@"相册没有访问权限，请在设置中打开"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
         
-        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-        controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-        controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        controller.allowsEditing=NO;
-        controller.delegate = self;
-        controller.videoQuality=UIImagePickerControllerQualityTypeLow;
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
         
-        [HUD show:YES];
+        [noticeAlert addAction:cancelAction];
+        [noticeAlert addAction:okAction];
+        
+        [self presentViewController:noticeAlert animated:YES completion:nil];
+        
+        [HUD hide:YES];
 
-        [self presentViewController:controller animated:YES completion:^{
-            [HUD hide:YES];
+    }else {
+    
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+            controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+            controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            controller.allowsEditing=NO;
+            controller.delegate = self;
+            controller.videoQuality=UIImagePickerControllerQualityTypeLow;
+            
+            [HUD show:YES];
+            
+            [self presentViewController:controller animated:YES completion:^{
+                [HUD hide:YES];
+                
+            }];
+        }
 
-        }];
     }
+    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
