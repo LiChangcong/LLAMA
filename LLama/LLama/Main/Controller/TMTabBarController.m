@@ -11,6 +11,8 @@
 #import "LLABaseNavigationController.h"
 #import "LLAHomeViewController.h"
 #import "LLAUserProfileViewController.h"
+#import "LLAZoomViewController.h"
+#import "LLAMessageViewController.h"
 
 #import "TMPublishView.h"
 
@@ -22,6 +24,13 @@ static NSString * const homeTabarImage_Selected = @"homeH";
 
 static NSString * const userProfileTabbarImage_Normal = @"profile";
 static NSString * const userProfileTabbarImage_Selected = @"profileH";
+
+static NSString * const zoomTabbarImage_Normal = @"zoom";
+static NSString * const zoomTabbarImage_Selected = @"zoomH";
+
+static NSString * const messageTabbarImage_Normal = @"message";
+static NSString * const messageTabbarImage_Selected = @"messageH";
+
 
 static NSString * const publishScriptImage_Normal = @"start";
 static NSString * const publishScriptImage_Selected= @"startH";
@@ -41,6 +50,8 @@ static NSString * const publishScriptImage_Selected= @"startH";
 
 @synthesize homeNavigationController;
 @synthesize userProfileNavigationController;
+@synthesize zoomNavigationController;
+@synthesize messageNavigationController;
 
 #pragma mark - 初始化方法
 
@@ -90,19 +101,30 @@ static NSString * const publishScriptImage_Selected= @"startH";
 
     homeNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:homeViewController];
     
+    //zoom
+    LLAZoomViewController *zoomViewController = [[LLAZoomViewController alloc] init];
+    
+    zoomNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:zoomViewController];
+    
     //empty controller
     UIViewController *empty = [UIViewController new];
+    
+    
+    //message
+    LLAMessageViewController *messageViewController = [[LLAMessageViewController alloc] init];
+    
+    messageNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:messageViewController];
     
     //user profile
     LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:[LLAUser me].userIdString];
     
     userProfileNavigationController = [[LLABaseNavigationController alloc] initWithRootViewController:userProfile];
     
-    [self setViewControllers:@[homeNavigationController,empty,userProfileNavigationController]];
+    [self setViewControllers:@[homeNavigationController,zoomNavigationController,empty,messageNavigationController,userProfileNavigationController]];
     
-    NSArray *titlesArray = @[@"",@"",@""];
-    NSArray *normalImages = @[homeTabarImage_Normal,@"",userProfileTabbarImage_Normal];
-    NSArray *selectedImages = @[homeTabarImage_Selected,@"",userProfileTabbarImage_Selected];
+    NSArray *titlesArray = @[@"",@"",@"",@"",@""];
+    NSArray *normalImages = @[homeTabarImage_Normal,zoomTabbarImage_Normal,@"",messageTabbarImage_Normal,userProfileTabbarImage_Normal];
+    NSArray *selectedImages = @[homeTabarImage_Selected,zoomTabbarImage_Selected,@"",messageTabbarImage_Selected,userProfileTabbarImage_Selected];
     
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
         [item setTitle:titlesArray[idx]];
@@ -110,7 +132,7 @@ static NSString * const publishScriptImage_Selected= @"startH";
         [item setSelectedImage:[[UIImage llaImageWithName:selectedImages[idx]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     }];
     
-    [self.tabBar.items[1] setEnabled:NO];
+    [self.tabBar.items[2] setEnabled:NO];
     
     //center Button
     publishScriptButton = [[UIButton alloc] init];
