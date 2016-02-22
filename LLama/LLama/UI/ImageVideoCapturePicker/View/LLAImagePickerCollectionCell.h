@@ -29,4 +29,5 @@
 @property (nonatomic, assign) NSIndexPath *indexPath;
 
 @property(nonatomic, weak) UIButton *selectedButtonFaceToPublich;
+
 @end
