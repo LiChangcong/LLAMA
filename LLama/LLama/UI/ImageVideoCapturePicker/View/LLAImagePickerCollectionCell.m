@@ -9,6 +9,7 @@
 #import "LLAImagePickerCollectionCell.h"
 
 #import "LLAPickImageItemInfo.h"
+#import "LLAPickImageManager.h"
 
 @interface LLAImagePickerCollectionCell()
 {
@@ -102,8 +103,12 @@
 
 - (void) updateCellWithInfo:(LLAPickImageItemInfo *)info {
     //
-    imageThumbView.image = info.thumbImage;
     selectedButton.selected = info.IsSelected;
+    
+    //load image from asset
+    [[LLAPickImageManager shareManager] photoFromAsset:info.asset completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
+        imageThumbView.image = resultImage;
+    }];
     
 }
 
@@ -115,7 +120,6 @@
 
 - (void)selectButtonClick
 {
-    NSLog(@"123");
     // 不要直接操作cell，要操作模型，那不是会带来循环利用的问题。
 //    selectedButton.selected = !selectedButton.selected;
     

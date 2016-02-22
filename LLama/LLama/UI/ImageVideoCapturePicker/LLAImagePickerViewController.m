@@ -24,7 +24,7 @@
 
 //uitl
 #import "LLAViewUtil.h"
-
+#import "LLAPickImageManager.h"
 
 #import "TMPostScriptViewController.h"
 #import "LLABaseNavigationController.h"
@@ -46,7 +46,7 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
     
     LLALoadingView *HUD;
     
-    NSMutableArray *dataArray;
+    NSMutableArray<LLAPickImageItemInfo *> *dataArray;
 }
 
 @property (nonatomic, strong) LLAPickImageItemInfo *currentPickImgItemInfo;
@@ -65,8 +65,6 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
     [self initSubViews];
     [self initSubConstraints];
     
-    [HUD show:YES];
-    
     if ([PHPhotoLibrary authorizationStatus] ==  PHAuthorizationStatusDenied) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有相机权限" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
@@ -74,9 +72,8 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadImagesData];
-    });
+    [self loadImagesData];
+    
 
 }
 
@@ -164,55 +161,20 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         onlyOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType = %i", PHAssetMediaTypeImage];
         onlyOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
 
+        //PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary  options:nil];
         
-        PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary  options:nil];
-        [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
+        PHFetchResult *resultAsset = [PHAsset fetchAssetsWithOptions:onlyOptions];
+        
+        [resultAsset enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:onlyOptions];
-            if (assetsFetchResult.count > 0) {
-                
-                [assetsFetchResult enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-                    if (asset != nil) {
-                        
-                        PHImageRequestOptions *options = [PHImageRequestOptions new];
-                        options.synchronous = YES;
-                        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-                        options.resizeMode = PHImageRequestOptionsResizeModeNone;
-                        if (asset.pixelHeight > 4000 || asset.pixelWidth > 4000) {
-                            options.resizeMode = PHImageRequestOptionsResizeModeFast;
-                        }
-                        
-                        PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
-                        
-                        [imageManager requestImageForAsset:asset
-                                                    targetSize:CGSizeMake(321/3, 321/3)//targetSize:CGSizeMake(321/3, 321/3)
-                                                    contentMode:PHImageContentModeAspectFill
-                                                        options:options
-                                                  resultHandler:^(UIImage *result, NSDictionary *info) {
-
-                                                      UIImage *img = result;
-                                                      
-                                                      LLAPickImageItemInfo *itemInfo = [LLAPickImageItemInfo new];
-                                                      itemInfo.thumbImage = img;
-                                                      
-                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                          [dataArray addObject:itemInfo];
-                                                          [dataCollectionView reloadData];
-                                                          [HUD hide:YES];
-                                                      });
-
-
-                                                  }];
-                        
-
-                    }
-                }];
-
-                *stop = YES;
-            }
+            PHAsset *asset = (PHAsset *)obj;
+            
+            LLAPickImageItemInfo *imageInfo = [LLAPickImageItemInfo new];
+            imageInfo.asset = asset;
+            
+            [dataArray addObject:imageInfo];
+            
         }];
-
-        
         
     }else {
         
@@ -222,30 +184,27 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             
-            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *groupStop) {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-                if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
-                    //photo
+                [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *groupStop) {
                     
-                    LLAPickImageItemInfo *itemInfo = [LLAPickImageItemInfo new];
-                    
-                    itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
-                    
-                    [dataArray addObject:itemInfo];
-                    
-                    if (groupStop && stop) {
+                    if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                        //photo
                         
-                        [HUD hide:YES];
-                        [dataCollectionView reloadData];
+                        LLAPickImageItemInfo *itemInfo = [LLAPickImageItemInfo new];
+                        
+                        //itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
+                        itemInfo.asset = result;
+                        
+                        [dataArray addObject:itemInfo];
+                        
                     }
                     
-                }else {
-                    //video
-                    if (stop)
-                        [HUD hide:YES];
-                }
+                }];
                 
-            }];
+                [dataCollectionView reloadData];
+                
+            });
             
             
         } failureBlock:^(NSError *error) {
@@ -260,6 +219,8 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         }];
         
     }
+    
+    [dataCollectionView reloadData];
 
 }
 
@@ -317,13 +278,12 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
         return cell;
 
     }else {
-//        if (indexPath.row >= 1) {
-            LLAImagePickerCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.delegate = self;
-            cell.indexPath = indexPath;
-            [cell updateCellWithInfo:dataArray[indexPath.row - 1]];
+        LLAImagePickerCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.indexPath = indexPath;
+                
+        [cell updateCellWithInfo:dataArray[indexPath.row - 1]];
 
-//        }
         return cell;
 
     }
@@ -351,19 +311,45 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 - (void)LLAImagePickerCollectionCellDidClickSelectedButton:(LLAImagePickerCollectionCell *)imagePickerCollectionCell andIndexPath:(NSIndexPath *)indexPath andButtonIsSelected:(BOOL)isSelected
 {
 
-    LLAPickImageItemInfo *iteminfo = dataArray[indexPath.row - 1];
-    iteminfo.IsSelected = !iteminfo.IsSelected;
+    static NSIndexPath *selectedIndexPath = nil;
     
-    if (iteminfo.IsSelected) { // 选中状态
-        // 之前保存选中状态的模型变成非选中状态
-        _currentPickImgItemInfo.IsSelected = NO;
-        // 把新的为选中状态的图片存到选中模型
-        _currentPickImgItemInfo = iteminfo;
-        [dataCollectionView reloadData];
+    LLAPickImageItemInfo *itemInfo = dataArray[indexPath.row - 1];
+    
+    if (itemInfo == _currentPickImgItemInfo) {
+        
+        itemInfo.IsSelected = !itemInfo.IsSelected;
+        
+        if (itemInfo.IsSelected) {
+            //
+            _currentPickImgItemInfo = itemInfo;
+            selectedIndexPath = indexPath;
+            
+        }else {
+            _currentPickImgItemInfo = nil;
+            selectedIndexPath = nil;
+        }
+        
+        [dataCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+        
     }else {
-        _currentPickImgItemInfo = nil;
-        [dataCollectionView reloadData];
-
+        
+        //
+        _currentPickImgItemInfo.IsSelected = NO;
+        NSIndexPath *prdIndex = selectedIndexPath;
+        
+        _currentPickImgItemInfo = itemInfo;
+        selectedIndexPath = indexPath;
+        itemInfo.IsSelected = YES;
+        
+        NSArray *reloadIndexes = nil;
+        if (prdIndex) {
+            reloadIndexes = @[prdIndex,selectedIndexPath];
+        }else {
+            reloadIndexes = @[selectedIndexPath];
+        }
+        
+        [dataCollectionView reloadItemsAtIndexPaths:reloadIndexes];
+        
     }
     
     if (_currentPickImgItemInfo) {
@@ -505,47 +491,55 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 
 - (void)LLAImagePickerTopToolBarDidClickDetermineButton:(LLAImagePickerTopToolBar *)imagePickerTopToolBar
 {
-    
-    if (self.status == PickerImgOrHeadStatusImg) {
+    //get image from asset
+    [[LLAPickImageManager shareManager] photoFromAsset:_currentPickImgItemInfo.asset completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
         
+        _currentPickImgItemInfo.thumbImage = resultImage;
         
-        if (self.PickerTimesStatus == PickerTimesStatusOne) {
-
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-                
-            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
-            
-            postS.scriptType = LLAPublishScriptType_Image;
+        if (self.status == PickerImgOrHeadStatusImg) {
             
             
-            postS.pickImgInfo = _currentPickImgItemInfo;
-            
-            
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
-            //        [self presentViewController:postS animated:YES completion:nil];
-            
-            
-            //            self.callBack(_currentPickImgItemInfo);
+            if (self.PickerTimesStatus == PickerTimesStatusOne) {
                 
                 
-        
-
-        }else if(self.PickerTimesStatus == PickerTimesStatusTwo){
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+                TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+                
+                postS.scriptType = LLAPublishScriptType_Image;
+                
+                
+                postS.pickImgInfo = _currentPickImgItemInfo;
+                
+                
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
+                //        [self presentViewController:postS animated:YES completion:nil];
+                
+                
+                //            self.callBack(_currentPickImgItemInfo);
+                
+                
+                
+                
+            }else if(self.PickerTimesStatus == PickerTimesStatusTwo){
+                [self dismissViewControllerAnimated:YES completion:nil];
+                self.callBack(_currentPickImgItemInfo);
+                
+                
+            }
+            
+            
+            
+        } else {
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             self.callBack(_currentPickImgItemInfo);
-            
-            
         }
 
         
-        
-    } else {
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-        self.callBack(_currentPickImgItemInfo);
-    }
-
+    }];
+    
+    
 }
 
 @end

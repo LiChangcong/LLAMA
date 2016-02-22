@@ -14,4 +14,6 @@
 
 @property(nonatomic, assign) BOOL IsSelected;
 
+@property(nonatomic, strong) id asset;
+
 @end
