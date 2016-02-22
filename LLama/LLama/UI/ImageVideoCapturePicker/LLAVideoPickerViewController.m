@@ -159,7 +159,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
 
         //
-        PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+        PHImageManager *imageManager = [PHImageManager defaultManager];
         
         for (int i=0; i<assetsFetchResults.count;i++) {
             //
