@@ -28,6 +28,11 @@
 //    return [MTLJSONAdapter arrayTransformerWithModelClass:[LLAWhoLoveMeUser class]];
 //}
 
++ (NSValueTransformer *)dataListJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[LLAUser class]];
+}
+
 - (instancetype) initWithDictionary:(NSDictionary *)dictionaryValue error:(NSError *__autoreleasing *)error {
     self = [super initWithDictionary:dictionaryValue error:error];
     if (self) {

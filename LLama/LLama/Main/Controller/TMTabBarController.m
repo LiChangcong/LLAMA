@@ -20,8 +20,8 @@
 static NSString * const homeTabarImage_Normal = @"home";
 static NSString * const homeTabarImage_Selected = @"homeH";
 
-static NSString * const userProfileTabbarImage_Normal = @"message";
-static NSString * const userProfileTabbarImage_Selected = @"messageH";
+static NSString * const userProfileTabbarImage_Normal = @"profile";
+static NSString * const userProfileTabbarImage_Selected = @"profileH";
 
 static NSString * const publishScriptImage_Normal = @"start";
 static NSString * const publishScriptImage_Selected= @"startH";

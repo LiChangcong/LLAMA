@@ -106,6 +106,8 @@ static const CGFloat userNameLabelToLeft = 6;
     userNameLabel.font = userNameLabelFont;
     userNameLabel.textColor = userNameLabelTextColor;
     userNameLabel.textAlignment = NSTextAlignmentLeft;
+    userNameLabel.shadowOffset = CGSizeMake(1, 1);
+    userNameLabel.shadowColor = [UIColor grayColor];
     [self.contentView addSubview:userNameLabel];
     
     // 选中演员图
