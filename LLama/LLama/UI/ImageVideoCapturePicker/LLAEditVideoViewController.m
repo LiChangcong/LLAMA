@@ -35,7 +35,7 @@ static const CGFloat topBarHeight = 70;
 static NSString *playPauseButtonImageName_Normal = @"play";
 static NSString *playPasueButtonImageName_Highlight = @"playh";
 
-@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate,SCPlayerDelegate>
+@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate,SCPlayerDelegate,LLAEditVideoProgressViewDelegate>
 {
     AVAsset *editAsset;
     
@@ -144,6 +144,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     //
     editProgressView = [[LLAEditVideoProgressView alloc] initWithAsset:editAsset];
     editProgressView.translatesAutoresizingMaskIntoConstraints = NO;
+    editProgressView.delegate = self;
     
     [self.view addSubview:editProgressView];
     
@@ -505,6 +506,62 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 //    }
     
     
+}
+
+#pragma mark - LLAEditVideoProgressViewDelegate
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didEndEditBeginRatio:(CGFloat)beginRatio {
+    
+    //seek to begin
+    [self seekPlayerToBeginRatio];
+    
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didChangeBeginRatio:(CGFloat)beginRatio {
+    
+    [self seekPlayerToBeginRatio];
+    
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didChangeEndRatio:(CGFloat)endRatio {
+    
+    [self seekPlayerToEndRatio];
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didEndEditEndRatio:(CGFloat)endRatio {
+    //seek to begin
+    [self seekPlayerToBeginRatio];
+}
+
+#pragma mark - Private Method
+
+/**
+ **/
+
+- (void) seekPlayerToBeginRatio {
+    if ([videoPlayerView.player isPlaying]) {
+        [videoPlayerView.player pause];
+        playPauseButton.hidden = NO;
+        
+    }
+    //seek to time
+    
+    [videoPlayerView.player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(videoPlayerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+        
+    }];
+}
+
+- (void) seekPlayerToEndRatio {
+    if ([videoPlayerView.player isPlaying]) {
+        [videoPlayerView.player pause];
+        playPauseButton.hidden = NO;
+    }
+    //seek to time
+    
+    [videoPlayerView.player seekToTime:CMTimeMake(editProgressView.editEndRatio*CMTimeGetSeconds(videoPlayerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+        
+    }];
+
 }
 
 
