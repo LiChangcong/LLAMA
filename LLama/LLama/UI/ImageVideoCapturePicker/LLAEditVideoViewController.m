@@ -342,6 +342,13 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
         return;
     }
     
+    //trim position
+    CGFloat left = playerViewBackScrollView.contentOffset.x / playerViewBackScrollView.contentSize.width;
+    CGFloat right = (playerViewBackScrollView.contentSize.width-playerViewBackScrollView.contentOffset.x-playerViewBackScrollView.bounds.size.width) / playerViewBackScrollView.contentSize.width;
+    
+    CGFloat top = playerViewBackScrollView.contentOffset.y / playerViewBackScrollView.contentSize.height;
+    CGFloat bottom = (playerViewBackScrollView.contentSize.height-playerViewBackScrollView.contentOffset.y - playerViewBackScrollView.bounds.size.height) / playerViewBackScrollView.contentSize.height;
+    
     //exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
     
     //get thumb image
@@ -352,7 +359,23 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     CMTime actualTime;
     
     CGImageRef cgImage = [imageGenerator copyCGImageAtTime:startTime actualTime:&actualTime error:nil];
+    
+    //crop image
+    
+    CGSize videoNaturalSize = [self naturalSizeForEditAsset];
+    
+    float ratio;
+    float xratio = self.view.bounds.size.width / videoNaturalSize.width;
+    float yratio =self.view.bounds.size.width / videoNaturalSize.height;
+    ratio = MAX(xratio, yratio);
+    
+    CGRect cropRect = CGRectMake(videoNaturalSize.width*left, videoNaturalSize.height*top, videoNaturalSize.width*(1-left-right), videoNaturalSize.height*(1-top-bottom));
+    
+    cgImage = CGImageCreateWithImageInRect(cgImage, cropRect);
+    
     UIImage *thumbImage = [UIImage imageWithCGImage:cgImage];
+    
+    CGImageRelease(cgImage);
     
     LLALoadingView *loadingView = [LLAViewUtil addLLALoadingViewToView:self.view];
     [loadingView show:YES];
@@ -391,9 +414,6 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     AVEncoderBitRateKey: @64000,
     };
 
-    //trim position
-    CGFloat left = playerViewBackScrollView.contentOffset.x / playerViewBackScrollView.contentSize.width;
-    CGFloat top = playerViewBackScrollView.contentOffset.y / playerViewBackScrollView.contentSize.height;
     encoder.trimEdgeInsets = UIEdgeInsetsMake(top, left, 0, 0);
     
     //
