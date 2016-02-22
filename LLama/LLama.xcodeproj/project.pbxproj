@@ -285,6 +285,8 @@
 		7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08EDB1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m */; };
 		7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */; };
 		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
+		7EC717841C7AE15F005F04FB /* LLAZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */; };
+		7EC717871C7AE178005F04FB /* LLAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC717861C7AE178005F04FB /* LLAMessageViewController.m */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
 		A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A771C3CCCF700CADC51 /* LLAApplication.m */; };
 		A3209A7C1C3D044700CADC51 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3209A7B1C3D044700CADC51 /* TencentOpenAPI.framework */; };
@@ -1030,6 +1032,10 @@
 		7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerViewController.m; sourceTree = "<group>"; };
 		7EC3CAAF1C4DFF88008424E6 /* LLAAlbumPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAlbumPickerCell.h; sourceTree = "<group>"; };
 		7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAlbumPickerCell.m; sourceTree = "<group>"; };
+		7EC717821C7AE15F005F04FB /* LLAZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAZoomViewController.h; sourceTree = "<group>"; };
+		7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAZoomViewController.m; sourceTree = "<group>"; };
+		7EC717851C7AE178005F04FB /* LLAMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageViewController.h; sourceTree = "<group>"; };
+		7EC717861C7AE178005F04FB /* LLAMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageViewController.m; sourceTree = "<group>"; };
 		A3209A731C3CCB7B00CADC51 /* LLADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLADelegate.h; sourceTree = "<group>"; };
 		A3209A741C3CCB7B00CADC51 /* LLADelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLADelegate.m; sourceTree = "<group>"; };
 		A3209A761C3CCCF700CADC51 /* LLAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAApplication.h; sourceTree = "<group>"; };
@@ -2529,6 +2535,8 @@
 			children = (
 				A3DEDE0E1C3CAEC6009F3D37 /* TMMessageController.h */,
 				A3DEDE0F1C3CAEC6009F3D37 /* TMMessageController.m */,
+				7EC717851C7AE178005F04FB /* LLAMessageViewController.h */,
+				7EC717861C7AE178005F04FB /* LLAMessageViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2782,6 +2790,8 @@
 			children = (
 				A3DEDE5B1C3CAEC6009F3D37 /* TMZoomController.h */,
 				A3DEDE5C1C3CAEC6009F3D37 /* TMZoomController.m */,
+				7EC717821C7AE15F005F04FB /* LLAZoomViewController.h */,
+				7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3324,6 +3334,7 @@
 				7E96C3A71C5F6EDC00B13415 /* LLAILoveWhoInfo.m in Sources */,
 				A3DEDDA51C3CAE38009F3D37 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */,
+				7EC717871C7AE178005F04FB /* LLAMessageViewController.m in Sources */,
 				A3DEDD971C3CAE38009F3D37 /* EXTRuntimeExtensions.m in Sources */,
 				5C7534771C7714450058F93C /* PSTCollectionViewItemKey.m in Sources */,
 				5C7534421C7711920058F93C /* MWTapDetectingImageView.m in Sources */,
@@ -3357,6 +3368,7 @@
 				5CC324E71C5B814800413E25 /* LLAPayUserViewController.m in Sources */,
 				5CDF7A511C4BC7A3000CABB0 /* LLAScriptDetailViewController.m in Sources */,
 				5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
+				7EC717841C7AE15F005F04FB /* LLAZoomViewController.m in Sources */,
 				5C7534711C7714450058F93C /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				7EC08ED91C58778B00C4B46A /* LLAAccountSecuritySectionOne.m in Sources */,
 				5C8275141C5726A500DD547F /* MMSheetView.m in Sources */,

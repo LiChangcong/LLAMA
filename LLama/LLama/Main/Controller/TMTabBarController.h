@@ -14,4 +14,8 @@
 
 @property(nonatomic,readonly) UINavigationController *userProfileNavigationController;
 
+@property(nonatomic,readonly) UINavigationController *zoomNavigationController;
+
+@property(nonatomic,readonly) UINavigationController *messageNavigationController;
+
 @end
