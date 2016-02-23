@@ -13,6 +13,10 @@
 //controller
 #import "LLAHomeViewController.h"
 
+static const NSInteger homeIndex = 0;
+static const NSInteger searchIndex = 1;
+static const NSInteger messageIndex = 3;
+static const NSInteger userProfileIndex = 4;
 
 @interface LLARedirectUtil()
 {
@@ -65,18 +69,19 @@
     }
     
     UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+    
+    [self hidePresentedViewController:tabBarController.selectedViewController];
+    [self popToRootWithController:tabBarController.selectedViewController];
+    
     for (UIViewController *viewController in tabBarController.viewControllers) {
-        UIViewController *presentedViewController = viewController.presentedViewController;
-        if (presentedViewController) {
-            [viewController dismissViewControllerAnimated:NO completion:nil];
-        }
         
         if (![viewController isKindOfClass:[UINavigationController class]]) {
             continue;
         }
         
-        UINavigationController *navigationController = (UINavigationController *)viewController;
-        [navigationController popToRootViewControllerAnimated:YES];
+        [self hidePresentedViewController:viewController];
+        [self popToRootWithController:viewController];
+        
     }
 
     //
@@ -85,7 +90,7 @@
             
         case LLARedirectType_HomeHall:
         {
-            tabBarController.selectedIndex = 0;
+            tabBarController.selectedIndex = homeIndex;
             //
             UINavigationController *navigationController = (UINavigationController *)tabBarController.selectedViewController;
             
@@ -99,7 +104,7 @@
             
             break;
         case LLARedirectType_UserProfile:
-            tabBarController.selectedIndex = 2;
+            tabBarController.selectedIndex = userProfileIndex;
             
             break;
             
@@ -109,6 +114,28 @@
     
     //
     nextType = LLARedirectType_None;
+
+    
+}
+
+//
+- (void) popToRootWithController:(UIViewController *) controller {
+    
+    if ([controller isKindOfClass:[UIViewController class]]) {
+        UINavigationController *navi = (UINavigationController *) controller;
+        
+        if (navi.viewControllers.count > 1)
+            [navi popToRootViewControllerAnimated:YES];
+    }
+}
+
+- (void) hidePresentedViewController:(UIViewController *) controller {
+    
+    UIViewController *presentedViewController = controller.presentedViewController;
+    if (presentedViewController) {
+        
+        [presentedViewController dismissViewControllerAnimated:NO completion:NULL];
+    }
 
     
 }

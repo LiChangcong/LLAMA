@@ -11,8 +11,7 @@
 #import "LLASaveUserDefaultUtil.h"
 #import "YYShowAlertUtil.h"
 
-#import "LLAUser.h"
-#import "LLAChangeRootControllerUtil.h"
+#import "LLAExceptionManager.h"
 
 //正式服
 //static NSString *const httpBaseURL = @"https://api.hillama.com";
@@ -109,20 +108,8 @@ static NSString *const httpBaseURL = @"https://test-api.hillama.com/";
             if (data.responseCode == LLAHttpResonseCode_TokenUnavailable) {
                 //show ohter login
                 
-                //
-                [LLAUser logout];
-                //change root view controller
-                
-                [LLAChangeRootControllerUtil changeToLoginViewController];
-                
-                if ([UIApplication sharedApplication].keyWindow) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"你的帐号在别处登录，请重新登录" delegate:nil cancelButtonTitle:@"重新登录" otherButtonTitles:nil];
-                    [alertView show];
-                }
-                
-                
-                
-                
+                [[LLAExceptionManager shareManager] showTokenExpiredView];
+            
             }else {
             //
                 if (exceptionBlock)

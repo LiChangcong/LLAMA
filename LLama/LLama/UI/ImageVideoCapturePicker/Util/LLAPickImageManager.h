@@ -16,5 +16,7 @@
 
 - (void) photoFromAsset:(id) asset completion:(void (^)(UIImage *resultImage,NSDictionary *info,BOOL isDegraded)) completion;
 
+- (void) photoFromAsset:(id) asset picWidth:(CGFloat) width completion:(void (^)(UIImage *resultImage,NSDictionary *info,BOOL isDegraded)) completion;
+
 @end
       

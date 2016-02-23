@@ -199,6 +199,7 @@
 		5CC696DD1C5CE4C200E4BA89 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DB1C5CE4C200E4BA89 /* libcrypto.a */; };
 		5CC696DE1C5CE4C200E4BA89 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DC1C5CE4C200E4BA89 /* libssl.a */; };
 		5CD6723E1C7C021000DEEA59 /* LLAVideoPlayUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */; };
+		5CD672411C7C2F2E00DEEA59 /* LLAExceptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -867,6 +868,8 @@
 		5CC696DC1C5CE4C200E4BA89 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		5CD6723C1C7C021000DEEA59 /* LLAVideoPlayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPlayUtil.h; sourceTree = "<group>"; };
 		5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPlayUtil.m; sourceTree = "<group>"; };
+		5CD6723F1C7C2F2E00DEEA59 /* LLAExceptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAExceptionManager.h; sourceTree = "<group>"; };
+		5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAExceptionManager.m; sourceTree = "<group>"; };
 		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
@@ -2214,6 +2217,8 @@
 				A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */,
 				5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */,
 				5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */,
+				5CD6723F1C7C2F2E00DEEA59 /* LLAExceptionManager.h */,
+				5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */,
 			);
 			path = ViewUtil;
 			sourceTree = "<group>";
@@ -3279,6 +3284,7 @@
 				5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */,
 				5C6D7A391C58B73200119A3A /* SCFilter+UIImage.m in Sources */,
 				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
+				5CD672411C7C2F2E00DEEA59 /* LLAExceptionManager.m in Sources */,
 				5CC324EF1C5B836F00413E25 /* LLAPayUserPayTypeCell.m in Sources */,
 				5CBF9AAB1C535942001A4EA0 /* LLAChangeRootControllerUtil.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,

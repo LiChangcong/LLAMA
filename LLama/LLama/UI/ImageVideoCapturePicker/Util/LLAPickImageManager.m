@@ -116,4 +116,55 @@
     }
 }
 
+//
+- (void) photoFromAsset:(id) asset picWidth:(CGFloat) width completion:(void (^)(UIImage *resultImage,NSDictionary *info,BOOL isDegraded)) completion {
+    
+    if ([asset isKindOfClass:[PHAsset class]]) {
+        
+        PHAsset *pAsset = (PHAsset *) asset;
+        
+        CGFloat aspectRatio = pAsset.pixelWidth / (CGFloat)pAsset.pixelHeight;
+        CGFloat multiple = [UIScreen mainScreen].scale;
+        CGFloat pixelWidth = width * multiple;
+        CGFloat pixelHeight = pixelWidth / aspectRatio;
+        
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(pixelWidth, pixelHeight) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]);
+            if (downloadFinined && result) {
+                if (completion) completion(result,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
+            }
+            
+            // Download image from iCloud / 从iCloud下载图片
+            if ([info objectForKey:PHImageResultIsInCloudKey] && !result) {
+                PHImageRequestOptions *option = [[PHImageRequestOptions alloc]init];
+                option.networkAccessAllowed = YES;
+                [[PHImageManager defaultManager] requestImageDataForAsset:asset options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                    UIImage *resultImage = [UIImage imageWithData:imageData scale:0.1];
+                    
+                    if (resultImage) {
+                        if (completion) completion(resultImage,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
+                    }
+                }];
+            }
+        }];
+        
+        
+    }else if ([asset isKindOfClass:[ALAsset class]]) {
+        
+        ALAsset *aAsset = (ALAsset *) asset;
+        
+        UIImage *image = [UIImage imageWithCGImage:aAsset.aspectRatioThumbnail];
+        
+        
+        if (completion)
+            completion(image,nil,YES);
+    }else {
+        
+        if (completion)
+            completion(nil,nil,NO);
+    }
+
+    
+}
+
 @end
