@@ -340,6 +340,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     AVAsset *asset = [AVAsset assetWithURL:itemInfo.videoURL];
     
+    if (!asset) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"无效的视频"];
+        return;
+    }
+    
     LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:asset];
     
     [self.navigationController pushViewController:editVideo animated:YES];

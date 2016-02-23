@@ -43,6 +43,7 @@ const CGFloat editVideo_progressViewHeight = 6;
 
 @implementation LLAEditVideoProgressView
 
+@synthesize delegate;
 @synthesize numberOfThumbImages;
 @synthesize editBeginRatio,editEndRatio;
 @synthesize editAsset;
@@ -135,6 +136,13 @@ const CGFloat editVideo_progressViewHeight = 6;
     [self addSubview:thumbImageContentView];
     
     [self sendSubviewToBack:thumbImageContentView];
+    
+    //to stop pop gesture
+    
+    UIPanGestureRecognizer *popPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(popPan:)];
+    [self addGestureRecognizer:popPan];
+    self.userInteractionEnabled = YES;
+    
 }
 
 - (void) initThumbImages {
@@ -287,24 +295,31 @@ const CGFloat editVideo_progressViewHeight = 6;
         return ;
     }
     
-    static CGFloat originalX = 0;
+    static CGFloat leftOriginalX = 0;
+    static CGFloat rightOriginalX = 0;
     
     CGPoint point = [ges locationInView:self];
     
     switch (ges.state) {
         case UIGestureRecognizerStateBegan:
         {
-            originalX = point.x;
+            if (touchedView == leftToggleView) {
+                leftOriginalX = point.x;
+            }else {
+                rightOriginalX = point.x;
+            }
+            
         }
             break;
         case UIGestureRecognizerStateChanged:
         {
-            CGFloat offset = point.x - originalX;
-            
-            CGFloat newCenterX = touchedView.center.x+offset;
             
             if (touchedView == leftToggleView) {
                 //left toggle
+                CGFloat offset = point.x - leftOriginalX;
+                
+                CGFloat newCenterX = touchedView.center.x+offset;
+                
                 newCenterX = MAX(newCenterX, leftToggleView.bounds.size.width/2);
                 newCenterX = MIN(rightToggleView.frame.origin.x-leftToggleView.bounds.size.width/2, newCenterX);
                 
@@ -312,24 +327,49 @@ const CGFloat editVideo_progressViewHeight = 6;
                 
                 cutProgressViewLeftConstraint.constant = newCenterX;
                 
+                touchedView.center = CGPointMake(newCenterX, touchedView.center.y);
+                
+                leftOriginalX = newCenterX;
+                
+                if (delegate && [delegate respondsToSelector:@selector(progressView:didChangeBeginRatio:)]) {
+                    [delegate progressView:self didChangeBeginRatio:editBeginRatio];
+                }
+                
             }else {
                 //right toggle
+                CGFloat offset = point.x - rightOriginalX;
+                CGFloat newCenterX = touchedView.center.x+offset;
+                
                 newCenterX = MIN(self.bounds.size.width-rightToggleView.bounds.size.width/2, newCenterX);
                 newCenterX = MAX(leftToggleView.frame.origin.x+leftToggleView.bounds.size.width+rightToggleView.bounds.size.width/2, newCenterX);
                 
                 editEndRatio = (newCenterX - leftToggleView.bounds.size.width/2)/(self.bounds.size.width-leftToggleView.bounds.size.width/2-rightToggleView.bounds.size.width/2);
                 
                 cutProgressViewRightConstraint.constant = self.bounds.size.width - newCenterX - rightToggleView.bounds.size.width/2;
+                
+                touchedView.center = CGPointMake(newCenterX, touchedView.center.y);
+                
+                rightOriginalX = newCenterX;
+                
+                if (delegate && [delegate respondsToSelector:@selector(progressView:didChangeEndRatio:)]) {
+                    [delegate progressView:self didChangeEndRatio:editEndRatio];
+                }
+
             }
-            
-            touchedView.center = CGPointMake(newCenterX, touchedView.center.y);
-            
-            originalX = newCenterX;
             
         }
             break;
         case UIGestureRecognizerStateEnded:
         {
+            if (touchedView == leftToggleView) {
+                if (delegate && [delegate respondsToSelector:@selector(progressView:didEndEditBeginRatio:)]) {
+                    [delegate progressView:self didEndEditBeginRatio:editBeginRatio];
+                }
+            }else {
+                if (delegate && [delegate respondsToSelector:@selector(progressView:didEndEditEndRatio:)]) {
+                    [delegate progressView:self didEndEditEndRatio:editEndRatio];
+                }
+            }
             
         }
             break;
@@ -342,6 +382,12 @@ const CGFloat editVideo_progressViewHeight = 6;
         default:
             break;
     }
+    
+}
+
+#pragma mark - 
+
+- (void) popPan:(UIPanGestureRecognizer *) ges {
     
 }
 

@@ -11,7 +11,23 @@
 
 extern const CGFloat editVideo_progressViewHeight;
 
+@class LLAEditVideoProgressView;
+
+@protocol LLAEditVideoProgressViewDelegate <NSObject>
+
+@optional
+
+- (void) progressView:(LLAEditVideoProgressView *) progressView didChangeBeginRatio:(CGFloat) beginRatio;
+- (void) progressView:(LLAEditVideoProgressView *) progressView didEndEditBeginRatio:(CGFloat) beginRatio;
+
+- (void) progressView:(LLAEditVideoProgressView *) progressView didChangeEndRatio:(CGFloat) endRatio;
+- (void) progressView:(LLAEditVideoProgressView *) progressView didEndEditEndRatio:(CGFloat) endRatio;
+
+@end
+
 @interface LLAEditVideoProgressView : UIView
+
+@property(nonatomic , weak) id<LLAEditVideoProgressViewDelegate> delegate;
 
 @property(nonatomic , readonly ,weak) AVAsset *editAsset;
 

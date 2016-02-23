@@ -35,7 +35,7 @@ static const CGFloat topBarHeight = 70;
 static NSString *playPauseButtonImageName_Normal = @"play";
 static NSString *playPasueButtonImageName_Highlight = @"playh";
 
-@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate,SCPlayerDelegate>
+@interface LLAEditVideoViewController()<LLAEditVideoTopToolBarDelegate,SCVideoPlayerViewDelegate,SCPlayerDelegate,LLAEditVideoProgressViewDelegate>
 {
     AVAsset *editAsset;
     
@@ -144,6 +144,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     //
     editProgressView = [[LLAEditVideoProgressView alloc] initWithAsset:editAsset];
     editProgressView.translatesAutoresizingMaskIntoConstraints = NO;
+    editProgressView.delegate = self;
     
     [self.view addSubview:editProgressView];
     
@@ -341,6 +342,13 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
         return;
     }
     
+    //trim position
+    CGFloat left = playerViewBackScrollView.contentOffset.x / playerViewBackScrollView.contentSize.width;
+    CGFloat right = (playerViewBackScrollView.contentSize.width-playerViewBackScrollView.contentOffset.x-playerViewBackScrollView.bounds.size.width) / playerViewBackScrollView.contentSize.width;
+    
+    CGFloat top = playerViewBackScrollView.contentOffset.y / playerViewBackScrollView.contentSize.height;
+    CGFloat bottom = (playerViewBackScrollView.contentSize.height-playerViewBackScrollView.contentOffset.y - playerViewBackScrollView.bounds.size.height) / playerViewBackScrollView.contentSize.height;
+    
     //exportSession.timeRange = CMTimeRangeMake(startTime, durationTime);
     
     //get thumb image
@@ -351,7 +359,23 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     CMTime actualTime;
     
     CGImageRef cgImage = [imageGenerator copyCGImageAtTime:startTime actualTime:&actualTime error:nil];
+    
+    //crop image
+    
+    CGSize videoNaturalSize = [self naturalSizeForEditAsset];
+    
+    float ratio;
+    float xratio = self.view.bounds.size.width / videoNaturalSize.width;
+    float yratio =self.view.bounds.size.width / videoNaturalSize.height;
+    ratio = MAX(xratio, yratio);
+    
+    CGRect cropRect = CGRectMake(videoNaturalSize.width*left, videoNaturalSize.height*top, videoNaturalSize.width*(1-left-right), videoNaturalSize.height*(1-top-bottom));
+    
+    cgImage = CGImageCreateWithImageInRect(cgImage, cropRect);
+    
     UIImage *thumbImage = [UIImage imageWithCGImage:cgImage];
+    
+    CGImageRelease(cgImage);
     
     LLALoadingView *loadingView = [LLAViewUtil addLLALoadingViewToView:self.view];
     [loadingView show:YES];
@@ -390,9 +414,6 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     AVEncoderBitRateKey: @64000,
     };
 
-    //trim position
-    CGFloat left = playerViewBackScrollView.contentOffset.x / playerViewBackScrollView.contentSize.width;
-    CGFloat top = playerViewBackScrollView.contentOffset.y / playerViewBackScrollView.contentSize.height;
     encoder.trimEdgeInsets = UIEdgeInsetsMake(top, left, 0, 0);
     
     //
@@ -505,6 +526,62 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 //    }
     
     
+}
+
+#pragma mark - LLAEditVideoProgressViewDelegate
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didEndEditBeginRatio:(CGFloat)beginRatio {
+    
+    //seek to begin
+    [self seekPlayerToBeginRatio];
+    
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didChangeBeginRatio:(CGFloat)beginRatio {
+    
+    [self seekPlayerToBeginRatio];
+    
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didChangeEndRatio:(CGFloat)endRatio {
+    
+    [self seekPlayerToEndRatio];
+}
+
+- (void) progressView:(LLAEditVideoProgressView *)progressView didEndEditEndRatio:(CGFloat)endRatio {
+    //seek to begin
+    [self seekPlayerToBeginRatio];
+}
+
+#pragma mark - Private Method
+
+/**
+ **/
+
+- (void) seekPlayerToBeginRatio {
+    if ([videoPlayerView.player isPlaying]) {
+        [videoPlayerView.player pause];
+        playPauseButton.hidden = NO;
+        
+    }
+    //seek to time
+    
+    [videoPlayerView.player seekToTime:CMTimeMake(editProgressView.editBeginRatio*CMTimeGetSeconds(videoPlayerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+        
+    }];
+}
+
+- (void) seekPlayerToEndRatio {
+    if ([videoPlayerView.player isPlaying]) {
+        [videoPlayerView.player pause];
+        playPauseButton.hidden = NO;
+    }
+    //seek to time
+    
+    [videoPlayerView.player seekToTime:CMTimeMake(editProgressView.editEndRatio*CMTimeGetSeconds(videoPlayerView.player.currentItem.duration), 1) completionHandler:^(BOOL finished) {
+        
+    }];
+
 }
 
 
