@@ -123,6 +123,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         [self addGestureRecognizer:tapGes];
         self.userInteractionEnabled = YES;
         
+        //willEnterBackGround notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterBackGround:) name:UIApplicationWillResignActiveNotification object:nil];
+        
     }
     return self;
 }
@@ -267,7 +270,11 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     }
 }
 
-#pragma mark - playerViewTapped
+- (void) willEnterBackGround:(NSNotification *) noti {
+    [self pauseVideo];
+}
+
+#pragma mark - playerViewTapped≥
 
 - (void) playerViewTapped:(UITapGestureRecognizer *) ges {
 
