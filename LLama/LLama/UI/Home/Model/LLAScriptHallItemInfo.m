@@ -80,7 +80,6 @@
         }else {
             self.currentRole = LLAUserRoleInScript_Passer;
         }
-        
     }
     
     return self;

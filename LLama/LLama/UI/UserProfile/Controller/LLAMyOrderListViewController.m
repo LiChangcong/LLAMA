@@ -472,6 +472,10 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     }else {
         [self destroyTimer];
     }
+    
+    if (shouldRefreshData) {
+        [dataCollectionView triggerPullToRefresh];
+    }
 
 }
 
