@@ -198,6 +198,7 @@
 		5CC696DA1C5CDEBF00E4BA89 /* AlipayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696D91C5CDEBF00E4BA89 /* AlipayOrder.m */; };
 		5CC696DD1C5CE4C200E4BA89 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DB1C5CE4C200E4BA89 /* libcrypto.a */; };
 		5CC696DE1C5CE4C200E4BA89 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DC1C5CE4C200E4BA89 /* libssl.a */; };
+		5CD6723E1C7C021000DEEA59 /* LLAVideoPlayUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -860,6 +861,8 @@
 		5CC696D91C5CDEBF00E4BA89 /* AlipayOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayOrder.m; sourceTree = "<group>"; };
 		5CC696DB1C5CE4C200E4BA89 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		5CC696DC1C5CE4C200E4BA89 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		5CD6723C1C7C021000DEEA59 /* LLAVideoPlayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPlayUtil.h; sourceTree = "<group>"; };
+		5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPlayUtil.m; sourceTree = "<group>"; };
 		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
@@ -1869,6 +1872,15 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5CD6723C1C7C021000DEEA59 /* LLAVideoPlayUtil.h */,
+				5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */,
+			);
+			path = VideoPlayUtil;
+			sourceTree = "<group>";
+		};
 		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -2328,6 +2340,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */,
 				5C6D26991C75D110003CD77A /* JumpUtil */,
 				5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */,
 				5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */,
@@ -3404,6 +3417,7 @@
 				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
 				7EB0BA5B1C5F384B00D4A43C /* LLALoveViewController.m in Sources */,
+				5CD6723E1C7C021000DEEA59 /* LLAVideoPlayUtil.m in Sources */,
 				5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */,
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,

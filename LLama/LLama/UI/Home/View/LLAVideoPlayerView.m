@@ -31,6 +31,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
     
     //
     UIImageView *coverImageView;
+    
+    //
+    NSString *playingURLString;
 }
 
 @property(nonatomic , assign , readwrite) BOOL isPlaying;
@@ -182,6 +185,8 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         [videoPlayer replaceCurrentItemWithPlayerItem:newItem];
         
         [self initPlayerItemObserver];
+        
+        playingURLString = playingVideoInfo.videoPlayURL;
     }
 }
 
@@ -200,13 +205,9 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
         return;
     }
     
-    if(isPlaying){
-        [self stopVideo];
-    }
-    
     playingVideoInfo = videoInfo;
     
-    [self replacePlayerItem];
+    //[self replacePlayerItem];
     
     //
     [coverImageView setImageWithURL:[NSURL URLWithString:playingVideoInfo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
@@ -314,9 +315,22 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) playVideo {
     
-    if (videoPlayer.rate >0) {
-        return;
+    if ([playingVideoInfo.videoPlayURL isEqualToString:playingURLString]) {
+        
+        if (videoPlayer.rate > 0) {
+            return;
+        }else {
+            [videoPlayer play];
+        }
+        
     }else {
+        
+        if (isPlaying) {
+            [videoPlayer play];
+        }
+        
+        [self replacePlayerItem];
+        
         [videoPlayer play];
     }
     
@@ -324,12 +338,12 @@ static void *AVPlayerRateObservationContext = &AVPlayerRateObservationContext;
 
 - (void) stopVideo {
     
-    if (self.isPlaying || CMTimeGetSeconds(videoPlayer.currentTime) > 0 || videoPlayer.currentItem.status == AVPlayerItemStatusUnknown) {
     
-        [videoPlayer pause];
+    [videoPlayer pause];
     
+    if (CMTimeGetSeconds(videoPlayer.currentTime) > 0.0)
         [videoPlayer seekToTime:kCMTimeZero];
-    }
+    
     //
     coverImageView.hidden = NO;
 }

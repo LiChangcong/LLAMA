@@ -715,6 +715,7 @@ static const CGFloat scriptLabelFontSize = 13;
     currentVideoInfo = videoInfo;
     
     //
+    videoPlayerView.delegate = delegate;
     
     [rewardView updateViewWithRewardMoney:currentVideoInfo.rewardMoney];
     
@@ -761,8 +762,9 @@ static const CGFloat scriptLabelFontSize = 13;
     //player view
     //videoPlayerView.playingVideoInfo = videoInfo.videoInfo;
     shouldPlayVideoInfo = videoInfo.videoInfo;
+    videoPlayerView.playingVideoInfo = videoInfo.videoInfo;
     
-    [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
+    //[videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
     
     //
 }
