@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLAZoomViewController : UIViewController
+#import "LLACommonViewController.h"
+
+@interface LLAZoomViewController : LLACommonViewController
 
 @end
