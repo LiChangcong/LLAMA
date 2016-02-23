@@ -145,7 +145,11 @@
             [dataTableView reloadData];
         }
         
-        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
+        //dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
+        if (mainInfo.dataList.count < LLA_LOAD_DATA_DEFAULT_NUMBERS) {
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
+        }
+
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -266,6 +270,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:mainInfo.dataList[indexPath.row].userIdString];
     

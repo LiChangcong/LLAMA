@@ -19,7 +19,7 @@
             
             UIView<LLACellPlayVideoProtocol> *tc = (UIView<LLACellPlayVideoProtocol> *)tempCell;
             
-            CGRect playerFrame = tc.videoPlayerView.bounds;
+            CGRect playerFrame = tc.videoPlayerView.frame;
             
             CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
             if (subViewFrame.origin.y >= scrollView.contentOffset.y+scrollView.bounds.size.height || scrollView.contentOffset.y>subViewFrame.origin.y+subViewFrame.size.height) {
@@ -44,7 +44,7 @@
             
             UIView<LLACellPlayVideoProtocol> *tc = (UIView<LLACellPlayVideoProtocol> *)tempCell;
             
-            CGRect playerFrame = tc.videoPlayerView.bounds;
+            CGRect playerFrame = tc.videoPlayerView.frame;
             
             CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
             
