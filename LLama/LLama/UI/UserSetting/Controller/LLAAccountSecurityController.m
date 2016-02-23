@@ -494,7 +494,7 @@ static NSString *const accountSecuritySectionTwoCell = @"LLAAccountSecuritySecti
             //register
             NSMutableDictionary *params = [NSMutableDictionary dictionary];
             
-            [params setValue:@([openId longLongValue]) forKey:@"openid"];
+            [params setValue:openId forKey:@"openid"];
             [params setValue:accessToken forKey:@"access_token"];
             
             __weak  typeof(self) blockSelf = self;
