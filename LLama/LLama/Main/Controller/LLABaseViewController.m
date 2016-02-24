@@ -25,6 +25,7 @@
     //set back item
     if (self.navigationController.viewControllers.count > 1){
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
+        self.navigationItem.hidesBackButton = YES;
     }
 
     

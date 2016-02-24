@@ -1,5 +1,5 @@
 //
-//  LLAHotUsersCell.h
+//  LLAHotUsersViewController.h
 //  LLama
 //
 //  Created by tommin on 16/2/23.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLACommonViewController.h"
 
-@interface LLAHotUsersCell : UICollectionViewCell
+@interface LLAHotUsersViewController : LLACommonViewController
 
-- (void)updateInfo;
 @end

@@ -1,5 +1,5 @@
 //
-//  LLAHotUsersCell.h
+//  LLAHotUsersTableViewCell.h
 //  LLama
 //
 //  Created by tommin on 16/2/23.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLAHotUsersCell : UICollectionViewCell
+@interface LLAHotUsersTableViewCell : UITableViewCell
 
-- (void)updateInfo;
 @end

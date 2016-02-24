@@ -25,7 +25,7 @@
 
 - (void)setUp
 {
-    NSLog(@"设置searchBar");
+
 }
 
 @end

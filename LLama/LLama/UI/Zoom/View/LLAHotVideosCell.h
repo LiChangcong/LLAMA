@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLAUser.h"
 
 @interface LLAHotVideosCell : UICollectionViewCell
+
++ (CGFloat) calculateHeightWitthUserInfo:(LLAUser *)userInfo maxWidth:(CGFloat)maxWidth;
 
 @end
