@@ -27,6 +27,12 @@
     self.navigationBar.barTintColor = [UIColor llaNavigationBarColor];
     self.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setBackIndicatorImage:nil];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:nil];
+    
+    //
+
+    
     //
     self.delegate = self;
     

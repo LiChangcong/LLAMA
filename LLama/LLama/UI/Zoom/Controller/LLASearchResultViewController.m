@@ -70,7 +70,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 //    [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         self.navigationItem.leftBarButtonItem = nil;
-
     
 }
 
