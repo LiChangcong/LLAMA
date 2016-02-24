@@ -8,8 +8,7 @@
 
 #import "LLAPickImageManager.h"
 
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <Photos/Photos.h>
+
 
 @interface LLAPickImageManager()
 {
@@ -165,6 +164,34 @@
     }
 
     
+}
+
+- (void) avAssetFromaAsset:(id)asset completion:(void (^)(AVAsset *, NSDictionary *))completion {
+    if ([asset isKindOfClass:[PHAsset class]]) {
+        PHAsset *pAsset = (PHAsset *) asset;
+        
+        PHImageManager *imageManager = [PHImageManager defaultManager];
+        
+        [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable avAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion)
+                    completion(avAsset,info);
+            });
+            
+            
+        }];
+        
+        
+    }else if ([asset isKindOfClass:[ALAsset class]]) {
+        if (completion) {
+            AVAsset *as = [AVAsset assetWithURL:[asset valueForProperty:ALAssetPropertyAssetURL]];
+            completion(as,nil);
+        }
+    }else {
+        if (completion)
+            completion(nil,nil);
+    }
 }
 
 @end

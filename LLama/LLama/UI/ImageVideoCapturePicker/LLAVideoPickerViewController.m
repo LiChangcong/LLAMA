@@ -24,6 +24,7 @@
 
 //uitl
 #import "LLAViewUtil.h"
+#import "LLAPickImageManager.h"
 
 static const CGFloat topBarHeight = 70;
 
@@ -61,6 +62,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [self initTopViews];
     [self initSubViews];
     [self initSubConstraints];
+    
+    [self.view bringSubviewToFront:topBar];
     
     [HUD show:YES];
     [self loadVideoData];
@@ -159,9 +162,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         PHFetchResult *assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
 
         //
-        PHImageManager *imageManager = [PHImageManager defaultManager];
-        
-        for (int i=0; i<assetsFetchResults.count;i++) {
+            for (int i=0; i<assetsFetchResults.count;i++) {
             //
             PHAsset *asset = assetsFetchResults[i];
             
@@ -171,49 +172,50 @@ static NSString *cellIdentifier = @"cellIdentifier";
             
             LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
             itemInfo.videoDuration = asset.duration;
+            itemInfo.asset = asset;
             [dataArray addObject:itemInfo];
             
-            [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable videoAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
-                
-//                if (i== assetsFetchResults.count-1) {
+//            [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable videoAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+//                
+////                if (i== assetsFetchResults.count-1) {
+////                    dispatch_async(dispatch_get_main_queue(), ^{
+////                        [HUD hide:YES];
+////
+////                    });
+////                }
+//                
+//                if (videoAsset && [videoAsset isKindOfClass:[AVURLAsset class]]) {
+//                    
+//                        AVURLAsset *urlAsset = (AVURLAsset *) videoAsset;
+//                    
+//                        AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:videoAsset];
+//                        imageGenerator.appliesPreferredTrackTransform = YES;
+//                        
+//                        CMTime time = kCMTimeZero;
+//                        CMTime actualTime;
+//                        
+//                        CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
+//                        UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
+//                        
+//                        itemInfo.videoURL = urlAsset.URL;
+//                        itemInfo.thumbImage = thumbImage;
+//                    
 //                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        [HUD hide:YES];
-//
+//                        [dataCollectionView reloadData];
 //                    });
+//
+//                    
+//                }else {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        
+//                        [dataArray removeObject:itemInfo];
+//                        [dataCollectionView reloadData];
+//                    });
+//
 //                }
-                
-                if (videoAsset && [videoAsset isKindOfClass:[AVURLAsset class]]) {
-                    
-                        AVURLAsset *urlAsset = (AVURLAsset *) videoAsset;
-                    
-                        AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:videoAsset];
-                        imageGenerator.appliesPreferredTrackTransform = YES;
-                        
-                        CMTime time = kCMTimeZero;
-                        CMTime actualTime;
-                        
-                        CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:&actualTime error:nil];
-                        UIImage *thumbImage = [UIImage imageWithCGImage:imageRef];
-                        
-                        itemInfo.videoURL = urlAsset.URL;
-                        itemInfo.thumbImage = thumbImage;
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [dataCollectionView reloadData];
-                    });
-
-                    
-                }else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [dataArray removeObject:itemInfo];
-                        [dataCollectionView reloadData];
-                    });
-
-                }
-                
-                
-            }];
+//                
+//                
+//            }];
             
             
             
@@ -232,7 +234,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
         ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
         
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *groupStop) {
                 
@@ -241,9 +243,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
                     
                     LLAPickVideoItemInfo *itemInfo = [LLAPickVideoItemInfo new];
                     
-                    itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
+                    //itemInfo.thumbImage = [UIImage imageWithCGImage:result.aspectRatioThumbnail];
                     itemInfo.videoDuration =[[result valueForProperty:ALAssetPropertyDuration] floatValue];
-                    itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
+                    //itemInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
+                    itemInfo.asset = result;
                     
                     [dataArray insertObject:itemInfo atIndex:0];
                     
@@ -338,17 +341,27 @@ static NSString *cellIdentifier = @"cellIdentifier";
         return;
     }
     
-    AVAsset *asset = [AVAsset assetWithURL:itemInfo.videoURL];
+    //read asset from info
     
-    if (!asset) {
+    [HUD show:NO];
+    
+    [[LLAPickImageManager shareManager] avAssetFromaAsset:itemInfo.asset completion:^(AVAsset *avAsset, NSDictionary *info) {
+        [HUD hide:NO];
         
-        [LLAViewUtil showAlter:self.view withText:@"无效的视频"];
-        return;
-    }
+        if (!avAsset) {
+            
+            [LLAViewUtil showAlter:self.view withText:@"无效的视频"];
+            return;
+        }
+        
+        LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:avAsset];
+        
+        [self.navigationController pushViewController:editVideo animated:YES];
+        
+    }];
     
-    LLAEditVideoViewController *editVideo = [[LLAEditVideoViewController alloc] initWithAVAsset:asset];
     
-    [self.navigationController pushViewController:editVideo animated:YES];
+    
     
 }
 
