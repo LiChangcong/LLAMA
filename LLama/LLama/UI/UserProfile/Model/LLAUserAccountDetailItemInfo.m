@@ -29,7 +29,7 @@
     
     return [MTLValueTransformer transformerUsingForwardBlock:^id(NSNumber *value, BOOL *success, NSError *__autoreleasing *error) {
         
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[value longLongValue]];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[value longLongValue]/1000];
         NSDateFormatter *dateFormator = [[NSDateFormatter alloc] init];
         dateFormator.timeZone = [NSTimeZone localTimeZone];
         dateFormator.dateFormat = @"MM/dd/yyyy";

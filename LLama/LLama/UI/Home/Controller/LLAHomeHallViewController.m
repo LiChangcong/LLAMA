@@ -29,6 +29,7 @@
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 #import "LLAUploadVideoShareManager.h"
+#import "LLAVideoPlayUtil.h"
 
 @interface LLAHomeHallViewController()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LLAHallVideoInfoCellDelegate,LLAUploadVideoProgressViewDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
 {
@@ -78,13 +79,8 @@
     [super viewDidAppear:animated];
     
     //play
-    if (delegate && [delegate respondsToSelector:@selector(shouldPlayVideo)]) {
-        if ([delegate shouldPlayVideo]) {
-            [self startPlayVideo];
-        }
-    }else {
-        [self startPlayVideo];
-    }
+    
+    [self startPlayVideo];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -316,22 +312,7 @@
     
     //stop those which is out of screen
     
-    for (UITableViewCell* tempCell in playerCellsArray) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            
-            CGRect playerFrame = tc.videoPlayerView.bounds;
-            
-            CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
-            if (subViewFrame.origin.y >= scrollView.contentOffset.y+scrollView.bounds.size.height || scrollView.contentOffset.y>subViewFrame.origin.y+subViewFrame.size.height) {
-                
-                [tc.videoPlayerView stopVideo];
-            }
-            
-        }
-    }
-
+    [LLAVideoPlayUtil stopOutBoundsPlayingVideoInCells:playerCellsArray inScrollView:scrollView];
     
 }
 
@@ -339,55 +320,7 @@
     
     //get the index
     
-    
-    id <LLACellPlayVideoProtocol> playCell = nil;
-    
-    
-    CGFloat maxHeight = 0;
-    
-    for (UITableViewCell* tempCell in playerCellsArray) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            
-            CGRect playerFrame = tc.videoPlayerView.bounds;
-            
-            CGRect subViewFrame = [tc convertRect:playerFrame toView:scrollView];
-            
-            CGFloat heightInWindow =  0;
-            
-            if (subViewFrame.origin.y < scrollView.contentOffset.y) {
-                heightInWindow = subViewFrame.origin.y+subViewFrame.size.height-scrollView.contentOffset.y;
-            }else if(subViewFrame.origin.y+subViewFrame.size.height > scrollView.contentOffset.y+scrollView.bounds.size.height) {
-                heightInWindow = scrollView.contentOffset.y+scrollView.bounds.size.height-subViewFrame.origin.y;
-                
-            }else {
-                heightInWindow = subViewFrame.size.height;
-            }
-            
-            
-            if (heightInWindow >= maxHeight) {
-                maxHeight = heightInWindow;
-                playCell = tc;
-            }
-        }
-    }
-    
-    //
-    for (UITableViewCell* tempCell in playerCellsArray) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            
-            if (tc == playCell) {
-                playCell.videoPlayerView.playingVideoInfo = playCell.shouldPlayVideoInfo;
-                [playCell.videoPlayerView playVideo];
-            }else {
-                [tc.videoPlayerView stopVideo];
-            }
-            
-        }
-    }
+    [LLAVideoPlayUtil playShouldPlayVideoInCells:playerCellsArray inScrollView:scrollView];
     
 }
 
@@ -524,17 +457,7 @@
 
 - (void) playerViewTappToPlay:(LLAVideoPlayerView *) playerView {
     //
-
-    for (UITableViewCell* tempCell in playerCellsArray) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            if (playerView != tc.videoPlayerView) {
-                [tc.videoPlayerView stopVideo];
-            }
-        }
-    }
-
+    [LLAVideoPlayUtil handlePlayerViewTappToPlay:playerView inCell:playerCellsArray inScrollView:dataTableView];
 }
 
 - (void) playerViewTappToPause:(LLAVideoPlayerView *)playerView {
@@ -560,20 +483,22 @@
 
 - (void) stopAllVideo {
     
-    
-    for (UITableViewCell* tempCell in playerCellsArray) {
-        if ([[tempCell class] conformsToProtocol:@protocol(LLACellPlayVideoProtocol)]) {
-            
-            UITableViewCell<LLACellPlayVideoProtocol> *tc = (UITableViewCell<LLACellPlayVideoProtocol> *)tempCell;
-            [tc.videoPlayerView stopVideo];
-        }
-    }
-    
+    [LLAVideoPlayUtil stopAllVideosInCells:playerCellsArray inScrollView:dataTableView];
 }
 
 - (void) startPlayVideo {
     
-    [self scrollViewDidEndDecelerating:dataTableView];
+    if (delegate && [delegate respondsToSelector:@selector(shouldPlayVideo)]) {
+        if ([delegate shouldPlayVideo]) {
+            
+            if (playerCellsArray.count < 1 && mainInfo.dataList.count > 0) {
+                [dataTableView visibleCells];
+            }
+            
+            [LLAVideoPlayUtil playShouldPlayVideoInCells:playerCellsArray inScrollView:dataTableView];
+        }
+    }
+    
 }
 
 @end

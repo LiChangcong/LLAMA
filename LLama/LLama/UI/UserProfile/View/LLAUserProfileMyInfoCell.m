@@ -339,6 +339,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
     
     currentUser = userInfo;
     
+    videoPlayerView.delegate = delegate;
     if (!userInfo.userVideo) {
 
         //no video
@@ -364,8 +365,8 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         [videoCoverImageView setImageWithURL:[NSURL URLWithString:currentUser.userVideo.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
         
         shouldPlayVideoInfo = currentUser.userVideo;
-        
-        [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
+        videoPlayerView.playingVideoInfo = currentUser.userVideo;
+        //[videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
         
     }
     

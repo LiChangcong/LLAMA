@@ -47,6 +47,8 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
     LLALoadingView *HUD;
     
     NSMutableArray<LLAPickImageItemInfo *> *dataArray;
+    
+    NSIndexPath *selectedIndexPath;
 }
 
 @property (nonatomic, strong) LLAPickImageItemInfo *currentPickImgItemInfo;
@@ -311,8 +313,6 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
 - (void)LLAImagePickerCollectionCellDidClickSelectedButton:(LLAImagePickerCollectionCell *)imagePickerCollectionCell andIndexPath:(NSIndexPath *)indexPath andButtonIsSelected:(BOOL)isSelected
 {
 
-    static NSIndexPath *selectedIndexPath = nil;
-    
     LLAPickImageItemInfo *itemInfo = dataArray[indexPath.row - 1];
     
     if (itemInfo == _currentPickImgItemInfo) {

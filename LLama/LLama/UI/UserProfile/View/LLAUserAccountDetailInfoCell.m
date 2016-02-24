@@ -202,7 +202,7 @@ static const CGFloat moneyToRight = 10;
     
     NSString *symbolString = nil;
     
-    if (currentInfo.transactionType == LLAUserAccounTransactionType_BalanceIncom) {
+    if (currentInfo.transactionType == LLAUserAccounTransactionType_BalanceIncom || currentInfo.transactionType == LLAUserAccounTransactionType_BalanceRefund) {
         symbolString = @"+";
     }else {
         symbolString = @"-";

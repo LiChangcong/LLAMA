@@ -335,7 +335,7 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
         [LLAViewUtil showAlter:self.view withText:@"片长不能小于5秒"];
         
         return;
-    }else if (CMTimeGetSeconds(durationTime) > 60) {
+    }else if ((int)CMTimeGetSeconds(durationTime) > 60.0) {
         
         [LLAViewUtil showAlter:self.view withText:@"片长不能大于60秒"];
         
@@ -390,10 +390,11 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
     //sdexport
     SDAVAssetExportSession *encoder = [[SDAVAssetExportSession alloc] initWithAsset:editAsset];
     encoder.outputFileType = AVFileTypeMPEG4;
-    encoder.outputURL = [SCRecorder sharedRecorder].session.outputUrl;
+    //encoder.outputURL = [SCRecorder sharedRecorder].session.outputUrl;
+    encoder.outputURL = [NSURL fileURLWithPath:[self generateOutPutVideoURL]];
     encoder.shouldOptimizeForNetworkUse = YES;
     encoder.timeRange = CMTimeRangeMake(startTime, durationTime);
-
+    NSLog(@"outputURL:%@",encoder.outputURL);
     encoder.videoSettings = @
     {
     AVVideoCodecKey: AVVideoCodecH264,
@@ -584,5 +585,18 @@ static NSString *playPasueButtonImageName_Highlight = @"playh";
 
 }
 
+- (NSString *) generateOutPutVideoURL {
+    
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSString *ourDocumentPath = [documentPaths objectAtIndex:0];
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    NSString *adVideoCachPath = [ourDocumentPath stringByAppendingPathComponent:@"tmp"];
+    if (![defaultManager fileExistsAtPath:adVideoCachPath]){
+        [defaultManager createDirectoryAtPath:adVideoCachPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return [adVideoCachPath stringByAppendingFormat:@"/%.0f.mp4",[NSDate timeIntervalSinceReferenceDate]];
+
+    
+}
 
 @end

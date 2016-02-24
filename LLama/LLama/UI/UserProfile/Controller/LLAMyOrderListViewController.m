@@ -52,6 +52,12 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     LLACollectionView *dataCollectionView;
     
     LLALoadingView *HUD;
+    
+    //
+    NSTimer *countTimer;
+    
+    //
+    NSDate *disapperDate;
 }
 
 @end
@@ -59,6 +65,10 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
 @implementation LLAMyOrderListViewController
 
 #pragma mark - Life Cycle
+
+- (void) dealloc {
+    [self destroyTimer];
+}
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -76,6 +86,30 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     
     [HUD show:YES];
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (disapperDate) {
+        NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:disapperDate];
+        if (interval > 0) {
+            [self doTimerWithInterval:interval];
+        }
+        
+        disapperDate = nil;
+    }
+    
+    [self startTimer];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    disapperDate = [NSDate date];
+    
+    [self destroyTimer];
+}
+
 
 #pragma mark - Init
 
@@ -245,10 +279,12 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
         LLAScriptHallMainInfo *tempInfo = [LLAScriptHallMainInfo parseJsonWithDic:responseObject];
         if (tempInfo){
             mainInfo = tempInfo;
-            [dataCollectionView reloadData];
         }
         
         dataCollectionView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
+        [dataCollectionView reloadData];
+        
+        [self startTimer];
 
         
     } exception:^(NSInteger code, NSString *errorMessage) {
@@ -298,6 +334,7 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
             mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
             
             [dataCollectionView reloadData];
+            [self startTimer];
         }else {
             //[LLAViewUtil showAlter:self.view withText:LLA_LOAD_DATA_NO_MORE_TIPS];
             [dataCollectionView.infiniteScrollingView setInfiniteNoMoreLoading];
@@ -394,5 +431,61 @@ typedef NS_ENUM(NSInteger,MyOrderListType) {
     
     [self.navigationController pushViewController:userProfile animated:YES];
 }
+
+#pragma mark - Timer
+
+- (void) startTimer {
+    
+    if (countTimer) {
+        [self destroyTimer];
+    }
+    
+    countTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(doTimer) userInfo:nil repeats:YES];
+}
+
+- (void) doTimer {
+    
+    [self doTimerWithInterval:1.0];
+}
+
+- (void) doTimerWithInterval:(NSTimeInterval ) interval {
+    BOOL shouldRefreshData = NO;
+    NSMutableArray *reloadIndexArray = [NSMutableArray array];
+    
+    for (int i=0;i<mainInfo.dataList.count;i++) {
+        
+        LLAScriptHallItemInfo *item = mainInfo.dataList[i];
+        
+        if (item.status == LLAScriptStatus_PayVertified) {
+            if (item.timeOutInterval == 0) {
+                shouldRefreshData = YES;
+            }else {
+                item.timeOutInterval = MAX(0, item.timeOutInterval-interval);
+                [reloadIndexArray addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            
+        }
+        
+    }
+    if (reloadIndexArray.count > 0) {
+        [dataCollectionView reloadItemsAtIndexPaths:reloadIndexArray];
+    }else {
+        [self destroyTimer];
+    }
+    
+    if (shouldRefreshData) {
+        [dataCollectionView triggerPullToRefresh];
+    }
+
+}
+
+- (void) destroyTimer {
+    
+    [countTimer invalidate];
+    countTimer = nil;
+    
+}
+
+
 
 @end

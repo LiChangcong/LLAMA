@@ -14,6 +14,9 @@
 //view
 #import "LLAHomeTitleView.h"
 
+static const NSInteger hallIndex = 0;
+static const NSInteger scriptHallIndex = 1;
+
 @interface LLAHomeViewController()<UIScrollViewDelegate,LLAHomeTitleViewDelegate,LLAHomeHallViewControllerDelegate>
 
 {
@@ -179,8 +182,8 @@
 
 // 点击了顶部标题view按钮跳到不同子控制器
 - (void) titleView:(LLAHomeTitleView *)titleView didSelectedIndex:(NSInteger)index {
-    [contentScrollView setContentOffset:CGPointMake(self.view.frame.size.width*index, contentScrollView.contentOffset.y) animated:YES];
     
+    [contentScrollView setContentOffset:CGPointMake(self.view.frame.size.width*index, contentScrollView.contentOffset.y) animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -194,12 +197,20 @@
     NSInteger selectedIndex = (NSInteger)((scrollView.contentOffset.x+scrollView.bounds.size.width/2) /scrollView.frame.size.width);
     
     [self handlePlayWithIndex:selectedIndex];
+   
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    NSInteger selectedIndex = (NSInteger)((scrollView.contentOffset.x+scrollView.bounds.size.width/2) /scrollView.frame.size.width);
+    
+    [self handlePlayWithIndex:selectedIndex];
 }
 
 #pragma mark - handle play stop
 
 - (void) handlePlayWithIndex:(NSInteger) index {
-    if (index == 0) {
+    if (index == hallIndex) {
         [hallController startPlayVideo];
     }else {
         [hallController stopAllVideo];
@@ -212,17 +223,17 @@
     
     NSInteger selectedIndex = (NSInteger)((contentScrollView.contentOffset.x+contentScrollView.bounds.size.width/2) /contentScrollView.frame.size.width);
     
-    return selectedIndex == 0;
+    return selectedIndex == hallIndex;
 }
 
 #pragma mark - Public Method
 
 - (void) showHallViewController {
-    [self titleView:titleView didSelectedIndex:0];
+    [self titleView:titleView didSelectedIndex:hallIndex];
 }
 
 - (void) showScriptHallViewController {
-    [self titleView:titleView didSelectedIndex:1];
+    [self titleView:titleView didSelectedIndex:scriptHallIndex];
 }
 
 

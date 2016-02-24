@@ -106,7 +106,11 @@
     selectedButton.selected = info.IsSelected;
     
     //load image from asset
-    [[LLAPickImageManager shareManager] photoFromAsset:info.asset completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
+//    [[LLAPickImageManager shareManager] photoFromAsset:info.asset completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
+//        imageThumbView.image = resultImage;
+//    }];
+    
+    [[LLAPickImageManager shareManager] photoFromAsset:info.asset picWidth:[UIScreen mainScreen].bounds.size.width/3 completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
         imageThumbView.image = resultImage;
     }];
     

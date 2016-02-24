@@ -198,6 +198,8 @@
 		5CC696DA1C5CDEBF00E4BA89 /* AlipayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696D91C5CDEBF00E4BA89 /* AlipayOrder.m */; };
 		5CC696DD1C5CE4C200E4BA89 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DB1C5CE4C200E4BA89 /* libcrypto.a */; };
 		5CC696DE1C5CE4C200E4BA89 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC696DC1C5CE4C200E4BA89 /* libssl.a */; };
+		5CD6723E1C7C021000DEEA59 /* LLAVideoPlayUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */; };
+		5CD672411C7C2F2E00DEEA59 /* LLAExceptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */; };
 		5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */; };
 		5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD977F1C40E56D00557CB7 /* LLAUploadFileUtil.m */; };
 		5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD97821C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m */; };
@@ -871,6 +873,10 @@
 		5CC696D91C5CDEBF00E4BA89 /* AlipayOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayOrder.m; sourceTree = "<group>"; };
 		5CC696DB1C5CE4C200E4BA89 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		5CC696DC1C5CE4C200E4BA89 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		5CD6723C1C7C021000DEEA59 /* LLAVideoPlayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPlayUtil.h; sourceTree = "<group>"; };
+		5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPlayUtil.m; sourceTree = "<group>"; };
+		5CD6723F1C7C2F2E00DEEA59 /* LLAExceptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAExceptionManager.h; sourceTree = "<group>"; };
+		5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAExceptionManager.m; sourceTree = "<group>"; };
 		5CDCA5CC1C48B88A005A96D2 /* LLASubCommentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASubCommentProtocol.h; sourceTree = "<group>"; };
 		5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoadingView.h; sourceTree = "<group>"; };
 		5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoadingView.m; sourceTree = "<group>"; };
@@ -1902,6 +1908,15 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5CD6723C1C7C021000DEEA59 /* LLAVideoPlayUtil.h */,
+				5CD6723D1C7C021000DEEA59 /* LLAVideoPlayUtil.m */,
+			);
+			path = VideoPlayUtil;
+			sourceTree = "<group>";
+		};
 		5CDD977D1C40E53100557CB7 /* UploadFileUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -2233,6 +2248,8 @@
 				A3D8E8011C3FA6D600B27898 /* LLAViewUtil.m */,
 				5CDD977A1C40E3E700557CB7 /* LLALoadingView.h */,
 				5CDD977B1C40E3E700557CB7 /* LLALoadingView.m */,
+				5CD6723F1C7C2F2E00DEEA59 /* LLAExceptionManager.h */,
+				5CD672401C7C2F2E00DEEA59 /* LLAExceptionManager.m */,
 			);
 			path = ViewUtil;
 			sourceTree = "<group>";
@@ -2393,6 +2410,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */,
 				5C6D26991C75D110003CD77A /* JumpUtil */,
 				5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */,
 				5CA194661C4F886C00A0B5B7 /* VideoCacheUtil */,
@@ -3303,6 +3321,7 @@
 				5CBF9A9F1C532A30001A4EA0 /* LLAUserProfileSettingController.m in Sources */,
 				5C6D7A391C58B73200119A3A /* SCFilter+UIImage.m in Sources */,
 				5CE162F01C50AB86006B69DC /* LLAUserProfileNavigationBar.m in Sources */,
+				5CD672411C7C2F2E00DEEA59 /* LLAExceptionManager.m in Sources */,
 				5CC324EF1C5B836F00413E25 /* LLAPayUserPayTypeCell.m in Sources */,
 				5CBF9AAB1C535942001A4EA0 /* LLAChangeRootControllerUtil.m in Sources */,
 				5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */,
@@ -3470,6 +3489,7 @@
 				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
 				7EB0BA5B1C5F384B00D4A43C /* LLALoveViewController.m in Sources */,
+				5CD6723E1C7C021000DEEA59 /* LLAVideoPlayUtil.m in Sources */,
 				5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */,
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
@@ -3530,8 +3550,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3553,7 +3573,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5453b506-18b1-45b5-8d1f-848d6d842ffb";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3575,8 +3595,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3591,7 +3611,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5453b506-18b1-45b5-8d1f-848d6d842ffb";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3676,8 +3696,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -272,7 +272,7 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
 - (void) updateCellWithUserInfo:(LLAUser *)userInfo tableWidth:(CGFloat)tableWidth {
     
     currentUser = userInfo;
-    
+    videoPlayerView.delegate = delegate;
     if (!userInfo.userVideo) {
         
         //has video
@@ -296,7 +296,9 @@ static NSString *const uploadViewButtonImageName_Highlight = @"userProfile_NewVi
         
         shouldPlayVideoInfo = currentUser.userVideo;
         
-        [videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
+        videoPlayerView.playingVideoInfo = currentUser.userVideo;
+        
+        //[videoPlayerView updateCoverImageWithVideoInfo:shouldPlayVideoInfo];
         
     }
     

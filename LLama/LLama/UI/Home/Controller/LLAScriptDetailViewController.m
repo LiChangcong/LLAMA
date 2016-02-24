@@ -60,6 +60,13 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     LLAScriptHallItemInfo *scriptInfo;
     
     NSString *scriptIDString;
+    
+    //
+    NSTimer *countTimer;
+    
+    //disapper date
+    
+    NSDate *disapperDate;
 }
 
 @end
@@ -74,6 +81,10 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
         scriptIDString = [idString copy];
     }
     return self;
+}
+
+- (void) dealloc {
+    [self destroyTimer];
 }
 
 - (void) viewDidLoad {
@@ -92,6 +103,29 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     [self loadData];
     // 显示加载菊花
     [HUD show:YES];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (disapperDate) {
+        NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:disapperDate];
+        if (interval > 0) {
+            [self doTimerWithInterval:interval];
+        }
+        
+        disapperDate = nil;
+    }
+    
+    [self startTimer];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    disapperDate = [NSDate date];
+    
+    [self destroyTimer];
 }
 
 #pragma mark - Init
@@ -239,6 +273,8 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
             
             [dataCollectionView reloadData];
         }
+        
+        [self startTimer];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -643,6 +679,45 @@ static const NSInteger chooseActorInfoSectionIndex = 1;
     return nil;
 }
 
+- (void) startTimer {
+    if (countTimer) {
+        [self destroyTimer];
+    }
+    
+    countTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(doTimer) userInfo:nil repeats:YES];
+
+}
+
+- (void) doTimer {
+    [self doTimerWithInterval:1.0];
+}
+
+- (void) doTimerWithInterval:(NSTimeInterval ) interval {
+    
+    if (interval <=0) {
+        return;
+    }
+    
+    if (scriptInfo.status == LLAScriptStatus_PayVertified) {
+        
+        if (scriptInfo.timeOutInterval == 0) {
+            [self destroyTimer];
+            [dataCollectionView triggerPullToRefresh];
+        }else {
+            scriptInfo.timeOutInterval =MAX(0,scriptInfo.timeOutInterval - interval);
+            [dataCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:mainInfoSectionIndex]]];
+        }
+        
+    }else {
+        [self destroyTimer];
+    }
+
+}
+
+- (void) destroyTimer {
+    [countTimer invalidate];
+    countTimer = nil;
+}
 
 #pragma mark - LLAPayUserViewControllerDelegate
 

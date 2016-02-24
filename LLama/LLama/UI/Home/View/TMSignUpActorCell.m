@@ -21,7 +21,6 @@
     return self;
 }
 
-#warning 这里打印的屏幕宽度始终是320，所以排布出来始终有问题，该怎么解决。
 - (void)createSquares
 {
 

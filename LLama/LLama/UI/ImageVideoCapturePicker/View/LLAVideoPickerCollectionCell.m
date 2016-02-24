@@ -9,6 +9,7 @@
 #import "LLAVideoPickerCollectionCell.h"
 
 #import "LLAPickVideoItemInfo.h"
+#import "LLAPickImageManager.h"
 
 static NSString *const cameraImageName = @"VideoSendIcon";
 
@@ -134,7 +135,10 @@ static const CGFloat timeLabelToBottom = 5;
 
 - (void) updateCellWithInfo:(LLAPickVideoItemInfo *)info {
     //
-    videoThumbView.image = info.thumbImage;
+    //videoThumbView.image = info.thumbImage;
+    [[LLAPickImageManager shareManager] photoFromAsset:info.asset picWidth:[UIScreen mainScreen].bounds.size.width/3 completion:^(UIImage *resultImage, NSDictionary *info, BOOL isDegraded) {
+            videoThumbView.image = resultImage;
+    }];
     
     //format the time
     
