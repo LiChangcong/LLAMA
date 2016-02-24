@@ -277,7 +277,13 @@
     
     if (scriptVideoTaskArray.count > 0) {
         //
+        
+        LLAUploadVideoTaskInfo *task = [scriptVideoTaskArray firstObject];
+        if (task.videoPathURL)
+            [[NSFileManager defaultManager] removeItemAtURL:task.videoPathURL error:nil];
+        
         [scriptVideoTaskArray removeObjectAtIndex:0];
+        
     }
     
     [self doScriptUploadTask];
@@ -288,6 +294,11 @@
     isUserVideoUploading = NO;
     
     if (userVideoTaskArray.count > 0) {
+        
+        LLAUploadVideoTaskInfo *task = [userVideoTaskArray firstObject];
+        if (task.videoPathURL)
+            [[NSFileManager defaultManager] removeItemAtURL:task.videoPathURL error:nil];
+        
         [userVideoTaskArray removeObjectAtIndex:0];
     }
     

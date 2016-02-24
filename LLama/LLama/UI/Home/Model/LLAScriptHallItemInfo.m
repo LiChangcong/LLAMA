@@ -75,9 +75,12 @@
         if ([self.directorInfo isEqual:me]) {
             self.currentRole = LLAUserRoleInScript_Director;
             
-        }else if ([self.partakeUsersArray containsObject:me] || [self.choosedUserIdString isEqualToString:me.userIdString]) {
+        }else if ([self.partakeUsersArray containsObject:me] && self.status == LLAScriptStatus_Normal) {
             self.currentRole = LLAUserRoleInScript_Actor;
-        }else {
+        }else if ([self.choosedUserIdString isEqualToString:me.userIdString]) {
+            self.currentRole = LLAUserRoleInScript_Actor;
+        }
+        else {
             self.currentRole = LLAUserRoleInScript_Passer;
         }
     }

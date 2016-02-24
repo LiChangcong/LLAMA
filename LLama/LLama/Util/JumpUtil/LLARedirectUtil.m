@@ -125,7 +125,7 @@ static const NSInteger userProfileIndex = 4;
         UINavigationController *navi = (UINavigationController *) controller;
         
         if (navi.viewControllers.count > 1)
-            [navi popToRootViewControllerAnimated:YES];
+            [navi popToRootViewControllerAnimated:NO];
     }
 }
 

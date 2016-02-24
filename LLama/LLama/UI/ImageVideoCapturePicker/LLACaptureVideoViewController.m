@@ -417,14 +417,17 @@ static NSString *const recordFoucusImageName = @"";
                 if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
                     videoEditButton.enabled = YES;
                     videoEditButton.selected = YES;
-                    
-                    chooseVideoButton.hidden = YES;
+                    videoEditButton.hidden = NO;
+                    //chooseVideoButton.hidden = YES;
                 }else {
-                    chooseVideoButton.hidden = NO;
+                    //chooseVideoButton.hidden = NO;
                     videoEditButton.enabled = NO;
-                    videoEditButton.hidden = YES;
+                    videoEditButton.hidden = NO;
                 }
                 
+                //
+                chooseVideoButton.hidden = CMTimeGetSeconds(shareRecorder.session.duration) > 0;
+                videoEditButton.hidden = !(CMTimeGetSeconds(shareRecorder.session.duration) > 0);
             }
         }
     }];
@@ -457,6 +460,8 @@ static NSString *const recordFoucusImageName = @"";
     videoEditButton.hidden = NO;
     chooseVideoButton.hidden = YES;
     
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
 }
 
 - (void) recordTouchUp:(UIButton *) sender {
@@ -465,6 +470,8 @@ static NSString *const recordFoucusImageName = @"";
     
     [recordProgressView startBlinkIndicator];
     
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    
     //
     [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Normal] forState:UIControlStateNormal];
     
@@ -472,16 +479,33 @@ static NSString *const recordFoucusImageName = @"";
     [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Highlight] forState:UIControlStateSelected];
     
     //
+    
+    
+    
+//    if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
+//        videoEditButton.enabled = YES;
+//        videoEditButton.selected = YES;
+//        
+//        chooseVideoButton.hidden = YES;
+//    }else {
+//        chooseVideoButton.hidden = NO;
+//        videoEditButton.enabled = NO;
+//        videoEditButton.hidden = YES;
+//    }
+    
     if (CMTimeGetSeconds(shareRecorder.session.duration) >= minVideoSecond) {
         videoEditButton.enabled = YES;
         videoEditButton.selected = YES;
+        videoEditButton.hidden = NO;
         
         chooseVideoButton.hidden = YES;
     }else {
-        chooseVideoButton.hidden = NO;
+        chooseVideoButton.hidden = YES;
+        
         videoEditButton.enabled = NO;
-        videoEditButton.hidden = YES;
+        videoEditButton.hidden = NO;
     }
+
 
     
 }
@@ -493,6 +517,8 @@ static NSString *const recordFoucusImageName = @"";
         //[self recordClicked:pressToRecordButton];
         pressToRecordButton.selected = NO;
     [recordProgressView startBlinkIndicator];
+    
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     
     //
     [pressToRecordButton setImage:[UIImage llaImageWithName:recordButtonImageName_Normal] forState:UIControlStateNormal];

@@ -3508,8 +3508,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3531,7 +3531,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5453b506-18b1-45b5-8d1f-848d6d842ffb";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3553,8 +3553,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3569,7 +3569,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5453b506-18b1-45b5-8d1f-848d6d842ffb";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3654,8 +3654,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Heihei Technology (Chengdu) Co., Ltd. (FQ6KWM8G2Y)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

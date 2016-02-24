@@ -20,8 +20,8 @@
 static NSString *const loveVideoImageName_Normal = @"support";
 static NSString *const loveVideoImageName_Highlight = @"supportH";
 
-static NSString *const commentVideoImageName_Normal = @"message";
-static NSString *const commentVideoImageName_Highlight = @"messageH";
+static NSString *const commentVideoImageName_Normal = @"commentVideo_Normal";
+static NSString *const commentVideoImageName_Highlight = @"commentVideo_Highlight";
 
 static NSString *const shareVideoButtonImageName_Normal = @"share";
 static NSString *const shareVideoButtonImageName_Highlight = @"shareH";
