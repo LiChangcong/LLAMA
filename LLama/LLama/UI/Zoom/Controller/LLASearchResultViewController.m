@@ -46,6 +46,8 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     LLAZoomCollectionView *dataCollectionView;
     
     UIButton *shadeButton;
+    
+
 }
 @end
 
@@ -67,8 +69,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 //    [backButton sizeToFit];
 //    [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-//        self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.hidesBackButton = YES;
+        self.navigationItem.leftBarButtonItem = nil;
 
     
 }
@@ -115,10 +116,17 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     shadeButton.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     shadeButton.backgroundColor = [UIColor lightGrayColor];
     shadeButton.alpha = 0.1;
-    //    [shadeButton addTarget:self action:@selector(searchBarCancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [shadeButton addTarget:self action:@selector(shadeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     shadeButton.hidden = YES;
     [self.view addSubview:shadeButton];
 
+}
+
+- (void)shadeButtonClicked
+{
+//    [self searchBarCancelButtonClicked:searchResultBar];
+    [searchResultBar resignFirstResponder];
+    shadeButton.hidden = YES;
 }
 
 - (void)initSubConstraints
@@ -133,18 +141,26 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 
 #pragma mark - 点击了搜索bar的取消按钮
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    shadeButton.hidden = NO;
+    
+    [searchBar setShowsCancelButton:YES animated:NO];
+}
+
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
 
     //
     
-    [self.navigationController popViewControllerAnimated:YES];
     searchResultBar.text = @"";
     //    searchBar.showsCancelButton = NO;
     [searchResultBar setShowsCancelButton:NO animated:YES];
     [searchResultBar resignFirstResponder];
 //    _isFiltered = FALSE;
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 
@@ -206,13 +222,13 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
             
             LLAHotVideosHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:hotVideosHeaderIden forIndexPath:indexPath];
             //            header.headerText = @"热门用户";
-            [header updateHeaderText:@"热门用户"];
+            [header updateHeaderText:@"相关用户"];
             return header;
         } else {
             // 热门视频header
             LLAHotVideosHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:hotVideosHeaderIden forIndexPath:indexPath];
             //            header.headerText = @"热门视频";
-            [header updateHeaderText:@"热门视频"];
+            [header updateHeaderText:@"相关视频"];
             return header;
         }
     }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
@@ -292,5 +308,21 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 {
     NSLog(@"点击了返回");
 }
+
+
+
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+//{
+//    
+//    //
+//    shadeButton.hidden = YES;
+//    
+//    searchBar.text = @"";
+//    //    searchBar.showsCancelButton = NO;
+//    [searchBar setShowsCancelButton:NO animated:YES];
+//    [searchBar resignFirstResponder];
+//    _isFiltered = FALSE;
+//    
+//}
 
 @end

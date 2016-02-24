@@ -118,11 +118,16 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     shadeButton.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     shadeButton.backgroundColor = [UIColor lightGrayColor];
     shadeButton.alpha = 0.1;
-//    [shadeButton addTarget:self action:@selector(searchBarCancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [shadeButton addTarget:self action:@selector(shadeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     shadeButton.hidden = YES;
     [self.view addSubview:shadeButton];
 
 
+}
+
+- (void)shadeButtonClicked
+{
+    [self searchBarCancelButtonClicked:headSearchBar];
 }
 
 // 设置约束
@@ -136,13 +141,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 
 
 #pragma mark - UISearchBarDelegate
-
-
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
-}
 
 
 #pragma mark - UICollectionViewDataSource
@@ -243,28 +241,15 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
 
-    //    TMZoomController *zoom = [[TMZoomController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:zoom];
-    
-
-//    headSearchBar.text = @"";
-    [headSearchBar resignFirstResponder];
-//    //    [self.view endEditing:YES];
-//    [searchBar resignFirstResponder];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-//        LLAHotUsersViewController *hot =[[LLAHotUsersViewController alloc] init];
-//        [self.navigationController pushViewController:hot animated:YES];
-        
-        shadeButton.hidden = YES;
 
         LLASearchResultViewController *searchResult = [[LLASearchResultViewController alloc] init];
         searchResult.searchResultText = headSearchBar.text;
         [self.navigationController pushViewController:searchResult animated:YES];
 
-    });
-    
+    shadeButton.hidden = YES;
+    headSearchBar.text = @"";
+    [headSearchBar resignFirstResponder];
+
     
 }
 
