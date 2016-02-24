@@ -22,13 +22,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     //set back item
     if (self.navigationController.viewControllers.count > 1){
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem barItemWithImage:[UIImage llaImageWithName:@"back"] highlightedImage:nil target:self action:@selector(back)];
-        self.navigationItem.hidesBackButton = YES;
+        //self.navigationItem.hidesBackButton = YES;
+        
     }
+    
+    
+    
+    [self.navigationItem setHidesBackButton:YES];
+//    
+//    for (UIView *view in self.navigationController.navigationBar.subviews){
+//        NSString *name = [NSString stringWithFormat:@"%@",view.class];
+//        if ([name isEqualToString:@"UINavigationItemButtonView"] || [name isEqualToString:@"_UINavigationBarBackIndicatorView"]) {
+//            [view setHidden:YES];
+//            
+//        }
+//    }
 
     
+    
+
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
