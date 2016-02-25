@@ -256,6 +256,9 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */; };
+		7E21E7C81C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */; };
+		7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */; };
 		7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */; };
 		7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */; };
 		7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */; };
@@ -995,6 +998,12 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsViewController.h; sourceTree = "<group>"; };
+		7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsViewController.m; sourceTree = "<group>"; };
+		7E21E7C61C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersSearchResultsCell.h; sourceTree = "<group>"; };
+		7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotUsersSearchResultsCell.m; sourceTree = "<group>"; };
+		7E21E7C91C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersSearchResultsHeader.h; sourceTree = "<group>"; };
+		7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotUsersSearchResultsHeader.m; sourceTree = "<group>"; };
 		7E3376821C72E79F00CA6E26 /* LLAPickImageItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageItemInfo.h; sourceTree = "<group>"; };
 		7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageItemInfo.m; sourceTree = "<group>"; };
 		7E3376851C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAImagePickerCollectionCell.h; sourceTree = "<group>"; };
@@ -2157,6 +2166,10 @@
 				7EB30C351C7D538400B993F6 /* LLAHotUsersButton.m */,
 				7ECD6E431C7D8D1800F2D939 /* LLASearchResultsVideoCell.h */,
 				7ECD6E441C7D8D1800F2D939 /* LLASearchResultsVideoCell.m */,
+				7E21E7C61C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.h */,
+				7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */,
+				7E21E7C91C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.h */,
+				7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2879,6 +2892,8 @@
 				7E64DF3B1C7C620100F88093 /* LLAHotUsersViewController.m */,
 				7ECD6E401C7D7F3500F2D939 /* LLASearchResultViewController.h */,
 				7ECD6E411C7D7F3500F2D939 /* LLASearchResultViewController.m */,
+				7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */,
+				7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3194,6 +3209,7 @@
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
 				5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */,
 				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
+				7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */,
 				7E64DEEB1C7C038200F88093 /* LLAHotUsersCell.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
@@ -3331,6 +3347,7 @@
 				A3DEDE931C3CAEC7009F3D37 /* YZTableView.m in Sources */,
 				A3DEDD901C3CAE38009F3D37 /* TMHTTPSessionManager.m in Sources */,
 				7EB0BA611C5F38E300D4A43C /* LLAILoveWhoViewController.m in Sources */,
+				7E21E7C81C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m in Sources */,
 				A3DEDDA21C3CAE38009F3D37 /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				A3DEDE861C3CAEC7009F3D37 /* TMPublishView.m in Sources */,
 				A3D8E7FB1C3F9D4B00B27898 /* UIButton+LLABKColorWithState.m in Sources */,
@@ -3494,6 +3511,7 @@
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,
+				7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */,
 				A3E2D90E1C3E1845005885D4 /* LLAUser.m in Sources */,
 				A3DEDE631C3CAEC6009F3D37 /* TMHallTableViewController.m in Sources */,
 				5CC324E31C5B694300413E25 /* LLAVideoPickerCollectionCell.m in Sources */,

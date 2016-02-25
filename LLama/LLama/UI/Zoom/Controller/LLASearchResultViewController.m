@@ -21,10 +21,6 @@
 #import "LLASearchResultViewController.h"
 
 
-static const CGFloat hotVideoCellsHorSpace = 6;
-static const CGFloat hotVideoCellsVerSpace = 6;
-
-
 static const CGFloat zoomCellsHorSpace = 6;
 static const CGFloat zoomCellsVerSpace = 6;
 
@@ -64,12 +60,8 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     [self initSubViews];
     [self initSubConstraints];
 
-//    UIButton *backButton = [[UIButton alloc] init];
-//    [backButton setTitle:@"返回" forState:UIControlStateNormal];
-//    [backButton sizeToFit];
-//    [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem = nil;
+    
     
 }
 
@@ -101,6 +93,8 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     dataCollectionView.delegate = self;
     dataCollectionView.bounces = YES;
     dataCollectionView.backgroundColor = [UIColor colorWithHex:0x1e1d28];
+    dataCollectionView.showsHorizontalScrollIndicator = NO;
+    dataCollectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:dataCollectionView];
     
     
@@ -199,8 +193,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         return hotUsersCell;
         
     }else {
-//        LLAHotVideosCell *hotVideosCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:hotVideosCellIden forIndexPath:indexPath];
-        //        hotVideos.delegate = self;
+
         
         LLASearchResultsVideoCell *searchResultsVideoCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:searchResultsVideoCellIden forIndexPath:indexPath];
         
@@ -248,9 +241,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         
     }else {
         
-//        CGFloat itemWidth = (collectionView.frame.size.width - 3*hotVideoCellsHorSpace)/2;
         
-//        CGFloat itemHeight = [LLAHotVideosCell calculateHeightWitthUserInfo:nil maxWidth:itemWidth];
         CGFloat itemWidth = collectionView.frame.size.width;
         return CGSizeMake(itemWidth, itemWidth);
         
@@ -262,11 +253,9 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     
     if (section == hotUsersIndex) {
         
-//        return UIEdgeInsetsMake(0, hotVideoCellsHorSpace, 6, hotVideoCellsHorSpace);
         return UIEdgeInsetsZero;
     }else{
         
-//        return UIEdgeInsetsMake(0, hotVideoCellsHorSpace, 6, hotVideoCellsHorSpace);
         return UIEdgeInsetsZero;
 
     }
@@ -277,7 +266,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     
     if (section == hotUsersIndex) {
         
-        //        return CGSizeZero;
         return CGSizeMake(collectionView.frame.size.width, 31);
         
     }else {
@@ -293,35 +281,20 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     if (indexPath.section == hotUsersIndex) {
         
         // 热门用户
-        LLAHotUsersViewController *hotUsers = [[LLAHotUsersViewController alloc] init];
-        [self.navigationController pushViewController:hotUsers animated:YES];
+        LLAHotUsersViewController *resultUsers = [[LLAHotUsersViewController alloc] init];
+        resultUsers.userType = UserTypeIsResultsUsers;
+        [self.navigationController pushViewController:resultUsers animated:YES];
         
     }else{
+        
+        NSLog(@"%d,%d",indexPath.section, indexPath.row);
         
     }
     
     
 }
 
-- (void)backButtonClick
-{
-    NSLog(@"点击了返回");
-}
 
 
-
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-//{
-//    
-//    //
-//    shadeButton.hidden = YES;
-//    
-//    searchBar.text = @"";
-//    //    searchBar.showsCancelButton = NO;
-//    [searchBar setShowsCancelButton:NO animated:YES];
-//    [searchBar resignFirstResponder];
-//    _isFiltered = FALSE;
-//    
-//}
 
 @end

@@ -21,12 +21,12 @@
 #import "LLAHotVideosHeader.h"
 #import "LLAHotUsersViewController.h"
 #import "LLASearchResultViewController.h"
+#import "LLASearchResultsViewController.h"
 
 static const CGFloat zoomCellsHorSpace = 6;
 static const CGFloat zoomCellsVerSpace = 6;
 
 static const CGFloat hotVideoCellsHorSpace = 6;
-static const CGFloat hotVideoCellsVerSpace = 6;
 
 
 
@@ -104,6 +104,8 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     dataCollectionView.delegate = self;
     dataCollectionView.bounces = YES;
     dataCollectionView.backgroundColor = [UIColor colorWithHex:0x1e1d28];
+    dataCollectionView.showsHorizontalScrollIndicator = NO;
+    dataCollectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:dataCollectionView];
     
     // 注册cell
@@ -242,10 +244,14 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 {
 
 
-        LLASearchResultViewController *searchResult = [[LLASearchResultViewController alloc] init];
-        searchResult.searchResultText = headSearchBar.text;
-        [self.navigationController pushViewController:searchResult animated:YES];
-
+//    LLASearchResultViewController *searchResult = [[LLASearchResultViewController alloc] init];
+//    searchResult.searchResultText = headSearchBar.text;
+//    [self.navigationController pushViewController:searchResult animated:YES];
+    
+    LLASearchResultsViewController *searchResults = [[LLASearchResultsViewController alloc] init];
+    searchResults.searchResultText = headSearchBar.text;
+    [self.navigationController pushViewController:searchResults animated:YES];
+    
     shadeButton.hidden = YES;
     headSearchBar.text = @"";
     [headSearchBar resignFirstResponder];
@@ -307,10 +313,13 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         
         // 热门用户
         LLAHotUsersViewController *hotUsers = [[LLAHotUsersViewController alloc] init];
+        hotUsers.userType = UserTypeIsHotUsers;
         [self.navigationController pushViewController:hotUsers animated:YES];
         
     }else{
     
+        NSLog(@"%d,%d",indexPath.section, indexPath.row);
+
     }
     
     

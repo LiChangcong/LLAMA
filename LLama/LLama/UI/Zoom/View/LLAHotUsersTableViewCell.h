@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class LLAHotUsersTableViewCell;
+
+@protocol LLAHotUsersTableViewCellDelegate <NSObject>
+
+- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell;
+
+@end
+
 @interface LLAHotUsersTableViewCell : UITableViewCell
 
+@property(nonatomic , weak) id<LLAHotUsersTableViewCellDelegate> delegate;
+
+- (void)updateCellWithInfo;
 @end

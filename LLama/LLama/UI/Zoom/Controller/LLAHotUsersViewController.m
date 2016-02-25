@@ -13,7 +13,7 @@
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface LLAHotUsersViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface LLAHotUsersViewController () <UITableViewDataSource, UITableViewDelegate, LLAHotUsersTableViewCellDelegate>
 {
     UITableView *dataTableView;
     
@@ -30,6 +30,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     self.view.backgroundColor = [UIColor colorWithHex:0x1e1d28];
     
+    if (self.userType == UserTypeIsHotUsers) {
+        self.navigationItem.title = @"热门用户";
+    }else {
+        self.navigationItem.title = @"相关用户";
+    }
     // 设置
 //    [self initVariables];
     [self initSubViews];
@@ -77,6 +82,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
     LLAHotUsersTableViewCell *cell = [dataTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     
     return cell;
 }
@@ -86,4 +92,19 @@ static NSString *cellIdentifier = @"cellIdentifier";
     return 51;
 }
 
+#pragma mark - tableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%d,%d", indexPath.section, indexPath.row);
+}
+
+#pragma mark - hotUsersTableViewCellDelegate
+
+- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell
+{
+    NSLog(@"点击了关注按钮");
+
+    // 发送请求给服务器，代表关注了该用户
+}
 @end

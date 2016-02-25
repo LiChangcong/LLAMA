@@ -97,6 +97,7 @@ static const CGFloat attentionButtonToRight = 10;
     attentionButton.translatesAutoresizingMaskIntoConstraints = NO;
     [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_unfollow"] forState:UIControlStateNormal];
     [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_follow"] forState:UIControlStateSelected];
+    [attentionButton addTarget:self action:@selector(attentionButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:attentionButton];
     
     // line
@@ -143,4 +144,23 @@ static const CGFloat attentionButtonToRight = 10;
     
 
 }
+
+- (void)attentionButtonClick
+{
+    
+    if ([self.delegate respondsToSelector:@selector(hotUsersTableViewCellDidSelectedAttentionButton:)]) {
+        
+        [self.delegate hotUsersTableViewCellDidSelectedAttentionButton:self];
+    }
+}
+- (void)updateCellWithInfo
+{
+    // 根据模型里面存储的状态是什么，根据状态来判断关注按钮显示什么，已关注/相互关注/点击关注；
+    
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
+}
+
+
 @end
