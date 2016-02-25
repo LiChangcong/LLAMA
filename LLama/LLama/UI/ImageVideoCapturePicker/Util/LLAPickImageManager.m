@@ -172,7 +172,7 @@
         
         PHImageManager *imageManager = [PHImageManager defaultManager];
         
-        [imageManager requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable avAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+        [imageManager requestAVAssetForVideo:pAsset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * _Nullable avAsset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion)

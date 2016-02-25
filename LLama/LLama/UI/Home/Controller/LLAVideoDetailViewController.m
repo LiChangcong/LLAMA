@@ -27,6 +27,11 @@
 //util
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
+#import "LLASocialShareUtil.h"
+
+//
+#import "UMSocialSnsService.h"
+#import "UMSocialSnsPlatformManager.h"
 
 @interface LLAVideoDetailViewController()<UITableViewDataSource,UITableViewDelegate,LLAHallVideoInfoCellDelegate,LLAVideoPlayerViewDelegate,LLAVideoCommentViewControllerDelegate>
 {
@@ -61,7 +66,6 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     
     [self initNavigationItems];
     [self initSubViews];
@@ -254,6 +258,8 @@
 }
 
 - (void) shareVideoWithVideoItemInfo:(LLAHallVideoItemInfo *)videoItemInfo {
+    
+    /**
     [MMPopupWindow sharedWindow].touchWildToHide = YES;
     
     MMSheetViewConfig *config = [MMSheetViewConfig globalConfig];
@@ -294,6 +300,24 @@
         
     }];
 
+    **/
+    
+    //test share
+    LLAShareRequestInfo *requestInfo = [LLAShareRequestInfo new];
+    requestInfo.urlString = @"/play/getShareInfo";
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:videoIdString forKey:@"playId"];
+    
+    requestInfo.paramsDic = params;
+    
+    [LLASocialShareUtil shareWithRequestInfo:requestInfo title:@"分享这个视频到" reportHandler:^(void) {
+        
+    } stateChangeHandler:^(LLASocialShareResponseState state, NSString *message, NSError *error) {
+        
+        NSLog(@"share Message:%@",message);
+    }];
+    
     
 }
 

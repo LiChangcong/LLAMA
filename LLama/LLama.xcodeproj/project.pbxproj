@@ -107,6 +107,12 @@
 		5C8275131C5726A500DD547F /* MMPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82750B1C5726A500DD547F /* MMPopupWindow.m */; };
 		5C8275141C5726A500DD547F /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82750D1C5726A500DD547F /* MMSheetView.m */; };
 		5C8275171C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275161C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m */; };
+		5C8547081C7E9A5C00CAA30C /* LLASocialShareUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */; };
+		5C85470B1C7E9B2C00CAA30C /* LLASocialShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */; };
+		5C85470E1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C85470D1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m */; };
+		5C8547111C7EA91100CAA30C /* LLASocialSharePlatformItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8547101C7EA91100CAA30C /* LLASocialSharePlatformItem.m */; };
+		5C8547151C7EE46F00CAA30C /* LLAShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8547141C7EE46F00CAA30C /* LLAShareInfo.m */; };
+		5C8547181C7EE5B700CAA30C /* LLAShareRequestInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8547171C7EE5B700CAA30C /* LLAShareRequestInfo.m */; };
 		5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8979341C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m */; };
 		5C9353B31C5DBE6300DD75DC /* LLAPayUserPaySuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353B21C5DBE6300DD75DC /* LLAPayUserPaySuccessView.m */; };
 		5C9353B71C5DC2C800DD75DC /* LLAUploadVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9353B61C5DC2C800DD75DC /* LLAUploadVideoProgressView.m */; };
@@ -664,6 +670,19 @@
 		5C82750D1C5726A500DD547F /* MMSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSheetView.m; sourceTree = "<group>"; };
 		5C8275151C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserWithdrawCashSuccessView.h; sourceTree = "<group>"; };
 		5C8275161C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserWithdrawCashSuccessView.m; sourceTree = "<group>"; };
+		5C8547061C7E9A5C00CAA30C /* LLASocialShareUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareUtil.h; sourceTree = "<group>"; };
+		5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialShareUtil.m; sourceTree = "<group>"; };
+		5C8547091C7E9B2C00CAA30C /* LLASocialShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareView.h; sourceTree = "<group>"; };
+		5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialShareView.m; sourceTree = "<group>"; };
+		5C85470C1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASoicalSharePlatformCell.h; sourceTree = "<group>"; };
+		5C85470D1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASoicalSharePlatformCell.m; sourceTree = "<group>"; };
+		5C85470F1C7EA91100CAA30C /* LLASocialSharePlatformItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialSharePlatformItem.h; sourceTree = "<group>"; };
+		5C8547101C7EA91100CAA30C /* LLASocialSharePlatformItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialSharePlatformItem.m; sourceTree = "<group>"; };
+		5C8547121C7EE3D200CAA30C /* LLASocialShareHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareHeader.h; sourceTree = "<group>"; };
+		5C8547131C7EE46F00CAA30C /* LLAShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAShareInfo.h; sourceTree = "<group>"; };
+		5C8547141C7EE46F00CAA30C /* LLAShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAShareInfo.m; sourceTree = "<group>"; };
+		5C8547161C7EE5B700CAA30C /* LLAShareRequestInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAShareRequestInfo.h; sourceTree = "<group>"; };
+		5C8547171C7EE5B700CAA30C /* LLAShareRequestInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAShareRequestInfo.m; sourceTree = "<group>"; };
 		5C8979331C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserAccountWithdrawCashInfoCell.h; sourceTree = "<group>"; };
 		5C8979341C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserAccountWithdrawCashInfoCell.m; sourceTree = "<group>"; };
 		5C9353B11C5DBE6300DD75DC /* LLAPayUserPaySuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPayUserPaySuccessView.h; sourceTree = "<group>"; };
@@ -1690,6 +1709,26 @@
 			path = MMPopupView;
 			sourceTree = "<group>";
 		};
+		5C8547051C7E9A4300CAA30C /* SocialShareUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C8547061C7E9A5C00CAA30C /* LLASocialShareUtil.h */,
+				5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */,
+				5C8547091C7E9B2C00CAA30C /* LLASocialShareView.h */,
+				5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */,
+				5C85470C1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.h */,
+				5C85470D1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m */,
+				5C85470F1C7EA91100CAA30C /* LLASocialSharePlatformItem.h */,
+				5C8547101C7EA91100CAA30C /* LLASocialSharePlatformItem.m */,
+				5C8547121C7EE3D200CAA30C /* LLASocialShareHeader.h */,
+				5C8547131C7EE46F00CAA30C /* LLAShareInfo.h */,
+				5C8547141C7EE46F00CAA30C /* LLAShareInfo.m */,
+				5C8547161C7EE5B700CAA30C /* LLAShareRequestInfo.h */,
+				5C8547171C7EE5B700CAA30C /* LLAShareRequestInfo.m */,
+			);
+			path = SocialShareUtil;
+			sourceTree = "<group>";
+		};
 		5C9353B41C5DC2A300DD75DC /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2410,6 +2449,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5C8547051C7E9A4300CAA30C /* SocialShareUtil */,
 				5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */,
 				5C6D26991C75D110003CD77A /* JumpUtil */,
 				5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */,
@@ -3262,6 +3302,7 @@
 				A3DEDE671C3CAEC7009F3D37 /* TMCommentCell.m in Sources */,
 				7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */,
 				5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */,
+				5C85470E1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m in Sources */,
 				5C6D26951C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m in Sources */,
 				A3DEDE9C1C3CAEC7009F3D37 /* TMAccountSecurityController.m in Sources */,
 				5C75343D1C7711920058F93C /* MWCaptionView.m in Sources */,
@@ -3274,6 +3315,7 @@
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
 				5CE0EB901C46424300C6BC79 /* TYImageStorage.m in Sources */,
 				A3DEDE901C3CAEC7009F3D37 /* YZPersonTableViewController.m in Sources */,
+				5C8547151C7EE46F00CAA30C /* LLAShareInfo.m in Sources */,
 				A3E2D9111C3E3865005885D4 /* LLABaseNavigationController.m in Sources */,
 				5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */,
 				5C6D7A351C58B73200119A3A /* SCAssetExportSession.m in Sources */,
@@ -3293,6 +3335,7 @@
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
 				A3DEDE8D1C3CAEC7009F3D37 /* TMProfileViewController.m in Sources */,
 				A3D8E7E11C3F5B7D00B27898 /* LLABaseViewController.m in Sources */,
+				5C85470B1C7E9B2C00CAA30C /* LLASocialShareView.m in Sources */,
 				A3D8E7F21C3F87F300B27898 /* UIBarButtonItem+Image.m in Sources */,
 				5C6D7A381C58B73200119A3A /* SCContext.m in Sources */,
 				5C6D7A3B1C58B73200119A3A /* SCFilter.m in Sources */,
@@ -3306,6 +3349,7 @@
 				5C8275171C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m in Sources */,
 				5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */,
 				A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */,
+				5C8547081C7E9A5C00CAA30C /* LLASocialShareUtil.m in Sources */,
 				5C6D7A3E1C58B73200119A3A /* SCImageView.m in Sources */,
 				A3DEDE621C3CAEC6009F3D37 /* TMDetailsTableViewController.m in Sources */,
 				5C75347C1C7714450058F93C /* PSTGridLayoutRow.m in Sources */,
@@ -3373,6 +3417,7 @@
 				5C6D7A4F1C58B73200119A3A /* SCWeakSelectorTarget.m in Sources */,
 				7E06066D1C5C90B50089329D /* LLAUserAgreementViewController.m in Sources */,
 				A3E2D9141C3E3B6D005885D4 /* LLAThirdSDKDelegate.m in Sources */,
+				5C8547181C7EE5B700CAA30C /* LLAShareRequestInfo.m in Sources */,
 				5CE646CD1C44E6C0004DA6D5 /* LLAHomeTitleView.m in Sources */,
 				5C75347A1C7714450058F93C /* PSTGridLayoutInfo.m in Sources */,
 				7E64DF391C7C565F00F88093 /* LLAHotUsersCollectionView.m in Sources */,
@@ -3395,6 +3440,7 @@
 				5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */,
 				5C7534431C7711920058F93C /* MWTapDetectingView.m in Sources */,
 				7E64DEE51C7BF79D00F88093 /* LLAZoomCollectionView.m in Sources */,
+				5C8547111C7EA91100CAA30C /* LLASocialSharePlatformItem.m in Sources */,
 				5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,
@@ -3681,6 +3727,7 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
+					"-w",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3753,6 +3800,7 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
+					"-w",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
