@@ -10,7 +10,6 @@
 
 @interface LLAHotVideosHeader : UICollectionReusableView
 
-//@property(nonatomic, weak) NSString *headerText;
 
 - (void) updateHeaderText:(NSString *)headerText;
 
