@@ -100,7 +100,6 @@ static NSString * const shareCancelDesc = @"分享取消";
         [platforms addObject:[LLASocialSharePlatformItem qqZoneItem]];
     }
     
-    
     return platforms;
 }
 

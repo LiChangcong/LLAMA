@@ -31,6 +31,7 @@
         
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
         [self addGestureRecognizer:gesture];
+        
     }
     return self;
 }

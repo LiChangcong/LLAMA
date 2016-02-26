@@ -99,6 +99,7 @@
 		5C7884681C5F79C0002EC705 /* LLAVideoCommentInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7884671C5F79C0002EC705 /* LLAVideoCommentInputViewController.m */; };
 		5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */; };
 		5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */; };
+		5C7E26651C8019E2008364E4 /* LLASocialShareHorPageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E26641C8019E2008364E4 /* LLASocialShareHorPageLayout.m */; };
 		5C82750E1C5726A500DD547F /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8274FF1C5726A500DD547F /* MMAlertView.m */; };
 		5C82750F1C5726A500DD547F /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275011C5726A500DD547F /* MMDateView.m */; };
 		5C8275101C5726A500DD547F /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275041C5726A500DD547F /* MMPopupCategory.m */; };
@@ -655,6 +656,8 @@
 		5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		5C78846C1C5F7A6E002EC705 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		5C7E26631C8019E2008364E4 /* LLASocialShareHorPageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareHorPageLayout.h; sourceTree = "<group>"; };
+		5C7E26641C8019E2008364E4 /* LLASocialShareHorPageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialShareHorPageLayout.m; sourceTree = "<group>"; };
 		5C8274FE1C5726A500DD547F /* MMAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlertView.h; sourceTree = "<group>"; };
 		5C8274FF1C5726A500DD547F /* MMAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlertView.m; sourceTree = "<group>"; };
 		5C8275001C5726A500DD547F /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = "<group>"; };
@@ -1721,15 +1724,17 @@
 		5C8547051C7E9A4300CAA30C /* SocialShareUtil */ = {
 			isa = PBXGroup;
 			children = (
+				5C8547121C7EE3D200CAA30C /* LLASocialShareHeader.h */,
 				5C8547061C7E9A5C00CAA30C /* LLASocialShareUtil.h */,
 				5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */,
 				5C8547091C7E9B2C00CAA30C /* LLASocialShareView.h */,
 				5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */,
+				5C7E26631C8019E2008364E4 /* LLASocialShareHorPageLayout.h */,
+				5C7E26641C8019E2008364E4 /* LLASocialShareHorPageLayout.m */,
 				5C85470C1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.h */,
 				5C85470D1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m */,
 				5C85470F1C7EA91100CAA30C /* LLASocialSharePlatformItem.h */,
 				5C8547101C7EA91100CAA30C /* LLASocialSharePlatformItem.m */,
-				5C8547121C7EE3D200CAA30C /* LLASocialShareHeader.h */,
 				5C8547131C7EE46F00CAA30C /* LLAShareInfo.h */,
 				5C8547141C7EE46F00CAA30C /* LLAShareInfo.m */,
 				5C8547161C7EE5B700CAA30C /* LLAShareRequestInfo.h */,
@@ -3406,6 +3411,7 @@
 				A3DEDE8F1C3CAEC7009F3D37 /* UIImage+Image.m in Sources */,
 				5C6D7A441C58B73200119A3A /* SCRecorder.m in Sources */,
 				7EA6FC2E1C576DFE00F78099 /* LLAAccountSecurityController.m in Sources */,
+				5C7E26651C8019E2008364E4 /* LLASocialShareHorPageLayout.m in Sources */,
 				5CC696D71C5CDEA100E4BA89 /* RSADataVerifier.m in Sources */,
 				5CE646D01C44FB33004DA6D5 /* LLAHomeHallViewController.m in Sources */,
 				5C5D68E71C56103D008A1230 /* LLAUserAccountDetailInfoCell.m in Sources */,

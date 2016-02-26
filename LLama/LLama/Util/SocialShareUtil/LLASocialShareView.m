@@ -9,6 +9,7 @@
 #import "LLASocialShareView.h"
 #import "MMPopup.h"
 
+#import "LLASocialShareHorPageLayout.h"
 #import "LLASocialSharePlatformItem.h"
 #import "LLASoicalSharePlatformCell.h"
 
@@ -31,7 +32,7 @@ static const CGFloat functionButtonHeight = 36;
 static const CGFloat functionButtonVerSapce = 16;
 static const CGFloat functionButtonToBottom = 22;
 
-@interface LLASocialShareView()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LLASoicalSharePlatformCellDelegate>
+@interface LLASocialShareView()<UICollectionViewDataSource,LLASocialShareHorPageLayoutDelegate,UICollectionViewDelegate,LLASoicalSharePlatformCellDelegate>
 {
     UIView *backView;
     UIColor *backViewBKColor;
@@ -150,16 +151,23 @@ static const CGFloat functionButtonToBottom = 22;
     [backView addSubview:titleLabel];
     
     //
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.minimumInteritemSpacing = minItemsVerSpace;
-    flowLayout.minimumLineSpacing = minItemsHorSpace;
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    flowLayout.minimumInteritemSpacing = minItemsVerSpace;
+//    flowLayout.minimumLineSpacing = minItemsHorSpace;
+    LLASocialShareHorPageLayout *flowLayout = [[LLASocialShareHorPageLayout alloc] init];
+    flowLayout.minCellVerSpace = minItemsVerSpace;
+    flowLayout.minCellHorSpace = minItemsHorSpace;
+    flowLayout.delegate = self;
     
     dataCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     dataCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
     dataCollectionView.backgroundColor = backView.backgroundColor;
     dataCollectionView.delegate = self;
     dataCollectionView.dataSource = self;
+    dataCollectionView.pagingEnabled = YES;
+    dataCollectionView.showsHorizontalScrollIndicator = NO;
+    dataCollectionView.showsVerticalScrollIndicator = NO;
     
     [dataCollectionView registerClass:[LLASoicalSharePlatformCell class] forCellWithReuseIdentifier:shareCellIden];
     
