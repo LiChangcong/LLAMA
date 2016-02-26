@@ -24,8 +24,12 @@
 #import "LLAViewUtil.h"
 #import "LLAHttpUtil.h"
 #import "LLAUploadFileUtil.h"
-
+#import "LLASocialContinuousShareManager.h"
+//
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
 //#import "TMAlbumPickerViewController.h"
+
 #import "LLAImagePickerViewController.h"
 #import "LLAPickImageItemInfo.h"
 #import "ZLPhotoAssets.h"
@@ -134,11 +138,11 @@ static const CGFloat textViewToLeftWithImage = 118;
     _qqFriend.tintColor = nil;
     [_qqFriend addTarget:self action:@selector(qqFriendClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.weixinButton.hidden = YES;
-    self.weiboButton.hidden = YES;
-    self.qqButton.hidden = YES;
-    self.friendCircle.hidden = YES;
-    self.shareToView.hidden = YES;
+//    self.weixinButton.hidden = YES;
+//    self.weiboButton.hidden = YES;
+//    self.qqButton.hidden = YES;
+//    self.friendCircle.hidden = YES;
+//    self.shareToView.hidden = YES;
 
 }
 
@@ -149,20 +153,20 @@ static const CGFloat textViewToLeftWithImage = 118;
     
     _isPrivateButton.selected = !_isPrivateButton.selected;
 //
-//    if (_isPrivateButton.selected == YES) {
-//        self.weixinButton.hidden = YES;
-//        self.weiboButton.hidden = YES;
-//        self.qqButton.hidden = YES;
-//        self.friendCircle.hidden = YES;
-//        self.shareToView.hidden = YES;
-//    }else{
-//        self.weixinButton.hidden = NO;
-//        self.weiboButton.hidden = NO;
-//        self.qqButton.hidden = NO;
-//        self.friendCircle.hidden = NO;
-//        self.shareToView.hidden = NO;
-//        
-//    }
+    if (_isPrivateButton.selected == YES) {
+        self.weixinButton.hidden = YES;
+        self.weiboButton.hidden = YES;
+        self.qqButton.hidden = YES;
+        self.friendCircle.hidden = YES;
+        self.shareToView.hidden = YES;
+    }else{
+        self.weixinButton.hidden = NO;
+        self.weiboButton.hidden = NO;
+        self.qqButton.hidden = NO;
+        self.friendCircle.hidden = NO;
+        self.shareToView.hidden = NO;
+        
+    }
 
 }
 
@@ -189,7 +193,33 @@ static const CGFloat textViewToLeftWithImage = 118;
 }
 
 - (void) sinaWeiBoClicked:(UIButton *) sender {
-    _sinaWeiBo.selected = !_sinaWeiBo.selected;
+    
+    if (!_sinaWeiBo.isSelected) {
+
+        
+        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+
+        
+        if (snsAccount.usid.length < 1) {
+            
+            UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+            snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                
+                //          获取微博用户名、uid、token等
+                
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    
+                    //UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
+                    _sinaWeiBo.selected = YES;
+                    
+                }});
+        }else {
+            _sinaWeiBo.selected = YES;
+        }
+        
+    }else {
+        _sinaWeiBo.selected = !_sinaWeiBo.selected;
+    }
     
     if (_sinaWeiBo.selected) {
         _sinaWeiBo.backgroundColor = [UIColor colorWithHex:0x555555];
@@ -361,6 +391,63 @@ static const CGFloat textViewToLeftWithImage = 118;
 
 - (void) handlePublishSuccessWithPlayId:(NSString *) playId {
 
+    //do share
+    if (!_isPrivateButton.selected) {
+        NSMutableArray *platformsArray = [NSMutableArray arrayWithCapacity:4];
+        
+        if (self.weChatFriend.isSelected) {
+            [platformsArray addObject:@(LLASocialSharePlatform_WechatSession)];
+        }
+        
+        if (self.weChatTimeLine.isSelected) {
+            [platformsArray addObject:@(LLASocialSharePlatform_WechatTimeLine)];
+        }
+        
+        if (self.sinaWeiBo.isSelected) {
+            [platformsArray addObject:@(LLASocialSharePlatform_SinaWeiBo)];
+        }
+        
+        if (self.qqFriend.isSelected) {
+            [platformsArray addObject:@(LLASocialSharePlatform_QQFriend)];
+        }
+        
+        if (platformsArray.count > 0) {
+            
+            LLAShareRequestInfo *requestInfo = [LLAShareRequestInfo new];
+            requestInfo.urlString = @"/play/getShareInfo";
+            
+            NSMutableDictionary *params = [NSMutableDictionary dictionary];
+            [params setValue:playId forKey:@"playId"];
+            requestInfo.paramsDic = params;
+            
+            __block int totalCount = (int)platformsArray.count;
+            __weak typeof(self) weakSelf = self;
+            
+            [[LLASocialContinuousShareManager shareManager] shareToPlatforms:platformsArray requetInfo:requestInfo stateChangeHandler:^(LLASocialShareResponseState state, NSString *message, NSError *error) {
+                
+                if (state != LLASocialShareResponseState_Begin) {
+                    totalCount--;
+                }
+                if (totalCount < 1) {
+                    
+                    [weakSelf dismissWithPlayId:playId];
+                    
+                }
+                
+            }];
+            
+        }
+
+    }else {
+    
+        //dismiss
+        [self dismissWithPlayId:playId];
+    }
+    
+}
+
+- (void) dismissWithPlayId:(NSString *) playId {
+    //dismiss,show detail
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         UIViewController *controller = [[UIApplication sharedApplication].delegate window].rootViewController;
         if ([controller isKindOfClass:[TMTabBarController class]]) {
@@ -373,8 +460,8 @@ static const CGFloat textViewToLeftWithImage = 118;
             }
         }
     }];
-}
 
+}
 
 // 限制昵称长度
 - (void)textFieldDidChange:(UITextField *)textField

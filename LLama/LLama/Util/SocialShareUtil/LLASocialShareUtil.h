@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "LLASocialShareHeader.h"
 #import "LLAShareRequestInfo.h"
+#import "LLAShareInfo.h"
 
 @interface LLASocialShareUtil : NSObject
 
-+ (void) shareWithRequestInfo:(LLAShareRequestInfo *) requestInfo
++ (instancetype) shareManager;
+
+- (void) shareWithRequestInfo:(LLAShareRequestInfo *) requestInfo
                         title:(NSString *) title
                 reportHandler:(LLASocialReportHandler) reportHandler
            stateChangeHandler:(LLASocialShareStateChangeHandler) stateChangeHandler;
+
+- (void) shareWithShareInfo:(LLAShareInfo *) shareInfo platform:(LLASocialSharePlatform) platform completion:(LLASocialShareStateChangeHandler) completion;
 
 
 @end

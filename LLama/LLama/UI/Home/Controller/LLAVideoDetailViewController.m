@@ -311,11 +311,10 @@
     
     requestInfo.paramsDic = params;
     
-    [LLASocialShareUtil shareWithRequestInfo:requestInfo title:@"分享这个视频到" reportHandler:^(void) {
+    [[LLASocialShareUtil shareManager] shareWithRequestInfo:requestInfo title:@"分享这个视频到" reportHandler:^(void) {
         
     } stateChangeHandler:^(LLASocialShareResponseState state, NSString *message, NSError *error) {
-        
-        NSLog(@"share Message:%@",message);
+        //NSLog(@"message:%@",message);
     }];
     
     

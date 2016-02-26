@@ -11,7 +11,6 @@
 #import "LLASocialShareView.h"
 #import "LLASocialSharePlatformItem.h"
 #import "LLAHttpUtil.h"
-#import "LLAShareInfo.h"
 #import "UMSocialSnsService.h"
 #import "UMSocialSnsPlatformManager.h"
 
@@ -23,9 +22,62 @@ static NSString * const shareFailedDesc = @"分享失败";
 static NSString * const shareSuccessDesc = @"分享成功";
 static NSString * const shareCancelDesc = @"分享取消";
 
+@interface LLASocialShareUtil()
+{
+    
+}
+
+@property(nonatomic , copy) LLASocialShareStateChangeHandler completeHandler;
+
+@end
+
 @implementation LLASocialShareUtil
 
-+ (void) shareWithRequestInfo:(LLAShareRequestInfo *)requestInfo
+@synthesize completeHandler;
+
+#pragma mark - Life Cycle
+
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
+    return self;
+}
+
+- (void) dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+#pragma mark - Notification
+
+- (void) didBecomeActive:(NSNotification *) noti {
+    
+    if (completeHandler) {
+        completeHandler(LLASocialShareResponseState_Unknow,@"",nil);
+    }
+}
+
+#pragma mark
+
++ (instancetype) shareManager {
+    
+    static LLASocialShareUtil *shareManager = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        shareManager = [[[self class] alloc] init];
+    });
+    
+    return shareManager;
+    
+}
+
+#pragma mark - share
+
+- (void) shareWithRequestInfo:(LLAShareRequestInfo *)requestInfo
                         title:(NSString *) title
                 reportHandler:(LLASocialReportHandler)reportHandler
            stateChangeHandler:(LLASocialShareStateChangeHandler)stateChangeHandler {
@@ -84,7 +136,7 @@ static NSString * const shareCancelDesc = @"分享取消";
     [shareView show];
 }
 
-+ (NSArray<LLASocialSharePlatformItem *> *) defaultPlatforms {
+- (NSArray<LLASocialSharePlatformItem *> *) defaultPlatforms {
     
     NSMutableArray<LLASocialSharePlatformItem*> *platforms = [NSMutableArray array];
     
@@ -103,11 +155,12 @@ static NSString * const shareCancelDesc = @"分享取消";
     return platforms;
 }
 
-+ (void) shareWithShareInfo:(LLAShareInfo *) shareInfo platform:(LLASocialSharePlatform) platform completion:(LLASocialShareStateChangeHandler) completion{
+- (void) shareWithShareInfo:(LLAShareInfo *) shareInfo platform:(LLASocialSharePlatform) platform completion:(LLASocialShareStateChangeHandler) completion{
     if (!shareInfo) {
         completion(LLASocialShareResponseState_Failed,@"错误的分享数据",nil);
     }
-    
+    //
+    completeHandler = completion;
     //
     [UMSocialData defaultData].urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:shareInfo.shareImageURLString];
     
@@ -149,6 +202,7 @@ static NSString * const shareCancelDesc = @"分享取消";
     
     //share
     [[UMSocialDataService defaultDataService] postSNSWithTypes:@[umSharePlatform] content:shareInfo.shareContent.length >0 ? shareInfo.shareContent:shareInfo.shareTitle image:nil location:nil urlResource:[UMSocialData defaultData].urlResource presentedController:nil completion:^(UMSocialResponseEntity *response) {
+        
         if (response.responseCode == UMSResponseCodeSuccess) {
             if (completion){
                 completion(LLASocialShareResponseState_Success,shareSuccessDesc,nil);
@@ -162,6 +216,9 @@ static NSString * const shareCancelDesc = @"分享取消";
                 completion(LLASocialShareResponseState_Failed,shareFailedDesc,response.error);
             }
         }
+        
+        completeHandler = nil;
+        
     }];
 }
 

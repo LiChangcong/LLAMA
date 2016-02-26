@@ -100,6 +100,12 @@
 		5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846B1C5F7A6E002EC705 /* HPGrowingTextView.m */; };
 		5C78846F1C5F7A6E002EC705 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */; };
 		5C7E26651C8019E2008364E4 /* LLASocialShareHorPageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E26641C8019E2008364E4 /* LLASocialShareHorPageLayout.m */; };
+		5C7E26681C804EB5008364E4 /* LLASocialContinuousShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E26671C804EB5008364E4 /* LLASocialContinuousShareManager.m */; };
+		5C7E26741C8062ED008364E4 /* Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E266B1C8062ED008364E4 /* Emoji.m */; };
+		5C7E26751C8062ED008364E4 /* EmojiEmoticons.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E266D1C8062ED008364E4 /* EmojiEmoticons.m */; };
+		5C7E26761C8062ED008364E4 /* EmojiMapSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E266F1C8062ED008364E4 /* EmojiMapSymbols.m */; };
+		5C7E26771C8062ED008364E4 /* EmojiPictographs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E26711C8062ED008364E4 /* EmojiPictographs.m */; };
+		5C7E26781C8062ED008364E4 /* EmojiTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E26731C8062ED008364E4 /* EmojiTransport.m */; };
 		5C82750E1C5726A500DD547F /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8274FF1C5726A500DD547F /* MMAlertView.m */; };
 		5C82750F1C5726A500DD547F /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275011C5726A500DD547F /* MMDateView.m */; };
 		5C8275101C5726A500DD547F /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275041C5726A500DD547F /* MMPopupCategory.m */; };
@@ -658,6 +664,18 @@
 		5C78846D1C5F7A6E002EC705 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		5C7E26631C8019E2008364E4 /* LLASocialShareHorPageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareHorPageLayout.h; sourceTree = "<group>"; };
 		5C7E26641C8019E2008364E4 /* LLASocialShareHorPageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialShareHorPageLayout.m; sourceTree = "<group>"; };
+		5C7E26661C804EB5008364E4 /* LLASocialContinuousShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialContinuousShareManager.h; sourceTree = "<group>"; };
+		5C7E26671C804EB5008364E4 /* LLASocialContinuousShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialContinuousShareManager.m; sourceTree = "<group>"; };
+		5C7E266A1C8062ED008364E4 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
+		5C7E266B1C8062ED008364E4 /* Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emoji.m; sourceTree = "<group>"; };
+		5C7E266C1C8062ED008364E4 /* EmojiEmoticons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiEmoticons.h; sourceTree = "<group>"; };
+		5C7E266D1C8062ED008364E4 /* EmojiEmoticons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiEmoticons.m; sourceTree = "<group>"; };
+		5C7E266E1C8062ED008364E4 /* EmojiMapSymbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiMapSymbols.h; sourceTree = "<group>"; };
+		5C7E266F1C8062ED008364E4 /* EmojiMapSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiMapSymbols.m; sourceTree = "<group>"; };
+		5C7E26701C8062ED008364E4 /* EmojiPictographs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiPictographs.h; sourceTree = "<group>"; };
+		5C7E26711C8062ED008364E4 /* EmojiPictographs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiPictographs.m; sourceTree = "<group>"; };
+		5C7E26721C8062ED008364E4 /* EmojiTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTransport.h; sourceTree = "<group>"; };
+		5C7E26731C8062ED008364E4 /* EmojiTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTransport.m; sourceTree = "<group>"; };
 		5C8274FE1C5726A500DD547F /* MMAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAlertView.h; sourceTree = "<group>"; };
 		5C8274FF1C5726A500DD547F /* MMAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAlertView.m; sourceTree = "<group>"; };
 		5C8275001C5726A500DD547F /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = "<group>"; };
@@ -1698,6 +1716,23 @@
 			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
+		5C7E26691C8062ED008364E4 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				5C7E266A1C8062ED008364E4 /* Emoji.h */,
+				5C7E266B1C8062ED008364E4 /* Emoji.m */,
+				5C7E266C1C8062ED008364E4 /* EmojiEmoticons.h */,
+				5C7E266D1C8062ED008364E4 /* EmojiEmoticons.m */,
+				5C7E266E1C8062ED008364E4 /* EmojiMapSymbols.h */,
+				5C7E266F1C8062ED008364E4 /* EmojiMapSymbols.m */,
+				5C7E26701C8062ED008364E4 /* EmojiPictographs.h */,
+				5C7E26711C8062ED008364E4 /* EmojiPictographs.m */,
+				5C7E26721C8062ED008364E4 /* EmojiTransport.h */,
+				5C7E26731C8062ED008364E4 /* EmojiTransport.m */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
 		5C8274FD1C5726A500DD547F /* MMPopupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1727,6 +1762,8 @@
 				5C8547121C7EE3D200CAA30C /* LLASocialShareHeader.h */,
 				5C8547061C7E9A5C00CAA30C /* LLASocialShareUtil.h */,
 				5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */,
+				5C7E26661C804EB5008364E4 /* LLASocialContinuousShareManager.h */,
+				5C7E26671C804EB5008364E4 /* LLASocialContinuousShareManager.m */,
 				5C8547091C7E9B2C00CAA30C /* LLASocialShareView.h */,
 				5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */,
 				5C7E26631C8019E2008364E4 /* LLASocialShareHorPageLayout.h */,
@@ -2399,6 +2436,7 @@
 		A3DEDCF21C3CAE38009F3D37 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5C7E26691C8062ED008364E4 /* Emoji */,
 				5C7534541C7714450058F93C /* PSTCollectionView */,
 				5C7534061C7711920058F93C /* MWPhotoBrowser */,
 				5CE2DBDE1C71B41D00029E67 /* SDAVAssetExportSession.h */,
@@ -3246,18 +3284,22 @@
 				5CE0EB8E1C46424300C6BC79 /* TYDrawStorage.m in Sources */,
 				7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */,
 				5CC324DD1C5B65FB00413E25 /* LLAPickVideoItemInfo.m in Sources */,
+				5C7E26771C8062ED008364E4 /* EmojiPictographs.m in Sources */,
 				5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */,
+				5C7E26781C8062ED008364E4 /* EmojiTransport.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				5CC696DA1C5CDEBF00E4BA89 /* AlipayOrder.m in Sources */,
 				7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */,
 				A3DEDDA61C3CAE38009F3D37 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				A3DEDD9E1C3CAE38009F3D37 /* MTLTransformerErrorHandling.m in Sources */,
+				5C7E26681C804EB5008364E4 /* LLASocialContinuousShareManager.m in Sources */,
 				5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */,
 				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
 				7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */,
 				7E64DEEB1C7C038200F88093 /* LLAHotUsersCell.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
+				5C7E26761C8062ED008364E4 /* EmojiMapSymbols.m in Sources */,
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
 				A3DEDD981C3CAE38009F3D37 /* EXTScope.m in Sources */,
 				5C8275131C5726A500DD547F /* MMPopupWindow.m in Sources */,
@@ -3306,6 +3348,7 @@
 				5C6D7A4C1C58B73200119A3A /* SCSwipeableFilterView.m in Sources */,
 				5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */,
 				5C6D7A4D1C58B73200119A3A /* SCVideoConfiguration.m in Sources */,
+				5C7E26751C8062ED008364E4 /* EmojiEmoticons.m in Sources */,
 				A3DEDD9B1C3CAE38009F3D37 /* MTLModel+NSCoding.m in Sources */,
 				5C6D7A4B1C58B73200119A3A /* SCSaveToCameraRollOperation.m in Sources */,
 				7E0607281C5E05D50089329D /* ZLPhotoPickerDatas.m in Sources */,
@@ -3515,6 +3558,7 @@
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */,
 				5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */,
+				5C7E26741C8062ED008364E4 /* Emoji.m in Sources */,
 				5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */,
 				5CC324E71C5B814800413E25 /* LLAPayUserViewController.m in Sources */,
 				7E64DF3F1C7C63A800F88093 /* LLAHotUsersTableViewCell.m in Sources */,
