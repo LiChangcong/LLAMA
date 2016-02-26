@@ -149,7 +149,7 @@ static NSString * const shareCancelDesc = @"分享取消";
     }
     
     //share
-    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[umSharePlatform] content:shareInfo.shareContent image:nil location:nil urlResource:[UMSocialData defaultData].urlResource presentedController:nil completion:^(UMSocialResponseEntity *response) {
+    [[UMSocialDataService defaultDataService] postSNSWithTypes:@[umSharePlatform] content:shareInfo.shareContent.length >0 ? shareInfo.shareContent:shareInfo.shareTitle image:nil location:nil urlResource:[UMSocialData defaultData].urlResource presentedController:nil completion:^(UMSocialResponseEntity *response) {
         if (response.responseCode == UMSResponseCodeSuccess) {
             if (completion){
                 completion(LLASocialShareResponseState_Success,shareSuccessDesc,nil);
