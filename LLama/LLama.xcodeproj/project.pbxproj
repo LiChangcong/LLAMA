@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0312651C81532A005B70FF /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312631C81532A005B70FF /* AVOSCloud.framework */; };
+		5C0312661C81532A005B70FF /* AVOSCloudIM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312641C81532A005B70FF /* AVOSCloudIM.framework */; };
 		5C0F6C301C7AB6CC00D2D86B /* LLAPickImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */; };
 		5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */; };
 		5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */; };
@@ -473,6 +475,8 @@
 /* Begin PBXFileReference section */
 		17DA4835DA331D5811427335 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5C0312631C81532A005B70FF /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		5C0312641C81532A005B70FF /* AVOSCloudIM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudIM.framework; sourceTree = "<group>"; };
 		5C0F6C2E1C7AB6CC00D2D86B /* LLAPickImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageManager.h; sourceTree = "<group>"; };
 		5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageManager.m; sourceTree = "<group>"; };
 		5C1FEF511C59E9C500C71A9B /* LLAEditVideoTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoTopToolBar.h; sourceTree = "<group>"; };
@@ -1399,7 +1403,9 @@
 				6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */,
 				A3209A7C1C3D044700CADC51 /* TencentOpenAPI.framework in Frameworks */,
 				A3209A831C3D06EF00CADC51 /* libWeChatSDK.a in Frameworks */,
+				5C0312661C81532A005B70FF /* AVOSCloudIM.framework in Frameworks */,
 				5CC696DD1C5CE4C200E4BA89 /* libcrypto.a in Frameworks */,
+				5C0312651C81532A005B70FF /* AVOSCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1426,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C0312621C81532A005B70FF /* LeanCloudSDK */ = {
+			isa = PBXGroup;
+			children = (
+				5C0312631C81532A005B70FF /* AVOSCloud.framework */,
+				5C0312641C81532A005B70FF /* AVOSCloudIM.framework */,
+			);
+			path = LeanCloudSDK;
+			sourceTree = "<group>";
+		};
 		5C0F6C2D1C7AB67D00D2D86B /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -2287,6 +2302,7 @@
 		A3209A791C3D044700CADC51 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				5C0312621C81532A005B70FF /* LeanCloudSDK */,
 				A3E2D8FF1C3E0F42005885D4 /* Alipay */,
 				A3209A8D1C3D0E5000CADC51 /* SinaWeiBo */,
 				A3209A7D1C3D06EF00CADC51 /* WeiXin */,
@@ -3745,6 +3761,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/QQ",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/Alipay",
+					"$(PROJECT_DIR)/LLama/ThirdSDK/LeanCloudSDK",
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/LLama/Main/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
@@ -3818,6 +3835,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/QQ",
 					"$(PROJECT_DIR)/LLama/ThirdSDK/Alipay",
+					"$(PROJECT_DIR)/LLama/ThirdSDK/LeanCloudSDK",
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/LLama/Main/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
