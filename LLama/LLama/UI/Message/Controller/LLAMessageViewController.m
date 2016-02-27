@@ -8,6 +8,7 @@
 
 //controler
 #import "LLAMessageViewController.h"
+#import "LLAMessageReceivedPraiseController.h"
 
 //view
 #import "LLATableView.h"
@@ -192,6 +193,13 @@ static const NSInteger conversationSectionIndex = 1;
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == systemMessageSectionIndex) {
+        LLAMessageCenterSystemMsgInfo *msgInfo = systemMessageArray[indexPath.row];
+
+        
+    }else if (indexPath.section == conversationSectionIndex) {
+        
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

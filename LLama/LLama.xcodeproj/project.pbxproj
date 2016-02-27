@@ -15,6 +15,10 @@
 		5C0312721C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312711C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m */; };
 		5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */; };
 		5C0312781C818BA8005B70FF /* LLAMessageCenterRoomInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */; };
+		5C03127B1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C03127A1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m */; };
+		5C03127E1C819DB8005B70FF /* LLAMessageReceivedCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */; };
+		5C0312811C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312801C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m */; };
+		5C0312841C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312831C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m */; };
 		5C0F6C301C7AB6CC00D2D86B /* LLAPickImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */; };
 		5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */; };
 		5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */; };
@@ -493,6 +497,14 @@
 		5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterConversationCell.m; sourceTree = "<group>"; };
 		5C0312761C818BA8005B70FF /* LLAMessageCenterRoomInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCenterRoomInfo.h; sourceTree = "<group>"; };
 		5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterRoomInfo.m; sourceTree = "<group>"; };
+		5C0312791C819BDA005B70FF /* LLAMessageReceivedPraiseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedPraiseController.h; sourceTree = "<group>"; };
+		5C03127A1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedPraiseController.m; sourceTree = "<group>"; };
+		5C03127C1C819DB8005B70FF /* LLAMessageReceivedCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedCommentController.h; sourceTree = "<group>"; };
+		5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedCommentController.m; sourceTree = "<group>"; };
+		5C03127F1C819F0A005B70FF /* LLAMessageReceivedPraiseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedPraiseCell.h; sourceTree = "<group>"; };
+		5C0312801C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedPraiseCell.m; sourceTree = "<group>"; };
+		5C0312821C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedPraiseItemInfo.h; sourceTree = "<group>"; };
+		5C0312831C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedPraiseItemInfo.m; sourceTree = "<group>"; };
 		5C0F6C2E1C7AB6CC00D2D86B /* LLAPickImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageManager.h; sourceTree = "<group>"; };
 		5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageManager.m; sourceTree = "<group>"; };
 		5C1FEF511C59E9C500C71A9B /* LLAEditVideoTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoTopToolBar.h; sourceTree = "<group>"; };
@@ -1460,6 +1472,8 @@
 				5C0312711C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m */,
 				5C0312761C818BA8005B70FF /* LLAMessageCenterRoomInfo.h */,
 				5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */,
+				5C0312821C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.h */,
+				5C0312831C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m */,
 			);
 			name = Model;
 			path = Controller/Model;
@@ -1472,6 +1486,8 @@
 				5C03126E1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m */,
 				5C0312731C818173005B70FF /* LLAMessageCenterConversationCell.h */,
 				5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */,
+				5C03127F1C819F0A005B70FF /* LLAMessageReceivedPraiseCell.h */,
+				5C0312801C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m */,
 			);
 			name = View;
 			path = Controller/View;
@@ -2776,6 +2792,10 @@
 				A3DEDE0F1C3CAEC6009F3D37 /* TMMessageController.m */,
 				7EC717851C7AE178005F04FB /* LLAMessageViewController.h */,
 				7EC717861C7AE178005F04FB /* LLAMessageViewController.m */,
+				5C0312791C819BDA005B70FF /* LLAMessageReceivedPraiseController.h */,
+				5C03127A1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m */,
+				5C03127C1C819DB8005B70FF /* LLAMessageReceivedCommentController.h */,
+				5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3383,9 +3403,11 @@
 				5C6D7A571C58B85C00119A3A /* LLAEditVideoViewController.m in Sources */,
 				5C6D7A3A1C58B73200119A3A /* SCFilter+VideoComposition.m in Sources */,
 				5C6D7A401C58B73200119A3A /* SCMediaTypeConfiguration.m in Sources */,
+				5C0312841C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m in Sources */,
 				5C5D68D51C55EF59008A1230 /* LLAUserAccountDetailViewController.m in Sources */,
 				5C9353B31C5DBE6300DD75DC /* LLAPayUserPaySuccessView.m in Sources */,
 				5C75347D1C7714450058F93C /* PSTGridLayoutSection.m in Sources */,
+				5C03127B1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m in Sources */,
 				5CC4D4341C50E1A700BD3D57 /* LLAUserProfileMyFunctionCell.m in Sources */,
 				5CDD97831C40E5B200557CB7 /* LLAQiNiuUploadFileManager.m in Sources */,
 				5C6D7A431C58B73200119A3A /* SCProcessingQueue.m in Sources */,
@@ -3602,6 +3624,7 @@
 				5C82750E1C5726A500DD547F /* MMAlertView.m in Sources */,
 				5CC696D11C5CDEA100E4BA89 /* DataSigner.m in Sources */,
 				A3DEDE811C3CAEC7009F3D37 /* TMRetrievePasswordViewController.m in Sources */,
+				5C0312811C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m in Sources */,
 				7EB0BA6C1C5F40E500D4A43C /* LLAWhoLoveMeInfo.m in Sources */,
 				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
@@ -3615,6 +3638,7 @@
 				5C8979351C5715D100808E2F /* LLAUserAccountWithdrawCashInfoCell.m in Sources */,
 				7EC717841C7AE15F005F04FB /* LLAZoomViewController.m in Sources */,
 				5C7534711C7714450058F93C /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				5C03127E1C819DB8005B70FF /* LLAMessageReceivedCommentController.m in Sources */,
 				7EC08ED91C58778B00C4B46A /* LLAAccountSecuritySectionOne.m in Sources */,
 				5C8275141C5726A500DD547F /* MMSheetView.m in Sources */,
 				7ECD6E451C7D8D1800F2D939 /* LLASearchResultsVideoCell.m in Sources */,

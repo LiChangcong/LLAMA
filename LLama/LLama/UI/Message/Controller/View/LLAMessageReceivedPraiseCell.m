@@ -1,44 +1,42 @@
 //
-//  LLAMessageCenterConversationCell.m
+//  LLAMessageReceivedPraiseCell.m
 //  LLama
 //
 //  Created by Live on 16/2/27.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAMessageCenterConversationCell.h"
+#import "LLAMessageReceivedPraiseCell.h"
 
 #import "LLAUserHeadView.h"
 
-#import "LLAUser.h"
-#import "LLAMessageCenterRoomInfo.h"
+#import "LLAMessageReceivedPraiseItemInfo.h"
 
 static const CGFloat headViewToLeft = 11;
 static const CGFloat headViewHeightWidth = 34;
 
 static const CGFloat headViewToCenterContent = 8;
-static const CGFloat userNameLabelToTimeLabelHorSpace = 2;
-static const CGFloat timeLabelToRight = 12;
+static const CGFloat messageLabelToImageHorSpace = 2;
+static const CGFloat infoImageViewHeightWidth = 46;
+static const CGFloat infoImageViewToRight = 8;
 
-static const CGFloat lastMessageLabelToBadgeHorSpace = 2;
-static const CGFloat badgeToRight = 16;
-
-static const CGFloat badgeViewHeight = 15;
+static const CGFloat timeLabelToInfoImageHorSpace = 2;
 
 static const CGFloat lineHeight = 0.6;
 
-@interface LLAMessageCenterConversationCell()<LLAUserHeadViewDelegate>
+
+
+@interface LLAMessageReceivedPraiseCell()<LLAUserHeadViewDelegate>
 {
     
     UIView *selectedCoverView;
     
     LLAUserHeadView *headView;
     
-    UILabel *userNameLabel;
+    UILabel *messageLabel;
     UILabel *timeLabel;
     
-    UILabel *lastMessageLabel;
-    UIButton *badgeButton;
+    UIImageView *infoImageView;
     
     UIView *sepLineView;
     
@@ -46,27 +44,25 @@ static const CGFloat lineHeight = 0.6;
     UIColor *backColor;
     UIColor *selectedColor;
     
-    UIFont *userNameLabelFont;
-    UIColor *userNameLabelTextColor;
+    UIFont *messageLabelFont;
+    UIColor *messageLabelTextColor;
     
     UIFont *timeLabelFont;
     UIColor *timeLabelTextColor;
     
-    UIFont *lastMessageLabelFont;
-    UIColor *lastMessageLabelTextColor;
-    
-    UIColor *badgeBackColor;
-    UIFont *badgeFont;
-    UIColor *badgeTextColor;
-    
     UIColor *lineColor;
     
-    LLAMessageCenterRoomInfo *roomInfo;
+    //
+    NSLayoutConstraint *messageToRightConstraints;
+    NSLayoutConstraint *timeToRightConstraints;
+    
+    //
+    LLAMessageReceivedPraiseItemInfo *praiseInfo;
 }
 
 @end
 
-@implementation LLAMessageCenterConversationCell
+@implementation LLAMessageReceivedPraiseCell
 
 #pragma mark - Init
 
@@ -99,21 +95,14 @@ static const CGFloat lineHeight = 0.6;
     backColor = [UIColor colorWithHex:0x211f2c];
     selectedColor = [UIColor colorWithHex:0xfffff alpha:0.2];
     
-    userNameLabelFont = [UIFont boldLLAFontOfSize:15];
-    userNameLabelTextColor = [UIColor whiteColor];
+    messageLabelFont = [UIFont boldLLAFontOfSize:15];
+    messageLabelTextColor = [UIColor whiteColor];
     
     timeLabelFont = [UIFont llaFontOfSize:12];
     timeLabelTextColor = [UIColor colorWithHex:0x807f87];
     
-    lastMessageLabelFont = [UIFont llaFontOfSize:13.5];
-    lastMessageLabelTextColor = [UIColor colorWithHex:0x807f87];
-    
-    badgeBackColor = [UIColor colorWithHex:0xf94848];
-    badgeFont = [UIFont llaFontOfSize:12];
-    badgeTextColor = [UIColor whiteColor];
-    
     lineColor = [UIColor colorWithHex:0x1e1d22];
-
+    
     
 }
 
@@ -124,20 +113,20 @@ static const CGFloat lineHeight = 0.6;
     selectedCoverView.backgroundColor = selectedColor;
     selectedCoverView.hidden = YES;
     [self.contentView addSubview:selectedCoverView];
-
+    
     
     headView = [[LLAUserHeadView alloc] init];
     headView.translatesAutoresizingMaskIntoConstraints = NO;
     headView.delegate = self;
     [self.contentView addSubview:headView];
     
-    userNameLabel = [[UILabel alloc] init];
-    userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    userNameLabel.font = userNameLabelFont;
-    userNameLabel.textColor = userNameLabelTextColor;
-    userNameLabel.textAlignment = NSTextAlignmentLeft;
+    messageLabel = [[UILabel alloc] init];
+    messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    messageLabel.font = messageLabelFont;
+    messageLabel.textColor = messageLabelTextColor;
+    messageLabel.textAlignment = NSTextAlignmentLeft;
     
-    [self.contentView addSubview:userNameLabel];
+    [self.contentView addSubview:messageLabel];
     
     timeLabel = [[UILabel alloc] init];
     timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -147,28 +136,12 @@ static const CGFloat lineHeight = 0.6;
     
     [self.contentView addSubview:timeLabel];
     
-    lastMessageLabel = [[UILabel alloc] init];
-    lastMessageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    lastMessageLabel.font = lastMessageLabelFont;
-    lastMessageLabel.textColor = lastMessageLabelTextColor;
-    lastMessageLabel.textAlignment = NSTextAlignmentLeft;
+    infoImageView = [[UIImageView alloc] init];
+    infoImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    infoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    infoImageView.clipsToBounds = YES;
     
-    [self.contentView addSubview:lastMessageLabel];
-    
-    badgeButton = [[UIButton alloc] init];
-    badgeButton.translatesAutoresizingMaskIntoConstraints = NO;
-    badgeButton.userInteractionEnabled = NO;
-    badgeButton.titleLabel.font = badgeFont;
-
-    badgeButton.contentEdgeInsets = UIEdgeInsetsMake(0,2,0,2);
-    
-    [badgeButton setBackgroundColor:badgeBackColor forState:UIControlStateNormal];
-    [badgeButton setTitleColor:badgeTextColor forState:UIControlStateNormal];
-    
-    badgeButton.clipsToBounds = YES;
-    badgeButton.layer.cornerRadius = badgeViewHeight / 2;
-    
-    [self.contentView addSubview:badgeButton];
+    [self.contentView addSubview:infoImageView];
     
     sepLineView = [[UIView alloc] init];
     sepLineView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -177,7 +150,7 @@ static const CGFloat lineHeight = 0.6;
     [self.contentView addSubview:sepLineView];
     
     [self.contentView bringSubviewToFront:selectedCoverView];
-
+    
     
 }
 
@@ -193,7 +166,7 @@ static const CGFloat lineHeight = 0.6;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(selectedCoverView)]];
-
+    
     
     [constrArray addObject:
      [NSLayoutConstraint
@@ -217,7 +190,7 @@ static const CGFloat lineHeight = 0.6;
     //username
     [constrArray addObject:
      [NSLayoutConstraint
-      constraintWithItem:userNameLabel
+      constraintWithItem:messageLabel
       attribute:NSLayoutAttributeTop
       relatedBy:NSLayoutRelationEqual
       toItem:headView
@@ -228,32 +201,33 @@ static const CGFloat lineHeight = 0.6;
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:timeLabel
-      attribute:NSLayoutAttributeCenterY
-      relatedBy:NSLayoutRelationEqual
-      toItem:userNameLabel
-      attribute:NSLayoutAttributeCenterY
-      multiplier:1.0
-      constant:0]];
-
-    [constrArray addObject:
-     [NSLayoutConstraint
-      constraintWithItem:lastMessageLabel
       attribute:NSLayoutAttributeBottom
       relatedBy:NSLayoutRelationEqual
-      toItem:headView
+      toItem:self.contentView
       attribute:NSLayoutAttributeBottom
       multiplier:1.0
       constant:0]];
     
     [constrArray addObject:
      [NSLayoutConstraint
-      constraintWithItem:badgeButton
+      constraintWithItem:infoImageView
+      attribute:NSLayoutAttributeHeight
+      relatedBy:NSLayoutRelationEqual
+      toItem:nil
+      attribute:NSLayoutAttributeNotAnAttribute
+      multiplier:0
+      constant:infoImageViewHeightWidth]];
+    
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:infoImageView
       attribute:NSLayoutAttributeCenterY
       relatedBy:NSLayoutRelationEqual
-      toItem:lastMessageLabel
+      toItem:self.contentView
       attribute:NSLayoutAttributeCenterY
       multiplier:1.0
-      constant:0]];
+      constant:-(lineHeight)/2]];
+
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -261,7 +235,7 @@ static const CGFloat lineHeight = 0.6;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"height":@(lineHeight)}
       views:NSDictionaryOfVariableBindings(sepLineView)]];
-
+    
     //horizonal
     
     [constrArray addObjectsFromArray:
@@ -270,49 +244,51 @@ static const CGFloat lineHeight = 0.6;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(selectedCoverView)]];
-
+    
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[headView(headWidth)]-(headViewToCenter)-[userNameLabel]-(nameToTime)-[timeLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[headView(headWidth)]-(headViewToCenter)-[messageLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"toLeft":@(headViewToLeft),
                 @"headWidth":@(headViewHeightWidth),
                 @"headViewToCenter":@(headViewToCenterContent),
-                @"nameToTime":@(userNameLabelToTimeLabelHorSpace),
-                @"toRight":@(timeLabelToRight)}
-      views:NSDictionaryOfVariableBindings(headView,userNameLabel,timeLabel)]];
+                @"toRight":@(infoImageViewToRight+infoImageViewHeightWidth+messageLabelToImageHorSpace)}
+      views:NSDictionaryOfVariableBindings(headView,messageLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[headView]-(headViewToCenter)-[lastMessageLabel]-(lastToBadge)-[badgeButton(>=minWidth)]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[headView]-(headViewToCenter)-[timeLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{
                 @"headViewToCenter":@(headViewToCenterContent),
-                @"lastToBadge":@(lastMessageLabelToBadgeHorSpace),
-                @"toRight":@(badgeToRight),
-                @"minWidth":@(badgeViewHeight)}
-      views:NSDictionaryOfVariableBindings(headView,lastMessageLabel,badgeButton)]];
+                @"toRight":@(infoImageViewToRight+infoImageViewHeightWidth+messageLabelToImageHorSpace)}
+      views:NSDictionaryOfVariableBindings(headView,timeLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(0)-[sepLineView]-(0)-|"
+      constraintsWithVisualFormat:@"H:[sepLineView(width)]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
-      metrics:nil
+      metrics:@{@"toRight":@(infoImageViewToRight),
+                @"width":@(infoImageViewHeightWidth)}
+      views:NSDictionaryOfVariableBindings(infoImageView)]];
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[sepLineView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:@{@"toLeft":@(headViewToLeft+headViewHeightWidth+headViewToCenterContent)}
       views:NSDictionaryOfVariableBindings(sepLineView)]];
-
+    
     [self.contentView addConstraints:constrArray];
     
-    [userNameLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [timeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [lastMessageLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [badgeButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    
-    [userNameLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [timeLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [lastMessageLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [badgeButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    
+    for (NSLayoutConstraint *constr in constrArray) {
+        if (constr.secondItem == messageLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
+            messageToRightConstraints = constr;
+        }else if (constr.secondItem == timeLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
+            timeToRightConstraints = constr;
+        }
+    }
 }
 
 #pragma mark - Selection
@@ -330,27 +306,36 @@ static const CGFloat lineHeight = 0.6;
 
 #pragma mark - Update
 
-- (void) updateCellWithRoomInfo:(LLAMessageCenterRoomInfo *)info tableWidth:(CGFloat)width {
+- (void) updateCellWithInfo:(LLAMessageReceivedPraiseItemInfo *)info tableWidth:(CGFloat)width {
     
+    praiseInfo = info;
     //
-    roomInfo = info;
     
-    //test
-    [headView updateHeadViewWithUser:[LLAUser me]];
+    [self adjustLabelPosition];
     
-    userNameLabel.text = [LLAUser me].userName;
+    [headView updateHeadViewWithUser:praiseInfo.authorUser];
     
-    timeLabel.text = @"刚刚";
+    messageLabel.text = praiseInfo.manageContent;
+    timeLabel.text = praiseInfo.editTimeString;
     
-    lastMessageLabel.text = @"你妹的";
-    
-    [badgeButton setTitle:@"12" forState:UIControlStateNormal];
+    [infoImageView setImageWithURL:[NSURL URLWithString:praiseInfo.infoImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_340"]];
     
 }
 
-#pragma mark - CalculateHeight
+- (void) adjustLabelPosition {
+    if (praiseInfo.infoImageURL.length > 0) {
+        messageToRightConstraints.constant = messageLabelToImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
+        timeToRightConstraints.constant =  messageLabelToImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
+    }else {
+        messageToRightConstraints.constant = infoImageViewToRight;
+        timeToRightConstraints.constant = infoImageViewToRight;
+    }
+}
 
-+ (CGFloat) calculateCellHeight:(LLAMessageCenterRoomInfo *)info tableWidth:(CGFloat)width {
+#pragma mark - Calculate Height
+
++ (CGFloat) calculateHeightWithInfo:(LLAMessageReceivedPraiseItemInfo *)info tableWidth:(CGFloat)width {
+    
     return 68;
 }
 
