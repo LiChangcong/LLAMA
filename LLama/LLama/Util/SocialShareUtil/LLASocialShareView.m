@@ -463,6 +463,10 @@ static const CGFloat functionButtonToBottom = 22;
     return CGSizeMake(width, height);
 }
 
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeZero;
+}
+
 #pragma mark - ShareCellDelegate
 
 - (void) shareWithPlatformInfo:(LLASocialSharePlatformItem *)platformInfo {

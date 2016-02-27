@@ -11,8 +11,8 @@
 #import "LLASocialShareView.h"
 #import "LLASocialSharePlatformItem.h"
 #import "LLAHttpUtil.h"
-#import "UMSocialSnsService.h"
-#import "UMSocialSnsPlatformManager.h"
+
+#import "UMSocial.h"
 
 
 #import <WXApi.h>
@@ -159,6 +159,10 @@ static NSString * const shareCancelDesc = @"分享取消";
     if (!shareInfo) {
         completion(LLASocialShareResponseState_Failed,@"错误的分享数据",nil);
     }
+    
+    //
+    [UMSocialConfig setFinishToastIsHidden:NO position:UMSocialiToastPositionCenter];
+    
     //
     completeHandler = completion;
     //

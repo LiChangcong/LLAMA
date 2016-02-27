@@ -24,6 +24,6 @@
 
 @property(nonatomic , assign) UIEdgeInsets sectionInsets;
 
-@property(nonatomic , assign) id<LLASocialShareHorPageLayoutDelegate> delegate;
+@property(nonatomic , assign) _Nullable id <LLASocialShareHorPageLayoutDelegate> delegate;
 
 @end
