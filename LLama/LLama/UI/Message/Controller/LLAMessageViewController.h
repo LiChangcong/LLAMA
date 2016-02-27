@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLAMessageViewController : UIViewController
+#import "LLACommonViewController.h"
+
+@interface LLAMessageViewController : LLACommonViewController
 
 @end

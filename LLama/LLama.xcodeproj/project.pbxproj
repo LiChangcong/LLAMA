@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		5C0312651C81532A005B70FF /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312631C81532A005B70FF /* AVOSCloud.framework */; };
 		5C0312661C81532A005B70FF /* AVOSCloudIM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312641C81532A005B70FF /* AVOSCloudIM.framework */; };
+		5C0312681C81540F005B70FF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312671C81540F005B70FF /* MobileCoreServices.framework */; };
+		5C03126A1C81541E005B70FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C0312691C81541E005B70FF /* CoreLocation.framework */; };
+		5C03126F1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C03126E1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m */; };
+		5C0312721C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312711C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m */; };
+		5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */; };
+		5C0312781C818BA8005B70FF /* LLAMessageCenterRoomInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */; };
 		5C0F6C301C7AB6CC00D2D86B /* LLAPickImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */; };
 		5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF521C59E9C500C71A9B /* LLAEditVideoTopToolBar.m */; };
 		5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */; };
@@ -477,6 +483,16 @@
 		243E2DF2DD198446BD41D69F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5C0312631C81532A005B70FF /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		5C0312641C81532A005B70FF /* AVOSCloudIM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudIM.framework; sourceTree = "<group>"; };
+		5C0312671C81540F005B70FF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5C0312691C81541E005B70FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5C03126D1C817162005B70FF /* LLAMessageCenterSystemMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCenterSystemMessageCell.h; sourceTree = "<group>"; };
+		5C03126E1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterSystemMessageCell.m; sourceTree = "<group>"; };
+		5C0312701C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCenterSystemMsgInfo.h; sourceTree = "<group>"; };
+		5C0312711C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterSystemMsgInfo.m; sourceTree = "<group>"; };
+		5C0312731C818173005B70FF /* LLAMessageCenterConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCenterConversationCell.h; sourceTree = "<group>"; };
+		5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterConversationCell.m; sourceTree = "<group>"; };
+		5C0312761C818BA8005B70FF /* LLAMessageCenterRoomInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCenterRoomInfo.h; sourceTree = "<group>"; };
+		5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCenterRoomInfo.m; sourceTree = "<group>"; };
 		5C0F6C2E1C7AB6CC00D2D86B /* LLAPickImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageManager.h; sourceTree = "<group>"; };
 		5C0F6C2F1C7AB6CC00D2D86B /* LLAPickImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageManager.m; sourceTree = "<group>"; };
 		5C1FEF511C59E9C500C71A9B /* LLAEditVideoTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoTopToolBar.h; sourceTree = "<group>"; };
@@ -1381,6 +1397,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C03126A1C81541E005B70FF /* CoreLocation.framework in Frameworks */,
+				A3209AA41C3D104A00CADC51 /* CoreTelephony.framework in Frameworks */,
+				5C0312681C81540F005B70FF /* MobileCoreServices.framework in Frameworks */,
 				A3209A9D1C3D101D00CADC51 /* QuartzCore.framework in Frameworks */,
 				5CB5EBFD1C60ACBD00ED74C5 /* Photos.framework in Frameworks */,
 				A3209A8C1C3D07D500CADC51 /* libc++.tbd in Frameworks */,
@@ -1392,7 +1411,6 @@
 				5C6D7A5F1C58B92C00119A3A /* AudioToolbox.framework in Frameworks */,
 				A3E2D9071C3E146A005885D4 /* CFNetwork.framework in Frameworks */,
 				A3209AA71C3D106E00CADC51 /* CoreGraphics.framework in Frameworks */,
-				A3209AA41C3D104A00CADC51 /* CoreTelephony.framework in Frameworks */,
 				A3209AA51C3D104A00CADC51 /* CoreText.framework in Frameworks */,
 				A3209AA11C3D103C00CADC51 /* Security.framework in Frameworks */,
 				A3209A9F1C3D102300CADC51 /* ImageIO.framework in Frameworks */,
@@ -1433,6 +1451,30 @@
 				5C0312641C81532A005B70FF /* AVOSCloudIM.framework */,
 			);
 			path = LeanCloudSDK;
+			sourceTree = "<group>";
+		};
+		5C03126B1C81714D005B70FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C0312701C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.h */,
+				5C0312711C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m */,
+				5C0312761C818BA8005B70FF /* LLAMessageCenterRoomInfo.h */,
+				5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */,
+			);
+			name = Model;
+			path = Controller/Model;
+			sourceTree = "<group>";
+		};
+		5C03126C1C81714D005B70FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C03126D1C817162005B70FF /* LLAMessageCenterSystemMessageCell.h */,
+				5C03126E1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m */,
+				5C0312731C818173005B70FF /* LLAMessageCenterConversationCell.h */,
+				5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */,
+			);
+			name = View;
+			path = Controller/View;
 			sourceTree = "<group>";
 		};
 		5C0F6C2D1C7AB67D00D2D86B /* Util */ = {
@@ -2128,6 +2170,8 @@
 		660179C1F0CA8536FA315666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C0312691C81541E005B70FF /* CoreLocation.framework */,
+				5C0312671C81540F005B70FF /* MobileCoreServices.framework */,
 				5CB5EBFC1C60ACBD00ED74C5 /* Photos.framework */,
 				5C6D7A621C58B94800119A3A /* GLKit.framework */,
 				5C6D7A601C58B93500119A3A /* CoreAudio.framework */,
@@ -2718,9 +2762,9 @@
 		A3DEDE0C1C3CAEC6009F3D37 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				5C03126B1C81714D005B70FF /* Model */,
+				5C03126C1C81714D005B70FF /* View */,
 				A3DEDE0D1C3CAEC6009F3D37 /* Controller */,
-				A3DEDE101C3CAEC6009F3D37 /* Model */,
-				A3DEDE111C3CAEC6009F3D37 /* View */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2734,20 +2778,6 @@
 				7EC717861C7AE178005F04FB /* LLAMessageViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		A3DEDE101C3CAEC6009F3D37 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A3DEDE111C3CAEC6009F3D37 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		A3DEDE121C3CAEC6009F3D37 /* Publish */ = {
@@ -3335,6 +3365,7 @@
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
 				5C7534731C7714450058F93C /* PSTCollectionViewCell.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
+				5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */,
 				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
 				5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */,
 				A3DEDE6F1C3CAEC7009F3D37 /* TMPhotoView.m in Sources */,
@@ -3391,6 +3422,7 @@
 				7E9F7B111C58BE5C00620ED2 /* LLAModifyPasswordViewController.m in Sources */,
 				7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
+				5C0312721C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m in Sources */,
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
 				5CE0EB901C46424300C6BC79 /* TYImageStorage.m in Sources */,
@@ -3505,6 +3537,7 @@
 				7E64DF391C7C565F00F88093 /* LLAHotUsersCollectionView.m in Sources */,
 				7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */,
 				5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */,
+				5C0312781C818BA8005B70FF /* LLAMessageCenterRoomInfo.m in Sources */,
 				5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */,
 				5C6D7A411C58B73200119A3A /* SCPhotoConfiguration.m in Sources */,
 				7EAF3D2F1C7418BC00AA91BA /* LLACameraCell.m in Sources */,
@@ -3614,6 +3647,7 @@
 				5C8275121C5726A500DD547F /* MMPopupView.m in Sources */,
 				7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */,
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
+				5C03126F1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
 				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
@@ -3813,6 +3847,9 @@
 					"-framework",
 					"\"UIKit\"",
 					"-w",
+					"-lz",
+					"-lsqlite3",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3887,6 +3924,9 @@
 					"-framework",
 					"\"UIKit\"",
 					"-w",
+					"-lz",
+					"-lsqlite3",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
