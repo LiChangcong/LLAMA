@@ -30,6 +30,8 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
 
 @interface LLAMessageCenterSystemMessageCell()
 {
+    UIView *selectedCoverView;
+    
     UIImageView *iconImageView;
     
     UILabel *titleLabel;
@@ -42,6 +44,7 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     
     //
     UIColor *backColor;
+    UIColor *selectedColor;
     
     UIFont *titleLabelFont;
     UIColor *titleLabelTextColor;
@@ -69,7 +72,7 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     if (self) {
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self commonInit];
         
     }
@@ -88,6 +91,7 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
 
 - (void) initVariables {
     backColor = [UIColor colorWithHex:0x211f2c];
+    selectedColor = [UIColor colorWithHex:0xfffff alpha:0.2];
     
     titleLabelFont = [UIFont boldLLAFontOfSize:15];
     titleLabelTextColor = [UIColor whiteColor];
@@ -101,6 +105,12 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
 }
 
 - (void) initSubViews {
+    selectedCoverView = [[UIView alloc] init];
+    selectedCoverView.translatesAutoresizingMaskIntoConstraints = NO;
+    selectedCoverView.backgroundColor = selectedColor;
+    selectedCoverView.hidden = YES;
+    [self.contentView addSubview:selectedCoverView];
+    
     iconImageView = [[UIImageView alloc] init];
     iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
     iconImageView.clipsToBounds = YES;
@@ -142,6 +152,8 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     sepLineView.backgroundColor = sepLineColor;
     
     [self.contentView addSubview:sepLineView];
+    
+    [self.contentView bringSubviewToFront:selectedCoverView];
 }
 
 - (void) initConstraints {
@@ -149,6 +161,14 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     NSMutableArray *constrArray = [NSMutableArray array];
     
     //vertical
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(0)-[selectedCoverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(selectedCoverView)]];
+    
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:iconImageView
@@ -209,6 +229,14 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
       constant:-(lineHeight)/2]];
 
     //horizonal
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[selectedCoverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(selectedCoverView)]];
+    
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"H:|-(toLeft)-[iconImageView(iconWidth)]-(iconToTitle)-[titleLabel]-(titleToBadge)-[badgeButton(>=minWidth)]-(badgeToArrow)-[arrowImageView]-(toRight)-|"
@@ -240,6 +268,14 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     [arrowImageView setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
 }
+
+#pragma mark - Selection
+
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    selectedCoverView.hidden = !highlighted;
+}
+
+#pragma mark - Update
 
 - (void) updateCellWithMsgInfo:(LLAMessageCenterSystemMsgInfo *) info tableWidth:(CGFloat) tableWidth {
     

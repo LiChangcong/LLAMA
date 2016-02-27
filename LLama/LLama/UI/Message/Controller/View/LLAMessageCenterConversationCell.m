@@ -29,6 +29,9 @@ static const CGFloat lineHeight = 0.6;
 
 @interface LLAMessageCenterConversationCell()<LLAUserHeadViewDelegate>
 {
+    
+    UIView *selectedCoverView;
+    
     LLAUserHeadView *headView;
     
     UILabel *userNameLabel;
@@ -41,6 +44,7 @@ static const CGFloat lineHeight = 0.6;
     
     //
     UIColor *backColor;
+    UIColor *selectedColor;
     
     UIFont *userNameLabelFont;
     UIColor *userNameLabelTextColor;
@@ -72,7 +76,7 @@ static const CGFloat lineHeight = 0.6;
     if (self) {
         
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self commonInit];
         
     }
@@ -92,6 +96,7 @@ static const CGFloat lineHeight = 0.6;
 - (void) initVariables {
     
     backColor = [UIColor colorWithHex:0x211f2c];
+    selectedColor = [UIColor colorWithHex:0xfffff alpha:0.2];
     
     userNameLabelFont = [UIFont boldLLAFontOfSize:15];
     userNameLabelTextColor = [UIColor whiteColor];
@@ -112,6 +117,13 @@ static const CGFloat lineHeight = 0.6;
 }
 
 - (void) initSubViews {
+    
+    selectedCoverView = [[UIView alloc] init];
+    selectedCoverView.translatesAutoresizingMaskIntoConstraints = NO;
+    selectedCoverView.backgroundColor = selectedColor;
+    selectedCoverView.hidden = YES;
+    [self.contentView addSubview:selectedCoverView];
+
     
     headView = [[LLAUserHeadView alloc] init];
     headView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -162,6 +174,8 @@ static const CGFloat lineHeight = 0.6;
     sepLineView.backgroundColor = lineColor;
     
     [self.contentView addSubview:sepLineView];
+    
+    [self.contentView bringSubviewToFront:selectedCoverView];
 
     
 }
@@ -171,6 +185,15 @@ static const CGFloat lineHeight = 0.6;
     NSMutableArray *constrArray = [NSMutableArray array];
     
     //vertical
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(0)-[selectedCoverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(selectedCoverView)]];
+
+    
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:headView
@@ -239,6 +262,15 @@ static const CGFloat lineHeight = 0.6;
       views:NSDictionaryOfVariableBindings(sepLineView)]];
 
     //horizonal
+    
+    [constrArray addObjectsFromArray:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|-(0)-[selectedCoverView]-(0)-|"
+      options:NSLayoutFormatDirectionLeadingToTrailing
+      metrics:nil
+      views:NSDictionaryOfVariableBindings(selectedCoverView)]];
+
+    
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"H:|-(toLeft)-[headView(headWidth)]-(headViewToCenter)-[userNameLabel]-(nameToTime)-[timeLabel]-(toRight)-|"
@@ -281,6 +313,13 @@ static const CGFloat lineHeight = 0.6;
     [badgeButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
 }
+
+#pragma mark - Selection
+
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    selectedCoverView.hidden = !highlighted;
+}
+
 
 #pragma mark - LLAHeadViewDelegate
 
