@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LLAChatInputPickerEmojiViewDelegate <NSObject>
+
+- (void) pickedEmoji:(NSString *) emojiString;
+
+- (void) sendMessageClicked;
+
+- (void) deleteEmoji;
+
+@end
+
 @interface LLAChatInputPickerEmojiView : UIView
+
+@property(nonatomic , weak) id<LLAChatInputPickerEmojiViewDelegate> delegate;
 
 + (CGFloat) calculateHeight;
 

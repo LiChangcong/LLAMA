@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LLAChatInputViewControllerDelegate <NSObject>
+
+
+@end
+
 @interface LLAChatInputViewController : UIViewController
+
+@property(nonatomic , weak) id<LLAChatInputViewControllerDelegate> delegate;
 
 @end

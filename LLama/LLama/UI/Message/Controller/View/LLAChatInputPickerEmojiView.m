@@ -67,6 +67,8 @@ static const NSInteger numberOfEmojiIconRows = 3;
 
 @implementation LLAChatInputPickerEmojiView
 
+@synthesize delegate;
+
 #pragma mark - Life Cycle
 
 - (void) layoutSubviews {

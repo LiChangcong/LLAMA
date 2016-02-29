@@ -236,5 +236,11 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
     }
 }
 
+#pragma mark - CalculateHeight
+
++ (CGFloat) calculateHeight {
+    return 40;
+}
+
 
 @end

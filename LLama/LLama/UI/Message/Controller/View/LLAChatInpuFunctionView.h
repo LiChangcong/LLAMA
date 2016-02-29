@@ -26,4 +26,6 @@
 
 @property(nonatomic , weak) id<LLAChatInpuFunctionViewDelegate> delegate;
 
++ (CGFloat) calculateHeight;
+
 @end
