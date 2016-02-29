@@ -264,6 +264,11 @@
 		5CE646D31C44FB59004DA6D5 /* LLAHomeScriptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D21C44FB59004DA6D5 /* LLAHomeScriptViewController.m */; };
 		5CE646DA1C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */; };
 		5CE646DF1C4513D3004DA6D5 /* LLATableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE646DE1C4513D3004DA6D5 /* LLATableView.m */; };
+		5CECCC6F1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC6E1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m */; };
+		5CECCC721C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC711C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m */; };
+		5CECCC751C83EE16002BDE99 /* LLAMessageOrderAideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */; };
+		5CECCC781C83EE9C002BDE99 /* LLAMessageOrderAideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */; };
+		5CECCC7B1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */; };
 		5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */; };
 		5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */; };
 		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
@@ -1034,6 +1039,16 @@
 		5CE646D71C4512D6004DA6D5 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		5CE646DD1C4513D3004DA6D5 /* LLATableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATableView.h; sourceTree = "<group>"; };
 		5CE646DE1C4513D3004DA6D5 /* LLATableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLATableView.m; sourceTree = "<group>"; };
+		5CECCC6D1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedCommentCell.h; sourceTree = "<group>"; };
+		5CECCC6E1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedCommentCell.m; sourceTree = "<group>"; };
+		5CECCC701C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedCommentItemInfo.h; sourceTree = "<group>"; };
+		5CECCC711C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedCommentItemInfo.m; sourceTree = "<group>"; };
+		5CECCC731C83EE16002BDE99 /* LLAMessageOrderAideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageOrderAideController.h; sourceTree = "<group>"; };
+		5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageOrderAideController.m; sourceTree = "<group>"; };
+		5CECCC761C83EE9C002BDE99 /* LLAMessageOrderAideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageOrderAideCell.h; sourceTree = "<group>"; };
+		5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageOrderAideCell.m; sourceTree = "<group>"; };
+		5CECCC791C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedOrderItemInfo.h; sourceTree = "<group>"; };
+		5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedOrderItemInfo.m; sourceTree = "<group>"; };
 		5CED5E7D1C4BC853003E09CF /* LLACollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACollectionView.h; sourceTree = "<group>"; };
 		5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACollectionView.m; sourceTree = "<group>"; };
 		5CED5E801C4BC97D003E09CF /* LLAVideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoDetailViewController.h; sourceTree = "<group>"; };
@@ -1474,6 +1489,10 @@
 				5C0312771C818BA8005B70FF /* LLAMessageCenterRoomInfo.m */,
 				5C0312821C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.h */,
 				5C0312831C81A3BC005B70FF /* LLAMessageReceivedPraiseItemInfo.m */,
+				5CECCC701C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.h */,
+				5CECCC711C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m */,
+				5CECCC791C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.h */,
+				5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */,
 			);
 			name = Model;
 			path = Controller/Model;
@@ -1488,6 +1507,10 @@
 				5C0312741C818173005B70FF /* LLAMessageCenterConversationCell.m */,
 				5C03127F1C819F0A005B70FF /* LLAMessageReceivedPraiseCell.h */,
 				5C0312801C819F0A005B70FF /* LLAMessageReceivedPraiseCell.m */,
+				5CECCC6D1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.h */,
+				5CECCC6E1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m */,
+				5CECCC761C83EE9C002BDE99 /* LLAMessageOrderAideCell.h */,
+				5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */,
 			);
 			name = View;
 			path = Controller/View;
@@ -2796,6 +2819,8 @@
 				5C03127A1C819BDA005B70FF /* LLAMessageReceivedPraiseController.m */,
 				5C03127C1C819DB8005B70FF /* LLAMessageReceivedCommentController.h */,
 				5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */,
+				5CECCC731C83EE16002BDE99 /* LLAMessageOrderAideController.h */,
+				5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3398,8 +3423,10 @@
 				5CE0EB731C4607AD00C6BC79 /* LLAVideoInfo.m in Sources */,
 				A3DEDE831C3CAEC7009F3D37 /* TMMessageController.m in Sources */,
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
+				5CECCC7B1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m in Sources */,
 				5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */,
 				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
+				5CECCC6F1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m in Sources */,
 				5C6D7A571C58B85C00119A3A /* LLAEditVideoViewController.m in Sources */,
 				5C6D7A3A1C58B73200119A3A /* SCFilter+VideoComposition.m in Sources */,
 				5C6D7A401C58B73200119A3A /* SCMediaTypeConfiguration.m in Sources */,
@@ -3600,6 +3627,7 @@
 				A3DEDDA51C3CAE38009F3D37 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */,
 				7EC717871C7AE178005F04FB /* LLAMessageViewController.m in Sources */,
+				5CECCC721C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m in Sources */,
 				A3DEDD971C3CAE38009F3D37 /* EXTRuntimeExtensions.m in Sources */,
 				5C7534771C7714450058F93C /* PSTCollectionViewItemKey.m in Sources */,
 				5C7534421C7711920058F93C /* MWTapDetectingImageView.m in Sources */,
@@ -3656,6 +3684,8 @@
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */,
 				5CC696D21C5CDEA100E4BA89 /* DataVerifier.m in Sources */,
+				5CECCC751C83EE16002BDE99 /* LLAMessageOrderAideController.m in Sources */,
+				5CECCC781C83EE9C002BDE99 /* LLAMessageOrderAideCell.m in Sources */,
 				7E64DEEE1C7C03BF00F88093 /* LLAHotVideosCell.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,

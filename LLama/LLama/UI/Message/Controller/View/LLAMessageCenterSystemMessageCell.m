@@ -100,7 +100,7 @@ static NSString *const orderListIconName = @"MessageCenter_OrderList_Icon";
     badgeTextColor = [UIColor whiteColor];
     badgeBackColor = [UIColor colorWithHex:0xf94848];
     
-    sepLineColor = [UIColor colorWithHex:0x1e1d22];
+    sepLineColor = [UIColor colorWithHex:0x1e1d28];
 
 }
 

@@ -11,6 +11,10 @@
 //view
 #import "LLATableView.h"
 #import "LLALoadingView.h"
+#import "LLAMessageReceivedCommentCell.h"
+
+//model
+#import "LLAMessageReceivedCommentItemInfo.h"
 
 //util
 #import "LLAViewUtil.h"
@@ -21,6 +25,8 @@
 @interface LLAMessageReceivedCommentController()<UITableViewDelegate,UITableViewDataSource>
 {
     LLATableView *dataTableView;
+    
+    NSMutableArray *dataArray;
 }
 
 @end
@@ -43,10 +49,31 @@
 
 - (void) initVariables {
     
+    dataArray = [NSMutableArray array];
+    
+    LLAMessageReceivedCommentItemInfo *itemInfo = [LLAMessageReceivedCommentItemInfo new];
+    
+    itemInfo.authorUser = [LLAUser me];
+    itemInfo.editTimeString = @"刚刚";
+    itemInfo.manageContent = @"回复了你的视频";
+    itemInfo.infoImageURL = @"http://pic.nipic.com/2007-11-09/200711912453162_2.jpg";
+    
+    [dataArray addObject:itemInfo];
+    
+    LLAMessageReceivedCommentItemInfo *itemInfo1 = [LLAMessageReceivedCommentItemInfo new];
+    
+    itemInfo1.authorUser = [LLAUser me];
+    itemInfo1.editTimeString = @"刚刚";
+    itemInfo1.manageContent = @"回复了你的视频";
+    
+    
+    [dataArray addObject:itemInfo1];
+
+    
 }
 
 - (void) initNavigationItems {
-    self.navigationItem.title = @"收到的赞";
+    self.navigationItem.title = @"收到的评论";
 }
 
 - (void) initSubViews {
@@ -101,15 +128,24 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return dataArray.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    static NSString *commentIden = @"commentIden";
+    
+    LLAMessageReceivedCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentIden];
+    if (!cell) {
+        cell = [[LLAMessageReceivedCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commentIden];
+    }
+    
+    [cell updateCellWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    return cell;
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -119,7 +155,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
+    return [LLAMessageReceivedCommentCell calculateHeightWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
 }
 
 

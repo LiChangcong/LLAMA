@@ -112,7 +112,7 @@ static const CGFloat lineHeight = 0.6;
     badgeFont = [UIFont llaFontOfSize:12];
     badgeTextColor = [UIColor whiteColor];
     
-    lineColor = [UIColor colorWithHex:0x1e1d22];
+    lineColor = [UIColor colorWithHex:0x1e1d28];
 
     
 }

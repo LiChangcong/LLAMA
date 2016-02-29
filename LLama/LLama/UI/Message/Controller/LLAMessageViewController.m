@@ -9,6 +9,8 @@
 //controler
 #import "LLAMessageViewController.h"
 #import "LLAMessageReceivedPraiseController.h"
+#import "LLAMessageReceivedCommentController.h"
+#import "LLAMessageOrderAideController.h"
 
 //view
 #import "LLATableView.h"
@@ -195,7 +197,22 @@ static const NSInteger conversationSectionIndex = 1;
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == systemMessageSectionIndex) {
         LLAMessageCenterSystemMsgInfo *msgInfo = systemMessageArray[indexPath.row];
-
+        
+        if (msgInfo.messageType == LLASystemMessageType_BePraised) {
+            //
+            LLAMessageReceivedPraiseController *praised = [[LLAMessageReceivedPraiseController alloc] init];
+            [self.navigationController pushViewController:praised animated:YES];
+            
+        }else if (msgInfo.messageType == LLASystemMessageType_BeCommented) {
+            //
+            LLAMessageReceivedCommentController *comment = [[LLAMessageReceivedCommentController alloc] init];
+            [self.navigationController pushViewController:comment animated:YES];
+            
+        }else if (msgInfo.messageType == LLASystemMessageType_Order) {
+            //
+            LLAMessageOrderAideController *order = [[LLAMessageOrderAideController alloc] init];
+            [self.navigationController pushViewController:order animated:YES];
+        }
         
     }else if (indexPath.section == conversationSectionIndex) {
         

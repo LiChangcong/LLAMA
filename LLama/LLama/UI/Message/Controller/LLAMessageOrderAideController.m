@@ -1,29 +1,28 @@
 //
-//  LLAMessageReceivedPraiseController.m
+//  LLAMessageOrderAideController.m
 //  LLama
 //
-//  Created by Live on 16/2/27.
+//  Created by Live on 16/2/29.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-//controller
-#import "LLAMessageReceivedPraiseController.h"
+#import "LLAMessageOrderAideController.h"
 
 //view
 #import "LLATableView.h"
 #import "LLALoadingView.h"
-#import "LLAMessageReceivedPraiseCell.h"
+#import "LLAMessageOrderAideCell.h"
+
+//model
+#import "LLAMessageReceivedOrderItemInfo.h"
 
 //util
 #import "LLAViewUtil.h"
 
-//model
-#import "LLAMessageReceivedPraiseItemInfo.h"
-
 //category
 #import "SVPullToRefresh.h"
 
-@interface LLAMessageReceivedPraiseController()<UITableViewDataSource,UITableViewDelegate>
+@interface LLAMessageOrderAideController()<UITableViewDataSource,UITableViewDelegate>
 {
     LLATableView *dataTableView;
     
@@ -32,7 +31,7 @@
 
 @end
 
-@implementation LLAMessageReceivedPraiseController
+@implementation LLAMessageOrderAideController
 
 #pragma mark - Life Cycle
 
@@ -49,31 +48,32 @@
 #pragma mark - Init
 
 - (void) initVariables {
+    
     dataArray = [NSMutableArray array];
     
-    LLAMessageReceivedPraiseItemInfo *itemInfo = [LLAMessageReceivedPraiseItemInfo new];
+    LLAMessageReceivedOrderItemInfo *itemInfo = [LLAMessageReceivedOrderItemInfo new];
     
     itemInfo.authorUser = [LLAUser me];
     itemInfo.editTimeString = @"刚刚";
-    itemInfo.manageContent = @"赞了你的视频";
-    itemInfo.infoImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
+    itemInfo.manageContent = @"回复了你的视频";
+    itemInfo.infoImageURL = @"http://pic.nipic.com/2007-11-09/200711912453162_2.jpg";
     
     [dataArray addObject:itemInfo];
     
-    LLAMessageReceivedPraiseItemInfo *itemInfo1 = [LLAMessageReceivedPraiseItemInfo new];
+    LLAMessageReceivedOrderItemInfo *itemInfo1 = [LLAMessageReceivedOrderItemInfo new];
     
     itemInfo1.authorUser = [LLAUser me];
     itemInfo1.editTimeString = @"刚刚";
-    itemInfo1.manageContent = @"赞了你的视频";
+    itemInfo1.manageContent = @"回复了你的视频";
     
     
     [dataArray addObject:itemInfo1];
-
+    
     
 }
 
 - (void) initNavigationItems {
-    self.navigationItem.title = @"收到的赞";
+    self.navigationItem.title = @"订单助手";
 }
 
 - (void) initSubViews {
@@ -111,7 +111,7 @@
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
-
+    
     
 }
 
@@ -136,17 +136,16 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *commentIden = @"commentIden";
     
-    static NSString *praiseIden = @"praiseIden";
-    
-    LLAMessageReceivedPraiseCell *cell = [tableView dequeueReusableCellWithIdentifier:praiseIden];
+    LLAMessageOrderAideCell *cell = [tableView dequeueReusableCellWithIdentifier:commentIden];
     if (!cell) {
-        cell = [[LLAMessageReceivedPraiseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:praiseIden];
+        cell = [[LLAMessageOrderAideCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commentIden];
     }
     
     [cell updateCellWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
     return cell;
-                            
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -156,7 +155,8 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [LLAMessageReceivedPraiseCell calculateHeightWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    return [LLAMessageOrderAideCell calculateHeightWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
 }
+
 
 @end

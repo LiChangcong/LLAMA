@@ -1,16 +1,16 @@
 //
-//  LLAMessageReceivedPraiseCell.m
+//  LLAMessageReceivedCommentCell.m
 //  LLama
 //
-//  Created by Live on 16/2/27.
+//  Created by Live on 16/2/29.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLAMessageReceivedPraiseCell.h"
+#import "LLAMessageReceivedCommentCell.h"
 
 #import "LLAUserHeadView.h"
 
-#import "LLAMessageReceivedPraiseItemInfo.h"
+#import "LLAMessageReceivedCommentItemInfo.h"
 
 static const CGFloat headViewToLeft = 11;
 static const CGFloat headViewHeightWidth = 34;
@@ -24,9 +24,7 @@ static const CGFloat timeLabelToInfoImageHorSpace = 2;
 
 static const CGFloat lineHeight = 0.6;
 
-
-
-@interface LLAMessageReceivedPraiseCell()<LLAUserHeadViewDelegate>
+@interface LLAMessageReceivedCommentCell()<LLAUserHeadViewDelegate>
 {
     
     UIView *selectedCoverView;
@@ -57,12 +55,12 @@ static const CGFloat lineHeight = 0.6;
     NSLayoutConstraint *timeToRightConstraints;
     
     //
-    LLAMessageReceivedPraiseItemInfo *praiseInfo;
+    LLAMessageReceivedCommentItemInfo *commentInfo;
 }
 
 @end
 
-@implementation LLAMessageReceivedPraiseCell
+@implementation LLAMessageReceivedCommentCell
 
 #pragma mark - Init
 
@@ -227,7 +225,7 @@ static const CGFloat lineHeight = 0.6;
       attribute:NSLayoutAttributeCenterY
       multiplier:1.0
       constant:-(lineHeight)/2]];
-
+    
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -262,7 +260,7 @@ static const CGFloat lineHeight = 0.6;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{
                 @"headViewToCenter":@(headViewToCenterContent),
-                @"toRight":@(timeLabelToInfoImageHorSpace+infoImageViewHeightWidth+infoImageViewToRight)}
+                @"toRight":@(timeLabelToInfoImageHorSpace+infoImageViewHeightWidth+messageLabelToImageHorSpace)}
       views:NSDictionaryOfVariableBindings(headView,timeLabel)]];
     
     [constrArray addObjectsFromArray:
@@ -306,25 +304,25 @@ static const CGFloat lineHeight = 0.6;
 
 #pragma mark - Update
 
-- (void) updateCellWithInfo:(LLAMessageReceivedPraiseItemInfo *)info tableWidth:(CGFloat)width {
+- (void) updateCellWithInfo:(LLAMessageReceivedCommentItemInfo *)info tableWidth:(CGFloat)width {
     
-    praiseInfo = info;
+    commentInfo = info;
     //
     
     [self adjustLabelPosition];
     
-    [headView updateHeadViewWithUser:praiseInfo.authorUser];
+    [headView updateHeadViewWithUser:commentInfo.authorUser];
     
-    messageLabel.text = praiseInfo.manageContent;
-    timeLabel.text = praiseInfo.editTimeString;
+    messageLabel.text = commentInfo.manageContent;
+    timeLabel.text = commentInfo.editTimeString;
     
-    if (praiseInfo.infoImageURL)
-        [infoImageView setImageWithURL:[NSURL URLWithString:praiseInfo.infoImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_340"]];
+    if (commentInfo.infoImageURL)
+        [infoImageView setImageWithURL:[NSURL URLWithString:commentInfo.infoImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_340"]];
     
 }
 
 - (void) adjustLabelPosition {
-    if (praiseInfo.infoImageURL.length > 0) {
+    if (commentInfo.infoImageURL.length > 0) {
         messageToRightConstraints.constant = messageLabelToImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
         timeToRightConstraints.constant =  timeLabelToInfoImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
         infoImageView.hidden = NO;
@@ -337,7 +335,7 @@ static const CGFloat lineHeight = 0.6;
 
 #pragma mark - Calculate Height
 
-+ (CGFloat) calculateHeightWithInfo:(LLAMessageReceivedPraiseItemInfo *)info tableWidth:(CGFloat)width {
++ (CGFloat) calculateHeightWithInfo:(LLAMessageReceivedCommentItemInfo *)info tableWidth:(CGFloat)width {
     
     return 68;
 }
