@@ -1,14 +1,16 @@
 //
-//  LLASocialShareHorPageLayout.m
+//  LLAChatInputEmojiFlowLayout.m
 //  LLama
 //
-//  Created by Live on 16/2/26.
+//  Created by Live on 16/2/29.
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import "LLASocialShareHorPageLayout.h"
+#import "LLAChatInputEmojiFlowLayout.h"
 
-@interface LLASocialShareHorPageLayout()
+
+
+@interface LLAChatInputEmojiFlowLayout()
 {
     CGFloat maxHeightForLayout;
     
@@ -17,9 +19,10 @@
     CGSize layoutContentSize;
 }
 
+
 @end
 
-@implementation LLASocialShareHorPageLayout
+@implementation LLAChatInputEmojiFlowLayout
 
 @synthesize delegate;
 
@@ -88,11 +91,11 @@
         for (int itemIndex = 0; itemIndex < numberOfItems; itemIndex++) {
             
             CGSize itemSize = [delegate collectionView:self.collectionView layout:self sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:itemIndex inSection:sectionIndex]];
-        
+            
             UICollectionViewLayoutAttributes *attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForRow:itemIndex inSection:sectionIndex]];
             CGRect itemFrame = CGRectMake(currentX, currentY, itemSize.width, itemSize.height);
             attr.frame = itemFrame;
-
+            
             //x
             if (offesetX + minCellHorSpace + itemSize.width > self.collectionView.bounds.size.width) {
                 //new line
@@ -134,7 +137,7 @@
             
             //set frame
             attr.frame = itemFrame;
-    
+            
             [itemsData addObject:attr];
             
         }
@@ -177,5 +180,6 @@
     return result;
     
 }
+
 
 @end
