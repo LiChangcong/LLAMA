@@ -17,4 +17,7 @@ typedef enum : NSUInteger {
 @interface LLAHotUsersViewController : LLACommonViewController
 
 @property(nonatomic , assign) UserType userType;
+
+@property(nonatomic, strong) NSArray *hotUsersArray;
+@property(nonatomic, strong) NSArray *searchResultUsersArray;
 @end

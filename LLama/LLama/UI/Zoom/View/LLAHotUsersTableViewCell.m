@@ -14,10 +14,12 @@ static const CGFloat nameLabelToHeadIcon = 10;
 static const CGFloat detailLabelToHeadIcon = 10;
 static const CGFloat attentionButtonToRight = 10;
 
+#import "LLAUserHeadView.h"
 
 @interface LLAHotUsersTableViewCell()
 {
-    UIButton *headIcon;
+//    UIButton *headIcon;
+    LLAUserHeadView *userHeadView;
     
     UILabel *nameLabel;
     
@@ -70,18 +72,23 @@ static const CGFloat attentionButtonToRight = 10;
 
 - (void)initSubViews
 {
+//    // 头像
+//    headIcon = [[UIButton alloc] init];
+//    headIcon.translatesAutoresizingMaskIntoConstraints = NO;
+//    [headIcon setImage:[UIImage imageNamed:@"userhead"] forState:UIControlStateNormal];
+//    [self.contentView addSubview:headIcon];
+    
     // 头像
-    headIcon = [[UIButton alloc] init];
-    headIcon.translatesAutoresizingMaskIntoConstraints = NO;
-    [headIcon setImage:[UIImage imageNamed:@"userhead"] forState:UIControlStateNormal];
-    [self.contentView addSubview:headIcon];
+    userHeadView = [[LLAUserHeadView alloc] init];
+    userHeadView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView addSubview:userHeadView];
 
     // 用户名
     nameLabel = [[UILabel alloc] init];
     nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     nameLabel.font = nameLabelTextFont;
     nameLabel.textColor = nameLabelColor;
-    nameLabel.text = @"用户名";
+//    nameLabel.text = @"用户名";
     [self.contentView addSubview:nameLabel];
     
     // 详情说说
@@ -89,14 +96,14 @@ static const CGFloat attentionButtonToRight = 10;
     detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
     detailLabel.font = detailLabelFont;
     detailLabel.textColor = detailLabelColor;
-    detailLabel.text = @"我是一个好人";
+//    detailLabel.text = @"我是一个好人";
     [self.contentView addSubview:detailLabel];
 
     // 关注按钮
     attentionButton = [[UIButton alloc] init];
     attentionButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_unfollow"] forState:UIControlStateNormal];
-    [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_follow"] forState:UIControlStateSelected];
+//    [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_unfollow"] forState:UIControlStateNormal];
+//    [attentionButton setBackgroundImage:[UIImage imageNamed:@"search_hotUsers_follow"] forState:UIControlStateSelected];
     [attentionButton addTarget:self action:@selector(attentionButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:attentionButton];
     
@@ -107,7 +114,7 @@ static const CGFloat attentionButtonToRight = 10;
 }
 - (void)initSubConstraints
 {
-    [headIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+    [userHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@34);
         make.height.equalTo(@34);
         make.centerY.equalTo(self.contentView.mas_centerY);
@@ -116,14 +123,14 @@ static const CGFloat attentionButtonToRight = 10;
     }];
     
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(headIcon.mas_right).with.offset(nameLabelToHeadIcon);
-        make.top.equalTo(headIcon.mas_top);
+        make.left.equalTo(userHeadView.mas_right).with.offset(nameLabelToHeadIcon);
+        make.top.equalTo(userHeadView.mas_top);
         
     }];
     
     [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(headIcon.mas_bottom);
-        make.left.equalTo(headIcon.mas_right).with.offset(detailLabelToHeadIcon);
+        make.bottom.equalTo(userHeadView.mas_bottom);
+        make.left.equalTo(userHeadView.mas_right).with.offset(detailLabelToHeadIcon);
     }];
     
     [attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -136,7 +143,7 @@ static const CGFloat attentionButtonToRight = 10;
     
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@1);
-        make.left.equalTo(headIcon.mas_right);
+        make.left.equalTo(userHeadView.mas_right);
         make.right.equalTo(self.contentView.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom);
         
@@ -153,14 +160,38 @@ static const CGFloat attentionButtonToRight = 10;
         [self.delegate hotUsersTableViewCellDidSelectedAttentionButton:self];
     }
 }
-- (void)updateCellWithInfo
+//- (void)updateCellWithInfo
+//{
+//    // 根据模型里面存储的状态是什么，根据状态来判断关注按钮显示什么，已关注/相互关注/点击关注；
+//    
+////    if (<#condition#>) {
+////        <#statements#>
+////    }
+//}
+- (void) updateCellWithInfo:(LLAHotUserInfo *) info tableWidth:(CGFloat) width
 {
-    // 根据模型里面存储的状态是什么，根据状态来判断关注按钮显示什么，已关注/相互关注/点击关注；
     
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-}
+    [userHeadView updateHeadViewWithUser:info.hotUser];
+    nameLabel.text = info.hotUser.userName;
+    detailLabel.text = info.hotUser.userDescription;
+    
+    if (info.attentionType == LLAAttentionType_NotAttention) {
+        [attentionButton setImage:[UIImage imageNamed:@"search_hotUsers_unfollow"] forState:UIControlStateNormal];
+        attentionButton.userInteractionEnabled = YES;
 
+    }else if (info.attentionType == LLAAttentionType_HasAttention){
+        
+        [attentionButton setImage:[UIImage imageNamed:@"search_hotUsers_follow"] forState:UIControlStateNormal];
+        attentionButton.userInteractionEnabled = NO;
+
+    }else if (info.attentionType == LLAAttentionType_AllAttention){
+        
+        [attentionButton setImage:[UIImage imageNamed:@"search_hotUsers_bothfollow"] forState:UIControlStateNormal];
+        attentionButton.userInteractionEnabled = NO;
+
+    }
+    
+    
+}
 
 @end

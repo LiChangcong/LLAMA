@@ -187,7 +187,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         
         LLAHotUsersCell *hotUsersCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:hotUsersCellIden forIndexPath:indexPath];
         //        hotUsers.delegate = self;
-        [hotUsersCell updateInfo];
+//        [hotUsersCell updateInfo];
         // 设置数据
         //        [hotUsers updateCellWithInfo:scriptInfo maxWidth:collectionView.frame.size.width];
         return hotUsersCell;
