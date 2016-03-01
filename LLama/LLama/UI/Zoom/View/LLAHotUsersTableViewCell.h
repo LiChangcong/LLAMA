@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class LLAHotUsersTableViewCell;
+#import "LLAHotUserInfo.h"
 
 @protocol LLAHotUsersTableViewCellDelegate <NSObject>
 
@@ -20,5 +21,5 @@
 
 @property(nonatomic , weak) id<LLAHotUsersTableViewCellDelegate> delegate;
 
-- (void)updateCellWithInfo;
+- (void) updateCellWithInfo:(LLAHotUserInfo *) info tableWidth:(CGFloat) width;
 @end

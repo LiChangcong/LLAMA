@@ -13,6 +13,8 @@
 
 #import "LLAUserHeadView.h"
 
+#import "LLAHotUserInfo.h"
+
 @interface LLAHotUsersCell()
 {
     UIView *containerView;
@@ -91,7 +93,7 @@
     
 }
 
-- (void)updateInfo
+- (void) updateCellWithInfo:(NSMutableArray <LLAHotUserInfo *> *)info tableWidth:(CGFloat)width
 {
 
     NSMutableArray *arr = [NSMutableArray array];
@@ -99,9 +101,12 @@
     CGFloat screenWidth =  [UIScreen mainScreen].bounds.size.width;
     
     // CGFloat num = (screenWidth- 25 )/(60);
-    // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。20，间隙
-    CGFloat num = (screenWidth - 17 - 40)/ (50 + 20);
-    for (int i = 0 ; i < num; i++) {
+    // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。10，每一个之间的间隙
+    CGFloat num = (screenWidth - 17 - 40)/ (50 + 10);
+    NSLog(@"%d,%d",info.count,(int)num);
+    // 解决热门用户小于显示的个数时候崩溃问题
+    int times = info.count > num ? num:info.count;
+    for (int i = 0 ; i < times; i++) {
 /*
         LLAHotUsersButton *hotUsersButton = [[LLAHotUsersButton alloc] init];
         [hotUsersButton setImage:[UIImage imageNamed:@"userhead"] forState:UIControlStateNormal];
@@ -114,19 +119,23 @@
         UIView *hotUserContentView = [[UIView alloc] init];
         [self.contentView addSubview:hotUserContentView];
         [arr addObject:hotUserContentView];
-        
+
         UILabel *userNameLabel = [[UILabel alloc] init];
         userNameLabel.font = hotUserFont;
         userNameLabel.textColor = hotUserColor;
-        userNameLabel.text = @"Coolprice";
+        userNameLabel.text = info[i].hotUser.userName;
+
+        userNameLabel.textAlignment = NSTextAlignmentCenter;
         [hotUserContentView addSubview:userNameLabel];
         
         
         LLAUserHeadView *headView = [[LLAUserHeadView alloc] init];
-        [headView.userHeadImageView setImage:[UIImage imageNamed:@"userhead"]];
+        headView.translatesAutoresizingMaskIntoConstraints = NO;
+        [headView updateHeadViewWithUser:info[i].hotUser];
         [hotUserContentView addSubview:headView];
 
         [headView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.equalTo(@34);
             make.top.equalTo(hotUserContentView).with.offset(5);
             make.centerX.equalTo(hotUserContentView);
         }];

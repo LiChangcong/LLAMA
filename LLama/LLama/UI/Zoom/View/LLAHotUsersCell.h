@@ -10,5 +10,5 @@
 
 @interface LLAHotUsersCell : UICollectionViewCell
 
-- (void)updateInfo;
+- (void) updateCellWithInfo:(NSMutableArray *)info tableWidth:(CGFloat)width;
 @end

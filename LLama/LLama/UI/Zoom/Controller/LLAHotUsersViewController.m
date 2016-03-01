@@ -75,13 +75,24 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    if (self.userType == UserTypeIsHotUsers) {
+        return self.hotUsersArray.count;
+    }else{
+        return self.searchResultUsersArray.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LLAHotUsersTableViewCell *cell = [dataTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (UserTypeIsHotUsers == self.userType) {
+        [cell updateCellWithInfo:self.hotUsersArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    }else{
+        [cell updateCellWithInfo:self.searchResultUsersArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    }
+    
     cell.delegate = self;
     
     return cell;

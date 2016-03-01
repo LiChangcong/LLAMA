@@ -63,7 +63,7 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     // hotVideoImageView
     hotVideoImageView = [[UIImageView alloc] init];
     hotVideoImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    hotVideoImageView.backgroundColor = [UIColor yellowColor];
+//    hotVideoImageView.backgroundColor = [UIColor yellowColor];
     hotVideoImageView.contentMode = UIViewContentModeScaleAspectFill;
     hotVideoImageView.clipsToBounds = YES;
     [self.contentView addSubview:hotVideoImageView];
@@ -73,7 +73,7 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     prizeButton.translatesAutoresizingMaskIntoConstraints = NO;
     [prizeButton setImage:[UIImage llaImageWithName:prizeButtonImageName_Normal] forState:UIControlStateNormal];
     [prizeButton setImage:[UIImage llaImageWithName:prizeButtonImageName_Highlight] forState:UIControlStateHighlighted];
-    [prizeButton setTitle:@"688" forState:UIControlStateNormal];
+//    [prizeButton setTitle:@"688" forState:UIControlStateNormal];
     [prizeButton setTitleColor:prizeButtonTextColor forState:UIControlStateNormal];
     prizeButton.titleLabel.font = prizeAndLoveButtonTextFont;
     prizeButton.userInteractionEnabled = NO;
@@ -84,7 +84,7 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     loveButton.translatesAutoresizingMaskIntoConstraints = NO;
     [loveButton setImage:[UIImage llaImageWithName:loveButtonImageName_Normal] forState:UIControlStateNormal];
     [loveButton setImage:[UIImage llaImageWithName:loveButtonImageName_Highlight] forState:UIControlStateHighlighted];
-    [loveButton setTitle:@"321" forState:UIControlStateNormal];
+//    [loveButton setTitle:@"321" forState:UIControlStateNormal];
     loveButton.titleLabel.font = prizeAndLoveButtonTextFont;
     loveButton.userInteractionEnabled = NO;
     [self.contentView addSubview:loveButton];
@@ -131,4 +131,13 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     return MAX(0, maxWidth+hotVideoImageViewToBottom);
 }
 
+
+- (void) updateCellWithInfo:(LLAHotVideoInfo *)info tableWidth:(CGFloat)width
+{
+//    hotVideoImageView.image = videoCoverImageURL;
+    [hotVideoImageView setImageWithURL:[NSURL URLWithString:info.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
+    [prizeButton setTitle:[NSString stringWithFormat:@"%d",info.prizeNum] forState:UIControlStateNormal];
+    [loveButton setTitle:[NSString stringWithFormat:@"%d",info.likeNum] forState:UIControlStateNormal];
+
+}
 @end
