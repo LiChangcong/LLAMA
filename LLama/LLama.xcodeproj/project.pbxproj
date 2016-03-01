@@ -269,6 +269,11 @@
 		5CECCC751C83EE16002BDE99 /* LLAMessageOrderAideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */; };
 		5CECCC781C83EE9C002BDE99 /* LLAMessageOrderAideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */; };
 		5CECCC7B1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */; };
+		5CECCC7E1C840242002BDE99 /* LLAChatInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC7D1C840242002BDE99 /* LLAChatInputViewController.m */; };
+		5CECCC811C84155E002BDE99 /* LLAChatInpuFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC801C84155E002BDE99 /* LLAChatInpuFunctionView.m */; };
+		5CECCC841C84293B002BDE99 /* LLAChatInputPickerEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC831C84293B002BDE99 /* LLAChatInputPickerEmojiView.m */; };
+		5CECCC871C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC861C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m */; };
+		5CECCC8A1C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECCC891C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m */; };
 		5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */; };
 		5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */; };
 		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
@@ -1051,6 +1056,16 @@
 		5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageOrderAideCell.m; sourceTree = "<group>"; };
 		5CECCC791C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedOrderItemInfo.h; sourceTree = "<group>"; };
 		5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedOrderItemInfo.m; sourceTree = "<group>"; };
+		5CECCC7C1C840242002BDE99 /* LLAChatInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatInputViewController.h; sourceTree = "<group>"; };
+		5CECCC7D1C840242002BDE99 /* LLAChatInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatInputViewController.m; sourceTree = "<group>"; };
+		5CECCC7F1C84155E002BDE99 /* LLAChatInpuFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatInpuFunctionView.h; sourceTree = "<group>"; };
+		5CECCC801C84155E002BDE99 /* LLAChatInpuFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatInpuFunctionView.m; sourceTree = "<group>"; };
+		5CECCC821C84293B002BDE99 /* LLAChatInputPickerEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatInputPickerEmojiView.h; sourceTree = "<group>"; };
+		5CECCC831C84293B002BDE99 /* LLAChatInputPickerEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatInputPickerEmojiView.m; sourceTree = "<group>"; };
+		5CECCC851C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatInputEmojiFlowLayout.h; sourceTree = "<group>"; };
+		5CECCC861C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatInputEmojiFlowLayout.m; sourceTree = "<group>"; };
+		5CECCC881C843B8F002BDE99 /* LLAChatInputPickEmojiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatInputPickEmojiCell.h; sourceTree = "<group>"; };
+		5CECCC891C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatInputPickEmojiCell.m; sourceTree = "<group>"; };
 		5CED5E7D1C4BC853003E09CF /* LLACollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACollectionView.h; sourceTree = "<group>"; };
 		5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACollectionView.m; sourceTree = "<group>"; };
 		5CED5E801C4BC97D003E09CF /* LLAVideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoDetailViewController.h; sourceTree = "<group>"; };
@@ -1517,6 +1532,14 @@
 				5CECCC6E1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m */,
 				5CECCC761C83EE9C002BDE99 /* LLAMessageOrderAideCell.h */,
 				5CECCC771C83EE9C002BDE99 /* LLAMessageOrderAideCell.m */,
+				5CECCC7F1C84155E002BDE99 /* LLAChatInpuFunctionView.h */,
+				5CECCC801C84155E002BDE99 /* LLAChatInpuFunctionView.m */,
+				5CECCC821C84293B002BDE99 /* LLAChatInputPickerEmojiView.h */,
+				5CECCC831C84293B002BDE99 /* LLAChatInputPickerEmojiView.m */,
+				5CECCC881C843B8F002BDE99 /* LLAChatInputPickEmojiCell.h */,
+				5CECCC891C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m */,
+				5CECCC851C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.h */,
+				5CECCC861C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m */,
 			);
 			name = View;
 			path = Controller/View;
@@ -2831,6 +2854,8 @@
 				5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */,
 				5CECCC731C83EE16002BDE99 /* LLAMessageOrderAideController.h */,
 				5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */,
+				5CECCC7C1C840242002BDE99 /* LLAChatInputViewController.h */,
+				5CECCC7D1C840242002BDE99 /* LLAChatInputViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3410,6 +3435,7 @@
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
 				5C9353C71C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m in Sources */,
+				5CECCC7E1C840242002BDE99 /* LLAChatInputViewController.m in Sources */,
 				5CBF9AA51C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m in Sources */,
 				5C6D7A421C58B73200119A3A /* SCPlayer.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
@@ -3423,6 +3449,7 @@
 				5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */,
 				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
 				5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */,
+				5CECCC871C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m in Sources */,
 				A3DEDE6F1C3CAEC7009F3D37 /* TMPhotoView.m in Sources */,
 				A3DEDD9F1C3CAE38009F3D37 /* MTLValueTransformer.m in Sources */,
 				7EB3F5541C84314200CF6D02 /* LLAHotUserInfo.m in Sources */,
@@ -3436,6 +3463,7 @@
 				A3DEDE841C3CAEC7009F3D37 /* TMPostScriptViewController.m in Sources */,
 				5CECCC7B1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m in Sources */,
 				5C78846E1C5F7A6E002EC705 /* HPGrowingTextView.m in Sources */,
+				5CECCC8A1C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m in Sources */,
 				A3D8E7F81C3F8EDF00B27898 /* UIImage+LLAImage.m in Sources */,
 				5CECCC6F1C83E7FA002BDE99 /* LLAMessageReceivedCommentCell.m in Sources */,
 				5C6D7A571C58B85C00119A3A /* LLAEditVideoViewController.m in Sources */,
@@ -3463,6 +3491,7 @@
 				5C6D7A3D1C58B73200119A3A /* SCFilterImageView.m in Sources */,
 				7E0607251C5E05D50089329D /* UIImage+ZLPhotoLib.m in Sources */,
 				A3DEDEA11C3CAEC7009F3D37 /* TMUserAgreementViewController.m in Sources */,
+				5CECCC841C84293B002BDE99 /* LLAChatInputPickerEmojiView.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
 				5C82750F1C5726A500DD547F /* MMDateView.m in Sources */,
@@ -3503,6 +3532,7 @@
 				A3DEDDA31C3CAE38009F3D37 /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */,
 				7EB0BA681C5F3B7B00D4A43C /* LLALoveCell.m in Sources */,
+				5CECCC811C84155E002BDE99 /* LLAChatInpuFunctionView.m in Sources */,
 				5C7534411C7711920058F93C /* MWPhotoBrowser.m in Sources */,
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
 				A3DEDE8D1C3CAEC7009F3D37 /* TMProfileViewController.m in Sources */,
