@@ -11,6 +11,7 @@
 #import "LLAMessageReceivedPraiseController.h"
 #import "LLAMessageReceivedCommentController.h"
 #import "LLAMessageOrderAideController.h"
+#import "LLAChatMessageViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -215,7 +216,9 @@ static const NSInteger conversationSectionIndex = 1;
         }
         
     }else if (indexPath.section == conversationSectionIndex) {
-        
+        //
+        LLAChatMessageViewController *chat = [[LLAChatMessageViewController alloc] init];
+        [self.navigationController pushViewController:chat animated:YES];
     }
 }
 

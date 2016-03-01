@@ -78,6 +78,7 @@
 		5C6D7A681C58B9C500119A3A /* LLACaptureVideoToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7A671C58B9C500119A3A /* LLACaptureVideoToolBar.m */; };
 		5C6D7A6B1C58BF1000119A3A /* LLACaptureVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7A6A1C58BF1000119A3A /* LLACaptureVideoProgressView.m */; };
 		5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D7A6D1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m */; };
+		5C6E71341C8572FA00A57358 /* LLAChatMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6E71331C8572FA00A57358 /* LLAChatMessageViewController.m */; };
 		5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */; };
 		5C7298261C438E5500106BA2 /* LLACommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7298251C438E5500106BA2 /* LLACommonUtil.m */; };
 		5C75343D1C7711920058F93C /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7534091C7711920058F93C /* MWCaptionView.m */; };
@@ -634,6 +635,8 @@
 		5C6D7A6A1C58BF1000119A3A /* LLACaptureVideoProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACaptureVideoProgressView.m; sourceTree = "<group>"; };
 		5C6D7A6C1C58CBFB00119A3A /* LLACaptureVideoClipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACaptureVideoClipInfo.h; sourceTree = "<group>"; };
 		5C6D7A6D1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACaptureVideoClipInfo.m; sourceTree = "<group>"; };
+		5C6E71321C8572FA00A57358 /* LLAChatMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatMessageViewController.h; sourceTree = "<group>"; };
+		5C6E71331C8572FA00A57358 /* LLAChatMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatMessageViewController.m; sourceTree = "<group>"; };
 		5C7298201C4366A700106BA2 /* LLASaveUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASaveUserDefaultUtil.h; sourceTree = "<group>"; };
 		5C7298211C4366A700106BA2 /* LLASaveUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASaveUserDefaultUtil.m; sourceTree = "<group>"; };
 		5C7298241C438E5500106BA2 /* LLACommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACommonUtil.h; sourceTree = "<group>"; };
@@ -2844,6 +2847,8 @@
 				5C03127D1C819DB8005B70FF /* LLAMessageReceivedCommentController.m */,
 				5CECCC731C83EE16002BDE99 /* LLAMessageOrderAideController.h */,
 				5CECCC741C83EE16002BDE99 /* LLAMessageOrderAideController.m */,
+				5C6E71321C8572FA00A57358 /* LLAChatMessageViewController.h */,
+				5C6E71331C8572FA00A57358 /* LLAChatMessageViewController.m */,
 				5CECCC7C1C840242002BDE99 /* LLAChatInputViewController.h */,
 				5CECCC7D1C840242002BDE99 /* LLAChatInputViewController.m */,
 			);
@@ -3741,6 +3746,7 @@
 				5CE0EB981C46469800C6BC79 /* LLAUserHeadView.m in Sources */,
 				A3DEDDA11C3CAE38009F3D37 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				A3DEDE891C3CAEC7009F3D37 /* TMDirectorTableViewController.m in Sources */,
+				5C6E71341C8572FA00A57358 /* LLAChatMessageViewController.m in Sources */,
 				7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */,
 				A3E2D90E1C3E1845005885D4 /* LLAUser.m in Sources */,
 				A3DEDE631C3CAEC6009F3D37 /* TMHallTableViewController.m in Sources */,

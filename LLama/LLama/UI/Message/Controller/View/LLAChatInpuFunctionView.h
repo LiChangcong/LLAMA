@@ -26,6 +26,11 @@
 
 @property(nonatomic , weak) id<LLAChatInpuFunctionViewDelegate> delegate;
 
+@property(nonatomic , readonly) UIButton *recordVoiceButton;
+@property(nonatomic , readonly) UIButton *pickPhotoButton;
+@property(nonatomic , readonly) UIButton *cameraButton;
+@property(nonatomic , readonly) UIButton *emojiButton;
+
 + (CGFloat) calculateHeight;
 
 @end

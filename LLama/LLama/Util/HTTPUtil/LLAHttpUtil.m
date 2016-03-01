@@ -10,6 +10,7 @@
 #import "LLAHttpResponseData.h"
 #import "LLASaveUserDefaultUtil.h"
 #import "YYShowAlertUtil.h"
+#import "LLACommonUtil.h"
 
 #import "LLAExceptionManager.h"
 
@@ -148,6 +149,7 @@ static NSString *const httpBaseURL = @"https://test-api.hillama.com/";
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
 
     [manager.requestSerializer setValue:[LLASaveUserDefaultUtil userAuthToken] forHTTPHeaderField:@"auth"];
+    [manager.requestSerializer setValue:[LLACommonUtil appVersion] forHTTPHeaderField:@"version"];
         return manager;
 }
 

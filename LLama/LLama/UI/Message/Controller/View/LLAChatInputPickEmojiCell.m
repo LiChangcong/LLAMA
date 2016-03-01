@@ -25,7 +25,7 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor colorWithHex:0xf6f6f6];
         self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self commonInit];
         
@@ -43,7 +43,7 @@
 
 - (void) initVariables {
     
-    emojiLabelFont = [UIFont llaFontOfSize:18];
+    emojiLabelFont = [UIFont llaFontOfSize:28];
 }
 
 - (void) initSubViews {
