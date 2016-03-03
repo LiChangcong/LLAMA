@@ -21,6 +21,8 @@
     // color
     UIColor *hotUsersSearchResultsColor;
     
+    NSMutableArray<LLAUserHeadView *> *searchResultUsers_HeadImageArray;
+    NSMutableArray<UILabel *> *searchResultUsers_UserNameArray;
 
 }
 
@@ -57,6 +59,10 @@
 {
     hotUsersSearchResultsFont = [UIFont systemFontOfSize:12];
     hotUsersSearchResultsColor = [UIColor colorWithHex:0x807f87];
+    
+    searchResultUsers_UserNameArray = [NSMutableArray array];
+    searchResultUsers_HeadImageArray = [NSMutableArray array];
+
 }
 
 - (void)initSubViews
@@ -73,6 +79,66 @@
     arrowImageView.highlightedImage = [UIImage imageNamed:@"search_cell_arrowH"];
     [self.contentView addSubview:arrowImageView];
 
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    
+    CGFloat screenWidth =  [UIScreen mainScreen].bounds.size.width;
+    
+    // CGFloat num = (screenWidth- 25 )/(60);
+    // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。20，间隙
+    CGFloat num = (screenWidth - 17 - 40)/ (50 + 10);
+    
+    for (int i = 0 ; i < num; i++) {
+        /*
+         LLAHotUsersButton *hotUsersButton = [[LLAHotUsersButton alloc] init];
+         [hotUsersButton setImage:[UIImage imageNamed:@"userhead"] forState:UIControlStateNormal];
+         [hotUsersButton setTitle:@"Coolprice" forState:UIControlStateNormal];
+         hotUsersButton.backgroundColor = [UIColor redColor];
+         [self.contentView addSubview:hotUsersButton];
+         [arr addObject:hotUsersButton];
+         */
+        
+        UIView *hotUserContentView = [[UIView alloc] init];
+        [self.contentView addSubview:hotUserContentView];
+        [arr addObject:hotUserContentView];
+        
+        UILabel *userNameLabel = [[UILabel alloc] init];
+        userNameLabel.font = hotUsersSearchResultsFont;
+        userNameLabel.textColor = hotUsersSearchResultsColor;
+        userNameLabel.text = @"Coolprice";
+        [hotUserContentView addSubview:userNameLabel];
+        [searchResultUsers_UserNameArray addObject:userNameLabel];
+        
+        LLAUserHeadView *headView = [[LLAUserHeadView alloc] init];
+        [headView.userHeadImageView setImage:[UIImage imageNamed:@"userhead"]];
+        [hotUserContentView addSubview:headView];
+        [searchResultUsers_HeadImageArray addObject:headView];
+
+        
+        [headView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(hotUserContentView).with.offset(5);
+            make.centerX.equalTo(hotUserContentView);
+        }];
+        
+        [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(hotUserContentView.mas_left);
+            make.right.equalTo(hotUserContentView.mas_right);
+            make.top.equalTo(headView.mas_bottom).with.offset(5);
+        }];
+        
+    }
+    
+    
+    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:17 tailSpacing:40];
+    
+    [arr mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@0);
+        make.height.equalTo(@60);
+        
+    }];
+
+    
 
 }
 - (void)initSubConstraints
@@ -93,63 +159,7 @@
 
 - (void)updateInfo
 {
-    NSMutableArray *arr = [NSMutableArray array];
     
-    CGFloat screenWidth =  [UIScreen mainScreen].bounds.size.width;
-    
-    // CGFloat num = (screenWidth- 25 )/(60);
-    // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。20，间隙
-    CGFloat num = (screenWidth - 17 - 40)/ (50 + 20);
-    for (int i = 0 ; i < num; i++) {
-        /*
-         LLAHotUsersButton *hotUsersButton = [[LLAHotUsersButton alloc] init];
-         [hotUsersButton setImage:[UIImage imageNamed:@"userhead"] forState:UIControlStateNormal];
-         [hotUsersButton setTitle:@"Coolprice" forState:UIControlStateNormal];
-         hotUsersButton.backgroundColor = [UIColor redColor];
-         [self.contentView addSubview:hotUsersButton];
-         [arr addObject:hotUsersButton];
-         */
-        
-        UIView *hotUserContentView = [[UIView alloc] init];
-        [self.contentView addSubview:hotUserContentView];
-        [arr addObject:hotUserContentView];
-        
-        UILabel *userNameLabel = [[UILabel alloc] init];
-        userNameLabel.font = hotUsersSearchResultsFont;
-        userNameLabel.textColor = hotUsersSearchResultsColor;
-        userNameLabel.text = @"Coolprice";
-        [hotUserContentView addSubview:userNameLabel];
-        
-        
-        LLAUserHeadView *headView = [[LLAUserHeadView alloc] init];
-        [headView.userHeadImageView setImage:[UIImage imageNamed:@"userhead"]];
-        [hotUserContentView addSubview:headView];
-        
-        [headView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(hotUserContentView).with.offset(5);
-            make.centerX.equalTo(hotUserContentView);
-        }];
-        
-        [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(hotUserContentView.mas_left);
-            make.right.equalTo(hotUserContentView.mas_right);
-            make.top.equalTo(headView.mas_bottom).with.offset(5);
-        }];
-        
-    }
-    
-    
-    
-    
-    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:17 tailSpacing:40];
-    
-    [arr mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@0);
-        make.height.equalTo(@60);
-        
-    }];
-
 }
 
 @end

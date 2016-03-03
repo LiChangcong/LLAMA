@@ -17,6 +17,9 @@
 
 #import "LLAHotUsersSearchResultsHeader.h"
 
+#import "LLALoadingView.h"
+#import "LLAHttpUtil.h"
+#import "LLAViewUtil.h"
 //section index
 static const NSInteger searchResultsUsersIndex = 0;
 static const NSInteger searchResultsVideosIndex = 1;
@@ -38,6 +41,9 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     
     UIButton *shadeButton;
 
+    
+    LLALoadingView *HUD;
+
 }
 
 @end
@@ -53,6 +59,14 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     [self initSubConstraints];
 
     self.navigationItem.leftBarButtonItem = nil;
+    
+    // 显示菊花
+    [HUD show:YES];
+
+    // 刷新数据
+    [self loadData];
+
+
 }
 
 - (void)initVariables
@@ -100,6 +114,38 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         make.edges.equalTo(self.view);
     }];
 }
+
+#pragma mark - Load Data
+// 刷新数据
+- (void) loadData {
+    
+    // 参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:self.searchResultText forKey:@"keyword"];
+    
+    // 发送请求
+    [LLAHttpUtil httpPostWithUrl:@"/discover/search" param:params responseBlock:^(id responseObject) {
+        
+        [HUD hide:NO];
+        
+        NSLog(@"%@",responseObject);
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+}
+
+
 
 - (void)shadeButtonClicked
 {
