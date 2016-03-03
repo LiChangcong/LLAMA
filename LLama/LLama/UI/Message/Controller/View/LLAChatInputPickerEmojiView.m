@@ -34,7 +34,7 @@ static const CGFloat sendButtonToRight = 2;
 static const CGFloat sendButtonToBottom = 1;
 static const CGFloat sendButtonCornerRadious = 4;
 
-static const NSInteger numberOfEmojiIconRows = 3;
+static const NSInteger numberOfEmojiIconRows = 4;
 
 @interface LLAChatInputPickerEmojiView()<UICollectionViewDataSource,UICollectionViewDelegate,LLAChatInputEmojiFlowLayoutDelegate>
 {
@@ -61,6 +61,8 @@ static const NSInteger numberOfEmojiIconRows = 3;
     //
     CGSize itemSize;
     
+    //collectionViewWidth
+    CGFloat preCollectionViewWidth;
 }
 
 @end
@@ -77,6 +79,12 @@ static const NSInteger numberOfEmojiIconRows = 3;
     
     //calculate item size
     CGSize collectionBounds = emojiCollection.bounds.size;
+    
+    if (collectionBounds.width == preCollectionViewWidth) {
+        return;
+    }
+    
+    preCollectionViewWidth = collectionBounds.width;
     
     NSInteger maxColumn = (collectionBounds.width - emojiIconHorSpace)/(emojiIconHorSpace + emojiIconMinWidth);
     
@@ -99,7 +107,9 @@ static const NSInteger numberOfEmojiIconRows = 3;
     
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor colorWithHex:0xf6f6f6];
         [self commonInit];
+        
     }
     
     return self;
@@ -142,15 +152,15 @@ static const NSInteger numberOfEmojiIconRows = 3;
     
     //emoji view
     LLAChatInputEmojiFlowLayout *flowLayout = [[LLAChatInputEmojiFlowLayout alloc] init];
-    flowLayout.minCellHorSpace = 4;
-    flowLayout.minCellVerSpace = 8;
+    flowLayout.minCellHorSpace = emojiIconHorSpace;
+    flowLayout.minCellVerSpace = emojiIconVerSpace;
     flowLayout.delegate = self;
     
     emojiCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     emojiCollection.translatesAutoresizingMaskIntoConstraints = NO;
     emojiCollection.delegate = self;
     emojiCollection.dataSource = self;
-    emojiCollection.backgroundColor = [UIColor whiteColor];
+    emojiCollection.backgroundColor = [UIColor colorWithHex:0xf6f6f6];
     emojiCollection.pagingEnabled = YES;
     emojiCollection.showsHorizontalScrollIndicator = NO;
     emojiCollection.showsVerticalScrollIndicator = NO;
@@ -162,6 +172,8 @@ static const NSInteger numberOfEmojiIconRows = 3;
     //page control
     pageControl = [[UIPageControl alloc] init];
     pageControl.translatesAutoresizingMaskIntoConstraints = NO;
+    pageControl.pageIndicatorTintColor = [UIColor colorWithHex:0x9a9a9a];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithHex:0x434343];
     [self addSubview:pageControl];
     
     //
@@ -170,7 +182,7 @@ static const NSInteger numberOfEmojiIconRows = 3;
     
     sendMessageButton.titleLabel.font = sendMessageButtonFont;
     sendMessageButton.clipsToBounds = YES;
-    sendMessageButton.layer.cornerRadius = 4;
+    sendMessageButton.layer.cornerRadius = sendButtonCornerRadious;
     
     [sendMessageButton setTitle:@"发送" forState:UIControlStateNormal];
     [sendMessageButton setTitleColor:sendMessageButtonNormalTextColor forState:UIControlStateNormal];
@@ -191,7 +203,7 @@ static const NSInteger numberOfEmojiIconRows = 3;
     //vertical
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(0)-[closeButton(closeHeight)]-(0)-[emojiCollection]-(0)-[pageControl]-(0)-[sendMessageButton(sendHeight)]-(toBottom)-|"
+      constraintsWithVisualFormat:@"V:|-(0)-[closeButton(closeHeight)]-(0)-[emojiCollection]-(0)-[pageControl(pageControlHeight)]-(0)-[sendMessageButton(sendHeight)]-(toBottom)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"closeHeight":@(closeButtonHeight),
                 @"pageControlHeight":@(pageControlHeight),
@@ -218,7 +230,7 @@ static const NSInteger numberOfEmojiIconRows = 3;
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[sendMessageButton(closeWidth)]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[sendMessageButton(width)]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"width":@(sendButtonWidth),
                 @"toRight":@(sendButtonToRight)} views:NSDictionaryOfVariableBindings(sendMessageButton)]];
@@ -261,7 +273,9 @@ static const NSInteger numberOfEmojiIconRows = 3;
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (delegate && [delegate respondsToSelector:@selector(pickedEmoji:)]) {
+        [delegate pickedEmoji:[emojiArray objectAtIndex:indexPath.row]];
+    }
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -297,6 +311,7 @@ static const NSInteger numberOfEmojiIconRows = 3;
     height += pageControlHeight;
     height += sendButtonHeight;
     height += sendButtonToBottom;
+    height += 6;
     
     return height;
 }

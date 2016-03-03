@@ -20,9 +20,9 @@
 + (NSArray *)allEmoji {
     NSMutableArray *array = [NSMutableArray new];
     [array addObjectsFromArray:[EmojiEmoticons allEmoticons]];
-    [array addObjectsFromArray:[EmojiMapSymbols allMapSymbols]];
+    //[array addObjectsFromArray:[EmojiMapSymbols allMapSymbols]];
     [array addObjectsFromArray:[EmojiPictographs allPictographs]];
-    [array addObjectsFromArray:[EmojiTransport allTransport]];
+    //[array addObjectsFromArray:[EmojiTransport allTransport]];
     
     return array;
 }

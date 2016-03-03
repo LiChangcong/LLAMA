@@ -13,10 +13,10 @@
 +(NSArray *)allPictographs {
     NSMutableArray *array = [NSMutableArray new];
     
-    for (int i=0x1F300; i<=0x1F320; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
+//    for (int i=0x1F300; i<=0x1F320; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
     for (int i=0x1F330; i<=0x1F335; i++) {
         [array addObject:[Emoji emojiWithCode:i]];
     }
@@ -29,17 +29,17 @@
         [array addObject:[Emoji emojiWithCode:i]];
     }
     
-    for (int i=0x1F3A0; i<=0x1F3C4; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
-    for (int i=0x1F3C6; i<=0x1F3CA; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
-    for (int i=0x1F3E0; i<=0x1F3F0; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
+//    for (int i=0x1F3A0; i<=0x1F3C4; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
+//    for (int i=0x1F3C6; i<=0x1F3CA; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
+//    for (int i=0x1F3E0; i<=0x1F3F0; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
     
     for (int i=0x1F400; i<=0x1F4FC; i++) {
         if (i==0x1F441 || i==0x1F43F || i==0x1F4F8) {
@@ -48,21 +48,21 @@
         [array addObject:[Emoji emojiWithCode:i]];
     }
     
-    for (int i=0x1F500; i<=0x1F53D; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
-    for (int i=0x1F540; i<=0x1F543; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
-    for (int i=0x1F550; i<=0x1F567; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
-    
-    for (int i=0x1F5FB; i<=0x1F5FF; i++) {
-        [array addObject:[Emoji emojiWithCode:i]];
-    }
+//    for (int i=0x1F500; i<=0x1F53D; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
+//    for (int i=0x1F540; i<=0x1F543; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
+//    for (int i=0x1F550; i<=0x1F567; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
+//    
+//    for (int i=0x1F5FB; i<=0x1F5FF; i++) {
+//        [array addObject:[Emoji emojiWithCode:i]];
+//    }
     
     return array;
 }

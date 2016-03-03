@@ -22,20 +22,22 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 
 @interface LLAChatInpuFunctionView()
 {
-    UIButton *recordVoiceButton;
-    
-    UIButton *pickPhotoButton;
-    
-    UIButton *cameraButton;
-    
-    UIButton *emojiButton;
+
 }
+
+@property(nonatomic , readwrite , strong) UIButton *recordVoiceButton;
+@property(nonatomic , readwrite , strong) UIButton *pickPhotoButton;
+@property(nonatomic , readwrite , strong) UIButton *cameraButton;
+@property(nonatomic , readwrite , strong) UIButton *emojiButton;
+
 
 @end
 
 @implementation LLAChatInpuFunctionView
 
 @synthesize delegate;
+
+@synthesize recordVoiceButton,pickPhotoButton,cameraButton,emojiButton;
 
 #pragma mark - Init
 
@@ -206,6 +208,9 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
         return;
     }
     
+    emojiButton.selected = NO;
+    recordVoiceButton.selected = YES;
+    
     if (delegate && [delegate respondsToSelector:@selector(recordVoiceWithFunctionView:)]) {
         [delegate recordVoiceWithFunctionView:self];
     }
@@ -221,8 +226,9 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 }
 
 - (void) cameraButtonClicked:(UIButton *) sender {
-    if (delegate && [delegate respondsToSelector:@selector(pickImageWithFunctionView:)]) {
-        [delegate pickImageWithFunctionView:self];
+    
+    if (delegate && [delegate respondsToSelector:@selector(takePhotoWithFunctionView:)]) {
+        [delegate takePhotoWithFunctionView:self];
     }
 }
 
@@ -231,8 +237,13 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
         return;
     }
     
-    if (delegate && [delegate respondsToSelector:@selector(takePhotoWithFunctionView:)]) {
-        [delegate takePhotoWithFunctionView:self];
+    emojiButton.selected = YES;
+    recordVoiceButton.selected = NO;
+    pickPhotoButton.selected = NO;
+    cameraButton.selected = NO;
+    
+    if (delegate && [delegate respondsToSelector:@selector(showEmojiWithFunctionView:)]) {
+        [delegate showEmojiWithFunctionView:self];
     }
 }
 
