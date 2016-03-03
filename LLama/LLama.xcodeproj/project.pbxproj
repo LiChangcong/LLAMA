@@ -105,6 +105,22 @@
 		5C75347C1C7714450058F93C /* PSTGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C75346E1C7714450058F93C /* PSTGridLayoutRow.m */; };
 		5C75347D1C7714450058F93C /* PSTGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7534701C7714450058F93C /* PSTGridLayoutSection.m */; };
 		5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */; };
+		5C7882C51C86A5F000808C55 /* LLAInstantMessageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882C41C86A5F000808C55 /* LLAInstantMessageService.m */; };
+		5C7882C81C86A61E00808C55 /* LLAInstantMessageStorageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882C71C86A61E00808C55 /* LLAInstantMessageStorageUtil.m */; };
+		5C7882CB1C86A66600808C55 /* LLAInstantMessageDispatchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882CA1C86A66600808C55 /* LLAInstantMessageDispatchManager.m */; };
+		5C7882CF1C86BD1400808C55 /* LLAIMConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882CE1C86BD1400808C55 /* LLAIMConversation.m */; };
+		5C7882D21C86BD3700808C55 /* LLAIMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882D11C86BD3700808C55 /* LLAIMMessage.m */; };
+		5C7882DF1C86C23D00808C55 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882D51C86C23D00808C55 /* FMDatabase.m */; };
+		5C7882E01C86C23D00808C55 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882D71C86C23D00808C55 /* FMDatabaseAdditions.m */; };
+		5C7882E11C86C23D00808C55 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882D91C86C23D00808C55 /* FMDatabasePool.m */; };
+		5C7882E21C86C23D00808C55 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882DB1C86C23D00808C55 /* FMDatabaseQueue.m */; };
+		5C7882E31C86C23D00808C55 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882DE1C86C23D00808C55 /* FMResultSet.m */; };
+		5C7882E71C86D9D700808C55 /* LLAIMImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882E61C86D9D700808C55 /* LLAIMImageMessage.m */; };
+		5C7882EA1C86D9F200808C55 /* LLAIMVoiceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882E91C86D9F200808C55 /* LLAIMVoiceMessage.m */; };
+		5C7882ED1C86F90500808C55 /* LLAChatMessageBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882EC1C86F90500808C55 /* LLAChatMessageBaseCell.m */; };
+		5C7882F01C86F92000808C55 /* LLAChatMessageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882EF1C86F92000808C55 /* LLAChatMessageTextCell.m */; };
+		5C7882F31C86F93200808C55 /* LLAChatMessageImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882F21C86F93200808C55 /* LLAChatMessageImageCell.m */; };
+		5C7882F61C86F94800808C55 /* LLAChatMessageVoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7882F51C86F94800808C55 /* LLAChatMessageVoiceCell.m */; };
 		5C7884601C5F0AB7002EC705 /* YYActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */; };
 		5C7884611C5F0AB7002EC705 /* YYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845D1C5F0AB7002EC705 /* YYAlertView.m */; };
 		5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78845F1C5F0AB7002EC705 /* YYShowAlertUtil.m */; };
@@ -695,6 +711,40 @@
 		5C7534701C7714450058F93C /* PSTGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTGridLayoutSection.m; sourceTree = "<group>"; };
 		5C75347E1C7718F90058F93C /* LLACachingVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLACachingVideoInfo.h; sourceTree = "<group>"; };
 		5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLACachingVideoInfo.m; sourceTree = "<group>"; };
+		5C7882C31C86A5F000808C55 /* LLAInstantMessageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAInstantMessageService.h; sourceTree = "<group>"; };
+		5C7882C41C86A5F000808C55 /* LLAInstantMessageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAInstantMessageService.m; sourceTree = "<group>"; };
+		5C7882C61C86A61E00808C55 /* LLAInstantMessageStorageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAInstantMessageStorageUtil.h; sourceTree = "<group>"; };
+		5C7882C71C86A61E00808C55 /* LLAInstantMessageStorageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAInstantMessageStorageUtil.m; sourceTree = "<group>"; };
+		5C7882C91C86A66600808C55 /* LLAInstantMessageDispatchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAInstantMessageDispatchManager.h; sourceTree = "<group>"; };
+		5C7882CA1C86A66600808C55 /* LLAInstantMessageDispatchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAInstantMessageDispatchManager.m; sourceTree = "<group>"; };
+		5C7882CC1C86BC6200808C55 /* LLAInstantMessageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAInstantMessageHeader.h; sourceTree = "<group>"; };
+		5C7882CD1C86BD1400808C55 /* LLAIMConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAIMConversation.h; sourceTree = "<group>"; };
+		5C7882CE1C86BD1400808C55 /* LLAIMConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAIMConversation.m; sourceTree = "<group>"; };
+		5C7882D01C86BD3700808C55 /* LLAIMMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAIMMessage.h; sourceTree = "<group>"; };
+		5C7882D11C86BD3700808C55 /* LLAIMMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAIMMessage.m; sourceTree = "<group>"; };
+		5C7882D41C86C23D00808C55 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		5C7882D51C86C23D00808C55 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		5C7882D61C86C23D00808C55 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		5C7882D71C86C23D00808C55 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		5C7882D81C86C23D00808C55 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		5C7882D91C86C23D00808C55 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		5C7882DA1C86C23D00808C55 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		5C7882DB1C86C23D00808C55 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		5C7882DC1C86C23D00808C55 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		5C7882DD1C86C23D00808C55 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		5C7882DE1C86C23D00808C55 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		5C7882E51C86D9D700808C55 /* LLAIMImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAIMImageMessage.h; sourceTree = "<group>"; };
+		5C7882E61C86D9D700808C55 /* LLAIMImageMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAIMImageMessage.m; sourceTree = "<group>"; };
+		5C7882E81C86D9F200808C55 /* LLAIMVoiceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAIMVoiceMessage.h; sourceTree = "<group>"; };
+		5C7882E91C86D9F200808C55 /* LLAIMVoiceMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAIMVoiceMessage.m; sourceTree = "<group>"; };
+		5C7882EB1C86F90500808C55 /* LLAChatMessageBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatMessageBaseCell.h; sourceTree = "<group>"; };
+		5C7882EC1C86F90500808C55 /* LLAChatMessageBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatMessageBaseCell.m; sourceTree = "<group>"; };
+		5C7882EE1C86F92000808C55 /* LLAChatMessageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatMessageTextCell.h; sourceTree = "<group>"; };
+		5C7882EF1C86F92000808C55 /* LLAChatMessageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatMessageTextCell.m; sourceTree = "<group>"; };
+		5C7882F11C86F93200808C55 /* LLAChatMessageImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatMessageImageCell.h; sourceTree = "<group>"; };
+		5C7882F21C86F93200808C55 /* LLAChatMessageImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatMessageImageCell.m; sourceTree = "<group>"; };
+		5C7882F41C86F94800808C55 /* LLAChatMessageVoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChatMessageVoiceCell.h; sourceTree = "<group>"; };
+		5C7882F51C86F94800808C55 /* LLAChatMessageVoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAChatMessageVoiceCell.m; sourceTree = "<group>"; };
 		5C78845A1C5F0AB7002EC705 /* YYActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYActionSheetView.h; sourceTree = "<group>"; };
 		5C78845B1C5F0AB7002EC705 /* YYActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYActionSheetView.m; sourceTree = "<group>"; };
 		5C78845C1C5F0AB7002EC705 /* YYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAlertView.h; sourceTree = "<group>"; };
@@ -1543,6 +1593,14 @@
 				5CECCC891C843B8F002BDE99 /* LLAChatInputPickEmojiCell.m */,
 				5CECCC851C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.h */,
 				5CECCC861C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m */,
+				5C7882EB1C86F90500808C55 /* LLAChatMessageBaseCell.h */,
+				5C7882EC1C86F90500808C55 /* LLAChatMessageBaseCell.m */,
+				5C7882EE1C86F92000808C55 /* LLAChatMessageTextCell.h */,
+				5C7882EF1C86F92000808C55 /* LLAChatMessageTextCell.m */,
+				5C7882F11C86F93200808C55 /* LLAChatMessageImageCell.h */,
+				5C7882F21C86F93200808C55 /* LLAChatMessageImageCell.m */,
+				5C7882F41C86F94800808C55 /* LLAChatMessageVoiceCell.h */,
+				5C7882F51C86F94800808C55 /* LLAChatMessageVoiceCell.m */,
 			);
 			name = View;
 			path = Controller/View;
@@ -1818,6 +1876,55 @@
 				5C7534701C7714450058F93C /* PSTGridLayoutSection.m */,
 			);
 			path = PSTCollectionView;
+			sourceTree = "<group>";
+		};
+		5C7882C21C86A5CB00808C55 /* IMUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5C7882C31C86A5F000808C55 /* LLAInstantMessageService.h */,
+				5C7882C41C86A5F000808C55 /* LLAInstantMessageService.m */,
+				5C7882C61C86A61E00808C55 /* LLAInstantMessageStorageUtil.h */,
+				5C7882C71C86A61E00808C55 /* LLAInstantMessageStorageUtil.m */,
+				5C7882C91C86A66600808C55 /* LLAInstantMessageDispatchManager.h */,
+				5C7882CA1C86A66600808C55 /* LLAInstantMessageDispatchManager.m */,
+				5C7882CC1C86BC6200808C55 /* LLAInstantMessageHeader.h */,
+				5C7882CD1C86BD1400808C55 /* LLAIMConversation.h */,
+				5C7882CE1C86BD1400808C55 /* LLAIMConversation.m */,
+				5C7882D01C86BD3700808C55 /* LLAIMMessage.h */,
+				5C7882D11C86BD3700808C55 /* LLAIMMessage.m */,
+				5C7882E51C86D9D700808C55 /* LLAIMImageMessage.h */,
+				5C7882E61C86D9D700808C55 /* LLAIMImageMessage.m */,
+				5C7882E81C86D9F200808C55 /* LLAIMVoiceMessage.h */,
+				5C7882E91C86D9F200808C55 /* LLAIMVoiceMessage.m */,
+			);
+			path = IMUtil;
+			sourceTree = "<group>";
+		};
+		5C7882D31C86C23D00808C55 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				5C7882D41C86C23D00808C55 /* FMDatabase.h */,
+				5C7882D51C86C23D00808C55 /* FMDatabase.m */,
+				5C7882D61C86C23D00808C55 /* FMDatabaseAdditions.h */,
+				5C7882D71C86C23D00808C55 /* FMDatabaseAdditions.m */,
+				5C7882D81C86C23D00808C55 /* FMDatabasePool.h */,
+				5C7882D91C86C23D00808C55 /* FMDatabasePool.m */,
+				5C7882DA1C86C23D00808C55 /* FMDatabaseQueue.h */,
+				5C7882DB1C86C23D00808C55 /* FMDatabaseQueue.m */,
+				5C7882DC1C86C23D00808C55 /* FMDB.h */,
+				5C7882DD1C86C23D00808C55 /* FMResultSet.h */,
+				5C7882DE1C86C23D00808C55 /* FMResultSet.m */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		5C7882E41C86C24700808C55 /* SDAVAssetExportSession */ = {
+			isa = PBXGroup;
+			children = (
+				5CE2DBDE1C71B41D00029E67 /* SDAVAssetExportSession.h */,
+				5CE2DBDF1C71B41D00029E67 /* SDAVAssetExportSession.m */,
+			);
+			name = SDAVAssetExportSession;
 			sourceTree = "<group>";
 		};
 		5C7884591C5F0AB7002EC705 /* YYShowAlertUtil */ = {
@@ -2571,11 +2678,11 @@
 		A3DEDCF21C3CAE38009F3D37 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5C7882E41C86C24700808C55 /* SDAVAssetExportSession */,
+				5C7882D31C86C23D00808C55 /* fmdb */,
 				5C7E26691C8062ED008364E4 /* Emoji */,
 				5C7534541C7714450058F93C /* PSTCollectionView */,
 				5C7534061C7711920058F93C /* MWPhotoBrowser */,
-				5CE2DBDE1C71B41D00029E67 /* SDAVAssetExportSession.h */,
-				5CE2DBDF1C71B41D00029E67 /* SDAVAssetExportSession.m */,
 				5C7884691C5F7A6E002EC705 /* HPGrowingTextView */,
 				5C6D79F51C58B73200119A3A /* SCRecorder */,
 				5C8274FD1C5726A500DD547F /* MMPopupView */,
@@ -2640,6 +2747,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5C7882C21C86A5CB00808C55 /* IMUtil */,
 				5C8547051C7E9A4300CAA30C /* SocialShareUtil */,
 				5CD6723B1C7C01F400DEEA59 /* VideoPlayUtil */,
 				5C6D26991C75D110003CD77A /* JumpUtil */,
@@ -3426,6 +3534,7 @@
 				5C7E26681C804EB5008364E4 /* LLASocialContinuousShareManager.m in Sources */,
 				5CBF9AA81C534AA8001A4EA0 /* LLAUserProfileLogoutCell.m in Sources */,
 				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
+				5C7882E21C86C23D00808C55 /* FMDatabaseQueue.m in Sources */,
 				7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */,
 				7E64DEEB1C7C038200F88093 /* LLAHotUsersCell.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
@@ -3443,6 +3552,7 @@
 				5CECCC7E1C840242002BDE99 /* LLAChatInputViewController.m in Sources */,
 				5CBF9AA51C5339D7001A4EA0 /* LLAUserProfileSettingItemInfo.m in Sources */,
 				5C6D7A421C58B73200119A3A /* SCPlayer.m in Sources */,
+				5C7882F01C86F92000808C55 /* LLAChatMessageTextCell.m in Sources */,
 				A3DEDDA71C3CAE38009F3D37 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				5C6D7A681C58B9C500119A3A /* LLACaptureVideoToolBar.m in Sources */,
 				A3DEDE771C3CAEC7009F3D37 /* TMDataIconController.m in Sources */,
@@ -3486,6 +3596,7 @@
 				A3DEDD911C3CAE38009F3D37 /* TMTabBar.m in Sources */,
 				5C6D7A501C58B73200119A3A /* UIImage+SCSaveToCameraRoll.m in Sources */,
 				5C6D7A4C1C58B73200119A3A /* SCSwipeableFilterView.m in Sources */,
+				5C7882DF1C86C23D00808C55 /* FMDatabase.m in Sources */,
 				5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */,
 				5C6D7A4D1C58B73200119A3A /* SCVideoConfiguration.m in Sources */,
 				5C7E26751C8062ED008364E4 /* EmojiEmoticons.m in Sources */,
@@ -3499,6 +3610,7 @@
 				5CECCC841C84293B002BDE99 /* LLAChatInputPickerEmojiView.m in Sources */,
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
+				5C7882ED1C86F90500808C55 /* LLAChatMessageBaseCell.m in Sources */,
 				5C82750F1C5726A500DD547F /* MMDateView.m in Sources */,
 				5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */,
 				5C6D7A5A1C58B87900119A3A /* LLAVideoPickerViewController.m in Sources */,
@@ -3517,6 +3629,7 @@
 				7EAA2F4A1C572D23002DF3B1 /* LLAAlipayWithDrawalsViewController.m in Sources */,
 				A3DEDE981C3CAEC7009F3D37 /* TMPurseHeadCell.m in Sources */,
 				5C0312721C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m in Sources */,
+				5C7882F61C86F94800808C55 /* LLAChatMessageVoiceCell.m in Sources */,
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
 				5CE0EB901C46424300C6BC79 /* TYImageStorage.m in Sources */,
@@ -3531,6 +3644,7 @@
 				A3DEDE961C3CAEC7009F3D37 /* TMProfileLikeCell.m in Sources */,
 				A3DEDE9D1C3CAEC7009F3D37 /* TMChangePwdController.m in Sources */,
 				5C7534721C7714450058F93C /* PSTCollectionView.m in Sources */,
+				5C7882E31C86C23D00808C55 /* FMResultSet.m in Sources */,
 				5C75347B1C7714450058F93C /* PSTGridLayoutItem.m in Sources */,
 				5C6D7A491C58B73200119A3A /* SCRecordSessionSegment.m in Sources */,
 				5CDDF4561C474D3A00168989 /* LLAVideoCommentView.m in Sources */,
@@ -3545,6 +3659,7 @@
 				5C85470B1C7E9B2C00CAA30C /* LLASocialShareView.m in Sources */,
 				A3D8E7F21C3F87F300B27898 /* UIBarButtonItem+Image.m in Sources */,
 				5C6D7A381C58B73200119A3A /* SCContext.m in Sources */,
+				5C7882CF1C86BD1400808C55 /* LLAIMConversation.m in Sources */,
 				5C6D7A3B1C58B73200119A3A /* SCFilter.m in Sources */,
 				A3DEDD8F1C3CAE38009F3D37 /* main.m in Sources */,
 				5CA194691C4F889100A0B5B7 /* LLAVideoCacheUtil.m in Sources */,
@@ -3555,6 +3670,7 @@
 				A3DEDE751C3CAEC7009F3D37 /* TMTopicCell.m in Sources */,
 				5C8275171C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m in Sources */,
 				5CE646C11C44CB5B004DA6D5 /* UIImageView+LLAImageCache.m in Sources */,
+				5C7882E11C86C23D00808C55 /* FMDatabasePool.m in Sources */,
 				A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */,
 				5C8547081C7E9A5C00CAA30C /* LLASocialShareUtil.m in Sources */,
 				5C6D7A3E1C58B73200119A3A /* SCImageView.m in Sources */,
@@ -3604,13 +3720,16 @@
 				5CC696D31C5CDEA100E4BA89 /* MD5DataSigner.m in Sources */,
 				5C7534451C7711920058F93C /* DACircularProgressView.m in Sources */,
 				5CE0EB921C46424300C6BC79 /* TYTextContainer+Extended.m in Sources */,
+				5C7882CB1C86A66600808C55 /* LLAInstantMessageDispatchManager.m in Sources */,
 				7E64DEE21C7BF54500F88093 /* LLASearchBar.m in Sources */,
 				5CBF9AAE1C535DA6001A4EA0 /* LLAMyOrderListViewController.m in Sources */,
 				7EB0BA5E1C5F38D400D4A43C /* LLAWhoLoveMeViewController.m in Sources */,
 				5CDDF44D1C473BDB00168989 /* LLAHallVideoInfoCell.m in Sources */,
 				5C5D68DB1C55F9EB008A1230 /* LLAUserAccountDetailMainInfo.m in Sources */,
 				A3DEDE881C3CAEC7009F3D37 /* TMActorTableViewController.m in Sources */,
+				5C7882C51C86A5F000808C55 /* LLAInstantMessageService.m in Sources */,
 				5C5D68EA1C562CF1008A1230 /* LLAUserAccountWithdrawCashViewController.m in Sources */,
+				5C7882C81C86A61E00808C55 /* LLAInstantMessageStorageUtil.m in Sources */,
 				5CE0EB701C45F4A100C6BC79 /* LLAHallVideoCommentItem.m in Sources */,
 				5CE0EB911C46424300C6BC79 /* TYLinkTextStorage.m in Sources */,
 				5C0F6C301C7AB6CC00D2D86B /* LLAPickImageManager.m in Sources */,
@@ -3650,6 +3769,7 @@
 				5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */,
 				5C7534431C7711920058F93C /* MWTapDetectingView.m in Sources */,
 				7E64DEE51C7BF79D00F88093 /* LLAZoomCollectionView.m in Sources */,
+				5C7882D21C86BD3700808C55 /* LLAIMMessage.m in Sources */,
 				5C8547111C7EA91100CAA30C /* LLASocialSharePlatformItem.m in Sources */,
 				5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
@@ -3667,6 +3787,7 @@
 				A3DEDE7D1C3CAEC7009F3D37 /* TMLoginViewController.m in Sources */,
 				A3DEDE9A1C3CAEC7009F3D37 /* TMTHistoryCell.m in Sources */,
 				5CC696D51C5CDEA100E4BA89 /* openssl_wrapper.m in Sources */,
+				5C7882E71C86D9D700808C55 /* LLAIMImageMessage.m in Sources */,
 				5C6D7A481C58B73200119A3A /* SCRecordSession.m in Sources */,
 				A3DEDE7F1C3CAEC7009F3D37 /* TMRegisterViewController.m in Sources */,
 				A3DEDD9C1C3CAE38009F3D37 /* MTLModel.m in Sources */,
@@ -3705,6 +3826,7 @@
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */,
 				5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */,
+				5C7882EA1C86D9F200808C55 /* LLAIMVoiceMessage.m in Sources */,
 				5C7E26741C8062ED008364E4 /* Emoji.m in Sources */,
 				5C5D68D81C55F2DF008A1230 /* LLAUserAccountDetailItemInfo.m in Sources */,
 				5CC324E71C5B814800413E25 /* LLAPayUserViewController.m in Sources */,
@@ -3719,6 +3841,7 @@
 				7ECD6E451C7D8D1800F2D939 /* LLASearchResultsVideoCell.m in Sources */,
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5C9353B71C5DC2C800DD75DC /* LLAUploadVideoProgressView.m in Sources */,
+				5C7882F31C86F93200808C55 /* LLAChatMessageImageCell.m in Sources */,
 				5C6D7A3F1C58B73200119A3A /* SCIOPixelBuffers.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
 				7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */,
@@ -3750,6 +3873,7 @@
 				5CE646CA1C44DBBB004DA6D5 /* LLAUserProfileViewController.m in Sources */,
 				5C03126F1C817162005B70FF /* LLAMessageCenterSystemMessageCell.m in Sources */,
 				A3DEDE6B1C3CAEC7009F3D37 /* TMLikeCell.m in Sources */,
+				5C7882E01C86C23D00808C55 /* FMDatabaseAdditions.m in Sources */,
 				5C5D68E11C5600B5008A1230 /* LLAUserAccountWithdrawCashCell.m in Sources */,
 				5CE0FF6F1C4A1F0000991394 /* LLAScriptHallItemInfo.m in Sources */,
 				7EB0BA5B1C5F384B00D4A43C /* LLALoveViewController.m in Sources */,
