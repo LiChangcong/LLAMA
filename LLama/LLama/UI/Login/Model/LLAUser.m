@@ -150,4 +150,14 @@ static BOOL isSimpleUserModel;
     isSimpleUserModel = isSimple;
 }
 
+- (NSDictionary *) dicForIMAttributes {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    [dic setValue:self.userIdString forKey:@"id"];
+    [dic setValue:self.userName forKey:@"name"];
+    [dic setValue:self.headImageURL forKey:@"img"];
+    
+    return dic;
+}
+
 @end

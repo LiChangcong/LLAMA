@@ -27,6 +27,7 @@
     if (leanMessage.mediaType == kAVIMMessageMediaTypeText) {
         
         LLAIMMessage *textMessage = [LLAIMImageMessage new];
+        textMessage.mediaType = LLAIMMessageType_Text;
         
         message = textMessage;
         
@@ -39,6 +40,7 @@
         imageMessage.format = typeMessage.format;
         imageMessage.imageURL = typeMessage.file.url;
         imageMessage.size = typeMessage.size;
+        imageMessage.mediaType = LLAIMMessageType_Image;
         
         message = imageMessage;
         
@@ -51,12 +53,15 @@
         voiceMessage.size = typeMessage.size;
         voiceMessage.audioURL = typeMessage.file.url;
         
+        voiceMessage.mediaType = LLAIMMessageType_Audio;
+        
         message = voiceMessage;
     
     }else {
         //unsupport mediaType message
         
         LLAIMMessage *textMessage = [LLAIMImageMessage new];
+        textMessage.mediaType = LLAIMMessageType_Text;
         
         message = textMessage;
         
@@ -64,7 +69,7 @@
     
     //common
     message.ioType = leanMessage.ioType == AVIMMessageIOTypeIn ? LLAIMMessageIOType_In : LLAIMMessageIOType_Out;
-    message.status = (NSInteger)leanMessage.status;
+    message.msgStatus = (NSInteger)leanMessage.status;
     message.messageId = leanMessage.messageId;
     message.clientId = leanMessage.clientId;
     message.conversationId = leanMessage.conversationId;

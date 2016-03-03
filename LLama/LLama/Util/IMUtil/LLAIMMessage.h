@@ -25,13 +25,22 @@ typedef NS_ENUM(NSInteger , LLAIMMessageStatus) {
     LLAIMMessageStatusFailed,
 };
 
+typedef NS_ENUM(NSInteger , LLAIMMessageType){
+    LLAIMMessageType_None = 0,
+    LLAIMMessageType_Text = -1,
+    LLAIMMessageType_Image = -2,
+    LLAIMMessageType_Audio = -3,
+};
+
 @class AVIMTypedMessage;
 
 @interface LLAIMMessage : MTLModel
 
 @property (nonatomic , assign ) LLAIMMessageIOType ioType;
 
-@property (nonatomic , assign ) LLAIMMessageStatus status;
+@property (nonatomic , assign ) LLAIMMessageStatus msgStatus;
+
+@property (nonatomic , assign) LLAIMMessageType mediaType;
 
 @property (nonatomic ,strong) NSString *messageId;
 

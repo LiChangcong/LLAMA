@@ -96,4 +96,6 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 
 + (void) logout;
 
+- (NSDictionary *) dicForIMAttributes;
+
 @end

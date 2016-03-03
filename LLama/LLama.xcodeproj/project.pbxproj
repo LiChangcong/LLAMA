@@ -218,6 +218,8 @@
 		5CBF9AB41C536600001A4EA0 /* LLAUserOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB31C536600001A4EA0 /* LLAUserOrderListCell.m */; };
 		5CBF9AB71C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB61C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m */; };
 		5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF9AB91C5382CB001A4EA0 /* LLATextView.m */; };
+		5CC2E2251C87E63300AFE6B6 /* LLAMessageChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2E2241C87E63300AFE6B6 /* LLAMessageChatConfig.m */; };
+		5CC2E2281C88321000AFE6B6 /* LLAFollowViewInChattingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2E2271C88321000AFE6B6 /* LLAFollowViewInChattingView.m */; };
 		5CC324DA1C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */; };
 		5CC324DD1C5B65FB00413E25 /* LLAPickVideoItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324DC1C5B65FB00413E25 /* LLAPickVideoItemInfo.m */; };
 		5CC324E31C5B694300413E25 /* LLAVideoPickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC324E21C5B694300413E25 /* LLAVideoPickerCollectionCell.m */; };
@@ -895,6 +897,10 @@
 		5CBF9AB61C538090001A4EA0 /* LLAUserProfileEditUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileEditUserInfoController.m; sourceTree = "<group>"; };
 		5CBF9AB81C5382CB001A4EA0 /* LLATextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATextView.h; sourceTree = "<group>"; };
 		5CBF9AB91C5382CB001A4EA0 /* LLATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLATextView.m; sourceTree = "<group>"; };
+		5CC2E2231C87E63300AFE6B6 /* LLAMessageChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageChatConfig.h; sourceTree = "<group>"; };
+		5CC2E2241C87E63300AFE6B6 /* LLAMessageChatConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageChatConfig.m; sourceTree = "<group>"; };
+		5CC2E2261C88321000AFE6B6 /* LLAFollowViewInChattingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAFollowViewInChattingView.h; sourceTree = "<group>"; };
+		5CC2E2271C88321000AFE6B6 /* LLAFollowViewInChattingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAFollowViewInChattingView.m; sourceTree = "<group>"; };
 		5CC324D81C5B58DA00413E25 /* LLAVideoPickerTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVideoPickerTopToolBar.h; sourceTree = "<group>"; };
 		5CC324D91C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoPickerTopToolBar.m; sourceTree = "<group>"; };
 		5CC324DB1C5B65FB00413E25 /* LLAPickVideoItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickVideoItemInfo.h; sourceTree = "<group>"; };
@@ -1601,6 +1607,8 @@
 				5C7882F21C86F93200808C55 /* LLAChatMessageImageCell.m */,
 				5C7882F41C86F94800808C55 /* LLAChatMessageVoiceCell.h */,
 				5C7882F51C86F94800808C55 /* LLAChatMessageVoiceCell.m */,
+				5CC2E2261C88321000AFE6B6 /* LLAFollowViewInChattingView.h */,
+				5CC2E2271C88321000AFE6B6 /* LLAFollowViewInChattingView.m */,
 			);
 			name = View;
 			path = Controller/View;
@@ -2088,6 +2096,15 @@
 				5C75347F1C7718F90058F93C /* LLACachingVideoInfo.m */,
 			);
 			path = VideoCacheUtil;
+			sourceTree = "<group>";
+		};
+		5CC2E2221C87E60E00AFE6B6 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5CC2E2231C87E63300AFE6B6 /* LLAMessageChatConfig.h */,
+				5CC2E2241C87E63300AFE6B6 /* LLAMessageChatConfig.m */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		5CC324E41C5B810000413E25 /* Pay */ = {
@@ -2945,6 +2962,7 @@
 		A3DEDE0C1C3CAEC6009F3D37 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				5CC2E2221C87E60E00AFE6B6 /* Config */,
 				5C03126B1C81714D005B70FF /* Model */,
 				5C03126C1C81714D005B70FF /* View */,
 				A3DEDE0D1C3CAEC6009F3D37 /* Controller */,
@@ -3546,6 +3564,7 @@
 				5CE646C71C44DB6A004DA6D5 /* LLAHomeViewController.m in Sources */,
 				A3DEDE941C3CAEC7009F3D37 /* TMNoticeView.m in Sources */,
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
+				5CC2E2251C87E63300AFE6B6 /* LLAMessageChatConfig.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
 				5C9353C71C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m in Sources */,
@@ -3849,6 +3868,7 @@
 				A3DEDE9F1C3CAEC7009F3D37 /* TMFriendValidationController.m in Sources */,
 				5CBF9AA21C533136001A4EA0 /* LLAUserProfileSettingCell.m in Sources */,
 				5CE0EB941C46424300C6BC79 /* TYTextStorage.m in Sources */,
+				5CC2E2281C88321000AFE6B6 /* LLAFollowViewInChattingView.m in Sources */,
 				5CC324DA1C5B58DA00413E25 /* LLAVideoPickerTopToolBar.m in Sources */,
 				7EAA2F591C575448002DF3B1 /* LLABoundPhonesViewController.m in Sources */,
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,

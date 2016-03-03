@@ -23,6 +23,7 @@
 //model
 #import "LLAMessageCenterSystemMsgInfo.h"
 #import "LLAMessageCenterRoomInfo.h"
+#import "LLAUser.h"
 
 //util
 #import "LLAViewUtil.h"
@@ -55,6 +56,23 @@ static const NSInteger conversationSectionIndex = 1;
     [self initVariables];
     [self initNavigationItems];
     [self initSubViews];
+    
+    //
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
+    
+    [paramsDic setValue:@(0) forKey:@"type"];
+    
+    NSMutableArray *members = [NSMutableArray arrayWithCapacity:2];
+    [members addObject:[[LLAUser me] dicForIMAttributes]];
+    [members addObject:[[LLAUser me] dicForIMAttributes]];
+    
+    [paramsDic setValue:members forKey:@"members"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramsDic options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"%@",jsonString);
 
 }
 
