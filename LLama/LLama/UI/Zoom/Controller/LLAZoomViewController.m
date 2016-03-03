@@ -26,6 +26,10 @@
 #import "LLAHotUserInfo.h"
 #import "LLAHotVideoInfo.h"
 
+#import "LLALoadingView.h"
+#import "LLAHttpUtil.h"
+#import "LLAViewUtil.h"
+
 static const CGFloat zoomCellsHorSpace = 6;
 static const CGFloat zoomCellsVerSpace = 6;
 
@@ -54,6 +58,8 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     // 点击搜索时候产生一个遮盖
     UIButton *shadeButton;
     
+    LLALoadingView *HUD;
+
     //
     NSMutableArray *hotUsersArray;
     NSMutableArray *hotVideosArray;
@@ -78,6 +84,12 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     [self initSubViews];
     // 设置约束
     [self initSubConstraints];
+    
+    // 显示菊花
+    [HUD show:YES];
+    
+    // 刷新数据
+    [self loadData];
 
 }
 
@@ -138,6 +150,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo1.hotUser.userName = @"聪聪";
     hotUserInfo1.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo1.hotUser.userDescription = @"我是很帅气很可爱很温柔的小哥";
+    hotUserInfo1.hotUser.gender = UserGender_Male;
     hotUserInfo1.attentionType = LLAAttentionType_NotAttention;
     [hotUsersArray addObject:hotUserInfo1];
     
@@ -146,6 +159,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo2.hotUser.userName = @"tommin";
     hotUserInfo2.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo2.hotUser.userDescription = @"你猜你猜，你再猜";
+    hotUserInfo2.hotUser.gender = UserGender_Female;
     hotUserInfo2.attentionType = LLAAttentionType_AllAttention;
     [hotUsersArray addObject:hotUserInfo2];
 
@@ -155,6 +169,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo3.hotUser.userName = @"Money";
     hotUserInfo3.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo3.hotUser.userDescription = @"我是良民呀";
+    hotUserInfo3.hotUser.gender = UserGender_Female;
     hotUserInfo3.attentionType = LLAAttentionType_HasAttention;
     [hotUsersArray addObject:hotUserInfo3];
 
@@ -165,6 +180,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo4.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo4.hotUser.userDescription = @"我要背媳妇";
     hotUserInfo4.attentionType = LLAAttentionType_NotAttention;
+    hotUserInfo4.hotUser.gender = UserGender_Female;
     [hotUsersArray addObject:hotUserInfo4];
 
     
@@ -173,6 +189,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo5.hotUser.userName = @"Jack";
     hotUserInfo5.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo5.hotUser.userDescription = @"jack is black，and i am beautiful";
+    hotUserInfo5.hotUser.gender = UserGender_Male;
     hotUserInfo5.attentionType = LLAAttentionType_AllAttention;
     [hotUsersArray addObject:hotUserInfo5];
     
@@ -182,8 +199,10 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     hotUserInfo6.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
     hotUserInfo6.hotUser.userDescription = @"你才是鸡母";
     hotUserInfo6.attentionType = LLAAttentionType_AllAttention;
+    hotUserInfo6.hotUser.gender = UserGender_Female;
     [hotUsersArray addObject:hotUserInfo6];
     
+    NSLog(@"%@",hotUsersArray);
     // 热门视频加数据
     hotVideosArray = [NSMutableArray array];
     
@@ -232,6 +251,35 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         make.edges.equalTo(self.view);
     }];
     
+}
+
+
+#pragma mark - Load Data
+
+- (void) loadData {
+    
+    NSDictionary *params = [NSDictionary dictionary];
+    // 发送请求
+    [LLAHttpUtil httpPostWithUrl:@"/discover/hotInfo" param:params responseBlock:^(id responseObject) {
+        
+        [HUD hide:NO];
+        
+        NSLog(@"%@",responseObject);
+        
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
 }
 
 

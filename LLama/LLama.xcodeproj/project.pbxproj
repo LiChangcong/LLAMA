@@ -316,6 +316,7 @@
 		7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */; };
 		7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */; };
 		7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */; };
+		7E44A8B21C87EC46000780DD /* LLAHotUsersVideosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E44A8B11C87EC46000780DD /* LLAHotUsersVideosInfo.m */; };
 		7E64DEE21C7BF54500F88093 /* LLASearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E64DEE11C7BF54500F88093 /* LLASearchBar.m */; };
 		7E64DEE51C7BF79D00F88093 /* LLAZoomCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E64DEE41C7BF79D00F88093 /* LLAZoomCollectionView.m */; };
 		7E64DEEB1C7C038200F88093 /* LLAHotUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E64DEEA1C7C038200F88093 /* LLAHotUsersCell.m */; };
@@ -1173,6 +1174,8 @@
 		7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAImagePickerCollectionCell.m; sourceTree = "<group>"; };
 		7E3376881C72F12200CA6E26 /* LLAImagePickerTopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAImagePickerTopToolBar.h; sourceTree = "<group>"; };
 		7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAImagePickerTopToolBar.m; sourceTree = "<group>"; };
+		7E44A8B01C87EC46000780DD /* LLAHotUsersVideosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersVideosInfo.h; sourceTree = "<group>"; };
+		7E44A8B11C87EC46000780DD /* LLAHotUsersVideosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotUsersVideosInfo.m; sourceTree = "<group>"; };
 		7E64DEE01C7BF54500F88093 /* LLASearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchBar.h; sourceTree = "<group>"; };
 		7E64DEE11C7BF54500F88093 /* LLASearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchBar.m; sourceTree = "<group>"; };
 		7E64DEE31C7BF79D00F88093 /* LLAZoomCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAZoomCollectionView.h; sourceTree = "<group>"; };
@@ -2480,6 +2483,8 @@
 				7EB3F5531C84314200CF6D02 /* LLAHotUserInfo.m */,
 				7EB3F5551C844C2D00CF6D02 /* LLAHotVideoInfo.h */,
 				7EB3F5561C844C2D00CF6D02 /* LLAHotVideoInfo.m */,
+				7E44A8B01C87EC46000780DD /* LLAHotUsersVideosInfo.h */,
+				7E44A8B11C87EC46000780DD /* LLAHotUsersVideosInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3561,6 +3566,7 @@
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
 				A3DEDD981C3CAE38009F3D37 /* EXTScope.m in Sources */,
 				5C8275131C5726A500DD547F /* MMPopupWindow.m in Sources */,
+				7E44A8B21C87EC46000780DD /* LLAHotUsersVideosInfo.m in Sources */,
 				5CE646C71C44DB6A004DA6D5 /* LLAHomeViewController.m in Sources */,
 				A3DEDE941C3CAEC7009F3D37 /* TMNoticeView.m in Sources */,
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,

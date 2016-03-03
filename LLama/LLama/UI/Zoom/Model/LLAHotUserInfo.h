@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger,LLAAttentionType){
     LLAAttentionType_AllAttention = 2,
 };
 
+
+
 @interface LLAHotUserInfo : MTLModel
 
 @property(nonatomic, copy) LLAUser *hotUser;

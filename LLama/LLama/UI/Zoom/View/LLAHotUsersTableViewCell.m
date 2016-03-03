@@ -29,6 +29,8 @@ static const CGFloat attentionButtonToRight = 10;
     
     UIView *bottomLine;
     
+    UIImageView *sexImageView;
+    
     // font
     UIFont *nameLabelTextFont;
     UIFont *detailLabelFont;
@@ -99,6 +101,11 @@ static const CGFloat attentionButtonToRight = 10;
 //    detailLabel.text = @"我是一个好人";
     [self.contentView addSubview:detailLabel];
 
+    // 性别
+    sexImageView = [[UIImageView alloc] init];
+    sexImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView addSubview:sexImageView];
+    
     // 关注按钮
     attentionButton = [[UIButton alloc] init];
     attentionButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -133,6 +140,13 @@ static const CGFloat attentionButtonToRight = 10;
         make.left.equalTo(userHeadView.mas_right).with.offset(detailLabelToHeadIcon);
     }];
     
+    [sexImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(nameLabel.mas_right).with.offset(5);
+        make.centerY.equalTo(nameLabel.mas_centerY);
+        make.height.equalTo(nameLabel.mas_height).multipliedBy(0.6);
+        make.width.equalTo(sexImageView.mas_height);
+    }];
+    
     [attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@91);
         make.height.equalTo(@30);
@@ -148,6 +162,7 @@ static const CGFloat attentionButtonToRight = 10;
         make.bottom.equalTo(self.contentView.mas_bottom);
         
     }];
+    
     
 
 }
@@ -175,6 +190,14 @@ static const CGFloat attentionButtonToRight = 10;
     nameLabel.text = info.hotUser.userName;
     detailLabel.text = info.hotUser.userDescription;
     
+    // 性别状态
+    if (info.hotUser.gender == UserGender_Male) {
+        [sexImageView setImage:[UIImage imageNamed:@"search_hotUsers_sexual-man"]];
+    }else if (info.hotUser.gender == UserGender_Female){
+        [sexImageView setImage:[UIImage imageNamed:@"search_hotUsers_sexual-woman"]];
+    }
+    
+    // 关注按钮状态
     if (info.attentionType == LLAAttentionType_NotAttention) {
         [attentionButton setImage:[UIImage imageNamed:@"search_hotUsers_unfollow"] forState:UIControlStateNormal];
         attentionButton.userInteractionEnabled = YES;
@@ -188,7 +211,6 @@ static const CGFloat attentionButtonToRight = 10;
         
         [attentionButton setImage:[UIImage imageNamed:@"search_hotUsers_bothfollow"] forState:UIControlStateNormal];
         attentionButton.userInteractionEnabled = NO;
-
     }
     
     
