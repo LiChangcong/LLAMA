@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LLAIMMessage.h"
+#import "LLAIMConversation.h"
+
 @interface LLAInstantMessageStorageUtil : NSObject
+
++ (instancetype) shareInstance;
 
 @end

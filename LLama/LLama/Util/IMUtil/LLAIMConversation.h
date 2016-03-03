@@ -39,6 +39,8 @@
 //
 @property (nonatomic, strong) LLAIMMessage *lastMessage;
 
+@property (nonatomic, assign) NSInteger unreadCount;
+
 + (instancetype) conversationWithLeanCloudConversation:(AVIMConversation *) conversation;
 
 @end
