@@ -22,4 +22,14 @@ typedef NS_ENUM(NSInteger,LLAConverstionType) {
     
 };
 
+typedef enum:NSInteger{
+    //断开
+    IMClientStatus_Offline = 1,
+    //连接中
+    IMClientStatus_Connecting = 2,
+    //已连接
+    IMClientStatus_Online = 3,
+    
+}IMClientStatus;
+
 #endif /* LLAInstantMessageHeader_h */
