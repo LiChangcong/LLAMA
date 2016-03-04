@@ -14,6 +14,7 @@
 #import "LLAInstantMessageHeader.h"
 
 @class AVIMConversation;
+@class AVIMKeyedConversation;
 
 @interface LLAIMConversation : MTLModel
 
@@ -44,6 +45,8 @@
 @property (nonatomic, assign) NSInteger unreadCount;
 
 @property (nonatomic , strong) AVIMConversation *leanConversation;
+
+@property (nonatomic , strong) AVIMKeyedConversation *keyedConversation;
 
 
 + (instancetype) conversationWithLeanCloudConversation:(AVIMConversation *) conversation;

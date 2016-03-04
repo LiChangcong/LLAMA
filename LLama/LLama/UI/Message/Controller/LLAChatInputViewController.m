@@ -434,10 +434,21 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     return YES;
 }
 
-- (BOOL) growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView {
-    if (delegate && [delegate respondsToSelector:@selector(sendMessageWithContent:)]) {
-        [delegate sendMessageWithContent:growingTextView.text];
+- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if (text.length !=0 && [text isEqualToString:@"\n"]){
+        
+        if (delegate && [delegate respondsToSelector:@selector(sendMessageWithContent:)]) {
+            [delegate sendMessageWithContent:growingTextView.text];
+        }
+        growingTextView.text = @"";
+        return NO;
     }
+    return YES;
+}
+
+
+- (BOOL) growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView {
+    growingTextView.text = @"";
     return NO;
 }
 

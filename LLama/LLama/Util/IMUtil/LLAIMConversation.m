@@ -62,6 +62,7 @@
     imConversation.transient = conversation.transient;
     imConversation.muted = conversation.muted;
     imConversation.leanConversation = conversation;
+    imConversation.keyedConversation = [conversation keyedConversation];
     
     NSDictionary *attributes = conversation.attributes;
     
@@ -114,7 +115,7 @@
     
     if (message.mediaType == LLAIMMessageType_Text) {
     
-        AVIMTextMessage *textMessage = [AVIMTextMessage messageWithContent:message.content];
+        AVIMTextMessage *textMessage = [AVIMTextMessage messageWithText:message.content attributes:nil];
         typeMessage = textMessage;
         
     }else if (message.mediaType == LLAIMMessageType_Image) {
@@ -137,6 +138,9 @@
                 progressBlock(percentDone/100.0);
             
         } callback:^(BOOL succeeded, NSError *error) {
+            
+            NSLog(@"typeMessage:%@",typeMessage);
+            
             if (callback)
                 callback(succeeded,error);
         }];

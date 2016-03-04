@@ -25,6 +25,7 @@
 //util
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
+#import "LLAIMCommonUtil.h"
 
 @interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver>
 {
@@ -53,7 +54,7 @@
     
     self = [super init];
     if (self) {
-        currentConversation = [conversation copy];
+        currentConversation = conversation ;
     }
     
     return self;
@@ -76,10 +77,14 @@
 #pragma mark - Init
 
 - (void) initVariables {
-    
+    messageArray = [NSMutableArray array];
 }
 
 - (void) updateNavigationItems {
+    
+    LLAUser *targetUser = [LLAIMCommonUtil findTheOtherWithConversation:currentConversation mainUser:[LLAUser me]];
+    
+    self.navigationItem.title = targetUser.userName;
     
 }
 

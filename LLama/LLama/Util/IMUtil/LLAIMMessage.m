@@ -11,6 +11,8 @@
 #import <AVOSCloudIM/AVOSCloudIM.h>
 #import <AVOSCloud/AVOSCloud.h>
 
+#import "LLAInstantMessageStorageUtil.h"
+
 #import "LLAIMImageMessage.h"
 #import "LLAIMVoiceMessage.h"
 
@@ -26,7 +28,7 @@
     
     if (leanMessage.mediaType == kAVIMMessageMediaTypeText) {
         
-        LLAIMMessage *textMessage = [LLAIMImageMessage new];
+        LLAIMMessage *textMessage = [LLAIMMessage new];
         textMessage.mediaType = LLAIMMessageType_Text;
         
         message = textMessage;
@@ -60,7 +62,7 @@
     }else {
         //unsupport mediaType message
         
-        LLAIMMessage *textMessage = [LLAIMImageMessage new];
+        LLAIMMessage *textMessage = [LLAIMMessage new];
         textMessage.mediaType = LLAIMMessageType_Text;
         
         message = textMessage;
@@ -73,21 +75,25 @@
     message.messageId = leanMessage.messageId;
     message.clientId = leanMessage.clientId;
     message.conversationId = leanMessage.conversationId;
-    message.content = leanMessage.content;
+    message.content = leanMessage.text;
     message.sendTimestamp = leanMessage.sendTimestamp;
     message.deliveredTimestamp = leanMessage.deliveredTimestamp;
     message.transient = leanMessage.transient;
     
     //get author info from message
+    if (message.clientId.length > 0)
+        message.authorUser = [[LLAInstantMessageStorageUtil shareInstance] getUserByUserId:message.clientId];
     
     return message;
 }
 
 + (instancetype) textMessageWithContent:(NSString *) content {
     
-    AVIMTextMessage *message = [AVIMTextMessage messageWithContent:content];
+    AVIMTextMessage *message = [AVIMTextMessage messageWithText:content attributes:nil];
     
     LLAIMMessage *textMessage = [self messageFromLeanTypedMessage:message];
+    textMessage.authorUser = [LLAUser me];
+    
     return textMessage;
     
 }
@@ -98,6 +104,7 @@
     
     LLAIMImageMessage *imageMessage = [self messageFromLeanTypedMessage:message];
     imageMessage.mediaType = LLAIMMessageType_Image;
+    imageMessage.authorUser = [LLAUser me];
     
     //save image to disk
     
@@ -111,6 +118,7 @@
     
     LLAIMVoiceMessage *audioMessage = [self messageFromLeanTypedMessage:message];
     audioMessage.mediaType = LLAIMMessageType_Audio;
+    audioMessage.authorUser = [LLAUser me];
     
     return audioMessage;
     

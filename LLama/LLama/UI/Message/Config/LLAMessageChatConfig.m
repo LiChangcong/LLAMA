@@ -45,9 +45,10 @@
     self.sentFailedViewWidth = 26;
     self.sentFailedViewHeight = 26;
     self.sentFailedViewMinSpaceToHorBorder = 8;
-    self.bubbleArrowWidth = 8;
-    self.textMessageToBubbleHorBorder = 10;
-    self.textMessageToBubbleVerBorder = 6;
+    self.bubbleArrowWidth = 4;
+    self.textMessageToBubbleHorBorder = 6;
+    self.textMessageToBubbleVerBorder = 4;
+    self.textLineSpace = 2,
     self.bubbleToBottom = 4;
     self.bubbleImageViewMinHeight = 30;
     
@@ -65,11 +66,12 @@
     self.voiceDurationTextColor = [UIColor whiteColor];
     
     //bunbble image
-    self.othersBubbleWithArrow = [UIImage llaImageWithName:@"other_message_bubble_withArrow"];
-    self.othersBubbleWithoutArrow = [UIImage llaImageWithName:@"other_message_bubble_withoutArrow"];
+    self.othersBubbleWithArrow = [[UIImage llaImageWithName:@"other_message_bubble_withArrow"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 6, 4, 8)];
     
-    self.myBubbleWithArrow = [UIImage llaImageWithName:@"my_message_bubble_withArrow"];
-    self.myBubbleWithoutArrow = [UIImage llaImageWithName:@"my_message_bubble_withoutArrow"];
+    self.othersBubbleWithoutArrow = [[UIImage llaImageWithName:@"other_message_bubble_withoutArrow"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 6, 4, 8)];
+    
+    self.myBubbleWithArrow = [[UIImage llaImageWithName:@"my_message_bubble_withArrow"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 4, 6, 8)];
+    self.myBubbleWithoutArrow = [[UIImage llaImageWithName:@"my_message_bubble_withoutArrow"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 4, 6, 8)];
     
     //sent failed image
     self.sentFailedImage_Normal = [UIImage llaImageWithName:@""];

@@ -121,7 +121,6 @@ static const NSInteger conversationSectionIndex = 1;
     
     [systemMessageArray addObject:order];
     
-    LLAMessageCenterRoomInfo *roomInfo = [LLAMessageCenterRoomInfo new];
     
 }
 
