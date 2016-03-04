@@ -47,6 +47,7 @@
 #import "LLAHttpUtil.h"
 #import "LLAUploadVideoShareManager.h"
 #import "LLAVideoPlayUtil.h"
+#import "LLAInstantMessageService.h"
 
 // 点赞
 #import "LLALoveViewController.h"
@@ -562,7 +563,17 @@ static const CGFloat navigationBarHeight = 64;
 }
 
 - (void) backToPre {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    
+    //create conversation
+    
+    LLAUser *me = [LLAUser me];
+    if (![me isEqual:mainInfo.userInfo]) {
+        
+        [[LLAInstantMessageService shareService] createSingleChatConversationWithMembers:@[me,mainInfo.userInfo] callBack:^(LLAIMConversation *conversation, NSError *error) {
+            
+        }];
+    }
 }
 
 - (void) showSetting {

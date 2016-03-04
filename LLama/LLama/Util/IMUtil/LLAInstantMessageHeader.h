@@ -9,16 +9,25 @@
 #ifndef LLAInstantMessageHeader_h
 #define LLAInstantMessageHeader_h
 
-typedef void (^LLAIMBooleanResultBlock)(BOOL succeeded, NSError *error);
+#define LLACONVERSATION_ATTRIBUTES_TYPEKEY @"type"
+#define LLACONVERSATION_ATTRIBUTES_MEMBERSKEY @"members"
 
-typedef NS_ENUM(NSInteger,LLAConverstionType) {
+#define LLACONVERSATION_LOAD_HISTORY_MESSAGE_NUMPERTIME 15
+
+@class LLAIMConversation;
+
+typedef void (^LLAIMBooleanResultBlock)(BOOL succeeded, NSError *error);
+typedef void (^LLAIMConversationResultBlock)(LLAIMConversation *conversation, NSError *error);
+typedef void (^LLAIMProgressBlock)(CGFloat percent);
+
+typedef NS_ENUM(NSInteger,LLAConversationType) {
     
     //单聊
-    LLAConverstionType_Single = 0,
+    LLAConversationType_Single = 0,
     //群聊
-    LLAConverstionType_Group = 1,
+    LLAConversationType_Group = 1,
     //系统消息
-    LLAConverstionType_System = 2,
+    LLAConversationType_System = 2,
     
 };
 

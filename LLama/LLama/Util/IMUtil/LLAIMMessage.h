@@ -60,4 +60,10 @@ typedef NS_ENUM(NSInteger , LLAIMMessageType){
 
 + (instancetype) messageFromLeanTypedMessage:(AVIMTypedMessage *) leanMessage;
 
++ (instancetype) textMessageWithContent:(NSString *) content;
+
++ (instancetype) imageMessageWithImage:(UIImage *) image;
+
++ (instancetype) voiceMessageWithAudioFilePath:(NSString *) audioFilePath;
+
 @end

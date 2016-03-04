@@ -8,6 +8,10 @@
 
 #import "LLACommonViewController.h"
 
+@class LLAIMConversation;
+
 @interface LLAChatMessageViewController : LLACommonViewController
+
+- (instancetype) initWithConversation:(LLAIMConversation *) conversation;
 
 @end

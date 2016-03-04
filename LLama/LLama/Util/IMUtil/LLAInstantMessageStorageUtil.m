@@ -14,7 +14,7 @@
 
 #define ROOMS_TABLE_SQL @"CREATE TABLE IF NOT EXISTS `rooms` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`convid` VARCHAR(63) UNIQUE NOT NULL,`conObject` BLOB NOT NULL,`unread_count` INTEGER DEFAULT 0)"
 
-#define USERINFO_TABLE_SQL @"CREATE TABLE IF NOT EXISTS 'userInfo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT,'uid' VARCHAR(200) UNIQUE NOT NULL,'name' VARCHAR(200) NOT NULL,'headUrl' VARCHAR(200),'role' INTEGER,'roleImg' VARCHAR(200), 'levelName' VARCHAR(50) , 'levelPicURL' VARCHAR(200),'updateTime' VARCHAR(63) NOT NULL)"
+#define USERINFO_TABLE_SQL @"CREATE TABLE IF NOT EXISTS 'userInfo' ('id' INTEGER PRIMARY KEY AUTOINCREMENT,'uid' VARCHAR(200) UNIQUE NOT NULL,'name' VARCHAR(200) NOT NULL,'headUrl' VARCHAR(300),'role' INTEGER,'roleImg' VARCHAR(200), 'levelName' VARCHAR(50) , 'levelPicURL' VARCHAR(200),'updateTime' VARCHAR(63) NOT NULL)"
 
 #define FIELD_ID @"id"
 #define FIELD_CONVID @"convid"
@@ -109,7 +109,7 @@
 
 #pragma mark -
 #pragma mark MessageTable
--(NSArray*)getMsgsWithConvid:(NSString*)convid maxTime:(int64_t)time limit:(int)limit{
+-(NSArray<LLAIMMessage *>*)getMsgsWithConvid:(NSString*)convid maxTime:(int64_t)time limit:(int)limit{
     __block NSArray* msgs=nil;
     [_dbQueue inDatabase:^(FMDatabase *db) {
         NSString* timeStr=[self strOfInt64:time];
@@ -262,6 +262,7 @@
     [_dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet* rs=[db executeQuery:@"SELECT * FROM rooms WHERE convid=?",convid];
         if([rs next]==NO){
+            conversation.leanConversation = nil;
             NSData* data=[NSKeyedArchiver archivedDataWithRootObject:conversation];
             [db executeUpdate:@"INSERT INTO rooms (convid,conObject) VALUES(?,?) " withArgumentsInArray:@[convid,data]];
         }
@@ -300,7 +301,7 @@
     }];
 }
 
--(NSArray *)getOldestUserInfo{
+-(NSArray<LLAUser *> *)getOldestUserInfo{
     
     [self setupUserInfoDBQueue];
     

@@ -27,6 +27,8 @@
 
 //util
 #import "LLAViewUtil.h"
+#import "LLAInstantMessageDispatchManager.h"
+#import "LLAInstantMessageStorageUtil.h"
 
 //category
 #import "UIScrollView+SVPullToRefresh.h"
@@ -34,13 +36,13 @@
 static const NSInteger systemMessageSectionIndex = 0;
 static const NSInteger conversationSectionIndex = 1;
 
-@interface LLAMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface LLAMessageViewController ()<UITableViewDataSource,UITableViewDelegate,LLAIMEventObserver>
 {
     LLATableView *dataTableView;
     
     NSMutableArray *systemMessageArray;
     
-    NSMutableArray *roomArray;
+    NSMutableArray<LLAMessageCenterRoomInfo *> *roomArray;
 }
 
 @end
@@ -48,6 +50,11 @@ static const NSInteger conversationSectionIndex = 1;
 @implementation LLAMessageViewController
 
 #pragma mark - Life Cycle
+
+- (void) dealloc {
+    
+    [[LLAInstantMessageDispatchManager sharedInstance] removeEventObserver:self forConversation:INSTANT_MESSAGE_ALL_MESSAGE];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,22 +64,26 @@ static const NSInteger conversationSectionIndex = 1;
     [self initNavigationItems];
     [self initSubViews];
     
+    [self addIMObserver];
+    
+    [self loadRoomData];
+    
     //
-    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
-    
-    [paramsDic setValue:@(0) forKey:@"type"];
-    
-    NSMutableArray *members = [NSMutableArray arrayWithCapacity:2];
-    [members addObject:[[LLAUser me] dicForIMAttributes]];
-    [members addObject:[[LLAUser me] dicForIMAttributes]];
-    
-    [paramsDic setValue:members forKey:@"members"];
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramsDic options:NSJSONWritingPrettyPrinted error:nil];
-    
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"%@",jsonString);
+//    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
+//    
+//    [paramsDic setValue:@(0) forKey:@"type"];
+//    
+//    NSMutableArray *members = [NSMutableArray arrayWithCapacity:2];
+//    [members addObject:[[LLAUser me] dicForIMAttributes]];
+//    [members addObject:[[LLAUser me] dicForIMAttributes]];
+//    
+//    [paramsDic setValue:members forKey:@"members"];
+//    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramsDic options:NSJSONWritingPrettyPrinted error:nil];
+//    
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    
+//    NSLog(@"%@",jsonString);
 
 }
 
@@ -112,22 +123,6 @@ static const NSInteger conversationSectionIndex = 1;
     
     LLAMessageCenterRoomInfo *roomInfo = [LLAMessageCenterRoomInfo new];
     
-    [roomArray addObject:roomInfo];
-    
-    LLAMessageCenterRoomInfo *roomInfo1 = [LLAMessageCenterRoomInfo new];
-    
-    [roomArray addObject:roomInfo1];
-    
-    LLAMessageCenterRoomInfo *roomInfo2 = [LLAMessageCenterRoomInfo new];
-    
-    [roomArray addObject:roomInfo2];
-    
-    LLAMessageCenterRoomInfo *roomInfo3 = [LLAMessageCenterRoomInfo new];
-    
-    [roomArray addObject:roomInfo3];
-    
-
-    
 }
 
 - (void) initNavigationItems {
@@ -158,6 +153,29 @@ static const NSInteger conversationSectionIndex = 1;
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
+    
+}
+
+- (void) addIMObserver {
+    
+    [[LLAInstantMessageDispatchManager sharedInstance] addEventObserver:self forConversation:INSTANT_MESSAGE_ALL_MESSAGE];
+}
+
+#pragma mark - LoadData
+
+- (void) loadRoomData {
+    
+    NSArray *rooms = [[LLAInstantMessageStorageUtil shareInstance] getRooms];
+    
+    for (LLAIMConversation *conversation in rooms) {
+        
+        LLAMessageCenterRoomInfo *roomInfo = [LLAMessageCenterRoomInfo roomInfoWithConversation:conversation];
+        
+        [roomArray addObject:roomInfo];
+        
+    }
+    
+    [dataTableView reloadData];
     
 }
 
@@ -235,8 +253,15 @@ static const NSInteger conversationSectionIndex = 1;
         
     }else if (indexPath.section == conversationSectionIndex) {
         //
-        LLAChatMessageViewController *chat = [[LLAChatMessageViewController alloc] init];
-        [self.navigationController pushViewController:chat animated:YES];
+        
+        LLAMessageCenterRoomInfo *roomInfo = roomArray[indexPath.row];
+        
+        if (roomInfo.conversation) {
+        
+            LLAChatMessageViewController *chat = [[LLAChatMessageViewController alloc] initWithConversation:roomInfo.conversation];
+            
+            [self.navigationController pushViewController:chat animated:YES];
+        }
     }
 }
 
@@ -264,6 +289,58 @@ static const NSInteger conversationSectionIndex = 1;
     if (indexPath.section == conversationSectionIndex && editingStyle == UITableViewCellEditingStyleDelete) {
         //delete conversation
     }
+}
+
+#pragma mark - LLAIMEventObserver
+
+- (void) newMessageArrived:(LLAIMMessage *)message conversation:(LLAIMConversation *)conversation {
+    
+    NSInteger index = [self indexOfConversationInRoomArray:conversation];
+    if (index == NSNotFound) {
+        
+        LLAMessageCenterRoomInfo *rooInfo = [LLAMessageCenterRoomInfo roomInfoWithConversation:conversation];
+        rooInfo.conversation.lastMessage = message;
+        
+        [roomArray insertObject:rooInfo atIndex:0];
+        
+        [dataTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else {
+        
+        LLAMessageCenterRoomInfo *roomInfo = roomArray[index];
+        
+        [roomArray removeObjectAtIndex:index];
+        [roomArray insertObject:roomInfo atIndex:0];
+        
+        [dataTableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:conversationSectionIndex] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]];
+        
+    }
+    
+}
+
+- (void) messageDelivered:(LLAIMMessage *)message conversation:(LLAIMConversation *)conversation {
+    
+}
+
+- (void) imClientStatusChanged:(IMClientStatus)status {
+    
+}
+
+#pragma mark - Index of conversation
+
+- (NSInteger) indexOfConversationInRoomArray:(LLAIMConversation *) conversation {
+    
+    NSInteger index = NSNotFound;
+    
+    for (int i=0;i<roomArray.count;i++) {
+        LLAMessageCenterRoomInfo *roomInfo = roomArray[i];
+        
+        if ([roomInfo.conversation.conversationId isEqualToString:conversation.conversationId]) {
+            index = i;
+            break;
+        }
+    }
+    
+    return index;
 }
 
 @end

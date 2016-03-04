@@ -10,4 +10,11 @@
 
 @implementation LLAMessageCenterRoomInfo
 
++ (instancetype) roomInfoWithConversation:(LLAIMConversation *)conversation {
+    LLAMessageCenterRoomInfo *room = [LLAMessageCenterRoomInfo new];
+    room.conversation = conversation;
+    
+    return room;
+}
+
 @end

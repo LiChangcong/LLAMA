@@ -8,6 +8,12 @@
 
 #import "MTLModel.h"
 
+#import "LLAIMConversation.h"
+
 @interface LLAMessageCenterRoomInfo : MTLModel
+
+@property(nonatomic , strong) LLAIMConversation *conversation;
+
++ (instancetype) roomInfoWithConversation:(LLAIMConversation *) conversation;
 
 @end

@@ -143,6 +143,7 @@
 		5C8275131C5726A500DD547F /* MMPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82750B1C5726A500DD547F /* MMPopupWindow.m */; };
 		5C8275141C5726A500DD547F /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82750D1C5726A500DD547F /* MMSheetView.m */; };
 		5C8275171C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8275161C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m */; };
+		5C83B2F11C89288500ED1BE5 /* LLASyncUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C83B2F01C89288500ED1BE5 /* LLASyncUserInfoManager.m */; };
 		5C8547081C7E9A5C00CAA30C /* LLASocialShareUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */; };
 		5C85470B1C7E9B2C00CAA30C /* LLASocialShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C85470A1C7E9B2C00CAA30C /* LLASocialShareView.m */; };
 		5C85470E1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C85470D1C7E9E9800CAA30C /* LLASoicalSharePlatformCell.m */; };
@@ -794,6 +795,8 @@
 		5C82750D1C5726A500DD547F /* MMSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSheetView.m; sourceTree = "<group>"; };
 		5C8275151C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserWithdrawCashSuccessView.h; sourceTree = "<group>"; };
 		5C8275161C5726FD00DD547F /* LLAUserWithdrawCashSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserWithdrawCashSuccessView.m; sourceTree = "<group>"; };
+		5C83B2EF1C89288500ED1BE5 /* LLASyncUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASyncUserInfoManager.h; sourceTree = "<group>"; };
+		5C83B2F01C89288500ED1BE5 /* LLASyncUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASyncUserInfoManager.m; sourceTree = "<group>"; };
 		5C8547061C7E9A5C00CAA30C /* LLASocialShareUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareUtil.h; sourceTree = "<group>"; };
 		5C8547071C7E9A5C00CAA30C /* LLASocialShareUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASocialShareUtil.m; sourceTree = "<group>"; };
 		5C8547091C7E9B2C00CAA30C /* LLASocialShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASocialShareView.h; sourceTree = "<group>"; };
@@ -1907,6 +1910,8 @@
 				5C7882E61C86D9D700808C55 /* LLAIMImageMessage.m */,
 				5C7882E81C86D9F200808C55 /* LLAIMVoiceMessage.h */,
 				5C7882E91C86D9F200808C55 /* LLAIMVoiceMessage.m */,
+				5C83B2EF1C89288500ED1BE5 /* LLASyncUserInfoManager.h */,
+				5C83B2F01C89288500ED1BE5 /* LLASyncUserInfoManager.m */,
 			);
 			path = IMUtil;
 			sourceTree = "<group>";
@@ -3796,6 +3801,7 @@
 				7E64DEE51C7BF79D00F88093 /* LLAZoomCollectionView.m in Sources */,
 				5C7882D21C86BD3700808C55 /* LLAIMMessage.m in Sources */,
 				5C8547111C7EA91100CAA30C /* LLASocialSharePlatformItem.m in Sources */,
+				5C83B2F11C89288500ED1BE5 /* LLASyncUserInfoManager.m in Sources */,
 				5C7534801C7718F90058F93C /* LLACachingVideoInfo.m in Sources */,
 				5C8275111C5726A500DD547F /* MMPopupitem.m in Sources */,
 				A3DEDD9D1C3CAE38009F3D37 /* MTLReflection.m in Sources */,

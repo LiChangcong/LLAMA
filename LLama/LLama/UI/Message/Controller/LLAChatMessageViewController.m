@@ -14,18 +14,29 @@
 //view
 #import "LLATableView.h"
 #import "LLALoadingView.h"
+#import "LLAChatMessageTextCell.h"
+#import "LLAChatMessageImageCell.h"
+#import "LLAChatMessageVoiceCell.h"
 
 //model
+#import "LLAIMConversation.h"
+#import "LLAIMMessage.h"
 
-@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate>
+//util
+#import "LLAInstantMessageDispatchManager.h"
+#import "LLAInstantMessageStorageUtil.h"
+
+@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver>
 {
     LLATableView *dataTableView;
     
     LLAChatInputViewController *inputController;
     
-    NSMutableArray *messageArray;
+    NSMutableArray<LLAIMMessage *> *messageArray;
     
     NSLayoutConstraint *inputViewHeightConstraints;
+    
+    LLAIMConversation *currentConversation;
 }
 
 @end
@@ -34,6 +45,20 @@
 
 #pragma mark - Life Cycle
 
+- (void) dealloc {
+    [[LLAInstantMessageDispatchManager sharedInstance] removeEventObserver:self forConversation:currentConversation.conversationId];
+}
+
+- (instancetype) initWithConversation:(LLAIMConversation *)conversation {
+    
+    self = [super init];
+    if (self) {
+        currentConversation = [conversation copy];
+    }
+    
+    return self;
+}
+
 - (void) viewDidLoad {
     [super viewDidLoad];
     
@@ -41,8 +66,12 @@
     [self initVariables];
     [self updateNavigationItems];
     [self initSubViews];
+    [self addIMEventObserver];
+    
+    [self loadMessageData];
     
 }
+
 
 #pragma mark - Init
 
@@ -111,6 +140,31 @@
     
 }
 
+- (void) addIMEventObserver {
+    
+    [[LLAInstantMessageDispatchManager sharedInstance] addEventObserver:self forConversation:currentConversation.conversationId];
+}
+
+#pragma mark - Load Message
+
+- (void) loadMessageData {
+    
+    long long timestamps = [[NSDate date] timeIntervalSince1970]*1000;
+    
+    //last message
+    LLAIMMessage *lastMessage = [messageArray firstObject];
+    if (lastMessage) {
+        timestamps = lastMessage.sendTimestamp;
+    }
+    
+    //
+    NSArray *msgs = [[LLAInstantMessageStorageUtil shareInstance] getMsgsWithConvid:currentConversation.conversationId maxTime:timestamps limit:LLACONVERSATION_LOAD_HISTORY_MESSAGE_NUMPERTIME];
+    
+    [messageArray addObjectsFromArray:msgs];
+    [dataTableView reloadData];
+    
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -122,19 +176,81 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    
+    LLAIMMessage *message = messageArray[indexPath.row];
+    
+    UITableViewCell *cell = nil;
+    
+    if (message.mediaType == LLAIMMessageType_Image) {
+        
+        static NSString *imageIden = @"imageIden";
+        
+        LLAChatMessageImageCell *imageCell = [tableView dequeueReusableCellWithIdentifier:imageIden];
+        if (!imageCell) {
+            imageCell = [[LLAChatMessageImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:imageIden];
+        }
+        [imageCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        
+        cell = imageCell;
+        
+    }else if (message.mediaType == LLAIMMessageType_Audio) {
+        
+        static NSString *voiceIden = @"voiceIden";
+        
+        LLAChatMessageVoiceCell *voiceCell = [tableView dequeueReusableCellWithIdentifier:voiceIden];
+        if (!voiceCell) {
+            voiceCell = [[LLAChatMessageVoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:voiceIden];
+        }
+        
+        [voiceCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        
+        cell = voiceCell;
+        
+        
+    }else {
+        //text
+        
+        static NSString *textIden = @"textIden";
+        
+        LLAChatMessageTextCell *textCell = [tableView dequeueReusableCellWithIdentifier:textIden];
+        if (!textCell) {
+            textCell = [[LLAChatMessageTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textIden];
+        }
+        
+        [textCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        
+        cell = textCell;
+    }
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
+    
+    return [LLAChatMessageBaseCell calculateHeightWithMessage:messageArray[indexPath.row] maxWidth:tableView.bounds.size.width showTime:YES];
 }
 
 #pragma mark - LLAChatInputViewControllerDelegate
 
 - (void) sendMessageWithContent:(NSString *) textContent {
-
+    
+    if (textContent.length < 1) {
+        return;
+    }
+    
+    LLAIMMessage *message = [LLAIMMessage textMessageWithContent:textContent];
+    
+    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded) {
+            
+        }
+        
+    }];
+    
+    [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:currentConversation];
+    
 }
 
 - (void) sendMessageWithImage:(UIImage *) image {
@@ -159,6 +275,25 @@
     } completion:^(BOOL finished) {
         
     }];
+    
+}
+
+#pragma mark - LLAIMEventObserver
+
+- (void) newMessageArrived:(LLAIMMessage *)message conversation:(LLAIMConversation *)conversation {
+    
+    if ([currentConversation.conversationId isEqualToString:conversation.conversationId] && message) {
+        
+        [messageArray addObject:message];
+        [dataTableView reloadData];
+    }
+}
+
+- (void) messageDelivered:(LLAIMMessage *)message conversation:(LLAIMConversation *)conversation {
+    
+}
+
+- (void) imClientStatusChanged:(IMClientStatus)status {
     
 }
 

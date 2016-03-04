@@ -10,16 +10,23 @@
 #import "LLAInstantMessageHeader.h"
 
 @class LLAIMConversation;
+@class LLAUser;
 
 @interface LLAInstantMessageService : NSObject
 
 @property(nonatomic , readonly) NSString *currentUIDString;
+
+@property(nonatomic , readonly) IMClientStatus clientStatus;
 
 + (instancetype) shareService;
 
 - (void) openWithClientId:(NSString *) clientId callBack:(LLAIMBooleanResultBlock) callBack;
 
 - (void) closeClientWithCallBack:(LLAIMBooleanResultBlock) callBack;
+
+//create conversation
+
+- (void) createSingleChatConversationWithMembers:(NSArray<LLAUser *> *) members callBack:(LLAIMConversationResultBlock) callBack;
 
 //
 

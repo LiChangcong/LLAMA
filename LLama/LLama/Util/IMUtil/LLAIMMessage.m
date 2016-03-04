@@ -83,4 +83,37 @@
     return message;
 }
 
++ (instancetype) textMessageWithContent:(NSString *) content {
+    
+    AVIMTextMessage *message = [AVIMTextMessage messageWithContent:content];
+    
+    LLAIMMessage *textMessage = [self messageFromLeanTypedMessage:message];
+    return textMessage;
+    
+}
+
++ (instancetype) imageMessageWithImage:(UIImage *) image {
+    
+    AVIMImageMessage *message = [AVIMImageMessage messageWithText:@"" file:[AVFile fileWithURL:@""] attributes:nil];
+    
+    LLAIMImageMessage *imageMessage = [self messageFromLeanTypedMessage:message];
+    imageMessage.mediaType = LLAIMMessageType_Image;
+    
+    //save image to disk
+    
+    return imageMessage;
+    
+}
+
++ (instancetype) voiceMessageWithAudioFilePath:(NSString *) audioFilePath {
+    
+    AVIMAudioMessage *message = [AVIMAudioMessage messageWithText:@"" file:[AVFile fileWithURL:audioFilePath] attributes:nil];
+    
+    LLAIMVoiceMessage *audioMessage = [self messageFromLeanTypedMessage:message];
+    audioMessage.mediaType = LLAIMMessageType_Audio;
+    
+    return audioMessage;
+    
+}
+
 @end

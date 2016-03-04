@@ -17,6 +17,9 @@
 
 #import <AlipaySDK/AlipaySDK.h>
 
+
+#import "LLAInstantMessageService.h"
+
 @interface LLADelegate()
 
 @end
@@ -75,12 +78,39 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //
     
+    [application cancelAllLocalNotifications];
+    
     //pay call back to deal with when
     [[LLAThirdPayManager shareManager] payResponseFromThirdPartyWithType:LLAThirdPayType_Unknow responseCode:LLAThirdPayResponseStatus_Unknow error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation setChannels:[NSArray array]];
+    
+    AVUser *user = [AVUser currentUser];
+    if (user && user.objectId.length >0) {
+        [currentInstallation addUniqueObject:user.objectId forKey:@"installation"];
+    }
+    
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+    }];
+}
+
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    if (application.applicationState == UIApplicationStateActive) {
+    
+    }else {
+        
+    }
 }
 
 - (void) application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
@@ -149,6 +179,7 @@
     [self setupUmengSDK];
     [self setupAliPaySDK];
     [self setupBugtags];
+    [self setupLeanClound];
 }
 
 - (void) setupUmengSDK {
@@ -192,6 +223,27 @@
 
 - (void) setupBugtags {
     //[Bugtags startWithAppKey:LLA_BUGTAGS_APPKEY invocationEvent:BTGInvocationEventBubble];
+}
+
+- (void) setupLeanClound {
+    
+#if DEBUG
+    [AVOSCloud setApplicationId:LLA_LEANCLOUD_APPLICATIONID_TEST clientKey:LLA_LEANCLOUD_CLIENTKEY_TEST];
+#else
+    [AVOSCloud setApplicationId:LLA_LEANCLOUD_APPLICATIONID clientKey:LLA_LEANCLOUD_CLIENTKEY];
+#endif
+    
+    [AVOSCloudIM registerForRemoteNotification];
+    
+    LLAUser *me = [LLAUser me];
+    
+    if (me.isLogin) {
+        [[LLAInstantMessageService shareService] openWithClientId:me.userIdString callBack:^(BOOL succeeded, NSError *error) {
+            
+        }];
+    }
+    
+    
 }
 
 #pragma mark - Setup ShortCuts

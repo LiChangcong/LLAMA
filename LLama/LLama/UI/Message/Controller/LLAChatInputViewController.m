@@ -122,6 +122,7 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     inputTextView.maxNumberOfLines = 5;
     inputTextView.delegate = self;
     inputTextView.isScrollable = YES;
+    inputTextView.returnKeyType = UIReturnKeySend;
     
     [self.view addSubview:inputTextView];
     
@@ -431,6 +432,13 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     functionView.emojiButton.selected = NO;
     
     return YES;
+}
+
+- (BOOL) growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView {
+    if (delegate && [delegate respondsToSelector:@selector(sendMessageWithContent:)]) {
+        [delegate sendMessageWithContent:growingTextView.text];
+    }
+    return NO;
 }
 
 #pragma mark - Record Button

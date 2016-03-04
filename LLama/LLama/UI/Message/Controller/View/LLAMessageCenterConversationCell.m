@@ -336,15 +336,15 @@ static const CGFloat lineHeight = 0.6;
     roomInfo = info;
     
     //test
-    [headView updateHeadViewWithUser:[LLAUser me]];
+    [headView updateHeadViewWithUser:roomInfo.conversation.creator];
     
     userNameLabel.text = [LLAUser me].userName;
     
     timeLabel.text = @"刚刚";
     
-    lastMessageLabel.text = @"你妹的";
+    lastMessageLabel.text = roomInfo.conversation.lastMessage.content;
     
-    [badgeButton setTitle:@"12" forState:UIControlStateNormal];
+    [badgeButton setTitle:[NSString stringWithFormat:@"%ld",(long)roomInfo.conversation.unreadCount] forState:UIControlStateNormal];
     
 }
 

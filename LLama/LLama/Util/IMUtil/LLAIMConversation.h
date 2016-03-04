@@ -11,6 +11,8 @@
 #import "LLAUser.h"
 #import "LLAIMMessage.h"
 
+#import "LLAInstantMessageHeader.h"
+
 @class AVIMConversation;
 
 @interface LLAIMConversation : MTLModel
@@ -41,6 +43,13 @@
 
 @property (nonatomic, assign) NSInteger unreadCount;
 
+@property (nonatomic , strong) AVIMConversation *leanConversation;
+
+
 + (instancetype) conversationWithLeanCloudConversation:(AVIMConversation *) conversation;
+
+- (void)sendMessage:(LLAIMMessage *)message
+      progressBlock:(LLAIMProgressBlock)progressBlock
+           callback:(LLAIMBooleanResultBlock)callback;
 
 @end

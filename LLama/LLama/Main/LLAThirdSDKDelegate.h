@@ -22,6 +22,12 @@
 
 #define SDK_REDIRECT_URL @"http://www.hillama.com"
 
+#define LLA_LEANCLOUD_APPLICATIONID @"8RFnpOoAU5UjWjzYud3CijQC-gzGzoHsz"
+#define LLA_LEANCLOUD_CLIENTKEY @"WPFn9FYz5VG1boT2ju5yXQ2r"
+
+#define LLA_LEANCLOUD_APPLICATIONID_TEST @"vfwLbNRf4KBk7YhA7HqljjtF-gzGzoHsz"
+#define LLA_LEANCLOUD_CLIENTKEY_TEST @"spmftuE4gTWi9A18UYkuWnVo"
+
 //sina
 #import "WeiboSDK.h"
 
@@ -43,6 +49,10 @@
 
 //bug tags
 #import <Bugtags/Bugtags.h>
+
+//lean cloud
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudIM/AVOSCloudIM.h>
 
 typedef NS_ENUM(NSInteger,LLAThirdLoginState) {
 
