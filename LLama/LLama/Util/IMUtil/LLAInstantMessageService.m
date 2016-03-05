@@ -135,11 +135,14 @@
     imClient.delegate = self;
     
     [imClient openWithCallback:^(BOOL succeeded, NSError *error) {
+        
+        [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
+        [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
+        
         if (succeeded) {
             currentUIDString = [clientId copy];
             
-            [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
-            [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
+
         }
         if (callBack)
             callBack(succeeded,error);

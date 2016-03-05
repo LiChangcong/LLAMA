@@ -24,10 +24,15 @@
 #import "LLAIMImageMessage.h"
 #import "LLAIMVoiceMessage.h"
 
+//category
+#import "UIScrollView+SVPullToRefresh.h"
+
 //util
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
 #import "LLAIMCommonUtil.h"
+
+#import "XHAudioPlayerHelper.h"
 
 @interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver>
 {
@@ -65,6 +70,9 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     //
     [self initVariables];
     [self updateNavigationItems];
@@ -72,6 +80,8 @@
     [self addIMEventObserver];
     
     [self loadMessageData];
+    
+    [self scrollTableToBottom];
     
     //
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToHide:)];
@@ -105,6 +115,12 @@
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     dataTableView.backgroundColor = [UIColor colorWithHex:0x211f2c];
     [self.view addSubview:dataTableView];
+    
+    WEAKSELF
+    
+    [dataTableView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadMessageData];
+    }];
     
     inputController = [[LLAChatInputViewController alloc] init];
     inputController.delegate = self;
@@ -176,7 +192,7 @@
     [messageArray addObjectsFromArray:msgs];
     [dataTableView reloadData];
     
-    [self scrollTableToBottom];
+    [dataTableView.pullToRefreshView stopAnimating];
     
 }
 
@@ -196,6 +212,8 @@
     
     UITableViewCell *cell = nil;
     
+    BOOL showTime = [self shouldShowTimeAtIndex:indexPath.row];
+    
     if (message.mediaType == LLAIMMessageType_Image) {
         
         static NSString *imageIden = @"imageIden";
@@ -204,7 +222,7 @@
         if (!imageCell) {
             imageCell = [[LLAChatMessageImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:imageIden];
         }
-        [imageCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        [imageCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
         
         cell = imageCell;
         
@@ -217,7 +235,7 @@
             voiceCell = [[LLAChatMessageVoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:voiceIden];
         }
         
-        [voiceCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        [voiceCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
         
         cell = voiceCell;
         
@@ -232,7 +250,7 @@
             textCell = [[LLAChatMessageTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textIden];
         }
         
-        [textCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:YES];
+        [textCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
         
         cell = textCell;
     }
@@ -243,7 +261,23 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [LLAChatMessageBaseCell calculateHeightWithMessage:messageArray[indexPath.row] maxWidth:tableView.bounds.size.width showTime:YES];
+    
+    BOOL showTime = [self shouldShowTimeAtIndex:indexPath.row];
+    
+    return [LLAChatMessageBaseCell calculateHeightWithMessage:messageArray[indexPath.row] maxWidth:tableView.bounds.size.width showTime:showTime];
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LLAIMMessage *message = messageArray[indexPath.row];
+    
+    if (message.mediaType == LLAIMMessageType_Audio) {
+        
+        LLAIMVoiceMessage *voiceMessage = (LLAIMVoiceMessage *)message;
+        
+        [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:voiceMessage.audioURL toPlay:YES];
+    }
+    
 }
 
 #pragma mark - LLAChatInputViewControllerDelegate
@@ -297,10 +331,24 @@
     
 }
 
-- (void) sendMessageWithVoiceURL:(NSURL *) voiceURL {
+- (void) sendMessageWithVoiceURL:(NSString *)voiceFilePath withDuration:(CGFloat)duration {
     
-}
+    LLAIMVoiceMessage *voiceMessage = [LLAIMVoiceMessage voiceMessageWithAudioFilePath:voiceFilePath withDuration:duration];
+    
+    [currentConversation sendMessage:voiceMessage progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
+        
+        NSInteger index = [messageArray indexOfObject:voiceMessage];
+        
+        if (index != NSNotFound) {
+            
+            [messageArray replaceObjectAtIndex:index withObject:newMessage];
+            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            //[dataTableView reloadData];
+        }
+        
+    }];
 
+}
 
 - (void) inputViewController:(LLAChatInputViewController *) inputViewController
                    newHeight:(CGFloat) newHeight
@@ -395,6 +443,33 @@
         
         [dataTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messageArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
+}
+
+#pragma mark - Should Show Time
+
+- (BOOL) shouldShowTimeAtIndex:(NSInteger) index {
+    
+    if (index > messageArray.count-1) {
+        return NO;
+    }
+    
+    if (index == 0) {
+        return YES;
+    }
+    
+    LLAIMMessage *curMsg = messageArray[index];
+    LLAIMMessage *preMsg = messageArray[index - 1];
+    
+    if (curMsg.ioType != preMsg.ioType) {
+        return YES;
+    }
+    
+    if ((curMsg.sendTimestamp - preMsg.sendTimestamp)/1000 >120) {
+        return YES;
+    }else {
+        return NO;
+    }
+    
 }
 
 #pragma mark - Reset input controller

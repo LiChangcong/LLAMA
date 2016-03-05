@@ -77,7 +77,7 @@
     self.sentFailedImage_Normal = [UIImage llaImageWithName:@""];
     self.sentFailedImage_Highlight = [UIImage llaImageWithName:@""];
     
-    self.voicePlayImage = [UIImage imageNamed:@""];
+    self.voicePlayImage = [UIImage imageNamed:@"chat_Message_Voice_Play"];
     
     self.maxRecordVoiceDuration = 60.0;
     self.minRecordVoiceDuration = 2.0;

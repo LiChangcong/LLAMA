@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger,LLAChatInputControllerCurrentType) {
 
 - (void) sendMessageWithImage:(UIImage *) image;
 
-- (void) sendMessageWithVoiceURL:(NSURL *) voiceURL;
+- (void) sendMessageWithVoiceURL:(NSString *) voiceFilePath withDuration:(CGFloat) duration;
 
 //change Height
 
@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger,LLAChatInputControllerCurrentType) {
                    newHeight:(CGFloat) newHeight
                     duration:(NSTimeInterval) duration
               animationCurve:(UIViewAnimationCurve) animationCurve;
+
 
 @end
 

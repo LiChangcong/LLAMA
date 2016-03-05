@@ -12,6 +12,8 @@
 #import "LLASaveUserDefaultUtil.h"
 #import "LLAThirdPayManager.h"
 
+
+
 @interface LLAThirdSDKDelegate()
 {
     TencentOAuth *qqAuth;
@@ -395,6 +397,9 @@
         
         if (callBack)
             callBack(userInfo,nil);
+        
+        //
+        
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         if (callBack) {

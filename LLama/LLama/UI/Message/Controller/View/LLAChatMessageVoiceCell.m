@@ -47,6 +47,8 @@
     voiceImageView = [[UIImageView alloc] init];
     voiceImageView.clipsToBounds = YES;
     voiceImageView.image = [LLAMessageChatConfig shareConfig].voicePlayImage;
+    //voiceImageView.backgroundColor = [UIColor purpleColor];
+    voiceImageView.contentMode = UIViewContentModeCenter;
     
     [self.bubbleImageView addSubview:voiceImageView];
 }
@@ -72,7 +74,7 @@
         durationLabel.frame = CGRectMake(bubbleFrame.origin.x+bubbleFrame.size.width+config.sentFailedViewToBunbbleHorSpace, bubbleFrame.origin.y+(bubbleFrame.size.height-durationLabel.bounds.size.height)/2, durationLabel.bounds.size.width, durationLabel.bounds.size.height);
     }else {
         voiceImageView.frame = CGRectMake(bubbleFrame.size.width-config.bubbleArrowWidth-config.voiceToBubbleHorBorder - config.voicePlayImageWidth, (self.bubbleImageView.bounds.size.height-config.voicePlayImageHeight)/2, config.voicePlayImageWidth, config.voicePlayImageHeight);
-        durationLabel.frame = CGRectMake(bubbleFrame.origin.x+bubbleFrame.size.width+config.sentFailedViewToBunbbleHorSpace, bubbleFrame.origin.y+(bubbleFrame.size.height-durationLabel.bounds.size.height)/2, durationLabel.bounds.size.width, durationLabel.bounds.size.height);
+        durationLabel.frame = CGRectMake(bubbleFrame.origin.x - config.sentFailedViewToBunbbleHorSpace - durationLabel.bounds.size.width, bubbleFrame.origin.y+(bubbleFrame.size.height-durationLabel.bounds.size.height)/2, durationLabel.bounds.size.width, durationLabel.bounds.size.height);
     }
     
     if (self.currentMessage.msgStatus == LLAIMMessageStatusFailed || self.currentMessage.msgStatus == LLAIMMessageStatusSending) {
@@ -87,6 +89,8 @@
 
 - (void) updateCellWithMessage:(LLAIMMessage *)message maxWidth:(CGFloat)maxWidth showTime:(BOOL)showTime {
     //
+    
+    [super updateCellWithMessage:message maxWidth:maxWidth showTime:showTime];
     
     durationLabel.text = [self formatDurationString];
     

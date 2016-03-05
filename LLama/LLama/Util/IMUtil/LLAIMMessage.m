@@ -60,6 +60,20 @@ static NSString * const tempImageCacheDirectory = @"tempImage";
         voiceMessage.mediaType = LLAIMMessageType_Audio;
         
         message = voiceMessage;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            AVFile *file = leanMessage.file;
+            if (file && file.isDataAvailable == NO) {
+                
+                NSError *error;
+
+                NSData *data = [file getData:&error];
+                if (error || data == nil) {
+                    NSLog(@"download file error : %@", error);
+                }
+                
+            }
+        });
     
     }else {
         //unsupport mediaType message
@@ -122,13 +136,13 @@ static NSString * const tempImageCacheDirectory = @"tempImage";
     
 }
 
-+ (instancetype) voiceMessageWithAudioFilePath:(NSString *) audioFilePath {
++ (instancetype) voiceMessageWithAudioFilePath:(NSString *) audioFilePath withDuration:(CGFloat)duration{
     
     LLAIMVoiceMessage *audioMessage = [LLAIMVoiceMessage new];
     audioMessage.mediaType = LLAIMMessageType_Audio;
     audioMessage.authorUser = [LLAUser me];
     audioMessage.sendTimestamp = [[NSDate date] timeIntervalSince1970] * 1000;
-    audioMessage.duration = .0;
+    audioMessage.duration = duration;
     audioMessage.messageId = [self generateTmpMessageId];
 
     audioMessage.audioURL = audioFilePath;

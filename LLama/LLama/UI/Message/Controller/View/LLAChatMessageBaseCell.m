@@ -23,6 +23,8 @@
     
     UIButton *sentFailedButton;
     
+    NSDateFormatter *dateFormatter;
+    
 }
 
 @property(nonatomic , readwrite , strong) UILabel *timeLabel;
@@ -84,7 +86,8 @@
 
 
 - (void) baseInitVariables {
-    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
 }
 
 - (void) baseInitSubViews {
@@ -260,13 +263,20 @@
     
     if (shouldShowTime) {
         timeLabel.hidden = NO;
+        headView.hidden = NO;
     }else {
         timeLabel.hidden = YES;
+        headView.hidden = YES;
     }
 }
 
 - (NSString *) formatTimeString {
-    return [NSString stringWithFormat:@"%lld",currentMessage.sendTimestamp/1000];
+    
+    dateFormatter.dateFormat = @"HH:mm";
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:currentMessage.sendTimestamp/1000];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 + (CGFloat) calculateHeightWithMessage:(LLAIMMessage *) message maxWidth:(CGFloat) maxWidth showTime:(BOOL) shouldShow {

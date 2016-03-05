@@ -170,7 +170,6 @@
                     
                     //[[NSFileManager defaultManager] removeItemAtPath:[((LLAIMImageMessage *)message).imageURL path] error:nil];
                     
-                    
                 }
             
                 //

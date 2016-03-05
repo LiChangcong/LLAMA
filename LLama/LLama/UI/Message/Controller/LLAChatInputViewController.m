@@ -14,10 +14,21 @@
 #import "HPGrowingTextView.h"
 #import "LLAChatInputPickerEmojiView.h"
 
+#import "XHVoiceRecordHUD.h"
+
 //model
 #import "LLAPickImageItemInfo.h"
 
+//util
+#import "XHVoiceRecordHelper.h"
 
+#import "XHMacro.h"
+
+//
+#define kXHTouchToRecord         @"按住 说话"
+#define kXHTouchToFinish         @"松开 结束"
+
+#define MIN_AUDIO_RECORDING_INTERVAL 1
 
 static const CGFloat inputTextViewToTop = 5;
 static const CGFloat inputTextViewMinHeight = 34;
@@ -61,6 +72,28 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 @property(nonatomic , strong) LLAChatInputPickerEmojiView *emojiPickerView;
 
 @property(nonatomic , assign ,readwrite) LLAChatInputControllerCurrentType  currentInputType;
+
+//
+@property (nonatomic, assign, readwrite) CFTimeInterval lastAudioRecordingTime;
+
+/**
+ *  是否取消錄音
+ */
+@property (nonatomic, assign, readwrite) BOOL isCancelled;
+
+/**
+ *  是否正在錄音
+ */
+@property (nonatomic, assign, readwrite) BOOL isRecording;
+
+//recorder
+
+@property (nonatomic , strong ,readwrite) XHVoiceRecordHelper *voiceRecordHelper;
+
+//recorder HUD
+
+@property (nonatomic , strong ,readwrite) XHVoiceRecordHUD *voiceRecordHUD;
+
 
 @end
 
@@ -146,8 +179,15 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     
     [tapToRecordButton setTitle:@"按住说话" forState:UIControlStateNormal];
     
-    [tapToRecordButton addTarget:self action:@selector(tapToRecordTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [tapToRecordButton addTarget:self action:@selector(tapToRecordTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    [tapToRecordButton setTitle:kXHTouchToRecord forState:UIControlStateNormal];
+    [tapToRecordButton setTitle:kXHTouchToFinish forState:UIControlStateHighlighted];
+
+    
+    [tapToRecordButton addTarget:self action:@selector(holdDownButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    [tapToRecordButton addTarget:self action:@selector(holdDownButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
+    [tapToRecordButton addTarget:self action:@selector(holdDownButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [tapToRecordButton addTarget:self action:@selector(holdDownDragOutside) forControlEvents:UIControlEventTouchDragExit];
+    [tapToRecordButton addTarget:self action:@selector(holdDownDragInside) forControlEvents:UIControlEventTouchDragEnter];
     
     
     [self.view addSubview:tapToRecordButton];
@@ -472,13 +512,127 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 
 #pragma mark - Record Button
 
-- (void) tapToRecordTouchDown:(UIButton *) sender {
+- (BOOL)audioRecordingShouldBegin {
+    BOOL result = YES;
+    
+    CFTimeInterval now = CACurrentMediaTime();
+    
+    if (self.lastAudioRecordingTime > 0 && now - self.lastAudioRecordingTime < MIN_AUDIO_RECORDING_INTERVAL) {
+        result = NO;
+    }
+    
+    self.lastAudioRecordingTime = now;
+    
+    return result;
+}
+
+
+- (void)holdDownButtonTouchDown {
+    if (![self audioRecordingShouldBegin]) {
+        return;
+    }
+    
+    self.isCancelled = NO;
+    self.isRecording = NO;
+
+    
+    WEAKSELF
+    
+    //這邊回調 return 的 YES, 或 NO, 可以讓底層知道該次錄音是否成功, 進而處理無用的 record 對象
+    [self.voiceRecordHelper prepareRecordingWithPath:[self getRecorderPath] prepareRecorderCompletion:^BOOL{
+        STRONGSELF
+        
+        //這邊要判斷回調回來的時候, 使用者是不是已經早就鬆開手了
+        if (strongSelf && !strongSelf.isCancelled) {
+            strongSelf.isRecording = YES;
+        
+            //
+            [self.voiceRecordHUD startRecordingHUDAtView:[UIApplication sharedApplication].keyWindow];
+            [self.voiceRecordHelper startRecordingWithStartRecorderCompletion:^{
+            }];
+            
+            return YES;
+        } else {
+            return NO;
+        }
+
+    }];
+
     
 }
 
-- (void) tapToRecordTouchUp:(UIButton *) sender {
+- (void)holdDownButtonTouchUpOutside {
     
+    //如果已經開始錄音了, 才需要做取消的動作, 否則只要切換 isCancelled, 不讓錄音開始.
+    if (self.isRecording) {
+//        if ([self.delegate respondsToSelector:@selector(didCancelRecordingVoiceAction)]) {
+//            [self.delegate didCancelRecordingVoiceAction];
+//        }
+        WEAKSELF
+        [self.voiceRecordHUD cancelRecordCompled:^(BOOL fnished) {
+            weakSelf.voiceRecordHUD = nil;
+        }];
+        [self.voiceRecordHelper cancelledDeleteWithCompletion:^{
+            
+        }];
+
+        
+    } else {
+        self.isCancelled = YES;
+    }
 }
+
+- (void)holdDownButtonTouchUpInside {
+    
+    //如果已經開始錄音了, 才需要做結束的動作, 否則只要切換 isCancelled, 不讓錄音開始.
+    if (self.isRecording) {
+//        if ([self.delegate respondsToSelector:@selector(didFinishRecoingVoiceAction)]) {
+//            [self.delegate didFinishRecoingVoiceAction];
+//        }
+        
+        WEAKSELF
+        [self.voiceRecordHUD stopRecordCompled:^(BOOL fnished) {
+            weakSelf.voiceRecordHUD = nil;
+        }];
+        [self.voiceRecordHelper stopRecordingWithStopRecorderCompletion:^{
+            //[weakSelf didSendMessageWithVoice:weakSelf.voiceRecordHelper.recordPath voiceDuration:weakSelf.voiceRecordHelper.recordDuration];
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(sendMessageWithVoiceURL:withDuration:)]) {
+                
+                [weakSelf.delegate sendMessageWithVoiceURL:weakSelf.voiceRecordHelper.recordPath withDuration:[weakSelf.voiceRecordHelper.recordDuration floatValue]];
+            }
+        }];
+        
+    } else {
+        self.isCancelled = YES;
+    }
+}
+
+- (void)holdDownDragOutside {
+    
+    //如果已經開始錄音了, 才需要做拖曳出去的動作, 否則只要切換 isCancelled, 不讓錄音開始.
+    if (self.isRecording) {
+//        if ([self.delegate respondsToSelector:@selector(didDragOutsideAction)]) {
+//            [self.delegate didDragOutsideAction];
+//        }
+        [self.voiceRecordHUD resaueRecord];
+    } else {
+        self.isCancelled = YES;
+    }
+}
+
+- (void)holdDownDragInside {
+    
+    //如果已經開始錄音了, 才需要做拖曳回來的動作, 否則只要切換 isCancelled, 不讓錄音開始.
+    if (self.isRecording) {
+//        if ([self.delegate respondsToSelector:@selector(didDragInsideAction)]) {
+//            [self.delegate didDragInsideAction];
+//        }
+        [self.voiceRecordHUD pauseRecord];
+    } else {
+        self.isCancelled = YES;
+    }
+}
+
 
 #pragma mark - KeyBoardNotification
 
@@ -549,12 +703,52 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
             [delegate inputViewController:self newHeight:newHeight duration:0.2 animationCurve:UIViewAnimationCurveEaseIn];
         }
         
-        
-        
     }else {
         
     }
     
+}
+
+#pragma mark - Recorder Helper
+
+- (XHVoiceRecordHelper *)voiceRecordHelper {
+    if (!_voiceRecordHelper) {
+        WEAKSELF
+        _voiceRecordHelper = [[XHVoiceRecordHelper alloc] init];
+        _voiceRecordHelper.maxTimeStopRecorderCompletion = ^{
+            DLog(@"已经达到最大限制时间了，进入下一步的提示");
+            
+            [weakSelf holdDownButtonTouchUpInside];
+            
+        };
+        _voiceRecordHelper.peakPowerForChannel = ^(float peakPowerForChannel) {
+            weakSelf.voiceRecordHUD.peakPower = peakPowerForChannel;
+        };
+        _voiceRecordHelper.maxRecordTime = kVoiceRecorderTotalTime;
+    }
+    return _voiceRecordHelper;
+}
+
+- (XHVoiceRecordHUD *)voiceRecordHUD {
+    if (!_voiceRecordHUD) {
+        _voiceRecordHUD = [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
+    }
+    return _voiceRecordHUD;
+}
+
+
+#pragma mark - RecorderPath Helper Method
+
+- (NSString *)getRecorderPath {
+    NSString *recorderPath = nil;
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yy-MMMM-dd";
+    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
+    //    dateFormatter.dateFormat = @"hh-mm-ss";
+    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
+    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.aac", [dateFormatter stringFromDate:now]];
+    return recorderPath;
 }
 
 #pragma mark - height
