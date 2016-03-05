@@ -10,6 +10,13 @@
 
 #import "LLAHotUsersTableViewCell.h"
 
+#import "LLAUserProfileViewController.h"
+
+
+#import "LLAHttpUtil.h"
+#import "LLALoadingView.h"
+#import "LLAViewUtil.h"
+
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -17,9 +24,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
     UITableView *dataTableView;
     
-    
+    LLALoadingView *HUD;
+
     //
     UIColor *backGroundColor;
+    
+    
 }
 @end
 
@@ -69,6 +79,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [dataTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    // 菊花控件
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+
 }
 
 #pragma mark - Table view data source
@@ -86,10 +100,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
     LLAHotUsersTableViewCell *cell = [dataTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.delegate = self;
     if (UserTypeIsHotUsers == self.userType) {
+        cell.indexPathRow = indexPath.row;
         [cell updateCellWithInfo:self.hotUsersArray[indexPath.row] tableWidth:tableView.bounds.size.width];
     }else{
+        cell.indexPathRow = indexPath.row;
         [cell updateCellWithInfo:self.searchResultUsersArray[indexPath.row] tableWidth:tableView.bounds.size.width];
     }
     
@@ -107,15 +123,79 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%d,%d", indexPath.section, indexPath.row);
+    if (self.userType == UserTypeIsHotUsers) {
+
+        if (self.hotUsersArray[indexPath.row].userIdString.length > 0) {
+            
+            LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:self.hotUsersArray[indexPath.row].userIdString];
+            [self.navigationController pushViewController:userProfile animated:YES];
+        }
+    }else{
+    
+        if (self.searchResultUsersArray[indexPath.row].userIdString.length > 0) {
+            
+            LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:self.searchResultUsersArray[indexPath.row].userIdString];
+            [self.navigationController pushViewController:userProfile animated:YES];
+        }
+
+    }
+
 }
 
 #pragma mark - hotUsersTableViewCellDelegate
 
-- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell
+//- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell
+- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell withIndexPathRow:(NSInteger)indexPathRow
 {
-    NSLog(@"点击了关注按钮");
+    NSString *userId = nil;
+    
+    if (self.userType == UserTypeIsHotUsers) {
+        userId = self.hotUsersArray[indexPathRow].userIdString;
+    }else {
+        
+        userId = self.searchResultUsersArray[indexPathRow].userIdString;
+    }
 
-    // 发送请求给服务器，代表关注了该用户
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:userId forKey:@"userId"];
+
+    // 发送请求
+    [LLAHttpUtil httpPostWithUrl:@"/user/zanUser" param:params responseBlock:^(id responseObject) {
+        
+        [HUD hide:NO];
+        int tempInfo = [[responseObject valueForKey:@"followStat"] intValue];
+
+        if (tempInfo) {
+            // 更改模型中followstate状态；
+            self.hotUsersArray[indexPathRow].attentionType =tempInfo;
+            [dataTableView reloadData];
+        }
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:NO];
+        
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+
+}
+
+#pragma mark - LLAHotUsersTableViewCellDelegate
+
+- (void)userHeadViewTapped:(LLAUser *)userInfo
+{
+    if (userInfo.userIdString.length > 0) {
+        
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
+
 }
 @end

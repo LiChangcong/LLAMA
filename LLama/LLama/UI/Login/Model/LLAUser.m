@@ -12,6 +12,7 @@
 //用来标识解析
 
 static BOOL isSimpleUserModel;
+static BOOL isSearchModel;
 
 @implementation LLAUser
 
@@ -19,6 +20,7 @@ static BOOL isSimpleUserModel;
 
 + (LLAUser *) parseJsonWidthDic:(NSDictionary *)data {
     isSimpleUserModel = NO;
+    isSearchModel = NO;
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:data error:nil];
     
 }
@@ -26,10 +28,24 @@ static BOOL isSimpleUserModel;
 
 + (NSDictionary *) JSONKeyPathsByPropertyKey {
     
+
     if (isSimpleUserModel) {
+
         return @{@"userIdString":@"uid",
                  @"userName":@"uname",
                  @"headImageURL":@"imgUrl"};
+    }else if (isSearchModel){
+        
+        return @{
+                 @"attentionType":@"followStat",
+                 @"headImageURL":@"imgUrl",
+                 @"genderString":@"sex",
+                 @"userDescription":@"signature",
+                 @"userIdString":@"uid",
+                 @"userName":@"uname"
+                 };
+
+    
     }else {
         return @{@"userIdString":@"id",
                  @"userName":@"name",
@@ -149,6 +165,15 @@ static BOOL isSimpleUserModel;
 + (void) setIsSimpleUserModel:(BOOL)isSimple {
     isSimpleUserModel = isSimple;
 }
+
++ (BOOL) isSearchModel {
+    return isSearchModel;
+}
+
++ (void) setIsSearchModel:(BOOL)isSearch {
+    isSearchModel = isSearch;
+}
+
 
 - (NSDictionary *) dicForIMAttributes {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];

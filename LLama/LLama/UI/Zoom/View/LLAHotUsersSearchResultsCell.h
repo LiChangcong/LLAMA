@@ -8,9 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+#import "LLAUser.h"
+@class LLAHotUsersCell;
+
+@protocol LLAHotUsersSearchResultsCellDelegate <NSObject>
+
+- (void) userHeadViewTapped:(LLAUser *) userInfo;
+
+@end
+
 @interface LLAHotUsersSearchResultsCell : UITableViewCell
 
-- (void)updateInfo;
+
+@property(nonatomic , weak) id<LLAHotUsersSearchResultsCellDelegate> delegate;
+
+- (void) updateCellWithInfo:(NSMutableArray <LLAUser *> *)info tableWidth:(CGFloat)width;
 
 
 @end

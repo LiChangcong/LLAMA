@@ -16,7 +16,7 @@ static const CGFloat attentionButtonToRight = 10;
 
 #import "LLAUserHeadView.h"
 
-@interface LLAHotUsersTableViewCell()
+@interface LLAHotUsersTableViewCell()<LLAUserHeadViewDelegate>
 {
 //    UIButton *headIcon;
     LLAUserHeadView *userHeadView;
@@ -83,6 +83,7 @@ static const CGFloat attentionButtonToRight = 10;
     // 头像
     userHeadView = [[LLAUserHeadView alloc] init];
     userHeadView.translatesAutoresizingMaskIntoConstraints = NO;
+    userHeadView.delegate = self;
     [self.contentView addSubview:userHeadView];
 
     // 用户名
@@ -138,6 +139,7 @@ static const CGFloat attentionButtonToRight = 10;
     [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(userHeadView.mas_bottom);
         make.left.equalTo(userHeadView.mas_right).with.offset(detailLabelToHeadIcon);
+        make.right.equalTo(attentionButton.mas_left).with.offset(5);
     }];
     
     [sexImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,30 +172,31 @@ static const CGFloat attentionButtonToRight = 10;
 - (void)attentionButtonClick
 {
     
-    if ([self.delegate respondsToSelector:@selector(hotUsersTableViewCellDidSelectedAttentionButton:)]) {
+//    if ([self.delegate respondsToSelector:@selector(hotUsersTableViewCellDidSelectedAttentionButton:)]) {
+//        
+//        [self.delegate hotUsersTableViewCellDidSelectedAttentionButton:self];
+//    }
+    
+    if ([self.delegate respondsToSelector:@selector(hotUsersTableViewCellDidSelectedAttentionButton:withIndexPathRow:)]) {
         
-        [self.delegate hotUsersTableViewCellDidSelectedAttentionButton:self];
+        [self.delegate hotUsersTableViewCellDidSelectedAttentionButton:self withIndexPathRow:self.indexPathRow];
     }
+
+    
 }
-//- (void)updateCellWithInfo
-//{
-//    // 根据模型里面存储的状态是什么，根据状态来判断关注按钮显示什么，已关注/相互关注/点击关注；
-//    
-////    if (<#condition#>) {
-////        <#statements#>
-////    }
-//}
-- (void) updateCellWithInfo:(LLAHotUserInfo *) info tableWidth:(CGFloat) width
+
+- (void) updateCellWithInfo:(LLAUser *) info tableWidth:(CGFloat) width
 {
     
-    [userHeadView updateHeadViewWithUser:info.hotUser];
-    nameLabel.text = info.hotUser.userName;
-    detailLabel.text = info.hotUser.userDescription;
+    [userHeadView updateHeadViewWithUser:info];
+    nameLabel.text = info.userName;
+    detailLabel.text = info.userDescription;
     
     // 性别状态
-    if (info.hotUser.gender == UserGender_Male) {
+//    NSLog(@"%d", [info.genderString intValue]);
+    if ([info.genderString intValue] == UserGender_Male) {
         [sexImageView setImage:[UIImage imageNamed:@"search_hotUsers_sexual-man"]];
-    }else if (info.hotUser.gender == UserGender_Female){
+    }else{
         [sexImageView setImage:[UIImage imageNamed:@"search_hotUsers_sexual-woman"]];
     }
     
@@ -214,6 +217,15 @@ static const CGFloat attentionButtonToRight = 10;
     }
     
     
+}
+
+#pragma mark - LLAUserHeadViewDelegate
+
+- (void)headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeadViewTapped:)]) {
+        [self.delegate userHeadViewTapped:user];
+    }
 }
 
 @end
