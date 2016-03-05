@@ -9,17 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class LLAHotUsersTableViewCell;
-#import "LLAHotUserInfo.h"
+//#import "LLAHotUserInfo.h"
+#import "LLAUser.h"
 
 @protocol LLAHotUsersTableViewCellDelegate <NSObject>
 
-- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell;
+//- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell;
+- (void)hotUsersTableViewCellDidSelectedAttentionButton:(LLAHotUsersTableViewCell *)hotUsersTableViewCell withIndexPathRow:(NSInteger)indexPathRow;
+
+- (void) userHeadViewTapped:(LLAUser *) userInfo;
 
 @end
 
 @interface LLAHotUsersTableViewCell : UITableViewCell
 
+@property(nonatomic , assign)  NSInteger indexPathRow;
+
 @property(nonatomic , weak) id<LLAHotUsersTableViewCellDelegate> delegate;
 
-- (void) updateCellWithInfo:(LLAHotUserInfo *) info tableWidth:(CGFloat) width;
+- (void) updateCellWithInfo:(LLAUser *) info tableWidth:(CGFloat) width;
 @end

@@ -20,15 +20,21 @@
 #import "TMZoomController.h"
 #import "LLAHotVideosHeader.h"
 #import "LLAHotUsersViewController.h"
-#import "LLASearchResultViewController.h"
+//#import "LLASearchResultViewController.h"
 #import "LLASearchResultsViewController.h"
 
-#import "LLAHotUserInfo.h"
-#import "LLAHotVideoInfo.h"
+#import "LLAHotUsersVideosInfo.h"
+//#import "LLAHotVideoInfo.h"
 
 #import "LLALoadingView.h"
 #import "LLAHttpUtil.h"
 #import "LLAViewUtil.h"
+
+#import "SVPullToRefresh.h"
+
+
+#import "LLAUserProfileViewController.h"
+#import "LLAVideoDetailViewController.h"
 
 static const CGFloat zoomCellsHorSpace = 6;
 static const CGFloat zoomCellsVerSpace = 6;
@@ -47,7 +53,7 @@ static NSString *const hotVideosCellIden = @"hotVideosCellIden";
 static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 
 
-@interface LLAZoomViewController () <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface LLAZoomViewController () <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate,LLAHotUsersCellDelegate>
 {
     LLASearchBar *headSearchBar;
     
@@ -59,10 +65,14 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     UIButton *shadeButton;
     
     LLALoadingView *HUD;
+    
+    LLAHotUsersVideosInfo *mainInfo;
 
     //
     NSMutableArray *hotUsersArray;
     NSMutableArray *hotVideosArray;
+    
+
 }
 
 @property (nonatomic, assign) bool isFiltered;
@@ -78,18 +88,22 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     
     self.view.backgroundColor = [UIColor colorWithHex:0x1e1d28];
     
+    
     // 设置变量
-    [self initVariables];
+//    [self initVariables];
+    
     // 设置子控件
     [self initSubViews];
+
     // 设置约束
     [self initSubConstraints];
-    
+
     // 显示菊花
     [HUD show:YES];
-    
+
     // 刷新数据
     [self loadData];
+    
 
 }
 
@@ -103,6 +117,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 // 设置子控件
 - (void)initSubViews
 {
+    
     // headSearchBar
     headSearchBar = [[LLASearchBar alloc] init];
     headSearchBar.placeholder = @"搜索";
@@ -123,14 +138,22 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     dataCollectionView.delegate = self;
     dataCollectionView.bounces = YES;
     dataCollectionView.backgroundColor = [UIColor colorWithHex:0x1e1d28];
+//    dataCollectionView.autoresizingMask = NO; // 那不是下拉刷新后会上去一小节
     dataCollectionView.showsHorizontalScrollIndicator = NO;
     dataCollectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:dataCollectionView];
     
+    
+//    __weak typeof(self) weakSelf = self;
+//    
+//    [dataCollectionView addPullToRefreshWithActionHandler:^{
+//        [weakSelf loadData];
+//    }];
+    
+
     // 注册cell
     [dataCollectionView registerClass:[LLAHotUsersCell class] forCellWithReuseIdentifier:hotUsersCellIden];
     [dataCollectionView registerClass:[LLAHotVideosCell class] forCellWithReuseIdentifier:hotVideosCellIden];
-//    [dataCollectionView registerClass:[LLAHotVideosHeader class] forCellWithReuseIdentifier:hotVideosHeaderIden];
     [dataCollectionView registerClass:[LLAHotVideosHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:hotVideosHeaderIden];
 
 
@@ -143,99 +166,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     shadeButton.hidden = YES;
     [self.view addSubview:shadeButton];
 
-    // 假数据
-    hotUsersArray = [NSMutableArray array];
-    LLAHotUserInfo *hotUserInfo1 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo1.hotUser = [[LLAUser alloc] init];
-    hotUserInfo1.hotUser.userName = @"聪聪";
-    hotUserInfo1.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo1.hotUser.userDescription = @"我是很帅气很可爱很温柔的小哥";
-    hotUserInfo1.hotUser.gender = UserGender_Male;
-    hotUserInfo1.attentionType = LLAAttentionType_NotAttention;
-    [hotUsersArray addObject:hotUserInfo1];
-    
-    LLAHotUserInfo *hotUserInfo2 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo2.hotUser = [[LLAUser alloc] init];
-    hotUserInfo2.hotUser.userName = @"tommin";
-    hotUserInfo2.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo2.hotUser.userDescription = @"你猜你猜，你再猜";
-    hotUserInfo2.hotUser.gender = UserGender_Female;
-    hotUserInfo2.attentionType = LLAAttentionType_AllAttention;
-    [hotUsersArray addObject:hotUserInfo2];
-
-    
-    LLAHotUserInfo *hotUserInfo3 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo3.hotUser = [[LLAUser alloc] init];
-    hotUserInfo3.hotUser.userName = @"Money";
-    hotUserInfo3.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo3.hotUser.userDescription = @"我是良民呀";
-    hotUserInfo3.hotUser.gender = UserGender_Female;
-    hotUserInfo3.attentionType = LLAAttentionType_HasAttention;
-    [hotUsersArray addObject:hotUserInfo3];
-
-    
-    LLAHotUserInfo *hotUserInfo4 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo4.hotUser = [[LLAUser alloc] init];
-    hotUserInfo4.hotUser.userName = @"八戒";
-    hotUserInfo4.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo4.hotUser.userDescription = @"我要背媳妇";
-    hotUserInfo4.attentionType = LLAAttentionType_NotAttention;
-    hotUserInfo4.hotUser.gender = UserGender_Female;
-    [hotUsersArray addObject:hotUserInfo4];
-
-    
-    LLAHotUserInfo *hotUserInfo5 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo5.hotUser = [[LLAUser alloc] init];
-    hotUserInfo5.hotUser.userName = @"Jack";
-    hotUserInfo5.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo5.hotUser.userDescription = @"jack is black，and i am beautiful";
-    hotUserInfo5.hotUser.gender = UserGender_Male;
-    hotUserInfo5.attentionType = LLAAttentionType_AllAttention;
-    [hotUsersArray addObject:hotUserInfo5];
-    
-    LLAHotUserInfo *hotUserInfo6 = [[LLAHotUserInfo alloc] init];
-    hotUserInfo6.hotUser = [[LLAUser alloc] init];
-    hotUserInfo6.hotUser.userName = @"Jim";
-    hotUserInfo6.hotUser.headImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotUserInfo6.hotUser.userDescription = @"你才是鸡母";
-    hotUserInfo6.attentionType = LLAAttentionType_AllAttention;
-    hotUserInfo6.hotUser.gender = UserGender_Female;
-    [hotUsersArray addObject:hotUserInfo6];
-    
-    NSLog(@"%@",hotUsersArray);
-    // 热门视频加数据
-    hotVideosArray = [NSMutableArray array];
-    
-    LLAHotVideoInfo *hotVideoInfo1 = [[LLAHotVideoInfo alloc] init];
-    hotVideoInfo1.videoCoverImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotVideoInfo1.likeNum = 12;
-    hotVideoInfo1.prizeNum = 11178787;
-    [hotVideosArray addObject:hotVideoInfo1];
-    
-    LLAHotVideoInfo *hotVideoInfo2 = [[LLAHotVideoInfo alloc] init];
-    hotVideoInfo2.videoCoverImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotVideoInfo2.likeNum = 342;
-    hotVideoInfo2.prizeNum = 288622;
-    [hotVideosArray addObject:hotVideoInfo2];
-
-    
-    LLAHotVideoInfo *hotVideoInfo3 = [[LLAHotVideoInfo alloc] init];
-    hotVideoInfo3.videoCoverImageURL = @"";
-    hotVideoInfo3.likeNum = 5677;
-    hotVideoInfo3.prizeNum = 43;
-    [hotVideosArray addObject:hotVideoInfo3];
-
-    LLAHotVideoInfo *hotVideoInfo4 = [[LLAHotVideoInfo alloc] init];
-    hotVideoInfo4.videoCoverImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotVideoInfo4.likeNum = 563;
-    hotVideoInfo4.prizeNum = 86;
-    [hotVideosArray addObject:hotVideoInfo4];
-
-    LLAHotVideoInfo *hotVideoInfo5 = [[LLAHotVideoInfo alloc] init];
-    hotVideoInfo5.videoCoverImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    hotVideoInfo5.likeNum = 87;
-    hotVideoInfo5.prizeNum = 9;
-    [hotVideosArray addObject:hotVideoInfo5];
 
 }
 
@@ -249,7 +179,12 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 {
     [dataCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+//        make.top.equalTo(@44);
+//        make.left.right.bottom.equalTo(self.view);
     }];
+    
+    // 菊花控件
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
@@ -263,9 +198,15 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     [LLAHttpUtil httpPostWithUrl:@"/discover/hotInfo" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
-        
-        NSLog(@"%@",responseObject);
-        
+//        [dataCollectionView.pullToRefreshView stopAnimating];
+//        [dataCollectionView.infiniteScrollingView resetInfiniteScroll];
+
+        LLAHotUsersVideosInfo *tempInfo = [LLAHotUsersVideosInfo parseJsonWithDic:responseObject];
+        if (tempInfo) {
+            mainInfo = tempInfo;
+            [dataCollectionView reloadData];
+
+        }
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -301,7 +242,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         
     }else if(section == hotVideosIndex){
     
-        return 5;
+        return mainInfo.hotVideosdataList.count;
         
     }else {
         
@@ -315,19 +256,18 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     if (indexPath.section == hotUsersIndex) {
         
         LLAHotUsersCell *hotUsersCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:hotUsersCellIden forIndexPath:indexPath];
-//        hotUsers.delegate = self;
-//        [hotUsersCell updateInfo];
-        [hotUsersCell updateCellWithInfo:hotUsersArray tableWidth:collectionView.bounds.size.width];
+        hotUsersCell.delegate = self;
+
         // 设置数据
-//        [hotUsers updateCellWithInfo:scriptInfo maxWidth:collectionView.frame.size.width];
+        [hotUsersCell updateCellWithInfo:mainInfo.hotUsersataList tableWidth:collectionView.bounds.size.width];
+
         return hotUsersCell;
         
     }else {
         LLAHotVideosCell *hotVideosCell = [dataCollectionView dequeueReusableCellWithReuseIdentifier:hotVideosCellIden forIndexPath:indexPath];
-//        hotVideos.delegate = self;
-        [hotVideosCell updateCellWithInfo:hotVideosArray[indexPath.row] tableWidth:collectionView.bounds.size.width];
+        
         // 设置数据
-//        [hotVideos updateCellWithUserInfo:scriptInfo.partakeUsersArray[indexPath.row]];
+        [hotVideosCell updateCellWithInfo:mainInfo.hotVideosdataList[indexPath.row] tableWidth:collectionView.bounds.size.width];
         return hotVideosCell;
     }
 
@@ -343,13 +283,12 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         if (indexPath.section == hotUsersIndex) {
             
             LLAHotVideosHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:hotVideosHeaderIden forIndexPath:indexPath];
-//            header.headerText = @"热门用户";
             [header updateHeaderText:@"热门用户"];
             return header;
         } else {
+            
             // 热门视频header
             LLAHotVideosHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:hotVideosHeaderIden forIndexPath:indexPath];
-//            header.headerText = @"热门视频";
             [header updateHeaderText:@"热门视频"];
             return header;
         }
@@ -375,7 +314,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     shadeButton.hidden = YES;
 
     searchBar.text = @"";
-//    searchBar.showsCancelButton = NO;
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     _isFiltered = FALSE;
@@ -386,9 +324,6 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 {
 
 
-//    LLASearchResultViewController *searchResult = [[LLASearchResultViewController alloc] init];
-//    searchResult.searchResultText = headSearchBar.text;
-//    [self.navigationController pushViewController:searchResult animated:YES];
     
     LLASearchResultsViewController *searchResults = [[LLASearchResultsViewController alloc] init];
     searchResults.searchResultText = headSearchBar.text;
@@ -456,16 +391,30 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
         // 热门用户
         LLAHotUsersViewController *hotUsers = [[LLAHotUsersViewController alloc] init];
         hotUsers.userType = UserTypeIsHotUsers;
-        hotUsers.hotUsersArray = hotUsersArray;
+        hotUsers.hotUsersArray = mainInfo.hotUsersataList;
         [self.navigationController pushViewController:hotUsers animated:YES];
         
     }else{
     
-        NSLog(@"%d,%d",indexPath.section, indexPath.row);
+        LLAVideoDetailViewController *videoDetail = [[LLAVideoDetailViewController alloc] initWithVideoId:mainInfo.hotVideosdataList[indexPath.row].videoid];
+        [self.navigationController pushViewController:videoDetail animated:YES];
+
 
     }
     
     
+}
+
+#pragma mark - LLAHotUsersCellDelegate
+
+- (void)userHeadViewTapped:(LLAUser *)userInfo
+{
+    if (userInfo.userIdString.length > 0) {
+        
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
+
 }
 
 @end

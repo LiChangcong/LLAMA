@@ -9,7 +9,7 @@
 #import "LLAHotUsersSearchResultsCell.h"
 #import "LLAUserHeadView.h"
 
-@interface LLAHotUsersSearchResultsCell()
+@interface LLAHotUsersSearchResultsCell()<LLAUserHeadViewDelegate>
 {
     UIImageView *arrowImageView;
 
@@ -23,7 +23,8 @@
     
     NSMutableArray<LLAUserHeadView *> *searchResultUsers_HeadImageArray;
     NSMutableArray<UILabel *> *searchResultUsers_UserNameArray;
-
+    
+    CGFloat num;
 }
 
 @end
@@ -86,7 +87,7 @@
     
     // CGFloat num = (screenWidth- 25 )/(60);
     // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。20，间隙
-    CGFloat num = (screenWidth - 17 - 40)/ (50 + 10);
+    num = (screenWidth - 17 - 40)/ (50 + 10);
     
     for (int i = 0 ; i < num; i++) {
         /*
@@ -105,17 +106,21 @@
         UILabel *userNameLabel = [[UILabel alloc] init];
         userNameLabel.font = hotUsersSearchResultsFont;
         userNameLabel.textColor = hotUsersSearchResultsColor;
-        userNameLabel.text = @"Coolprice";
+        userNameLabel.textAlignment = NSTextAlignmentCenter;
+//        userNameLabel.text = @"Coolprice";
         [hotUserContentView addSubview:userNameLabel];
         [searchResultUsers_UserNameArray addObject:userNameLabel];
         
         LLAUserHeadView *headView = [[LLAUserHeadView alloc] init];
-        [headView.userHeadImageView setImage:[UIImage imageNamed:@"userhead"]];
+        headView.translatesAutoresizingMaskIntoConstraints = NO;
+        headView.delegate = self;
+//        [headView.userHeadImageView setImage:[UIImage imageNamed:@"userhead"]];
         [hotUserContentView addSubview:headView];
         [searchResultUsers_HeadImageArray addObject:headView];
 
         
         [headView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.equalTo(@34);
             make.top.equalTo(hotUserContentView).with.offset(5);
             make.centerX.equalTo(hotUserContentView);
         }];
@@ -157,8 +162,41 @@
         make.centerY.equalTo(self.contentView.mas_centerY).with.offset(4);    }];
 }
 
-- (void)updateInfo
+#pragma mark - LLAUserHeadViewDelegate
+
+- (void)headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeadViewTapped:)]) {
+        [self.delegate userHeadViewTapped:user];
+    }
+
+}
+
+- (void) updateCellWithInfo:(NSMutableArray <LLAUser *> *)info tableWidth:(CGFloat)width
+{
+//    NSInteger times = info.count > searchResultUsers_HeadImageArray.count ? searchResultUsers_HeadImageArray.count:info.count;
+    for (int i = 0; i < num; i++) { // i < hotUsers_UserNameArray.count建设传来的数据没有铺满屏幕，会崩溃
+        
+        if (i < info.count) {
+            searchResultUsers_UserNameArray[i].userInteractionEnabled = YES;
+            searchResultUsers_HeadImageArray[i].userInteractionEnabled = YES;
+            
+            searchResultUsers_UserNameArray[i].text = info[i].userName;
+            [searchResultUsers_HeadImageArray[i] updateHeadViewWithUser:info[i]];
+
+            
+        }else {
+
+            searchResultUsers_UserNameArray[i].text = nil;
+            [searchResultUsers_HeadImageArray[i] updateHeadViewWithUser:nil];
+
+            searchResultUsers_UserNameArray[i].userInteractionEnabled = NO;
+            searchResultUsers_HeadImageArray[i].userInteractionEnabled = NO;
+
+
+        }
+       
+    }
     
 }
 

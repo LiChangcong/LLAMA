@@ -30,6 +30,15 @@ typedef NS_ENUM(NSInteger,UserLoginType){
     UserLoginType_QQ = 4,
 };
 
+typedef NS_ENUM(NSInteger,LLAAttentionType){
+    LLAAttentionType_NotAttention = 0,
+    LLAAttentionType_HasAttention = 1,
+    LLAAttentionType_AllAttention = 2,
+};
+
+
+
+
 @interface LLAUser : MTLModel<MTLJSONSerializing,LLAChooseItemProtocol>
 
 @property(nonatomic , copy) NSString *userIdString;
@@ -60,6 +69,8 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 @property(nonatomic , assign) CGFloat balance;
 
 @property(nonatomic , assign) NSInteger bePraisedNumber;
+
+@property(nonatomic, assign) LLAAttentionType attentionType;
 
 //token
 @property(nonatomic , copy) NSString *authenToken;
@@ -93,6 +104,9 @@ typedef NS_ENUM(NSInteger,UserLoginType){
 
 + (BOOL) isSimpleUserModel;
 + (void) setIsSimpleUserModel:(BOOL) isSimple;
+
++ (BOOL) isSearchModel;
++ (void) setIsSearchModel:(BOOL)isSearch;
 
 + (void) logout;
 

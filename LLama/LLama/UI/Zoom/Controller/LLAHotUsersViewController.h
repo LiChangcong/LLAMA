@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LLACommonViewController.h"
+#import "LLAUser.h"
 
 typedef enum : NSUInteger {
     UserTypeIsHotUsers,
@@ -18,6 +19,6 @@ typedef enum : NSUInteger {
 
 @property(nonatomic , assign) UserType userType;
 
-@property(nonatomic, strong) NSArray *hotUsersArray;
-@property(nonatomic, strong) NSArray *searchResultUsersArray;
+@property(nonatomic, strong) NSArray<LLAUser *> *hotUsersArray;
+@property(nonatomic, strong) NSArray<LLAUser *> *searchResultUsersArray;
 @end

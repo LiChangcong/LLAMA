@@ -352,8 +352,8 @@
 		7EB0BA691C5F3B7B00D4A43C /* LLALoveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB0BA671C5F3B7B00D4A43C /* LLALoveCell.xib */; };
 		7EB0BA6C1C5F40E500D4A43C /* LLAWhoLoveMeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0BA6B1C5F40E500D4A43C /* LLAWhoLoveMeInfo.m */; };
 		7EB30C361C7D538400B993F6 /* LLAHotUsersButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB30C351C7D538400B993F6 /* LLAHotUsersButton.m */; };
-		7EB3F5541C84314200CF6D02 /* LLAHotUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F5531C84314200CF6D02 /* LLAHotUserInfo.m */; };
 		7EB3F5571C844C2D00CF6D02 /* LLAHotVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3F5561C844C2D00CF6D02 /* LLAHotVideoInfo.m */; };
+		7EBA718D1C8A8817008D9BF0 /* LLASearchResultsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBA718C1C8A8817008D9BF0 /* LLASearchResultsInfo.m */; };
 		7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08ECD1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m */; };
 		7EC08ED01C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC08ECE1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib */; };
 		7EC08ED41C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC08ED21C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.m */; };
@@ -364,7 +364,6 @@
 		7EC3CAB11C4DFF88008424E6 /* LLAAlbumPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3CAB01C4DFF88008424E6 /* LLAAlbumPickerCell.m */; };
 		7EC717841C7AE15F005F04FB /* LLAZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */; };
 		7EC717871C7AE178005F04FB /* LLAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC717861C7AE178005F04FB /* LLAMessageViewController.m */; };
-		7ECD6E421C7D7F3500F2D939 /* LLASearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD6E411C7D7F3500F2D939 /* LLASearchResultViewController.m */; };
 		7ECD6E451C7D8D1800F2D939 /* LLASearchResultsVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD6E441C7D8D1800F2D939 /* LLASearchResultsVideoCell.m */; };
 		A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A741C3CCB7B00CADC51 /* LLADelegate.m */; };
 		A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = A3209A771C3CCCF700CADC51 /* LLAApplication.m */; };
@@ -1249,10 +1248,10 @@
 		7EB0BA6B1C5F40E500D4A43C /* LLAWhoLoveMeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAWhoLoveMeInfo.m; sourceTree = "<group>"; };
 		7EB30C341C7D538400B993F6 /* LLAHotUsersButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersButton.h; sourceTree = "<group>"; };
 		7EB30C351C7D538400B993F6 /* LLAHotUsersButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotUsersButton.m; sourceTree = "<group>"; };
-		7EB3F5521C84314200CF6D02 /* LLAHotUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUserInfo.h; sourceTree = "<group>"; };
-		7EB3F5531C84314200CF6D02 /* LLAHotUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotUserInfo.m; sourceTree = "<group>"; };
 		7EB3F5551C844C2D00CF6D02 /* LLAHotVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotVideoInfo.h; sourceTree = "<group>"; };
 		7EB3F5561C844C2D00CF6D02 /* LLAHotVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAHotVideoInfo.m; sourceTree = "<group>"; };
+		7EBA718B1C8A8817008D9BF0 /* LLASearchResultsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsInfo.h; sourceTree = "<group>"; };
+		7EBA718C1C8A8817008D9BF0 /* LLASearchResultsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsInfo.m; sourceTree = "<group>"; };
 		7EC08ECC1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAccountSecuritySectionOneCell.h; sourceTree = "<group>"; };
 		7EC08ECD1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAccountSecuritySectionOneCell.m; sourceTree = "<group>"; };
 		7EC08ECE1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAAccountSecuritySectionOneCell.xib; sourceTree = "<group>"; };
@@ -1271,8 +1270,6 @@
 		7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAZoomViewController.m; sourceTree = "<group>"; };
 		7EC717851C7AE178005F04FB /* LLAMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageViewController.h; sourceTree = "<group>"; };
 		7EC717861C7AE178005F04FB /* LLAMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageViewController.m; sourceTree = "<group>"; };
-		7ECD6E401C7D7F3500F2D939 /* LLASearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultViewController.h; sourceTree = "<group>"; };
-		7ECD6E411C7D7F3500F2D939 /* LLASearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultViewController.m; sourceTree = "<group>"; };
 		7ECD6E431C7D8D1800F2D939 /* LLASearchResultsVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsVideoCell.h; sourceTree = "<group>"; };
 		7ECD6E441C7D8D1800F2D939 /* LLASearchResultsVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsVideoCell.m; sourceTree = "<group>"; };
 		A3209A731C3CCB7B00CADC51 /* LLADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLADelegate.h; sourceTree = "<group>"; };
@@ -2522,12 +2519,12 @@
 		7E64DEDE1C7BF4F900F88093 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7EB3F5521C84314200CF6D02 /* LLAHotUserInfo.h */,
-				7EB3F5531C84314200CF6D02 /* LLAHotUserInfo.m */,
 				7EB3F5551C844C2D00CF6D02 /* LLAHotVideoInfo.h */,
 				7EB3F5561C844C2D00CF6D02 /* LLAHotVideoInfo.m */,
 				7E44A8B01C87EC46000780DD /* LLAHotUsersVideosInfo.h */,
 				7E44A8B11C87EC46000780DD /* LLAHotUsersVideosInfo.m */,
+				7EBA718B1C8A8817008D9BF0 /* LLASearchResultsInfo.h */,
+				7EBA718C1C8A8817008D9BF0 /* LLASearchResultsInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3279,8 +3276,6 @@
 				7EC717831C7AE15F005F04FB /* LLAZoomViewController.m */,
 				7E64DF3A1C7C620100F88093 /* LLAHotUsersViewController.h */,
 				7E64DF3B1C7C620100F88093 /* LLAHotUsersViewController.m */,
-				7ECD6E401C7D7F3500F2D939 /* LLASearchResultViewController.h */,
-				7ECD6E411C7D7F3500F2D939 /* LLASearchResultViewController.m */,
 				7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */,
 				7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */,
 			);
@@ -3640,10 +3635,8 @@
 				5CECCC871C842F34002BDE99 /* LLAChatInputEmojiFlowLayout.m in Sources */,
 				A3DEDE6F1C3CAEC7009F3D37 /* TMPhotoView.m in Sources */,
 				A3DEDD9F1C3CAE38009F3D37 /* MTLValueTransformer.m in Sources */,
-				7EB3F5541C84314200CF6D02 /* LLAHotUserInfo.m in Sources */,
 				A3DEDE691C3CAEC7009F3D37 /* TMDetailsCell.m in Sources */,
 				5CA18F761C4F682200A0B5B7 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				7ECD6E421C7D7F3500F2D939 /* LLASearchResultViewController.m in Sources */,
 				A3DEDE701C3CAEC7009F3D37 /* TMScriptCell.m in Sources */,
 				5C5D68F31C562F62008A1230 /* LLAUserAccountWithdrawCashCellPhoneInfoCell.m in Sources */,
 				5CE0EB731C4607AD00C6BC79 /* LLAVideoInfo.m in Sources */,
@@ -3966,6 +3959,7 @@
 				A3E2D90E1C3E1845005885D4 /* LLAUser.m in Sources */,
 				A3DEDE631C3CAEC6009F3D37 /* TMHallTableViewController.m in Sources */,
 				5CC324E31C5B694300413E25 /* LLAVideoPickerCollectionCell.m in Sources */,
+				7EBA718D1C8A8817008D9BF0 /* LLASearchResultsInfo.m in Sources */,
 				5C7534401C7711920058F93C /* MWPhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

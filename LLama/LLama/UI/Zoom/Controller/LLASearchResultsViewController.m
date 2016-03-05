@@ -20,6 +20,11 @@
 #import "LLALoadingView.h"
 #import "LLAHttpUtil.h"
 #import "LLAViewUtil.h"
+
+#import "LLASearchResultsInfo.h"
+#import "LLAUserProfileViewController.h"
+
+
 //section index
 static const NSInteger searchResultsUsersIndex = 0;
 static const NSInteger searchResultsVideosIndex = 1;
@@ -29,7 +34,7 @@ static NSString *const hotUsersSearchResultsCellIden = @"hotUsersSearchResultsCe
 static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 
-@interface LLASearchResultsViewController ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface LLASearchResultsViewController ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,LLAHotUsersSearchResultsCellDelegate>
 {
     UITableView *dataTableView;
  
@@ -43,6 +48,8 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
     
     LLALoadingView *HUD;
+    
+    LLASearchResultsInfo *mainInfo;
 
 }
 
@@ -106,6 +113,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     [shadeButton addTarget:self action:@selector(shadeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     shadeButton.hidden = YES;
     [self.view addSubview:shadeButton];
+    
 
 }
 - (void)initSubConstraints
@@ -113,6 +121,10 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     [dataTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    // 菊花控件
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+
 }
 
 #pragma mark - Load Data
@@ -127,8 +139,14 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     [LLAHttpUtil httpPostWithUrl:@"/discover/search" param:params responseBlock:^(id responseObject) {
         
         [HUD hide:NO];
-        
-        NSLog(@"%@",responseObject);
+
+        LLASearchResultsInfo *tempInfo = [LLASearchResultsInfo parseJsonWithDic:responseObject];
+        if (tempInfo) {
+            mainInfo = tempInfo;
+            // 刷新数据
+            [dataTableView reloadData];
+        }
+        [dataTableView reloadData];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
@@ -166,7 +184,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         
         return 1;
     }else {
-        return 10;
+        return mainInfo.searchResultVideosdataList.count;
     }
 }
 
@@ -175,16 +193,17 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     if (indexPath.section == searchResultsUsersIndex) {
     
         LLAHotUsersSearchResultsCell *hotUsersSearchResultsCell = [dataTableView dequeueReusableCellWithIdentifier:hotUsersSearchResultsCellIden forIndexPath:indexPath];
-        [hotUsersSearchResultsCell updateInfo];
+
+        [hotUsersSearchResultsCell updateCellWithInfo:mainInfo.searchResultUsersDataList tableWidth:tableView.bounds.size.width];
+        hotUsersSearchResultsCell.delegate = self;
         hotUsersSearchResultsCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        hotUsersSearchResultsCell.
         return hotUsersSearchResultsCell;
         
     }else {
 
-//        LLAHotUsersSearchResultsCell *hotUsersSearchResultsCell = [dataTableView dequeueReusableCellWithIdentifier:hotUsersSearchResultsCellIden forIndexPath:indexPath];
-//        return hotUsersSearchResultsCell;
         LLAHallVideoInfoCell *VideoInfoCell = [dataTableView dequeueReusableCellWithIdentifier:hallVideoInfoCellIden forIndexPath:indexPath];
+
+        [VideoInfoCell updateCellWithVideoInfo:mainInfo.searchResultVideosdataList[indexPath.row] tableWidth:tableView.bounds.size.width];
         return VideoInfoCell;
     }
     
@@ -247,6 +266,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         
         LLAHotUsersViewController *searchResultUsers = [[LLAHotUsersViewController alloc] init];
         searchResultUsers.userType = UserTypeIsResultsUsers;
+        searchResultUsers.searchResultUsersArray = mainInfo.searchResultUsersDataList;
         [self.navigationController pushViewController:searchResultUsers animated:YES];
         
     }else{
@@ -259,7 +279,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    NSLog(@"开始编辑");
+//    NSLog(@"开始编辑");
     
     shadeButton.hidden = NO;
 
@@ -267,8 +287,18 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"点击了搜索");
-    // 给服务器发送请求
+//    [mainInfo.searchResultUsersDataList removeAllObjects];
+//    [mainInfo.searchResultVideosdataList removeAllObjects];
+    mainInfo = nil;
+    
+    [searchBar resignFirstResponder];
+    shadeButton.hidden = YES;
+    // 显示菊花
+    [HUD show:YES];
+    
+    self.searchResultText = searchBar.text;
+    
+    [self loadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -276,6 +306,18 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - LLAHotUsersSearchResultsCellDelegate
+
+- (void)userHeadViewTapped:(LLAUser *)userInfo
+{
+    if (userInfo.userIdString.length > 0) {
+        
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
+
 }
 
 @end

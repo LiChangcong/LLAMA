@@ -148,10 +148,13 @@ static const CGFloat roleImageViewHeightWidth = 8;
 - (void) updateHeadViewWithUser:(LLAUser *)userInfo {
     currentUser = userInfo;
     
-    [userHeadImageView setImageWithURL:[NSURL URLWithString:currentUser.headImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_100"]];
-    
-    //role image
-
+    if (userInfo == nil) {
+        [userHeadImageView setImage:nil];
+    }else {
+        [userHeadImageView setImageWithURL:[NSURL URLWithString:currentUser.headImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_100"]];
+        
+        //role image
+    }
 }
 
 @end

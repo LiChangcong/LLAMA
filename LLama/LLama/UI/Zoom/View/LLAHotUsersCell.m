@@ -13,9 +13,10 @@
 
 #import "LLAUserHeadView.h"
 
-#import "LLAHotUserInfo.h"
-
-@interface LLAHotUsersCell()
+//#import "LLAHotUserInfo.h"
+//#import "LLAHotUsersVideosInfo.h"
+#import "LLAUser.h"
+@interface LLAHotUsersCell() <LLAUserHeadViewDelegate>
 {
     UIView *containerView;
     
@@ -31,6 +32,9 @@
     
     NSMutableArray<LLAUserHeadView *> *hotUsers_HeadImageArray;
     NSMutableArray<UILabel *> *hotUsers_UserNameArray;
+    
+    CGFloat num;
+
     
 }
 
@@ -81,7 +85,7 @@
     
     // CGFloat num = (screenWidth- 25 )/(60);
     // 17:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。10，每一个之间的间隙
-    CGFloat num = (screenWidth - 17 - 40)/ (50 + 10);
+    num = (screenWidth - 17 - 40)/ (50 + 10);
     // 解决热门用户小于显示的个数时候崩溃问题
 //    int times = info.count > num ? num:info.count;
     
@@ -109,6 +113,7 @@
         
         LLAUserHeadView *headView = [[LLAUserHeadView alloc] init];
         headView.translatesAutoresizingMaskIntoConstraints = NO;
+        headView.delegate = self;
         [hotUserContentView addSubview:headView];
         [hotUsers_HeadImageArray addObject:headView];
         
@@ -161,13 +166,39 @@
     
 }
 
-- (void) updateCellWithInfo:(NSMutableArray <LLAHotUserInfo *> *)info tableWidth:(CGFloat)width
+#pragma mark - LLAUserHeadViewDelegate
+
+- (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeadViewTapped:)]) {
+        [self.delegate userHeadViewTapped:user];
+    }
+}
+
+
+- (void) updateCellWithInfo:(NSMutableArray <LLAUser *> *)info tableWidth:(CGFloat)width
 {
-    int times = info.count > hotUsers_HeadImageArray.count ? hotUsers_HeadImageArray.count:info.count;
-    for (int i = 0; i < times; i++) { // i < hotUsers_UserNameArray.count建设传来的数据没有铺满屏幕，会崩溃
+
+//    NSInteger times = info.count > hotUsers_HeadImageArray.count ? hotUsers_HeadImageArray.count:info.count;
+    for (int i = 0; i < num; i++) { // i < hotUsers_UserNameArray.count建设传来的数据没有铺满屏幕，会崩溃
+//
+        if (i < info.count) {
+            
+            hotUsers_UserNameArray[i].userInteractionEnabled = YES;
+            hotUsers_HeadImageArray[i].userInteractionEnabled = YES;
+            
+            hotUsers_UserNameArray[i].text = info[i].userName;
+            [hotUsers_HeadImageArray[i] updateHeadViewWithUser:info[i]];
+
+        }else{
         
-        hotUsers_UserNameArray[i].text = info[i].hotUser.userName;
-        [hotUsers_HeadImageArray[i] updateHeadViewWithUser:info[i].hotUser];
+            hotUsers_UserNameArray[i].text = nil;
+            [hotUsers_HeadImageArray[i] updateHeadViewWithUser:nil];
+
+            hotUsers_UserNameArray[i].userInteractionEnabled = NO;
+            hotUsers_HeadImageArray[i].userInteractionEnabled = NO;
+
+        }
     }
     
 }

@@ -112,32 +112,18 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
 }
 
 #pragma mark - Update Cell
-// 设置信息
-//- (void) updateCellWithUserInfo:(LLAUser *)userInfo {
-//    //
-//    currentUserInfo = userInfo;
-//    
-//    // 设置头像
-//    [userHeadImageView setImageWithURL:[NSURL URLWithString:currentUserInfo.headImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_200"]];
-//    // 遥远名字
-//    userNameLabel.text = currentUserInfo.userName;
-//    // 选中按钮选中与否
-//    selectedImageCoverView.hidden = !currentUserInfo.hasBeenSelected;
-//    
-//}
 
 // 计算高度
 + (CGFloat) calculateHeightWitthUserInfo:(LLAUser *)userInfo maxWidth:(CGFloat)maxWidth  {
     return MAX(0, maxWidth+hotVideoImageViewToBottom);
 }
 
-
+// 设置信息
 - (void) updateCellWithInfo:(LLAHotVideoInfo *)info tableWidth:(CGFloat)width
 {
-//    hotVideoImageView.image = videoCoverImageURL;
-    [hotVideoImageView setImageWithURL:[NSURL URLWithString:info.videoCoverImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
-    [prizeButton setTitle:[NSString stringWithFormat:@"%d",info.prizeNum] forState:UIControlStateNormal];
-    [loveButton setTitle:[NSString stringWithFormat:@"%d",info.likeNum] forState:UIControlStateNormal];
+    [hotVideoImageView setImageWithURL:[NSURL URLWithString:info.videoThumb] placeholderImage:[UIImage llaImageWithName:@"placeHolder_750"]];
+    [prizeButton setTitle:[NSString stringWithFormat:@"%d",info.fee] forState:UIControlStateNormal];
+    [loveButton setTitle:[NSString stringWithFormat:@"%d",info.zan] forState:UIControlStateNormal];
 
 }
 @end

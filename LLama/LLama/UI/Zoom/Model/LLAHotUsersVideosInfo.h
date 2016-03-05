@@ -6,8 +6,20 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "MTLModel.h"
+#import "Mantle.h"
 
-@interface LLAHotUsersVideosInfo : NSObject
+//#import "LLAHotUserInfo.h"
+#import "LLAHotVideoInfo.h"
+#import "LLAUser.h"
+
+
+@interface LLAHotUsersVideosInfo : MTLModel<MTLJSONSerializing>
+
+@property(nonatomic , strong) NSMutableArray<LLAUser *> *hotUsersataList;
+@property(nonatomic , strong) NSMutableArray<LLAHotVideoInfo *> *hotVideosdataList;
+
++ (LLAHotUsersVideosInfo *) parseJsonWithDic:(NSDictionary *) data;
+
 
 @end
