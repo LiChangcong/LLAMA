@@ -201,7 +201,10 @@
     //qq
     [UMSocialQQHandler setQQWithAppId:LLA_QQ_APPID appKey:LLA_QQ_APPKEY url:SDK_REDIRECT_URL];
     //sina
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY RedirectURL:SDK_REDIRECT_URL];
+    //[UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY RedirectURL:SDK_REDIRECT_URL];
+//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY
+//                                              secret:LLA_
+//                                         RedirectURL:SDK_REDIRECT_URL];
 }
 
 //- (void) setupQQSDK {
