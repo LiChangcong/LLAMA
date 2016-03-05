@@ -14,6 +14,7 @@
 #import "LLAInstantMessageHeader.h"
 
 @class AVIMConversation;
+@class AVIMKeyedConversation;
 
 @interface LLAIMConversation : MTLModel
 
@@ -45,11 +46,13 @@
 
 @property (nonatomic , strong) AVIMConversation *leanConversation;
 
+@property (nonatomic , strong) AVIMKeyedConversation *keyedConversation;
+
 
 + (instancetype) conversationWithLeanCloudConversation:(AVIMConversation *) conversation;
 
 - (void)sendMessage:(LLAIMMessage *)message
       progressBlock:(LLAIMProgressBlock)progressBlock
-           callback:(LLAIMBooleanResultBlock)callback;
+           callback:(LLAIMSendMessageResultBlock)callback;
 
 @end

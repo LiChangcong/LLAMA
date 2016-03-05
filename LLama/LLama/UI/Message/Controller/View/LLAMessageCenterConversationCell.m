@@ -12,6 +12,9 @@
 
 #import "LLAUser.h"
 #import "LLAMessageCenterRoomInfo.h"
+#import "LLAIMMessage.h"
+
+#import "LLAIMCommonUtil.h"
 
 static const CGFloat headViewToLeft = 11;
 static const CGFloat headViewHeightWidth = 34;
@@ -336,9 +339,12 @@ static const CGFloat lineHeight = 0.6;
     roomInfo = info;
     
     //test
-    [headView updateHeadViewWithUser:roomInfo.conversation.creator];
     
-    userNameLabel.text = [LLAUser me].userName;
+    LLAUser *targetUser = [LLAIMCommonUtil findTheOtherWithConversation:roomInfo.conversation mainUser:[LLAUser me]];
+    
+    [headView updateHeadViewWithUser:targetUser];
+    
+    userNameLabel.text = targetUser.userName;
     
     timeLabel.text = @"刚刚";
     

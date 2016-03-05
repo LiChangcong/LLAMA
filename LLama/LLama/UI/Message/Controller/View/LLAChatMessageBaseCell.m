@@ -23,8 +23,6 @@
     
     UIButton *sentFailedButton;
     
-    BOOL shouldShowTime;
-    
 }
 
 @property(nonatomic , readwrite , strong) UILabel *timeLabel;
@@ -35,6 +33,10 @@
 
 @property(nonatomic , readwrite , strong) LLAIMMessage *currentMessage;
 
+@property(nonatomic , readwrite , assign) BOOL shouldShowTime;
+
+@property(nonatomic , readwrite , assign) CGFloat cellMaxWidth;
+
 
 @end
 
@@ -44,6 +46,8 @@
 @synthesize bubbleImageView;
 @synthesize timeLabel;
 @synthesize currentMessage;
+@synthesize shouldShowTime;
+@synthesize cellMaxWidth;
 
 #pragma mark - Init
 
@@ -52,6 +56,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor colorWithHex:0x211f2c];
+        
         [self baseCommonInit];
     }
     
@@ -95,6 +103,11 @@
     
     [self.contentView addSubview:headView];
     
+    bubbleImageView = [[UIImageView alloc] init];
+    bubbleImageView.clipsToBounds = YES;
+    
+    [self.contentView addSubview:bubbleImageView];
+    
     sentingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     sentingIndicator.hidesWhenStopped = YES;
     [sentingIndicator stopAnimating];
@@ -124,7 +137,7 @@
     
     //
     
-    CGSize cellSize = self.contentView.bounds.size;
+    CGSize cellSize = CGSizeMake(MAX(cellMaxWidth,self.bounds.size.width), self.bounds.size.height);
     LLAMessageChatConfig *config = [LLAMessageChatConfig shareConfig];
     CGSize bubbleSize = [[self class] calculateContentSizeWithMessage:currentMessage maxWidth:cellSize.width];
     
@@ -227,7 +240,11 @@
     //
     shouldShowTime = showTime;
     
+    cellMaxWidth = maxWidth;
+    
     currentMessage = message;
+    
+    [headView updateHeadViewWithUser:message.authorUser];
     
     if (currentMessage.msgStatus == LLAIMMessageStatusSending) {
         [sentingIndicator startAnimating];
@@ -270,7 +287,8 @@
 }
 
 + (CGSize) calculateContentSizeWithMessage:(LLAIMMessage *)message maxWidth:(CGFloat)maxWidth {
-    return  [[self class] calculateContentSizeWithMessage:message maxWidth:maxWidth];
+    //return  [[self class] calculateContentSizeWithMessage:message maxWidth:maxWidth];
+    return CGSizeZero;
 }
 
 @end

@@ -12,15 +12,14 @@
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
 
-#import <AVOSCloud/AVOSCloud.h>
-#import <AVOSCloudIM/AVOSCloudIM.h>
 
 @interface LLAInstantMessageService()<AVIMClientDelegate>
 {
-    AVIMClient *imClient;
     
     NSMutableArray *chattingCoversations;
 }
+
+@property(nonatomic , readwrite , strong) AVIMClient *imClient;
 
 @property(nonatomic , readwrite , strong) NSString *currentUIDString;
 
@@ -30,6 +29,7 @@
 
 @implementation LLAInstantMessageService
 @synthesize currentUIDString;
+@synthesize imClient;
 
 + (instancetype) shareService {
     static LLAInstantMessageService *shareService = nil;
@@ -132,6 +132,7 @@
 - (void) openWithClientId:(NSString *)clientId callBack:(LLAIMBooleanResultBlock)callBack {
     
     imClient = [[AVIMClient alloc] initWithClientId:clientId];
+    imClient.delegate = self;
     
     [imClient openWithCallback:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

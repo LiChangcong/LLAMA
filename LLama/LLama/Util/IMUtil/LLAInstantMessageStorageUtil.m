@@ -10,6 +10,10 @@
 #import "FMDB.h"
 #import "LLAUser.h"
 
+#import "LLAInstantMessageService.h"
+
+#import <AVOSCloudIM/AVOSCloudIM.h>
+
 #define MSG_TABLE_SQL @"CREATE TABLE IF NOT EXISTS `msgs` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `msg_id` VARCHAR(63) UNIQUE NOT NULL,`convid` VARCHAR(63) NOT NULL,`object` BLOB NOT NULL,`time` VARCHAR(63) NOT NULL)"
 
 #define ROOMS_TABLE_SQL @"CREATE TABLE IF NOT EXISTS `rooms` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`convid` VARCHAR(63) UNIQUE NOT NULL,`conObject` BLOB NOT NULL,`unread_count` INTEGER DEFAULT 0)"
@@ -213,6 +217,7 @@
     LLAIMConversation *conv = [self getConversationByResultSet:rs];
     conv.unreadCount = [rs intForColumn:FIELD_UNREAD_COUNT];
     conv.lastMessage=[self getMsgByResultSet:rs];
+    conv.leanConversation = [[LLAInstantMessageService shareService].imClient conversationWithKeyedConversation:conv.keyedConversation];
     
     return conv;
 }

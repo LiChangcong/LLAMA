@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "LLAInstantMessageHeader.h"
 
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudIM/AVOSCloudIM.h>
+
 @class LLAIMConversation;
 @class LLAUser;
 
@@ -17,6 +20,8 @@
 @property(nonatomic , readonly) NSString *currentUIDString;
 
 @property(nonatomic , readonly) IMClientStatus clientStatus;
+
+@property(nonatomic , readonly) AVIMClient *imClient;
 
 + (instancetype) shareService;
 

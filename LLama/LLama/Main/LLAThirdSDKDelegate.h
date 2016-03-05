@@ -41,7 +41,7 @@
 #import "MobClick.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
-#import "UMSocialSinaHandler.h"
+//#import "UMSocialSinaHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
 //

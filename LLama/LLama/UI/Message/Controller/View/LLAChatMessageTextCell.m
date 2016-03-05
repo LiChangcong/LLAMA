@@ -38,9 +38,17 @@
     contentTextView = [[UITextView alloc] init];
     contentTextView.font = [LLAMessageChatConfig shareConfig].textMessageFont;
     contentTextView.textColor = [LLAMessageChatConfig shareConfig].textMessageColor;
-    contentTextView.scrollEnabled = NO;
+    //contentTextView.scrollEnabled = NO;
+    contentTextView.editable = NO;
+    contentTextView.scrollEnabled = YES;
+    contentTextView.userInteractionEnabled = YES;
+    contentTextView.textContainerInset = UIEdgeInsetsZero;
+    contentTextView.textContainer.lineFragmentPadding = 0;
+    contentTextView.dataDetectorTypes  = UIDataDetectorTypeAll;
+    contentTextView.backgroundColor = [UIColor clearColor];
+    //contentTextView.backgroundColor = [UIColor clearColor];
     
-    [self.contentView addSubview:contentTextView];
+    [self.bubbleImageView addSubview:contentTextView];
 }
 
 #pragma mark - layoutSubView
@@ -53,18 +61,18 @@
     }
     
     //
-    CGSize textSize = [[self class] calculateContentSizeWithMessage:self.currentMessage maxWidth:self.bounds.size.width];
+    CGSize textSize = [[self class] textSizeWithTextMaxWidth:self.cellMaxWidth message:self.currentMessage];
     
     LLAMessageChatConfig *config = [LLAMessageChatConfig shareConfig];
-    CGRect bubbleframe = self.bubbleImageView.frame;
+    //CGRect bubbleframe = self.bubbleImageView.frame;
     
     if (self.currentMessage.ioType == LLAIMMessageIOType_In) {
         //ohters
-        contentTextView.frame = CGRectMake(bubbleframe.origin.x+config.bubbleArrowWidth+config.textMessageToBubbleHorBorder, bubbleframe.origin.y+config.textMessageToBubbleVerBorder, textSize.width, textSize.height);
+        contentTextView.frame = CGRectMake(config.bubbleArrowWidth+config.textMessageToBubbleHorBorder,(self.bubbleImageView.bounds.size.height - textSize.height)/2, textSize.width, textSize.height);
         
     }else {
         //my
-        contentTextView.frame = CGRectMake(bubbleframe.origin.x+config.textMessageToBubbleHorBorder, bubbleframe.origin.y+config.textMessageToBubbleVerBorder, textSize.width, textSize.height);
+        contentTextView.frame = CGRectMake(config.textMessageToBubbleHorBorder,(self.bubbleImageView.bounds.size.height - textSize.height)/2, textSize.width, textSize.height);
     }
     
 }
@@ -75,7 +83,21 @@
     //
     [super updateCellWithMessage:message maxWidth:maxWidth showTime:showTime];
     
-    contentTextView.text = message.content;
+    //contentTextView.text = message.content;
+    
+    LLAMessageChatConfig *config = [LLAMessageChatConfig shareConfig];
+    
+    
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = config.textLineSpace;
+
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:message.content];
+    [attr addAttribute:NSFontAttributeName value:config.textMessageFont range:NSMakeRange(0, attr.length)];
+    [attr addAttribute:NSForegroundColorAttributeName value:config.textMessageColor range:NSMakeRange(0, attr.length)];
+    
+    [attr addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, attr.length)];
+    contentTextView.attributedText = attr;
+
     
     [self layoutIfNeeded];
 }
@@ -130,7 +152,13 @@
         textString = @"";
     }
     
-    CGSize textSize = [textString boundingRectWithSize:CGSizeMake(textMaxWith, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:config.textMessageFont,NSFontAttributeName, nil] context:nil].size;
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = config.textLineSpace;
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:textString];
+    [attr addAttribute:NSFontAttributeName value:config.textMessageFont range:NSMakeRange(0, attr.length)];
+    [attr addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, attr.length)];
+    
+    CGSize textSize =  [attr boundingRectWithSize:CGSizeMake(textMaxWith, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
     
     return CGSizeMake(textSize.width, ceilf(textSize.height));
     
@@ -140,7 +168,7 @@
     
     LLAMessageChatConfig *config = [LLAMessageChatConfig shareConfig];
     
-    CGSize textSize = [self calculateContentSizeWithMessage:message maxWidth:maxWidth];
+    CGSize textSize = [self textSizeWithTextMaxWidth:maxWidth message:message];
     
     return  CGSizeMake(textSize.width+config.textMessageToBubbleHorBorder*2+config.bubbleArrowWidth, MAX(textSize.height+config.textMessageToBubbleVerBorder*2, config.bubbleImageViewMinHeight));
     

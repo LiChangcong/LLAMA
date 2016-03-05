@@ -42,6 +42,8 @@
 
 @property(nonatomic , assign) CGFloat textMessageToBubbleVerBorder;
 
+@property(nonatomic , assign) CGFloat textLineSpace;
+
 @property(nonatomic , assign) CGFloat bubbleToBottom;
 
 @property(nonatomic , assign) CGFloat bubbleImageViewMinHeight;

@@ -22,6 +22,6 @@
 /// Image format, png, jpg, etc. Simply get it from the file extension.
 @property(nonatomic, copy)NSString *format;
 
-@property(nonatomic, copy)NSString *imageURL;
+@property(nonatomic, copy)NSURL *imageURL;
 
 @end

@@ -28,6 +28,10 @@
 
 @property(nonatomic , readonly) LLAIMMessage *currentMessage;
 
+@property(nonatomic , readonly) BOOL shouldShowTime;
+
+@property(nonatomic , readonly) CGFloat cellMaxWidth;
+
 - (void) updateCellWithMessage:(LLAIMMessage *) message maxWidth:(CGFloat) maxWidth showTime:(BOOL) showTime;
 
 + (CGFloat) calculateHeightWithMessage:(LLAIMMessage *) message maxWidth:(CGFloat) maxWidth showTime:(BOOL) shouldShow;

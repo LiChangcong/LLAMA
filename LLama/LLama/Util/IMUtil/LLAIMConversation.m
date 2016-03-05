@@ -12,9 +12,12 @@
 #import <AVOSCloud/AVOSCloud.h>
 
 #import "LLAInstantMessageStorageUtil.h"
+#import "LLAInstantMessageDispatchManager.h"
 
 #import "LLAIMImageMessage.h"
 #import "LLAIMVoiceMessage.h"
+
+#import "SDWebImageManager.h"
 
 @interface LLAIMConversation()
 
@@ -62,6 +65,7 @@
     imConversation.transient = conversation.transient;
     imConversation.muted = conversation.muted;
     imConversation.leanConversation = conversation;
+    imConversation.keyedConversation = [conversation keyedConversation];
     
     NSDictionary *attributes = conversation.attributes;
     
@@ -106,7 +110,7 @@
 
 - (void) sendMessage:(LLAIMMessage *)message
        progressBlock:(LLAIMProgressBlock)progressBlock
-            callback:(LLAIMBooleanResultBlock)callback {
+            callback:(LLAIMSendMessageResultBlock)callback {
     
     //
     
@@ -114,37 +118,91 @@
     
     if (message.mediaType == LLAIMMessageType_Text) {
     
-        AVIMTextMessage *textMessage = [AVIMTextMessage messageWithContent:message.content];
+        AVIMTextMessage *textMessage = [AVIMTextMessage messageWithText:message.content attributes:nil];
         typeMessage = textMessage;
         
     }else if (message.mediaType == LLAIMMessageType_Image) {
     
-        AVIMImageMessage *imageMessage = [AVIMImageMessage messageWithText:@"" file:[AVFile fileWithURL:((LLAIMImageMessage *)message).imageURL] attributes:nil];
+        AVIMImageMessage *imageMessage = [AVIMImageMessage messageWithText:nil attachedFilePath:[((LLAIMImageMessage *)message).imageURL path] attributes:nil];
         
         typeMessage = imageMessage;
         
     }else if (message.mediaType == LLAIMMessageType_Audio) {
         
-        AVIMAudioMessage *audioMessage = [AVIMAudioMessage messageWithText:@"" file:[AVFile fileWithURL:((LLAIMVoiceMessage *)message).audioURL] attributes:nil];
+        AVIMAudioMessage *audioMessage = [AVIMAudioMessage messageWithText:nil attachedFilePath:((LLAIMVoiceMessage *)message).audioURL attributes:nil];
         
         typeMessage = audioMessage;
         
     }
     
+    
+    
     if (typeMessage) {
+        
+        message.conversationId = self.conversationId;
+        //save to disk
+        [[LLAInstantMessageStorageUtil shareInstance] insertMsg:message];
+        //dispatch it
+        [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:self];
+        
         [self.leanConversation sendMessage:typeMessage progressBlock:^(NSInteger percentDone) {
             if (progressBlock)
                 progressBlock(percentDone/100.0);
             
         } callback:^(BOOL succeeded, NSError *error) {
-            if (callback)
-                callback(succeeded,error);
+            
+            LLAIMMessage *newMessage = nil;
+            
+            if (succeeded) {
+                
+                newMessage = [LLAIMMessage messageFromLeanTypedMessage:typeMessage];
+                
+                //save temp image to cache
+                if (message.mediaType == LLAIMMessageType_Image) {
+                    
+                    UIImage *tempImage = [UIImage imageWithContentsOfFile:[((LLAIMImageMessage *)message).imageURL path]];
+                    if (tempImage) {
+                        
+                        [[SDWebImageManager sharedManager] saveImageToCache:tempImage forURL:[NSURL URLWithString:typeMessage.file.url]];
+                        
+                        [self performSelector:@selector(deleteDiskImage:) withObject:[((LLAIMImageMessage *)message).imageURL path] afterDelay:5];
+                    }
+                    
+                    //[[NSFileManager defaultManager] removeItemAtPath:[((LLAIMImageMessage *)message).imageURL path] error:nil];
+                    
+                    
+                }
+            
+                //
+                [[LLAInstantMessageStorageUtil shareInstance] updateFailedMsg:newMessage byTmpId:message.messageId];
+                
+                if (callback) {
+                    callback(succeeded,newMessage,error);
+                }
+
+                
+            }else {
+                
+                newMessage = message;
+                message.msgStatus = LLAIMMessageStatusFailed;
+                
+                [[LLAInstantMessageStorageUtil shareInstance] updateStatus:LLAIMMessageStatusFailed byMsgId:message.messageId];
+                if (callback)
+                    callback(succeeded,newMessage,error);
+            }
+            
         }];
     }else {
         if (callback)
-            callback(NO,nil);
+            callback(NO,message,nil);
     }
     
+    
+}
+
+- (void) deleteDiskImage:(id) path {
+    
+    [[NSFileManager defaultManager] removeItemAtPath:(NSString *)path error:nil];
     
 }
 
