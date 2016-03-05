@@ -307,10 +307,21 @@ static const NSInteger conversationSectionIndex = 1;
         
         LLAMessageCenterRoomInfo *roomInfo = roomArray[index];
         
-        [roomArray removeObjectAtIndex:index];
-        [roomArray insertObject:roomInfo atIndex:0];
+        if (message){
+            roomInfo.conversation.lastMessage = message;
+        }
         
-        [dataTableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:conversationSectionIndex] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]];
+        if (index == 0) {
+        
+        }else {
+        
+            [roomArray removeObjectAtIndex:index];
+            [roomArray insertObject:roomInfo atIndex:0];
+        
+            [dataTableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:conversationSectionIndex] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]];
+        }
+        
+        [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]] withRowAnimation:UITableViewRowAnimationNone];
         
     }
     

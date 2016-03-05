@@ -11,12 +11,14 @@
 @implementation UIColor (LLACustomColor)
 
 + (UIColor *) themeColor {
-    return [UIColor colorWithHex:0xffd409];
+    //return [UIColor colorWithHex:0xffd409];
+    return [UIColor colorWithHex:0xea216a];
 }
 
 + (UIColor *)llaNavigationBarColor {
     
-    return [UIColor colorWithHex:0x11111e];
+    //return [UIColor colorWithHex:0x11111e];
+    return [UIColor colorWithHex:0x1e1d22];
 }
 
 + (UIColor *) llaTabbarColor {

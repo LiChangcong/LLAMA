@@ -54,41 +54,52 @@
     
     messageImageView.frame = CGRectMake(0, 0, self.bubbleImageView.bounds.size.width, self.bubbleImageView.bounds.size.height);
     
+   
+
+    
 }
 
 - (void) updateCellWithMessage:(LLAIMMessage *)message maxWidth:(CGFloat)maxWidth showTime:(BOOL)showTime {
     
     [super updateCellWithMessage:message maxWidth:maxWidth showTime:showTime];
     //
-    LLAIMImageMessage *imageMessage = (LLAIMImageMessage *) message;
     
-    [messageImageView setImageWithURL:[NSURL URLWithString:imageMessage.imageURL] placeholderImage:[UIImage imageNamed:@"placeHolder_750"]];
+    LLAIMImageMessage *imageMessage = (LLAIMImageMessage *) message;
     
     //mask image to bounds
     UIImage *maskImage = nil;
-    if (message.ioType == LLAIMMessageIOType_In) {
-        if (showTime) {
+    if (self.currentMessage.ioType == LLAIMMessageIOType_In) {
+        if (self.shouldShowTime) {
             maskImage = [LLAMessageChatConfig shareConfig].othersBubbleWithArrow;
         }else {
             maskImage = [LLAMessageChatConfig shareConfig].othersBubbleWithoutArrow;
         }
     }else {
-        if (showTime) {
+        if (self.shouldShowTime) {
             maskImage = [LLAMessageChatConfig shareConfig].myBubbleWithArrow;
         }else {
             maskImage = [LLAMessageChatConfig shareConfig].myBubbleWithoutArrow;
         }
     }
     
-    [self makeMaskView:messageImageView withImage:maskImage];
+    CGSize size = [[self class] calculateImageSizeWithImageMessage:imageMessage maxWith:maxWidth];
+    
+    [self makeMaskView:messageImageView withImage:maskImage size:size];
+    
+    if ([imageMessage.imageURL isFileURL]) {
+        messageImageView.image = [UIImage imageWithContentsOfFile:[imageMessage.imageURL path]];
+    }else {
+    
+        [messageImageView setImageWithURL:imageMessage.imageURL placeholderImage:[UIImage imageNamed:@"placeHolder_750"]];
+    }
     
     [self layoutIfNeeded];
     
 }
 
-- (void) makeMaskView:(UIView *) view withImage:(UIImage *) image {
+- (void) makeMaskView:(UIView *) view withImage:(UIImage *) image size:(CGSize) size{
     UIImageView *imageViewMask = [[UIImageView alloc] initWithImage:image];
-    imageViewMask.frame = CGRectInset(CGRectMake(0, 0, view.frame.size.width, view.frame.size.height), 0.0f, 0.0f);
+    imageViewMask.frame = CGRectInset(CGRectMake(0, 0,size.width, size.height), 0.0f, 0.0f);
     view.layer.mask = imageViewMask.layer;
 
 }
@@ -140,7 +151,7 @@
     }
     
     //calculate height
-    CGFloat width = imageMaxWidth * ((float)message.width/(float)message.height);
+    CGFloat width = imageMaxWidth * MIN(((float)message.width/(float)message.height),0.9);
     
     CGFloat height = imageMaxWidth / message.width * message.height;
     

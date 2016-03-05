@@ -15,10 +15,13 @@
 #define LLACONVERSATION_LOAD_HISTORY_MESSAGE_NUMPERTIME 15
 
 @class LLAIMConversation;
+@class LLAIMMessage;
 
 typedef void (^LLAIMBooleanResultBlock)(BOOL succeeded, NSError *error);
 typedef void (^LLAIMConversationResultBlock)(LLAIMConversation *conversation, NSError *error);
 typedef void (^LLAIMProgressBlock)(CGFloat percent);
+
+typedef void (^LLAIMSendMessageResultBlock)(BOOL succeeded,LLAIMMessage *message,NSError *error);
 
 typedef NS_ENUM(NSInteger,LLAConversationType) {
     

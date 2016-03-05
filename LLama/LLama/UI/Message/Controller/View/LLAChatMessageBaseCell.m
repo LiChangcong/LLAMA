@@ -23,8 +23,6 @@
     
     UIButton *sentFailedButton;
     
-    BOOL shouldShowTime;
-    
 }
 
 @property(nonatomic , readwrite , strong) UILabel *timeLabel;
@@ -34,6 +32,8 @@
 @property(nonatomic , readwrite , strong) UIImageView *bubbleImageView;
 
 @property(nonatomic , readwrite , strong) LLAIMMessage *currentMessage;
+
+@property(nonatomic , readwrite , assign) BOOL shouldShowTime;
 
 @property(nonatomic , readwrite , assign) CGFloat cellMaxWidth;
 
@@ -46,6 +46,7 @@
 @synthesize bubbleImageView;
 @synthesize timeLabel;
 @synthesize currentMessage;
+@synthesize shouldShowTime;
 @synthesize cellMaxWidth;
 
 #pragma mark - Init

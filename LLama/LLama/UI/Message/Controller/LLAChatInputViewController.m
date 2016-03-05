@@ -14,6 +14,11 @@
 #import "HPGrowingTextView.h"
 #import "LLAChatInputPickerEmojiView.h"
 
+//model
+#import "LLAPickImageItemInfo.h"
+
+
+
 static const CGFloat inputTextViewToTop = 5;
 static const CGFloat inputTextViewMinHeight = 34;
 
@@ -316,6 +321,15 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 //        return;
 //    }
     LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
+    imagePicker.status = PickerImgOrHeadStatusHead;
+    
+    imagePicker.callBack = ^(LLAPickImageItemInfo *item) {
+        if (item.thumbImage) {
+            if (delegate && [delegate respondsToSelector:@selector(sendMessageWithImage:)]) {
+                [delegate sendMessageWithImage:item.thumbImage];
+            }
+        }
+    };
     
     [self.navigationController presentViewController:imagePicker animated:YES completion:^{
         
@@ -377,6 +391,16 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 }
 
 - (void) sendMessageClicked {
+    
+    if (inputTextView.text.length > 0) {
+        
+        if (delegate && [delegate respondsToSelector:@selector(sendMessageWithContent:)]) {
+            [delegate sendMessageWithContent:inputTextView.text];
+        }
+        inputTextView.text = @"";
+
+    }
+    
     
 }
 
@@ -446,12 +470,6 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     return YES;
 }
 
-
-- (BOOL) growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView {
-    growingTextView.text = @"";
-    return NO;
-}
-
 #pragma mark - Record Button
 
 - (void) tapToRecordTouchDown:(UIButton *) sender {
@@ -501,7 +519,9 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     }
     
     [picker dismissViewControllerAnimated:YES completion:^{
-        
+        if (delegate && [delegate respondsToSelector:@selector(sendMessageWithImage:)]) {
+            [delegate sendMessageWithImage:pickedImage];
+        }
     }];
     
 }
@@ -519,6 +539,21 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 - (void) resignInputView {
     
     //
+    if (currentInputType == LLAChatInputControllerCurrentType_InputText || currentInputType == LLAChatInputControllerCurrentType_PickEmoji) {
+    
+        [inputTextView resignFirstResponder];
+        currentInputType = LLAChatInputControllerCurrentType_InputText;
+        //
+        CGFloat newHeight = inputTextViewToTop + inputTextView.bounds.size.height+[LLAChatInpuFunctionView calculateHeight];
+        if (delegate && [delegate respondsToSelector:@selector(inputViewController:newHeight:duration:animationCurve:)]) {
+            [delegate inputViewController:self newHeight:newHeight duration:0.2 animationCurve:UIViewAnimationCurveEaseIn];
+        }
+        
+        
+        
+    }else {
+        
+    }
     
 }
 

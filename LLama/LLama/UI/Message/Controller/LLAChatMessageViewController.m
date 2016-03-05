@@ -21,6 +21,8 @@
 //model
 #import "LLAIMConversation.h"
 #import "LLAIMMessage.h"
+#import "LLAIMImageMessage.h"
+#import "LLAIMVoiceMessage.h"
 
 //util
 #import "LLAInstantMessageDispatchManager.h"
@@ -71,6 +73,11 @@
     
     [self loadMessageData];
     
+    //
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToHide:)];
+    
+    [self.view addGestureRecognizer:tapGesture];
+    
 }
 
 
@@ -107,6 +114,7 @@
     
     //
     UIView *inputView = inputController.view;
+    inputView.backgroundColor = dataTableView.backgroundColor;
     inputView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.view addSubview:inputView];
@@ -167,6 +175,8 @@
     
     [messageArray addObjectsFromArray:msgs];
     [dataTableView reloadData];
+    
+    [self scrollTableToBottom];
     
 }
 
@@ -246,19 +256,44 @@
     
     LLAIMMessage *message = [LLAIMMessage textMessageWithContent:textContent];
     
-    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, NSError *error) {
+    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
         
-        if (succeeded) {
+        NSInteger index = [messageArray indexOfObject:message];
+        
+        if (index != NSNotFound) {
             
+            [messageArray replaceObjectAtIndex:index withObject:newMessage];
+            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
     }];
     
-    [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:currentConversation];
+    //[[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:currentConversation];
     
 }
 
 - (void) sendMessageWithImage:(UIImage *) image {
+    
+    
+    if (!image) {
+        return;
+    }
+    
+    LLAIMImageMessage *message = [LLAIMImageMessage imageMessageWithImage:image];
+    
+    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
+        
+        NSInteger index = [messageArray indexOfObject:message];
+        
+        if (index != NSNotFound) {
+            
+            [messageArray replaceObjectAtIndex:index withObject:newMessage];
+            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            //[dataTableView reloadData];
+        }
+        
+    }];
+
     
 }
 
@@ -267,19 +302,50 @@
 }
 
 
-- (void) inputViewController:(LLAChatInputViewController *) inputController
+- (void) inputViewController:(LLAChatInputViewController *) inputViewController
                    newHeight:(CGFloat) newHeight
                     duration:(NSTimeInterval) duration
               animationCurve:(UIViewAnimationCurve) animationCurve {
     
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        
+//        inputViewHeightConstraints.constant = newHeight;
+//        [self.view layoutIfNeeded];
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+    
+    //
+    CGFloat changeHeight = newHeight - inputController.view.frame.size.height;
+    
+    BOOL shouldOffset = ceilf(dataTableView.contentOffset.y+dataTableView.frame.size.height) == ceilf(dataTableView.contentSize.height);
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:animationCurve];
+    [UIView setAnimationDuration:duration];
+    
+    inputViewHeightConstraints.constant = newHeight;
+    
+    [self.view layoutIfNeeded];
+    [UIView commitAnimations];
+
+    
+    //---计算tableView应该滚动的高度,以viewoffset来计算相对变化的高度
+    if (!(shouldOffset && changeHeight<0)){
+        CGFloat maxOffset = MAX(dataTableView.contentSize.height - dataTableView.frame.size.height,0);
+        CGFloat changeOffset = dataTableView.contentOffset.y+changeHeight;
         
-        inputViewHeightConstraints.constant = newHeight;
+        CGFloat actualOffset = MIN(changeOffset,maxOffset);
+        actualOffset = MAX(actualOffset,0);
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:animationCurve];
+        [UIView setAnimationDuration:duration];
+        dataTableView.contentOffset = CGPointMake(dataTableView.contentOffset.x, actualOffset);
         [self.view layoutIfNeeded];
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+        [UIView commitAnimations];
+    }
+
     
 }
 
@@ -289,8 +355,28 @@
     
     if ([currentConversation.conversationId isEqualToString:conversation.conversationId] && message) {
         
+        BOOL shouldScroll = NO;
+        
+        if (messageArray.count > 0) {
+            
+            NSArray *visibleArray = [dataTableView indexPathsForVisibleRows];
+            
+            for (NSIndexPath *indexPath in  visibleArray) {
+                if (indexPath.row == messageArray.count - 1) {
+                    shouldScroll = YES;
+                    break;
+                }
+            }
+            
+        }
+        
         [messageArray addObject:message];
         [dataTableView reloadData];
+        
+        if (shouldScroll) {
+            [self scrollTableToBottom];
+        }
+        
     }
 }
 
@@ -301,5 +387,25 @@
 - (void) imClientStatusChanged:(IMClientStatus)status {
     
 }
+
+#pragma mark - ScrollToBottom
+
+- (void) scrollTableToBottom {
+    if (messageArray.count > 0) {
+        
+        [dataTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messageArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+#pragma mark - Reset input controller
+
+- (void) tapToHide:(UITapGestureRecognizer *) ges {
+    [self resetInputController];
+}
+
+- (void) resetInputController {
+    [inputController resignInputView];
+}
+
 
 @end

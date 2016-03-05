@@ -53,6 +53,6 @@
 
 - (void)sendMessage:(LLAIMMessage *)message
       progressBlock:(LLAIMProgressBlock)progressBlock
-           callback:(LLAIMBooleanResultBlock)callback;
+           callback:(LLAIMSendMessageResultBlock)callback;
 
 @end
