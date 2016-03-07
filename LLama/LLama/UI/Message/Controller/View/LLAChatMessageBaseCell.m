@@ -50,6 +50,7 @@
 @synthesize currentMessage;
 @synthesize shouldShowTime;
 @synthesize cellMaxWidth;
+@synthesize delegate;
 
 #pragma mark - Init
 
@@ -108,6 +109,7 @@
     
     bubbleImageView = [[UIImageView alloc] init];
     bubbleImageView.clipsToBounds = YES;
+    bubbleImageView.userInteractionEnabled = YES;
     
     [self.contentView addSubview:bubbleImageView];
     
@@ -223,12 +225,18 @@
 #pragma mark - Resent Message
 
 - (void) sentFailedButtonClicked:(UIButton *) sender {
-    
+    if (delegate && [delegate respondsToSelector:@selector(resentFailedMessage:)]) {
+        [delegate resentFailedMessage:currentMessage];
+    }
 }
 
 #pragma mark - HeadViewDelegate
 
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
+    
+    if (delegate && [delegate respondsToSelector:@selector(showUserDetailWithUserInfo:)]) {
+        [delegate showUserDetailWithUserInfo:user];
+    }
     
 }
 

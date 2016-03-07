@@ -35,4 +35,6 @@ typedef void(^XHPeakPowerForChannel)(float peakPowerForChannel);
 - (void)stopRecordingWithStopRecorderCompletion:(XHStopRecorderCompletion)stopRecorderCompletion;
 - (void)cancelledDeleteWithCompletion:(XHCancellRecorderDeleteFileCompletion)cancelledDeleteCompletion;
 
+
+
 @end

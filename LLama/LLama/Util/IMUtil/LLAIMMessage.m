@@ -61,19 +61,19 @@ static NSString * const tempImageCacheDirectory = @"tempImage";
         
         message = voiceMessage;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            AVFile *file = leanMessage.file;
-            if (file && file.isDataAvailable == NO) {
-                
-                NSError *error;
-
-                NSData *data = [file getData:&error];
-                if (error || data == nil) {
-                    NSLog(@"download file error : %@", error);
-                }
-                
-            }
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            AVFile *file = leanMessage.file;
+//            if (file && file.isDataAvailable == NO) {
+//                
+//                NSError *error;
+//
+//                NSData *data = [file getData:&error];
+//                if (error || data == nil) {
+//                    NSLog(@"download file error : %@", error);
+//                }
+//                
+//            }
+//        });
     
     }else {
         //unsupport mediaType message

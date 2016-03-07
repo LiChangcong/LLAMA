@@ -21,8 +21,11 @@
 
 //util
 #import "XHVoiceRecordHelper.h"
+#import "XHVoiceCommonHelper.h"
 
 #import "XHMacro.h"
+
+#import "VoiceConverter.h"
 
 //
 #define kXHTouchToRecord         @"按住 说话"
@@ -539,7 +542,10 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     WEAKSELF
     
     //這邊回調 return 的 YES, 或 NO, 可以讓底層知道該次錄音是否成功, 進而處理無用的 record 對象
-    [self.voiceRecordHelper prepareRecordingWithPath:[self getRecorderPath] prepareRecorderCompletion:^BOOL{
+    
+    NSString *path = [XHVoiceCommonHelper generateAudioRecordPath];
+    
+    [self.voiceRecordHelper prepareRecordingWithPath:path prepareRecorderCompletion:^BOOL{
         STRONGSELF
         
         //這邊要判斷回調回來的時候, 使用者是不是已經早就鬆開手了
@@ -598,7 +604,13 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
             //[weakSelf didSendMessageWithVoice:weakSelf.voiceRecordHelper.recordPath voiceDuration:weakSelf.voiceRecordHelper.recordDuration];
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(sendMessageWithVoiceURL:withDuration:)]) {
                 
-                [weakSelf.delegate sendMessageWithVoiceURL:weakSelf.voiceRecordHelper.recordPath withDuration:[weakSelf.voiceRecordHelper.recordDuration floatValue]];
+                //convert from wav to amr
+                
+                NSString *amrPath = [XHVoiceCommonHelper amrPathFromWavPath:weakSelf.voiceRecordHelper.recordPath];
+                
+                [VoiceConverter wavToAmr:weakSelf.voiceRecordHelper.recordPath amrSavePath:amrPath];
+                
+                [weakSelf.delegate sendMessageWithVoiceURL:amrPath withDuration:[weakSelf.voiceRecordHelper.recordDuration floatValue]];
             }
         }];
         
@@ -734,21 +746,6 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
         _voiceRecordHUD = [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
     }
     return _voiceRecordHUD;
-}
-
-
-#pragma mark - RecorderPath Helper Method
-
-- (NSString *)getRecorderPath {
-    NSString *recorderPath = nil;
-    NSDate *now = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yy-MMMM-dd";
-    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
-    //    dateFormatter.dateFormat = @"hh-mm-ss";
-    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
-    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.aac", [dateFormatter stringFromDate:now]];
-    return recorderPath;
 }
 
 #pragma mark - height

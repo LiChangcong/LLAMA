@@ -31,10 +31,11 @@
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
 #import "LLAIMCommonUtil.h"
+#import "LLAAudioCacheUtil.h"
 
 #import "XHAudioPlayerHelper.h"
 
-@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver>
+@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver,LLAChatMessageCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -86,7 +87,7 @@
     //
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToHide:)];
     
-    [self.view addGestureRecognizer:tapGesture];
+    [dataTableView addGestureRecognizer:tapGesture];
     
 }
 
@@ -221,6 +222,7 @@
         LLAChatMessageImageCell *imageCell = [tableView dequeueReusableCellWithIdentifier:imageIden];
         if (!imageCell) {
             imageCell = [[LLAChatMessageImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:imageIden];
+            imageCell.delegate = self;
         }
         [imageCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
         
@@ -233,6 +235,7 @@
         LLAChatMessageVoiceCell *voiceCell = [tableView dequeueReusableCellWithIdentifier:voiceIden];
         if (!voiceCell) {
             voiceCell = [[LLAChatMessageVoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:voiceIden];
+            voiceCell.delegate = self;
         }
         
         [voiceCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
@@ -248,6 +251,7 @@
         LLAChatMessageTextCell *textCell = [tableView dequeueReusableCellWithIdentifier:textIden];
         if (!textCell) {
             textCell = [[LLAChatMessageTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textIden];
+            textCell.delegate = self;
         }
         
         [textCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
@@ -280,6 +284,52 @@
     
 }
 
+#pragma mark - MessageCellDelegate
+
+- (void) resentFailedMessage:(LLAIMMessage *) message {
+    
+}
+
+- (void) showUserDetailWithUserInfo:(LLAUser *) userInfo {
+    
+}
+
+//for image cell
+- (void) showFullImageWithMessage:(LLAIMMessage *) message {
+    
+}
+//for voice cell
+
+- (void) playStopVoiceWithMessage:(LLAIMMessage *) message {
+    
+    LLAIMVoiceMessage *voiceMessage = (LLAIMVoiceMessage *) message;
+
+    if ([LLAAudioCacheUtil isFilePathURLString:voiceMessage.audioURL]) {
+        //for tmp message,play
+        
+        [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:voiceMessage.audioURL toPlay:YES];
+        
+    }else {
+
+        if ([[LLAAudioCacheUtil shareInstance] isCachedForAudioURL:[NSURL URLWithString:voiceMessage.audioURL]] ) {
+            
+            //cached,play it
+            NSURL *filePathURL = [[LLAAudioCacheUtil shareInstance] cacheURLForAudioURL:[NSURL URLWithString:voiceMessage.audioURL]];
+            
+            [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:filePathURL.path toPlay:YES];
+            
+        }else {
+            //download it
+            
+            [[LLAAudioCacheUtil shareInstance] cacheAudioWithURL:[NSURL URLWithString:voiceMessage.audioURL]];
+            
+            //set to play it
+        }
+        
+    }
+    
+}
+
 #pragma mark - LLAChatInputViewControllerDelegate
 
 - (void) sendMessageWithContent:(NSString *) textContent {
@@ -297,7 +347,8 @@
         if (index != NSNotFound) {
             
             [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            [dataTableView reloadData];
         }
         
     }];

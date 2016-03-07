@@ -49,8 +49,13 @@
     voiceImageView.image = [LLAMessageChatConfig shareConfig].voicePlayImage;
     //voiceImageView.backgroundColor = [UIColor purpleColor];
     voiceImageView.contentMode = UIViewContentModeCenter;
+    voiceImageView.userInteractionEnabled = YES;
     
     [self.bubbleImageView addSubview:voiceImageView];
+    
+    //
+    UITapGestureRecognizer *voiceTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVoice:)];
+    [voiceImageView addGestureRecognizer:voiceTapped];
 }
 
 #pragma mark - Layout SubViews
@@ -85,6 +90,15 @@
     
 }
 
+#pragma mark - 
+
+- (void) tapVoice:(UIGestureRecognizer *) ges {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(playStopVoiceWithMessage:)]) {
+        [self.delegate playStopVoiceWithMessage:self.currentMessage];
+    }
+}
+
 #pragma mark - Update
 
 - (void) updateCellWithMessage:(LLAIMMessage *)message maxWidth:(CGFloat)maxWidth showTime:(BOOL)showTime {
@@ -105,7 +119,7 @@
 }
 
 - (NSString *) formatDurationString {
-    return [NSString stringWithFormat:@"%.0f''",((LLAIMVoiceMessage *)self.currentMessage).duration];
+    return [NSString stringWithFormat:@"%.0f''",((LLAIMVoiceMessage *)self.currentMessage).duration+0.5];
 }
 
 #pragma mark - CalculateHeight

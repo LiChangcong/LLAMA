@@ -38,9 +38,15 @@
     messageImageView = [[UIImageView alloc] init];
     messageImageView.clipsToBounds = YES;
     messageImageView.contentMode = UIViewContentModeScaleAspectFill;
+    messageImageView.userInteractionEnabled = YES;
     
     self.bubbleImageView.clipsToBounds = YES;
     [self.bubbleImageView addSubview:messageImageView];
+    
+    //
+    UITapGestureRecognizer *tappImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(messageImageViewTapped:)];
+    
+    [messageImageView addGestureRecognizer:tappImage];
 }
 
 #pragma mark - layout subViews 
@@ -102,6 +108,13 @@
     imageViewMask.frame = CGRectInset(CGRectMake(0, 0,size.width, size.height), 0.0f, 0.0f);
     view.layer.mask = imageViewMask.layer;
 
+}
+
+- (void) messageImageViewTapped:(UIGestureRecognizer *) ges {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showFullImageWithMessage:)]) {
+        [self.delegate showFullImageWithMessage:self.currentMessage];
+    }
 }
 
 #pragma mark - CalculateHeight

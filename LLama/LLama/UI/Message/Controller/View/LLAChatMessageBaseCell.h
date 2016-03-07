@@ -14,9 +14,31 @@
 
 #import <UIKit/UIKit.h>
 
+@class LLAUser;
+
 @class LLAUserHeadView;
 
 @class LLAIMMessage;
+
+@protocol LLAChatMessageCellDelegate <NSObject>
+
+@optional
+
+- (void) resentFailedMessage:(LLAIMMessage *) message;
+
+- (void) showUserDetailWithUserInfo:(LLAUser *) userInfo;
+
+//for text cell
+
+//for image cell
+
+- (void) showFullImageWithMessage:(LLAIMMessage *) message;
+
+//for voice cell
+
+- (void) playStopVoiceWithMessage:(LLAIMMessage *) message;
+
+@end
 
 @interface LLAChatMessageBaseCell : UITableViewCell
 
@@ -31,6 +53,8 @@
 @property(nonatomic , readonly) BOOL shouldShowTime;
 
 @property(nonatomic , readonly) CGFloat cellMaxWidth;
+
+@property(nonatomic , weak) id<LLAChatMessageCellDelegate> delegate;
 
 - (void) updateCellWithMessage:(LLAIMMessage *) message maxWidth:(CGFloat) maxWidth showTime:(BOOL) showTime;
 

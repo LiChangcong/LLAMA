@@ -191,4 +191,75 @@
     }
 }
 
+#pragma mark - 
+
+/**
+ *  generate record path
+ *
+ *
+ *
+ **/
+
++ (NSString *) generateAudioRecordPath {
+    
+//    NSString *recorderPath = nil;
+//    NSDate *now = [NSDate date];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
+//    
+//    recorderPath = [[self getCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-MySound.wav",[dateFormatter stringFromDate:now]]];
+//    
+//    return recorderPath;
+    
+    NSString *recorderPath = nil;
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yy-MMMM-dd";
+    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
+    //    dateFormatter.dateFormat = @"hh-mm-ss";
+    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
+    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.wav", [dateFormatter stringFromDate:now]];
+    return recorderPath;
+}
+
+/**
+ * get convert path from wav to amr
+ *
+ *
+ *
+ *
+ **/
+
++ (NSString *) amrPathFromWavPath:(NSString *) wavPath {
+    
+    if (!wavPath) {
+        return nil;
+    }
+    
+    if ([wavPath hasSuffix:@".wav"]) {
+        
+        return [wavPath stringByReplacingCharactersInRange:NSMakeRange(wavPath.length-4,4) withString:@".amr"];
+        
+    }else {
+        return [wavPath stringByAppendingString:@".amr"];
+    }
+    
+}
+
++ (NSString *) wavPathFromAmrPath:(NSString *)amrPath {
+    
+    if (!amrPath) {
+        return nil;
+    }
+    
+    if ([amrPath hasPrefix:@".amr"]) {
+        
+        return [amrPath stringByReplacingCharactersInRange:NSMakeRange(amrPath.length - 4,4) withString:@".wav"];
+        
+    }else {
+        return [amrPath stringByAppendingString:@".wav"];
+    }
+    
+}
+
 @end

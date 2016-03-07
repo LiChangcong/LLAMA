@@ -9,6 +9,10 @@
 #import "XHAudioPlayerHelper.h"
 #import "XHVoiceCommonHelper.h"
 
+#import "LLAAudioCacheUtil.h"
+
+#import "VoiceConverter.h"
+
 @implementation XHAudioPlayerHelper
 
 #pragma mark - Public Methed
@@ -70,8 +74,14 @@
              NSString *wavName = [amrName stringByReplacingOccurrencesOfString:@"wavToAmr" withString:@"amrToWav"];
              AVAudioPlayer *pl = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[XHVoiceCommonHelper getPathByFileName:fileName ofType:@"wav"]] error:nil];
              */
+            
+            //converter to wav
+            NSString *wavPath = [XHVoiceCommonHelper wavPathFromAmrPath:fileName];
+            [VoiceConverter amrToWav:fileName wavSavePath:wavPath];
+            
+            //
             NSError* error;
-            AVAudioPlayer *pl = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:fileName] error:&error];
+            AVAudioPlayer *pl = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
             if(error!=nil){
                 NSLog(@"file error");
             }
@@ -142,11 +152,18 @@
     if (self) {
         [self changeProximityMonitorEnableState:YES];
         [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+        
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDownLoadFinished:) name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
+        
     }
     return self;
 }
 
 - (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
+    
     [self changeProximityMonitorEnableState:NO];
 }
 
@@ -194,6 +211,14 @@
             [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
         }
     }
+}
+
+#pragma mark - Download Audio Finished
+
+- (void) audioDownLoadFinished:(NSNotification *) noti {
+    
+    //if 
+    
 }
 
 @end

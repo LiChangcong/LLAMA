@@ -351,9 +351,13 @@ static const CGFloat lineHeight = 0.6;
     lastMessageLabel.text = roomInfo.conversation.lastMessage.content;
     
     if (roomInfo.conversation.unreadCount > 0){
-
-        [badgeButton setTitle:[NSString stringWithFormat:@"%ld",(long)roomInfo.conversation.unreadCount] forState:UIControlStateNormal];
+        badgeButton.hidden = NO;
+        
+    }else {
+        badgeButton.hidden = YES;
     }
+    
+    [badgeButton setTitle:[NSString stringWithFormat:@"%ld",(long)roomInfo.conversation.unreadCount] forState:UIControlStateNormal];
     
     
 }

@@ -18,6 +18,7 @@
 #import "LLAIMVoiceMessage.h"
 
 #import "SDWebImageManager.h"
+#import "LLAAudioCacheUtil.h"
 
 @interface LLAIMConversation()
 
@@ -71,7 +72,7 @@
     
     //get creator info
     imConversation.creator = [[LLAInstantMessageStorageUtil shareInstance] getUserByUserId:conversation.clientId];
-    //get members info from extension attributes
+    //get members info from  . attributes
     
     NSMutableArray<LLAUser *> *membersArray = [NSMutableArray array];
     
@@ -152,11 +153,10 @@
         } callback:^(BOOL succeeded, NSError *error) {
             
             LLAIMMessage *newMessage = nil;
+            newMessage = [LLAIMMessage messageFromLeanTypedMessage:typeMessage];
             
             if (succeeded) {
-                
-                newMessage = [LLAIMMessage messageFromLeanTypedMessage:typeMessage];
-                
+            
                 //save temp image to cache
                 if (message.mediaType == LLAIMMessageType_Image) {
                     
@@ -169,6 +169,17 @@
                     }
                     
                     //[[NSFileManager defaultManager] removeItemAtPath:[((LLAIMImageMessage *)message).imageURL path] error:nil];
+                    
+                }else if (message.mediaType == LLAIMMessageType_Audio) {
+                    
+                    //move amr,wav file to cache and rename it
+                    //if wav file is playing delete it when it plays end
+                    NSString *filePath  = ((LLAIMVoiceMessage *) message).audioURL;
+                    NSURL *audioURL = [NSURL URLWithString:((AVIMAudioMessage *)typeMessage).file.url];
+                    
+                    [[LLAAudioCacheUtil shareInstance] saveAmrFile:filePath forURL:audioURL];
+                    
+                    //delete ,or mark the wav video should be delete
                     
                 }
             

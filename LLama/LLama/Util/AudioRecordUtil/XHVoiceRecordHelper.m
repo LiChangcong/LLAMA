@@ -121,9 +121,14 @@
         }
         
         NSMutableDictionary * recordSetting = [NSMutableDictionary dictionary];
-        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-        [recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
+        //[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+        [recordSetting setValue:[NSNumber numberWithFloat:8000.0] forKey:AVSampleRateKey];
         [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+        //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+        //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+        [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityMedium] forKey:AVEncoderAudioQualityKey];
+        [recordSetting setValue :[NSNumber numberWithInt:16] forKey: AVLinearPCMBitDepthKey];
         
         if (weakSelf) {
             STRONGSELF
@@ -188,11 +193,12 @@
 }
 
 - (void)stopRecordingWithStopRecorderCompletion:(XHStopRecorderCompletion)stopRecorderCompletion {
-    [self getVoiceDuration:_recordPath];
+    //[self getVoiceDuration:_recordPath];
     
     _isPause = NO;
     [self stopBackgroundTask];
     [self stopRecord];
+    [self getVoiceDuration:_recordPath];
     dispatch_async(dispatch_get_main_queue(), stopRecorderCompletion);
 }
 
@@ -267,6 +273,7 @@
 - (void)getVoiceDuration:(NSString*)recordPath {
     AVAudioPlayer *play = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:recordPath] error:nil];
     DLog(@"时长:%f", play.duration);
+    
     self.recordDuration = [NSString stringWithFormat:@"%.1f", play.duration];
     //    return play.duration;
 }
