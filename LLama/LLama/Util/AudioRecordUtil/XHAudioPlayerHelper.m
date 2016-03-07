@@ -152,17 +152,12 @@
     if (self) {
         [self changeProximityMonitorEnableState:YES];
         [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
-        
         //
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDownLoadFinished:) name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
-        
     }
     return self;
 }
 
 - (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
     
     [self changeProximityMonitorEnableState:NO];
 }
@@ -213,12 +208,5 @@
     }
 }
 
-#pragma mark - Download Audio Finished
-
-- (void) audioDownLoadFinished:(NSNotification *) noti {
-    
-    //if 
-    
-}
 
 @end

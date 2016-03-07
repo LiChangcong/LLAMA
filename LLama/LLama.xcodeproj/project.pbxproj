@@ -24,6 +24,16 @@
 		5C1FEF561C5A022D00C71A9B /* LLAEditVideoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1FEF551C5A022D00C71A9B /* LLAEditVideoProgressView.m */; };
 		5C416D461C8D3F38002DF002 /* LLAAudioCachingInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C416D451C8D3F38002DF002 /* LLAAudioCachingInfo.m */; };
 		5C416D491C8D3F57002DF002 /* LLAAudioCacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C416D481C8D3F57002DF002 /* LLAAudioCacheUtil.m */; };
+		5C416D561C8D8D05002DF002 /* RecordCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D4C1C8D8D05002DF002 /* RecordCancel@2x.png */; };
+		5C416D571C8D8D05002DF002 /* RecordingBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D4D1C8D8D05002DF002 /* RecordingBkg@2x.png */; };
+		5C416D581C8D8D05002DF002 /* RecordingSignal001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D4E1C8D8D05002DF002 /* RecordingSignal001@2x.png */; };
+		5C416D591C8D8D05002DF002 /* RecordingSignal002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D4F1C8D8D05002DF002 /* RecordingSignal002@2x.png */; };
+		5C416D5A1C8D8D05002DF002 /* RecordingSignal003@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D501C8D8D05002DF002 /* RecordingSignal003@2x.png */; };
+		5C416D5B1C8D8D05002DF002 /* RecordingSignal004@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D511C8D8D05002DF002 /* RecordingSignal004@2x.png */; };
+		5C416D5C1C8D8D05002DF002 /* RecordingSignal005@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D521C8D8D05002DF002 /* RecordingSignal005@2x.png */; };
+		5C416D5D1C8D8D05002DF002 /* RecordingSignal006@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D531C8D8D05002DF002 /* RecordingSignal006@2x.png */; };
+		5C416D5E1C8D8D05002DF002 /* RecordingSignal007@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D541C8D8D05002DF002 /* RecordingSignal007@2x.png */; };
+		5C416D5F1C8D8D05002DF002 /* RecordingSignal008@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C416D551C8D8D05002DF002 /* RecordingSignal008@2x.png */; };
 		5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */; };
 		5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684BF1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m */; };
 		5C4684C41C52076E00705FA9 /* LLAUserProfileMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4684C31C52076E00705FA9 /* LLAUserProfileMainInfo.m */; };
@@ -559,6 +569,16 @@
 		5C416D451C8D3F38002DF002 /* LLAAudioCachingInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAudioCachingInfo.m; sourceTree = "<group>"; };
 		5C416D471C8D3F57002DF002 /* LLAAudioCacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAAudioCacheUtil.h; sourceTree = "<group>"; };
 		5C416D481C8D3F57002DF002 /* LLAAudioCacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAAudioCacheUtil.m; sourceTree = "<group>"; };
+		5C416D4C1C8D8D05002DF002 /* RecordCancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordCancel@2x.png"; sourceTree = "<group>"; };
+		5C416D4D1C8D8D05002DF002 /* RecordingBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingBkg@2x.png"; sourceTree = "<group>"; };
+		5C416D4E1C8D8D05002DF002 /* RecordingSignal001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal001@2x.png"; sourceTree = "<group>"; };
+		5C416D4F1C8D8D05002DF002 /* RecordingSignal002@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal002@2x.png"; sourceTree = "<group>"; };
+		5C416D501C8D8D05002DF002 /* RecordingSignal003@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal003@2x.png"; sourceTree = "<group>"; };
+		5C416D511C8D8D05002DF002 /* RecordingSignal004@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal004@2x.png"; sourceTree = "<group>"; };
+		5C416D521C8D8D05002DF002 /* RecordingSignal005@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal005@2x.png"; sourceTree = "<group>"; };
+		5C416D531C8D8D05002DF002 /* RecordingSignal006@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal006@2x.png"; sourceTree = "<group>"; };
+		5C416D541C8D8D05002DF002 /* RecordingSignal007@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal007@2x.png"; sourceTree = "<group>"; };
+		5C416D551C8D8D05002DF002 /* RecordingSignal008@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal008@2x.png"; sourceTree = "<group>"; };
 		5C4684B81C51F85900705FA9 /* LLAUserProfileOtherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileOtherInfoCell.h; sourceTree = "<group>"; };
 		5C4684B91C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAUserProfileOtherInfoCell.m; sourceTree = "<group>"; };
 		5C4684BE1C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUserProfileVideoHeaderView.h; sourceTree = "<group>"; };
@@ -1680,6 +1700,23 @@
 			path = AudioCacheUtil;
 			sourceTree = "<group>";
 		};
+		5C416D4B1C8D8D05002DF002 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5C416D4C1C8D8D05002DF002 /* RecordCancel@2x.png */,
+				5C416D4D1C8D8D05002DF002 /* RecordingBkg@2x.png */,
+				5C416D4E1C8D8D05002DF002 /* RecordingSignal001@2x.png */,
+				5C416D4F1C8D8D05002DF002 /* RecordingSignal002@2x.png */,
+				5C416D501C8D8D05002DF002 /* RecordingSignal003@2x.png */,
+				5C416D511C8D8D05002DF002 /* RecordingSignal004@2x.png */,
+				5C416D521C8D8D05002DF002 /* RecordingSignal005@2x.png */,
+				5C416D531C8D8D05002DF002 /* RecordingSignal006@2x.png */,
+				5C416D541C8D8D05002DF002 /* RecordingSignal007@2x.png */,
+				5C416D551C8D8D05002DF002 /* RecordingSignal008@2x.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		5C4684C11C52074E00705FA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2213,6 +2250,7 @@
 		5CA6C0491C8AFD0D005D975C /* AudioRecordUtil */ = {
 			isa = PBXGroup;
 			children = (
+				5C416D4B1C8D8D05002DF002 /* Resource */,
 				5CA6C0501C8AFF7A005D975C /* XHFoundationMacro.h */,
 				5CA6C0511C8AFF7A005D975C /* XHMacro.h */,
 				5CA6C0521C8AFF7A005D975C /* XHUIKitMacro.h */,
@@ -3521,6 +3559,7 @@
 				A3DEDE7C1C3CAEC7009F3D37 /* TMLoginRegisterViewController.xib in Resources */,
 				5CA18FA81C4F6C9100A0B5B7 /* lla_Loading_1.png in Resources */,
 				A3DEDE7E1C3CAEC7009F3D37 /* TMLoginViewController.xib in Resources */,
+				5C416D5B1C8D8D05002DF002 /* RecordingSignal004@2x.png in Resources */,
 				A3DEDE951C3CAEC7009F3D37 /* TMNoticeView.xib in Resources */,
 				7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */,
 				5CA18FAE1C4F6C9100A0B5B7 /* lla_Loading_11@3x.png in Resources */,
@@ -3531,7 +3570,9 @@
 				5CA18FB31C4F6C9100A0B5B7 /* lla_Loading_13@2x.png in Resources */,
 				5CA18FAF1C4F6C9100A0B5B7 /* lla_Loading_12.png in Resources */,
 				5CA18FC51C4F6C9100A0B5B7 /* lla_Loading_3@3x.png in Resources */,
+				5C416D5D1C8D8D05002DF002 /* RecordingSignal006@2x.png in Resources */,
 				5CA18FCB1C4F6C9100A0B5B7 /* lla_Loading_5@3x.png in Resources */,
+				5C416D581C8D8D05002DF002 /* RecordingSignal001@2x.png in Resources */,
 				5CA18FD01C4F6C9100A0B5B7 /* lla_Loading_7@2x.png in Resources */,
 				A3DEDE761C3CAEC7009F3D37 /* TMTopicCell.xib in Resources */,
 				5CA18FC61C4F6C9100A0B5B7 /* lla_Loading_4.png in Resources */,
@@ -3542,6 +3583,7 @@
 				7EC08ED51C58727500C4B46A /* LLAAccountSecuritySectionTwoCell.xib in Resources */,
 				A3DEDE9E1C3CAEC7009F3D37 /* TMChangePwdController.xib in Resources */,
 				5CA18FBA1C4F6C9100A0B5B7 /* lla_Loading_15@3x.png in Resources */,
+				5C416D571C8D8D05002DF002 /* RecordingBkg@2x.png in Resources */,
 				A3DEDE871C3CAEC7009F3D37 /* TMPublishView.xib in Resources */,
 				5CA18FAB1C4F6C9100A0B5B7 /* lla_Loading_10@3x.png in Resources */,
 				5CA18FCD1C4F6C9100A0B5B7 /* lla_Loading_6@2x.png in Resources */,
@@ -3564,6 +3606,7 @@
 				5CA18FB61C4F6C9100A0B5B7 /* lla_Loading_14@2x.png in Resources */,
 				5CA18FBF1C4F6C9100A0B5B7 /* lla_Loading_1@3x.png in Resources */,
 				5CA18FBD1C4F6C9100A0B5B7 /* lla_Loading_16@3x.png in Resources */,
+				5C416D5A1C8D8D05002DF002 /* RecordingSignal003@2x.png in Resources */,
 				5CA18FD71C4F6C9100A0B5B7 /* lla_Loading_9@3x.png in Resources */,
 				5CA18FA91C4F6C9100A0B5B7 /* lla_Loading_10.png in Resources */,
 				5CA18FB11C4F6C9100A0B5B7 /* lla_Loading_12@3x.png in Resources */,
@@ -3573,12 +3616,15 @@
 				7EAA2F501C57308F002DF3B1 /* LLAChangBoundPhonesViewController.xib in Resources */,
 				5CA18FB51C4F6C9100A0B5B7 /* lla_Loading_14.png in Resources */,
 				5CA18FCC1C4F6C9100A0B5B7 /* lla_Loading_6.png in Resources */,
+				5C416D5E1C8D8D05002DF002 /* RecordingSignal007@2x.png in Resources */,
 				5CA18FAD1C4F6C9100A0B5B7 /* lla_Loading_11@2x.png in Resources */,
 				A3DEDE711C3CAEC7009F3D37 /* TMScriptCell.xib in Resources */,
 				7EC08ED01C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.xib in Resources */,
 				A3DEDE781C3CAEC7009F3D37 /* TMDataIconController.xib in Resources */,
 				5CA18FD41C4F6C9100A0B5B7 /* lla_Loading_8@3x.png in Resources */,
+				5C416D591C8D8D05002DF002 /* RecordingSignal002@2x.png in Resources */,
 				A3DEDE971C3CAEC7009F3D37 /* TMProfileLikeCell.xib in Resources */,
+				5C416D561C8D8D05002DF002 /* RecordCancel@2x.png in Resources */,
 				5CA18FD11C4F6C9100A0B5B7 /* lla_Loading_7@3x.png in Resources */,
 				5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */,
 				7E9F7B121C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib in Resources */,
@@ -3586,10 +3632,12 @@
 				A3DEDE7A1C3CAEC7009F3D37 /* TMDataVideoController.xib in Resources */,
 				A3DEDE9B1C3CAEC7009F3D37 /* TMTHistoryCell.xib in Resources */,
 				5CA18FC21C4F6C9100A0B5B7 /* lla_Loading_2@3x.png in Resources */,
+				5C416D5F1C8D8D05002DF002 /* RecordingSignal008@2x.png in Resources */,
 				5CA18FC41C4F6C9100A0B5B7 /* lla_Loading_3@2x.png in Resources */,
 				5CA18FCF1C4F6C9100A0B5B7 /* lla_Loading_7.png in Resources */,
 				5C7534531C7711920058F93C /* MWPhotoBrowser.bundle in Resources */,
 				5CA18FAC1C4F6C9100A0B5B7 /* lla_Loading_11.png in Resources */,
+				5C416D5C1C8D8D05002DF002 /* RecordingSignal005@2x.png in Resources */,
 				5CA18FCA1C4F6C9100A0B5B7 /* lla_Loading_5@2x.png in Resources */,
 				5CA18FCE1C4F6C9100A0B5B7 /* lla_Loading_6@3x.png in Resources */,
 				A3209A9B1C3D0E5100CADC51 /* WeiboSDK.bundle in Resources */,

@@ -83,6 +83,10 @@
     //if (conversation.members && [conversation.members containsObject:imClient.clientId]) {
         
         //
+    if (!conversation || !message) {
+        return;
+    }
+    
     LLAIMConversation *imCoversation = [LLAIMConversation conversationWithLeanCloudConversation:conversation];
     LLAIMMessage *imMessage = [LLAIMMessage messageFromLeanTypedMessage:message];
         

@@ -153,10 +153,10 @@
         } callback:^(BOOL succeeded, NSError *error) {
             
             LLAIMMessage *newMessage = nil;
-            newMessage = [LLAIMMessage messageFromLeanTypedMessage:typeMessage];
             
             if (succeeded) {
             
+                newMessage = [LLAIMMessage messageFromLeanTypedMessage:typeMessage];
                 //save temp image to cache
                 if (message.mediaType == LLAIMMessageType_Image) {
                     

@@ -16,7 +16,7 @@
 #import "LLAIMImageMessage.h"
 #import "LLAIMVoiceMessage.h"
 
-static NSString * const tempImageCacheDirectory = @"tempImage";
+static NSString * const tempImageCacheDirectory = @"imSendImageDir";
 
 @implementation LLAIMMessage
 
@@ -173,7 +173,7 @@ static NSString * const tempImageCacheDirectory = @"tempImage";
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:filePath error:NULL];
     
-    BOOL success = [UIImageJPEGRepresentation(image, 0.6) writeToFile:filePath atomically:YES];
+    [UIImageJPEGRepresentation(image, 0.6) writeToFile:filePath atomically:YES];
     
     
     return filePath;

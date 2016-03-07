@@ -9,6 +9,7 @@
 //controller
 #import "LLAChatMessageViewController.h"
 #import "LLAChatInputViewController.h"
+#import "LLAUserProfileViewController.h"
 
 
 //view
@@ -33,9 +34,10 @@
 #import "LLAIMCommonUtil.h"
 #import "LLAAudioCacheUtil.h"
 
+
 #import "XHAudioPlayerHelper.h"
 
-@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver,LLAChatMessageCellDelegate>
+@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver,LLAChatMessageCellDelegate,XHAudioPlayerHelperDelegate>
 {
     LLATableView *dataTableView;
     
@@ -46,6 +48,15 @@
     NSLayoutConstraint *inputViewHeightConstraints;
     
     LLAIMConversation *currentConversation;
+    
+    //should play audio message
+    
+    LLAIMVoiceMessage *willPlayAudioMessage;
+    
+    //playing audio message
+    
+    LLAIMVoiceMessage *playingAudioMessage;
+    
 }
 
 @end
@@ -55,7 +66,10 @@
 #pragma mark - Life Cycle
 
 - (void) dealloc {
+    
     [[LLAInstantMessageDispatchManager sharedInstance] removeEventObserver:self forConversation:currentConversation.conversationId];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
 }
 
 - (instancetype) initWithConversation:(LLAIMConversation *)conversation {
@@ -73,6 +87,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDownloadFinished:) name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
     
     //
     [self initVariables];
@@ -190,8 +206,19 @@
     //
     NSArray *msgs = [[LLAInstantMessageStorageUtil shareInstance] getMsgsWithConvid:currentConversation.conversationId maxTime:timestamps limit:LLACONVERSATION_LOAD_HISTORY_MESSAGE_NUMPERTIME];
     
-    [messageArray addObjectsFromArray:msgs];
+    for (int i = (int)msgs.count - 1;i >=0 ;i--) {
+        
+        LLAIMMessage *newMessage = msgs[i];
+        [messageArray insertObject:newMessage atIndex:0];
+    }
+    
+    //[messageArray addObjectsFromArray:msgs];
+    
+    CGFloat preContentHeight = dataTableView.contentSize.height;
+    CGFloat preOffsetY = dataTableView.contentOffset.y;
     [dataTableView reloadData];
+    CGFloat newOffsetY = dataTableView.contentSize.height - preContentHeight + preOffsetY;
+    dataTableView.contentOffset = CGPointMake(dataTableView.contentOffset.x, newOffsetY);
     
     [dataTableView.pullToRefreshView stopAnimating];
     
@@ -291,7 +318,7 @@
 }
 
 - (void) showUserDetailWithUserInfo:(LLAUser *) userInfo {
-    
+    [self showUserDetailWithUserInfo:userInfo];
 }
 
 //for image cell
@@ -304,10 +331,25 @@
     
     LLAIMVoiceMessage *voiceMessage = (LLAIMVoiceMessage *) message;
 
+    //
+    if (message == playingAudioMessage) {
+        
+        [[XHAudioPlayerHelper shareInstance] stopAudio];
+        return;
+        
+    }else {
+        
+        [[XHAudioPlayerHelper shareInstance] stopAudio];
+        playingAudioMessage = nil;
+    }
+    
+    //
     if ([LLAAudioCacheUtil isFilePathURLString:voiceMessage.audioURL]) {
         //for tmp message,play
         
         [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:voiceMessage.audioURL toPlay:YES];
+        //
+        playingAudioMessage = (LLAIMVoiceMessage *)message;
         
     }else {
 
@@ -318,12 +360,16 @@
             
             [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:filePathURL.path toPlay:YES];
             
+            playingAudioMessage = (LLAIMVoiceMessage *)message;
+            
+            
         }else {
             //download it
             
             [[LLAAudioCacheUtil shareInstance] cacheAudioWithURL:[NSURL URLWithString:voiceMessage.audioURL]];
             
             //set to play it
+            willPlayAudioMessage = (LLAIMVoiceMessage *)message;
         }
         
     }
@@ -373,8 +419,8 @@
         if (index != NSNotFound) {
             
             [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            //[dataTableView reloadData];
+            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            [dataTableView reloadData];
         }
         
     }];
@@ -393,8 +439,8 @@
         if (index != NSNotFound) {
             
             [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            [dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            //[dataTableView reloadData];
+            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            [dataTableView reloadData];
         }
         
     }];
@@ -487,6 +533,60 @@
     
 }
 
+#pragma mark - XHAudioPlayerHelperDelegate
+
+- (void)didAudioPlayerBeginPlay:(AVAudioPlayer*)audioPlayer {
+    //set start playing video
+    NSInteger index = [messageArray indexOfObject:playingAudioMessage];
+    
+    //update status
+    LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    
+    
+}
+
+- (void)didAudioPlayerStopPlay:(AVAudioPlayer*)audioPlayer {
+    //stop the playing video
+    
+    NSInteger index = [messageArray indexOfObject:playingAudioMessage];
+    
+    LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+}
+
+- (void)didAudioPlayerPausePlay:(AVAudioPlayer*)audioPlayer {
+    
+}
+
+
+#pragma mark - audioDownloadFinished notification
+
+- (void) audioDownloadFinished:(NSNotification *) noti {
+    //
+    if (self.isVisible) {
+        //
+        NSURL *finishedURL = noti.object;
+        
+        if ([finishedURL isEqual:[NSURL URLWithString:willPlayAudioMessage.audioURL]]) {
+            //the play it
+            if ([[XHAudioPlayerHelper shareInstance] player].isPlaying){
+                [[XHAudioPlayerHelper shareInstance] stopAudio];
+            }
+            
+            //play
+            [self playStopVoiceWithMessage:willPlayAudioMessage];
+            willPlayAudioMessage = nil;
+            
+        }
+        
+    }else {
+        //
+        willPlayAudioMessage = nil;
+    }
+    
+}
+
 #pragma mark - ScrollToBottom
 
 - (void) scrollTableToBottom {
@@ -531,6 +631,15 @@
 
 - (void) resetInputController {
     [inputController resignInputView];
+}
+
+#pragma mark - Private Method
+
+- (void) pushToUserProfileWithUserInfo:(LLAUser *) userInfo {
+    if (userInfo.userIdString.length > 0) {
+        LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+        [self.navigationController pushViewController:userProfile animated:YES];
+    }
 }
 
 

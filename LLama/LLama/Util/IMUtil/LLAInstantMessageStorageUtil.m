@@ -267,8 +267,10 @@
     [_dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet* rs=[db executeQuery:@"SELECT * FROM rooms WHERE convid=?",convid];
         if([rs next]==NO){
+            AVIMConversation *leanCon = conversation.leanConversation;
             conversation.leanConversation = nil;
             NSData* data=[NSKeyedArchiver archivedDataWithRootObject:conversation];
+            conversation.leanConversation = leanCon;
             [db executeUpdate:@"INSERT INTO rooms (convid,conObject) VALUES(?,?) " withArgumentsInArray:@[convid,data]];
         }
         [rs close];

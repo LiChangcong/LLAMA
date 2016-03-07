@@ -166,7 +166,7 @@
     //calculate height
     CGFloat width = imageMaxWidth * MIN(((float)message.width/(float)message.height),0.9);
     
-    CGFloat height = imageMaxWidth / message.width * message.height;
+    CGFloat height = width / message.width * message.height;
     
     return CGSizeMake(width, height);
     
