@@ -15,6 +15,9 @@
 #define TMRootView [UIApplication sharedApplication].keyWindow.rootViewController.view
 
 #import "LLAImagePickerViewController.h"
+#import "LLAPublishButton.h"
+
+#import "LLAPostScriptViewController.h"
 
 static CGFloat const XMGAnimationDelay = 0.08;
 static CGFloat const XMGSpringFactor = 10;
@@ -37,22 +40,25 @@ static CGFloat const XMGSpringFactor = 10;
     self.userInteractionEnabled = NO;
     
     // 数据
-    NSArray *images = @[@"writecircle", @"cameracircle"];
+    NSArray *images = @[@"poblish_pen-start", @"poblish_camera-start"];
+    NSArray *names = @[@"文字剧本", @"图文剧本"];
     
     // 中间的2个按钮
     int maxCols = 2;
     CGFloat buttonW = 90;
-    CGFloat buttonH = buttonW;
+    CGFloat buttonH = buttonW +20;
     CGFloat buttonStartY = (XMGScreenH - buttonH) * 0.7 ;
     CGFloat buttonStartX = 52;
     CGFloat xMargin = (XMGScreenW - 2 * buttonStartX - maxCols * buttonW) / (maxCols - 1);
     for (int i = 0; i<images.count; i++) {
-        UIButton *button = [[UIButton alloc] init];
+        LLAPublishButton *button = [[LLAPublishButton alloc] init];
         button.tag = i;
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
+        
         // 设置内容
         [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
+        [button setTitle:names[i] forState:UIControlStateNormal];
         
         // 计算X\Y
 //        int row = i / maxCols;
@@ -86,12 +92,16 @@ static CGFloat const XMGSpringFactor = 10;
         
         
         if (button.tag == 0) {
-            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
-
-            postS.scriptType = LLAPublishScriptType_Text;
+//            TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+//
+//            postS.scriptType = LLAPublishScriptType_Text;
+//            
+//            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
             
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
-
+            LLAPostScriptViewController *postS = [[LLAPostScriptViewController alloc] init];
+            postS.scriptType = LLAPublishScriptType_Text;
+//            postS.scriptType = LLAPublishScriptTypeNew_Image;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS ]  animated:YES completion:nil];
         } else if (button.tag == 1) {
             
             LLAImagePickerViewController *imagePicker = [[LLAImagePickerViewController alloc] init];
