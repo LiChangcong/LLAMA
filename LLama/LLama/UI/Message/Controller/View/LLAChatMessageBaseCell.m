@@ -195,7 +195,7 @@
             
             indicatorFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentingIndicatorToBubbleHorSapce-sentingIndicator.bounds.size.width, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-sentingIndicator.bounds.size.height)/2, sentingIndicator.bounds.size.width, sentingIndicator.bounds.size.height);
             
-            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce-config.sentFailedViewWidth, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
+            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentFailedViewToBunbbleHorSpace, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
             
         }else {
             bubbleImage = config.myBubbleWithoutArrow;
@@ -206,7 +206,7 @@
             
             indicatorFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentingIndicatorToBubbleHorSapce-sentingIndicator.bounds.size.width, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-sentingIndicator.bounds.size.height)/2, sentingIndicator.bounds.size.width, sentingIndicator.bounds.size.height);
             
-            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce-config.sentFailedViewWidth, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
+            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
         }
         
     }

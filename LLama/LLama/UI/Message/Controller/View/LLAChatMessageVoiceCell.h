@@ -10,4 +10,6 @@
 
 @interface LLAChatMessageVoiceCell : LLAChatMessageBaseCell
 
+- (void) updateVoiceStausWithIsPlaying:(BOOL) isPlaying;
+
 @end

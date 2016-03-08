@@ -74,13 +74,32 @@
     self.myBubbleWithoutArrow = [[UIImage llaImageWithName:@"my_message_bubble_withoutArrow"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 4, 6, 8)];
     
     //sent failed image
-    self.sentFailedImage_Normal = [UIImage llaImageWithName:@""];
-    self.sentFailedImage_Highlight = [UIImage llaImageWithName:@""];
+    self.sentFailedImage_Normal = [UIImage llaImageWithName:@"messageSendFail"];
+    self.sentFailedImage_Highlight = [UIImage llaImageWithName:@"messageSendFail"];
     
-    self.voicePlayImage = [UIImage imageNamed:@"chat_Message_Voice_Play"];
+    //
+    self.receiverVoicePlayImage = [UIImage llaImageWithName:@"ReceiverVoiceNodePlaying"];
+    self.senderVoicePlayImage = [UIImage llaImageWithName:@"SenderVoiceNodePlaying"];
+    
+    self.receiverVoicePlayingImages = @[
+                                        [UIImage llaImageWithName:@"ReceiverVoiceNodePlaying000"],
+                                        [UIImage llaImageWithName:@"ReceiverVoiceNodePlaying001"],
+                                        [UIImage llaImageWithName:@"ReceiverVoiceNodePlaying002"],
+                                        [UIImage llaImageWithName:@"ReceiverVoiceNodePlaying003"]
+                                        ];
+    
+    self.senderVoicePlayingImages = @[
+                                        [UIImage llaImageWithName:@"SenderVoiceNodePlaying000"],
+                                        [UIImage llaImageWithName:@"SenderVoiceNodePlaying001"],
+                                        [UIImage llaImageWithName:@"SenderVoiceNodePlaying002"],
+                                        [UIImage llaImageWithName:@"SenderVoiceNodePlaying003"]
+                                        ];
     
     self.maxRecordVoiceDuration = 60.0;
     self.minRecordVoiceDuration = 2.0;
+    
+    //
+    self.voicePlayingDuration = 0.5;
     
 }
 

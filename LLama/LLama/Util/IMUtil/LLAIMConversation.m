@@ -20,6 +20,8 @@
 #import "SDWebImageManager.h"
 #import "LLAAudioCacheUtil.h"
 
+#import "XHVoiceCommonHelper.h"
+
 @interface LLAIMConversation()
 
 @property(nonatomic , readwrite , strong) NSString *clientId;
@@ -124,19 +126,22 @@
         
     }else if (message.mediaType == LLAIMMessageType_Image) {
     
-        AVIMImageMessage *imageMessage = [AVIMImageMessage messageWithText:nil attachedFilePath:[((LLAIMImageMessage *)message).imageURL path] attributes:nil];
+        NSString *tempImagePath = [LLAIMMessage filePathForKey:message.messageId];
+        
+        AVIMImageMessage *imageMessage = [AVIMImageMessage messageWithText:nil attachedFilePath:tempImagePath attributes:nil];
         
         typeMessage = imageMessage;
         
     }else if (message.mediaType == LLAIMMessageType_Audio) {
         
-        AVIMAudioMessage *audioMessage = [AVIMAudioMessage messageWithText:nil attachedFilePath:((LLAIMVoiceMessage *)message).audioURL attributes:nil];
+        NSString *keyString = [XHVoiceCommonHelper keyFromPath:((LLAIMVoiceMessage *)message).audioURL];
+        NSString *voicePath = [XHVoiceCommonHelper audioPathWithKey:keyString];
+        
+        AVIMAudioMessage *audioMessage = [AVIMAudioMessage messageWithText:nil attachedFilePath:voicePath attributes:nil];
         
         typeMessage = audioMessage;
         
     }
-    
-    
     
     if (typeMessage) {
         
@@ -160,7 +165,8 @@
                 //save temp image to cache
                 if (message.mediaType == LLAIMMessageType_Image) {
                     
-                    UIImage *tempImage = [UIImage imageWithContentsOfFile:[((LLAIMImageMessage *)message).imageURL path]];
+                    NSString *tempImagePath = [LLAIMMessage filePathForKey:message.messageId];
+                    UIImage *tempImage = [UIImage imageWithContentsOfFile:tempImagePath];
                     if (tempImage) {
                         
                         [[SDWebImageManager sharedManager] saveImageToCache:tempImage forURL:[NSURL URLWithString:typeMessage.file.url]];
@@ -174,10 +180,14 @@
                     
                     //move amr,wav file to cache and rename it
                     //if wav file is playing delete it when it plays end
-                    NSString *filePath  = ((LLAIMVoiceMessage *) message).audioURL;
+                    
+                    NSString *keyString = [XHVoiceCommonHelper keyFromPath:((LLAIMVoiceMessage *)message).audioURL];
+                    NSString *voicePath = [XHVoiceCommonHelper audioPathWithKey:keyString];
+
+                    
                     NSURL *audioURL = [NSURL URLWithString:((AVIMAudioMessage *)typeMessage).file.url];
                     
-                    [[LLAAudioCacheUtil shareInstance] saveAmrFile:filePath forURL:audioURL];
+                    [[LLAAudioCacheUtil shareInstance] saveAmrFile:voicePath forURL:audioURL];
                     
                     //delete ,or mark the wav video should be delete
                     
@@ -194,9 +204,9 @@
             }else {
                 
                 newMessage = message;
-                message.msgStatus = LLAIMMessageStatusFailed;
+                newMessage.msgStatus = LLAIMMessageStatusFailed;
                 
-                [[LLAInstantMessageStorageUtil shareInstance] updateStatus:LLAIMMessageStatusFailed byMsgId:message.messageId];
+                [[LLAInstantMessageStorageUtil shareInstance] updateStatus:LLAIMMessageStatusFailed byMsgId:newMessage.messageId];
                 if (callback)
                     callback(succeeded,newMessage,error);
             }

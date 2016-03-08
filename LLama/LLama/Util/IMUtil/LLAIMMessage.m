@@ -182,7 +182,7 @@ static NSString * const tempImageCacheDirectory = @"imSendImageDir";
 
 + (NSString *) filePathForKey:(NSString *)key{
     
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *ourDocumentPath = [documentPaths objectAtIndex:0];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     NSString *adVideoCachPath = [ourDocumentPath stringByAppendingPathComponent:tempImageCacheDirectory];

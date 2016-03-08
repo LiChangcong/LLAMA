@@ -66,4 +66,7 @@ typedef NS_ENUM(NSInteger , LLAIMMessageType){
 
 + (instancetype) voiceMessageWithAudioFilePath:(NSString *) audioFilePath withDuration:(CGFloat) duration;
 
+//temp image file path
++ (NSString *) filePathForKey:(NSString *)key;
+
 @end

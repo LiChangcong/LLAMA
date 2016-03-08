@@ -93,7 +93,12 @@
     [self makeMaskView:messageImageView withImage:maskImage size:size];
     
     if ([imageMessage.imageURL isFileURL]) {
-        messageImageView.image = [UIImage imageWithContentsOfFile:[imageMessage.imageURL path]];
+        
+        //get temp file
+        NSString *filePath = [LLAIMMessage filePathForKey:self.currentMessage.messageId];
+        
+        messageImageView.image = [UIImage imageWithContentsOfFile:filePath];
+    
     }else {
     
         [messageImageView setImageWithURL:imageMessage.imageURL placeholderImage:[UIImage imageNamed:@"placeHolder_750"]];

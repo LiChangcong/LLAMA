@@ -200,26 +200,44 @@
  *
  **/
 
-+ (NSString *) generateAudioRecordPath {
++ (NSString *) generateAudioRecordPath{
+    
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
+    
+    NSString *key = [dateFormatter stringFromDate:now];
+    
+    key = [key stringByAppendingString:@"-MySound.wav"];
+    
+    return [self audioPathWithKey:key];
     
 //    NSString *recorderPath = nil;
 //    NSDate *now = [NSDate date];
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yy-MMMM-dd";
+//    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
+//    //    dateFormatter.dateFormat = @"hh-mm-ss";
 //    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
-//    
-//    recorderPath = [[self getCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-MySound.wav",[dateFormatter stringFromDate:now]]];
-//    
+//    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.wav", [dateFormatter stringFromDate:now]];
 //    return recorderPath;
+}
+
++ (NSString *) audioPathWithKey:(NSString *)key {
     
     NSString *recorderPath = nil;
-    NSDate *now = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yy-MMMM-dd";
-    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
-    //    dateFormatter.dateFormat = @"hh-mm-ss";
-    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
-    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.wav", [dateFormatter stringFromDate:now]];
+    
+    recorderPath = [[self getCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",key]];
+    
     return recorderPath;
+    
+}
+
++ (NSString *) keyFromPath:(NSString *) path {
+    
+    NSArray<NSString *> *arr = [path componentsSeparatedByString:@"/"];
+    
+    return [arr lastObject];
 }
 
 /**

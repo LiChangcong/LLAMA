@@ -97,6 +97,10 @@ typedef void(^DidDeleteAudioFileBlock)();
 
 + (NSString *) generateAudioRecordPath;
 
++ (NSString *) audioPathWithKey:(NSString *)key;
+
++ (NSString *) keyFromPath:(NSString *) path;
+
 /**
  * get convert path from wav to amr
  *

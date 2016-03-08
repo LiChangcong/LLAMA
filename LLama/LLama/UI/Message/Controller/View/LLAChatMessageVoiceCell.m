@@ -46,7 +46,7 @@
     //
     voiceImageView = [[UIImageView alloc] init];
     voiceImageView.clipsToBounds = YES;
-    voiceImageView.image = [LLAMessageChatConfig shareConfig].voicePlayImage;
+    //voiceImageView.image = [LLAMessageChatConfig shareConfig].voicePlayImage;
     //voiceImageView.backgroundColor = [UIColor purpleColor];
     voiceImageView.contentMode = UIViewContentModeCenter;
     voiceImageView.userInteractionEnabled = YES;
@@ -118,9 +118,52 @@
     [self layoutIfNeeded];
 }
 
+- (void) updateVoiceStausWithIsPlaying:(BOOL)isPlaying {
+    
+    //
+    
+    LLAMessageChatConfig *config = [LLAMessageChatConfig shareConfig];
+
+    
+    if (isPlaying) {
+        
+        if (!voiceImageView.isAnimating) {
+            if (self.currentMessage.ioType == LLAIMMessageIOType_In) {
+                //others
+                voiceImageView.animationImages = config.receiverVoicePlayingImages;
+                voiceImageView.animationDuration = config.voicePlayingDuration;
+                [voiceImageView startAnimating];
+                
+            }else {
+                //my
+                voiceImageView.animationImages = config.senderVoicePlayingImages;
+                voiceImageView.animationDuration = config.voicePlayingDuration;
+                [voiceImageView startAnimating];
+                
+            }
+        }
+        
+    }else {
+        
+        voiceImageView.animationImages = nil;
+        [voiceImageView stopAnimating];
+        
+        if (self.currentMessage.ioType == LLAIMMessageIOType_In) {
+            //
+            voiceImageView.image = config.receiverVoicePlayImage;
+        }else {
+            voiceImageView.image = config.senderVoicePlayImage;
+        }
+        
+    }
+    
+    
+}
+
 - (NSString *) formatDurationString {
     return [NSString stringWithFormat:@"%.0f''",((LLAIMVoiceMessage *)self.currentMessage).duration+0.5];
 }
+
 
 #pragma mark - CalculateHeight
 

@@ -33,6 +33,7 @@
 #import "LLAInstantMessageStorageUtil.h"
 #import "LLAIMCommonUtil.h"
 #import "LLAAudioCacheUtil.h"
+#import "XHVoiceCommonHelper.h"
 
 
 #import "XHAudioPlayerHelper.h"
@@ -104,6 +105,10 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToHide:)];
     
     [dataTableView addGestureRecognizer:tapGesture];
+    
+    XHAudioPlayerHelper *sharePlayer = [XHAudioPlayerHelper shareInstance];
+    
+    sharePlayer.delegate = self;
     
 }
 
@@ -267,6 +272,8 @@
         
         [voiceCell updateCellWithMessage:message maxWidth:tableView.bounds.size.width showTime:showTime];
         
+        [voiceCell updateVoiceStausWithIsPlaying:message == playingAudioMessage];
+        
         cell = voiceCell;
         
         
@@ -318,7 +325,7 @@
 }
 
 - (void) showUserDetailWithUserInfo:(LLAUser *) userInfo {
-    [self showUserDetailWithUserInfo:userInfo];
+    [self pushToUserProfileWithUserInfo:userInfo];
 }
 
 //for image cell
@@ -335,6 +342,7 @@
     if (message == playingAudioMessage) {
         
         [[XHAudioPlayerHelper shareInstance] stopAudio];
+        playingAudioMessage = nil;
         return;
         
     }else {
@@ -347,9 +355,14 @@
     if ([LLAAudioCacheUtil isFilePathURLString:voiceMessage.audioURL]) {
         //for tmp message,play
         
-        [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:voiceMessage.audioURL toPlay:YES];
-        //
         playingAudioMessage = (LLAIMVoiceMessage *)message;
+        
+        NSString *key = [XHVoiceCommonHelper keyFromPath:voiceMessage.audioURL];
+        NSString *playPath = [XHVoiceCommonHelper audioPathWithKey:key];
+        
+        [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:playPath toPlay:YES];
+        //
+        
         
     }else {
 
@@ -358,9 +371,9 @@
             //cached,play it
             NSURL *filePathURL = [[LLAAudioCacheUtil shareInstance] cacheURLForAudioURL:[NSURL URLWithString:voiceMessage.audioURL]];
             
-            [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:filePathURL.path toPlay:YES];
-            
             playingAudioMessage = (LLAIMVoiceMessage *)message;
+            
+            [[XHAudioPlayerHelper shareInstance] managerAudioWithFileName:filePathURL.path toPlay:YES];
             
             
         }else {
@@ -472,9 +485,10 @@
     
     inputViewHeightConstraints.constant = newHeight;
     
+    //
+    
     [self.view layoutIfNeeded];
     [UIView commitAnimations];
-
     
     //---计算tableView应该滚动的高度,以viewoffset来计算相对变化的高度
     if (!(shouldOffset && changeHeight<0)){
@@ -483,13 +497,10 @@
         
         CGFloat actualOffset = MIN(changeOffset,maxOffset);
         actualOffset = MAX(actualOffset,0);
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationCurve:animationCurve];
-        [UIView setAnimationDuration:duration];
+        
         dataTableView.contentOffset = CGPointMake(dataTableView.contentOffset.x, actualOffset);
-        [self.view layoutIfNeeded];
-        [UIView commitAnimations];
     }
+
 
     
 }
@@ -539,8 +550,18 @@
     //set start playing video
     NSInteger index = [messageArray indexOfObject:playingAudioMessage];
     
+    
     //update status
-    LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    if (index != NSNotFound) {
+        
+        LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        [voiceCell updateVoiceStausWithIsPlaying:YES];
+        
+        
+    }
+    
+
     
     
     
@@ -551,7 +572,15 @@
     
     NSInteger index = [messageArray indexOfObject:playingAudioMessage];
     
-    LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    if (index != NSNotFound) {
+        
+        LLAChatMessageVoiceCell *voiceCell = [dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        
+        [voiceCell updateVoiceStausWithIsPlaying:NO];
+        
+    }
+
+    playingAudioMessage = nil;
     
 }
 
@@ -569,10 +598,6 @@
         NSURL *finishedURL = noti.object;
         
         if ([finishedURL isEqual:[NSURL URLWithString:willPlayAudioMessage.audioURL]]) {
-            //the play it
-            if ([[XHAudioPlayerHelper shareInstance] player].isPlaying){
-                [[XHAudioPlayerHelper shareInstance] stopAudio];
-            }
             
             //play
             [self playStopVoiceWithMessage:willPlayAudioMessage];
