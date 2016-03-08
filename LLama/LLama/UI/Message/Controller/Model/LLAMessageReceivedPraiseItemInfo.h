@@ -10,7 +10,9 @@
 
 #import "LLAUser.h"
 
-@interface LLAMessageReceivedPraiseItemInfo : MTLModel
+@interface LLAMessageReceivedPraiseItemInfo : MTLModel<MTLJSONSerializing>
+
+@property(nonatomic , copy) NSString *itemIdString;
 
 @property(nonatomic , strong) LLAUser *authorUser;
 
@@ -21,5 +23,9 @@
 @property(nonatomic , copy) NSString *infoImageURL;
 
 @property(nonatomic , copy) NSString *manageContent;
+
+@property(nonatomic , copy) NSString *scriptIdString;
+
++ (instancetype) parseJsonWithDic:(NSDictionary *) data;
 
 @end

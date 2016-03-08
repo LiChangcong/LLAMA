@@ -24,6 +24,8 @@
 #import "SDImageCache.h"
 #import "LLAVideoCacheUtil.h"
 
+#import "LLAInstantMessageService.h"
+
 //setting
 //#import "TMAccountSecurityController.h"
 #import "LLAAccountSecurityController.h"
@@ -295,6 +297,12 @@ static const CGFloat logoutHeaderHeight = 28;
 - (void) logoutCurrentUser {
     //
     [LLAUser logout];
+    
+    //close client
+    [[LLAInstantMessageService shareService] closeClientWithCallBack:^(BOOL succeeded, NSError *error) {
+        
+    }];
+    
     //change root view controller
     
     [LLAChangeRootControllerUtil changeToLoginViewController];

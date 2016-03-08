@@ -75,12 +75,13 @@
             }
         }
         NSMutableDictionary *paramDic = [NSMutableDictionary dictionary];
-        [paramDic setValue:userIDString forKey:@"userIDs"];
-        [paramDic setValue:[NSNumber numberWithInteger:userInfo.count] forKey:@"length"];
+        [paramDic setValue:userIDString forKey:@"ids"];
+        //[paramDic setValue:[NSNumber numberWithInteger:userInfo.count] forKey:@"length"];
         
-        [LLAHttpUtil httpPostWithUrl:@"" param:paramDic responseBlock:^(id responseObject) {
+        [LLAHttpUtil httpPostWithUrl:@"/play/createPlay" param:paramDic responseBlock:^(id responseObject) {
             
             for (NSDictionary *dic in responseObject){
+                [LLAUser setIsSimpleUserModel:YES];
                 LLAUser *user = [LLAUser parseJsonWidthDic:dic];
                 
                 [[LLAInstantMessageStorageUtil shareInstance] updateUserInfoWithUser:user];

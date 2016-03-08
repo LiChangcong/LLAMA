@@ -217,7 +217,14 @@
     LLAIMConversation *conv = [self getConversationByResultSet:rs];
     conv.unreadCount = [rs intForColumn:FIELD_UNREAD_COUNT];
     conv.lastMessage=[self getMsgByResultSet:rs];
-    conv.leanConversation = [[LLAInstantMessageService shareService].imClient conversationWithKeyedConversation:conv.keyedConversation];
+    
+    AVIMClient *defaultClient = [LLAInstantMessageService shareService].imClient;
+    
+    if (!defaultClient) {
+        defaultClient = [AVIMClient defaultClient];
+    }
+    //conv.leanConversation = [[LLAInstantMessageService shareService].imClient conversationWithKeyedConversation:conv.keyedConversation];
+    conv.leanConversation = [defaultClient conversationWithKeyedConversation:conv.keyedConversation];
     
     return conv;
 }

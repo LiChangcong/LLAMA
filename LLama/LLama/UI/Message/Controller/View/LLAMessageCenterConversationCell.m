@@ -15,6 +15,7 @@
 #import "LLAIMMessage.h"
 
 #import "LLAIMCommonUtil.h"
+#import "LLACommonUtil.h"
 
 static const CGFloat headViewToLeft = 11;
 static const CGFloat headViewHeightWidth = 34;
@@ -346,7 +347,12 @@ static const CGFloat lineHeight = 0.6;
     
     userNameLabel.text = targetUser.userName;
     
-    timeLabel.text = @"刚刚";
+    if (roomInfo.conversation.lastMessage) {
+    
+        timeLabel.text = [LLACommonUtil formatTimeFromTimeInterval:roomInfo.conversation.lastMessage.sendTimestamp];
+    }else {
+        timeLabel.text = @"";
+    }
     
     lastMessageLabel.text = roomInfo.conversation.lastMessage.content;
     

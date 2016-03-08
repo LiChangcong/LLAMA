@@ -26,4 +26,23 @@
     
     return array;
 }
+
++ (NSArray *) customAllEmoji {
+    
+    NSMutableArray *array = [NSMutableArray new];
+    
+    for (int i=0x1F600; i<=0x1F637; i++) {
+        
+        if (i == 0x1F610 || i == 0x1F611 || i == 0x1F615 || i == 0x1F617 || i == 0x1F619 || i == 0x1F61B || i == 0x1F61F || i == 0x1F626 || i == 0x1F627 || i == 0x1F62C || i == 0x1F62F) {
+            continue;
+        }
+        
+        [array addObject:[Emoji emojiWithCode:i]];
+        
+    }
+    
+    
+    return array;
+}
+
 @end

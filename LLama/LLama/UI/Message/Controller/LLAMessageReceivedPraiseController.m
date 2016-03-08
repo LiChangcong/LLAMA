@@ -8,6 +8,7 @@
 
 //controller
 #import "LLAMessageReceivedPraiseController.h"
+#import "LLAScriptDetailViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -16,9 +17,11 @@
 
 //util
 #import "LLAViewUtil.h"
+#import "LLAHttpUtil.h"
 
 //model
 #import "LLAMessageReceivedPraiseItemInfo.h"
+#import "LLAMessageReceivedPraiseMainInfo.h"
 
 //category
 #import "SVPullToRefresh.h"
@@ -27,7 +30,9 @@
 {
     LLATableView *dataTableView;
     
-    NSMutableArray *dataArray;
+    LLAMessageReceivedPraiseMainInfo *mainInfo;
+    
+    LLALoadingView *HUD;
 }
 
 @end
@@ -44,31 +49,15 @@
     [self initNavigationItems];
     [self initSubViews];
     
+    [HUD show:YES];
+    
+    [self loadData];
+    
 }
 
 #pragma mark - Init
 
 - (void) initVariables {
-    dataArray = [NSMutableArray array];
-    
-    LLAMessageReceivedPraiseItemInfo *itemInfo = [LLAMessageReceivedPraiseItemInfo new];
-    
-    itemInfo.authorUser = [LLAUser me];
-    itemInfo.editTimeString = @"刚刚";
-    itemInfo.manageContent = @"赞了你的视频";
-    itemInfo.infoImageURL = @"http://pic13.nipic.com/20110415/1347158_132411659346_2.jpg";
-    
-    [dataArray addObject:itemInfo];
-    
-    LLAMessageReceivedPraiseItemInfo *itemInfo1 = [LLAMessageReceivedPraiseItemInfo new];
-    
-    itemInfo1.authorUser = [LLAUser me];
-    itemInfo1.editTimeString = @"刚刚";
-    itemInfo1.manageContent = @"赞了你的视频";
-    
-    
-    [dataArray addObject:itemInfo1];
-
     
 }
 
@@ -112,6 +101,7 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
 
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
@@ -119,9 +109,87 @@
 
 - (void) loadData {
     
+    NSMutableDictionary *paramDic = [NSMutableDictionary dictionary];
+    
+    [paramDic setValue:@"ZAN" forKey:@"type"];
+    [paramDic setValue:@(0) forKey:@"pageNumber"];
+    [paramDic setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/message/getNotifyByType" param:paramDic responseBlock:^(id responseObject) {
+        
+        [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        [dataTableView.infiniteScrollingView resetInfiniteScroll];
+        
+        LLAMessageReceivedPraiseMainInfo *tempInfo = [LLAMessageReceivedPraiseMainInfo parseJsonWithDic:responseObject];
+        if (tempInfo){
+            mainInfo = tempInfo;
+            [dataTableView reloadData];
+            //
+        }
+        
+        dataTableView.showsInfiniteScrolling = mainInfo.dataList.count > 0;
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:NO];
+        [dataTableView.pullToRefreshView stopAnimating];
+        
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+    
 }
 
 - (void) loadMoreData {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:@"ZAN" forKey:@"type"];
+    [params setValue:@(mainInfo.currentPage+1) forKey:@"pageNumber"];
+    [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
+    
+    [LLAHttpUtil httpPostWithUrl:@"/message/getNotifyByType" param:params responseBlock:^(id responseObject) {
+        
+        [dataTableView.infiniteScrollingView stopAnimating];
+        
+        LLAMessageReceivedPraiseMainInfo *tempInfo = [LLAMessageReceivedPraiseMainInfo parseJsonWithDic:responseObject];
+        if (tempInfo.dataList.count > 0){
+            
+            [mainInfo.dataList addObjectsFromArray:tempInfo.dataList];
+            
+            mainInfo.currentPage = tempInfo.currentPage;
+            mainInfo.pageSize = tempInfo.pageSize;
+            mainInfo.isFirstPage = tempInfo.isFirstPage;
+            mainInfo.isLastPage = tempInfo.isLastPage;
+            mainInfo.totalPageNumbers = tempInfo.totalPageNumbers;
+            mainInfo.totalDataNumbers = tempInfo.totalDataNumbers;
+            
+            [dataTableView reloadData];
+        }else {
+            [dataTableView.infiniteScrollingView setInfiniteNoMoreLoading];
+        }
+        
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [dataTableView.infiniteScrollingView stopAnimating];
+        [LLAViewUtil showAlter:self.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [dataTableView.infiniteScrollingView stopAnimating];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        
+    }];
+
     
 }
 
@@ -132,7 +200,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataArray.count;
+    return mainInfo.dataList.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,7 +212,7 @@
         cell = [[LLAMessageReceivedPraiseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:praiseIden];
     }
     
-    [cell updateCellWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    [cell updateCellWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
     return cell;
                             
 }
@@ -153,10 +221,18 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    //
+    LLAMessageReceivedPraiseItemInfo *orderItem = mainInfo.dataList[indexPath.row];
+    
+    LLAScriptDetailViewController *detail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:orderItem.scriptIdString];
+    
+    [self.navigationController pushViewController:detail animated:YES];
+
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [LLAMessageReceivedPraiseCell calculateHeightWithInfo:dataArray[indexPath.row] tableWidth:tableView.bounds.size.width];
+    return [LLAMessageReceivedPraiseCell calculateHeightWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
 }
 
 @end

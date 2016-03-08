@@ -11,6 +11,7 @@
 
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
+#import "LLAMessageCountManager.h"
 
 
 @interface LLAInstantMessageService()<AVIMClientDelegate>
@@ -99,6 +100,7 @@
         [[LLAInstantMessageStorageUtil shareInstance] insertRoomWithConvid:imCoversation.conversationId coverObj:imCoversation];
         [[LLAInstantMessageStorageUtil shareInstance] incrementUnreadWithConvid:imCoversation.conversationId];
         
+        [[LLAMessageCountManager shareManager] unReadIMNumChanged];
         //
     }
         
@@ -144,8 +146,9 @@
         [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
         
         if (succeeded) {
-            currentUIDString = [clientId copy];
             
+            currentUIDString = [clientId copy];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
 
         }
         if (callBack)
@@ -161,8 +164,9 @@
             if (callBack)
                 callBack(succeeded,error);
             if (succeeded) {
-                [[LLAInstantMessageStorageUtil shareInstance] closeDBQueue];
+
             }
+            [[LLAInstantMessageStorageUtil shareInstance] closeDBQueue];
         }];
         
     }else {

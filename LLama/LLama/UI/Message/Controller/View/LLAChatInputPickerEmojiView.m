@@ -11,6 +11,7 @@
 #import "LLAChatInputEmojiFlowLayout.h"
 #import "Emoji.h"
 #import "LLAChatInputPickEmojiCell.h"
+#import "LLAPickEmojiItemInfo.h"
 
 static NSString *const closeImageName_Normal = @"";
 static NSString *const closeImageName_Highlight = @"";
@@ -47,7 +48,7 @@ static const NSInteger numberOfEmojiIconRows = 4;
     UIButton *sendMessageButton;
     
     //
-    NSMutableArray<NSString *> *emojiArray;
+    NSMutableArray<LLAPickEmojiItemInfo *> *emojiArray;
     
     //
     UIFont *sendMessageButtonFont;
@@ -92,6 +93,49 @@ static const NSInteger numberOfEmojiIconRows = 4;
     
     itemSize = CGSizeMake(iconWidth, emojiIconHeight);
     
+    //generate emoji
+    [emojiArray removeAllObjects];
+    
+    NSArray *emojiStringArray = [Emoji customAllEmoji];
+    
+    NSInteger numberPerPage = maxColumn * numberOfEmojiIconRows;
+    
+    NSInteger index = 1;
+    
+    for (int i=0;i<emojiStringArray.count;i++) {
+        
+
+        if (index % numberPerPage == 0) {
+            //delete
+            LLAPickEmojiItemInfo *emojiInfo = [LLAPickEmojiItemInfo new];
+            emojiInfo.type = LLAPickEmojiItemType_DeleteEmoji;
+            [emojiArray addObject:emojiInfo];
+            
+            index ++;
+        }else {
+            //normal emoji
+            
+        }
+        
+        LLAPickEmojiItemInfo *emojiInfo = [LLAPickEmojiItemInfo new];
+        emojiInfo.type = LLAPickEmojiItemType_NormalEmoji;
+        emojiInfo.emojiString = [emojiStringArray objectAtIndex:i];
+        
+        [emojiArray addObject:emojiInfo];
+        
+        index ++;
+        
+        if (i == emojiStringArray.count-1 && index % numberPerPage > 0) {
+            //
+            LLAPickEmojiItemInfo *emojiInfo = [LLAPickEmojiItemInfo new];
+            emojiInfo.type = LLAPickEmojiItemType_DeleteEmoji;
+            [emojiArray addObject:emojiInfo];
+
+        }
+        
+        
+    }
+    
     [emojiCollection reloadData];
     
     //page control
@@ -125,8 +169,6 @@ static const NSInteger numberOfEmojiIconRows = 4;
 }
 
 - (void) initVariables {
-    emojiArray = [NSMutableArray arrayWithCapacity:100];
-    [emojiArray addObjectsFromArray:[Emoji allEmoji]];
     
     sendMessageButtonFont = [UIFont llaFontOfSize:13.5];
     
@@ -135,6 +177,8 @@ static const NSInteger numberOfEmojiIconRows = 4;
     
     sendMessageButtonNormalBKColor = [UIColor themeColor];
     sendMessageButtonHighlightBKColor = [UIColor lightGrayColor];
+    
+    emojiArray = [NSMutableArray arrayWithCapacity:40];
 
 }
 
@@ -278,9 +322,21 @@ static const NSInteger numberOfEmojiIconRows = 4;
 #pragma mark - UICollectionViewDelegate
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (delegate && [delegate respondsToSelector:@selector(pickedEmoji:)]) {
-        [delegate pickedEmoji:[emojiArray objectAtIndex:indexPath.row]];
+    
+    LLAPickEmojiItemInfo *info = [emojiArray objectAtIndex:indexPath.row];
+    
+    if (info.type == LLAPickEmojiItemType_NormalEmoji) {
+        if (delegate && [delegate respondsToSelector:@selector(pickedEmoji:)]) {
+            [delegate pickedEmoji:info.emojiString];
+        }
+
+    }else {
+        //delete
+        if (delegate && [delegate respondsToSelector:@selector(deleteEmoji)]) {
+            [delegate deleteEmoji];
+        }
     }
+    
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {

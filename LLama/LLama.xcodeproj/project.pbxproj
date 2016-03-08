@@ -52,6 +52,7 @@
 		5C649EB91C8D28280023FF6F /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C649EAF1C8D28280023FF6F /* libopencore-amrnb.a */; };
 		5C649EBA1C8D28280023FF6F /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C649EB31C8D28280023FF6F /* libopencore-amrwb.a */; };
 		5C649EBB1C8D28280023FF6F /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C649EB61C8D28280023FF6F /* VoiceConverter.mm */; };
+		5C6965811C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6965801C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.m */; };
 		5C6C77111C73357500D59A88 /* LLAEditVideoScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */; };
 		5C6D26951C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26941C75B4CE003CD77A /* LLAUploadVideoTaskInfo.m */; };
 		5C6D26981C75B530003CD77A /* LLAUploadVideoObserverInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D26971C75B530003CD77A /* LLAUploadVideoObserverInfo.m */; };
@@ -263,7 +264,18 @@
 		5CC5C7B71C8E6F6000DE3327 /* SenderVoiceNodePlaying001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7B11C8E6F6000DE3327 /* SenderVoiceNodePlaying001@2x.png */; };
 		5CC5C7B81C8E6F6000DE3327 /* SenderVoiceNodePlaying002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7B21C8E6F6000DE3327 /* SenderVoiceNodePlaying002@2x.png */; };
 		5CC5C7B91C8E6F6000DE3327 /* SenderVoiceNodePlaying003@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7B31C8E6F6000DE3327 /* SenderVoiceNodePlaying003@2x.png */; };
-		5CC5C7BB1C8E718900DE3327 /* messageSendFail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7BA1C8E718900DE3327 /* messageSendFail@2x.png */; };
+		5CC5C7BE1C8EA19500DE3327 /* LLAMessageCountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7BD1C8EA19500DE3327 /* LLAMessageCountManager.m */; };
+		5CC5C7C11C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7C01C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.m */; };
+		5CC5C7C41C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7C31C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.m */; };
+		5CC5C7C71C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7C61C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.m */; };
+		5CC5C7CA1C8EBBCA00DE3327 /* messageSendFail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7C81C8EBBCA00DE3327 /* messageSendFail@2x.png */; };
+		5CC5C7CB1C8EBBCA00DE3327 /* messageSendFail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7C91C8EBBCA00DE3327 /* messageSendFail@3x.png */; };
+		5CC5C7D91C8EDA4D00DE3327 /* HZPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7CE1C8EDA4D00DE3327 /* HZPhotoBrowser.m */; };
+		5CC5C7DA1C8EDA4D00DE3327 /* HZPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7D11C8EDA4D00DE3327 /* HZPhotoBrowserView.m */; };
+		5CC5C7DB1C8EDA4D00DE3327 /* HZPhotoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7D31C8EDA4D00DE3327 /* HZPhotoGroup.m */; };
+		5CC5C7DC1C8EDA4D00DE3327 /* HZPhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7D51C8EDA4D00DE3327 /* HZPhotoItem.m */; };
+		5CC5C7DD1C8EDA4D00DE3327 /* HZWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5C7D71C8EDA4D00DE3327 /* HZWaitingView.m */; };
+		5CC5C7DE1C8EDA4D00DE3327 /* whiteplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CC5C7D81C8EDA4D00DE3327 /* whiteplaceholder.png */; };
 		5CC696711C5CA58500E4BA89 /* LLAThirdPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696701C5CA58500E4BA89 /* LLAThirdPayManager.m */; };
 		5CC696D01C5CDEA100E4BA89 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696C01C5CDEA100E4BA89 /* base64.m */; };
 		5CC696D11C5CDEA100E4BA89 /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC696C31C5CDEA100E4BA89 /* DataSigner.m */; };
@@ -628,6 +640,8 @@
 		5C649EB31C8D28280023FF6F /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		5C649EB51C8D28280023FF6F /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
 		5C649EB61C8D28280023FF6F /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		5C69657F1C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickEmojiItemInfo.h; sourceTree = "<group>"; };
+		5C6965801C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickEmojiItemInfo.m; sourceTree = "<group>"; };
 		5C6C770F1C73357500D59A88 /* LLAEditVideoScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAEditVideoScaleView.h; sourceTree = "<group>"; };
 		5C6C77101C73357500D59A88 /* LLAEditVideoScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAEditVideoScaleView.m; sourceTree = "<group>"; };
 		5C6D26931C75B4CE003CD77A /* LLAUploadVideoTaskInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAUploadVideoTaskInfo.h; sourceTree = "<group>"; };
@@ -1006,7 +1020,28 @@
 		5CC5C7B11C8E6F6000DE3327 /* SenderVoiceNodePlaying001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying001@2x.png"; sourceTree = "<group>"; };
 		5CC5C7B21C8E6F6000DE3327 /* SenderVoiceNodePlaying002@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying002@2x.png"; sourceTree = "<group>"; };
 		5CC5C7B31C8E6F6000DE3327 /* SenderVoiceNodePlaying003@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying003@2x.png"; sourceTree = "<group>"; };
-		5CC5C7BA1C8E718900DE3327 /* messageSendFail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageSendFail@2x.png"; sourceTree = "<group>"; };
+		5CC5C7BC1C8EA19500DE3327 /* LLAMessageCountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageCountManager.h; sourceTree = "<group>"; };
+		5CC5C7BD1C8EA19500DE3327 /* LLAMessageCountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageCountManager.m; sourceTree = "<group>"; };
+		5CC5C7BF1C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedPraiseMainInfo.h; sourceTree = "<group>"; };
+		5CC5C7C01C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedPraiseMainInfo.m; sourceTree = "<group>"; };
+		5CC5C7C21C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedCommentMainInfo.h; sourceTree = "<group>"; };
+		5CC5C7C31C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedCommentMainInfo.m; sourceTree = "<group>"; };
+		5CC5C7C51C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAMessageReceivedOrderMainInfo.h; sourceTree = "<group>"; };
+		5CC5C7C61C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAMessageReceivedOrderMainInfo.m; sourceTree = "<group>"; };
+		5CC5C7C81C8EBBCA00DE3327 /* messageSendFail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageSendFail@2x.png"; sourceTree = "<group>"; };
+		5CC5C7C91C8EBBCA00DE3327 /* messageSendFail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messageSendFail@3x.png"; sourceTree = "<group>"; };
+		5CC5C7CD1C8EDA4D00DE3327 /* HZPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowser.h; sourceTree = "<group>"; };
+		5CC5C7CE1C8EDA4D00DE3327 /* HZPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoBrowser.m; sourceTree = "<group>"; };
+		5CC5C7CF1C8EDA4D00DE3327 /* HZPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowserConfig.h; sourceTree = "<group>"; };
+		5CC5C7D01C8EDA4D00DE3327 /* HZPhotoBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowserView.h; sourceTree = "<group>"; };
+		5CC5C7D11C8EDA4D00DE3327 /* HZPhotoBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoBrowserView.m; sourceTree = "<group>"; };
+		5CC5C7D21C8EDA4D00DE3327 /* HZPhotoGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoGroup.h; sourceTree = "<group>"; };
+		5CC5C7D31C8EDA4D00DE3327 /* HZPhotoGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoGroup.m; sourceTree = "<group>"; };
+		5CC5C7D41C8EDA4D00DE3327 /* HZPhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoItem.h; sourceTree = "<group>"; };
+		5CC5C7D51C8EDA4D00DE3327 /* HZPhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoItem.m; sourceTree = "<group>"; };
+		5CC5C7D61C8EDA4D00DE3327 /* HZWaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZWaitingView.h; sourceTree = "<group>"; };
+		5CC5C7D71C8EDA4D00DE3327 /* HZWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZWaitingView.m; sourceTree = "<group>"; };
+		5CC5C7D81C8EDA4D00DE3327 /* whiteplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteplaceholder.png; sourceTree = "<group>"; };
 		5CC6966F1C5CA58500E4BA89 /* LLAThirdPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAThirdPayManager.h; sourceTree = "<group>"; };
 		5CC696701C5CA58500E4BA89 /* LLAThirdPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAThirdPayManager.m; sourceTree = "<group>"; };
 		5CC696731C5CDEA100E4BA89 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -1661,6 +1696,14 @@
 				5CECCC711C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m */,
 				5CECCC791C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.h */,
 				5CECCC7A1C83EEC7002BDE99 /* LLAMessageReceivedOrderItemInfo.m */,
+				5CC5C7BF1C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.h */,
+				5CC5C7C01C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.m */,
+				5CC5C7C21C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.h */,
+				5CC5C7C31C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.m */,
+				5CC5C7C51C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.h */,
+				5CC5C7C61C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.m */,
+				5C69657F1C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.h */,
+				5C6965801C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.m */,
 			);
 			name = Model;
 			path = Controller/Model;
@@ -1725,7 +1768,8 @@
 		5C416D4B1C8D8D05002DF002 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				5CC5C7BA1C8E718900DE3327 /* messageSendFail@2x.png */,
+				5CC5C7C81C8EBBCA00DE3327 /* messageSendFail@2x.png */,
+				5CC5C7C91C8EBBCA00DE3327 /* messageSendFail@3x.png */,
 				5CC5C7AE1C8E6F6000DE3327 /* ReceiverVoiceNodePlaying@2x.png */,
 				5CC5C7AF1C8E6F6000DE3327 /* SenderVoiceNodePlaying@2x.png */,
 				5CC5C7B01C8E6F6000DE3327 /* SenderVoiceNodePlaying000@2x.png */,
@@ -2086,6 +2130,8 @@
 				5C83B2F01C89288500ED1BE5 /* LLASyncUserInfoManager.m */,
 				5C83B2F61C8999BA00ED1BE5 /* LLAIMCommonUtil.h */,
 				5C83B2F71C8999BA00ED1BE5 /* LLAIMCommonUtil.m */,
+				5CC5C7BC1C8EA19500DE3327 /* LLAMessageCountManager.h */,
+				5CC5C7BD1C8EA19500DE3327 /* LLAMessageCountManager.m */,
 			);
 			path = IMUtil;
 			sourceTree = "<group>";
@@ -2343,6 +2389,25 @@
 				5C9353B21C5DBE6300DD75DC /* LLAPayUserPaySuccessView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5CC5C7CC1C8EDA4D00DE3327 /* HZPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				5CC5C7CD1C8EDA4D00DE3327 /* HZPhotoBrowser.h */,
+				5CC5C7CE1C8EDA4D00DE3327 /* HZPhotoBrowser.m */,
+				5CC5C7CF1C8EDA4D00DE3327 /* HZPhotoBrowserConfig.h */,
+				5CC5C7D01C8EDA4D00DE3327 /* HZPhotoBrowserView.h */,
+				5CC5C7D11C8EDA4D00DE3327 /* HZPhotoBrowserView.m */,
+				5CC5C7D21C8EDA4D00DE3327 /* HZPhotoGroup.h */,
+				5CC5C7D31C8EDA4D00DE3327 /* HZPhotoGroup.m */,
+				5CC5C7D41C8EDA4D00DE3327 /* HZPhotoItem.h */,
+				5CC5C7D51C8EDA4D00DE3327 /* HZPhotoItem.m */,
+				5CC5C7D61C8EDA4D00DE3327 /* HZWaitingView.h */,
+				5CC5C7D71C8EDA4D00DE3327 /* HZWaitingView.m */,
+				5CC5C7D81C8EDA4D00DE3327 /* whiteplaceholder.png */,
+			);
+			path = HZPhotoBrowser;
 			sourceTree = "<group>";
 		};
 		5CC696721C5CDEA100E4BA89 /* openssl */ = {
@@ -2898,6 +2963,7 @@
 		A3DEDCF21C3CAE38009F3D37 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5CC5C7CC1C8EDA4D00DE3327 /* HZPhotoBrowser */,
 				5C649EA61C8D28280023FF6F /* VoiceConvert */,
 				5C7882E41C86C24700808C55 /* SDAVAssetExportSession */,
 				5C7882D31C86C23D00808C55 /* fmdb */,
@@ -3640,6 +3706,7 @@
 				A3DEDE6E1C3CAEC7009F3D37 /* TMMoreView.xib in Resources */,
 				A3DEDE681C3CAEC7009F3D37 /* TMCommentCell.xib in Resources */,
 				A3DEDE851C3CAEC7009F3D37 /* TMPostScriptViewController.xib in Resources */,
+				5CC5C7DE1C8EDA4D00DE3327 /* whiteplaceholder.png in Resources */,
 				5CA18FB81C4F6C9100A0B5B7 /* lla_Loading_15.png in Resources */,
 				5CC5C7B71C8E6F6000DE3327 /* SenderVoiceNodePlaying001@2x.png in Resources */,
 				A3DEDE611C3CAEC6009F3D37 /* TMCommentViewController.xib in Resources */,
@@ -3669,6 +3736,7 @@
 				5C416D561C8D8D05002DF002 /* RecordCancel@2x.png in Resources */,
 				5CA18FD11C4F6C9100A0B5B7 /* lla_Loading_7@3x.png in Resources */,
 				5CA18FD61C4F6C9100A0B5B7 /* lla_Loading_9@2x.png in Resources */,
+				5CC5C7CB1C8EBBCA00DE3327 /* messageSendFail@3x.png in Resources */,
 				7E9F7B121C58BE5C00620ED2 /* LLAModifyPasswordViewController.xib in Resources */,
 				7EAA2F551C5730F8002DF3B1 /* LLANextChangBoundPhonesViewController.xib in Resources */,
 				A3DEDE7A1C3CAEC7009F3D37 /* TMDataVideoController.xib in Resources */,
@@ -3685,7 +3753,7 @@
 				A3209A9B1C3D0E5100CADC51 /* WeiboSDK.bundle in Resources */,
 				A3209A841C3D06EF00CADC51 /* read_me.txt in Resources */,
 				5CA18FBB1C4F6C9100A0B5B7 /* lla_Loading_16.png in Resources */,
-				5CC5C7BB1C8E718900DE3327 /* messageSendFail@2x.png in Resources */,
+				5CC5C7CA1C8EBBCA00DE3327 /* messageSendFail@2x.png in Resources */,
 				7EAA2F5A1C575448002DF3B1 /* LLABoundPhonesViewController.xib in Resources */,
 				5CA18FC71C4F6C9100A0B5B7 /* lla_Loading_4@2x.png in Resources */,
 				5CC5C7B41C8E6F6000DE3327 /* ReceiverVoiceNodePlaying@2x.png in Resources */,
@@ -3783,6 +3851,7 @@
 				5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */,
 				5C7882E21C86C23D00808C55 /* FMDatabaseQueue.m in Sources */,
 				7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */,
+				5CC5C7D91C8EDA4D00DE3327 /* HZPhotoBrowser.m in Sources */,
 				7E64DEEB1C7C038200F88093 /* LLAHotUsersCell.m in Sources */,
 				A3DEDE791C3CAEC7009F3D37 /* TMDataVideoController.m in Sources */,
 				5CE646BE1C44CB3C004DA6D5 /* UIButton+LLAImageCache.m in Sources */,
@@ -3859,6 +3928,7 @@
 				A3DEDE651C3CAEC7009F3D37 /* TMLikeTableViewController.m in Sources */,
 				5CDDF4501C473F6D00168989 /* LLARewardMoneyView.m in Sources */,
 				5C7882ED1C86F90500808C55 /* LLAChatMessageBaseCell.m in Sources */,
+				5CC5C7DD1C8EDA4D00DE3327 /* HZWaitingView.m in Sources */,
 				5C82750F1C5726A500DD547F /* MMDateView.m in Sources */,
 				5C4684C01C51FDFC00705FA9 /* LLAUserProfileVideoHeaderView.m in Sources */,
 				5C6D7A5A1C58B87900119A3A /* LLAVideoPickerViewController.m in Sources */,
@@ -3879,6 +3949,7 @@
 				5C0312721C817BC2005B70FF /* LLAMessageCenterSystemMsgInfo.m in Sources */,
 				5C7882F61C86F94800808C55 /* LLAChatMessageVoiceCell.m in Sources */,
 				A3DEDE5F1C3CAEC6009F3D37 /* TMStartViewController.m in Sources */,
+				5CC5C7C41C8EB5E200DE3327 /* LLAMessageReceivedCommentMainInfo.m in Sources */,
 				5CE0EB6A1C45EEA600C6BC79 /* LLAHallVideoItemInfo.m in Sources */,
 				5CE0EB901C46424300C6BC79 /* TYImageStorage.m in Sources */,
 				5CA6C0581C8B0C78005D975C /* XHAudioPlayerHelper.m in Sources */,
@@ -3924,6 +3995,7 @@
 				A3209A781C3CCCF700CADC51 /* LLAApplication.m in Sources */,
 				5C8547081C7E9A5C00CAA30C /* LLASocialShareUtil.m in Sources */,
 				5C6D7A3E1C58B73200119A3A /* SCImageView.m in Sources */,
+				5CC5C7C11C8EB4B200DE3327 /* LLAMessageReceivedPraiseMainInfo.m in Sources */,
 				A3DEDE621C3CAEC6009F3D37 /* TMDetailsTableViewController.m in Sources */,
 				5C75347C1C7714450058F93C /* PSTGridLayoutRow.m in Sources */,
 				5C6D7A341C58B73200119A3A /* NSURL+SCSaveToCameraRoll.m in Sources */,
@@ -4003,6 +4075,7 @@
 				5C75347A1C7714450058F93C /* PSTGridLayoutInfo.m in Sources */,
 				7E64DF391C7C565F00F88093 /* LLAHotUsersCollectionView.m in Sources */,
 				7EC08EDC1C5877A600C4B46A /* LLAAccountSecuritySectionTwo.m in Sources */,
+				5CC5C7DC1C8EDA4D00DE3327 /* HZPhotoItem.m in Sources */,
 				5CE0EB951C46424300C6BC79 /* TYViewStorage.m in Sources */,
 				5C0312781C818BA8005B70FF /* LLAMessageCenterRoomInfo.m in Sources */,
 				5CBF9ABA1C5382CB001A4EA0 /* LLATextView.m in Sources */,
@@ -4038,6 +4111,7 @@
 				5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */,
 				7EB3F5571C844C2D00CF6D02 /* LLAHotVideoInfo.m in Sources */,
 				A3DEDE741C3CAEC7009F3D37 /* TMTitleButton.m in Sources */,
+				5C6965811C8EF04200ADC7A0 /* LLAPickEmojiItemInfo.m in Sources */,
 				A3DEDE7D1C3CAEC7009F3D37 /* TMLoginViewController.m in Sources */,
 				A3DEDE9A1C3CAEC7009F3D37 /* TMTHistoryCell.m in Sources */,
 				5CC696D51C5CDEA100E4BA89 /* openssl_wrapper.m in Sources */,
@@ -4048,6 +4122,7 @@
 				7E96C3A71C5F6EDC00B13415 /* LLAILoveWhoInfo.m in Sources */,
 				A3DEDDA51C3CAE38009F3D37 /* NSObject+MTLComparisonAdditions.m in Sources */,
 				A3209A751C3CCB7B00CADC51 /* LLADelegate.m in Sources */,
+				5CC5C7DA1C8EDA4D00DE3327 /* HZPhotoBrowserView.m in Sources */,
 				7EC717871C7AE178005F04FB /* LLAMessageViewController.m in Sources */,
 				5CECCC721C83E8C7002BDE99 /* LLAMessageReceivedCommentItemInfo.m in Sources */,
 				A3DEDD971C3CAE38009F3D37 /* EXTRuntimeExtensions.m in Sources */,
@@ -4098,6 +4173,7 @@
 				5CE0EB8F1C46424300C6BC79 /* TYImageCache.m in Sources */,
 				5C9353B71C5DC2C800DD75DC /* LLAUploadVideoProgressView.m in Sources */,
 				5C7882F31C86F93200808C55 /* LLAChatMessageImageCell.m in Sources */,
+				5CC5C7DB1C8EDA4D00DE3327 /* HZPhotoGroup.m in Sources */,
 				5C6D7A3F1C58B73200119A3A /* SCIOPixelBuffers.m in Sources */,
 				5CE0EB931C46424300C6BC79 /* TYTextContainer.m in Sources */,
 				7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */,
@@ -4111,10 +4187,12 @@
 				5CDD977C1C40E3E700557CB7 /* LLALoadingView.m in Sources */,
 				7EC08ECF1C58710B00C4B46A /* LLAAccountSecuritySectionOneCell.m in Sources */,
 				5CC696D21C5CDEA100E4BA89 /* DataVerifier.m in Sources */,
+				5CC5C7C71C8EB69100DE3327 /* LLAMessageReceivedOrderMainInfo.m in Sources */,
 				5C416D461C8D3F38002DF002 /* LLAAudioCachingInfo.m in Sources */,
 				5CECCC751C83EE16002BDE99 /* LLAMessageOrderAideController.m in Sources */,
 				5CECCC781C83EE9C002BDE99 /* LLAMessageOrderAideCell.m in Sources */,
 				7E64DEEE1C7C03BF00F88093 /* LLAHotVideosCell.m in Sources */,
+				5CC5C7BE1C8EA19500DE3327 /* LLAMessageCountManager.m in Sources */,
 				A3DEDE601C3CAEC6009F3D37 /* TMCommentViewController.m in Sources */,
 				7EC3CAAD1C4DFE37008424E6 /* LLAAlbumPickerViewController.m in Sources */,
 				5C6C77111C73357500D59A88 /* LLAEditVideoScaleView.m in Sources */,

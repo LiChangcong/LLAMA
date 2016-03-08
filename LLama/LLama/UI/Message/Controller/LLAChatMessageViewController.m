@@ -18,6 +18,7 @@
 #import "LLAChatMessageTextCell.h"
 #import "LLAChatMessageImageCell.h"
 #import "LLAChatMessageVoiceCell.h"
+#import "HZPhotoBrowser.h"
 
 //model
 #import "LLAIMConversation.h"
@@ -34,11 +35,13 @@
 #import "LLAIMCommonUtil.h"
 #import "LLAAudioCacheUtil.h"
 #import "XHVoiceCommonHelper.h"
+#import "LLAMessageCountManager.h"
+#import "YYShowAlertUtil.h"
 
 
 #import "XHAudioPlayerHelper.h"
 
-@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver,LLAChatMessageCellDelegate,XHAudioPlayerHelperDelegate>
+@interface LLAChatMessageViewController()<UITableViewDataSource,UITableViewDelegate,LLAChatInputViewControllerDelegate,LLAIMEventObserver,LLAChatMessageCellDelegate,XHAudioPlayerHelperDelegate,HZPhotoBrowserDelegate>
 {
     LLATableView *dataTableView;
     
@@ -57,6 +60,9 @@
     //playing audio message
     
     LLAIMVoiceMessage *playingAudioMessage;
+    
+    //show full image
+    NSMutableArray<LLAIMImageMessage *> *showingImageMessages;
     
 }
 
@@ -83,6 +89,15 @@
     return self;
 }
 
+- (void) resetChatControllerWihtConversation:(LLAIMConversation *)newConversation {
+    currentConversation = newConversation;
+    [self updateNavigationItems];
+    
+    [inputController resignInputView];
+    [self loadMessageData];
+    [self scrollTableToBottom];
+}
+
 - (void) viewDidLoad {
     [super viewDidLoad];
     
@@ -90,6 +105,11 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDownloadFinished:) name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
+    
+    //
+    [[LLAInstantMessageStorageUtil shareInstance] clearUnreadWithConvid:currentConversation.conversationId];
+    [[LLAMessageCountManager shareManager] unReadIMNumChanged];
+
     
     //
     [self initVariables];
@@ -116,7 +136,10 @@
 #pragma mark - Init
 
 - (void) initVariables {
+    
     messageArray = [NSMutableArray array];
+    showingImageMessages = [NSMutableArray arrayWithCapacity:1];
+    
 }
 
 - (void) updateNavigationItems {
@@ -321,7 +344,21 @@
 #pragma mark - MessageCellDelegate
 
 - (void) resentFailedMessage:(LLAIMMessage *) message {
-    
+    if (message) {
+        
+        [YYShowAlertUtil showAlertViewWithTitle:@"重发该消息" message:@"" cancelButtonTitle:@"取消" alertType:YYShowAlertType_AlertView destructiveButtonTitle:nil inViewController:self buttonClickedBlock:^(NSInteger buttonIndex) {
+            
+            if (buttonIndex == 1) {
+                message.msgStatus = LLAIMMessageStatusSending;
+                [dataTableView reloadData];
+                
+                [self sendMessage:message isResent:YES];
+
+            }
+            
+        } otherButtonTitles:@"确定", nil];
+        
+            }
 }
 
 - (void) showUserDetailWithUserInfo:(LLAUser *) userInfo {
@@ -329,7 +366,25 @@
 }
 
 //for image cell
-- (void) showFullImageWithMessage:(LLAIMMessage *) message {
+- (void) showFullImageWithMessage:(LLAIMMessage *) message imageView:(UIImageView *)imageView{
+    
+    //show full image
+    [showingImageMessages removeAllObjects];
+    
+    if (message.mediaType == LLAIMMessageType_Image) {
+        LLAIMImageMessage *imageMessage = (LLAIMImageMessage *) message;
+        
+        [showingImageMessages addObject:imageMessage];
+        
+        //show
+        HZPhotoBrowser *photoBrower = [[HZPhotoBrowser alloc] init];
+        photoBrower.sourceImagesContainerView = imageView;
+        photoBrower.imageCount = showingImageMessages.count;
+        
+        photoBrower.delegate = self;
+        
+        [photoBrower show];
+    }
     
 }
 //for voice cell
@@ -399,20 +454,7 @@
     
     LLAIMMessage *message = [LLAIMMessage textMessageWithContent:textContent];
     
-    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
-        
-        NSInteger index = [messageArray indexOfObject:message];
-        
-        if (index != NSNotFound) {
-            
-            [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            [dataTableView reloadData];
-        }
-        
-    }];
-    
-    //[[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:currentConversation];
+    [self sendMessage:message isResent:NO];
     
 }
 
@@ -425,7 +467,20 @@
     
     LLAIMImageMessage *message = [LLAIMImageMessage imageMessageWithImage:image];
     
-    [currentConversation sendMessage:message progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
+    [self sendMessage:message isResent:NO];
+    
+}
+
+- (void) sendMessageWithVoiceURL:(NSString *)voiceFilePath withDuration:(CGFloat)duration {
+    
+    LLAIMVoiceMessage *voiceMessage = [LLAIMVoiceMessage voiceMessageWithAudioFilePath:voiceFilePath withDuration:duration];
+    
+    [self sendMessage:voiceMessage isResent:NO];
+}
+
+- (void) sendMessage:(LLAIMMessage *) message isResent:(BOOL) isResent{
+    
+    [currentConversation sendMessage:message isResent:(BOOL) isResent progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
         
         NSInteger index = [messageArray indexOfObject:message];
         
@@ -439,25 +494,6 @@
     }];
 
     
-}
-
-- (void) sendMessageWithVoiceURL:(NSString *)voiceFilePath withDuration:(CGFloat)duration {
-    
-    LLAIMVoiceMessage *voiceMessage = [LLAIMVoiceMessage voiceMessageWithAudioFilePath:voiceFilePath withDuration:duration];
-    
-    [currentConversation sendMessage:voiceMessage progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
-        
-        NSInteger index = [messageArray indexOfObject:voiceMessage];
-        
-        if (index != NSNotFound) {
-            
-            [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            [dataTableView reloadData];
-        }
-        
-    }];
-
 }
 
 - (void) inputViewController:(LLAChatInputViewController *) inputViewController
@@ -610,6 +646,40 @@
         willPlayAudioMessage = nil;
     }
     
+}
+
+#pragma mark - Photo Browser Delegate
+
+- (UIImage *) photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index {
+    if (index < showingImageMessages.count) {
+        
+        LLAIMImageMessage *imageMessage = [showingImageMessages objectAtIndex:index];
+        //if is temp image
+        if ([imageMessage.imageURL isFileURL]) {
+            
+            //get temp file
+            NSString *filePath = [LLAIMMessage filePathForKey:imageMessage.messageId];
+            
+            return [UIImage imageWithContentsOfFile:filePath];
+            
+        }else {
+            return [UIImage llaImageWithName:@"placeHolder_750"];
+        }
+        
+    }else {
+        return nil;
+    }
+}
+
+- (NSURL *) photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index {
+    if (index < showingImageMessages.count) {
+        
+        LLAIMImageMessage *imageMessage = [showingImageMessages objectAtIndex:index];
+        return imageMessage.imageURL;
+        
+    }else {
+        return nil;
+    }
 }
 
 #pragma mark - ScrollToBottom

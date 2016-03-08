@@ -112,8 +112,9 @@
 }
 
 - (void) sendMessage:(LLAIMMessage *)message
+            isResent:(BOOL)isResent
        progressBlock:(LLAIMProgressBlock)progressBlock
-            callback:(LLAIMSendMessageResultBlock)callback {
+            callback:(LLAIMSendMessageResultBlock)callback{
     
     //
     
@@ -143,13 +144,18 @@
         
     }
     
+    //set attributes,for android
+    typeMessage.attributes = self.leanConversation.attributes;
+    
     if (typeMessage) {
         
         message.conversationId = self.conversationId;
         //save to disk
-        [[LLAInstantMessageStorageUtil shareInstance] insertMsg:message];
+        if (!isResent) {
+            [[LLAInstantMessageStorageUtil shareInstance] insertMsg:message];
         //dispatch it
-        [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:self];
+            [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:self];
+        }
         
         [self.leanConversation sendMessage:typeMessage progressBlock:^(NSInteger percentDone) {
             if (progressBlock)

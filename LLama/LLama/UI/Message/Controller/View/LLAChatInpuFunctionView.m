@@ -204,9 +204,9 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 
 - (void) recordVoiceButtonClicked:(UIButton *) sender {
     
-    if (recordVoiceButton.isSelected) {
-        return;
-    }
+//    if (recordVoiceButton.isSelected) {
+//        return;
+//    }
     
     emojiButton.selected = NO;
     recordVoiceButton.selected = YES;
@@ -233,9 +233,9 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 }
 
 - (void) emojiButtonClicked:(UIButton *) sender {
-    if (emojiButton.isSelected) {
-        return;
-    }
+//    if (emojiButton.isSelected) {
+//        return;
+//    }
     
     emojiButton.selected = YES;
     recordVoiceButton.selected = NO;
@@ -245,6 +245,15 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
     if (delegate && [delegate respondsToSelector:@selector(showEmojiWithFunctionView:)]) {
         [delegate showEmojiWithFunctionView:self];
     }
+}
+
+#pragma mark - 
+
+- (void) deselectAllButtons {
+    recordVoiceButton.selected = NO;
+    pickPhotoButton.selected = NO;
+    cameraButton.selected = NO;
+    emojiButton.selected = NO;
 }
 
 #pragma mark - CalculateHeight

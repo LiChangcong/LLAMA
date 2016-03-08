@@ -14,6 +14,11 @@
 
 #import "LLAExceptionManager.h"
 
+#import <AVOSCloudIM/AVOSCloudIM.h>
+#import <AVOSCloud/AVOSCloud.h>
+
+#import "LLAUser.h"
+
 //正式服
 //static NSString *const httpBaseURL = @"https://api.hillama.com";
 
@@ -106,7 +111,7 @@ static NSString *const httpBaseURL = @"https://test-api.hillama.com/";
             if (responseBlock)
                 responseBlock(data.responseData);
         }else {
-            if (data.responseCode == LLAHttpResonseCode_TokenUnavailable) {
+            if (data.responseCode == LLAHttpResonseCode_TokenUnavailable && exceptionBlock && [LLAUser me].isLogin) {
                 //show ohter login
                 
                 [[LLAExceptionManager shareManager] showTokenExpiredView];
@@ -150,7 +155,16 @@ static NSString *const httpBaseURL = @"https://test-api.hillama.com/";
 
     [manager.requestSerializer setValue:[LLASaveUserDefaultUtil userAuthToken] forHTTPHeaderField:@"auth"];
     [manager.requestSerializer setValue:[LLACommonUtil appVersion] forHTTPHeaderField:@"version"];
-        return manager;
+    [manager.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"platform"];
+    
+    //installation id,for push
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    
+    if (currentInstallation && [currentInstallation.objectId length] > 0) {
+        [manager.requestSerializer setValue:currentInstallation.objectId forHTTPHeaderField:@"lcObjId"];
+    }
+    
+    return manager;
 }
 
 
