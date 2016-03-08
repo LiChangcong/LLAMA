@@ -29,6 +29,8 @@
 #import "TMPostScriptViewController.h"
 #import "LLABaseNavigationController.h"
 
+#import "LLAPostScriptViewController.h"
+
 static const CGFloat topBarHeight = 70;
 static const CGFloat cellToHorBorder = 10;
 static const CGFloat cellToVerBorder = 17;
@@ -516,11 +518,11 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
                 
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
-                TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
-                
-                postS.scriptType = LLAPublishScriptType_Image;
-                
-                
+//                TMPostScriptViewController *postS = [[TMPostScriptViewController alloc] init];
+//                
+//                postS.scriptType = LLAPublishScriptType_Image;
+                LLAPostScriptViewController *postS = [[LLAPostScriptViewController alloc] init];
+                postS.scriptType = LLAPublishScriptTypeNew_Image;
                 postS.pickImgInfo = _currentPickImgItemInfo;
                 
                 
