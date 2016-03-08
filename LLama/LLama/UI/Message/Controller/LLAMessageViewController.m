@@ -257,6 +257,11 @@ static const NSInteger conversationSectionIndex = 1;
         
         if (roomInfo.conversation) {
         
+            [[LLAInstantMessageStorageUtil shareInstance] clearUnreadWithConvid:roomInfo.conversation.conversationId];
+            roomInfo.conversation.unreadCount = 0;
+            
+            [dataTableView reloadData];
+            
             LLAChatMessageViewController *chat = [[LLAChatMessageViewController alloc] initWithConversation:roomInfo.conversation];
             
             [self.navigationController pushViewController:chat animated:YES];

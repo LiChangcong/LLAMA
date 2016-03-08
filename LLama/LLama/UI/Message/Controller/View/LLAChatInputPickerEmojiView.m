@@ -246,7 +246,12 @@ static const NSInteger numberOfEmojiIconRows = 4;
 }
 
 - (void) sendMessage:(UIButton *) sender {
+
+    if (delegate && [delegate respondsToSelector:@selector(sendMessageClicked)]) {
     
+        [delegate sendMessageClicked];
+    
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

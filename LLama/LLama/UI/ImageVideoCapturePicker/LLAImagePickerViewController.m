@@ -434,13 +434,25 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
                 
                 [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[LLABaseNavigationController alloc] initWithRootViewController:postS] animated:YES completion:nil];
             }else{
-                [self dismissViewControllerAnimated:YES completion:nil];
-                self.callBack(_currentPickImgItemInfo);
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.callBack){
+                        self.callBack(_currentPickImgItemInfo);
+                        self.callBack = nil;
+                    }
+                    
+                }];
+
 
         }
         }else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-            self.callBack(_currentPickImgItemInfo);
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.callBack){
+                    self.callBack(_currentPickImgItemInfo);
+                    self.callBack = nil;
+                }
+
+            }];
+            
 
         }
         
@@ -524,8 +536,14 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
                 
                 
             }else if(self.PickerTimesStatus == PickerTimesStatusTwo){
-                [self dismissViewControllerAnimated:YES completion:nil];
-                self.callBack(_currentPickImgItemInfo);
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.callBack){
+                        self.callBack(_currentPickImgItemInfo);
+                        self.callBack = nil;
+                    }
+
+                }];
+                
                 
                 
             }
@@ -534,8 +552,15 @@ static NSString *cameraIdentifier = @"cameraIdentifier";
             
         } else {
             
-            [self dismissViewControllerAnimated:YES completion:nil];
-            self.callBack(_currentPickImgItemInfo);
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.callBack){
+                    self.callBack(_currentPickImgItemInfo);
+                    self.callBack = nil;
+                }
+
+            }];
+
+            
         }
 
         

@@ -38,9 +38,15 @@
     messageImageView = [[UIImageView alloc] init];
     messageImageView.clipsToBounds = YES;
     messageImageView.contentMode = UIViewContentModeScaleAspectFill;
+    messageImageView.userInteractionEnabled = YES;
     
     self.bubbleImageView.clipsToBounds = YES;
     [self.bubbleImageView addSubview:messageImageView];
+    
+    //
+    UITapGestureRecognizer *tappImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(messageImageViewTapped:)];
+    
+    [messageImageView addGestureRecognizer:tappImage];
 }
 
 #pragma mark - layout subViews 
@@ -87,7 +93,12 @@
     [self makeMaskView:messageImageView withImage:maskImage size:size];
     
     if ([imageMessage.imageURL isFileURL]) {
-        messageImageView.image = [UIImage imageWithContentsOfFile:[imageMessage.imageURL path]];
+        
+        //get temp file
+        NSString *filePath = [LLAIMMessage filePathForKey:self.currentMessage.messageId];
+        
+        messageImageView.image = [UIImage imageWithContentsOfFile:filePath];
+    
     }else {
     
         [messageImageView setImageWithURL:imageMessage.imageURL placeholderImage:[UIImage imageNamed:@"placeHolder_750"]];
@@ -102,6 +113,13 @@
     imageViewMask.frame = CGRectInset(CGRectMake(0, 0,size.width, size.height), 0.0f, 0.0f);
     view.layer.mask = imageViewMask.layer;
 
+}
+
+- (void) messageImageViewTapped:(UIGestureRecognizer *) ges {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showFullImageWithMessage:)]) {
+        [self.delegate showFullImageWithMessage:self.currentMessage];
+    }
 }
 
 #pragma mark - CalculateHeight
@@ -153,7 +171,7 @@
     //calculate height
     CGFloat width = imageMaxWidth * MIN(((float)message.width/(float)message.height),0.9);
     
-    CGFloat height = imageMaxWidth / message.width * message.height;
+    CGFloat height = width / message.width * message.height;
     
     return CGSizeMake(width, height);
     

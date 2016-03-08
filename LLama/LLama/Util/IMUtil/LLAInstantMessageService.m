@@ -83,6 +83,10 @@
     //if (conversation.members && [conversation.members containsObject:imClient.clientId]) {
         
         //
+    if (!conversation || !message) {
+        return;
+    }
+    
     LLAIMConversation *imCoversation = [LLAIMConversation conversationWithLeanCloudConversation:conversation];
     LLAIMMessage *imMessage = [LLAIMMessage messageFromLeanTypedMessage:message];
         
@@ -135,11 +139,14 @@
     imClient.delegate = self;
     
     [imClient openWithCallback:^(BOOL succeeded, NSError *error) {
+        
+        [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
+        [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
+        
         if (succeeded) {
             currentUIDString = [clientId copy];
             
-            [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
-            [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
+
         }
         if (callBack)
             callBack(succeeded,error);

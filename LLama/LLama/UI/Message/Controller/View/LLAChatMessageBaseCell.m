@@ -23,6 +23,8 @@
     
     UIButton *sentFailedButton;
     
+    NSDateFormatter *dateFormatter;
+    
 }
 
 @property(nonatomic , readwrite , strong) UILabel *timeLabel;
@@ -48,6 +50,7 @@
 @synthesize currentMessage;
 @synthesize shouldShowTime;
 @synthesize cellMaxWidth;
+@synthesize delegate;
 
 #pragma mark - Init
 
@@ -84,7 +87,8 @@
 
 
 - (void) baseInitVariables {
-    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
 }
 
 - (void) baseInitSubViews {
@@ -105,6 +109,7 @@
     
     bubbleImageView = [[UIImageView alloc] init];
     bubbleImageView.clipsToBounds = YES;
+    bubbleImageView.userInteractionEnabled = YES;
     
     [self.contentView addSubview:bubbleImageView];
     
@@ -190,7 +195,7 @@
             
             indicatorFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentingIndicatorToBubbleHorSapce-sentingIndicator.bounds.size.width, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-sentingIndicator.bounds.size.height)/2, sentingIndicator.bounds.size.width, sentingIndicator.bounds.size.height);
             
-            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce-config.sentFailedViewWidth, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
+            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentFailedViewToBunbbleHorSpace, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
             
         }else {
             bubbleImage = config.myBubbleWithoutArrow;
@@ -201,7 +206,7 @@
             
             indicatorFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentingIndicatorToBubbleHorSapce-sentingIndicator.bounds.size.width, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-sentingIndicator.bounds.size.height)/2, sentingIndicator.bounds.size.width, sentingIndicator.bounds.size.height);
             
-            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce-config.sentFailedViewWidth, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
+            sentFailedFrame = CGRectMake(bubbleImageViewFrame.origin.x - config.sentFailedViewWidth - config.sentingIndicatorToBubbleHorSapce, bubbleImageViewFrame.origin.y+(bubbleImageView.size.height-config.sentFailedViewHeight)/2, config.sentFailedViewWidth, config.sentFailedViewHeight);
         }
         
     }
@@ -220,12 +225,18 @@
 #pragma mark - Resent Message
 
 - (void) sentFailedButtonClicked:(UIButton *) sender {
-    
+    if (delegate && [delegate respondsToSelector:@selector(resentFailedMessage:)]) {
+        [delegate resentFailedMessage:currentMessage];
+    }
 }
 
 #pragma mark - HeadViewDelegate
 
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
+    
+    if (delegate && [delegate respondsToSelector:@selector(showUserDetailWithUserInfo:)]) {
+        [delegate showUserDetailWithUserInfo:user];
+    }
     
 }
 
@@ -260,13 +271,20 @@
     
     if (shouldShowTime) {
         timeLabel.hidden = NO;
+        headView.hidden = NO;
     }else {
         timeLabel.hidden = YES;
+        headView.hidden = YES;
     }
 }
 
 - (NSString *) formatTimeString {
-    return [NSString stringWithFormat:@"%lld",currentMessage.sendTimestamp/1000];
+    
+    dateFormatter.dateFormat = @"HH:mm";
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:currentMessage.sendTimestamp/1000];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 + (CGFloat) calculateHeightWithMessage:(LLAIMMessage *) message maxWidth:(CGFloat) maxWidth showTime:(BOOL) shouldShow {

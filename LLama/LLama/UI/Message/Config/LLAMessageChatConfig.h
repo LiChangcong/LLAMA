@@ -74,7 +74,14 @@
 @property(nonatomic , strong) UIImage *myBubbleWithArrow;
 @property(nonatomic , strong) UIImage *myBubbleWithoutArrow;
 
-@property(nonatomic , strong) UIImage *voicePlayImage;
+//voice playing image
+
+@property(nonatomic , strong) UIImage *receiverVoicePlayImage;
+@property(nonatomic , strong) UIImage *senderVoicePlayImage;
+
+@property(nonatomic , strong) NSArray<UIImage *> *receiverVoicePlayingImages;
+@property(nonatomic , strong) NSArray<UIImage *> *senderVoicePlayingImages;
+
 
 //sent failimage
 
@@ -86,6 +93,9 @@
 
 @property(nonatomic , assign) CGFloat maxRecordVoiceDuration;
 @property(nonatomic , assign) CGFloat minRecordVoiceDuration;
+
+//voice playing image duration
+@property(nonatomic , assign) CGFloat voicePlayingDuration;
 
 
 + (instancetype) shareConfig;

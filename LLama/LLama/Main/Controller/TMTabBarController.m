@@ -18,6 +18,9 @@
 
 #import "LLAUser.h"
 
+//
+#import "LLAInstantMessageService.h"
+
 
 static NSString * const homeTabarImage_Normal = @"home";
 static NSString * const homeTabarImage_Selected = @"homeH";
@@ -64,6 +67,16 @@ static NSString * const publishScriptImage_Selected= @"startH";
     
     // 处理tabBar
     [self setupTabBar];
+    
+    //
+    LLAUser *me = [LLAUser me];
+    
+    if (![LLAInstantMessageService shareService].currentUIDString)
+    
+        [[LLAInstantMessageService shareService] openWithClientId:me.userIdString callBack:^(BOOL succeeded, NSError *error) {
+            
+        }];
+    
 }
 
 // view布局完子控件的时候设置发布按钮的位置
