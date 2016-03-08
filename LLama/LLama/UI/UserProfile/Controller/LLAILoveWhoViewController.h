@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLAILoveWhoViewController : UIViewController
+#import "LLACommonViewController.h"
+
+@interface LLAILoveWhoViewController : LLACommonViewController
 
 @end
