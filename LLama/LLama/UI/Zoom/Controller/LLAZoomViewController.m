@@ -122,7 +122,7 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
     headSearchBar = [[LLASearchBar alloc] init];
     headSearchBar.placeholder = @"搜索";
     headSearchBar.delegate = self;
-    headSearchBar.tintColor = [UIColor lightGrayColor];
+    headSearchBar.tintColor = [UIColor colorWithHex:0xD3D3D3];
     self.navigationItem.titleView = headSearchBar;
 
     
