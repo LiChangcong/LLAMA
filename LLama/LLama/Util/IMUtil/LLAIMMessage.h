@@ -58,6 +58,8 @@ typedef NS_ENUM(NSInteger , LLAIMMessageType){
 
 @property (nonatomic, strong) LLAUser *authorUser;
 
+- (void) updateMessageWithNewMessage:(LLAIMMessage *) newMessage;
+
 + (instancetype) messageFromLeanTypedMessage:(AVIMTypedMessage *) leanMessage;
 
 + (instancetype) textMessageWithContent:(NSString *) content;

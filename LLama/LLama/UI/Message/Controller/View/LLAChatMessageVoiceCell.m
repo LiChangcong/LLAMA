@@ -56,6 +56,12 @@
     //
     UITapGestureRecognizer *voiceTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVoice:)];
     [voiceImageView addGestureRecognizer:voiceTapped];
+    
+    //add gesture to bubble
+    UITapGestureRecognizer *tappBubble = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVoice:)];
+    self.bubbleImageView.userInteractionEnabled = YES;
+    [self.bubbleImageView addGestureRecognizer:tappBubble];
+
 }
 
 #pragma mark - Layout SubViews

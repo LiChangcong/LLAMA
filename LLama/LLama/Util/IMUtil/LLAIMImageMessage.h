@@ -24,4 +24,5 @@
 
 @property(nonatomic, copy)NSURL *imageURL;
 
+
 @end

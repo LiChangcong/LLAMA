@@ -145,6 +145,17 @@
     
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    XHAudioPlayerHelper *sharePlayer = [XHAudioPlayerHelper shareInstance];
+    
+    if (sharePlayer.isPlaying) {
+        [sharePlayer stopAudio];
+    }
+    
+}
+
 
 #pragma mark - Init
 
@@ -493,16 +504,16 @@
 
 - (void) sendMessage:(LLAIMMessage *) message isResent:(BOOL) isResent{
     
+    message.ioType = LLAIMMessageIOType_Out;
+    
     [currentConversation sendMessage:message isResent:(BOOL) isResent progressBlock:NULL callback:^(BOOL succeeded, LLAIMMessage *newMessage, NSError *error) {
         
-        NSInteger index = [messageArray indexOfObject:message];
-        
-        if (index != NSNotFound) {
-            
-            [messageArray replaceObjectAtIndex:index withObject:newMessage];
-            //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            [dataTableView reloadData];
+        if (newMessage != message) {
+            [message updateMessageWithNewMessage:newMessage];
         }
+        [dataTableView reloadData];
+    
+        //[dataTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         
     }];
 
@@ -576,6 +587,7 @@
 //        }
         
         [messageArray addObject:message];
+        //[dataTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:messageArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [dataTableView reloadData];
         
         //if (shouldScroll) {
@@ -724,7 +736,7 @@
         return YES;
     }
     
-    if ((curMsg.sendTimestamp - preMsg.sendTimestamp)/1000 >120) {
+    if ((curMsg.sendTimestamp - preMsg.sendTimestamp)/1000 > 120) {
         return YES;
     }else {
         return NO;
