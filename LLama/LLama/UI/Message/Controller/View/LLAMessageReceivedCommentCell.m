@@ -16,11 +16,12 @@ static const CGFloat headViewToLeft = 11;
 static const CGFloat headViewHeightWidth = 34;
 
 static const CGFloat headViewToCenterContent = 8;
-static const CGFloat messageLabelToImageHorSpace = 2;
+static const CGFloat userNameLabelToTimeHorSpace = 2;
+static const CGFloat timeLabelToInfoImageHorSpace = 6;
 static const CGFloat infoImageViewHeightWidth = 46;
 static const CGFloat infoImageViewToRight = 8;
 
-static const CGFloat timeLabelToInfoImageHorSpace = 2;
+static const CGFloat descriptionLabelToInfoImageHorSpace = 2;
 
 static const CGFloat lineHeight = 0.6;
 
@@ -31,7 +32,8 @@ static const CGFloat lineHeight = 0.6;
     
     LLAUserHeadView *headView;
     
-    UILabel *messageLabel;
+    UILabel *userNameLabel;
+    UILabel *descriptionLabel;
     UILabel *timeLabel;
     
     UIImageView *infoImageView;
@@ -42,17 +44,20 @@ static const CGFloat lineHeight = 0.6;
     UIColor *backColor;
     UIColor *selectedColor;
     
-    UIFont *messageLabelFont;
-    UIColor *messageLabelTextColor;
+    UIFont *userNameLabelFont;
+    UIColor *userNameLabelTextColor;
     
     UIFont *timeLabelFont;
     UIColor *timeLabelTextColor;
     
+    UIFont *descriptionLabelFont;
+    UIColor *descriptionLabelTextColor;
+    
     UIColor *lineColor;
     
     //
-    NSLayoutConstraint *messageToRightConstraints;
     NSLayoutConstraint *timeToRightConstraints;
+    NSLayoutConstraint *descriptToRightConstraints;
     
     //
     LLAMessageReceivedCommentItemInfo *commentInfo;
@@ -95,16 +100,19 @@ static const CGFloat lineHeight = 0.6;
     backColor = [UIColor colorWithHex:0x211f2c];
     selectedColor = [UIColor colorWithHex:0xfffff alpha:0.2];
     
-    messageLabelFont = [UIFont boldLLAFontOfSize:15];
-    messageLabelTextColor = [UIColor whiteColor];
+    userNameLabelFont = [UIFont boldLLAFontOfSize:15];
+    userNameLabelTextColor = [UIColor whiteColor];
     
     timeLabelFont = [UIFont llaFontOfSize:12];
     timeLabelTextColor = [UIColor colorWithHex:0x807f87];
     
+    descriptionLabelFont = [UIFont llaFontOfSize:14];
+    descriptionLabelTextColor = [UIColor colorWithHex:0x807f87];
+    
     lineColor = [UIColor colorWithHex:0x1e1d28];
     
-    
 }
+
 
 - (void) initSubViews {
     
@@ -120,21 +128,29 @@ static const CGFloat lineHeight = 0.6;
     headView.delegate = self;
     [self.contentView addSubview:headView];
     
-    messageLabel = [[UILabel alloc] init];
-    messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    messageLabel.font = messageLabelFont;
-    messageLabel.textColor = messageLabelTextColor;
-    messageLabel.textAlignment = NSTextAlignmentLeft;
+    userNameLabel = [[UILabel alloc] init];
+    userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    userNameLabel.font = userNameLabelFont;
+    userNameLabel.textColor = userNameLabelTextColor;
+    userNameLabel.textAlignment = NSTextAlignmentLeft;
     
-    [self.contentView addSubview:messageLabel];
+    [self.contentView addSubview:userNameLabel];
     
     timeLabel = [[UILabel alloc] init];
     timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     timeLabel.font = timeLabelFont;
     timeLabel.textColor = timeLabelTextColor;
-    timeLabel.textAlignment = NSTextAlignmentLeft;
+    timeLabel.textAlignment = NSTextAlignmentRight;
     
     [self.contentView addSubview:timeLabel];
+    
+    descriptionLabel = [[UILabel alloc] init];
+    descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    descriptionLabel.font = descriptionLabelFont;
+    descriptionLabel.textColor = descriptionLabelTextColor;
+    descriptionLabel.textAlignment = NSTextAlignmentLeft;
+    
+    [self.contentView addSubview:descriptionLabel];
     
     infoImageView = [[UIImageView alloc] init];
     infoImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -190,7 +206,7 @@ static const CGFloat lineHeight = 0.6;
     //username
     [constrArray addObject:
      [NSLayoutConstraint
-      constraintWithItem:messageLabel
+      constraintWithItem:userNameLabel
       attribute:NSLayoutAttributeTop
       relatedBy:NSLayoutRelationEqual
       toItem:headView
@@ -201,6 +217,16 @@ static const CGFloat lineHeight = 0.6;
     [constrArray addObject:
      [NSLayoutConstraint
       constraintWithItem:timeLabel
+      attribute:NSLayoutAttributeTop
+      relatedBy:NSLayoutRelationEqual
+      toItem:userNameLabel
+      attribute:NSLayoutAttributeTop
+      multiplier:1.0
+      constant:0]];
+    
+    [constrArray addObject:
+     [NSLayoutConstraint
+      constraintWithItem:descriptionLabel
       attribute:NSLayoutAttributeBottom
       relatedBy:NSLayoutRelationEqual
       toItem:headView
@@ -248,22 +274,23 @@ static const CGFloat lineHeight = 0.6;
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(toLeft)-[headView(headWidth)]-(headViewToCenter)-[messageLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:|-(toLeft)-[headView(headWidth)]-(headViewToCenter)-[userNameLabel]-(userNameLabelToTime)-[timeLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{@"toLeft":@(headViewToLeft),
                 @"headWidth":@(headViewHeightWidth),
                 @"headViewToCenter":@(headViewToCenterContent),
-                @"toRight":@(infoImageViewToRight+infoImageViewHeightWidth+messageLabelToImageHorSpace)}
-      views:NSDictionaryOfVariableBindings(headView,messageLabel)]];
+                @"toRight":@(infoImageViewToRight+infoImageViewHeightWidth+timeLabelToInfoImageHorSpace),
+                @"userNameLabelToTime":@(userNameLabelToTimeHorSpace)}
+      views:NSDictionaryOfVariableBindings(headView,userNameLabel,timeLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:[headView]-(headViewToCenter)-[timeLabel]-(toRight)-|"
+      constraintsWithVisualFormat:@"H:[headView]-(headViewToCenter)-[descriptionLabel]-(toRight)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:@{
                 @"headViewToCenter":@(headViewToCenterContent),
-                @"toRight":@(timeLabelToInfoImageHorSpace+infoImageViewHeightWidth+messageLabelToImageHorSpace)}
-      views:NSDictionaryOfVariableBindings(headView,timeLabel)]];
+                @"toRight":@(descriptionLabelToInfoImageHorSpace+infoImageViewHeightWidth+infoImageViewToRight)}
+      views:NSDictionaryOfVariableBindings(headView,descriptionLabel)]];
     
     [constrArray addObjectsFromArray:
      [NSLayoutConstraint
@@ -283,10 +310,10 @@ static const CGFloat lineHeight = 0.6;
     [self.contentView addConstraints:constrArray];
     
     for (NSLayoutConstraint *constr in constrArray) {
-        if (constr.secondItem == messageLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
-            messageToRightConstraints = constr;
-        }else if (constr.secondItem == timeLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
+        if (constr.secondItem == timeLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
             timeToRightConstraints = constr;
+        }else if (constr.secondItem == descriptionLabel && constr.secondAttribute == NSLayoutAttributeTrailing) {
+            descriptToRightConstraints = constr;
         }
     }
 }
@@ -319,8 +346,9 @@ static const CGFloat lineHeight = 0.6;
     
     [headView updateHeadViewWithUser:commentInfo.authorUser];
     
-    messageLabel.text = commentInfo.manageContent;
+    descriptionLabel.text = commentInfo.manageContent;
     timeLabel.text = commentInfo.editTimeString;
+    userNameLabel.text = commentInfo.authorUser.userName;
     
     if (commentInfo.infoImageURL)
         [infoImageView setImageWithURL:[NSURL URLWithString:commentInfo.infoImageURL] placeholderImage:[UIImage llaImageWithName:@"placeHolder_340"]];
@@ -329,12 +357,12 @@ static const CGFloat lineHeight = 0.6;
 
 - (void) adjustLabelPosition {
     if (commentInfo.infoImageURL.length > 0) {
-        messageToRightConstraints.constant = messageLabelToImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
-        timeToRightConstraints.constant =  timeLabelToInfoImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
+        timeToRightConstraints.constant = timeLabelToInfoImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
+        descriptToRightConstraints.constant =  descriptionLabelToInfoImageHorSpace + infoImageViewHeightWidth + infoImageViewToRight;
         infoImageView.hidden = NO;
     }else {
-        messageToRightConstraints.constant = infoImageViewToRight;
         timeToRightConstraints.constant = infoImageViewToRight;
+        descriptToRightConstraints.constant = infoImageViewToRight;
         infoImageView.hidden = YES;
     }
 }

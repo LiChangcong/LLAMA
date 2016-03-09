@@ -342,6 +342,7 @@
 		5CED5E7F1C4BC853003E09CF /* LLACollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E7E1C4BC853003E09CF /* LLACollectionView.m */; };
 		5CED5E821C4BC97D003E09CF /* LLAVideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */; };
 		5CED5E851C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */; };
+		5CEE8DDB1C903C7900F120FD /* LLABadgeManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8DDA1C903C7900F120FD /* LLABadgeManger.m */; };
 		5CF8733A1C4CF31400D2D224 /* LLAChooseActorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF873391C4CF31400D2D224 /* LLAChooseActorCell.m */; };
 		6DB51CF546B0035D7A636621 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DA4835DA331D5811427335 /* libPods.a */; };
 		7E06066D1C5C90B50089329D /* LLAUserAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06066B1C5C90B50089329D /* LLAUserAgreementViewController.m */; };
@@ -1266,6 +1267,8 @@
 		5CED5E811C4BC97D003E09CF /* LLAVideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVideoDetailViewController.m; sourceTree = "<group>"; };
 		5CED5E831C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptDetailMainInfoCell.h; sourceTree = "<group>"; };
 		5CED5E841C4BCA9D003E09CF /* LLAScriptDetailMainInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAScriptDetailMainInfoCell.m; sourceTree = "<group>"; };
+		5CEE8DD91C903C7900F120FD /* LLABadgeManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLABadgeManger.h; sourceTree = "<group>"; };
+		5CEE8DDA1C903C7900F120FD /* LLABadgeManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLABadgeManger.m; sourceTree = "<group>"; };
 		5CF873361C4CB3F500D2D224 /* LLATextContentStretchProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLATextContentStretchProtocol.h; sourceTree = "<group>"; };
 		5CF873371C4CE52700D2D224 /* LLAScriptChooseActorTempChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAScriptChooseActorTempChooseProtocol.h; sourceTree = "<group>"; };
 		5CF873381C4CF31400D2D224 /* LLAChooseActorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAChooseActorCell.h; sourceTree = "<group>"; };
@@ -2670,6 +2673,15 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		5CEE8DD81C903C5A00F120FD /* LeanCloudBadgeManager */ = {
+			isa = PBXGroup;
+			children = (
+				5CEE8DD91C903C7900F120FD /* LLABadgeManger.h */,
+				5CEE8DDA1C903C7900F120FD /* LLABadgeManger.m */,
+			);
+			path = LeanCloudBadgeManager;
+			sourceTree = "<group>";
+		};
 		660179C1F0CA8536FA315666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3104,6 +3116,7 @@
 		A3DEDD581C3CAE38009F3D37 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5CEE8DD81C903C5A00F120FD /* LeanCloudBadgeManager */,
 				5C416D401C8D3E95002DF002 /* AudioCacheUtil */,
 				5CA6C0491C8AFD0D005D975C /* AudioRecordUtil */,
 				5C7882C21C86A5CB00808C55 /* IMUtil */,
@@ -4210,6 +4223,7 @@
 				A3DEDE7D1C3CAEC7009F3D37 /* TMLoginViewController.m in Sources */,
 				A3DEDE9A1C3CAEC7009F3D37 /* TMTHistoryCell.m in Sources */,
 				5CC696D51C5CDEA100E4BA89 /* openssl_wrapper.m in Sources */,
+				5CEE8DDB1C903C7900F120FD /* LLABadgeManger.m in Sources */,
 				5C7882E71C86D9D700808C55 /* LLAIMImageMessage.m in Sources */,
 				5C6D7A481C58B73200119A3A /* SCRecordSession.m in Sources */,
 				A3DEDE7F1C3CAEC7009F3D37 /* TMRegisterViewController.m in Sources */,
@@ -4451,8 +4465,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4518,7 +4532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
+				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -4530,8 +4544,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xianshen Liu (KPBUPGL9H7)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4597,7 +4611,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
+				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;

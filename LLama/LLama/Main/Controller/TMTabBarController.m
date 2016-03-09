@@ -22,6 +22,9 @@
 #import "LLAInstantMessageService.h"
 
 #import "LLAMessageCountManager.h"
+#import "LLABadgeManger.h"
+
+#import "LLARedirectUtil.h"
 
 #define UNREADCOUNT_DOT_TAG 1000
 
@@ -95,6 +98,9 @@ static NSString * const publishScriptImage_Selected= @"startH";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(manageTabbarDot:) name:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
     
     [self manageTabbarDot:nil];
+    
+    //
+    [[LLARedirectUtil shareInstance] doRedirect];
 }
 
 // view布局完子控件的时候设置发布按钮的位置
@@ -196,6 +202,11 @@ static NSString * const publishScriptImage_Selected= @"startH";
     
     NSInteger unreadCount = [[LLAMessageCountManager shareManager] totalUnreadCount];
     
+    [UIApplication sharedApplication].applicationIconBadgeNumber = unreadCount;
+    //sysbadge
+    [[LLABadgeManger shareManger] syncLeanBadge];
+    
+    //
     BOOL show = unreadCount > 0;
     
     if(!show){

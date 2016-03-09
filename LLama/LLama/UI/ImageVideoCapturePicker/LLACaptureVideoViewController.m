@@ -578,7 +578,15 @@ static NSString *const recordFoucusImageName = @"";
 - (void) closeCapture {
     
     [recordProgressView stopBlinkIndicator];
-    [shareRecorder.session removeAllSegments:YES];
+    
+    if (shareRecorder.isRecording) {
+        [shareRecorder pause:^{
+            
+            [shareRecorder.session removeAllSegments:YES];
+        }];
+    }
+    
+
     
     [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
 }

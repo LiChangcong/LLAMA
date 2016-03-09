@@ -22,6 +22,8 @@
 
 #import "LLALoginRegisterHomeViewController.h"
 #import "LLAMessageCountManager.h"
+#import "LLABadgeManger.h"
+#import "LLARedirectUtil.h"
 
 @interface LLADelegate()
 
@@ -65,12 +67,20 @@
 
     }
     
+    //
+    if ([launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [self handleNotificationWithDic:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    }
+    
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [[LLABadgeManger shareManger] syncLeanBadge];
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -94,6 +104,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[LLABadgeManger shareManger] syncLeanBadge];;
 }
 
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -117,7 +128,7 @@
     if (application.applicationState == UIApplicationStateActive) {
     
     }else {
-        
+        [self handleNotificationWithDic:userInfo];
     }
 }
 
@@ -271,5 +282,21 @@
 //            [UIApplication sharedApplication].shortcutItems = @[item1,item2];
 //    }
 }
+
+#pragma mark - Handle Remote Notification
+
+- (void) handleNotificationWithDic:(NSDictionary *) dicInfo {
+    
+    if (!dicInfo || ![dicInfo isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    
+    if ([[dicInfo valueForKey:@"type"] isEqualToString:@"ZAN"] || [[dicInfo valueForKey:@"type"] isEqualToString:@"COMMENT"] || [[dicInfo valueForKey:@"type"] isEqualToString:@"ORDER"]) {
+        
+        //message center
+        [[LLARedirectUtil shareInstance] redirectWithNewType:LLARedirectType_MessageCenter];
+    }
+}
+
 
 @end

@@ -218,9 +218,10 @@
             //construct conversation
             LLAIMConversation *imConv = [LLAIMConversation conversationWithLeanCloudConversation:conversation];
             
-            [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:nil conversation:imConv];
+            //在没有消息的情况下，会话不出现
+            //[[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:nil conversation:imConv];
             
-            [[LLAInstantMessageStorageUtil shareInstance] insertRoomWithConvid:imConv.conversationId coverObj:imConv];
+            //[[LLAInstantMessageStorageUtil shareInstance] insertRoomWithConvid:imConv.conversationId coverObj:imConv];
             
             
             if (callBack)

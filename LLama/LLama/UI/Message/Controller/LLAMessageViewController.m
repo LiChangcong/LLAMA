@@ -351,6 +351,10 @@ static const NSInteger conversationSectionIndex = 1;
 
 - (void) newMessageArrived:(LLAIMMessage *)message conversation:(LLAIMConversation *)conversation {
     
+    if (!conversation || !message) {
+        return;
+    }
+    
     NSInteger index = [self indexOfConversationInRoomArray:conversation];
     if (index == NSNotFound) {
         

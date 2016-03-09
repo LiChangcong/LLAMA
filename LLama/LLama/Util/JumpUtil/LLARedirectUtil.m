@@ -107,6 +107,10 @@ static const NSInteger userProfileIndex = 4;
             tabBarController.selectedIndex = userProfileIndex;
             
             break;
+        case LLARedirectType_MessageCenter:
+            tabBarController.selectedIndex = messageIndex;
+            
+            break;
             
         default:
             break;
