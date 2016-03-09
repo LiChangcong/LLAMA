@@ -7,7 +7,8 @@
 //
 
 #import "LLAMessageReceivedCommentController.h"
-#import "LLAScriptDetailViewController.h"
+#import "LLAVideoDetailViewController.h"
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -25,7 +26,7 @@
 //category
 #import "SVPullToRefresh.h"
 
-@interface LLAMessageReceivedCommentController()<UITableViewDelegate,UITableViewDataSource>
+@interface LLAMessageReceivedCommentController()<UITableViewDelegate,UITableViewDataSource,LLAMessageReceivedCommentCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -207,7 +208,9 @@
     
     LLAMessageReceivedCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentIden];
     if (!cell) {
+        
         cell = [[LLAMessageReceivedCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commentIden];
+        cell.delegate = self;
     }
     
     [cell updateCellWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
@@ -221,7 +224,7 @@
     
     LLAMessageReceivedCommentItemInfo *orderItem = mainInfo.dataList[indexPath.row];
     
-    LLAScriptDetailViewController *detail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:orderItem.scriptIdString];
+    LLAVideoDetailViewController *detail = [[LLAVideoDetailViewController alloc] initWithVideoId:orderItem.scriptIdString];
     
     [self.navigationController pushViewController:detail animated:YES];
 
@@ -232,5 +235,12 @@
     return [LLAMessageReceivedCommentCell calculateHeightWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
 }
 
+
+#pragma mark - Cell Delegate
+
+- (void) headViewClickWithUserInfo:(LLAUser *)userInfo {
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
+}
 
 @end

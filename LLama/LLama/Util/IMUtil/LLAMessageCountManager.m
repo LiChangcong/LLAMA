@@ -11,6 +11,8 @@
 #import "LLAHttpUtil.h"
 #import "LLAInstantMessageStorageUtil.h"
 
+#import "LLAUser.h"
+
 @interface LLAMessageCountManager()
 {
     NSTimer *timer;
@@ -72,6 +74,10 @@
 }
 
 - (void) fetchCount {
+    
+    if (![LLAUser me].isLogin) {
+        return;
+    }
     
     [LLAHttpUtil httpPostWithUrl:@"/message/update" param:[NSDictionary dictionary] responseBlock:^(id responseObject) {
         

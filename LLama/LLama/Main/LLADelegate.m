@@ -201,10 +201,10 @@
     //qq
     [UMSocialQQHandler setQQWithAppId:LLA_QQ_APPID appKey:LLA_QQ_APPKEY url:SDK_REDIRECT_URL];
     //sina
-    //[UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY RedirectURL:SDK_REDIRECT_URL];
-//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY
-//                                              secret:LLA_
-//                                         RedirectURL:SDK_REDIRECT_URL];
+    
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:LLA_SINA_WEIBO_APPKEY
+                                              secret:LLA_SINA_WEIBO_APP_SECRET
+                                         RedirectURL:SDK_REDIRECT_URL];
 }
 
 //- (void) setupQQSDK {
@@ -225,7 +225,7 @@
 }
 
 - (void) setupBugtags {
-    //[Bugtags startWithAppKey:LLA_BUGTAGS_APPKEY invocationEvent:BTGInvocationEventBubble];
+    [Bugtags startWithAppKey:LLA_BUGTAGS_APPKEY invocationEvent:BTGInvocationEventBubble];
 }
 
 - (void) setupLeanClound {
@@ -237,15 +237,6 @@
 #endif
     
     [AVOSCloudIM registerForRemoteNotification];
-    
-    LLAUser *me = [LLAUser me];
-    
-    if (me.isLogin) {
-        [[LLAInstantMessageService shareService] openWithClientId:me.userIdString callBack:^(BOOL succeeded, NSError *error) {
-            
-        }];
-    }
-    
     
 }
 

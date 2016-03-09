@@ -261,7 +261,7 @@
             }
         });
         
-        if (self.currentTimeInterval > self.maxRecordTime) {
+        if ((int)(self.currentTimeInterval + 0.5) > self.maxRecordTime) {
             [self stopRecord];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _maxTimeStopRecorderCompletion();

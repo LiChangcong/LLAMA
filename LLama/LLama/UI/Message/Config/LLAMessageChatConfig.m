@@ -96,7 +96,7 @@
                                         ];
     
     self.maxRecordVoiceDuration = 60.0;
-    self.minRecordVoiceDuration = 2.0;
+    self.minRecordVoiceDuration = 1.0;
     
     //
     self.voicePlayingDuration = 0.5;

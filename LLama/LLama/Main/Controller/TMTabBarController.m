@@ -63,10 +63,25 @@ static NSString * const publishScriptImage_Selected= @"startH";
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    //close client
+    [[LLAInstantMessageService shareService] closeClientWithCallBack:^(BOOL succeeded, NSError *error) {
+        
+    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //open client
+    
+    LLAUser *me = [LLAUser me];
+    
+    [[LLAInstantMessageService shareService] openWithClientId:me.userIdString callBack:^(BOOL succeeded, NSError *error) {
+        
+    }];
+    
+    //
     
     [self setupAppearance];
     

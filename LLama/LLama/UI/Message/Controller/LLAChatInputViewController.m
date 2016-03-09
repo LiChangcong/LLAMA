@@ -23,6 +23,7 @@
 //util
 #import "XHVoiceRecordHelper.h"
 #import "XHVoiceCommonHelper.h"
+#import "LLAMessageChatConfig.h"
 
 #import "XHMacro.h"
 
@@ -784,7 +785,8 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
         _voiceRecordHelper.peakPowerForChannel = ^(float peakPowerForChannel) {
             weakSelf.voiceRecordHUD.peakPower = peakPowerForChannel;
         };
-        _voiceRecordHelper.maxRecordTime = kVoiceRecorderTotalTime;
+        //_voiceRecordHelper.maxRecordTime = kVoiceRecorderTotalTime;
+        _voiceRecordHelper.maxRecordTime = [LLAMessageChatConfig shareConfig].maxRecordVoiceDuration;
     }
     return _voiceRecordHelper;
 }

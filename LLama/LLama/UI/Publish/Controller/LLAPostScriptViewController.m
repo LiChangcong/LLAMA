@@ -70,6 +70,9 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithHex:0x1f1f1f];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self initNav];
     [self initVariables];
     [self initSubViews];
@@ -136,7 +139,7 @@
 - (void)initSubConstraints
 {
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(64);
+        make.top.equalTo(self.view.mas_top);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.height.equalTo(@204);
@@ -416,6 +419,8 @@
                 
             }];
             
+        }else {
+            [self dismissWithPlayId:playId];
         }
         
     }else {
