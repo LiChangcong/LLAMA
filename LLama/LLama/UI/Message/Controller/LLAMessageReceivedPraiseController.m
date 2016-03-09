@@ -8,7 +8,9 @@
 
 //controller
 #import "LLAMessageReceivedPraiseController.h"
-#import "LLAScriptDetailViewController.h"
+#import "LLAVideoDetailViewController.h"
+
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -26,7 +28,7 @@
 //category
 #import "SVPullToRefresh.h"
 
-@interface LLAMessageReceivedPraiseController()<UITableViewDataSource,UITableViewDelegate>
+@interface LLAMessageReceivedPraiseController()<UITableViewDataSource,UITableViewDelegate,LLAMessageReceivedPraiseCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -210,6 +212,7 @@
     LLAMessageReceivedPraiseCell *cell = [tableView dequeueReusableCellWithIdentifier:praiseIden];
     if (!cell) {
         cell = [[LLAMessageReceivedPraiseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:praiseIden];
+        cell.delegate = self;
     }
     
     [cell updateCellWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
@@ -224,7 +227,7 @@
     //
     LLAMessageReceivedPraiseItemInfo *orderItem = mainInfo.dataList[indexPath.row];
     
-    LLAScriptDetailViewController *detail = [[LLAScriptDetailViewController alloc] initWithScriptIdString:orderItem.scriptIdString];
+    LLAVideoDetailViewController *detail = [[LLAVideoDetailViewController alloc] initWithVideoId:orderItem.scriptIdString];
     
     [self.navigationController pushViewController:detail animated:YES];
 
@@ -233,6 +236,15 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [LLAMessageReceivedPraiseCell calculateHeightWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
+}
+
+#pragma mark - LLAMessageReceivedPraiseCellDelegate
+
+- (void) headViewClickWithUserInfo:(LLAUser *)userInfo {
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
+    
 }
 
 @end

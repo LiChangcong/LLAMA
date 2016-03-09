@@ -8,6 +8,7 @@
 
 #import "LLAMessageOrderAideController.h"
 #import "LLAScriptDetailViewController.h"
+#import "LLAUserProfileViewController.h"
 
 //view
 #import "LLATableView.h"
@@ -25,7 +26,7 @@
 //category
 #import "SVPullToRefresh.h"
 
-@interface LLAMessageOrderAideController()<UITableViewDataSource,UITableViewDelegate>
+@interface LLAMessageOrderAideController()<UITableViewDataSource,UITableViewDelegate,LLAMessageOrderAideCellDelegate>
 {
     LLATableView *dataTableView;
     
@@ -99,7 +100,7 @@
       metrics:nil
       views:NSDictionaryOfVariableBindings(dataTableView)]];
     
-    
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
 }
 
 #pragma mark - Load Data
@@ -206,6 +207,7 @@
     LLAMessageOrderAideCell *cell = [tableView dequeueReusableCellWithIdentifier:commentIden];
     if (!cell) {
         cell = [[LLAMessageOrderAideCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commentIden];
+        cell.delegate = self;
     }
     
     [cell updateCellWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
@@ -229,6 +231,16 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [LLAMessageOrderAideCell calculateHeightWithInfo:mainInfo.dataList[indexPath.row] tableWidth:tableView.bounds.size.width];
 }
+
+#pragma mark - MessageOrderAideDelegate
+
+- (void) headViewClickWithUserInfo:(LLAUser *)userInfo {
+    
+    LLAUserProfileViewController *userProfile = [[LLAUserProfileViewController alloc] initWithUserIdString:userInfo.userIdString];
+    [self.navigationController pushViewController:userProfile animated:YES];
+    
+}
+
 
 
 @end

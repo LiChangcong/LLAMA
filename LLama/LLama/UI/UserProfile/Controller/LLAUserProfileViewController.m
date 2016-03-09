@@ -694,7 +694,13 @@ static const CGFloat navigationBarHeight = 64;
             
             [HUD hide:YES];
             
-            [LLAIMCommonUtil pushToChatViewController:self.navigationController conversation:conversation];
+            if (conversation) {
+            
+                [LLAIMCommonUtil pushToChatViewController:self.navigationController conversation:conversation];
+            }else {
+                [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+            }
+            
         }];
     }
 }

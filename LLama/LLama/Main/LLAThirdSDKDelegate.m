@@ -104,7 +104,7 @@
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
             
             if (callBack)
-                callBack(snsAccount.usid,snsAccount.accessToken,[self umResponseCodeToLoginState:response.responseCode],response.error);
+                callBack(snsAccount.openId,snsAccount.accessToken,[self umResponseCodeToLoginState:response.responseCode],response.error);
             
         });
         
@@ -398,13 +398,6 @@
         
         if (callBack)
             callBack(userInfo,nil);
-        
-        //
-        
-        //login client
-        [[LLAInstantMessageService shareService] openWithClientId:userInfo.userIdString callBack:^(BOOL succeeded, NSError *error) {
-            
-        }];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         if (callBack) {

@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class LLAMessageReceivedOrderItemInfo;
+@class LLAUser;
+
+@protocol LLAMessageOrderAideCellDelegate <NSObject>
+
+- (void) headViewClickWithUserInfo:(LLAUser *) userInfo;
+
+@end
 
 @interface LLAMessageOrderAideCell : UITableViewCell
+
+@property(nonatomic , weak) id<LLAMessageOrderAideCellDelegate> delegate;
 
 - (void) updateCellWithInfo:(LLAMessageReceivedOrderItemInfo *) info tableWidth:(CGFloat) width;
 

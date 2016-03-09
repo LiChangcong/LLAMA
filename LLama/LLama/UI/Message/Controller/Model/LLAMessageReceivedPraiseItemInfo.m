@@ -28,6 +28,11 @@
              @"editTimeString":@"time"};
 }
 
++ (NSValueTransformer *) authorUserJSONTransformer {
+    [LLAUser setIsSimpleUserModel:YES];
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
+}
+
 + (NSValueTransformer *)editTimeStringJSONTransformer {
     return [MTLValueTransformer transformerUsingForwardBlock:^id(NSNumber *value, BOOL *success, NSError *__autoreleasing *error) {
         return [LLACommonUtil formatTimeFromTimeInterval:[value longLongValue]];

@@ -81,29 +81,35 @@
 
 - (void) conversation:(AVIMConversation *)conversation didReceiveTypedMessage:(AVIMTypedMessage *)message {
     
-    //if (conversation.members && [conversation.members containsObject:imClient.clientId]) {
-        
-        //
+    
     if (!conversation || !message) {
         return;
     }
     
-    LLAIMConversation *imCoversation = [LLAIMConversation conversationWithLeanCloudConversation:conversation];
-    LLAIMMessage *imMessage = [LLAIMMessage messageFromLeanTypedMessage:message];
+    //
+    if (conversation.members && [conversation.members containsObject:imClient.clientId]) {
         
-    [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:imMessage conversation:imCoversation];
-    
-    [[LLAInstantMessageStorageUtil shareInstance] insertMsg:imMessage];
-    
-    if (![self isConversationChatting:imCoversation]) {
+        LLAIMConversation *imCoversation = [LLAIMConversation conversationWithLeanCloudConversation:conversation];
+        LLAIMMessage *imMessage = [LLAIMMessage messageFromLeanTypedMessage:message];
         
-        [[LLAInstantMessageStorageUtil shareInstance] insertRoomWithConvid:imCoversation.conversationId coverObj:imCoversation];
-        [[LLAInstantMessageStorageUtil shareInstance] incrementUnreadWithConvid:imCoversation.conversationId];
+        [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:imMessage conversation:imCoversation];
         
-        [[LLAMessageCountManager shareManager] unReadIMNumChanged];
-        //
+        [[LLAInstantMessageStorageUtil shareInstance] insertMsg:imMessage];
+        
+        if (![self isConversationChatting:imCoversation]) {
+            
+            [[LLAInstantMessageStorageUtil shareInstance] insertRoomWithConvid:imCoversation.conversationId coverObj:imCoversation];
+            [[LLAInstantMessageStorageUtil shareInstance] incrementUnreadWithConvid:imCoversation.conversationId];
+            
+            [[LLAMessageCountManager shareManager] unReadIMNumChanged];
+            //
+        }
+
+        
     }
-        
+
+    
+    
     //}
     
 }
@@ -139,11 +145,10 @@
     
     imClient = [[AVIMClient alloc] initWithClientId:clientId];
     imClient.delegate = self;
+    [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
+    [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
     
     [imClient openWithCallback:^(BOOL succeeded, NSError *error) {
-        
-        [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
-        [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
         
         if (succeeded) {
             

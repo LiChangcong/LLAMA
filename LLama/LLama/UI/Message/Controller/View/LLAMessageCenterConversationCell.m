@@ -354,7 +354,15 @@ static const CGFloat lineHeight = 0.6;
         timeLabel.text = @"";
     }
     
-    lastMessageLabel.text = roomInfo.conversation.lastMessage.content;
+    if (roomInfo.conversation.lastMessage.mediaType == LLAIMMessageType_Text) {
+        lastMessageLabel.text = roomInfo.conversation.lastMessage.content;
+    }else if (roomInfo.conversation.lastMessage.mediaType == LLAIMMessageType_Image) {
+        lastMessageLabel.text = @"[图片]";
+    }else if (roomInfo.conversation.lastMessage.mediaType == LLAIMMessageType_Audio) {
+        lastMessageLabel.text = @"[语音]";
+    }else {
+        lastMessageLabel.text = @"";
+    }
     
     if (roomInfo.conversation.unreadCount > 0){
         badgeButton.hidden = NO;

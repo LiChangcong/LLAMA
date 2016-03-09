@@ -64,6 +64,8 @@ static const CGFloat lineHeight = 0.6;
 
 @implementation LLAMessageReceivedPraiseCell
 
+@synthesize delegate;
+
 #pragma mark - Init
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -301,7 +303,9 @@ static const CGFloat lineHeight = 0.6;
 #pragma mark - LLAHeadViewDelegate
 
 - (void) headView:(LLAUserHeadView *)headView clickedWithUserInfo:(LLAUser *)user {
-    
+    if (delegate && [delegate respondsToSelector:@selector(headViewClickWithUserInfo:)]) {
+        [delegate headViewClickWithUserInfo:user];
+    }
 }
 
 #pragma mark - Update

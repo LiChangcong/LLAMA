@@ -32,6 +32,8 @@
 //util
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
+#import "LLAInstantMessageService.h"
+
 #import "LLAIMCommonUtil.h"
 #import "LLAAudioCacheUtil.h"
 #import "XHVoiceCommonHelper.h"
@@ -75,6 +77,7 @@
 - (void) dealloc {
     
     [[LLAInstantMessageDispatchManager sharedInstance] removeEventObserver:self forConversation:currentConversation.conversationId];
+    [[LLAInstantMessageService shareService] removeChattinCoversation:currentConversation];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
 }
@@ -90,6 +93,11 @@
 }
 
 - (void) resetChatControllerWihtConversation:(LLAIMConversation *)newConversation {
+    //remove chatting conversation
+    [[LLAInstantMessageService shareService] removeChattinCoversation:currentConversation];
+    [[LLAInstantMessageService shareService] addChattingCoversation:newConversation];
+    
+    //
     currentConversation = newConversation;
     [self updateNavigationItems];
     
@@ -107,6 +115,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDownloadFinished:) name:LLA_AUDIO_CACHE_DOWNLOAD_AUDIO_FINISH_NOTIFICATION object:nil];
     
     //
+    [[LLAInstantMessageService shareService] addChattingCoversation:currentConversation];
+    
     [[LLAInstantMessageStorageUtil shareInstance] clearUnreadWithConvid:currentConversation.conversationId];
     [[LLAMessageCountManager shareManager] unReadIMNumChanged];
 
@@ -547,27 +557,27 @@
     
     if ([currentConversation.conversationId isEqualToString:conversation.conversationId] && message) {
         
-        BOOL shouldScroll = NO;
-        
-        if (messageArray.count > 0) {
-            
-            NSArray *visibleArray = [dataTableView indexPathsForVisibleRows];
-            
-            for (NSIndexPath *indexPath in  visibleArray) {
-                if (indexPath.row == messageArray.count - 1) {
-                    shouldScroll = YES;
-                    break;
-                }
-            }
-            
-        }
+//        BOOL shouldScroll = NO;
+//        
+//        if (messageArray.count > 0) {
+//            
+//            NSArray *visibleArray = [dataTableView indexPathsForVisibleRows];
+//            
+//            for (NSIndexPath *indexPath in  visibleArray) {
+//                if (indexPath.row == messageArray.count - 1) {
+//                    shouldScroll = YES;
+//                    break;
+//                }
+//            }
+//            
+//        }
         
         [messageArray addObject:message];
         [dataTableView reloadData];
         
-        if (shouldScroll) {
-            [self scrollTableToBottom];
-        }
+        //if (shouldScroll) {
+        [self scrollTableToBottom];
+        //}
         
     }
 }
@@ -664,6 +674,7 @@
             
         }else {
             return [UIImage llaImageWithName:@"placeHolder_750"];
+            
         }
         
     }else {

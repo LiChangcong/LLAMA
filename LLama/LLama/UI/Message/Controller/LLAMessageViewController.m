@@ -357,7 +357,7 @@ static const NSInteger conversationSectionIndex = 1;
         LLAMessageCenterRoomInfo *rooInfo = [LLAMessageCenterRoomInfo roomInfoWithConversation:conversation];
         rooInfo.conversation.lastMessage = message;
         
-        if (message) {
+        if (message && ![[LLAInstantMessageService shareService] isConversationChatting:rooInfo.conversation]) {
             rooInfo.conversation.unreadCount = 1;
         }
         

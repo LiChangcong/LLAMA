@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class LLAMessageReceivedPraiseItemInfo;
+@class LLAUser;
+
+@protocol LLAMessageReceivedPraiseCellDelegate <NSObject>
+
+- (void) headViewClickWithUserInfo:(LLAUser *) userInfo;
+
+@end
 
 @interface LLAMessageReceivedPraiseCell : UITableViewCell
+
+@property(nonatomic , weak) id<LLAMessageReceivedPraiseCellDelegate> delegate;
 
 - (void) updateCellWithInfo:(LLAMessageReceivedPraiseItemInfo *) info tableWidth:(CGFloat) width;
 
