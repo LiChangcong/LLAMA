@@ -43,13 +43,13 @@
 + (NSValueTransformer *)authorUserJSONTransformer {
     
     [LLAUser setIsSimpleUserModel:YES];
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[LLAUser class]];
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 
 + (NSValueTransformer *)replyToUserJSONTransformer {
     
     [LLAUser setIsSimpleUserModel:YES];
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[LLAUser class]];
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:LLAUser.class];
 }
 
 
