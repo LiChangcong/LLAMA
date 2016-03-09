@@ -10,4 +10,15 @@
 
 @implementation LLAIMVoiceMessage
 
+- (void) updateMessageWithNewMessage:(LLAIMMessage *)newMessage {
+    [super updateMessageWithNewMessage:newMessage];
+    
+    LLAIMVoiceMessage *message = (LLAIMVoiceMessage *) newMessage;
+    
+    self.size = message.size;
+    self.format = message.format;
+    self.duration = message.duration;
+    self.audioURL = message.audioURL;
+}
+
 @end

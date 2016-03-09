@@ -13,6 +13,8 @@
 #import "LLAUser.h"
 #import "LLAIMMessage.h"
 
+#import "LLAIMCommonUtil.h"
+
 #import "LLAChatMessageTextCell.h"
 #import "LLAChatMessageImageCell.h"
 #import "LLAChatMessageVoiceCell.h"
@@ -280,9 +282,13 @@
 
 - (NSString *) formatTimeString {
     
-    dateFormatter.dateFormat = @"HH:mm";
-    
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:currentMessage.sendTimestamp/1000];
+    
+    if ([LLAIMCommonUtil isNewDayWithTimeInterval:currentMessage.sendTimestamp]) {
+        dateFormatter.dateFormat = @"MM-dd";
+    }else {
+        dateFormatter.dateFormat = @"HH:mm";
+    }
     
     return [dateFormatter stringFromDate:date];
 }

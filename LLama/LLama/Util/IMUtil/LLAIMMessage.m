@@ -20,6 +20,20 @@ static NSString * const tempImageCacheDirectory = @"imSendImageDir";
 
 @implementation LLAIMMessage
 
+- (void) updateMessageWithNewMessage:(LLAIMMessage *) newMessage {
+    self.ioType = newMessage.ioType;
+    self.msgStatus = newMessage.msgStatus;
+    self.mediaType = newMessage.mediaType;
+    self.messageId = newMessage.messageId;
+    self.clientId = newMessage.clientId;
+    self.conversationId = newMessage.conversationId;
+    self.content = newMessage.content;
+    self.sendTimestamp = newMessage.sendTimestamp;
+    self.deliveredTimestamp = newMessage.deliveredTimestamp;
+    self.transient = newMessage.transient;
+    self.authorUser = newMessage.authorUser;
+}
+
 + (instancetype) messageFromLeanTypedMessage:(AVIMTypedMessage *)leanMessage {
     //
     if (!leanMessage) {

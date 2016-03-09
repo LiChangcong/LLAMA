@@ -18,4 +18,6 @@
 
 +(void) pushToChatViewController:(UINavigationController *) navigationController conversation:(LLAIMConversation *) conv;
 
++ (BOOL) isNewDayWithTimeInterval:(long long) timeInterval;
+
 @end

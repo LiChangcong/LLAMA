@@ -47,6 +47,8 @@
     UITapGestureRecognizer *tappImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(messageImageViewTapped:)];
     
     [messageImageView addGestureRecognizer:tappImage];
+    
+    
 }
 
 #pragma mark - layout subViews 
