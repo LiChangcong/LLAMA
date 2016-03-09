@@ -19,6 +19,7 @@
 
 
 #import "LLAInstantMessageService.h"
+#import "LLALoginRegisterHomeViewController.h"
 
 @interface LLADelegate()
 
@@ -55,6 +56,11 @@
         LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
         
         self.window.rootViewController = loginNavi;
+        
+//        LLALoginRegisterHomeViewController *loginRegisterHome = [[LLALoginRegisterHomeViewController alloc] init];
+//         LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginRegisterHome];
+//        self.window.rootViewController = loginNavi;
+
     }
     
     return YES;
