@@ -53,7 +53,7 @@
 - (void)initSubViews
 {
     inviteLabel = [[UILabel alloc] init];
-    inviteLabel.text = @"邀请出演";
+    inviteLabel.text = @"邀请出演：";
     inviteLabel.textColor = inviteLabelColor;
     inviteLabel.font = inviteLabelFont;
     [self addSubview:inviteLabel];

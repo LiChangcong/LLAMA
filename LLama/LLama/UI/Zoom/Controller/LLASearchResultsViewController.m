@@ -50,6 +50,9 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     LLALoadingView *HUD;
     
     LLASearchResultsInfo *mainInfo;
+    
+    UIImageView *blankImage;
+    UILabel *desLabel;
 
 }
 
@@ -148,17 +151,17 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
             mainInfo = tempInfo;
             NSLog(@"%@",mainInfo);
             // 刷新数据
-            [dataTableView reloadData];
+//            [dataTableView reloadData];
             
             if (mainInfo.searchResultUsersDataList.count == 0 && mainInfo.searchResultVideosdataList.count == 0) {
                 
 
-                UIImageView *blankImage = [[UIImageView alloc] init];
+                blankImage = [[UIImageView alloc] init];
                 blankImage.image = [UIImage imageNamed:@"blankShow"];
                 [dataTableView addSubview:blankImage];
                 
                 
-                UILabel *desLabel = [[UILabel alloc] init];
+                desLabel = [[UILabel alloc] init];
                 desLabel.font = [UIFont systemFontOfSize:16];
                 desLabel.text = @"没有相关数据噢";
                 desLabel.textColor = [UIColor whiteColor];
@@ -192,9 +195,20 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 //                    make.bottom.equalTo(dataTableView.mas_bottom);
 //                }];
 
+            }else{
+            
+                blankImage.hidden = YES;
+                desLabel.hidden = YES;
             }
             
+        }else {
+        
+            blankImage.hidden = YES;
+            desLabel.hidden = YES;
+
         }
+        
+        
         [dataTableView reloadData];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
@@ -228,8 +242,11 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         
         return 0;
     }else {
+        
 //        if (mainInfo.searchResultUsersDataList.count == 0 || mainInfo.searchResultVideosdataList.count == 0) {
+//            
 //            return 1;
+//            
 //        }else{
         
             return 2;
@@ -243,6 +260,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         
         return 1;
     }else {
+        
         return mainInfo.searchResultVideosdataList.count;
     }
 }
@@ -277,8 +295,10 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
         return 60;
     }else{
         
-        return [LLAHallVideoInfoCell calculateHeightWithVideoInfo:nil tableWidth:tableView.frame.size.width];
-;
+//        return [LLAHallVideoInfoCell calculateHeightWithVideoInfo:nil tableWidth:tableView.frame.size.width];
+        return [LLAHallVideoInfoCell calculateHeightWithVideoInfo:mainInfo.searchResultVideosdataList[indexPath.row] tableWidth:tableView.frame.size.width];
+
+
     }
 }
 
@@ -362,8 +382,9 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    searchBar.text = @"";
+    
     [searchBar resignFirstResponder];
+    searchBar.text = @"";
     [self.navigationController popViewControllerAnimated:YES];
 }
 

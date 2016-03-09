@@ -68,6 +68,14 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     hotVideoImageView.clipsToBounds = YES;
     [self.contentView addSubview:hotVideoImageView];
     
+    
+//    // cover
+//    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(50, 100, 200, 200)];
+//    imageView.backgroundColor=[UIColor yellowColor];
+//    imageView.image=[self buttonImageFromColor:[UIColor redColor]];
+//    [self.view addSubview:imageView];
+//    
+//
     // prizeButton
     prizeButton = [[UIButton alloc] init];
     prizeButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -90,6 +98,20 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     [self.contentView addSubview:loveButton];
 
 }
+
+////通过颜色来生成一个纯色图片
+//- (UIImage *)buttonImageFromColor:(UIColor *)color{
+//    
+//    CGRect rect = CGRectMake(0, 0, self.contentView.size.width, self.contentView.size.height);
+//    UIGraphicsBeginImageContext(rect.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetFillColorWithColor(context, [color CGColor]);
+//    CGContextFillRect(context, rect);
+//    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return img;
+//}
+
 
 // 设置约束
 - (void)initSubConstraints
