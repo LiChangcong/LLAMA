@@ -150,6 +150,8 @@
     if (typeMessage) {
         
         message.conversationId = self.conversationId;
+        message.msgStatus = LLAIMMessageStatusSending;
+        
         //save to disk
         if (!isResent) {
             [[LLAInstantMessageStorageUtil shareInstance] insertMsg:message];

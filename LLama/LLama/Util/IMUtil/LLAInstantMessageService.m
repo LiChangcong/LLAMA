@@ -145,14 +145,17 @@
     
     imClient = [[AVIMClient alloc] initWithClientId:clientId];
     imClient.delegate = self;
-    [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:currentUIDString];
+    
+    [[LLAInstantMessageStorageUtil shareInstance] closeDBQueue];
+    [[LLAInstantMessageStorageUtil shareInstance] setupWithUserId:clientId];
     [[LLAInstantMessageStorageUtil shareInstance] setupUserInfoDBQueue];
+    
+    currentUIDString = [clientId copy];
     
     [imClient openWithCallback:^(BOOL succeeded, NSError *error) {
         
         if (succeeded) {
             
-            currentUIDString = [clientId copy];
             [[NSNotificationCenter defaultCenter] postNotificationName:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
 
         }
@@ -163,6 +166,9 @@
 }
 
 - (void) closeClientWithCallBack:(LLAIMBooleanResultBlock)callBack {
+    
+    [[LLAInstantMessageStorageUtil shareInstance] closeDBQueue];
+    
     if (!(imClient.status == AVIMClientStatusClosed || imClient.status == AVIMClientStatusClosing || imClient.status == AVIMClientStatusNone)) {
         
         [imClient closeWithCallback:^(BOOL succeeded, NSError *error) {
