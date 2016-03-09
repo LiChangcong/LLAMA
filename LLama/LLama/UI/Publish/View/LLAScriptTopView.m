@@ -240,10 +240,12 @@
 
 - (void)secretButtonClick
 {
-    secretButton.selected = !secretButton.selected;
-    
-    self.isSeleced = secretButton.selected;
-    
+//    secretButton.selected = !secretButton.selected;
+
+    if ([self.delegate respondsToSelector:@selector(scriptTopViewDidTapSecretButton: withSecretButton:)]) {
+        [self.delegate scriptTopViewDidTapSecretButton:self withSecretButton:secretButton];
+    }
+
 }
 
 - (void)textFieldDidChange:(UITextField *)textField

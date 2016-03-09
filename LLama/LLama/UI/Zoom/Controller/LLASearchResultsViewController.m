@@ -99,6 +99,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     resultsSearchBar.text = _searchResultText;
     resultsSearchBar.showsCancelButton = YES;
     resultsSearchBar.delegate = self;
+    resultsSearchBar.tintColor = [UIColor lightGrayColor];
     self.navigationItem.titleView = resultsSearchBar;
     
     // register
@@ -142,9 +143,28 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
         LLASearchResultsInfo *tempInfo = [LLASearchResultsInfo parseJsonWithDic:responseObject];
         if (tempInfo) {
+            
+            
             mainInfo = tempInfo;
+            NSLog(@"%@",mainInfo);
             // 刷新数据
             [dataTableView reloadData];
+            
+            if (mainInfo.searchResultUsersDataList.count == 0 && mainInfo.searchResultVideosdataList.count == 0) {
+////                NSLog(@"没有搜到东西");
+//                UIImageView *blankImage = [[UIImageView alloc] init];
+////                blankImage.frame = self.view.frame;
+//                blankImage.image = [UIImage imageNamed:@"blankShow"];
+//                [self.view addSubview:blankImage];
+//                
+//                [blankImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.top.equalTo(self.view.mas_top);
+//                    make.left.right.equalTo(self.view);
+//                    make.bottom.equalTo(self.view.mas_bottom);
+//                }];
+
+            }
+            
         }
         [dataTableView reloadData];
         

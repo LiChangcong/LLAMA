@@ -117,7 +117,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)initSubConstraints
 {
     [dataTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+//        make.edges.equalTo(self.view);
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
     }];
     
     // 菊花控件
