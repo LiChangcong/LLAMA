@@ -47,6 +47,10 @@
     
     LLAShareView *shareView;
     
+    UIView *blankShowView;
+    UIImageView *blankShow;
+    UILabel *blankDesLabel;
+
     UIButton *publishButton;
     
     
@@ -54,8 +58,8 @@
     UIColor *publishButtonColor;
     
     
-    LLALoadingView *HUD;
-    LLAILoveWhoInfo *mainInfo;
+//    LLALoadingView *HUD;
+//    LLAILoveWhoInfo *mainInfo;
 
 
 }
@@ -78,11 +82,11 @@
     [self initSubViews];
     [self initSubConstraints];
     
-    // 显示菊花
-    [HUD show:YES];
-    
-    // 刷新数据
-    [self loadData];
+//    // 显示菊花
+//    [HUD show:YES];
+//    
+//    // 刷新数据
+//    [self loadData];
 
 }
 
@@ -106,6 +110,7 @@
     if (self.scriptType == LLAPublishScriptTypeNew_Text) {
 
         topView = [[LLAScriptTopView alloc] initWithType:LLAScriptTopViewType_Text];
+        topView.delegate = self;
         [self.view addSubview:topView];
         
     }else if (self.scriptType == LLAPublishScriptTypeNew_Image){
@@ -122,11 +127,28 @@
     inviteView.userInteractionEnabled = YES;
     [self.view addSubview:inviteView];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteToActTap)];
+    [inviteView updateInfoWithInfoArray:[NSArray array]]; // 进入界面的时候邀请列表为空
     [inviteView addGestureRecognizer:tap];
     
     shareView = [[LLAShareView alloc] init];
     [self.view addSubview:shareView];
     
+    /*-------------------------------------*/
+    blankShowView = [[UIView alloc] init];
+    blankShowView.hidden = YES;
+    [self.view addSubview:blankShowView];
+    
+    blankShow = [[UIImageView alloc] init];
+    blankShow.image = [UIImage imageNamed:@"blankShow"];
+    [blankShowView addSubview:blankShow];
+    
+    blankDesLabel = [[UILabel alloc] init];
+    blankDesLabel.text = @"视频上传后将设置为私密状态,\n其他人都看不到哦~";
+    blankDesLabel.font = [UIFont systemFontOfSize:12];
+    blankDesLabel.textColor = [UIColor lightGrayColor];
+    [blankShowView addSubview:blankDesLabel];
+
+    /*-------------------------------------*/
     publishButton = [[UIButton alloc] init];
     publishButton.backgroundColor = publishButtonColor;
     [publishButton.titleLabel setFont:publishButtonFont];
@@ -138,6 +160,7 @@
 
 - (void)initSubConstraints
 {
+    /*-------------------------------------*/
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top);
         make.left.equalTo(self.view);
@@ -145,18 +168,43 @@
         make.height.equalTo(@204);
     }];
     
+    /*-------------------------------------*/
     [inviteView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom);
         make.height.equalTo(@44);
         make.left.right.equalTo(self.view);
     }];
 
+    /*-------------------------------------*/
     [shareView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(inviteView.mas_bottom).with.offset(40);
         make.left.right.equalTo(self.view);
         make.height.equalTo(@132);
     }];
     
+    
+    /*-------------------------------------*/
+    [blankShowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(inviteView.mas_bottom).with.offset(40);
+        make.left.right.equalTo(self.view);
+        make.height.equalTo(@132);
+    }];
+    
+    [blankShow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(blankShowView.mas_top);
+        make.left.equalTo(blankShowView.mas_left);
+        make.right.equalTo(blankShowView.mas_right);
+        make.height.equalTo(@100);
+    }];
+    
+    [blankDesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(blankShow.mas_bottom);
+        make.left.equalTo(blankShowView.mas_left);
+        make.right.equalTo(blankShowView.mas_right);
+        make.bottom.equalTo(blankShow.mas_bottom);
+    }];
+    
+    /*-------------------------------------*/
     [publishButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(shareView.mas_bottom).with.offset(40);
         make.left.right.equalTo(self.view).with.offset(10);
@@ -166,52 +214,52 @@
     
     
     // 菊花控件
-    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+//    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
     
 }
 
-#pragma mark - loadData
-
-- (void) loadData {
-    
-    LLAUser *me = [LLAUser me];
-    NSString *userId = me.userIdString;
-    NSString *type = @"LIKETO";
-    // 参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:userId forKey:@"userId"];
-    [params setValue:type forKey:@"type"];
-    [params setValue:@(0) forKey:@"pageNumber"];
-    [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
-    
-    // 发送请求
-    [LLAHttpUtil httpPostWithUrl:@"/user/getLikeList" param:params responseBlock:^(id responseObject) {
-        
-        [HUD hide:NO];
-        
-        LLAILoveWhoInfo *tempInfo = [LLAILoveWhoInfo parseJsonWithDic:responseObject];
-        if (tempInfo){
-            mainInfo = tempInfo;
-            
-            [inviteView updateInfoWithInfoArray:mainInfo.dataList];
-        }
-        
-        
-        
-    } exception:^(NSInteger code, NSString *errorMessage) {
-        
-        [HUD hide:NO];
-        
-        [LLAViewUtil showAlter:self.view withText:errorMessage];
-        
-    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-        
-        [HUD hide:NO];
-        
-        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
-        
-    }];
-}
+//#pragma mark - loadData
+//
+//- (void) loadData {
+//    
+//    LLAUser *me = [LLAUser me];
+//    NSString *userId = me.userIdString;
+//    NSString *type = @"LIKETO";
+//    // 参数
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setValue:userId forKey:@"userId"];
+//    [params setValue:type forKey:@"type"];
+//    [params setValue:@(0) forKey:@"pageNumber"];
+//    [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
+//    
+//    // 发送请求
+//    [LLAHttpUtil httpPostWithUrl:@"/user/getLikeList" param:params responseBlock:^(id responseObject) {
+//        
+//        [HUD hide:NO];
+//        
+//        LLAILoveWhoInfo *tempInfo = [LLAILoveWhoInfo parseJsonWithDic:responseObject];
+//        if (tempInfo){
+//            mainInfo = tempInfo;
+//            
+//            [inviteView updateInfoWithInfoArray:mainInfo.dataList];
+//        }
+//        
+//        
+//        
+//    } exception:^(NSInteger code, NSString *errorMessage) {
+//        
+//        [HUD hide:NO];
+//        
+//        [LLAViewUtil showAlter:self.view withText:errorMessage];
+//        
+//    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+//        
+//        [HUD hide:NO];
+//        
+//        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+//        
+//    }];
+//}
 
 
 
@@ -255,6 +303,11 @@
         [LLAViewUtil showAlter:self.view withText:@"请选择剧本图片"];
         return;
     }
+
+    LLALoadingView *HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    HUD.removeFromSuperViewOnHide = YES;
+    
+    [HUD show:YES];
 
     //
     if (self.scriptType == LLAPublishScriptTypeNew_Text) {
@@ -468,9 +521,25 @@
         topView.scriptImageView.image = itemInfo.thumbImage;
     };
     
+}
 
-
-
+- (void)scriptTopViewDidTapSecretButton:(LLAScriptTopView *)scriptTopView withSecretButton:(UIButton *)button
+{
+    button.selected = !button.selected;
+    
+    if (button.selected) {
+        
+        shareView.hidden = YES;
+        
+        blankShowView.hidden = NO;
+        
+    }else {
+        
+        shareView.hidden = NO;
+        
+        blankShowView.hidden = YES;
+        
+    }
 }
 
 

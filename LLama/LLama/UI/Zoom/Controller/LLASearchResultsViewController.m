@@ -99,7 +99,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     resultsSearchBar.text = _searchResultText;
     resultsSearchBar.showsCancelButton = YES;
     resultsSearchBar.delegate = self;
-    resultsSearchBar.tintColor = [UIColor lightGrayColor];
+    resultsSearchBar.tintColor = [UIColor colorWithHex:0xD3D3D3];
     self.navigationItem.titleView = resultsSearchBar;
     
     // register
@@ -151,16 +151,45 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
             [dataTableView reloadData];
             
             if (mainInfo.searchResultUsersDataList.count == 0 && mainInfo.searchResultVideosdataList.count == 0) {
-////                NSLog(@"没有搜到东西");
-//                UIImageView *blankImage = [[UIImageView alloc] init];
-////                blankImage.frame = self.view.frame;
-//                blankImage.image = [UIImage imageNamed:@"blankShow"];
-//                [self.view addSubview:blankImage];
-//                
-//                [blankImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.top.equalTo(self.view.mas_top);
-//                    make.left.right.equalTo(self.view);
-//                    make.bottom.equalTo(self.view.mas_bottom);
+                
+
+                UIImageView *blankImage = [[UIImageView alloc] init];
+                blankImage.image = [UIImage imageNamed:@"blankShow"];
+                [dataTableView addSubview:blankImage];
+                
+                
+                UILabel *desLabel = [[UILabel alloc] init];
+                desLabel.font = [UIFont systemFontOfSize:16];
+                desLabel.text = @"没有相关数据噢";
+                desLabel.textColor = [UIColor whiteColor];
+                desLabel.textAlignment = NSTextAlignmentCenter;
+                [dataTableView addSubview:desLabel];
+                
+                
+                [blankImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.top.equalTo(dataTableView.mas_top);
+//                    make.left.equalTo(dataTableView.mas_left);
+//                    make.right.equalTo(dataTableView.mas_right);
+//                    make.bottom.equalTo(dataTableView.mas_bottom);
+
+                    make.centerX.equalTo(dataTableView.mas_centerX);
+                    make.centerY.equalTo(dataTableView.mas_centerY);
+                    make.width.height.equalTo(@200);
+                }];
+                
+                [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(blankImage.mas_bottom);
+                    make.left.equalTo(dataTableView.mas_left);
+                    make.right.equalTo(dataTableView.mas_right);
+//                    make.height.equalTo(@40);
+                    make.centerX.equalTo(dataTableView.mas_centerX);
+                }];
+                
+//                [bgContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.top.equalTo(dataTableView.mas_top);
+//                    make.left.equalTo(dataTableView.mas_left);
+//                    make.right.equalTo(dataTableView.mas_right);
+//                    make.bottom.equalTo(dataTableView.mas_bottom);
 //                }];
 
             }
@@ -195,7 +224,17 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    if (mainInfo.searchResultUsersDataList.count == 0 && mainInfo.searchResultVideosdataList.count == 0) {
+        
+        return 0;
+    }else {
+//        if (mainInfo.searchResultUsersDataList.count == 0 || mainInfo.searchResultVideosdataList.count == 0) {
+//            return 1;
+//        }else{
+        
+            return 2;
+//        }
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
