@@ -90,6 +90,11 @@
 }
 
 -(void) setupWithUserId:(NSString *)userId{
+    
+    if (_dbQueue) {
+        [_dbQueue close];
+    }
+    
     _dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self dbPathWithUserId:userId]];
     [_dbQueue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:MSG_TABLE_SQL];

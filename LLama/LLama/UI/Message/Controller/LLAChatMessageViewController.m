@@ -94,8 +94,11 @@
 
 - (void) resetChatControllerWihtConversation:(LLAIMConversation *)newConversation {
     //remove chatting conversation
+    
     [[LLAInstantMessageService shareService] removeChattinCoversation:currentConversation];
     [[LLAInstantMessageService shareService] addChattingCoversation:newConversation];
+    [[LLAInstantMessageStorageUtil shareInstance] clearUnreadWithConvid:newConversation.conversationId];
+    [[LLAMessageCountManager shareManager] unReadIMNumChanged];
     
     //
     currentConversation = newConversation;

@@ -6,6 +6,8 @@
 //  Copyright © 2016年 heihei. All rights reserved.
 //
 
+#import <Photos/Photos.h>
+
 #import "LLAChatInputViewController.h"
 #import "LLAImagePickerViewController.h"
 
@@ -729,6 +731,21 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     if (!pickedImage) {
         pickedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
     }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //保存图片到相册
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            [PHAssetChangeRequest creationRequestForAssetFromImage:pickedImage];
+        } completionHandler:^(BOOL success, NSError *error) {
+            
+            if (success) {
+                // 保存照片成功
+            }
+            
+        }];
+        
+    });
     
     [picker dismissViewControllerAnimated:YES completion:^{
         if (delegate && [delegate respondsToSelector:@selector(sendMessageWithImage:)]) {
