@@ -111,6 +111,7 @@
     moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
     moneyTextField.textAlignment = NSTextAlignmentRight;
     moneyTextField.placeholder = @"点击此处输入金额";
+    [moneyTextField setValue:[UIFont systemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     [moneyTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.moneyTextField = moneyTextField;
     [moneyView addSubview:moneyTextField];
@@ -182,8 +183,8 @@
     
     [moneyTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(moneyButton).with.offset(10);
-        make.right.equalTo(moneyYuanLabel.mas_left).with.offset(-10);
-        make.centerY.equalTo(moneyView);
+        make.right.equalTo(moneyYuanLabel.mas_left).with.offset(-30);
+        make.centerY.equalTo(moneyButton);
         make.height.equalTo(moneyButton);
     }];
     

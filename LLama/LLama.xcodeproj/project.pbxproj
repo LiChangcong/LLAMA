@@ -356,6 +356,7 @@
 		7E1A14611C15D4A700693F3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A14601C15D4A700693F3E /* Assets.xcassets */; };
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
+		7E1C8DFC1C8FB5490067021F /* LLANewRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */; };
 		7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */; };
 		7E21E7C81C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */; };
 		7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */; };
@@ -363,6 +364,10 @@
 		7E2AFC231C8D7B3F0052DA2C /* LLAInviteToActViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC221C8D7B3F0052DA2C /* LLAInviteToActViewController.m */; };
 		7E2AFC261C8D806A0052DA2C /* LLAInviteToActCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC251C8D806A0052DA2C /* LLAInviteToActCell.m */; };
 		7E2AFC2A1C8D8D0A0052DA2C /* LLAInviteToActInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC291C8D8D0A0052DA2C /* LLAInviteToActInfo.m */; };
+		7E2AFC301C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC2F1C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.m */; };
+		7E2AFC361C8ECE9C0052DA2C /* LLANewLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC351C8ECE9C0052DA2C /* LLANewLoginViewController.m */; };
+		7E2AFC3C1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC3B1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m */; };
+		7E2AFC3F1C8EF6880052DA2C /* LLANewDataVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AFC3E1C8EF6880052DA2C /* LLANewDataVideoController.m */; };
 		7E3376841C72E79F00CA6E26 /* LLAPickImageItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */; };
 		7E3376871C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376861C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.m */; };
 		7E33768A1C72F12200CA6E26 /* LLAImagePickerTopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3376891C72F12200CA6E26 /* LLAImagePickerTopToolBar.m */; };
@@ -1291,6 +1296,8 @@
 		7E1A14751C15D4A700693F3E /* LLamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A14791C15D4A700693F3E /* LLamaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLamaUITests.m; sourceTree = "<group>"; };
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E1C8DFA1C8FB5490067021F /* LLANewRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewRegisterViewController.h; sourceTree = "<group>"; };
+		7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewRegisterViewController.m; sourceTree = "<group>"; };
 		7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsViewController.h; sourceTree = "<group>"; };
 		7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsViewController.m; sourceTree = "<group>"; };
 		7E21E7C61C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersSearchResultsCell.h; sourceTree = "<group>"; };
@@ -1305,6 +1312,14 @@
 		7E2AFC251C8D806A0052DA2C /* LLAInviteToActCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAInviteToActCell.m; sourceTree = "<group>"; };
 		7E2AFC281C8D8D0A0052DA2C /* LLAInviteToActInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAInviteToActInfo.h; sourceTree = "<group>"; };
 		7E2AFC291C8D8D0A0052DA2C /* LLAInviteToActInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAInviteToActInfo.m; sourceTree = "<group>"; };
+		7E2AFC2E1C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLALoginRegisterHomeViewController.h; sourceTree = "<group>"; };
+		7E2AFC2F1C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLALoginRegisterHomeViewController.m; sourceTree = "<group>"; };
+		7E2AFC341C8ECE9C0052DA2C /* LLANewLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewLoginViewController.h; sourceTree = "<group>"; };
+		7E2AFC351C8ECE9C0052DA2C /* LLANewLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewLoginViewController.m; sourceTree = "<group>"; };
+		7E2AFC3A1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewRetrievePasswordViewController.h; sourceTree = "<group>"; };
+		7E2AFC3B1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewRetrievePasswordViewController.m; sourceTree = "<group>"; };
+		7E2AFC3D1C8EF6880052DA2C /* LLANewDataVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewDataVideoController.h; sourceTree = "<group>"; };
+		7E2AFC3E1C8EF6880052DA2C /* LLANewDataVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewDataVideoController.m; sourceTree = "<group>"; };
 		7E3376821C72E79F00CA6E26 /* LLAPickImageItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAPickImageItemInfo.h; sourceTree = "<group>"; };
 		7E3376831C72E79F00CA6E26 /* LLAPickImageItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAPickImageItemInfo.m; sourceTree = "<group>"; };
 		7E3376851C72EC1D00CA6E26 /* LLAImagePickerCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAImagePickerCollectionCell.h; sourceTree = "<group>"; };
@@ -3281,6 +3296,16 @@
 				A3DEDE0B1C3CAEC6009F3D37 /* TMRetrievePasswordViewController.xib */,
 				7EC3CAAB1C4DFE37008424E6 /* LLAAlbumPickerViewController.h */,
 				7EC3CAAC1C4DFE37008424E6 /* LLAAlbumPickerViewController.m */,
+				7E2AFC2E1C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.h */,
+				7E2AFC2F1C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.m */,
+				7E2AFC341C8ECE9C0052DA2C /* LLANewLoginViewController.h */,
+				7E2AFC351C8ECE9C0052DA2C /* LLANewLoginViewController.m */,
+				7E1C8DFA1C8FB5490067021F /* LLANewRegisterViewController.h */,
+				7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */,
+				7E2AFC3A1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.h */,
+				7E2AFC3B1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m */,
+				7E2AFC3D1C8EF6880052DA2C /* LLANewDataVideoController.h */,
+				7E2AFC3E1C8EF6880052DA2C /* LLANewDataVideoController.m */,
 				7E0607121C5E05D50089329D /* temp */,
 			);
 			path = Controller;
@@ -3892,6 +3917,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1C8DFC1C8FB5490067021F /* LLANewRegisterViewController.m in Sources */,
 				5C75343E1C7711920058F93C /* MWGridCell.m in Sources */,
 				5C6D7A541C58B84100119A3A /* LLACaptureVideoViewController.m in Sources */,
 				5C4684BA1C51F85900705FA9 /* LLAUserProfileOtherInfoCell.m in Sources */,
@@ -3901,6 +3927,7 @@
 				5C7E26771C8062ED008364E4 /* EmojiPictographs.m in Sources */,
 				5C7884621C5F0AB7002EC705 /* YYShowAlertUtil.m in Sources */,
 				5C7E26781C8062ED008364E4 /* EmojiTransport.m in Sources */,
+				7E2AFC3F1C8EF6880052DA2C /* LLANewDataVideoController.m in Sources */,
 				A3DEDEA01C3CAEC7009F3D37 /* TMSettingViewController.m in Sources */,
 				5CC696DA1C5CDEBF00E4BA89 /* AlipayOrder.m in Sources */,
 				7EAA2F4F1C57308F002DF3B1 /* LLAChangBoundPhonesViewController.m in Sources */,
@@ -4024,6 +4051,7 @@
 				5CDD97801C40E56D00557CB7 /* LLAUploadFileUtil.m in Sources */,
 				5C6D7A351C58B73200119A3A /* SCAssetExportSession.m in Sources */,
 				7EB30C361C7D538400B993F6 /* LLAHotUsersButton.m in Sources */,
+				7E2AFC361C8ECE9C0052DA2C /* LLANewLoginViewController.m in Sources */,
 				A3DEDDA01C3CAE38009F3D37 /* NSArray+MTLManipulationAdditions.m in Sources */,
 				5C6D7A4E1C58B73200119A3A /* SCVideoPlayerView.m in Sources */,
 				A3DEDE961C3CAEC7009F3D37 /* TMProfileLikeCell.m in Sources */,
@@ -4037,6 +4065,7 @@
 				A3DEDDA31C3CAE38009F3D37 /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				5C1FEF531C59E9C500C71A9B /* LLAEditVideoTopToolBar.m in Sources */,
 				7EB0BA681C5F3B7B00D4A43C /* LLALoveCell.m in Sources */,
+				7E2AFC301C8EC21F0052DA2C /* LLALoginRegisterHomeViewController.m in Sources */,
 				5CECCC811C84155E002BDE99 /* LLAChatInpuFunctionView.m in Sources */,
 				5C7534411C7711920058F93C /* MWPhotoBrowser.m in Sources */,
 				A3DEDDC61C3CAE38009F3D37 /* LLAHttpResponseData.m in Sources */,
@@ -4221,6 +4250,7 @@
 				A3D8E7ED1C3F82CF00B27898 /* UIColor+LLAColorWithHex.m in Sources */,
 				A3D8E7FE1C3F9E9800B27898 /* UIButton+AlignImageTitle.m in Sources */,
 				5C649EB81C8D28280023FF6F /* wav.mm in Sources */,
+				7E2AFC3C1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m in Sources */,
 				5C6D7A6E1C58CBFB00119A3A /* LLACaptureVideoClipInfo.m in Sources */,
 				5CC324F51C5B882B00413E25 /* LLAPayUserPayInfo.m in Sources */,
 				5C7882EA1C86D9F200808C55 /* LLAIMVoiceMessage.m in Sources */,
