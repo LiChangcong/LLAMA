@@ -52,6 +52,7 @@
 + (instancetype) conversationWithLeanCloudConversation:(AVIMConversation *) conversation;
 
 - (void)sendMessage:(LLAIMMessage *)message
+           isResent:(BOOL) isResent
       progressBlock:(LLAIMProgressBlock)progressBlock
            callback:(LLAIMSendMessageResultBlock)callback;
 

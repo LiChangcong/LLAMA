@@ -10,6 +10,7 @@
 
 #import "LLAUser.h"
 #import "LLAIMConversation.h"
+#import "LLAChatMessageViewController.h"
 
 @implementation LLAIMCommonUtil
 
@@ -22,6 +23,25 @@
     }
     
     return nil;
+}
+
++ (void) pushToChatViewController:(UINavigationController *)navigationController conversation:(LLAIMConversation *)conv {
+    
+    for (UIViewController *controller in navigationController.viewControllers) {
+        if ([controller isKindOfClass:[LLAChatMessageViewController class]]){
+            LLAChatMessageViewController *chatViewController = (LLAChatMessageViewController *) controller;
+            
+            [chatViewController resetChatControllerWihtConversation:conv];
+            [navigationController popToViewController:chatViewController animated:YES];
+            return;
+        }
+    }
+    
+    LLAChatMessageViewController *chatViewController = [[LLAChatMessageViewController alloc] initWithConversation:conv];
+    chatViewController.hidesBottomBarWhenPushed = YES;
+    
+    [navigationController pushViewController:chatViewController animated:YES];
+    
 }
 
 @end

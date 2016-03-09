@@ -21,6 +21,9 @@
 //
 #import "LLAInstantMessageService.h"
 
+#import "LLAMessageCountManager.h"
+
+#define UNREADCOUNT_DOT_TAG 1000
 
 static NSString * const homeTabarImage_Normal = @"home";
 static NSString * const homeTabarImage_Selected = @"homeH";
@@ -58,6 +61,10 @@ static NSString * const publishScriptImage_Selected= @"startH";
 
 #pragma mark - 初始化方法
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -69,14 +76,10 @@ static NSString * const publishScriptImage_Selected= @"startH";
     [self setupTabBar];
     
     //
-    LLAUser *me = [LLAUser me];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(manageTabbarDot:) name:LLA_UNREAD_MESSAGE_COUNT_CHANGED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(manageTabbarDot:) name:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
     
-    if (![LLAInstantMessageService shareService].currentUIDString)
-    
-        [[LLAInstantMessageService shareService] openWithClientId:me.userIdString callBack:^(BOOL succeeded, NSError *error) {
-            
-        }];
-    
+    [self manageTabbarDot:nil];
 }
 
 // view布局完子控件的时候设置发布按钮的位置
@@ -168,6 +171,51 @@ static NSString * const publishScriptImage_Selected= @"startH";
     
     [publish show];
 
+}
+
+#pragma mark - ManaTabbarDot
+
+- (void) manageTabbarDot:(NSNotification *) noti {
+    
+    UILabel *dotLabel = (UILabel *)[self.tabBar viewWithTag:UNREADCOUNT_DOT_TAG];
+    
+    NSInteger unreadCount = [[LLAMessageCountManager shareManager] totalUnreadCount];
+    
+    BOOL show = unreadCount > 0;
+    
+    if(!show){
+        if (dotLabel){
+            [dotLabel removeFromSuperview];
+        }
+    }else{
+        if (!dotLabel){
+            dotLabel = [[UILabel alloc] init];
+        }
+        dotLabel.backgroundColor = [UIColor themeColor];
+        
+        dotLabel.clipsToBounds = YES;
+        dotLabel.textAlignment = NSTextAlignmentCenter;
+        dotLabel.tag = UNREADCOUNT_DOT_TAG;
+        dotLabel.textColor = [UIColor whiteColor];
+        dotLabel.font = [UIFont systemFontOfSize:9];
+        dotLabel.text = [NSString stringWithFormat:@"%ld",(long)unreadCount];
+        [dotLabel sizeToFit];
+        
+        CGRect frame = dotLabel.frame;
+        frame.size.width = MAX(8, frame.size.width+4);
+        frame.size.height = 12;
+        frame.size.width = MAX(frame.size.width, frame.size.height);
+        frame.origin.y = 6;
+        frame.origin.x = 7 * self.tabBar.bounds.size.width / 10 + 22-frame.size.width/2;
+        dotLabel.frame = frame;
+        
+        dotLabel.layer.cornerRadius = dotLabel.frame.size.height/2;
+        [self.tabBar addSubview:dotLabel];
+    }
+    [self.tabBar setNeedsLayout];
+    [self.tabBar layoutIfNeeded];
+
+    
 }
 
 #pragma mark - Rotating

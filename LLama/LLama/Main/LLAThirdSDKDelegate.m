@@ -12,6 +12,7 @@
 #import "LLASaveUserDefaultUtil.h"
 #import "LLAThirdPayManager.h"
 
+#import "LLAInstantMessageService.h"
 
 
 @interface LLAThirdSDKDelegate()
@@ -400,6 +401,10 @@
         
         //
         
+        //login client
+        [[LLAInstantMessageService shareService] openWithClientId:userInfo.userIdString callBack:^(BOOL succeeded, NSError *error) {
+            
+        }];
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         if (callBack) {

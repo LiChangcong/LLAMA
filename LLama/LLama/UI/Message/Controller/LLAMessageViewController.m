@@ -29,6 +29,9 @@
 #import "LLAViewUtil.h"
 #import "LLAInstantMessageDispatchManager.h"
 #import "LLAInstantMessageStorageUtil.h"
+#import "LLAMessageCountManager.h"
+#import "LLAHttpUtil.h"
+#import "LLAInstantMessageService.h"
 
 //category
 #import "UIScrollView+SVPullToRefresh.h"
@@ -54,6 +57,7 @@ static const NSInteger conversationSectionIndex = 1;
 - (void) dealloc {
     
     [[LLAInstantMessageDispatchManager sharedInstance] removeEventObserver:self forConversation:INSTANT_MESSAGE_ALL_MESSAGE];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -66,7 +70,11 @@ static const NSInteger conversationSectionIndex = 1;
     
     [self addIMObserver];
     
+    [self loadTypeListData];
     [self loadRoomData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageCountChanged:) name:LLA_UNREAD_MESSAGE_COUNT_CHANGED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openClientSuccess:) name:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
     
     //
 //    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionary];
@@ -99,24 +107,24 @@ static const NSInteger conversationSectionIndex = 1;
     systemMessageArray = [NSMutableArray arrayWithCapacity:3];
     roomArray = [NSMutableArray array];
     
-    //test Data
+    //temp Data
     LLAMessageCenterSystemMsgInfo *praise = [LLAMessageCenterSystemMsgInfo new];
     praise.titleString = @"收到的赞";
-    praise.unreadNum = 0;
+    praise.unreadNum = [[LLAMessageCountManager shareManager] getUnreadPraiseNum];
     praise.messageType = LLASystemMessageType_BePraised;
     
     [systemMessageArray addObject:praise];
     
     LLAMessageCenterSystemMsgInfo *comment = [LLAMessageCenterSystemMsgInfo new];
     comment.titleString = @"收到的评论";
-    comment.unreadNum = 1;
+    comment.unreadNum = [[LLAMessageCountManager shareManager] getUnreadCommentNum];
     comment.messageType = LLASystemMessageType_BeCommented;
     
     [systemMessageArray addObject:comment];
     
     LLAMessageCenterSystemMsgInfo *order = [LLAMessageCenterSystemMsgInfo new];
     order.titleString = @"订单助手";
-    order.unreadNum = 100;
+    order.unreadNum = [[LLAMessageCountManager shareManager] getUnreadOrderNum];
     order.messageType = LLASystemMessageType_Order;
     
     [systemMessageArray addObject:order];
@@ -161,6 +169,32 @@ static const NSInteger conversationSectionIndex = 1;
 }
 
 #pragma mark - LoadData
+
+- (void) loadTypeListData {
+    
+    [LLAHttpUtil httpPostWithUrl:@"/message/getTypeList" param:[NSDictionary dictionary] responseBlock:^(id responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            
+            [systemMessageArray removeAllObjects];
+            
+            for (NSDictionary *dic in responseObject) {
+                LLAMessageCenterSystemMsgInfo *info = [LLAMessageCenterSystemMsgInfo parsJsonWithDic:dic];
+                if (info) {
+                    [systemMessageArray addObject:info];
+                }
+            }
+            
+            [self updateUnreadMessage];
+        }
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+    }];
+    
+}
 
 - (void) loadRoomData {
     
@@ -236,18 +270,25 @@ static const NSInteger conversationSectionIndex = 1;
         
         if (msgInfo.messageType == LLASystemMessageType_BePraised) {
             //
+            
             LLAMessageReceivedPraiseController *praised = [[LLAMessageReceivedPraiseController alloc] init];
             [self.navigationController pushViewController:praised animated:YES];
+            
+            [[LLAMessageCountManager shareManager] resetUnreadPraiseNum];
             
         }else if (msgInfo.messageType == LLASystemMessageType_BeCommented) {
             //
             LLAMessageReceivedCommentController *comment = [[LLAMessageReceivedCommentController alloc] init];
             [self.navigationController pushViewController:comment animated:YES];
             
+            [[LLAMessageCountManager shareManager] resetUnreadCommnetNum];
+            
         }else if (msgInfo.messageType == LLASystemMessageType_Order) {
             //
             LLAMessageOrderAideController *order = [[LLAMessageOrderAideController alloc] init];
             [self.navigationController pushViewController:order animated:YES];
+            
+            [[LLAMessageCountManager shareManager] resetUnreadOrderNum];
         }
         
     }else if (indexPath.section == conversationSectionIndex) {
@@ -257,7 +298,6 @@ static const NSInteger conversationSectionIndex = 1;
         
         if (roomInfo.conversation) {
         
-            [[LLAInstantMessageStorageUtil shareInstance] clearUnreadWithConvid:roomInfo.conversation.conversationId];
             roomInfo.conversation.unreadCount = 0;
             
             [dataTableView reloadData];
@@ -292,6 +332,18 @@ static const NSInteger conversationSectionIndex = 1;
     
     if (indexPath.section == conversationSectionIndex && editingStyle == UITableViewCellEditingStyleDelete) {
         //delete conversation
+        
+        LLAMessageCenterRoomInfo *roomInfo = roomArray[indexPath.row];
+        
+        [[LLAInstantMessageStorageUtil shareInstance] deleteRoomByConvid:roomInfo.conversation.conversationId];
+        [[LLAInstantMessageStorageUtil shareInstance] deleteMsgsByConvid:roomInfo.conversation.conversationId];
+        if (roomInfo.conversation.unreadCount > 0) {
+            [[LLAMessageCountManager shareManager] unReadIMNumChanged];
+        }
+        
+        [roomArray removeObjectAtIndex:indexPath.row];
+        [dataTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        
     }
 }
 
@@ -305,6 +357,10 @@ static const NSInteger conversationSectionIndex = 1;
         LLAMessageCenterRoomInfo *rooInfo = [LLAMessageCenterRoomInfo roomInfoWithConversation:conversation];
         rooInfo.conversation.lastMessage = message;
         
+        if (message) {
+            rooInfo.conversation.unreadCount = 1;
+        }
+        
         [roomArray insertObject:rooInfo atIndex:0];
         
         [dataTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:conversationSectionIndex]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -314,6 +370,9 @@ static const NSInteger conversationSectionIndex = 1;
         
         if (message){
             roomInfo.conversation.lastMessage = message;
+            if (![[LLAInstantMessageService shareService] isConversationChatting:roomInfo.conversation]) {
+                roomInfo.conversation.unreadCount ++;
+            }
         }
         
         if (index == 0) {
@@ -337,6 +396,41 @@ static const NSInteger conversationSectionIndex = 1;
 }
 
 - (void) imClientStatusChanged:(IMClientStatus)status {
+    
+}
+
+#pragma mark - MessageCount Change
+
+- (void) messageCountChanged:(NSNotification *) noti {
+    [self updateUnreadMessage];
+}
+
+- (void) updateUnreadMessage {
+    
+    for (LLAMessageCenterSystemMsgInfo *msg in systemMessageArray) {
+        if (msg.messageType == LLASystemMessageType_BePraised) {
+            msg.unreadNum = [[LLAMessageCountManager shareManager] getUnreadPraiseNum];
+        }else if (msg.messageType == LLASystemMessageType_BeCommented) {
+            msg.unreadNum = [[LLAMessageCountManager shareManager] getUnreadCommentNum];
+        }else if (msg.messageType == LLASystemMessageType_Order) {
+            msg.unreadNum = [[LLAMessageCountManager shareManager] getUnreadOrderNum];
+        }
+    }
+    
+    [dataTableView reloadData];
+}
+
+#pragma mark - OpenClient Success
+
+- (void) openClientSuccess:(NSNotification *) noti {
+    
+    //reload conversation
+    AVIMClient *client = [LLAInstantMessageService shareService].imClient;
+    
+    for (LLAMessageCenterRoomInfo *room in roomArray) {
+        
+        room.conversation.leanConversation = [client conversationWithKeyedConversation:room.conversation.keyedConversation];
+    }
     
 }
 

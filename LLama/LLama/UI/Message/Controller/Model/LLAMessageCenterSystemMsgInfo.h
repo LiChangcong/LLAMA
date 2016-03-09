@@ -7,6 +7,7 @@
 //
 
 #import "MTLModel.h"
+#import "Mantle.h"
 
 typedef NS_ENUM(NSInteger,LLASystemMessageType){
     LLASystemMessageType_BePraised = 0,
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSInteger,LLASystemMessageType){
     LLASystemMessageType_Order = 2,
 };
 
-@interface LLAMessageCenterSystemMsgInfo : MTLModel
+@interface LLAMessageCenterSystemMsgInfo : MTLModel<MTLJSONSerializing>
 
 @property(nonatomic , copy) NSString *iconImageURLString;
 
@@ -23,5 +24,7 @@ typedef NS_ENUM(NSInteger,LLASystemMessageType){
 @property(nonatomic , assign) NSInteger unreadNum;
 
 @property(nonatomic , assign) LLASystemMessageType messageType;
+
++ (instancetype) parsJsonWithDic:(NSDictionary *) data;
 
 @end

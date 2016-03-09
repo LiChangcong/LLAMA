@@ -11,8 +11,11 @@
 @class LLAUser;
 @class LLAIMConversation;
 
+
 @interface LLAIMCommonUtil : NSObject
 
 + (LLAUser *) findTheOtherWithConversation:(LLAIMConversation *) conversation mainUser:(LLAUser *) mainUser;
+
++(void) pushToChatViewController:(UINavigationController *) navigationController conversation:(LLAIMConversation *) conv;
 
 @end

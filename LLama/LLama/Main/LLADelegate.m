@@ -19,7 +19,9 @@
 
 
 #import "LLAInstantMessageService.h"
+
 #import "LLALoginRegisterHomeViewController.h"
+#import "LLAMessageCountManager.h"
 
 @interface LLADelegate()
 
@@ -48,8 +50,8 @@
     if ([LLAUser me].isLogin) {
     
         TMTabBarController *tabbar = [[TMTabBarController alloc] init];
-    
         self.window.rootViewController = tabbar;
+        [[LLAMessageCountManager shareManager] beginFetchCount];
         
     }else {
         TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
@@ -172,7 +174,6 @@
     }
     return YES;
     
-    return YES;
 }
 
 #pragma mark - Setup Third SDK

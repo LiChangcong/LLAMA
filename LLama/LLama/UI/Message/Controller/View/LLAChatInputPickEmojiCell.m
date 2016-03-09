@@ -8,11 +8,13 @@
 
 #import "LLAChatInputPickEmojiCell.h"
 
+#import "LLAPickEmojiItemInfo.h"
+
 @interface LLAChatInputPickEmojiCell()
 {
-    UILabel *emojiLabel;
+    UIButton *emojiButton;
     
-    UIFont *emojiLabelFont;
+    UIFont *emojiButtonFont;
 }
 
 @end
@@ -43,37 +45,46 @@
 
 - (void) initVariables {
     
-    emojiLabelFont = [UIFont llaFontOfSize:28];
+    emojiButtonFont = [UIFont llaFontOfSize:28];
 }
 
 - (void) initSubViews {
     
-    emojiLabel = [[UILabel alloc] init];
-    emojiLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    emojiLabel.font = emojiLabelFont;
-    emojiLabel.textAlignment = NSTextAlignmentCenter;
+    emojiButton = [[UIButton alloc] init];
+    emojiButton.translatesAutoresizingMaskIntoConstraints = NO;
+    emojiButton.titleLabel.font = emojiButtonFont;
     
-    [self.contentView addSubview:emojiLabel];
+    emojiButton.userInteractionEnabled = NO;
+    
+    [self.contentView addSubview:emojiButton];
     
     //
     [self.contentView addConstraints:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(0)-[emojiLabel]-(0)-|"
+      constraintsWithVisualFormat:@"V:|-(0)-[emojiButton]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
-      views:NSDictionaryOfVariableBindings(emojiLabel)]];
+      views:NSDictionaryOfVariableBindings(emojiButton)]];
     
     [self.contentView addConstraints:
      [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|-(0)-[emojiLabel]-(0)-|"
+      constraintsWithVisualFormat:@"H:|-(0)-[emojiButton]-(0)-|"
       options:NSLayoutFormatDirectionLeadingToTrailing
       metrics:nil
-      views:NSDictionaryOfVariableBindings(emojiLabel)]];
+      views:NSDictionaryOfVariableBindings(emojiButton)]];
 
 }
 
-- (void) updateCellWithEmoji:(NSString *)emojiString {
-    emojiLabel.text = emojiString;
+- (void) updateCellWithEmoji:(LLAPickEmojiItemInfo *)emojiInfo {
+    
+    if (emojiInfo.type == LLAPickEmojiItemType_NormalEmoji) {
+        [emojiButton setImage:nil forState:UIControlStateNormal];
+        [emojiButton setTitle:emojiInfo.emojiString forState:UIControlStateNormal];
+    }else {
+        [emojiButton setTitle:nil forState:UIControlStateNormal];
+        [emojiButton setImage:[UIImage llaImageWithName:@"delete_emoji"] forState:UIControlStateNormal];
+    }
+    
 }
 
 @end

@@ -14,4 +14,6 @@
 
 - (instancetype) initWithConversation:(LLAIMConversation *) conversation;
 
+- (void) resetChatControllerWihtConversation:(LLAIMConversation *) newConversation;
+
 @end

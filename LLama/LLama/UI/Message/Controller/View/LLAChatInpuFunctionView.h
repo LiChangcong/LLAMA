@@ -31,6 +31,8 @@
 @property(nonatomic , readonly) UIButton *cameraButton;
 @property(nonatomic , readonly) UIButton *emojiButton;
 
+- (void) deselectAllButtons;
+
 + (CGFloat) calculateHeight;
 
 @end

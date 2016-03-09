@@ -48,6 +48,7 @@
 #import "LLAUploadVideoShareManager.h"
 #import "LLAVideoPlayUtil.h"
 #import "LLAInstantMessageService.h"
+#import "LLAIMCommonUtil.h"
 
 // 点赞
 #import "LLALoveViewController.h"
@@ -458,6 +459,9 @@ static const CGFloat navigationBarHeight = 64;
         
         [leftItems addObject:[self backBarItem]];
         
+        //test
+        [leftItems addObject:[self chatToUserItem]];
+        
         customNaviBar.leftBarButtonItems = leftItems;
         
         //right
@@ -562,18 +566,17 @@ static const CGFloat navigationBarHeight = 64;
     
 }
 
+- (UIBarButtonItem *) chatToUserItem {
+    UIBarButtonItem *chatItem = [[UIBarButtonItem alloc] initWithTitle:@"私聊" style:UIBarButtonItemStyleBordered target:self action:@selector(chatWithUser)];
+    
+    return chatItem;
+}
+
 - (void) backToPre {
-    //[self.navigationController popViewControllerAnimated:YES];
     
-    //create conversation
+    [self.navigationController popViewControllerAnimated:YES];
     
-    LLAUser *me = [LLAUser me];
-    if (![me isEqual:mainInfo.userInfo]) {
-        
-        [[LLAInstantMessageService shareService] createSingleChatConversationWithMembers:@[me,mainInfo.userInfo] callBack:^(LLAIMConversation *conversation, NSError *error) {
-            
-        }];
-    }
+
 }
 
 - (void) showSetting {
@@ -672,6 +675,26 @@ static const CGFloat navigationBarHeight = 64;
             
         } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
             [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }];
+    }
+}
+
+#pragma mark - ChatTouser
+
+- (void) chatWithUser {
+    
+    [HUD show:YES];
+    
+    //create conversation
+    
+    LLAUser *me = [LLAUser me];
+    if (![me isEqual:mainInfo.userInfo]) {
+        
+        [[LLAInstantMessageService shareService] createSingleChatConversationWithMembers:@[me,mainInfo.userInfo] callBack:^(LLAIMConversation *conversation, NSError *error) {
+            
+            [HUD hide:YES];
+            
+            [LLAIMCommonUtil pushToChatViewController:self.navigationController conversation:conversation];
         }];
     }
 }

@@ -117,8 +117,8 @@
 
 - (void) messageImageViewTapped:(UIGestureRecognizer *) ges {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(showFullImageWithMessage:)]) {
-        [self.delegate showFullImageWithMessage:self.currentMessage];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showFullImageWithMessage:imageView:)]) {
+        [self.delegate showFullImageWithMessage:self.currentMessage imageView:self.bubbleImageView];
     }
 }
 

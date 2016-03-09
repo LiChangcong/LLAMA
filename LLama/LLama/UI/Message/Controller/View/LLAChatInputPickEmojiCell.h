@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class LLAPickEmojiItemInfo;
+
 @interface LLAChatInputPickEmojiCell : UICollectionViewCell
 
-- (void) updateCellWithEmoji:(NSString *) emojiString;
+- (void) updateCellWithEmoji:(LLAPickEmojiItemInfo *) emojiInfo;
 
 @end

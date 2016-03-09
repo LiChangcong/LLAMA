@@ -32,7 +32,7 @@
 
 //for image cell
 
-- (void) showFullImageWithMessage:(LLAIMMessage *) message;
+- (void) showFullImageWithMessage:(LLAIMMessage *) message imageView:(UIImageView *) imageView;
 
 //for voice cell
 

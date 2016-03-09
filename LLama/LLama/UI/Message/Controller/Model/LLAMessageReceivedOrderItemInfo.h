@@ -10,7 +10,9 @@
 
 #import "LLAUser.h"
 
-@interface LLAMessageReceivedOrderItemInfo : MTLModel
+@interface LLAMessageReceivedOrderItemInfo : MTLModel<MTLJSONSerializing>
+
+@property(nonatomic , copy) NSString *itemIdString;
 
 @property(nonatomic , strong) LLAUser *authorUser;
 
@@ -22,5 +24,9 @@
 
 @property(nonatomic , copy) NSString *manageContent;
 
+@property(nonatomic , copy) NSString *scriptIdString;
+
+
++ (instancetype) parseJsonWithDic:(NSDictionary *)data;
 
 @end

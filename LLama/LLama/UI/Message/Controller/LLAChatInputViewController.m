@@ -18,6 +18,7 @@
 
 //model
 #import "LLAPickImageItemInfo.h"
+#import "Emoji.h"
 
 //util
 #import "XHVoiceRecordHelper.h"
@@ -122,6 +123,17 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    if (self.isRecording) {
+        //stop it
+        [self holdDownButtonTouchUpInside];
+    }
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -321,6 +333,9 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 - (void) recordVoiceWithFunctionView:(LLAChatInpuFunctionView *)fnView {
     
     if (currentInputType == LLAChatInputControllerCurrentType_RecordVoice) {
+        tapToRecordButton.hidden = YES;
+        inputTextView.hidden = NO;
+        [inputTextView.internalTextView becomeFirstResponder];
         return;
     }
     
@@ -375,7 +390,10 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     };
     
     [self.navigationController presentViewController:imagePicker animated:YES completion:^{
-        
+        if (currentInputType == LLAChatInputControllerCurrentType_InputText) {
+            [self resignInputView];
+        }
+
     }];
     
 }
@@ -392,13 +410,21 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     
     [self.navigationController presentViewController:imagePicker animated:YES completion:^{
         
+        if (currentInputType == LLAChatInputControllerCurrentType_InputText) {
+            [self resignInputView];
+        }
+
     }];
+    
     
 }
 
 - (void) showEmojiWithFunctionView:(LLAChatInpuFunctionView *)functionView {
     if (currentInputType == LLAChatInputControllerCurrentType_PickEmoji) {
-        //hide
+        //hide , show input text
+        
+        [inputTextView.internalTextView becomeFirstResponder];
+        
         return;
     }
     
@@ -448,6 +474,23 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 }
 
 - (void) deleteEmoji {
+    //delete
+    
+//    NSString *text = inputTextView.text;
+//    if (text.length < 1) {
+//        return;
+//    }
+//    
+//    //emoji占两个长度，所以先看看是不是emoji表情
+//    NSString *newStr = [text substringToIndex:text.length-1];
+//    NSArray *faces = [Emoji allEmoji];
+//    if(text.length > 1 && [faces containsObject:[text substringFromIndex:text.length-2]]){
+//        newStr = [text substringToIndex:text.length-2];
+//    }
+//    inputTextView.text = newStr;
+    
+    [inputTextView.internalTextView deleteBackward];
+
     
 }
 
@@ -577,11 +620,12 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
         WEAKSELF
         [self.voiceRecordHUD cancelRecordCompled:^(BOOL fnished) {
             weakSelf.voiceRecordHUD = nil;
+            self.isRecording = NO;
         }];
         [self.voiceRecordHelper cancelledDeleteWithCompletion:^{
             
         }];
-
+        
         
     } else {
         self.isCancelled = YES;
@@ -605,6 +649,7 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(sendMessageWithVoiceURL:withDuration:)]) {
                 
                 //convert from wav to amr
+                self.isRecording = NO;
                 
                 NSString *amrPath = [XHVoiceCommonHelper amrPathFromWavPath:weakSelf.voiceRecordHelper.recordPath];
                 
@@ -705,6 +750,9 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
 - (void) resignInputView {
     
     //
+    
+    [functionView deselectAllButtons];
+    
     if (currentInputType == LLAChatInputControllerCurrentType_InputText || currentInputType == LLAChatInputControllerCurrentType_PickEmoji) {
     
         [inputTextView resignFirstResponder];
