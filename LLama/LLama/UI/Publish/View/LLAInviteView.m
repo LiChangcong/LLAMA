@@ -63,7 +63,7 @@
     CGFloat screenWidth =  [UIScreen mainScreen].bounds.size.width;
     
     // 80:整体距离左边距离 。40，整体距离右边的距离。50,每个用户的宽度。10，每一个之间的间隙
-    num = (screenWidth - 80 - 40)/ (23 + 10);
+    num = (screenWidth - 100 - 40)/ (23 + 10);
 
     for (int i = 0 ; i < num; i++) {
         
@@ -90,7 +90,7 @@
         
     }
     
-    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:80 tailSpacing:40];
+    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:100 tailSpacing:40];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         
 //        make.top.equalTo(@0);

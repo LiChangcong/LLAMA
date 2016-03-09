@@ -20,11 +20,16 @@ typedef NS_ENUM(NSInteger,LLAScriptTopViewType){
 
 @protocol LLAScriptTopViewDelegate <NSObject>
 
+
 - (void) scriptTopViewDidTapImageView:(LLAScriptTopView *)topView;
+
+- (void) scriptTopViewDidTapSecretButton:(LLAScriptTopView *)scriptTopView withSecretButton:(UIButton *) button;
+
 
 @end
 
 @interface LLAScriptTopView : UIView
+
 
 @property(nonatomic , assign) LLAScriptTopViewType scriptTopViewType;
 
