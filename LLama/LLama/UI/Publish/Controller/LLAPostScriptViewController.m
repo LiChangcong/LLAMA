@@ -41,6 +41,8 @@
 
 @interface LLAPostScriptViewController () <LLAScriptTopViewDelegate>
 {
+    UIScrollView *contentScrollView;
+    
     LLAScriptTopView *topView;
     
     LLAInviteView *inviteView;
@@ -60,6 +62,10 @@
     
 //    LLALoadingView *HUD;
 //    LLAILoveWhoInfo *mainInfo;
+    
+    // 产生一个遮盖
+    UIButton *shadeButton;
+
 
 
 }
@@ -67,7 +73,7 @@
 
 @implementation LLAPostScriptViewController
 
-#pragma mark - life
+#pragma mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,13 +88,25 @@
     [self initSubViews];
     [self initSubConstraints];
     
-//    // 显示菊花
-//    [HUD show:YES];
-//    
-//    // 刷新数据
-//    [self loadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+
 
 }
+
+- (void) viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    //
+    
+//    CGFloat bottonY =  CGRectGetMaxY(publishButton.frame);
+    contentScrollView.contentSize = CGSizeMake(0, 557);
+
+}
+
+#pragma mark - Init
 
 - (void)initNav
 {
@@ -107,36 +125,51 @@
 
 - (void)initSubViews
 {
+    /*-------------------------------------*/
+//    CGRect bounds = [ [ UIScreen mainScreen ] applicationFrame ] ;
+    contentScrollView = [ [UIScrollView alloc ] init];
+//    contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+//    contentScrollView.contentSize = CGSizeMake(0, 1000);
+    contentScrollView.alwaysBounceHorizontal = NO;
+//    contentScrollView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:contentScrollView];
+    
+    /*-------------------------------------*/
     if (self.scriptType == LLAPublishScriptTypeNew_Text) {
 
         topView = [[LLAScriptTopView alloc] initWithType:LLAScriptTopViewType_Text];
         topView.delegate = self;
-        [self.view addSubview:topView];
+//        topView.backgroundColor = [UIColor colorWithHex:0x2c2a3a];
+        [contentScrollView addSubview:topView];
         
     }else if (self.scriptType == LLAPublishScriptTypeNew_Image){
         
         topView = [[LLAScriptTopView alloc] initWithType:LLAScriptTopViewType_Image];
         topView.delegate = self;
         topView.scriptImageView.image = self.pickImgInfo.thumbImage;
-        [self.view addSubview:topView];
+//        topView.backgroundColor = [UIColor colorWithHex:0x2c2a3a];
+        [contentScrollView addSubview:topView];
     
     }
-    
-    
+
+    /*-------------------------------------*/
     inviteView = [[LLAInviteView alloc] init];
     inviteView.userInteractionEnabled = YES;
-    [self.view addSubview:inviteView];
+    [contentScrollView addSubview:inviteView];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteToActTap)];
     [inviteView updateInfoWithInfoArray:[NSArray array]]; // 进入界面的时候邀请列表为空
     [inviteView addGestureRecognizer:tap];
     
+    /*-------------------------------------*/
+
     shareView = [[LLAShareView alloc] init];
-    [self.view addSubview:shareView];
+    [contentScrollView addSubview:shareView];
     
     /*-------------------------------------*/
     blankShowView = [[UIView alloc] init];
     blankShowView.hidden = YES;
-    [self.view addSubview:blankShowView];
+    [contentScrollView addSubview:blankShowView];
     
     blankShow = [[UIImageView alloc] init];
     blankShow.image = [UIImage imageNamed:@"blankShow"];
@@ -144,8 +177,10 @@
     
     blankDesLabel = [[UILabel alloc] init];
     blankDesLabel.text = @"视频上传后将设置为私密状态,\n其他人都看不到哦~";
+    blankDesLabel.numberOfLines = 0;
     blankDesLabel.font = [UIFont systemFontOfSize:12];
-    blankDesLabel.textColor = [UIColor lightGrayColor];
+    blankDesLabel.textColor = [UIColor colorWithHex:0x807f87];
+    blankDesLabel.textAlignment = NSTextAlignmentCenter;
     [blankShowView addSubview:blankDesLabel];
 
     /*-------------------------------------*/
@@ -154,112 +189,94 @@
     [publishButton.titleLabel setFont:publishButtonFont];
     [publishButton setTitle:@"发布" forState:UIControlStateNormal];
     [publishButton addTarget:self action:@selector(publishButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:publishButton];
+    [contentScrollView addSubview:publishButton];
 
+    
+    // 使用button生成一个遮盖
+    shadeButton = [[UIButton alloc] init];
+    shadeButton.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    shadeButton.backgroundColor = [UIColor lightGrayColor];
+    shadeButton.alpha = 0.1;
+    [shadeButton addTarget:self action:@selector(shadeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    shadeButton.hidden = YES;
+    [self.view addSubview:shadeButton];
 }
 
 - (void)initSubConstraints
 {
+    [contentScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
+    }];
+
     /*-------------------------------------*/
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
+        make.top.equalTo(contentScrollView.mas_top);
+        make.left.equalTo(contentScrollView);
+        make.right.equalTo(contentScrollView);
         make.height.equalTo(@204);
+        make.width.equalTo(contentScrollView.mas_width);
     }];
-    
+
     /*-------------------------------------*/
     [inviteView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom);
         make.height.equalTo(@44);
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(contentScrollView);
+        make.width.equalTo(contentScrollView.mas_width);
     }];
 
     /*-------------------------------------*/
     [shareView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(inviteView.mas_bottom).with.offset(40);
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(contentScrollView);
         make.height.equalTo(@132);
+        make.width.equalTo(contentScrollView.mas_width);
+
     }];
     
     
     /*-------------------------------------*/
     [blankShowView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(inviteView.mas_bottom).with.offset(40);
-        make.left.right.equalTo(self.view);
+        make.left.right.equalTo(contentScrollView);
         make.height.equalTo(@132);
+        make.width.equalTo(contentScrollView.mas_width);
+
     }];
     
     [blankShow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(blankShowView.mas_top);
-        make.left.equalTo(blankShowView.mas_left);
-        make.right.equalTo(blankShowView.mas_right);
-        make.height.equalTo(@100);
+//        make.left.equalTo(blankShowView.mas_left);
+//        make.right.equalTo(blankShowView.mas_right);
+        make.centerX.equalTo(blankShowView.mas_centerX);
+        make.width.height.equalTo(@100);
     }];
     
     [blankDesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(blankShow.mas_bottom);
-        make.left.equalTo(blankShowView.mas_left);
-        make.right.equalTo(blankShowView.mas_right);
-        make.bottom.equalTo(blankShow.mas_bottom);
+//        make.left.equalTo(blankShowView.mas_left);
+//        make.right.equalTo(blankShowView.mas_right);
+        make.centerX.equalTo(blankShowView.mas_centerX);
+//        make.bottom.equalTo(blankShow.mas_bottom);
     }];
     
     /*-------------------------------------*/
     [publishButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(shareView.mas_bottom).with.offset(40);
-        make.left.right.equalTo(self.view).with.offset(10);
-        make.bottom.equalTo(self.view).with.offset(- 20);
+        make.top.equalTo(inviteView.mas_bottom).with.offset(220);
+//        make.left.equalTo(contentScrollView.mas_left).with.offset(10);
+//        make.right.equalTo(contentScrollView.mas_right).with.offset(-10);
+//        make.bottom.equalTo(contentScrollView.mas_bottom).with.offset(- 20);
+        make.centerX.equalTo(contentScrollView.mas_centerX);
         make.height.equalTo(@45);
+        make.width.equalTo(contentScrollView.mas_width).with.multipliedBy(0.9);
+
     }];
-    
-    
-    // 菊花控件
-//    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+
     
 }
-
-//#pragma mark - loadData
-//
-//- (void) loadData {
-//    
-//    LLAUser *me = [LLAUser me];
-//    NSString *userId = me.userIdString;
-//    NSString *type = @"LIKETO";
-//    // 参数
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    [params setValue:userId forKey:@"userId"];
-//    [params setValue:type forKey:@"type"];
-//    [params setValue:@(0) forKey:@"pageNumber"];
-//    [params setValue:@(LLA_LOAD_DATA_DEFAULT_NUMBERS) forKey:@"pageSize"];
-//    
-//    // 发送请求
-//    [LLAHttpUtil httpPostWithUrl:@"/user/getLikeList" param:params responseBlock:^(id responseObject) {
-//        
-//        [HUD hide:NO];
-//        
-//        LLAILoveWhoInfo *tempInfo = [LLAILoveWhoInfo parseJsonWithDic:responseObject];
-//        if (tempInfo){
-//            mainInfo = tempInfo;
-//            
-//            [inviteView updateInfoWithInfoArray:mainInfo.dataList];
-//        }
-//        
-//        
-//        
-//    } exception:^(NSInteger code, NSString *errorMessage) {
-//        
-//        [HUD hide:NO];
-//        
-//        [LLAViewUtil showAlter:self.view withText:errorMessage];
-//        
-//    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
-//        
-//        [HUD hide:NO];
-//        
-//        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
-//        
-//    }];
-//}
 
 
 
@@ -542,5 +559,15 @@
     }
 }
 
+- (void)shadeButtonClicked
+{
+    [self.view endEditing:YES];
+    shadeButton.hidden = YES;
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    shadeButton.hidden = NO;
+}
 
 @end
