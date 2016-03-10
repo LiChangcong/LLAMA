@@ -924,11 +924,13 @@ static const CGFloat navigationBarHeight = 64;
         [photoArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:userInfo.headImageURL]]];
         
         MWPhotoBrowser *photoBrower = [[MWPhotoBrowser alloc] initWithDelegate:self];
-        [photoBrower showToolBar:NO];
+        //[photoBrower showToolBar:NO];
         LLABaseNavigationController *photoNavi = [[LLABaseNavigationController alloc] initWithRootViewController:photoBrower];
         
         photoNavi.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:photoNavi animated:YES completion:nil];
+        
+        //[self.navigationController pushViewController:photoBrower animated:YES];
         
     }
 }

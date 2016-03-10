@@ -21,9 +21,14 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Bugtags (1.1.9)
+  - DACircularProgress (2.3.1)
   - HappyDNS (0.2.3)
   - Masonry (0.6.4)
   - MBProgressHUD (0.9.2)
+  - MWPhotoBrowser (2.1.1):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
   - pop (1.0.9)
   - Qiniu (7.0.16):
     - AFNetworking (~> 2.0)
@@ -40,6 +45,7 @@ DEPENDENCIES:
   - Bugtags (~> 1.1.7)
   - Masonry
   - MBProgressHUD
+  - MWPhotoBrowser
   - pop
   - Qiniu (~> 7.0)
   - SDWebImage
@@ -50,9 +56,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bugtags: cff5f312f214af51b2f4fcdd65258d1874a0fd2e
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461

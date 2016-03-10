@@ -11,3 +11,4 @@ pod "UMengAnalytics-NO-IDFA"
 pod "UMengSocial"
 pod "SDWebImage“
 pod "Bugtags","~> 1.1.7"
+pod "MWPhotoBrowser"

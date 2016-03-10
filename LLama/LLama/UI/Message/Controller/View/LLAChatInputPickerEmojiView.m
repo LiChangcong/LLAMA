@@ -13,8 +13,8 @@
 #import "LLAChatInputPickEmojiCell.h"
 #import "LLAPickEmojiItemInfo.h"
 
-static NSString *const closeImageName_Normal = @"";
-static NSString *const closeImageName_Highlight = @"";
+static NSString *const closeImageName_Normal = @"MessageInput_Close_Normal";
+static NSString *const closeImageName_Highlight = @"MessageInput_Close_Highlight";
 
 static NSString *const emojiIden = @"emojiIden";
 
@@ -286,6 +286,10 @@ static const NSInteger numberOfEmojiIconRows = 4;
 #pragma mark - ButtonClick
 
 - (void) closeButtonClicked:(UIButton *) sender {
+    
+    if (delegate && [delegate respondsToSelector:@selector(closeKeyBoard)]) {
+        [delegate closeKeyBoard];
+    }
     
 }
 

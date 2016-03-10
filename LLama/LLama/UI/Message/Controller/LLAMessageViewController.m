@@ -190,7 +190,11 @@ static const NSInteger conversationSectionIndex = 1;
         
     } exception:^(NSInteger code, NSString *errorMessage) {
         
+        [self updateUnreadMessage];
+        
     } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [self updateUnreadMessage];
         
     }];
     

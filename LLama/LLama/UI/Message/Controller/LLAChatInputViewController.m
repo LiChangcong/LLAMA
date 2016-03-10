@@ -497,6 +497,10 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     
 }
 
+- (void) closeKeyBoard {
+    [self resignInputView];
+}
+
 #pragma mark - HPGrowingTextViewDelegate
 
 - (void) growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
@@ -539,10 +543,7 @@ static const CGFloat tapToRecordButtonToHorBorder = 8;
     
     currentInputType = LLAChatInputControllerCurrentType_InputText;
     
-    functionView.recordVoiceButton.selected = NO;
-    functionView.pickPhotoButton.selected = NO;
-    functionView.cameraButton.selected = NO;
-    functionView.emojiButton.selected = NO;
+    [functionView deselectAllButtons];
     
     return YES;
 }

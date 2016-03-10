@@ -11,6 +11,9 @@
 static NSString *const recordImage_Normal = @"message_Input_Record_Voice_Normal";
 static NSString *const recordImage_Highlight = @"message_Input_Record_Voice_Highlight";
 
+static NSString *const keyBoardImage_Normal = @"MessageInput_KeyBoard_Normal";
+static NSString *const keyBoardImage_Highlight = @"MessageInput_KeyBoard_Highlight";
+
 static NSString *const pickPhotosImage_Normal = @"message_Input_Pick_Photos_Normal";
 static NSString *const pickPhotosImage_Highlight = @"message_Input_Pick_Photos_Highlight";
 
@@ -22,7 +25,7 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 
 @interface LLAChatInpuFunctionView()
 {
-
+    BOOL isRecord;
 }
 
 @property(nonatomic , readwrite , strong) UIButton *recordVoiceButton;
@@ -71,6 +74,8 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
     [recordVoiceButton addTarget:self action:@selector(recordVoiceButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:recordVoiceButton];
+    
+    isRecord = YES;
     
     //
     pickPhotoButton = [[UIButton alloc] init];
@@ -207,9 +212,12 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 //    if (recordVoiceButton.isSelected) {
 //        return;
 //    }
+    if (isRecord) {
+        [self changeRecordImageToKeyBoard];
+    }
     
     emojiButton.selected = NO;
-    recordVoiceButton.selected = YES;
+    //recordVoiceButton.selected = YES;
     
     if (delegate && [delegate respondsToSelector:@selector(recordVoiceWithFunctionView:)]) {
         [delegate recordVoiceWithFunctionView:self];
@@ -238,7 +246,8 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 //    }
     
     emojiButton.selected = YES;
-    recordVoiceButton.selected = NO;
+    //recordVoiceButton.selected = NO;
+    [self changeRecordImageToRecordImage];
     pickPhotoButton.selected = NO;
     cameraButton.selected = NO;
     
@@ -250,10 +259,34 @@ static NSString *const emojiImage_Highlight = @"message_Input_Emoji_Highlight";
 #pragma mark - 
 
 - (void) deselectAllButtons {
-    recordVoiceButton.selected = NO;
+    //recordVoiceButton.selected = NO;
+    [self changeRecordImageToRecordImage];
+    
     pickPhotoButton.selected = NO;
     cameraButton.selected = NO;
     emojiButton.selected = NO;
+}
+
+#pragma mark - Set button image
+
+- (void) changeRecordImageToRecordImage {
+    
+    [recordVoiceButton setImage:[UIImage imageNamed:recordImage_Normal] forState:UIControlStateNormal];
+    [recordVoiceButton setImage:[UIImage imageNamed:recordImage_Highlight] forState:UIControlStateHighlighted];
+    [recordVoiceButton setImage:[UIImage imageNamed:recordImage_Highlight] forState:UIControlStateSelected];
+    
+    isRecord = YES;
+    
+}
+
+- (void) changeRecordImageToKeyBoard {
+    
+    [recordVoiceButton setImage:[UIImage imageNamed:keyBoardImage_Normal] forState:UIControlStateNormal];
+    [recordVoiceButton setImage:[UIImage imageNamed:keyBoardImage_Highlight] forState:UIControlStateHighlighted];
+    [recordVoiceButton setImage:[UIImage imageNamed:keyBoardImage_Highlight] forState:UIControlStateSelected];
+    
+    isRecord = NO;
+    
 }
 
 #pragma mark - CalculateHeight
