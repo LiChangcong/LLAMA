@@ -159,7 +159,7 @@
             [[LLAInstantMessageDispatchManager sharedInstance] dispatchNewMessageArrived:message conversation:self];
         }
         
-        [self.leanConversation sendMessage:typeMessage progressBlock:^(NSInteger percentDone) {
+        [self.leanConversation sendMessage:typeMessage options:AVIMMessageSendOptionRequestReceipt progressBlock:^(NSInteger percentDone) {
             if (progressBlock)
                 progressBlock(percentDone/100.0);
             

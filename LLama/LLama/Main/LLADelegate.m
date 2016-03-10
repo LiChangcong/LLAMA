@@ -115,7 +115,7 @@
     
     AVUser *user = [AVUser currentUser];
     if (user && user.objectId.length >0) {
-        [currentInstallation addUniqueObject:user.objectId forKey:@"installation"];
+        [currentInstallation addUniqueObject:user.objectId forKey:@"channels"];
     }
     
     [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

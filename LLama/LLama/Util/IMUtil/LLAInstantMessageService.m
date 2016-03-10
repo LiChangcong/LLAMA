@@ -14,6 +14,8 @@
 #import "LLAMessageCountManager.h"
 
 
+#define LEANCLOUD_LOGIN_PASSWORD @"LLAMA"
+
 @interface LLAInstantMessageService()<AVIMClientDelegate>
 {
     
@@ -156,6 +158,8 @@
         
         if (succeeded) {
             
+            [self generateAVUser];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:LLA_CONNECT_LEANCLOUD_CLIENT_SUCCESS_NOTIFICATION object:nil];
 
         }
@@ -168,6 +172,8 @@
 - (void) closeClientWithCallBack:(LLAIMBooleanResultBlock)callBack {
     
     [[LLAInstantMessageStorageUtil shareInstance] closeDBQueue];
+    
+    [AVUser logOut];
     
     if (!(imClient.status == AVIMClientStatusClosed || imClient.status == AVIMClientStatusClosing || imClient.status == AVIMClientStatusNone)) {
         
@@ -254,5 +260,54 @@
     }
 }
 
+#pragma mark - Bind Installation and User
+
+- (void) generateAVUser {
+    
+    if (imClient.clientId.length > 0) {
+        
+        [AVUser logOut];
+    
+        [AVUser logInWithUsernameInBackground:imClient.clientId password:LEANCLOUD_LOGIN_PASSWORD block:^(AVUser *user, NSError *error) {
+            
+            if (!error) {
+                //bind
+                [self bindInstallationWithUser];
+            }else {
+                //register
+                AVUser *newUser = [AVUser user];
+                newUser.username = imClient.clientId;
+                newUser.password = LEANCLOUD_LOGIN_PASSWORD;
+                [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        //bind
+                        [self bindInstallationWithUser];
+                    }
+                }];
+            }
+            
+        }];
+        
+    }
+}
+
+- (void) bindInstallationWithUser {
+    
+    //
+    AVUser *curUser = [AVUser currentUser];
+    AVInstallation *curInstallation = [AVInstallation currentInstallation];
+    
+    if (curUser && curInstallation && curInstallation.deviceToken) {
+        
+        //
+//        [curInstallation setObject:curUser forKey:@"owner"];
+//        [curInstallation saveInBackground];
+        
+        [curUser setObject:curInstallation forKey:@"installation"];
+        [curUser saveInBackground];
+        
+    }
+    
+}
 
 @end

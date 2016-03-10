@@ -51,6 +51,14 @@
                     uploadData = [fileForUpload copy];
                 }else if ([fileForUpload isKindOfClass:[UIImage class]]) {
                     uploadData = UIImageJPEGRepresentation((UIImage*)fileForUpload, 0.8);
+                    if (!uploadData) {
+                        uploadData = UIImagePNGRepresentation((UIImage *)fileForUpload);
+                    }
+                    
+                    if (!uploadData) {
+                        complete(LLAUploadFileResponseCode_ZeroDataSize,nil,nil,nil);
+                        return ;
+                    }
                 }
                 
             }else if (fileType == LLAUploadFileType_Video) {
