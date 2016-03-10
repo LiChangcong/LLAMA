@@ -736,7 +736,7 @@
         return YES;
     }
     
-    if ((curMsg.sendTimestamp - preMsg.sendTimestamp)/1000 > 120) {
+    if ((curMsg.sendTimestamp - preMsg.sendTimestamp)/1000 > 300) {
         return YES;
     }else {
         return NO;

@@ -16,6 +16,8 @@
 
 - (void) deleteEmoji;
 
+- (void) closeKeyBoard;
+
 @end
 
 @interface LLAChatInputPickerEmojiView : UIView
