@@ -78,6 +78,10 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
 //status bar style
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
