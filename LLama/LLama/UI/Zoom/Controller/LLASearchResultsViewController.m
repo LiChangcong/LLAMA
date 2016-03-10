@@ -24,6 +24,7 @@
 #import "LLASearchResultsInfo.h"
 #import "LLAUserProfileViewController.h"
 
+#import "LLASearchResultsView.h"
 
 //section index
 static const NSInteger searchResultsUsersIndex = 0;
@@ -34,12 +35,12 @@ static NSString *const hotUsersSearchResultsCellIden = @"hotUsersSearchResultsCe
 static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 
-@interface LLASearchResultsViewController ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,LLAHotUsersSearchResultsCellDelegate>
+@interface LLASearchResultsViewController ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,LLAHotUsersSearchResultsCellDelegate,LLASearchResultsViewDelegate>
 {
     UITableView *dataTableView;
  
-    UISearchBar *resultsSearchBar;
-    
+//    UISearchBar *resultsSearchBar;
+    LLASearchResultsView *resultsSearchBar;
     UILabel *sectionTitleLabel;
     
     LLAHotUsersSearchResultsHeader *searchResultsHeader;
@@ -53,6 +54,10 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     
     UIImageView *blankImage;
     UILabel *desLabel;
+    
+    UIImageView *blankImage1;
+    UILabel *desLabel1;
+
 
 }
 
@@ -98,13 +103,13 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:dataTableView];
     
-    resultsSearchBar = [[UISearchBar alloc] init];
-    resultsSearchBar.text = _searchResultText;
-    resultsSearchBar.showsCancelButton = YES;
+    resultsSearchBar = [[LLASearchResultsView alloc] init];
+    resultsSearchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
     resultsSearchBar.delegate = self;
-    resultsSearchBar.tintColor = [UIColor colorWithHex:0xD3D3D3];
+    resultsSearchBar.searchBar.text = _searchResultText;
     self.navigationItem.titleView = resultsSearchBar;
-    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithHex:0x1e1d22]];
+
     // register
     [dataTableView registerClass:[LLAHotUsersSearchResultsCell class] forCellReuseIdentifier:hotUsersSearchResultsCellIden];
     [dataTableView registerClass:[LLAHallVideoInfoCell class] forCellReuseIdentifier:hallVideoInfoCellIden];
@@ -156,6 +161,9 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
             if (mainInfo.searchResultUsersDataList.count == 0 && mainInfo.searchResultVideosdataList.count == 0) {
                 
 
+                blankImage1.hidden = YES;
+                desLabel1.hidden = YES;
+
                 blankImage = [[UIImageView alloc] init];
                 blankImage.image = [UIImage imageNamed:@"blankShow"];
                 [dataTableView addSubview:blankImage];
@@ -163,8 +171,8 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
                 
                 desLabel = [[UILabel alloc] init];
                 desLabel.font = [UIFont systemFontOfSize:16];
-                desLabel.text = @"没有相关数据噢";
-                desLabel.textColor = [UIColor whiteColor];
+                desLabel.text = @"没有搜到相关的结果";
+                desLabel.textColor = [UIColor lightGrayColor];
                 desLabel.textAlignment = NSTextAlignmentCenter;
                 [dataTableView addSubview:desLabel];
                 
@@ -195,10 +203,63 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 //                    make.bottom.equalTo(dataTableView.mas_bottom);
 //                }];
 
-            }else{
+            }
+//            else{
+//            
+//                blankImage.hidden = YES;
+//                desLabel.hidden = YES;
+//            }
             
+            if (mainInfo.searchResultVideosdataList.count == 0 && mainInfo.searchResultUsersDataList.count != 0) {
+                
+                
                 blankImage.hidden = YES;
                 desLabel.hidden = YES;
+
+                blankImage1 = [[UIImageView alloc] init];
+                blankImage1.image = [UIImage imageNamed:@"blankShow"];
+                [dataTableView addSubview:blankImage1];
+                
+                
+                desLabel1 = [[UILabel alloc] init];
+                desLabel1.font = [UIFont systemFontOfSize:16];
+                desLabel1.text = @"没有搜到相关的视频";
+                desLabel1.textColor = [UIColor lightGrayColor];
+                desLabel1.textAlignment = NSTextAlignmentCenter;
+                [dataTableView addSubview:desLabel1];
+                
+                
+                [blankImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.centerX.equalTo(dataTableView.mas_centerX);
+//                    make.centerY.equalTo(dataTableView.mas_centerY);
+                    make.centerY.equalTo(dataTableView.mas_top).with.offset(200);
+                    make.width.height.equalTo(@200);
+                }];
+                
+                [desLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(blankImage1.mas_bottom);
+                    make.left.equalTo(dataTableView.mas_left);
+                    make.right.equalTo(dataTableView.mas_right);
+                    make.centerX.equalTo(dataTableView.mas_centerX);
+                }];
+                
+            }
+//            else {
+//            
+//                blankImage.hidden = YES;
+//                desLabel.hidden = YES;
+//            }
+            
+            if (mainInfo.searchResultVideosdataList.count != 0) {
+                
+                blankImage.hidden = YES;
+                desLabel.hidden = YES;
+                
+                blankImage1.hidden = YES;
+                desLabel1.hidden = YES;
+
+
             }
             
         }else {
@@ -230,7 +291,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 
 - (void)shadeButtonClicked
 {
-    [resultsSearchBar resignFirstResponder];
+    [resultsSearchBar.searchBar resignFirstResponder];
     shadeButton.hidden = YES;
 }
 
@@ -355,7 +416,7 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
 }
 #pragma mark - searchBarDelegate
 
-
+/*
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
 //    NSLog(@"开始编辑");
@@ -387,7 +448,30 @@ static NSString *const hallVideoInfoCellIden = @"hallVideoInfoCell";
     searchBar.text = @"";
     [self.navigationController popViewControllerAnimated:YES];
 }
+*/
+- (void)searchResultsViewDidClickSearchButton:(LLASearchResultsView *)searchView withSearchBar:(UISearchBar *)searchBar
+{
+    mainInfo = nil;
+    
+    [searchBar resignFirstResponder];
+    shadeButton.hidden = YES;
+    // 显示菊花
+    [HUD show:YES];
+    
+    self.searchResultText = searchBar.text;
+    
+    [self loadData];
+    
+}
+- (void)searchResultsViewDidClickCancelButton:(LLASearchResultsView *)searchView
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+- (void)searchResultsViewDidBeginEditing:(LLASearchResultsView *)searchView
+{
+    shadeButton.hidden = NO;
+}
 #pragma mark - LLAHotUsersSearchResultsCellDelegate
 
 - (void)userHeadViewTapped:(LLAUser *)userInfo

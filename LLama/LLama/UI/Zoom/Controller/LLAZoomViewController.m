@@ -9,7 +9,8 @@
 #import "LLAZoomViewController.h"
 
 // view
-#import "LLASearchBar.h"
+//#import "LLASearchBar.h"
+#import "LLASearchView.h"
 #import "LLAZoomCollectionView.h"
 
 // cell
@@ -53,9 +54,10 @@ static NSString *const hotVideosCellIden = @"hotVideosCellIden";
 static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 
 
-@interface LLAZoomViewController () <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate,LLAHotUsersCellDelegate>
+@interface LLAZoomViewController () <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate,LLAHotUsersCellDelegate,LLASearchViewDelegate>
 {
-    LLASearchBar *headSearchBar;
+//    LLASearchBar *headSearchBar;
+    LLASearchView *headSearchBar;
     
     LLAZoomCollectionView *dataCollectionView;
 
@@ -119,12 +121,11 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 {
     
     // headSearchBar
-    headSearchBar = [[LLASearchBar alloc] init];
-    headSearchBar.placeholder = @"搜索";
+    headSearchBar = [[LLASearchView alloc] init];
+    headSearchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
     headSearchBar.delegate = self;
-    headSearchBar.tintColor = [UIColor colorWithHex:0xD3D3D3];
     self.navigationItem.titleView = headSearchBar;
-
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithHex:0x1e1d22]];
     
     // dataCollectionView布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -172,7 +173,10 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 
 - (void)shadeButtonClicked
 {
-    [self searchBarCancelButtonClicked:headSearchBar];
+//    [self searchBarCancelButtonClicked:headSearchBar];
+//    [searchBar resignFirstResponder];
+    shadeButton.hidden = YES;
+    [headSearchBar.topSearchBar resignFirstResponder];
 }
 
 // 设置约束
@@ -301,40 +305,63 @@ static NSString *const hotVideosHeaderIden = @"hotVideosHeaderIden";
 }
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+//{
+//    shadeButton.hidden = NO;
+//    
+//    [searchBar setShowsCancelButton:YES animated:NO];
+//}
+//
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+//{
+//
+//    //
+//    shadeButton.hidden = YES;
+//
+//    searchBar.text = @"";
+//    [searchBar setShowsCancelButton:NO animated:YES];
+//    [searchBar resignFirstResponder];
+//    _isFiltered = FALSE;
+//
+//}
+//
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//
+//
+//    
+//    LLASearchResultsViewController *searchResults = [[LLASearchResultsViewController alloc] init];
+//    searchResults.searchResultText = headSearchBar.text;
+//    [self.navigationController pushViewController:searchResults animated:YES];
+//    
+//    shadeButton.hidden = YES;
+//    headSearchBar.text = @"";
+//    [headSearchBar resignFirstResponder];
+//
+//    
+//}
+
+- (void)searchViewDidClickSearchButton:(LLASearchView *)searchView withSearchBar:(UISearchBar *)searchBar
 {
-    shadeButton.hidden = NO;
-    
-    [searchBar setShowsCancelButton:YES animated:NO];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-
-    //
-    shadeButton.hidden = YES;
-
-    searchBar.text = @"";
-    [searchBar setShowsCancelButton:NO animated:YES];
-    [searchBar resignFirstResponder];
-    _isFiltered = FALSE;
-
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-
-
     
     LLASearchResultsViewController *searchResults = [[LLASearchResultsViewController alloc] init];
-    searchResults.searchResultText = headSearchBar.text;
+    searchResults.searchResultText = searchBar.text;
     [self.navigationController pushViewController:searchResults animated:YES];
-    
-    shadeButton.hidden = YES;
-    headSearchBar.text = @"";
-    [headSearchBar resignFirstResponder];
 
+    shadeButton.hidden = YES;
     
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchViewDidClickCancelButton:(LLASearchView *)searchView
+{
+     shadeButton.hidden = YES;
+}
+
+-(void)searchViewDidBeginEditing:(LLASearchView *)searchView
+{
+    shadeButton.hidden = NO;
 }
 
 #pragma mark - UICollectionViewFlowLayout

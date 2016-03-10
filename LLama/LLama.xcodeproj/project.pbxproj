@@ -358,6 +358,8 @@
 		7E1A146F1C15D4A700693F3E /* LLamaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A146E1C15D4A700693F3E /* LLamaTests.m */; };
 		7E1A147A1C15D4A700693F3E /* LLamaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A14791C15D4A700693F3E /* LLamaUITests.m */; };
 		7E1C8DFC1C8FB5490067021F /* LLANewRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */; };
+		7E1C8E4A1C9155810067021F /* LLASearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8E491C9155810067021F /* LLASearchView.m */; };
+		7E1C8E4D1C9156000067021F /* LLASearchResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8E4C1C9156000067021F /* LLASearchResultsView.m */; };
 		7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */; };
 		7E21E7C81C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */; };
 		7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */; };
@@ -1301,6 +1303,10 @@
 		7E1A147B1C15D4A700693F3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E1C8DFA1C8FB5490067021F /* LLANewRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewRegisterViewController.h; sourceTree = "<group>"; };
 		7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewRegisterViewController.m; sourceTree = "<group>"; };
+		7E1C8E481C9155810067021F /* LLASearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchView.h; sourceTree = "<group>"; };
+		7E1C8E491C9155810067021F /* LLASearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchView.m; sourceTree = "<group>"; };
+		7E1C8E4B1C9156000067021F /* LLASearchResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsView.h; sourceTree = "<group>"; };
+		7E1C8E4C1C9156000067021F /* LLASearchResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsView.m; sourceTree = "<group>"; };
 		7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsViewController.h; sourceTree = "<group>"; };
 		7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsViewController.m; sourceTree = "<group>"; };
 		7E21E7C61C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersSearchResultsCell.h; sourceTree = "<group>"; };
@@ -2820,6 +2826,10 @@
 			children = (
 				7E64DEE01C7BF54500F88093 /* LLASearchBar.h */,
 				7E64DEE11C7BF54500F88093 /* LLASearchBar.m */,
+				7E1C8E481C9155810067021F /* LLASearchView.h */,
+				7E1C8E491C9155810067021F /* LLASearchView.m */,
+				7E1C8E4B1C9156000067021F /* LLASearchResultsView.h */,
+				7E1C8E4C1C9156000067021F /* LLASearchResultsView.m */,
 				7E64DEE31C7BF79D00F88093 /* LLAZoomCollectionView.h */,
 				7E64DEE41C7BF79D00F88093 /* LLAZoomCollectionView.m */,
 				7E64DF371C7C565F00F88093 /* LLAHotUsersCollectionView.h */,
@@ -3960,6 +3970,7 @@
 				5C7E26761C8062ED008364E4 /* EmojiMapSymbols.m in Sources */,
 				A3DEDE731C3CAEC7009F3D37 /* TMSignUpActorCell.m in Sources */,
 				A3DEDD981C3CAE38009F3D37 /* EXTScope.m in Sources */,
+				7E1C8E4A1C9155810067021F /* LLASearchView.m in Sources */,
 				5C8275131C5726A500DD547F /* MMPopupWindow.m in Sources */,
 				7E44A8B21C87EC46000780DD /* LLAHotUsersVideosInfo.m in Sources */,
 				5CE646C71C44DB6A004DA6D5 /* LLAHomeViewController.m in Sources */,
@@ -3981,6 +3992,7 @@
 				7EB0BA641C5F39E300D4A43C /* LLALoveTitleView.m in Sources */,
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
 				5C7534731C7714450058F93C /* PSTCollectionViewCell.m in Sources */,
+				7E1C8E4D1C9156000067021F /* LLASearchResultsView.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
 				5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */,
 				5C7298221C4366A700106BA2 /* LLASaveUserDefaultUtil.m in Sources */,
@@ -4532,7 +4544,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
+				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -4611,7 +4623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
+				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;
