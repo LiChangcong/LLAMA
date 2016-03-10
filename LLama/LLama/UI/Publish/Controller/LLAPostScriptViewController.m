@@ -333,15 +333,16 @@
         for (int i = 0 ; i< inviteView.inviteUsersArray.count; i++) {
             
             NSString *str = [NSString new];
-            if (!inviteView.inviteUsersArray.lastObject) {
-                str = [NSMutableString stringWithFormat:@"%@,",inviteView.inviteUsersArray[i].userIdString];
+            if (i != (inviteView.inviteUsersArray.count - 1)) {
+                str = [NSString stringWithFormat:@"%@,",inviteView.inviteUsersArray[i].userIdString];
             }else {
-                str = [NSMutableString stringWithFormat:@"%@",inviteView.inviteUsersArray[i].userIdString];
-
+                str = [NSString stringWithFormat:@"%@",inviteView.inviteUsersArray[i].userIdString];
             }
-            [inviteUsersString stringByAppendingString:str];
+            inviteUsersString = [inviteUsersString stringByAppendingString:str];
+
         }
         
+    
         
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         
@@ -386,14 +387,15 @@
                 for (int i = 0 ; i< inviteView.inviteUsersArray.count; i++) {
                     
                     NSString *str = [NSString new];
-                    if (!inviteView.inviteUsersArray.lastObject) {
-                        str = [NSMutableString stringWithFormat:@"%@,",inviteView.inviteUsersArray[i].userIdString];
+                    if (i != (inviteView.inviteUsersArray.count - 1)) {
+                        str = [NSString stringWithFormat:@"%@,",inviteView.inviteUsersArray[i].userIdString];
                     }else {
-                        str = [NSMutableString stringWithFormat:@"%@",inviteView.inviteUsersArray[i].userIdString];
+                        str = [NSString stringWithFormat:@"%@",inviteView.inviteUsersArray[i].userIdString];
                         
                     }
-                    [inviteUsersString stringByAppendingString:str];
+                    inviteUsersString = [inviteUsersString stringByAppendingString:str];
                 }
+
 
                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
                 

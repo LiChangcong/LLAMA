@@ -4532,7 +4532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Debug;
@@ -4611,7 +4611,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.heihei.llama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b48a23a1-bb1b-4ebe-83bb-8cc2b132c04b";
+				PROVISIONING_PROFILE = "02d37141-144b-4f5f-b400-8d6710538870";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/LLama";
 			};
 			name = Release;

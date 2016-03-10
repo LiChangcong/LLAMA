@@ -9,6 +9,17 @@
 #import "LLANewRegisterViewController.h"
 
 #import "LLANewRetrievePasswordViewController.h"
+#import "TMTabBarController.h"
+#import "TMDataIconController.h"
+#import "LLAUserAgreementViewController.h"
+
+#import "LLAThirdSDKDelegate.h"
+#import "LLAViewUtil.h"
+#import "LLALoadingView.h"
+#import "LLACommonUtil.h"
+#import "LLAHttpUtil.h"
+
+
 
 @interface LLANewRegisterViewController ()
 {
@@ -18,6 +29,7 @@
     UIView *Hline;
     UIView *vLine;
     UITextField *VerificationCodeTextField;
+    UIButton *VerificationCodeButton;
     UIView *Hline2;
     UITextField *pswTextField;
     
@@ -38,6 +50,13 @@
     UILabel *secretLabel;
     
     
+    LLALoadingView *HUD;
+    
+    NSTimer *idTimer;
+    
+    NSInteger timeInterval;
+
+
 }
 
 @end
@@ -50,6 +69,17 @@
     [self initVariables];
     [self initSubViews];
     [self initSubConstraints];
+
+    
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+
+    // 隐藏三方登陆按钮
+    if (![QQApiInterface isQQInstalled]) {
+        qq.hidden = YES;
+    }
+    if (![WXApi isWXAppInstalled]) {
+        weixin.hidden = YES;
+    }
 
 }
 
@@ -74,12 +104,18 @@
     
     phoneNumTextField = [[UITextField alloc] init];
     phoneNumTextField.placeholder = @"填写手机号";
+    phoneNumTextField.keyboardType = UIKeyboardTypePhonePad;
     [inputView addSubview:phoneNumTextField];
     
     VerificationCodeTextField = [[UITextField alloc] init];
     VerificationCodeTextField.placeholder = @"请输入验证码";
+    VerificationCodeTextField.keyboardType = UIKeyboardTypeASCIICapable;
     [inputView addSubview:VerificationCodeTextField];
     
+    VerificationCodeButton = [[UIButton alloc] init];
+    [VerificationCodeButton setTitle:@"发 送" forState:UIControlStateNormal];
+    [VerificationCodeButton addTarget:self action:@selector(sendToGetIdCodeClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [inputView addSubview:VerificationCodeButton];
     
     Hline = [[UIView alloc] init];
     Hline.backgroundColor = [UIColor colorWithHex:0x4a485b alpha:0.5];
@@ -94,7 +130,8 @@
     [inputView addSubview:Hline2];
     
     pswTextField = [[UITextField alloc] init];
-    pswTextField.placeholder = @"请输入验证码";
+    pswTextField.placeholder = @"请输入密码";
+    pswTextField.keyboardType = UIKeyboardTypeASCIICapable;
     [inputView addSubview:pswTextField];
     
     /*------------------------------------*/
@@ -107,6 +144,7 @@
     [loginButton setTitle:@"注册" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor colorWithHex:0xa6a5a8] forState:UIControlStateNormal];
     loginButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [loginButton addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:loginButton];
     
     registButton = [[UIButton alloc] init];
@@ -147,16 +185,19 @@
     weixin = [[UIButton alloc] init];
     [weixin setImage:[UIImage imageNamed:@"wechat-login"] forState:UIControlStateNormal];
     [weixin setImage:[UIImage imageNamed:@"wechat-loginh"] forState:UIControlStateNormal];
+    [weixin addTarget:self action:@selector(weChatLogin:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:weixin];
     
     weibo = [[UIButton alloc] init];
     [weibo setImage:[UIImage imageNamed:@"weibo-login"] forState:UIControlStateNormal];
     [weibo setImage:[UIImage imageNamed:@"weibo-loginh"] forState:UIControlStateNormal];
+    [weibo addTarget:self action:@selector(sinaWeiBoLogin:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:weibo];
     
     qq = [[UIButton alloc] init];
     [qq setImage:[UIImage imageNamed:@"qq-login"] forState:UIControlStateNormal];
     [qq setImage:[UIImage imageNamed:@"qq-loginh"] forState:UIControlStateNormal];
+    [qq addTarget:self action:@selector(qqLogin:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:qq];
     
     secretLabel = [[UILabel alloc] init];
@@ -166,6 +207,12 @@
     secretLabel.font = [UIFont systemFontOfSize:12];
     secretLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:secretLabel];
+    
+    // 添加手势
+    UITapGestureRecognizer *tapSecretLabel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSecretLabel)];
+    secretLabel.userInteractionEnabled = YES;
+    [secretLabel addGestureRecognizer:tapSecretLabel];
+
 }
 
 
@@ -299,13 +346,347 @@
     }];
 }
 
+#pragma mark - ButtonClick
+
+
+- (IBAction)sinaWeiBoLogin:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_SinaWeiBo loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_SinaWeiBo;
+            user.sinaWeiBoUid = [openId integerValue];
+            user.sinaWeiBoAccess_Token = accessToken;
+            
+            //fetch UserInfo
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_SinaWeiBo];
+            
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+}
+
+- (IBAction)weChatLogin:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_WeChat loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_WeChat;
+            user.weChatOpenId = openId;
+            user.weChatAccess_Token = accessToken;
+            
+            //fetch token;
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_WeChat];
+            
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+    
+}
+
+- (IBAction)qqLogin:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance]  thirdLoginWithType:UserLoginType_QQ loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            LLAUser *user = [LLAUser new];
+            
+            user.loginType = UserLoginType_QQ;
+            user.qqOpenId = openId;
+            user.qqAccess_Token = accessToken;
+            //fetch
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_QQ];
+            
+            
+        }else {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+}
+
+- (void) fetchUserInfoWithUser:(LLAUser *) user loginType:(UserLoginType)loginType{
+    
+    [HUD show:YES];
+    
+    __weak typeof(self) blockSelf = self;
+    
+    [[LLAThirdSDKDelegate shareInstance] fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+        if (token) {
+            //fetch userInfo
+            
+            [[LLAThirdSDKDelegate shareInstance] fetchUserInfoWithUserToken:token callBack:^(LLAUser *userInfo, NSError *error) {
+                
+                [HUD hide:YES];
+                
+                if (error) {
+                    [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+                }else {
+                    
+                    //login success,save userInfo to disk
+                    userInfo.loginType = loginType;
+                    
+                    [blockSelf loginSuccessWithUser:userInfo];
+                    
+                }
+            }];
+            
+        }else{
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+        }
+    }];
+}
+
+- (void) loginSuccessWithUser:(LLAUser *)newUser {
+    
+    [LLAUser updateUserInfo:newUser];
+    
+    if ([newUser hasUserProfile]) {
+        
+        //
+        TMTabBarController *tabController = [[TMTabBarController alloc] init];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabController;
+    }else {
+        //show finish userProfileController
+        TMDataIconController *finishProfile = [TMDataIconController new];
+        [self.navigationController pushViewController:finishProfile animated:YES];
+        
+    }
+}
+
+/*-----------------------------------------*/
+
+// 忘记密码
 - (void)forgetButtonClick
 {
     LLANewRetrievePasswordViewController *newRetrieve = [[LLANewRetrievePasswordViewController alloc] init];
     [self.navigationController pushViewController:newRetrieve animated:YES];
 }
 
+// 点击注册
+-(void)loginButtonClick
+{
+    [self.view endEditing:YES];
+    
+    //check
+    if (![LLACommonUtil validateMobile:phoneNumTextField.text]) {
+        [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
+        return;
+    }
+    
+    if (pswTextField.text.length < 1) {
+        [LLAViewUtil showAlter:self.view withText:@"请填写密码"];
+        return;
+    }
+    
+    if (pswTextField.text.length > 16) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"密码长度不能超过16位"];
+        return;
+    }
+    
+    if (VerificationCodeTextField.text.length < 1) {
+        
+        [LLAViewUtil showAlter:self.view withText:@"请输入验证码"];
+        return;
+    }
+    
+    [HUD show:YES];
+    
+    //register
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:phoneNumTextField.text forKey:@"mobile"];
+    [params setValue:pswTextField.text forKey:@"pwd"];
+    [params setValue:VerificationCodeTextField.text forKey:@"smsCode"];
+    
+    __weak  typeof(self) blockSelf = self;
+    
+    [LLAHttpUtil httpPostWithUrl:@"/login/mobileReg" param:params progress:NULL responseBlock:^(id responseObject) {
+        
+        //[HUD hide:YES];
+        
+        NSString *token = [responseObject valueForKey:@"token"];
+        
+        if ([token isKindOfClass:[NSString class]]) {
+            [[LLAThirdSDKDelegate shareInstance] fetchUserInfoWithUserToken:token callBack:^(LLAUser *userInfo, NSError *error) {
+                
+                [HUD hide:YES];
+                
+                if (error) {
+                    [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+                }else {
+                    
+                    //login success,save userInfo to disk
+                    userInfo.loginType = UserLoginType_MobilePhone;
+                    
+                    [blockSelf loginSuccessWithUser:userInfo];
+                }
+            }];
+            
+        }else {
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:blockSelf.view withText:@"无效的token"];
+        }
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:blockSelf.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        
+        [HUD hide:YES];
+        [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+    }];
 
+
+}
+
+
+
+- (IBAction)sendToGetIdCodeClicked:(id)sender {
+    //
+    
+    [self.view endEditing:YES];
+    
+    NSString *phoneNumber = phoneNumTextField.text;
+    
+    if (![LLACommonUtil validateMobile:phoneNumber]) {
+        [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
+        return;
+    }
+    
+    [HUD show:NO];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [params setValue:phoneNumber forKey:@"mobile"];
+    
+    __weak typeof(self) blockSelf = self;
+    
+    [LLAHttpUtil httpPostWithUrl:@"/login/getRegSmsCode" param:params progress:NULL responseBlock:^(id responseObject) {
+        //success
+        [HUD hide:NO];
+        
+        //start count
+        [blockSelf buttonTitleTime:VerificationCodeButton withTime:@"60"];
+        
+    } exception:^(NSInteger code, NSString *errorMessage) {
+        
+        [HUD hide:NO];
+        [LLAViewUtil showAlter:blockSelf.view withText:errorMessage];
+        
+    } failed:^(NSURLSessionTask *sessionTask, NSError *error) {
+        [HUD hide:NO];
+        [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+    }];
+    
+}
+
+- (void)buttonTitleTime:(UIButton *)button withTime:(NSString *)time
+{
+    __block int timeout=[time intValue]-1; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout<=0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                //if (isFirst) {
+                [button setTitle:@"获取验证码" forState:UIControlStateNormal];
+                //}else{
+                [button setTitle:@"重新获取" forState:UIControlStateNormal];
+                //}
+                
+                button.enabled = YES;
+                button.alpha = 1;
+                button.titleLabel.font = [UIFont llaFontOfSize:14];
+            });
+        }else{
+            int seconds = timeout % 60;
+            NSString *strTime = [NSString stringWithFormat:@"%d", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [button setTitle:[NSString stringWithFormat:@"%@s后重新获取",strTime] forState:UIControlStateDisabled];
+                button.titleLabel.font = [UIFont llaFontOfSize:13];
+                button.enabled = NO;
+                button.alpha = 0.4;
+                
+            });
+            timeout--;
+            
+        }
+    });
+    dispatch_resume(_timer);
+}
+
+- (void) timeCount {
+    
+    if (idTimer) {
+        [idTimer invalidate];
+        idTimer = nil;
+    }
+    
+    idTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(nextIntervalToGetIDTimerCount) userInfo:nil repeats:YES];
+    timeInterval = 60;
+    
+    [self nextIntervalToGetIDTimerCount];
+    
+}
+
+- (void) nextIntervalToGetIDTimerCount {
+    if (timeInterval < 0) {
+        [idTimer invalidate];
+        idTimer = nil;
+        
+        VerificationCodeButton.enabled = YES;
+        
+        [VerificationCodeButton setTitle:@"发 送" forState:UIControlStateNormal];
+        
+    }else {
+        VerificationCodeButton.enabled = NO;
+        
+        //[self.sendToGetIDCodeButton setTitle:[NSString stringWithFormat:@"%lds后重新获取",timeInterval] forState:UIControlStateNormal];
+        [VerificationCodeButton setTitle:[NSString stringWithFormat:@"%lds后重新新获取",timeInterval] forState:UIControlStateDisabled];
+        
+        
+        timeInterval --;
+    }
+}
+
+#pragma mark - touchScreen
+// 点击屏幕时也推出键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+
+#pragma mark - tapUserPrivacyLabel
+
+- (void)tapSecretLabel
+{
+    //    NSLog(@"点击了用户隐私");
+    LLAUserAgreementViewController *userAgreement = [[LLAUserAgreementViewController alloc] init];
+    [self.navigationController pushViewController:userAgreement animated:YES];
+    
+}
 
 
 @end

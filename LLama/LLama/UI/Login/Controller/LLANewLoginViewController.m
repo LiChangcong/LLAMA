@@ -9,6 +9,18 @@
 #import "LLANewLoginViewController.h"
 
 #import "LLANewRetrievePasswordViewController.h"
+#import "LLANewRegisterViewController.h"
+#import "LLAUserAgreementViewController.h"
+
+#import "LLACommonUtil.h"
+#import "LLAViewUtil.h"
+#import "LLAUser.h"
+#import "LLALoadingView.h"
+#import "LLAThirdSDKDelegate.h"
+
+#import "TMTabBarController.h"
+#import "TMDataIconController.h"
+
 
 @interface LLANewLoginViewController ()
 {
@@ -36,7 +48,7 @@
     
     UILabel *secretLabel;
 
-    
+    LLALoadingView *HUD;
 }
 @end
 
@@ -45,9 +57,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
     [self initVariables];
     [self initSubViews];
     [self initSubConstraints];
+    
+    // 菊花
+    HUD = [LLAViewUtil addLLALoadingViewToView:self.view];
+    [HUD hide:NO];
+
+    // 隐藏三方登陆按钮
+    if (![QQApiInterface isQQInstalled]) {
+        qq.hidden = YES;
+    }
+    if (![WXApi isWXAppInstalled]) {
+        weixin.hidden = YES;
+    }
+
 }
 
 - (void)initVariables
@@ -71,6 +97,7 @@
     
     phoneNumTextField = [[UITextField alloc] init];
     phoneNumTextField.placeholder = @"填写手机号";
+    phoneNumTextField.keyboardType = UIKeyboardTypePhonePad;
     [inputView addSubview:phoneNumTextField];
     
     pswTextField = [[UITextField alloc] init];
@@ -99,6 +126,7 @@
     [loginButton setTitle:@"登陆" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor colorWithHex:0xa6a5a8] forState:UIControlStateNormal];
     loginButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [loginButton addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:loginButton];
     
     registButton = [[UIButton alloc] init];
@@ -107,6 +135,7 @@
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateHighlighted];
     registButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    [forgetButton addTarget:self action:@selector(registButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:registButton];
     
     forgetButton = [[UIButton alloc] init];
@@ -139,16 +168,19 @@
     weixin = [[UIButton alloc] init];
     [weixin setImage:[UIImage imageNamed:@"wechat-login"] forState:UIControlStateNormal];
     [weixin setImage:[UIImage imageNamed:@"wechat-loginh"] forState:UIControlStateNormal];
+    [weixin addTarget:self action:@selector(weChatLoginClicked:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:weixin];
 
     weibo = [[UIButton alloc] init];
     [weibo setImage:[UIImage imageNamed:@"weibo-login"] forState:UIControlStateNormal];
     [weibo setImage:[UIImage imageNamed:@"weibo-loginh"] forState:UIControlStateNormal];
+    [weibo addTarget:self action:@selector(sinaWeiBoLoginClicked:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:weibo];
 
     qq = [[UIButton alloc] init];
     [qq setImage:[UIImage imageNamed:@"qq-login"] forState:UIControlStateNormal];
     [qq setImage:[UIImage imageNamed:@"qq-loginh"] forState:UIControlStateNormal];
+    [qq addTarget:self action:@selector(qqLoginClicked:) forControlEvents:UIControlEventTouchUpInside];
     [thirdLoginView addSubview:qq];
 
     secretLabel = [[UILabel alloc] init];
@@ -158,6 +190,14 @@
     secretLabel.font = [UIFont systemFontOfSize:12];
     secretLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:secretLabel];
+    
+    // 添加手势
+    UITapGestureRecognizer *tapSecretLabel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSecretLabel)];
+    secretLabel.userInteractionEnabled = YES;
+    [secretLabel addGestureRecognizer:tapSecretLabel];
+
+    
+
 }
 
 - (void)initSubConstraints
@@ -290,10 +330,196 @@
     }];
 }
 
+#pragma mark - ButtonClick
 
+/*-------------------------三方登陆-------------------------*/
+
+- (IBAction)sinaWeiBoLoginClicked:(id)sender {
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_SinaWeiBo loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_SinaWeiBo;
+            user.sinaWeiBoUid = [openId integerValue];
+            user.sinaWeiBoAccess_Token = accessToken;
+            
+            //fetch UserInfo
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_SinaWeiBo];
+            
+        }else if (state == LLAThirdLoginState_Failed){
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+}
+- (IBAction)weChatLoginClicked:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance] thirdLoginWithType:UserLoginType_WeChat loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            
+            LLAUser *user = [LLAUser new];
+            user.loginType = UserLoginType_WeChat;
+            user.weChatOpenId = openId;
+            user.weChatAccess_Token = accessToken;
+            
+            //fetch token;
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_WeChat];
+            
+        }else if (state == LLAThirdLoginState_Failed){
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+    
+}
+- (IBAction)qqLoginClicked:(id)sender {
+    
+    [[LLAThirdSDKDelegate shareInstance]  thirdLoginWithType:UserLoginType_QQ loginCallBack:^(NSString *openId, NSString *accessToken, LLAThirdLoginState state, NSError *error) {
+        
+        if (state == LLAThirdLoginState_Success) {
+            LLAUser *user = [LLAUser new];
+            
+            user.loginType = UserLoginType_QQ;
+            user.qqOpenId = openId;
+            user.qqAccess_Token = accessToken;
+            //fetch
+            
+            [self fetchUserInfoWithUser:user loginType:UserLoginType_QQ];
+            
+            
+        }else if(state == LLAThirdLoginState_Failed) {
+            [LLAViewUtil showAlter:self.view withText:error.localizedDescription];
+        }
+        
+    }];
+    
+}
+
+/*--------------------------------------------------*/
+// 点击了注册按钮
+- (void)registButtonClick
+{
+    [self.view endEditing:YES];
+    
+    LLANewRegisterViewController *registerController = [LLANewRegisterViewController new];
+    
+    [self.navigationController pushViewController:registerController animated:YES];
+    
+}
+
+// 点击了忘记密码按钮
 - (void)forgetButtonClick
 {
+    [self.view endEditing:YES];
+
     LLANewRetrievePasswordViewController *newRetrieve = [[LLANewRetrievePasswordViewController alloc] init];
     [self.navigationController pushViewController:newRetrieve animated:YES];
 }
+
+
+
+// 点击了登陆按钮
+- (void)loginButtonClick
+{
+
+    //login
+    
+    [self.view endEditing:YES];
+    
+    //check
+    if (![LLACommonUtil validateMobile:phoneNumTextField.text]) {
+        [LLAViewUtil showAlter:self.view withText:@"请输入正确的手机号"];
+        return;
+    }
+    
+    if (pswTextField.text.length < 1) {
+        [LLAViewUtil showAlter:self.view withText:@"请填写密码"];
+        return;
+    }
+    
+    
+    LLAUser *user = [LLAUser new];
+    
+    user.mobilePhone = phoneNumTextField.text;
+    user.mobileLoginPsd = pswTextField.text;
+    user.loginType = UserLoginType_MobilePhone;
+    
+    [self fetchUserInfoWithUser:user loginType:UserLoginType_MobilePhone];
+
+}
+
+- (void) fetchUserInfoWithUser:(LLAUser *) user loginType:(UserLoginType)loginType{
+    
+    [HUD show:YES];
+    
+    
+    __weak typeof (self) blockSelf = self;
+    
+    [[LLAThirdSDKDelegate shareInstance] fetchUserAccessTokenInfoWithInfo:user callBack:^(NSString *token, NSError *error) {
+        if (token) {
+            //fetch userInfo
+            
+            [[LLAThirdSDKDelegate shareInstance] fetchUserInfoWithUserToken:token callBack:^(LLAUser *userInfo, NSError *error) {
+                
+                [HUD hide:YES];
+                
+                if (error) {
+                    [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+                }else {
+                    
+                    //login success,save userInfo to disk
+                    userInfo.loginType = loginType;
+                    
+                    [blockSelf loginSuccessWithUser:userInfo];
+                }
+            }];
+            
+        }else{
+            [HUD hide:YES];
+            [LLAViewUtil showAlter:blockSelf.view withText:error.localizedDescription];
+        }
+    }];
+}
+
+- (void) loginSuccessWithUser:(LLAUser *)newUser {
+    
+    [LLAUser updateUserInfo:newUser];
+    
+    if ([newUser hasUserProfile]) {
+        
+        //
+        TMTabBarController *tabController = [[TMTabBarController alloc] init];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabController;
+    }else {
+        //
+        TMDataIconController *finishProfile = [TMDataIconController new];
+        
+        [self.navigationController pushViewController:finishProfile animated:YES];
+    }
+}
+
+#pragma mark - touchScreen
+
+// 点击屏幕时也推出键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - tapUserPrivacyLabel
+
+- (void)tapSecretLabel
+{
+    //    NSLog(@"点击了用户隐私");
+    LLAUserAgreementViewController *userAgreement = [[LLAUserAgreementViewController alloc] init];
+    [self.navigationController pushViewController:userAgreement animated:YES];
+    
+}
+
+
+
 @end
