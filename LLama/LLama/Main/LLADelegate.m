@@ -49,11 +49,13 @@
     [self setupShortCutsItems];
     
     //
+    
+    [[LLAMessageCountManager shareManager] beginFetchCount];
+    
     if ([LLAUser me].isLogin) {
     
         TMTabBarController *tabbar = [[TMTabBarController alloc] init];
         self.window.rootViewController = tabbar;
-        [[LLAMessageCountManager shareManager] beginFetchCount];
         
     }else {
         TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
