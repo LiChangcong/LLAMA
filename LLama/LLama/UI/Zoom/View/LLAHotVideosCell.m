@@ -28,6 +28,8 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     
     UIButton *loveButton;
     
+    UIImageView *cover;
+    
     //
     UIFont *prizeAndLoveButtonTextFont;
     UIColor *prizeButtonTextColor;
@@ -69,20 +71,22 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     [self.contentView addSubview:hotVideoImageView];
     
     
-//    // cover
-//    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(50, 100, 200, 200)];
-//    imageView.backgroundColor=[UIColor yellowColor];
-//    imageView.image=[self buttonImageFromColor:[UIColor redColor]];
-//    [self.view addSubview:imageView];
-//    
-//
+    // cover
+    // 画出一张cover。可能会影响性能，以后再优化
+    cover = [[UIImageView alloc]initWithFrame:CGRectZero];
+    cover.backgroundColor=[UIColor lightGrayColor];
+    cover.image=[self buttonImageFromColor:[UIColor blackColor]];
+    cover.alpha = 0.2;
+    [self.contentView addSubview:cover];
+    
+
     // prizeButton
     prizeButton = [[UIButton alloc] init];
     prizeButton.translatesAutoresizingMaskIntoConstraints = NO;
     [prizeButton setImage:[UIImage llaImageWithName:prizeButtonImageName_Normal] forState:UIControlStateNormal];
     [prizeButton setImage:[UIImage llaImageWithName:prizeButtonImageName_Highlight] forState:UIControlStateHighlighted];
 //    [prizeButton setTitle:@"688" forState:UIControlStateNormal];
-    [prizeButton setTitleColor:prizeButtonTextColor forState:UIControlStateNormal];
+    [prizeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     prizeButton.titleLabel.font = prizeAndLoveButtonTextFont;
     prizeButton.userInteractionEnabled = NO;
     [self.contentView addSubview:prizeButton];
@@ -99,18 +103,18 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
 
 }
 
-////通过颜色来生成一个纯色图片
-//- (UIImage *)buttonImageFromColor:(UIColor *)color{
-//    
-//    CGRect rect = CGRectMake(0, 0, self.contentView.size.width, self.contentView.size.height);
-//    UIGraphicsBeginImageContext(rect.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetFillColorWithColor(context, [color CGColor]);
-//    CGContextFillRect(context, rect);
-//    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return img;
-//}
+//通过颜色来生成一个纯色图片
+- (UIImage *)buttonImageFromColor:(UIColor *)color{
+    
+    CGRect rect = CGRectMake(0, 0, self.contentView.size.width, self.contentView.size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
 
 
 // 设置约束
@@ -130,6 +134,13 @@ static const CGFloat prizeButtonToLeftAndBottom = 7;
     [loveButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(prizeButton.mas_right).with.offset(14);
         make.centerY.equalTo(prizeButton.mas_centerY);
+    }];
+    
+    
+    [cover mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView);
+        make.left.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView).with.offset(-hotVideoImageViewToBottom);
     }];
 }
 
