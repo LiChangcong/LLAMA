@@ -113,6 +113,8 @@
     if (_dbQueue){
         [_dbQueue close];
         [_userInfoDBQueue close];
+        _dbQueue = nil;
+        _userInfoDBQueue = nil;
     }
 }
 
