@@ -58,14 +58,14 @@
         self.window.rootViewController = tabbar;
         
     }else {
-        TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
-        LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
-        
-        self.window.rootViewController = loginNavi;
-        
-//        LLALoginRegisterHomeViewController *loginRegisterHome = [[LLALoginRegisterHomeViewController alloc] init];
-//         LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginRegisterHome];
+//        TMLoginRegisterViewController *loginViewController =  [[TMLoginRegisterViewController alloc] init];
+//        LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginViewController];
+//        
 //        self.window.rootViewController = loginNavi;
+        
+        LLALoginRegisterHomeViewController *loginRegisterHome = [[LLALoginRegisterHomeViewController alloc] init];
+         LLABaseNavigationController *loginNavi = [[LLABaseNavigationController alloc] initWithRootViewController:loginRegisterHome];
+        self.window.rootViewController = loginNavi;
 
     }
     

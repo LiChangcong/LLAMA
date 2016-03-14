@@ -12,6 +12,7 @@
 #import "TMTabBarController.h"
 #import "TMDataIconController.h"
 #import "LLAUserAgreementViewController.h"
+#import "LLANewLoginViewController.h"
 
 #import "LLAThirdSDKDelegate.h"
 #import "LLAViewUtil.h"
@@ -99,17 +100,20 @@
     
     NumLabel = [[UILabel alloc] init];
     NumLabel.text = @"+86";
+    NumLabel.textColor = [UIColor whiteColor];
     NumLabel.textAlignment = NSTextAlignmentCenter;
     [inputView addSubview:NumLabel];
     
     phoneNumTextField = [[UITextField alloc] init];
     phoneNumTextField.placeholder = @"填写手机号";
     phoneNumTextField.keyboardType = UIKeyboardTypePhonePad;
+    phoneNumTextField.textColor = [UIColor whiteColor];
     [inputView addSubview:phoneNumTextField];
     
     VerificationCodeTextField = [[UITextField alloc] init];
     VerificationCodeTextField.placeholder = @"请输入验证码";
     VerificationCodeTextField.keyboardType = UIKeyboardTypeASCIICapable;
+    VerificationCodeTextField.textColor = [UIColor whiteColor];
     [inputView addSubview:VerificationCodeTextField];
     
     VerificationCodeButton = [[UIButton alloc] init];
@@ -132,6 +136,7 @@
     pswTextField = [[UITextField alloc] init];
     pswTextField.placeholder = @"请输入密码";
     pswTextField.keyboardType = UIKeyboardTypeASCIICapable;
+    pswTextField.textColor = [UIColor whiteColor];
     [inputView addSubview:pswTextField];
     
     /*------------------------------------*/
@@ -153,6 +158,7 @@
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateHighlighted];
     registButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    [registButton addTarget:self action:@selector(registButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:registButton];
     
     forgetButton = [[UIButton alloc] init];
@@ -220,7 +226,7 @@
 {
     /*------------------------------------*/
     [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(64);
+        make.top.equalTo(self.view);
         make.left.right.equalTo(self.view);
         make.height.equalTo(@80);
     }];
@@ -473,6 +479,16 @@
 {
     LLANewRetrievePasswordViewController *newRetrieve = [[LLANewRetrievePasswordViewController alloc] init];
     [self.navigationController pushViewController:newRetrieve animated:YES];
+}
+
+
+- (void)registButtonClick
+{
+    [self.view endEditing:YES];
+    
+    LLANewLoginViewController *login = [[LLANewLoginViewController alloc] init];
+    [self.navigationController pushViewController:login animated:YES];
+
 }
 
 // 点击注册

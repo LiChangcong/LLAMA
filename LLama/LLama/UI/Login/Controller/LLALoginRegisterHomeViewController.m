@@ -102,13 +102,11 @@
 
 - (void)loginButtonClick
 {
-    NSLog(@"点击了登陆按钮");
     LLANewLoginViewController *newLogin = [[LLANewLoginViewController alloc] init];
     [self.navigationController pushViewController:newLogin animated:YES];
 }
 - (void)registerButtonClick
 {
-    NSLog(@"点击了注册按钮");
 
     LLANewRegisterViewController *newRegister = [[LLANewRegisterViewController alloc] init];
     [self.navigationController pushViewController:newRegister animated:YES];

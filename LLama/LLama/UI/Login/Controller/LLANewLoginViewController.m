@@ -21,6 +21,7 @@
 #import "TMTabBarController.h"
 #import "TMDataIconController.h"
 
+#import "LLANewDataIconController.h"
 
 @interface LLANewLoginViewController ()
 {
@@ -92,16 +93,19 @@
     
     NumLabel = [[UILabel alloc] init];
     NumLabel.text = @"+86";
+    NumLabel.textColor = [UIColor whiteColor];
     NumLabel.textAlignment = NSTextAlignmentCenter;
     [inputView addSubview:NumLabel];
     
     phoneNumTextField = [[UITextField alloc] init];
     phoneNumTextField.placeholder = @"填写手机号";
     phoneNumTextField.keyboardType = UIKeyboardTypePhonePad;
+    phoneNumTextField.textColor = [UIColor whiteColor];
     [inputView addSubview:phoneNumTextField];
     
     pswTextField = [[UITextField alloc] init];
     pswTextField.placeholder = @"请输入密码";
+    pswTextField.textColor = [UIColor whiteColor];
     [inputView addSubview:pswTextField];
     
     
@@ -135,7 +139,7 @@
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
     [registButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateHighlighted];
     registButton.titleLabel.font = [UIFont systemFontOfSize:12];
-    [forgetButton addTarget:self action:@selector(registButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [registButton addTarget:self action:@selector(registButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:registButton];
     
     forgetButton = [[UIButton alloc] init];
@@ -204,7 +208,7 @@
 {
     /*------------------------------------*/
     [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(64);
+        make.top.equalTo(self.view);
         make.left.right.equalTo(self.view);
         make.height.equalTo(@80);
     }];
@@ -424,7 +428,7 @@
 // 点击了登陆按钮
 - (void)loginButtonClick
 {
-
+/*
     //login
     
     [self.view endEditing:YES];
@@ -448,7 +452,9 @@
     user.loginType = UserLoginType_MobilePhone;
     
     [self fetchUserInfoWithUser:user loginType:UserLoginType_MobilePhone];
-
+*/
+    LLANewDataIconController *newDataIcon = [[LLANewDataIconController alloc] init];
+    [self.navigationController pushViewController:newDataIcon animated:YES];
 }
 
 - (void) fetchUserInfoWithUser:(LLAUser *) user loginType:(UserLoginType)loginType{

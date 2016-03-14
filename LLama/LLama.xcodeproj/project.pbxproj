@@ -337,6 +337,7 @@
 		7E1C8DFC1C8FB5490067021F /* LLANewRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */; };
 		7E1C8E4A1C9155810067021F /* LLASearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8E491C9155810067021F /* LLASearchView.m */; };
 		7E1C8E4D1C9156000067021F /* LLASearchResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8E4C1C9156000067021F /* LLASearchResultsView.m */; };
+		7E1C8E501C918BB60067021F /* LLANewDataIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C8E4F1C918BB60067021F /* LLANewDataIconController.m */; };
 		7E21E7C51C7EB19F00ECBAE9 /* LLASearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */; };
 		7E21E7C81C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7C71C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.m */; };
 		7E21E7CB1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21E7CA1C7EC24500ECBAE9 /* LLAHotUsersSearchResultsHeader.m */; };
@@ -1234,6 +1235,8 @@
 		7E1C8E491C9155810067021F /* LLASearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchView.m; sourceTree = "<group>"; };
 		7E1C8E4B1C9156000067021F /* LLASearchResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsView.h; sourceTree = "<group>"; };
 		7E1C8E4C1C9156000067021F /* LLASearchResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsView.m; sourceTree = "<group>"; };
+		7E1C8E4E1C918BB60067021F /* LLANewDataIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLANewDataIconController.h; sourceTree = "<group>"; };
+		7E1C8E4F1C918BB60067021F /* LLANewDataIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLANewDataIconController.m; sourceTree = "<group>"; };
 		7E21E7C31C7EB19F00ECBAE9 /* LLASearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLASearchResultsViewController.h; sourceTree = "<group>"; };
 		7E21E7C41C7EB19F00ECBAE9 /* LLASearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLASearchResultsViewController.m; sourceTree = "<group>"; };
 		7E21E7C61C7EB99A00ECBAE9 /* LLAHotUsersSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAHotUsersSearchResultsCell.h; sourceTree = "<group>"; };
@@ -3164,6 +3167,8 @@
 				7E1C8DFB1C8FB5490067021F /* LLANewRegisterViewController.m */,
 				7E2AFC3A1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.h */,
 				7E2AFC3B1C8EEF200052DA2C /* LLANewRetrievePasswordViewController.m */,
+				7E1C8E4E1C918BB60067021F /* LLANewDataIconController.h */,
+				7E1C8E4F1C918BB60067021F /* LLANewDataIconController.m */,
 				7E2AFC3D1C8EF6880052DA2C /* LLANewDataVideoController.h */,
 				7E2AFC3E1C8EF6880052DA2C /* LLANewDataVideoController.m */,
 				7E0607121C5E05D50089329D /* temp */,
@@ -3813,6 +3818,7 @@
 				A3DEDD671C3CAE38009F3D37 /* UIWindow+TMExtension.m in Sources */,
 				5CC2E2251C87E63300AFE6B6 /* LLAMessageChatConfig.m in Sources */,
 				A3DEDD641C3CAE38009F3D37 /* NSString+TMExtension.m in Sources */,
+				7E1C8E501C918BB60067021F /* LLANewDataIconController.m in Sources */,
 				A3D8E8021C3FA6D600B27898 /* LLAViewUtil.m in Sources */,
 				5C9353C71C5E1A5F00DD75DC /* LLAVideoCommentMainInfo.m in Sources */,
 				5CECCC7E1C840242002BDE99 /* LLAChatInputViewController.m in Sources */,
@@ -3826,7 +3832,6 @@
 				5C83B2F81C8999BA00ED1BE5 /* LLAIMCommonUtil.m in Sources */,
 				7EB0BA641C5F39E300D4A43C /* LLALoveTitleView.m in Sources */,
 				A3DEDE721C3CAEC7009F3D37 /* TMShareButton.m in Sources */,
-				5C7534731C7714450058F93C /* PSTCollectionViewCell.m in Sources */,
 				7E1C8E4D1C9156000067021F /* LLASearchResultsView.m in Sources */,
 				A3DEDE8A1C3CAEC7009F3D37 /* TMILikeViewController.m in Sources */,
 				5C0312751C818173005B70FF /* LLAMessageCenterConversationCell.m in Sources */,
